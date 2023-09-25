@@ -1,10 +1,10 @@
-import GatherCatalogData from "./GatherCatalogData";
-import { catalogDataActions } from "../store/catalogDataSlice";
+import GatherStudyPlanData from "./GatherStudyPlanData";
+import { studyPlanDataActions } from "../store/studyPlanDataSlice";
 import { loadingRequestsActions } from "../store/loadingRequestsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { statusUpdateActions } from "../store/statusUpdateSlice";
 
-export const useRunGatherCatalogData = (props) => {
+export const useRunGatherStudyPlanData = (props) => {
   const makeLoadingRequest = function () {
     return dispatch(loadingRequestsActions.addToLoadRequest());
   };
@@ -15,11 +15,11 @@ export const useRunGatherCatalogData = (props) => {
 
   const dispatch = useDispatch();
 
-  const runGatherCatalogData = (props) => {
+  const runGatherStudyPlanData = (props) => {
     const user = props.user;
     const setLocalError = props.setLocalError;
     makeLoadingRequest();
-    GatherCatalogData(user)
+    GatherStudyPlanData(user)
       .then((data) => {
         if (process.env.NODE_ENV === "development")
           console.log(
@@ -29,7 +29,7 @@ export const useRunGatherCatalogData = (props) => {
           );
 
         if (data) {
-          dispatch(catalogDataActions.initState(data));
+          dispatch(studyPlanDataActions.initState(data));
           if (user) {
             dispatch(
               statusUpdateActions.updateStatus({
@@ -129,5 +129,5 @@ export const useRunGatherCatalogData = (props) => {
 
     removeLoadingRequest();
   };
-  return runGatherCatalogData;
+  return runGatherStudyPlanData;
 };

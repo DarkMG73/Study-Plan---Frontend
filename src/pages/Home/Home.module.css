@@ -6,8 +6,8 @@
   width: 100%;
   max-width: 1200px;
   box-shadow: 40px 40px 40px -40px hsla(356, 81%, 58%, 1);
-  box-shadow: 40px 40px 40px -40px var(--ms1-color-accent);
-  box-shadow: 3px 0px 40px 7px var(--ms1-color-accent);
+  box-shadow: 40px 40px 40px -40px var(--spt-color-accent);
+  box-shadow: 3px 0px 40px 7px var(--spt-color-accent);
   /* padding: 0 3rem 3rem; */
   border-radius: 0 0 50px 50px;
 }
@@ -40,7 +40,7 @@
   width: 100%;
   height: 100vh;
   max-height: 800px;
-  color: var(--ms1-color-accent);
+  color: var(--spt-color-accent);
   background: linear-gradient(
     135deg,
     #000000 25%,
@@ -62,7 +62,7 @@
   height: inherit;
 }
 .db-error-message {
-  font: var(--ms1-font-subheading);
+  font: var(--spt-font-subheading);
   max-width: 800px;
   margin: 2em auto;
 }
@@ -101,9 +101,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--ms1-color-accent-gradient);
+  background: var(--spt-color-accent-gradient);
   opacity: 0.9;
-  /* background: var(--ms1-color-accent); */
+  /* background: var(--spt-color-accent); */
   /* background-image: linear-gradient( 180deg, hsl(329.42deg 62.75% 48.43% / 80%) 30%, #000000c7 83% ); */
   box-shadow: inset 0px 0px 40px 0px black;
   box-shadow: inset 20px 20px 40px -20px #000000,
@@ -131,7 +131,7 @@
 
 .main-music-player-wrap {
   height: 100%;
-  background: var(--ms1-color-background);
+  background: var(--spt-color-background);
   padding: 1em 0 0.25em;
   border-radius: 50px;
 }
@@ -147,7 +147,7 @@
   max-height: 100%;
   border-radius: 50px;
   box-shadow: inset 10px 10px 30px -20px #ffffff82,
-    inset -0px -0px 20px 0px var(--ms1-color-accent);
+    inset -0px -0px 20px 0px var(--spt-color-accent);
   pointer-events: none;
 }
 

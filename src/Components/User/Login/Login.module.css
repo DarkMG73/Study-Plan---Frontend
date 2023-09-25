@@ -8,27 +8,27 @@
 .login-container h3 {
   padding: 0;
   margin-bottom: 0;
-  font: var(--ms1-font-subheading);
+  font: var(--spt-font-subheading);
 }
 
 .login-container .login-question button {
   font-variant: small-caps;
-  letter-spacing: var(--ms1-spacing-subheading);
+  letter-spacing: var(--spt-spacing-subheading);
   font-size: calc(0.8em + 0.05vw);
   font-weight: 700;
 }
 
 .login-container .form-container .login-container button {
-  background-color: var(--ms1-color-background);
-  background-image: var(--ms1-color-accent-gradient);
-  color: var(--ms1-color-background);
+  background-color: var(--spt-color-background);
+  background-image: var(--spt-color-accent-gradient);
+  color: var(--spt-color-background);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .login-container .form-container .login-container button:hover {
-  background: var(--ms1-color-accent-gradient);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent-gradient);
+  color: var(--spt-color-background);
   -webkit-background-clip: inherit;
   -webkit-text-fill-color: inherit;
 }
@@ -65,7 +65,7 @@
 
 .form button {
   height: 2em;
-  letter-spacing: var(--ms1-spacing-subheading);
+  letter-spacing: var(--spt-spacing-subheading);
   font-size: calc(0.5em + 0.2vw);
   font-weight: 700;
 }
@@ -107,8 +107,8 @@
   padding: 1em 4em 0em;
   font-size: 1.25rem;
   font-weight: 700;
-  background: var(--ms1-color-accent);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent);
+  color: var(--spt-color-background);
   margin-top: 1em;
   min-width: 100%;
 }
@@ -166,7 +166,7 @@
   height: 100%;
   padding: 0;
   margin: 0;
-  font: var(--ms1-font-body-text);
+  font: var(--spt-font-body-text);
   max-width: fit-content;
   font-size: 1rem;
   flex-wrap: nowrap;
@@ -216,9 +216,9 @@
 }
 
 .horizontal-display .login-question button {
-  background: var(--ms1-color-accent-gradient);
+  background: var(--spt-color-accent-gradient);
   /* border-radius: 15px; */
-  color: var(--ms1-color-background);
+  color: var(--spt-color-background);
   text-shadow: 0 0 3px wheat;
   background: linear-gradient(rgb(255 135 0) 37%, rgba(0, 0, 0, 1) 100%);
   margin-left: 1em;
@@ -239,8 +239,8 @@
   max-width: 100%;
   min-width: 0;
   padding: 0.5em 3em 1em !important;
-  background: var(--ms1-color-background-gradient);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-background-gradient);
+  color: var(--spt-color-background);
   left: 50%;
   transform: translateX(-50%);
   border-radius: 0 0 25px 25px;

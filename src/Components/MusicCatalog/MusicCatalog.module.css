@@ -1,25 +1,25 @@
-.music-catalog {
+.music-studyPlan {
   position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* background: var(--ms1-color-background); */
+  /* background: var(--spt-color-background); */
   padding: 0;
 }
 
 .title-wrap {
-  background: var(--ms1-color-background);
+  background: var(--spt-color-background);
   width: 100%;
   padding: 2em 0 0;
   box-shadow: inset 10px 10px 30px -20px #ffffff82,
-    inset 0px 0px 20px 0px var(--ms1-color-accent);
-  box-shadow: inset 0 21px 30px -20px var(--ms1-color-accent),
-    inset 0px -21px 20px -20px var(--ms1-color-accent);
+    inset 0px 0px 20px 0px var(--spt-color-accent);
+  box-shadow: inset 0 21px 30px -20px var(--spt-color-accent),
+    inset 0px -21px 20px -20px var(--spt-color-accent);
 }
 
-.music-catalog > .music-player-list {
-  box-shadow: inset 0 21px 30px -20px var(--ms1-color-accent),
-    inset 0px -10px 10px -10px var(--ms1-color-accent);
+.music-studyPlan > .music-player-list {
+  box-shadow: inset 0 21px 30px -20px var(--spt-color-accent),
+    inset 0px -10px 10px -10px var(--spt-color-accent);
 }
 
 .music-player-list {
@@ -29,21 +29,21 @@
   /* padding: 2em 1em; */
   padding: 5em 1em 5em;
   margin: 0 auto;
-  background: var(--ms1-color-background);
+  background: var(--spt-color-background);
 }
 
-.hasFeaturedElm-true .music-catalog > .music-player-list {
+.hasFeaturedElm-true .music-studyPlan > .music-player-list {
   padding-top: 2em;
 }
 
-.hasFeaturedElm-true .music-catalog .title-wrap {
-  box-shadow: inset 0 21px 30px -20px var(--ms1-color-accent),
-    inset 0px -7px 7px -7px var(--ms1-color-accent);
+.hasFeaturedElm-true .music-studyPlan .title-wrap {
+  box-shadow: inset 0 21px 30px -20px var(--spt-color-accent),
+    inset 0px -7px 7px -7px var(--spt-color-accent);
 }
 
-.hasFeaturedElm-true .music-catalog > .music-player-list {
-  box-shadow: inset 0px -7px 7px -7px var(--ms1-color-accent),
-    inset 0 21px 30px -20px var(--ms1-color-accent);
+.hasFeaturedElm-true .music-studyPlan > .music-player-list {
+  box-shadow: inset 0px -7px 7px -7px var(--spt-color-accent),
+    inset 0 21px 30px -20px var(--spt-color-accent);
 }
 
 .playlist {
@@ -62,7 +62,7 @@
   /* Must be the same as the header's navbar .outerwrap height. */
   /* height: 65px; */
   height: 0;
-  top: var(--ms1-navbar-height);
+  top: var(--spt-navbar-height);
   flex-basis: 100%;
   max-height: 1000px;
   transform: scale(1, 1);
@@ -75,9 +75,9 @@
 
 .featured-container {
   position: relative;
-  /* box-shadow: 3px 0px 14px 4px var(--ms1-color-accent); */
+  /* box-shadow: 3px 0px 14px 4px var(--spt-color-accent); */
   border-radius: 50px;
-  background: var(--ms1-color-background);
+  background: var(--spt-color-background);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -99,7 +99,7 @@
   max-height: 100%;
   border-radius: inherit;
   box-shadow: inset 10px 10px 30px -20px #ffffff82,
-    inset 0px 0px 20px 0px var(--ms1-color-accent);
+    inset 0px 0px 20px 0px var(--spt-color-accent);
   pointer-events: none;
 }
 
@@ -131,20 +131,20 @@
   left: 50%;
   width: 8em;
   height: 1.25em;
-  background: var(--ms1-color-accent-gradient);
+  background: var(--spt-color-accent-gradient);
   /* opacity: 1; */
 /* transform: rotate(0deg) translate(-50%, 1px);
   border-radius: 50px 0;
-  color: var(--ms1-color-background-contrast);
-  background: var(--ms1-color-accent-dark);  */
+  color: var(--spt-color-background-contrast);
+  background: var(--spt-color-accent-dark);  */
 /* text-transform: uppercase; */
 /* background: transparent; */
-/* text-shadow: 0px 0px 7px var(--ms1-color-accent-light); */
-/* color: var(--ms1-color-background);
-  background: linear-gradient(45deg, var(--ms1-color-accent-dark), transparent),
-    var(--ms1-color-accent-dark);
+/* text-shadow: 0px 0px 7px var(--spt-color-accent-light); */
+/* color: var(--spt-color-background);
+  background: linear-gradient(45deg, var(--spt-color-accent-dark), transparent),
+    var(--spt-color-accent-dark);
   border-radius: 50px;
-  color: var(--ms1-color-accent-light);
+  color: var(--spt-color-accent-light);
   background: transparent;
   border: 1px solid;
   border-left: none;
@@ -175,11 +175,11 @@
   width: calc(100% + 192px);
   max-height: 100%;
   height: 100%;
-  box-shadow: 3px 0px 14px 4px var(--ms1-color-accent),
-    3px 0px 75px 4px var(--ms1-color-accent-light);
-  /* box-shadow: 3px 0px 14px 4px var(--ms1-color-accent); */
+  box-shadow: 3px 0px 14px 4px var(--spt-color-accent),
+    3px 0px 75px 4px var(--spt-color-accent-light);
+  /* box-shadow: 3px 0px 14px 4px var(--spt-color-accent); */
   border-radius: 0;
-  border: 2px solid var(--ms1-color-accent);
+  border: 2px solid var(--spt-color-accent);
 }
 
 .background-video-wrap:after {
@@ -189,9 +189,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--ms1-color-accent-gradient);
+  background: var(--spt-color-accent-gradient);
   opacity: 0.9;
-  /* background: var(--ms1-color-accent); */
+  /* background: var(--spt-color-accent); */
   /* background-image: linear-gradient( 180deg, hsl(329.42deg 62.75% 48.43% / 80%) 30%, #000000c7 83% ); */
   box-shadow: inset 0px 0px 40px 0px black;
   box-shadow: inset 20px 20px 40px -20px #000000,
@@ -243,10 +243,10 @@
 }
 
 @media screen and (max-width: 900px) {
-  .music-catalog {
+  .music-studyPlan {
     flex-direction: column;
   }
-  .music-catalog p {
+  .music-studyPlan p {
     font-size: calc(6px + 1vw);
   }
 }

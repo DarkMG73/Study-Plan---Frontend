@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { catalogDataActions } from "../../store/catalogDataSlice";
+import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 import { authActions } from "../../store/authSlice";
 import { timerActions } from "../../store/timerSlice";
 import styles from "./NewQuestionButton.module.css";
@@ -11,7 +11,7 @@ import PushButton from "../../UI/Buttons/PushButton/PushButton";
 function NewQuestionButton(props) {
   const [questionComplete, setQuestionComplete] = useState(false);
   const { questionHistory, currentFilters, ...otherQuestionData } = useSelector(
-    (state) => state.catalogData
+    (state) => state.studyPlanData
   );
   const {
     questionHistoryStorageNeedsUpdate,
@@ -25,8 +25,8 @@ function NewQuestionButton(props) {
 
   useEffect(() => {
     if (questionComplete) {
-      dispatch(catalogDataActions.addToHistoryUnmarked());
-      dispatch(catalogDataActions.questionHistoryStorageNeedsUpdate(true));
+      dispatch(studyPlanDataActions.addToHistoryUnmarked());
+      dispatch(studyPlanDataActions.questionHistoryStorageNeedsUpdate(true));
       setQuestionComplete(false);
     }
   }, [questionComplete, setQuestionComplete]);
@@ -49,7 +49,7 @@ function NewQuestionButton(props) {
         updateUserHistory({ user, dataObj: questionHistory });
       }
 
-      dispatch(catalogDataActions.questionHistoryStorageNeedsUpdate(false));
+      dispatch(studyPlanDataActions.questionHistoryStorageNeedsUpdate(false));
     }
   }, [questionHistoryStorageNeedsUpdate]);
 
@@ -58,7 +58,7 @@ function NewQuestionButton(props) {
     dispatch(timerActions.startTimer());
     dispatch(timerActions.initiateQuiz());
 
-    dispatch(catalogDataActions.generateNewQuestion());
+    dispatch(studyPlanDataActions.generateNewQuestion());
     if (props.scrollToElm)
       props.scrollToElm.current.scrollIntoView({ behavior: "smooth" });
   }
@@ -85,7 +85,7 @@ function NewQuestionButton(props) {
               "inset 4px 4px 14px -7px rgb(255 255 255),  inset -4px -4px 14px -7px rgb(0 0 0 / 50%)",
           }}
         >
-          <h1 className="ms1-header">Grab a New Question</h1>
+          <h1 className="spt-header">Grab a New Question</h1>
         </PushButton>
       )}
       {timerRunning && (
@@ -102,7 +102,7 @@ function NewQuestionButton(props) {
               "inset 4px 4px 14px -7px rgb(255 255 255),  inset -4px -4px 14px -7px rgb(0 0 0 / 50%)",
           }}
         >
-          <h1 className="ms1-header">Click When Finished</h1>
+          <h1 className="spt-header">Click When Finished</h1>
         </PushButton>
       )}
     </div>

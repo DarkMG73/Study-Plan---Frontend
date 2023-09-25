@@ -47,12 +47,12 @@
   font-weight: 700;
   cursor: pointer;
   transition: 0.2s all ease;
-  font: var(--ms1-font-body-text);
+  font: var(--spt-font-body-text);
   font-size: 0.75em;
   font-size: calc(0.5em + 0.2vw);
   font-weight: 700;
-  background: var(--ms1-color-accent);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent);
+  color: var(--spt-color-background);
   text-decoration: none;
 }
 
@@ -84,7 +84,7 @@
 
 .list-full-launch button:hover,
 .list-full-launch a:hover {
-  background: var(--ms1-color-accent-light);
+  background: var(--spt-color-accent-light);
   transform: none;
   transition: 0.1s all ease;
 }
@@ -217,7 +217,7 @@
 
 .study-list-item:hover:after {
   transform: scale(1, 1.25);
-  border: 1px solid var(--ms1-color-accent);
+  border: 1px solid var(--spt-color-accent);
   border-radius: 10px;
   position: absolute;
   top: 0;
@@ -252,7 +252,7 @@
   background: linear-gradient(
     transparent,
     transparent 1.23em,
-    var(--ms1-color-accent) 1.25em
+    var(--spt-color-accent) 1.25em
   );
   background-size: 1.25em 1.25em;
   padding-bottom: 30px;
@@ -268,7 +268,7 @@
   border: 0;
   outline: 0;
   background: transparent;
-  color: var(--ms1-color-accent-dark);
+  color: var(--spt-color-accent-dark);
   /* font-family: "Handlee", cursive; */
   /* font-weight: bold; */
   /* font-size: 1.8rem; */
@@ -276,7 +276,7 @@
   z-index: 1;
   overflow: auto;
   resize: none;
-  font-family: var(--ms1-font-body-text);
+  font-family: var(--spt-font-body-text);
   /* color: black; */
   font-size: inherit;
 }
@@ -297,7 +297,7 @@ footer a {
   left: 50%;
   top: 50%;
   z-index: 99;
-  background: var(--ms1-color-accent);
+  background: var(--spt-color-accent);
   padding: 3px 7%;
   transform: scale(0.5) translate(-100%, -100%);
   border-radius: 25px;

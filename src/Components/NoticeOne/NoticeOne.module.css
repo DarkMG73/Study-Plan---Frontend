@@ -3,7 +3,7 @@
   justify-content: center;
   margin: 0 auto;
   font-size: 1.5em;
-  background: var(--ms1-color-background);
+  background: var(--spt-color-background);
   width: 100%;
   padding: 0 0 1em;
 }
@@ -17,11 +17,11 @@
 }
 .anchor-page-bookmark {
   position: relative;
-  top: calc(0px - var(--ms1-navbar-height));
+  top: calc(0px - var(--spt-navbar-height));
 }
 .about-text-container {
   margin: 0 auto 1em;
-  box-shadow: 0 15px 30px -15px var(--ms1-color-accent);
+  box-shadow: 0 15px 30px -15px var(--spt-color-accent);
 }
 
 .image-wrap {
@@ -37,7 +37,7 @@
   height: 100%;
   background: linear-gradient(
     180deg,
-    var(--ms1-color-background) 6.25%,
+    var(--spt-color-background) 6.25%,
     transparent 25%
   );
 }
@@ -64,7 +64,7 @@
   width: 100%;
   background: linear-gradient(
     0deg,
-    var(--ms1-color-background) 12.5%,
+    var(--spt-color-background) 12.5%,
     transparent
   );
   min-height: 25%;
@@ -103,10 +103,10 @@
 .text-pic-container-two .image-wrap:after {
   background: linear-gradient(
     270deg,
-    var(--ms1-color-background) 3.125%,
+    var(--spt-color-background) 3.125%,
     transparent 25%
   );
-  box-shadow: 0 0 58px 31px var(--ms1-color-background) inset;
+  box-shadow: 0 0 58px 31px var(--spt-color-background) inset;
 }
 
 /* Image & Text Three */
@@ -123,10 +123,10 @@
 .text-pic-container-three .image-wrap:after {
   background: linear-gradient(
     90deg,
-    var(--ms1-color-background) 6.25%,
+    var(--spt-color-background) 6.25%,
     transparent 25%
   );
-  box-shadow: 0 0 58px 31px var(--ms1-color-background) inset;
+  box-shadow: 0 0 58px 31px var(--spt-color-background) inset;
 }
 
 /* Image & Text Four */
@@ -149,10 +149,10 @@
 .text-pic-container-four .image-wrap:after {
   background: linear-gradient(
     180deg,
-    var(--ms1-color-background) 6.25%,
+    var(--spt-color-background) 6.25%,
     transparent 25%
   );
-  box-shadow: 0 0 58px 31px var(--ms1-color-background) inset;
+  box-shadow: 0 0 58px 31px var(--spt-color-background) inset;
 }
 
 p {
@@ -196,10 +196,10 @@ p {
     max-width: 100%;
   }
   .text-pic-container-two .image-wrap:after {
-    box-shadow: 0 0 58px 31px var(--ms1-color-background) inset;
+    box-shadow: 0 0 58px 31px var(--spt-color-background) inset;
     background: linear-gradient(
       360deg,
-      var(--ms1-color-background) 3.125%,
+      var(--spt-color-background) 3.125%,
       transparent 25%
     );
   }

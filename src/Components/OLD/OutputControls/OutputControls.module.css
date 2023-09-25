@@ -20,8 +20,8 @@
   border-radius: 50px;
 }
 .outerwrap button:hover {
-  background: var(--ms1-color-accent);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent);
+  color: var(--spt-color-background);
   transform: none;
 }
 body .loader-wrap > * {

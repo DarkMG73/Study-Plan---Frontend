@@ -1,16 +1,16 @@
 import React, { useState, Fragment } from "react";
 import { useDispatch } from "react-redux";
-import styles from "./CatalogItem.module.css";
+import styles from "./StudyPlanItem.module.css";
 import { formInputDataActions } from "../../../store/formInputDataSlice";
 
-const CatalogItem = (props) => {
-  const catalogItemsObj = props.catalogItemsObj.catalogItemsObj;
+const StudyPlanItem = (props) => {
+  const studyPlanItemsObj = props.studyPlanItemsObj.studyPlanItemsObj;
 
   const showProtectedHidden = props.showProtectedHidden;
   const unlockProtectedVisible = props.unlockProtectedVisible;
   const displayConditions = props.displayConditions;
   const onlyList = props.onlyList;
-  // const key = catalogItemsObj._id;
+  // const key = studyPlanItemsObj._id;
   const key = props.passedKey;
   // const setExistingFormInputValuesObj = props.setExistingFormInputValuesObj;
   const parentKey = props.parentKey;
@@ -113,7 +113,7 @@ const CatalogItem = (props) => {
               styles["_id"]
             }
           >
-            {catalogItemsObj[key]}
+            {studyPlanItemsObj[key]}
           </h4>
         )}
 
@@ -160,14 +160,14 @@ const CatalogItem = (props) => {
               }
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
-              category={catalogItemsObj[key]}
+              category={studyPlanItemsObj[key]}
               placeholder={key}
               title={key}
               parentkey={parentKey}
               parentsparentkey={parentsParentKey ? parentsParentKey : ""}
               parentmasterid={parentMasterID}
               onChange={addInputData}
-              defaultValue={catalogItemsObj[key]}
+              defaultValue={studyPlanItemsObj[key]}
               className={
                 styles[
                   "protectedVisible-" +
@@ -232,7 +232,7 @@ const CatalogItem = (props) => {
               }
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
-              defaultValue={catalogItemsObj[key]}
+              defaultValue={studyPlanItemsObj[key]}
               category={key}
               placeholder={key}
               title={key}
@@ -308,7 +308,7 @@ const CatalogItem = (props) => {
               }
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
-              defaultValue={catalogItemsObj[key]}
+              defaultValue={studyPlanItemsObj[key]}
               category={key}
               placeholder={key}
               title={key}
@@ -389,7 +389,7 @@ const CatalogItem = (props) => {
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
               type="datetime-local"
-              placeholder={catalogItemsObj[key]}
+              placeholder={studyPlanItemsObj[key]}
               title={key}
               parentkey={parentKey}
               parentsparentkey={
@@ -398,10 +398,10 @@ const CatalogItem = (props) => {
               parentmasterid={parentMasterID}
               onChange={addInputData}
               defaultValue={
-                catalogItemsObj[key]
-                  ? catalogItemsObj[key] &&
+                studyPlanItemsObj[key]
+                  ? studyPlanItemsObj[key] &&
                     new Date(
-                      new Date(catalogItemsObj[key]).getTime() -
+                      new Date(studyPlanItemsObj[key]).getTime() -
                         new Date().getTimezoneOffset() * 60000
                     )
                       .toISOString()
@@ -426,11 +426,11 @@ const CatalogItem = (props) => {
             />
           </Fragment>
         )}
-      {onlyList && <span>{catalogItemsObj[key]}</span>}
+      {onlyList && <span>{studyPlanItemsObj[key]}</span>}
     </li>
   );
 
   return output;
 };
 
-export default CatalogItem;
+export default StudyPlanItem;

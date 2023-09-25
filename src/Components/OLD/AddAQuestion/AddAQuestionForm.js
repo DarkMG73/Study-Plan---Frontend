@@ -8,7 +8,7 @@ import { addDocToDB } from "../../storage/interviewQuestionsDB";
 
 function AddAQuestionForm(props) {
   const user = useSelector((state) => state.auth.user);
-  const allQuestions = useSelector((state) => state.catalogData.allQuestions);
+  const allQuestions = useSelector((state) => state.studyPlanData.allQuestions);
   const [formJSX, setFormJSX] = useState([<AddAQuestionFormElms />]);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
@@ -58,14 +58,14 @@ function AddAQuestionForm(props) {
         return;
       }
 
-      // Make sure each title is unms1ue.
+      // Make sure each title is unsptue.
       if (theData.hasOwnProperty("title")) {
         const titlesArray = Object.keys(allQuestions).map((key) =>
           allQuestions[key].title.trim()
         );
         if (titlesArray.includes(theData.title.trim())) {
           alert(
-            " Titles need to be unms1ue. It appears a title field is exactly the same as one we already have for a questions. Please make sure each title is, in some way, different from existing questions."
+            " Titles need to be unsptue. It appears a title field is exactly the same as one we already have for a questions. Please make sure each title is, in some way, different from existing questions."
           );
           return;
         }

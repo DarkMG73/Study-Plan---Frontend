@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   /* border: 3px solid red; */
-  color: var(--ms1-color-background);
-  background: var(--ms1-color-accent-gradient);
+  color: var(--spt-color-background);
+  background: var(--spt-color-accent-gradient);
   padding: 2rem;
   /* border-radius: 50px; */
   box-shadow: inset -1px -1px 14px -7px rgb(255 255 255),
@@ -17,5 +17,5 @@
 }
 
 card-secondary a {
-  color: var(--ms1-color-accent);
+  color: var(--spt-color-accent);
 }

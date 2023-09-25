@@ -7,7 +7,7 @@ const LocalErrorDisplay = (props) => {
     <CardPrimary
       styles={{
         boxShadow:
-          "inset 4px 4px 14px -7px rgb(255 255 255), inset -4px -4px 14px -7px rgb(0 0 0 / 50%), 0 0 30px var(--ms1-color-accent)",
+          "inset 4px 4px 14px -7px rgb(255 255 255), inset -4px -4px 14px -7px rgb(0 0 0 / 50%), 0 0 30px var(--spt-color-accent)",
       }}
     >
       <div className={styles["error-container"]}>

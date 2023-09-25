@@ -19,7 +19,7 @@
   flex-basis: 100%;
   flex-basis: fit-content;
   flex-grow: 1;
-  color: var(--ms1-color-accent);
+  color: var(--spt-color-accent);
   margin: 0.5em 1em 0 2em;
 }
 
@@ -36,8 +36,8 @@
   flex-direction: column;
   -webkit-background-clip: unset;
   -webkit-text-fill-color: unset;
-  background: var(--ms1-color-accent-gradient);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent-gradient);
+  color: var(--spt-color-background);
   padding: 0.5em 1em;
   min-width: 100%;
   border-radius: 50px 50px 0 0;
@@ -76,8 +76,8 @@
   padding: 0 0 0 1em;
 }
 .group > .subgroup > .group-title {
-  background: var(--ms1-color-accent-gradient);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent-gradient);
+  color: var(--spt-color-background);
   background-clip: unset;
   -webkit-text-fill-color: unset;
   padding: 0.125em 1em;
@@ -165,13 +165,13 @@
 
 .form-button {
   position: relative;
-  color: var(--ms1-color-accent-light);
+  color: var(--spt-color-accent-light);
   border: none;
   border-radius: 0;
   padding: 0.5em 2em;
-  background: var(--ms1-color-background);
-  box-shadow: inset 5px 5px 9px -5px var(--ms1-color-accent-light),
-    inset -5px -5px 9px -5px var(--ms1-color-accent-dark);
+  background: var(--spt-color-background);
+  box-shadow: inset 5px 5px 9px -5px var(--spt-color-accent-light),
+    inset -5px -5px 9px -5px var(--spt-color-accent-dark);
   transition: 0.3s all ease;
   cursor: pointer;
   flex-grow: 1;
@@ -190,7 +190,7 @@
   width: min-content;
   padding: 1em 4em;
   /* opacity: 0.5; */
-  /* border: 1px solid var(--ms1-color-accent-dark); */
+  /* border: 1px solid var(--spt-color-accent-dark); */
 }
 
 @keyframes pulseYellow {
@@ -222,49 +222,49 @@
 
 @keyframes jumpPulseAccent {
   0% {
-    box-shadow: 0 0 0px 0px var(--ms1-color-accent);
+    box-shadow: 0 0 0px 0px var(--spt-color-accent);
   }
   10% {
-    box-shadow: 0 0 10px 3px var(--ms1-color-accent);
+    box-shadow: 0 0 10px 3px var(--spt-color-accent);
   }
   100% {
-    box-shadow: 0 0 0px 0px var(--ms1-color-accent);
+    box-shadow: 0 0 0px 0px var(--spt-color-accent);
   }
 }
 
 @keyframes pulseAccent {
   0% {
-    box-shadow: 0 0 0px 0px var(--ms1-color-accent);
+    box-shadow: 0 0 0px 0px var(--spt-color-accent);
   }
   10% {
-    box-shadow: 0 0 10px 3px var(--ms1-color-accent);
+    box-shadow: 0 0 10px 3px var(--spt-color-accent);
   }
   100% {
-    box-shadow: 0 0 0px 0px var(--ms1-color-accent);
+    box-shadow: 0 0 0px 0px var(--spt-color-accent);
   }
 }
 
 .submit-form-button {
   position: relative;
-  color: var(--ms1-color-accent-light);
+  color: var(--spt-color-accent-light);
   border: none;
   border-radius: inherit;
   padding: 1em 2em 0.5em;
-  background: var(--ms1-color-background);
+  background: var(--spt-color-background);
   box-shadow: inset 1px 1px 4px -2px white, inset -1px -1px 4px -2px black;
   cursor: pointer;
   width: 100%;
-  font: var(--ms1-font-subheading);
+  font: var(--spt-font-subheading);
   font-size: 2.4rem;
-  letter-spacing: var(--ms1-spacing-subheading);
-  border: 1px outset var(--ms1-color-accent);
+  letter-spacing: var(--spt-spacing-subheading);
+  border: 1px outset var(--spt-color-accent);
   animation: jumpPulseAccent 2s ease infinite;
 }
 
 .form-button:hover {
   position: relative;
-  background: var(--ms1-color-accent-light);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent-light);
+  color: var(--spt-color-background);
   transition: 0.2s all ease;
 }
 
@@ -291,8 +291,8 @@
 .edited-list {
   animation: pulseYellow 14s ease infinite;
   padding: 1em !important;
-  background: var(--ms1-color-accent-gradient);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent-gradient);
+  color: var(--spt-color-background);
   margin: 1em auto 0;
 }
 

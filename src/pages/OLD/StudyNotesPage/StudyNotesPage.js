@@ -13,7 +13,7 @@ import OutputControls from "../../Components/OutputControls/OutputControls";
 import Footer from "../../Components/Footer/Footer";
 import BottomBar from "../../Components/BottomBar/BottomBar";
 import LoginStatus from "../../Components/User/LoginStatus/LoginStatus";
-import { catalogDataActions } from "../../store/catalogDataSlice";
+import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 import { authActions } from "../../store/authSlice";
 import { updateStudyNotes } from "../../storage/userDB";
 import storage from "../../storage/storage";
@@ -24,7 +24,7 @@ function StudyNotesPage(props) {
   const dispatch = useDispatch();
   const location = useLocation();
   const { studyNotes, ...otherQuestionData } = useSelector(
-    (state) => state.catalogData
+    (state) => state.studyPlanData
   );
   const [currentStudyNotesText, setCurrentStudyNotesText] = useState(
     studyNotes.notePad
@@ -52,7 +52,7 @@ function StudyNotesPage(props) {
     e.preventDefault();
     const newStudyNotes = { ...studyNotes };
     newStudyNotes.notePad = studyNotesElm.current.value;
-    dispatch(catalogDataActions.updateStudyNotes(newStudyNotes));
+    dispatch(studyPlanDataActions.updateStudyNotes(newStudyNotes));
     if (user) updateStudyNotes({ user, dataObj: newStudyNotes });
     if (!user)
       storage("ADD", { studyNotes: newStudyNotes, ...otherQuestionData });
@@ -69,7 +69,7 @@ function StudyNotesPage(props) {
     if (confirm) {
       const newStudyNotes = { ...studyNotes };
       newStudyNotes.notePad = "Notes\n\n";
-      dispatch(catalogDataActions.updateStudyNotes(newStudyNotes));
+      dispatch(studyPlanDataActions.updateStudyNotes(newStudyNotes));
       setCurrentStudyNotesText(newStudyNotes.notePad);
       if (user) updateStudyNotes({ user, dataObj: newStudyNotes });
       if (!user) storage("ADD", { newStudyNotes, ...otherQuestionData });

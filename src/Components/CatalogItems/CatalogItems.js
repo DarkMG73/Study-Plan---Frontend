@@ -1,26 +1,26 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styles from "./CatalogItems.module.css";
-import CatalogItemsList from "./CatalogItemsList/CatalogItemsList";
+import styles from "./StudyPlanItems.module.css";
+import StudyPlanItemsList from "./StudyPlanItemsList/StudyPlanItemsList";
 import displayConditions from "../../data/displayConditionsObj.js";
 import useCreateNewForm from "../../Hooks/useCreateNewForm";
 import { formInputDataActions as allFormInputDataActions } from "../../store/formInputDataSlice";
 import { toTitleCase } from "../../Hooks/utility";
 import { sha256 } from "js-sha256";
 import {
-  saveManyCatalogItems,
-  getSchemaForCatalogItem,
-} from "../../storage/catalogDB";
+  saveManyStudyPlanItems,
+  getSchemaForStudyPlanItem,
+} from "../../storage/studyPlanDB";
 import {
   saveManyContentItems,
   getSchemaForContentItem,
 } from "../../storage/contentDB";
 import CollapsibleElm from "../../UI/CollapsibleElm/CollapsibleElm";
 
-const CatalogItems = (props) => {
+const StudyPlanItems = (props) => {
   const user = useSelector((state) => state.auth.user);
-  const catalogMetadata = useSelector(
-    (state) => state.catalogData.catalogMetadata
+  const studyPlanMetadata = useSelector(
+    (state) => state.studyPlanData.studyPlanMetadata
   );
   const id = props.id;
   const typeName = props.type;
@@ -39,7 +39,7 @@ const CatalogItems = (props) => {
   ////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataObjForEdit) {
-      let getSchema = getSchemaForCatalogItem;
+      let getSchema = getSchemaForStudyPlanItem;
       if (id === "content") {
         getSchema = getSchemaForContentItem;
       }
@@ -49,9 +49,9 @@ const CatalogItems = (props) => {
           const output = {};
           // Gather services available for sourceURLObj
           let availableServices =
-            catalogMetadata &&
-            catalogMetadata.hasOwnProperty("availableServices")
-              ? [...catalogMetadata.availableServices]
+            studyPlanMetadata &&
+            studyPlanMetadata.hasOwnProperty("availableServices")
+              ? [...studyPlanMetadata.availableServices]
               : [""];
 
           for (const itemID in dataObjForEdit) {
@@ -91,11 +91,11 @@ const CatalogItems = (props) => {
           console.log("ERROR->", err);
         });
     } else {
-      getSchemaForCatalogItem()
+      getSchemaForStudyPlanItem()
         .then((data) => {
           setFormInputData((prevState) => {
             const existingState = { ...prevState };
-            existingState.catalog = data.tree;
+            existingState.studyPlan = data.tree;
             return existingState;
           });
         })
@@ -107,8 +107,8 @@ const CatalogItems = (props) => {
 
   useEffect(() => {
     if (allFormInputData.allNewForms && user) {
-      let getSchema = getSchemaForCatalogItem;
-      let saveManyItems = saveManyCatalogItems;
+      let getSchema = getSchemaForStudyPlanItem;
+      let saveManyItems = saveManyStudyPlanItems;
       Object.keys(allFormInputData.allNewForms).forEach((formName) => {
         for (const categoryName in allFormInputData.allNewForms[formName]) {
           if (categoryName === "content") {
@@ -143,7 +143,7 @@ const CatalogItems = (props) => {
             const outputArray = [];
             // new-form
             for (const l1Key in nestedObj) {
-              // Catalog
+              // StudyPlan
               for (const l2Key in nestedObj[l1Key]) {
                 // The base form
                 const newObject = {};
@@ -224,7 +224,7 @@ const CatalogItems = (props) => {
 
           outputDataArray.push(...newFormData);
           saveManyItems({ user, outputDataArray }).then((data) => {
-            console.log("Success! An item has been saved to the catalog.");
+            console.log("Success! An item has been saved to the studyPlan.");
             dispatch(allFormInputDataActions.resetSubmitAllNewForms());
           });
         })
@@ -272,7 +272,7 @@ const CatalogItems = (props) => {
       id={id}
       type={typeName}
       className={
-        styles["catalog-items-group"] +
+        styles["studyPlan-items-group"] +
         " " +
         styles["group-" + id] +
         " " +
@@ -305,7 +305,7 @@ const CatalogItems = (props) => {
           fontFamily: "Arial",
 
           boxShadow: "none",
-          border: "3px solid var(--ms1-color-accent-dark)",
+          border: "3px solid var(--spt-color-accent-dark)",
         }}
         colorType="primary"
         data=""
@@ -315,8 +315,8 @@ const CatalogItems = (props) => {
         open={false}
       >
         {formInputData && Object.keys(formInputData).length > 0 && (
-          <CatalogItemsList
-            catalogItemsObj={formInputData}
+          <StudyPlanItemsList
+            studyPlanItemsObj={formInputData}
             parentKey={false}
             parentsParentKey={false}
             parentMasterID={false}
@@ -343,4 +343,4 @@ const CatalogItems = (props) => {
   );
 };
 
-export default CatalogItems;
+export default StudyPlanItems;

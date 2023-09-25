@@ -12,9 +12,9 @@
   margin: 0;
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--ms1-color-accent);
+  color: var(--spt-color-accent);
   text-align: center;
-  /* background: var(--ms1-color-background); */
+  /* background: var(--spt-color-background); */
   background: inherit;
   color: inherit;
   border-radius: 0 1.5em 1.5em 0;
@@ -90,7 +90,7 @@
     background: #ffffff;
     justify-content: center;
     align-items: center;
-    color: var(--ms1-color-accent);
+    color: var(--spt-color-accent);
     font-size: 2em;
     transition: 0.3s all ease;
   }

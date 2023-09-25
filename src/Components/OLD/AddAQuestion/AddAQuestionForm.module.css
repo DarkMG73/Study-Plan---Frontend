@@ -3,8 +3,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--ms1-color-background);
-  color: var(--ms1-color-accent);
+  background: var(--spt-color-background);
+  color: var(--spt-color-accent);
   border-radius: 50px;
   margin: 1em 1.5em 3em;
   box-shadow: inset 2px 2px 7px -5px black, inset -2px -2px 7px -5px white;
@@ -13,7 +13,7 @@
   position: relative;
   display: flex;
   padding: 1em;
-  font: var(--ms1--font-heading-2);
+  font: var(--spt--font-heading-2);
 }
 
 .add-quest-form button,
@@ -27,12 +27,12 @@
 }
 
 .add-quest-form input[type="submit"] {
-  color: var(--ms1-color-accent);
-  background: var(--ms1-color-background);
+  color: var(--spt-color-accent);
+  background: var(--spt-color-background);
 }
 
 .add-quest-form input[type="submit"]:hover {
-  background: var(--ms1-color-accent-light);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent-light);
+  color: var(--spt-color-background);
   transform: none;
 }

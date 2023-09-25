@@ -161,13 +161,13 @@ select {
 
 @keyframes pulseAccent {
   0% {
-    box-shadow: 0 0 0px 0px var(--ms1-color-accent);
+    box-shadow: 0 0 0px 0px var(--spt-color-accent);
   }
   10% {
-    box-shadow: 0 0 10px 3px var(--ms1-color-accent);
+    box-shadow: 0 0 10px 3px var(--spt-color-accent);
   }
   100% {
-    box-shadow: 0 0 0px 0px var(--ms1-color-accent);
+    box-shadow: 0 0 0px 0px var(--spt-color-accent);
   }
 }
 

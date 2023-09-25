@@ -45,7 +45,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  font: var(--ms1-font-subheading);
+  font: var(--spt-font-subheading);
   font-size: 1rem;
 }
 
@@ -61,7 +61,7 @@
 
 .grid-item-text {
   font-weight: 700;
-  color: var(--ms1-color-accent);
+  color: var(--spt-color-accent);
 }
 
 .grid-item-child {
@@ -122,12 +122,12 @@
 
 .title {
   grid-area: title;
-  font: var(--ms1-font-subheading);
+  font: var(--spt-font-subheading);
   min-height: 100%;
 }
 
 .title-text {
-  font: var(--ms1-font-subheading);
+  font: var(--spt-font-subheading);
   min-height: 100%;
   display: flex;
   justify-content: left;
@@ -172,10 +172,10 @@
 
 .answer > .grid-item-text,
 .question > .grid-item-text {
-  font: var(--ms1-font-body-text);
+  font: var(--spt-font-body-text);
   font-weight: 500;
   border-radius: 27px;
-  border: 1px solid var(--ms1-color-accent);
+  border: 1px solid var(--spt-color-accent);
   padding: 1em 2em;
   margin: 1em auto;
   width: 100%;
@@ -184,8 +184,8 @@
 
 .question,
 .answer {
-  background: var(--ms1-color-background);
-  color: var(--ms1-color-background-contrast);
+  background: var(--spt-color-background);
+  color: var(--spt-color-background-contrast);
 }
 
 .search {
@@ -216,10 +216,10 @@ button.edit {
 .button-container p {
   text-align: center;
   background: white;
-  color: var(--ms1-color-accent);
+  color: var(--spt-color-accent);
 }
 body .button-container button:hover {
-  background: var(--ms1-color-accent-light) !important;
+  background: var(--spt-color-accent-light) !important;
   color: white;
   border-radius: 50px;
   transform: none;
@@ -230,7 +230,7 @@ body .button-container button[value="edit"]:hover {
   background: #942828 !important;
   color: white;
   background: transparent !important;
-  color: var(--ms1-color-accent) !important;
+  color: var(--spt-color-accent) !important;
   border-radius: 50px;
   transform: scale(1, 1.5);
   text-align: center !important;
@@ -249,7 +249,7 @@ body .button-container button[value="edit"]:hover {
   grid-area: notepad;
   height: fit-content;
   border-radius: 27px;
-  border: 1px solid var(--ms1-color-accent);
+  border: 1px solid var(--spt-color-accent);
   overflow: hidden;
 }
 

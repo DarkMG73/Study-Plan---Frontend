@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 
 const useExportData = (props) => {
   const { allQuestions, questionHistory, filteredQuestionsIds } = useSelector(
-    (state) => state.catalogData
+    (state) => state.studyPlanData
   );
   if (!filteredQuestionsIds) return null;
   const totalQuestions = filteredQuestionsIds.length;

@@ -23,7 +23,7 @@
   box-shadow: inset -1px -1px 7px -5px black, inset 3px 3px 7px -1px white;
   border-radius: 3px;
   padding: 1em;
-  border: 1px inset var(--ms1-color-accent);
+  border: 1px inset var(--spt-color-accent);
 }
 
 .study-notepad-container h3,
@@ -32,7 +32,7 @@
 }
 
 .study-notepad-container p {
-  font: var(--ms1-font-body-text);
+  font: var(--spt-font-body-text);
   font-size: 1rem;
   max-width: 950px;
 }
@@ -43,7 +43,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  font: var(--ms1-font-subheading);
+  font: var(--spt-font-subheading);
   font-size: 1rem;
 }
 

@@ -7,7 +7,7 @@ import CardSecondary from "../../UI/Cards/CardSecondary/CardSecondary";
 import NotFound from "../../Components/NotFound/NotFound";
 import Footer from "../../Components/Footer/Footer";
 import MusicPlayer from "../../Components/MusicPlayer/MusicPlayer";
-import MusicCatalog from "../../Components/MusicCatalog/MusicCatalog";
+import MusicStudyPlan from "../../Components/MusicStudyPlan/MusicStudyPlan";
 import About from "../../Components/About/About";
 import NoticeOne from "../../Components/NoticeOne/NoticeOne";
 import NoticeTwo from "../../Components/NoticeTwo/NoticeTwo";
@@ -18,8 +18,8 @@ import { ErrorBoundary } from "../../HOC/ErrorHandling/ErrorBoundary/ErrorBounda
 import { scrollPositionActions } from "../../store/scrollPositionSlice";
 
 const Home = (props) => {
-  const { catalog, catalogMetadata } = useSelector(
-    (state) => state.catalogData
+  const { studyPlan, studyPlanMetadata } = useSelector(
+    (state) => state.studyPlanData
   );
   const { content } = useSelector((state) => state.contentData);
   // const [scrollToElm, setScrollToElm] = useState(false);
@@ -27,10 +27,10 @@ const Home = (props) => {
   // const [scrollToAnswer, setScrollToAnswer] = useState(false);
   const angledRectangleRef = useRef();
   const dispatch = useDispatch();
-  const hideMusicCatalog = false;
+  const hideMusicStudyPlan = false;
   const defaultSourceURLObj = determineDefaultSourceURLObj(
-    catalog,
-    catalogMetadata
+    studyPlan,
+    studyPlanMetadata
   );
 
   ////////////////////////////////////////
@@ -72,30 +72,30 @@ const Home = (props) => {
     return false;
   };
 
-  function determineDefaultSourceURLObj(catalog, catalogMetadata) {
-    const allCatalogValues =
-      catalog &&
-      Object.values(catalog).filter((item) =>
+  function determineDefaultSourceURLObj(studyPlan, studyPlanMetadata) {
+    const allStudyPlanValues =
+      studyPlan &&
+      Object.values(studyPlan).filter((item) =>
         item.sourceURLObj.hasOwnProperty("soundCloud")
       );
     const lastPlaylist =
-      allCatalogValues &&
-      allCatalogValues[allCatalogValues.length - 1].sourceURLObj;
+      allStudyPlanValues &&
+      allStudyPlanValues[allStudyPlanValues.length - 1].sourceURLObj;
     const output =
-      catalog &&
-      catalogMetadata &&
-      catalogMetadata.hasOwnProperty("isDefaultPlaylist") &&
-      catalog[catalogMetadata.isDefaultPlaylist[1]].hasOwnProperty(
+      studyPlan &&
+      studyPlanMetadata &&
+      studyPlanMetadata.hasOwnProperty("isDefaultPlaylist") &&
+      studyPlan[studyPlanMetadata.isDefaultPlaylist[1]].hasOwnProperty(
         "sourceURLObj"
       )
-        ? catalog[catalogMetadata.isDefaultPlaylist[1]].sourceURLObj
-        : catalog &&
-          catalogMetadata &&
-          catalogMetadata.hasOwnProperty("isFeaturedPlaylist") &&
-          catalog[catalogMetadata.isFeaturedPlaylist[1]].hasOwnProperty(
+        ? studyPlan[studyPlanMetadata.isDefaultPlaylist[1]].sourceURLObj
+        : studyPlan &&
+          studyPlanMetadata &&
+          studyPlanMetadata.hasOwnProperty("isFeaturedPlaylist") &&
+          studyPlan[studyPlanMetadata.isFeaturedPlaylist[1]].hasOwnProperty(
             "sourceURLObj"
           )
-        ? catalog[catalogMetadata.isFeaturedPlaylist[1]].sourceURLObj
+        ? studyPlan[studyPlanMetadata.isFeaturedPlaylist[1]].sourceURLObj
         : lastPlaylist;
     return output;
   }
@@ -147,7 +147,7 @@ const Home = (props) => {
         <CardPrimary
           styles={{
             boxShadow:
-              "inset 0 21px 30px -20px var(--ms1-color-accent), inset 0px -21px 20px -20px var(--ms1-color-accent)",
+              "inset 0 21px 30px -20px var(--spt-color-accent), inset 0px -21px 20px -20px var(--spt-color-accent)",
           }}
         >
           <ErrorBoundary>
@@ -155,11 +155,11 @@ const Home = (props) => {
           </ErrorBoundary>
         </CardPrimary>
       )}
-      {!hideMusicCatalog && catalog && (
+      {!hideMusicStudyPlan && studyPlan && (
         <CardTransparent>
           <ErrorBoundary>
-            <MusicCatalog
-              catalogData={{ catalog: catalog }}
+            <MusicStudyPlan
+              studyPlanData={{ studyPlan: studyPlan }}
               hideServiceSelector={false}
               musicIsActive={props.musicIsActive}
             />
@@ -171,7 +171,7 @@ const Home = (props) => {
           styles={{
             borderRadius: "0",
             boxShadow:
-              "inset 0 21px 30px -20px var(--ms1-color-accent), inset 0px -21px 20px -20px var(--ms1-color-accent)",
+              "inset 0 21px 30px -20px var(--spt-color-accent), inset 0px -21px 20px -20px var(--spt-color-accent)",
           }}
         >
           <ErrorBoundary>
@@ -190,7 +190,7 @@ const Home = (props) => {
         <CardPrimary
           styles={{
             boxShadow:
-              "inset 0 21px 30px -20px var(--ms1-color-accent), inset 0px -21px 20px -20px var(--ms1-color-accent)",
+              "inset 0 21px 30px -20px var(--spt-color-accent), inset 0px -21px 20px -20px var(--spt-color-accent)",
           }}
         >
           <ErrorBoundary>

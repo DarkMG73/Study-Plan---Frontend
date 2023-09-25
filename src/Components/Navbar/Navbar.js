@@ -11,7 +11,7 @@ function Navbar(props) {
         </a>
       )}
       {props.musicIsActive && (
-        <a href="#music-catalog" alt="">
+        <a href="#music-studyPlan" alt="">
           Music
         </a>
       )}

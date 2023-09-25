@@ -6,7 +6,7 @@
         "youTube":{"title": "YouTube", "slug": "youTube", "logo": "", "defaultEmbed": ""}
         }, 
 
-"catalog" : 
+"studyPlan" : 
         {    
         "defaults": { "defaultPlaylist": {   
                         "title": "Main Playlist",

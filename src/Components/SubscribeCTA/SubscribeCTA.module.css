@@ -17,8 +17,8 @@
   min-width: fit-content;
 }
 .subscribeCTA-email-input {
-  background: var(--ms1-color-accent-gradient);
-  color: var(--ms1-color-background-contrast);
+  background: var(--spt-color-accent-gradient);
+  color: var(--spt-color-background-contrast);
   border: none;
   border-radius: 50px 0 0 50px;
   padding: 0.2em 1em;
@@ -27,19 +27,19 @@
 
 .subscribeCTA-form ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: var(--ms1-color-background-contrast);
+  color: var(--spt-color-background-contrast);
   opacity: 0.5;
-  font: var(--ms1-font-subheading);
+  font: var(--spt-font-subheading);
   font-size: 1em;
 }
 
 .subscribeCTA-email-submit {
-  background: var(--ms1-color-accent-gradient);
+  background: var(--spt-color-accent-gradient);
   border: none;
   border-radius: 0 50px 50px 0;
   padding: 0.5em 1em;
-  background-color: var(--ms1-color-background);
-  background-image: var(--ms1-color-accent-gradient);
+  background-color: var(--spt-color-background);
+  background-image: var(--spt-color-accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 1.25em;
@@ -53,11 +53,11 @@
 }
 
 /* .subscribeCTA-email-submit {
-  background: var(--ms1-color-accent-gradient);
+  background: var(--spt-color-accent-gradient);
   border: none;
   border-radius: 0 50px 50px 0;
   padding: 0.2em 1em;
-  background-color: var(--ms1-color-background);
+  background-color: var(--spt-color-background);
   text-shadow: 0px 0px 24px hsla(356, 81%, 58%, 1);
  
 } */
@@ -93,8 +93,8 @@
   }
 }
 .not-logged-in {
-  background: var(--ms1-color-background);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-background);
+  color: var(--spt-color-background);
   padding: 0 3em 0.2em;
   border-radius: 50px;
   box-shadow: inset 1px 1px 3px -2px black, inset -1px -1px 3px -2px white;
@@ -117,7 +117,7 @@
   max-width: 100%;
   min-height: 100%;
   max-height: 100%;
-  background-image: radial-gradient(var(--ms1-color-background), #ffffffd4);
+  background-image: radial-gradient(var(--spt-color-background), #ffffffd4);
   transition: 0.3s;
   opacity: 0;
   pointer-events: none;

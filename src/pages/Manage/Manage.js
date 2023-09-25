@@ -15,23 +15,23 @@ import LoginStatus from "../../Components/User/LoginStatus/LoginStatus";
 import backgroundVideo from "../../assets/media/backgrounds/background-energy6.mp4";
 import { ErrorBoundary } from "../../HOC/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import { scrollPositionActions } from "../../store/scrollPositionSlice";
-import CatalogItems from "../../Components/CatalogItems/CatalogItems";
-import CatalogItemsList from "../../Components/CatalogItems/CatalogItemsList/CatalogItemsList";
+import StudyPlanItems from "../../Components/StudyPlanItems/StudyPlanItems";
+import StudyPlanItemsList from "../../Components/StudyPlanItems/StudyPlanItemsList/StudyPlanItemsList";
 import CollapsibleElm from "../../UI/CollapsibleElm/CollapsibleElm";
 import { toTitleCase } from "../../Hooks/utility";
 
 const Manage = (props) => {
   const user = useSelector((state) => state.auth.user);
   const contentData = useSelector((state) => state.contentData);
-  const catalogData = useSelector((state) => state.catalogData);
+  const studyPlanData = useSelector((state) => state.studyPlanData);
   const [outputJSX, setOutputJSX] = useState(false);
   const [contentOutputJSX, setContentOutputJSX] = useState(false);
   const angledRectangleRef = useRef();
   const dispatch = useDispatch();
-  const dataObj = catalogData;
+  const dataObj = studyPlanData;
   const jsxOutputInstructions = {
-    itemsToList: ["catalogMetadata", "contentMetadata"],
-    itemsToEdit: ["catalog", "services", "content"],
+    itemsToList: ["studyPlanMetadata", "contentMetadata"],
+    itemsToEdit: ["studyPlan", "services", "content"],
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -89,7 +89,7 @@ const Manage = (props) => {
                 key={key + typeName}
                 className={styles["section"] + " " + styles[typeName]}
               >
-                <CatalogItems
+                <StudyPlanItems
                   key={key + "catItems"}
                   id={key}
                   dataObjForEdit={sortedDataObject[typeName]}
@@ -148,7 +148,7 @@ const Manage = (props) => {
                     borderRadius: "0 0 50px 50px",
                     fontFamily: "Arial",
                     boxShadow: "none",
-                    border: "3px solid var(--ms1-color-accent-dark)",
+                    border: "3px solid var(--spt-color-accent-dark)",
                   }}
                   colorType="primary"
                   data=""
@@ -157,9 +157,9 @@ const Manage = (props) => {
                   buttonTextClosed={"- Open " + toTitleCase(key) + " -"}
                   open={false}
                 >
-                  <CatalogItemsList
+                  <StudyPlanItemsList
                     key={key + "catItemList"}
-                    catalogItemsObj={dataObjForList[key]}
+                    studyPlanItemsObj={dataObjForList[key]}
                     parentKey={false}
                     parentsParentKey={false}
                     parentMasterID={false}
@@ -211,7 +211,7 @@ const Manage = (props) => {
                 key={key + typeName + "div"}
                 className={styles["section"] + " " + styles[typeName]}
               >
-                <CatalogItems
+                <StudyPlanItems
                   key={key + typeName + "list"}
                   id={key}
                   dataObjForEdit={sortedDataObject[typeName]}
@@ -270,7 +270,7 @@ const Manage = (props) => {
                     borderRadius: "0 0 50px 50px",
                     fontFamily: "Arial",
                     boxShadow: "none",
-                    border: "3px solid var(--ms1-color-accent-dark)",
+                    border: "3px solid var(--spt-color-accent-dark)",
                   }}
                   colorType="primary"
                   data=""
@@ -279,9 +279,9 @@ const Manage = (props) => {
                   buttonTextClosed={"- Open " + toTitleCase(key) + " -"}
                   open={false}
                 >
-                  <CatalogItemsList
+                  <StudyPlanItemsList
                     key={key + "catList"}
-                    catalogItemsObj={dataObjForList[key]}
+                    studyPlanItemsObj={dataObjForList[key]}
                     parentKey={false}
                     parentsParentKey={false}
                     parentMasterID={false}
@@ -340,23 +340,23 @@ const Manage = (props) => {
           <div className={styles["title-wrap"]}>
             <h1
               key="qwewertyuifgh"
-              className={styles["ms1-title"] + " " + styles["first-word"]}
+              className={styles["spt-title"] + " " + styles["first-word"]}
             >
               Manage{" "}
             </h1>
             <h2
               key="qwewertyuifghjdvdfvd"
-              className={styles["ms1-title"] + " " + styles["first-word"]}
+              className={styles["spt-title"] + " " + styles["first-word"]}
             >
               Ignite{" "}
               <span
-                className={styles["ms1-title"] + " " + styles["second-word"]}
+                className={styles["spt-title"] + " " + styles["second-word"]}
               >
                 {" "}
                 &nbsp; Revolution
               </span>
             </h2>
-            <h3 className={styles["ms1-subtitle"]}>
+            <h3 className={styles["spt-subtitle"]}>
               Unite in Rhythm | Elevate
             </h3>
           </div>{" "}
@@ -387,7 +387,7 @@ const Manage = (props) => {
                   className={
                     styles["master-list-container"] +
                     " " +
-                    styles["master-catalog"]
+                    styles["master-studyPlan"]
                   }
                 >
                   {outputJSX}

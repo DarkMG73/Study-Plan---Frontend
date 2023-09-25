@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import SlideButton from "../../UI/Buttons/Slide-Button/Slide-Button";
 import { hyphenate } from "../../Hooks/utility";
 import SetFilteredQuestionIdList from "../../Hooks/SetFilteredQuestionIdList";
-import { catalogDataActions } from "../../store/catalogDataSlice";
+import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 import { updateUserCurrentFilters } from "../../storage/userDB";
 import storage from "../../storage/storage";
 
@@ -16,18 +16,18 @@ function QuestionFilter(props) {
     allQuestions,
     questionMetadata,
     currentFilterStorageNeedsUpdate,
-  } = useSelector((state) => state.catalogData);
+  } = useSelector((state) => state.studyPlanData);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const [refreshComponent, setRefreshComponent] = useState(1);
 
   useEffect(() => {
-    dispatch(catalogDataActions.clearQuestionFilterIds);
+    dispatch(studyPlanDataActions.clearQuestionFilterIds);
     const filteredQuestionIdList = SetFilteredQuestionIdList(
       allQuestions,
       currentFilters
     );
-    dispatch(catalogDataActions.setQuestionFilterIds(filteredQuestionIdList));
+    dispatch(studyPlanDataActions.setQuestionFilterIds(filteredQuestionIdList));
   }, [currentFilters, allQuestions, dispatch]);
 
   useEffect(() => {
@@ -41,14 +41,14 @@ function QuestionFilter(props) {
       } else if (user) {
         updateUserCurrentFilters({ user, dataObj: currentFilters });
       }
-      dispatch(catalogDataActions.currentFilterStorageNeedsUpdate(false));
+      dispatch(studyPlanDataActions.currentFilterStorageNeedsUpdate(false));
     }
   }, [currentFilterStorageNeedsUpdate]);
 
   function levelFilterButtonHandler(e) {
     if (e.target.checked) {
       dispatch(
-        catalogDataActions.addToQuestionFilters({
+        studyPlanDataActions.addToQuestionFilters({
           type: "level",
           value: e.target.value.replace(/-/g, ""),
         })
@@ -56,33 +56,33 @@ function QuestionFilter(props) {
       SetFilteredQuestionIdList();
     } else {
       dispatch(
-        catalogDataActions.removeFromQuestionFilters({
+        studyPlanDataActions.removeFromQuestionFilters({
           type: "level",
           value: e.target.value.replace(/-/g, ""),
         })
       );
     }
-    dispatch(catalogDataActions.currentFilterStorageNeedsUpdate(true));
+    dispatch(studyPlanDataActions.currentFilterStorageNeedsUpdate(true));
     // FilterQuestions(allQuestionsData);
   }
 
   function topicFilterButtonHandler(e) {
     if (e.target.checked) {
       dispatch(
-        catalogDataActions.addToQuestionFilters({
+        studyPlanDataActions.addToQuestionFilters({
           type: "topic",
           value: e.target.value.replace(/-/g, ""),
         })
       );
     } else {
       dispatch(
-        catalogDataActions.removeFromQuestionFilters({
+        studyPlanDataActions.removeFromQuestionFilters({
           type: "topic",
           value: e.target.value.replace(/-/g, ""),
         })
       );
     }
-    dispatch(catalogDataActions.currentFilterStorageNeedsUpdate(true));
+    dispatch(studyPlanDataActions.currentFilterStorageNeedsUpdate(true));
     // FilterQuestions(allQuestionsData);
   }
 
@@ -90,20 +90,20 @@ function QuestionFilter(props) {
     const value = e.target.value.replace(/-/g, "").replaceAll(" ", "_");
     if (e.target.checked) {
       dispatch(
-        catalogDataActions.addToQuestionFilters({
+        studyPlanDataActions.addToQuestionFilters({
           type: "tags",
           value: value,
         })
       );
     } else {
       dispatch(
-        catalogDataActions.removeFromQuestionFilters({
+        studyPlanDataActions.removeFromQuestionFilters({
           type: "tags",
           value: value,
         })
       );
     }
-    dispatch(catalogDataActions.currentFilterStorageNeedsUpdate(true));
+    dispatch(studyPlanDataActions.currentFilterStorageNeedsUpdate(true));
     // FilterQuestions(allQuestionsData);
   }
 

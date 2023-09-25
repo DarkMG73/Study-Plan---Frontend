@@ -1,4 +1,4 @@
-.catalog-items-group {
+.studyPlan-items-group {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -9,15 +9,15 @@
   flex-basis: 100%;
   flex-wrap: wrap;
   max-width: 100%;
-  background: var(--ms1-color-background);
+  background: var(--spt-color-background);
   padding: 1em;
   list-style: none;
   padding: 0;
 }
 
 .group-title {
-  background: var(--ms1-color-accent-gradient);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent-gradient);
+  color: var(--spt-color-background);
   background-clip: unset;
   -webkit-text-fill-color: unset;
   padding: 0.5em 1em;
@@ -60,7 +60,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--ms1-color-accent-gradient);
+  background: var(--spt-color-accent-gradient);
   overflow: scroll;
   z-index: 10000;
 }
@@ -75,7 +75,7 @@
 }
 
 .new-form-modal form {
-  background: var(--ms1-color-background);
+  background: var(--spt-color-background);
   padding: 3em;
   max-width: 100%;
   max-height: 100%;
@@ -99,38 +99,38 @@
   flex-grow: 1;
   justify-content: flex-start;
   position: relative;
-  box-shadow: 0px 24px 33px 0px var(--ms1-color-accent);
+  box-shadow: 0px 24px 33px 0px var(--spt-color-accent);
   max-width: 800px;
 }
 
 .new-form-button {
   position: relative;
   margin: 0 auto;
-  color: var(--ms1-color-accent-light);
+  color: var(--spt-color-accent-light);
   border: none;
   border-radius: 50px;
   padding: 0.25em 2em;
-  background: var(--ms1-color-background);
-  box-shadow: inset 10px 10px 14px -7px var(--ms1-color-accent-light),
-    inset -10px -10px 14px -7px var(--ms1-color-accent-dark);
+  background: var(--spt-color-background);
+  box-shadow: inset 10px 10px 14px -7px var(--spt-color-accent-light),
+    inset -10px -10px 14px -7px var(--spt-color-accent-dark);
   transition: 0.7s all ease;
   cursor: pointer;
   width: fit-content;
-  font: var(--ms1-font-subheading);
-  letter-spacing: var(--ms1-spacing-subheading);
+  font: var(--spt-font-subheading);
+  letter-spacing: var(--spt-spacing-subheading);
   font-family: Arial;
   font-size: 1.2rem;
   padding: 1em 4em;
   z-index: 10;
-  border: 1px solid var(--ms1-color-accent-dark);
-  /* border-top: 1px solid var(--ms1-color-accent-light); */
-  /* border-left: 1px solid var(--ms1-color-accent-light); */
+  border: 1px solid var(--spt-color-accent-dark);
+  /* border-top: 1px solid var(--spt-color-accent-light); */
+  /* border-left: 1px solid var(--spt-color-accent-light); */
 }
 
 .new-form-button:hover {
   position: relative;
-  background: var(--ms1-color-accent-light);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent-light);
+  color: var(--spt-color-background);
   transition: 0.3s all ease;
 }
 

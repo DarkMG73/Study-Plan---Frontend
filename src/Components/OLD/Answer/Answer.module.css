@@ -27,7 +27,7 @@
 .button-container > * {
   width: 100%;
   margin: 0 auto;
-  font: var(--ms1-font-body-text);
+  font: var(--spt-font-body-text);
   font-weight: 700;
 }
 .title {
@@ -107,8 +107,8 @@ pre {
 .more-about-this-link {
   font-size: 1.25em;
   font-size: calc(0.8rem + 0.5vw);
-  background: var(--ms1-color-accent);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent);
+  color: var(--spt-color-background);
   border-radius: 0 0 50px 50px;
   padding: 0.5em;
   text-decoration: none;

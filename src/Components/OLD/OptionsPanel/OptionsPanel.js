@@ -7,7 +7,7 @@ import { timerActions } from "../../store/timerSlice";
 
 function OptionsPanel(props) {
   const { answer, search } = useSelector(
-    (state) => state.catalogData.currentQuestionData
+    (state) => state.studyPlanData.currentQuestionData
   );
   const dispatch = useDispatch();
   const { timerRunning, peekTimer } = useSelector((state) => state.timer);

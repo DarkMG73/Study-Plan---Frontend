@@ -12,8 +12,8 @@
   /* transform: scale(1.1); */
   transform: none;
   transition: 0.1s all ease;
-  background: var(--ms1-color-accent-light) !important;
-  color: var(--ms1-color-background) !important;
+  background: var(--spt-color-accent-light) !important;
+  color: var(--spt-color-background) !important;
   box-shadow: rgb(255, 255, 255) 7px 7px 14px -7px inset,
     rgba(0, 0, 0, 0.5) -7px -7px 14px -7px inset, 14px 14px 14px -7px black !important;
 }

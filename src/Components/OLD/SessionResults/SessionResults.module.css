@@ -22,7 +22,7 @@
 
 .logo-wrap path {
   fill: ivory !important;
-  fill: var(--ms1-color-background) !important;
+  fill: var(--spt-color-background) !important;
 }
 
 .list-item-clear-list {

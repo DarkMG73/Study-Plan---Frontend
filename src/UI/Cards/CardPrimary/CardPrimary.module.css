@@ -1,7 +1,7 @@
 .card-primary {
   display: flex;
   flex-direction: column;
-  background-color: var(--ms1-color-background);
+  background-color: var(--spt-color-background);
 
   padding: 2rem;
   /* border-radius: 50px; */
@@ -15,12 +15,12 @@
 .card-primary h3,
 .card-primary a,
 .card-primary span {
-  background-color: var(--ms1-color-background);
-  background-image: var(--ms1-color-accent-gradient);
+  background-color: var(--spt-color-background);
+  background-image: var(--spt-color-accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .card-priimary a {
-  color: var(--ms1-color-accent);
+  color: var(--spt-color-accent);
 }

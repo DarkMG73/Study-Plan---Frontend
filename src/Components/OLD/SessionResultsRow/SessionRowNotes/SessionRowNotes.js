@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect, useRef, Fragment } from "react";
 import styles from "./SessionRowNotes.module.css";
-import { catalogDataActions } from "../../../store/catalogDataSlice";
+import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 import { updateUserHistory } from "../../../storage/userDB";
 import storage from "../../../storage/storage";
 import { updateStudyNotes } from "../../../storage/userDB";
@@ -12,7 +12,7 @@ const SessionRowNotes = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const { studyNotes, ...otherQuestionData } = useSelector(
-    (state) => state.catalogData
+    (state) => state.studyPlanData
   );
   const { questionHistory } = otherQuestionData;
   const [currentRowNotesText, setCurrentRowNotesText] = useState();
@@ -35,8 +35,8 @@ const SessionRowNotes = (props) => {
         rowNotesElm.current.value;
     }
 
-    dispatch(catalogDataActions.updateQuestionHistory(newQuestionHistory));
-    dispatch(catalogDataActions.questionHistoryStorageNeedsUpdate(true));
+    dispatch(studyPlanDataActions.updateQuestionHistory(newQuestionHistory));
+    dispatch(studyPlanDataActions.questionHistoryStorageNeedsUpdate(true));
   };
 
   const rowNotesOnChangeHandler = (e) => {
@@ -54,8 +54,8 @@ const SessionRowNotes = (props) => {
         ...newQuestionHistory.questionPersonalNotes,
       };
       delete newQuestionHistory.questionPersonalNotes[rowKey];
-      dispatch(catalogDataActions.updateQuestionHistory(newQuestionHistory));
-      dispatch(catalogDataActions.questionHistoryStorageNeedsUpdate(true));
+      dispatch(studyPlanDataActions.updateQuestionHistory(newQuestionHistory));
+      dispatch(studyPlanDataActions.questionHistoryStorageNeedsUpdate(true));
     }
   };
 

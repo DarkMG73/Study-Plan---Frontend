@@ -1,7 +1,7 @@
 import axios from "axios";
 
 /// GET THE CATALOG ITEMS /////////////////////////////
-export const catalogData = async (user) => {
+export const studyPlanData = async (user) => {
   let axiosConfig = null;
 
   if (user) {
@@ -15,7 +15,7 @@ export const catalogData = async (user) => {
   }
 
   try {
-    const res = await axios.post("/api/ms1/", user, axiosConfig);
+    const res = await axios.post("/api/spt/", user, axiosConfig);
     return res.data;
   } catch (err) {
     console.log(
@@ -41,7 +41,7 @@ export const getQuestionBy_Id = async (user, question_Id) => {
     };
   }
 
-  const res = await axios.post("/api/ms1/" + question_Id, user, axiosConfig);
+  const res = await axios.post("/api/spt/" + question_Id, user, axiosConfig);
   return res.data;
 };
 
@@ -55,7 +55,7 @@ export async function addDocToDB(userAndDataObject) {
   };
 
   const response = await axios
-    .post(`/api/ms1/add/`, userAndDataObject, axiosConfig)
+    .post(`/api/spt/add/`, userAndDataObject, axiosConfig)
     .then((res) => {
       return res;
     })
@@ -71,7 +71,7 @@ export async function addDocToDB(userAndDataObject) {
 }
 
 /// SAVE MANY /////////////////////////////////
-export async function saveManyCatalogItems(userAndDataObject) {
+export async function saveManyStudyPlanItems(userAndDataObject) {
   const axiosConfig = {
     headers: {
       "Content-Type": "application/json",
@@ -80,7 +80,7 @@ export async function saveManyCatalogItems(userAndDataObject) {
   };
 
   const response = await axios
-    .post(`/api/ms1/add-many/`, userAndDataObject, axiosConfig)
+    .post(`/api/spt/add-many/`, userAndDataObject, axiosConfig)
     .then((res) => {
       return res;
     })
@@ -96,7 +96,7 @@ export async function saveManyCatalogItems(userAndDataObject) {
 }
 
 /// UPDATE //////////////////////////////////
-export async function updateACatalogItem(id, dataObj, user) {
+export async function updateAStudyPlanItem(id, dataObj, user) {
   dataObj.identifier = id;
   const axiosConfig = {
     headers: {
@@ -106,7 +106,7 @@ export async function updateACatalogItem(id, dataObj, user) {
   };
 
   const response = await axios
-    .post(`/api/ms1/update/`, { dataObj }, axiosConfig)
+    .post(`/api/spt/update/`, { dataObj }, axiosConfig)
     .then((res) => {
       return res;
     })
@@ -131,7 +131,7 @@ export async function deleteDocFromDb(id, user) {
     },
   };
   const response = await axios
-    .get(`/api/ms1/${id}/delete/`, axiosConfig)
+    .get(`/api/spt/${id}/delete/`, axiosConfig)
     .then((res) => {
       return res;
     })
@@ -155,7 +155,7 @@ export async function deleteAllQuestions(user) {
     },
   };
   const response = await axios
-    .get(`/api/ms1/deleteAll/`, axiosConfig)
+    .get(`/api/spt/deleteAll/`, axiosConfig)
     .then((res) => {
       return res;
     })
@@ -176,7 +176,7 @@ export async function deleteAllQuestions(user) {
 }
 
 /// GET CATALOG ITEM SCHEMA //////////////
-export async function getSchemaForCatalogItem() {
+export async function getSchemaForStudyPlanItem() {
   const axiosConfig = {
     headers: {
       "Content-Type": "application/json",
@@ -184,7 +184,7 @@ export async function getSchemaForCatalogItem() {
   };
 
   const output = await axios
-    .get(`/api/ms1/model/`, axiosConfig)
+    .get(`/api/spt/model/`, axiosConfig)
     .then((res) => {
       return res.data.model;
     })

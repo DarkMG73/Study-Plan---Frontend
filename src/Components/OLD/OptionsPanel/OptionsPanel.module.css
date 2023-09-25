@@ -4,8 +4,8 @@
 
 .inner-wrap button:hover {
   transform: none;
-  background: var(--ms1-color-accent);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent);
+  color: var(--spt-color-background);
 }
 
 .inner-wrap pre {

@@ -18,13 +18,13 @@
   min-width: 18em;
   box-shadow: 3px 3px 7px -5px white inset,
     -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
-  color: var(--ms1-color-accent);
-  background: var(--ms1-color-background);
+  color: var(--spt-color-accent);
+  background: var(--spt-color-background);
   font-variant: small-caps;
 }
 
 .add-question-container .button-container button:hover {
-  background: var(--ms1-color-accent);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent);
+  color: var(--spt-color-background);
   transform: none;
 }

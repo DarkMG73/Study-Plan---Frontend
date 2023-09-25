@@ -1,4 +1,4 @@
-.ms1-history-backup {
+.spt-history-backup {
   font-weight: 700;
   margin-bottom: 1em;
 }
@@ -27,7 +27,7 @@
   text-transform: uppercase;
 }
 
-.ms1-history-backup ul {
+.spt-history-backup ul {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
@@ -38,7 +38,7 @@
   font-variant: small-caps;
 }
 
-.ms1-history-backup li {
+.spt-history-backup li {
   flex-basis: 100%;
   display: flex;
   align-items: center;
@@ -92,8 +92,8 @@
 .user-not-logged-in {
   max-width: max-content;
   margin: 0 auto;
-  background: var(--ms1-color-background);
-  color: var(--ms1-color-accent);
+  background: var(--spt-color-background);
+  color: var(--spt-color-accent);
   padding: 0.25em 1em;
   border-radius: 50px;
   box-shadow: inset 2px 2px 3px -2px black, inset -2px -2px 5px -2px white,
@@ -101,9 +101,9 @@
 }
 
 @media screen and (max-width: 900px) {
-  .ms1-history-backup .stat-correctAmount,
-  .ms1-history-backup .stat-incorrectAmount,
-  .ms1-history-backup .stat-unmarkedAmount {
+  .spt-history-backup .stat-correctAmount,
+  .spt-history-backup .stat-incorrectAmount,
+  .spt-history-backup .stat-unmarkedAmount {
     display: none;
   }
 }

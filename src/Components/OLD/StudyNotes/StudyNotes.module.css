@@ -135,12 +135,12 @@
   font-weight: 700;
   cursor: pointer;
   transition: 0.2s all ease;
-  font: var(--ms1-font-body-text);
+  font: var(--spt-font-body-text);
   font-size: 0.75em;
   font-size: calc(0.5em + 0.2vw);
   font-weight: 700;
-  background: var(--ms1-color-accent);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent);
+  color: var(--spt-color-background);
   text-decoration: none;
   font-variant: small-caps;
 }
@@ -175,7 +175,7 @@
 .study-topics-container button:hover,
 .study-topics-container a:hover,
 .study-topics-container input[type="submit"]:hover {
-  background: var(--ms1-color-accent-light);
+  background: var(--spt-color-accent-light);
   transform: none;
 }
 
@@ -364,7 +364,7 @@
 
 .study-list-item:hover:after {
   transform: scale(1, 1.25);
-  border: 1px solid var(--ms1-color-accent);
+  border: 1px solid var(--spt-color-accent);
   border-radius: 10px;
   position: absolute;
   top: 50%;
@@ -438,7 +438,7 @@ footer a {
   left: 50%;
   top: 50%;
   z-index: 99;
-  background: var(--ms1-color-accent);
+  background: var(--spt-color-accent);
   padding: 3px 7%;
   transform: scale(0.5) translate(-100%, -100%);
   border-radius: 25px;

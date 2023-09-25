@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import catalogDataReducer from "./catalogDataSlice";
+import studyPlanDataReducer from "./studyPlanDataSlice";
 import contentDataReducer from "./contentDataSlice";
 import authReducer from "./authSlice";
 import loadingRequestsReducer from "./loadingRequestsSlice";
@@ -10,7 +10,7 @@ import formInputDataReducer from "./formInputDataSlice";
 
 export default configureStore({
   reducer: {
-    catalogData: catalogDataReducer,
+    studyPlanData: studyPlanDataReducer,
     contentData: contentDataReducer,
     auth: authReducer,
     loadingRequests: loadingRequestsReducer,

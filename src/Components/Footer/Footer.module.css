@@ -1,5 +1,5 @@
 .footer-container {
-  background: var(--ms1-color-background);
+  background: var(--spt-color-background);
   border-radius: inherit;
   box-shadow: inherit;
   padding: 2em;
@@ -14,8 +14,8 @@
   transform-origin: left;
   transition: all 0.2s ease;
   /* border-bottom: 1px solid; */
-  /* color: var(--ms1-color-background);
-  background: var(--ms1-color-background); */
+  /* color: var(--spt-color-background);
+  background: var(--spt-color-background); */
   /* box-shadow: 3px 3px 7px -5px white inset,
     -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
   border-radius: 0 10px 10px 0;
@@ -29,7 +29,7 @@
 }
 
 .category-headings {
-  /* background: var(--ms1-color-background); */
+  /* background: var(--spt-color-background); */
   /* box-shadow: 3px 3px 7px -5px white inset,
     -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
   border-radius: 10px 0 0 10px; */

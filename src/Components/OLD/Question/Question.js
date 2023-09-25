@@ -6,7 +6,7 @@ import OptionsPanel from "../../Components/OptionsPanel/OptionsPanel";
 
 function Question(props) {
   const currentQuestionData = useSelector(
-    (state) => state.catalogData.currentQuestionData
+    (state) => state.studyPlanData.currentQuestionData
   );
 
   const questionBox = useRef();

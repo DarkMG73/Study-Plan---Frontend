@@ -10,6 +10,6 @@
 }
 
 body .list-item-delete button:hover {
-  background: var(--ms1-color-accent) !important;
-  color: var(--ms1-color-background) !important;
+  background: var(--spt-color-accent) !important;
+  color: var(--spt-color-background) !important;
 }

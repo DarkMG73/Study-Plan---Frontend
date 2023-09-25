@@ -4,11 +4,11 @@ import styles from "./FormItemEmpty.module.css";
 import { formInputDataActions } from "../../../store/formInputDataSlice";
 
 const FormItemEmpty = (props) => {
-  const catalogItemsObj = props.catalogItemsObj.catalogItemsObj;
+  const studyPlanItemsObj = props.studyPlanItemsObj.studyPlanItemsObj;
   const showProtectedHidden = props.showProtectedHidden;
   const unlockProtectedVisible = props.unlockProtectedVisible;
   const displayConditions = props.displayConditions;
-  // const key = catalogItemsObj._id;
+  // const key = studyPlanItemsObj._id;
   const key = props.passedKey;
   // const setExistingFormInputValuesObj = props.setExistingFormInputValuesObj;
   const parentKey = props.parentKey;
@@ -74,7 +74,7 @@ const FormItemEmpty = (props) => {
       }
     >
       {key === "_id" && (
-        <h4 name={parentKey + "-" + key}>{catalogItemsObj[key]}</h4>
+        <h4 name={parentKey + "-" + key}>{studyPlanItemsObj[key]}</h4>
       )}
       {key !== "_id" &&
         displayConditions &&
@@ -119,7 +119,7 @@ const FormItemEmpty = (props) => {
               }
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
-              category={catalogItemsObj[key]}
+              category={studyPlanItemsObj[key]}
               placeholder={key}
               title={key}
               parentkey={parentKey}
@@ -139,7 +139,7 @@ const FormItemEmpty = (props) => {
                 ]
               }
             >
-              {catalogItemsObj[key]}
+              {studyPlanItemsObj[key]}
             </textarea>
           </Fragment>
         )}
@@ -190,7 +190,7 @@ const FormItemEmpty = (props) => {
               }
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
-              category={catalogItemsObj[key]}
+              category={studyPlanItemsObj[key]}
               placeholder={key}
               title={key}
               parentkey={parentKey}
@@ -213,9 +213,9 @@ const FormItemEmpty = (props) => {
                 ]
               }
             >
-              <option selected={catalogItemsObj[key] === true}>True</option>
-              <option selected={catalogItemsObj[key] === false}>False</option>
-              {catalogItemsObj[key]}
+              <option selected={studyPlanItemsObj[key] === true}>True</option>
+              <option selected={studyPlanItemsObj[key] === false}>False</option>
+              {studyPlanItemsObj[key]}
             </select>
           </Fragment>
         )}
@@ -267,17 +267,17 @@ const FormItemEmpty = (props) => {
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
               type="datetime-local"
-              placeholder={catalogItemsObj[key]}
+              placeholder={studyPlanItemsObj[key]}
               title={key}
               parentkey={parentKey}
               parentsparentkey={parentsParentKey}
               parentmasterid={parentMasterID}
               onChange={addInputData}
               defaultValue={
-                catalogItemsObj[key]
-                  ? catalogItemsObj[key] &&
+                studyPlanItemsObj[key]
+                  ? studyPlanItemsObj[key] &&
                     new Date(
-                      new Date(catalogItemsObj[key]).getTime() -
+                      new Date(studyPlanItemsObj[key]).getTime() -
                         new Date().getTimezoneOffset() * 60000
                     )
                       .toISOString()

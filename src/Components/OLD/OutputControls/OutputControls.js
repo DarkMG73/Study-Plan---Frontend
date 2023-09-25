@@ -11,7 +11,7 @@ function OutputControls(props) {
   const exportData = useExportData({ type: "" });
   const [showAllQuestionPageLoader, setAllQuestionPageLoader] = useState(false);
   const { allQuestions, studyNotes, questionHistory } = useSelector(
-    (state) => state.catalogData
+    (state) => state.studyPlanData
   );
   const user = useSelector((state) => state.auth.user);
 

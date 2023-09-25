@@ -5,7 +5,7 @@
   padding: 1em;
   /* Must be the same as the Service Selector */
   height: 65px;
-  height: var(--ms1-navbar-height);
+  height: var(--spt-navbar-height);
 }
 
 .logo-title-outerwrap {
@@ -16,7 +16,7 @@
   width: 60%;
   z-index: 1;
   transform: translate(-12.5%, 25%);
-  /* background: var(--ms1-color-background); */
+  /* background: var(--spt-color-background); */
   border-radius: 0 0 50px 0;
   transition: 0.2s all cubic-bezier(0, 0.27, 0.61, 0.98);
   /* box-shadow: 10px 10px 15px 0 black; */
@@ -29,20 +29,20 @@
   left: 0;
   width: 100%;
   height: 100%;
-  /* box-shadow: 20px 0 0 0 var(--ms1-color-background); */
-  background: var(--ms1-color-background);
+  /* box-shadow: 20px 0 0 0 var(--spt-color-background); */
+  background: var(--spt-color-background);
   transform: scale(0.9) translate(10%, -11%);
   /* background: red; */
   border-radius: 50px;
 }
 
-.ms1-title {
+.spt-title {
   margin: 0 auto;
-  font: var(--ms1--font-heading);
-  letter-spacing: var(--ms1-spacing-heading);
+  font: var(--spt--font-heading);
+  letter-spacing: var(--spt-spacing-heading);
 }
 
-.ms1-title.first-word {
+.spt-title.first-word {
   position: relative;
   width: 204px;
   height: 90px;
@@ -65,7 +65,7 @@
   display: inline;
 }
 
-.ms1-title.second-word {
+.spt-title.second-word {
   position: relative;
   width: 195px;
   height: 77px;
@@ -93,9 +93,9 @@
   transform: translateY(-18%);
 }
 
-.ms1-subtitle {
-  font: var(--ms1-font-subheading);
-  letter-spacing: var(--ms1-spacing-subheading);
+.spt-subtitle {
+  font: var(--spt-font-subheading);
+  letter-spacing: var(--spt-spacing-subheading);
   text-transform: capitalize;
   margin: 0 auto;
   position: relative;
@@ -149,7 +149,7 @@
 .logo-wrap path,
 .logo-wrap circle {
   fill: ivory !important;
-  fill: var(--ms1-color-accent) !important;
+  fill: var(--spt-color-accent) !important;
   fill: url(#radial-gradient) !important;
 }
 
@@ -175,14 +175,14 @@
   display: flex;
 } */
 
-.logo-title-outerwrap .ms1-subtitle {
+.logo-title-outerwrap .spt-subtitle {
   transition: 0.3s all ease;
   transform-origin: top;
   opacity: 1;
 }
 
-.logo-to-header-header .ms1-subtitle,
-.logo-to-header-medium .ms1-subtitle {
+.logo-to-header-header .spt-subtitle,
+.logo-to-header-medium .spt-subtitle {
   transition: 0.3s all ease;
   transform-origin: top;
   opacity: 0;
@@ -217,7 +217,7 @@
   justify-content: center;
 }
 
-.logo-to-header-true .ms1-title.second-word {
+.logo-to-header-true .spt-title.second-word {
   top: 0;
   left: 0.25em;
   font-size: 96px;
@@ -308,7 +308,7 @@
   max-width: 100%;
   min-height: 100%;
   max-height: 100%;
-  background-image: radial-gradient(var(--ms1-color-accent), #ffffffd4);
+  background-image: radial-gradient(var(--spt-color-accent), #ffffffd4);
   transition: 0.3s;
   opacity: 0;
   pointer-events: none;
@@ -345,8 +345,8 @@
 .login-modal > div > button:hover {
   box-shadow: 3px 3px 7px -5px white inset,
     -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
-  color: var(--ms1-color-background);
-  background: var(--ms1-color-accent-gradient);
+  color: var(--spt-color-background);
+  background: var(--spt-color-accent-gradient);
   transition: 0.5s all ease;
   transform: none;
 }

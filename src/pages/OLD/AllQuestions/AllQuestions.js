@@ -14,7 +14,7 @@ import BottomBar from "../../Components/BottomBar/BottomBar";
 
 function AllQuestions(props) {
   const { allQuestions, questionMetadata } = useSelector(
-    (state) => state.catalogData
+    (state) => state.studyPlanData
   );
   const noDBErrors = props.noDBErrors;
 

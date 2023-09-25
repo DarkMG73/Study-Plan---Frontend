@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./Answer.module.css";
-import { catalogDataActions } from "../../store/catalogDataSlice";
+import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 import CardTransparent from "../../UI/Cards/CardTransparent/CardTransparent";
 import Card from "../../UI/Cards/Card/Card";
 import PushButton from "../../UI/Buttons/PushButton/PushButton";
@@ -9,11 +9,11 @@ import useStudyTopicIdAddToStorage from "../../Hooks/useStudyTopicIdAddToStorage
 
 function Answer() {
   const { currentQuestionData, allQuestions } = useSelector(
-    (state) => state.catalogData
+    (state) => state.studyPlanData
   );
   const user = useSelector((state) => state.auth.user);
   const { questionHistory, currentFilters } = useSelector(
-    (state) => state.catalogData
+    (state) => state.studyPlanData
   );
   const [isAnswerCorrect, seIsAnswerCorrect] = useState(null);
   const dispatch = useDispatch();
@@ -23,14 +23,14 @@ function Answer() {
   useEffect(() => {
     if (isAnswerCorrect) {
       setNoPulse(true);
-      dispatch(catalogDataActions.addToHistoryCorrect());
-      dispatch(catalogDataActions.questionHistoryStorageNeedsUpdate(true));
+      dispatch(studyPlanDataActions.addToHistoryCorrect());
+      dispatch(studyPlanDataActions.questionHistoryStorageNeedsUpdate(true));
     }
 
     if (isAnswerCorrect === false) {
       setNoPulse(true);
-      dispatch(catalogDataActions.addToHistoryIncorrect());
-      dispatch(catalogDataActions.questionHistoryStorageNeedsUpdate(true));
+      dispatch(studyPlanDataActions.addToHistoryIncorrect());
+      dispatch(studyPlanDataActions.questionHistoryStorageNeedsUpdate(true));
     }
   }, [isAnswerCorrect]);
 

@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  font: var(--ms1-font-body-text);
+  font: var(--spt-font-body-text);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,12 +28,12 @@
   justify-content: center;
   margin: 0 auto;
   font-size: calc(1rem + 1vmin);
-  color: var(--ms1-color-accent);
+  color: var(--spt-color-accent);
   background: linear-gradient(180deg, #000000 80%, transparent);
-  background: var(--ms1-color-background);
+  background: var(--spt-color-background);
   z-index: 10000;
   top: 0;
-  box-shadow: 0 15px 20px -15px var(--ms1-color-background);
+  box-shadow: 0 15px 20px -15px var(--sp-color-background);
 }
 
 .App-header > div {
@@ -94,7 +94,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background: var(--ms1-color-background);
+  background: var(--sp-color-background);
   padding: 2em;
   border-radius: 50px;
   font-family: Arial;
@@ -105,7 +105,7 @@
 .local-error-inner-wrap > div {
   box-shadow: inset 4px 4px 14px -7px rgb(255 255 255),
     inset -4px -4px 14px -7px rgb(0 0 0 / 50%),
-    0 0 108px 10px var(--ms1-color-accent) !important;
+    0 0 108px 10px var(--spt-color-accent) !important;
   border-radius: inherit !important;
 }
 
@@ -153,7 +153,7 @@
   padding: 200px;
   box-sizing: border-box;
   overflow: hidden;
-  background-color: var(--ms1-color-background);
+  background-color: var(--spt-color-background);
   transform: translate(-50%, -50%);
   z-index: 999;
   border-radius: 50px;

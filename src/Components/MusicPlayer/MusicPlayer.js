@@ -7,7 +7,7 @@ import { toCamelCase } from "../../Hooks/utility";
 
 const MusicPlayer = (props) => {
   const { serviceSelected } = useSelector((state) => state.musicPlayer);
-  const { serviceEmbedJSXObj } = useSelector((state) => state.catalogData);
+  const { serviceEmbedJSXObj } = useSelector((state) => state.studyPlanData);
   const isFeatured = props.isFeaturedPlaylist;
   const serviceEmbedJSX =
     serviceEmbedJSXObj && serviceEmbedJSXObj.hasOwnProperty(serviceSelected)

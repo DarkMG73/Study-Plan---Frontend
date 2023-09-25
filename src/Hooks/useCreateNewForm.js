@@ -1,15 +1,15 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSchemaForCatalogItem } from "../storage/catalogDB";
+import { getSchemaForStudyPlanItem } from "../storage/studyPlanDB";
 import { getSchemaForContentItem } from "../storage/contentDB";
-import CatalogItemsList from "../Components/CatalogItems/CatalogItemsList/CatalogItemsList";
+import StudyPlanItemsList from "../Components/StudyPlanItems/StudyPlanItemsList/StudyPlanItemsList";
 import displayConditions from "../data/displayConditionsObj.js";
 import { formInputDataActions } from "../store/formInputDataSlice";
 
 const useCreateNewForm = () => {
   const dispatch = useDispatch();
-  const catalogMetadata = useSelector(
-    (state) => state.catalogData.catalogMetadata
+  const studyPlanMetadata = useSelector(
+    (state) => state.studyPlanData.studyPlanMetadata
   );
   const outputFunction = (props) => {
     const e = props.e;
@@ -18,12 +18,12 @@ const useCreateNewForm = () => {
     const setNewFormInputValuesObj = props.setNewFormInputValuesObj;
     const id = props.id;
     let availableServices =
-      catalogMetadata && catalogMetadata.hasOwnProperty("availableServices")
-        ? [...catalogMetadata.availableServices]
+      studyPlanMetadata && studyPlanMetadata.hasOwnProperty("availableServices")
+        ? [...studyPlanMetadata.availableServices]
         : [""];
     const user = props.user;
     const getSchema =
-      id === "catalog" ? getSchemaForCatalogItem : getSchemaForContentItem;
+      id === "studyPlan" ? getSchemaForStudyPlanItem : getSchemaForContentItem;
     ////////////////////////////////////////////////////////////////
     /// Handlers
     ////////////////////////////////////////////////////////////////
@@ -111,8 +111,8 @@ const useCreateNewForm = () => {
               </h2>
 
               {cleansedFormData && (
-                <CatalogItemsList
-                  catalogItemsObj={cleansedFormData}
+                <StudyPlanItemsList
+                  studyPlanItemsObj={cleansedFormData}
                   id={"newForm-" + i}
                   parentKey={id}
                   displayConditions={displayConditions.emptyForm}

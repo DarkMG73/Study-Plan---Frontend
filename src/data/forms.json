@@ -6,7 +6,7 @@
                 "logo": "url", 
                 "defaultEmbed": "url"
     }, 
-    "catalog" : 
+    "studyPlan" : 
             {                     
                 "songs": {   
                                 "title": "text",

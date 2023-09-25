@@ -7,47 +7,47 @@
 
 /* Neon Purple*/
 :root {
-  --ms1-color-accent: hsl(329.42deg 62.75% 48.43%);
-  --ms1-color-accent-gradient: radial-gradient(
+  --spt-color-accent: hsl(329.42deg 62.75% 48.43%);
+  --spt-color-accent-gradient: radial-gradient(
     50% 50% at 50% 50%,
     #ff4024 0%,
     #bb2b95 100%
   );
-  --ms1-color-accent-light: hsl(329.42deg 62.75% 48.43%);
-  /* --ms1-color-accent-dark: hsl(205 78% 22% / 1); */
-  --ms1-color-accent-dark: #470d28;
-  --ms1-color-background: #000000;
-  --ms1-image-background-texture: url("https://www.transparenttextures.com/patterns/brushed-alum.png");
-  --ms1-color-background-warm: hsl(33 100% 96% / 1);
-  --ms1-color-background-cool: #c7cfd1;
-  --ms1-color-background-contrast: #ffffff;
-  --ms1--font-heading: normal 700 3.6rem "Covered By Your Grace", sans-serif;
-  --ms1--font-heading-2: normal 700 3rem "Covered By Your Grace", sans-serif;
-  --ms1-spacing-heading: 0.25em;
-  --ms1-spacing-subheading: 0.375em;
-  --ms1-spacing-body-text: 0.125em;
-  --ms1-font-subheading: normal 700 2rem "Covered By Your Grace", sans-serif;
-  --ms1-font-body-text: normal 500 1.6rem "Covered By Your Grace", sans-serif;
+  --spt-color-accent-light: hsl(329.42deg 62.75% 48.43%);
+  /* --spt-color-accent-dark: hsl(205 78% 22% / 1); */
+  --spt-color-accent-dark: #470d28;
+  --spt-color-background: #000000;
+  --spt-image-background-texture: url("https://www.transparenttextures.com/patterns/brushed-alum.png");
+  --spt-color-background-warm: hsl(33 100% 96% / 1);
+  --spt-color-background-cool: #c7cfd1;
+  --spt-color-background-contrast: #ffffff;
+  --spt--font-heading: normal 700 3.6rem "Covered By Your Grace", sans-serif;
+  --spt--font-heading-2: normal 700 3rem "Covered By Your Grace", sans-serif;
+  --spt-spacing-heading: 0.25em;
+  --spt-spacing-subheading: 0.375em;
+  --spt-spacing-body-text: 0.125em;
+  --spt-font-subheading: normal 700 2rem "Covered By Your Grace", sans-serif;
+  --spt-font-body-text: normal 500 1.6rem "Covered By Your Grace", sans-serif;
 }
 
 :root {
-  --ms1-navbar-height: 65px;
+  --spt-navbar-height: 65px;
 }
 
 @media screen and (max-width: 900px) {
   :root {
-    --ms1--font-heading: normal 700 1.8rem "Covered By Your Grace", sans-serif;
-    --ms1--font-heading-2: normal 700 1.6rem "Covered By Your Grace", sans-serif;
-    --ms1-spacing-heading: 0.125em;
-    --ms1-spacing-subheading: 0.162em;
-    --ms1-font-subheading: normal 700 1.4rem "Covered By Your Grace", sans-serif;
-    --ms1-font-body-text: normal 500 1.2rem "Covered By Your Grace", sans-serif;
+    --spt--font-heading: normal 700 1.8rem "Covered By Your Grace", sans-serif;
+    --spt--font-heading-2: normal 700 1.6rem "Covered By Your Grace", sans-serif;
+    --spt-spacing-heading: 0.125em;
+    --spt-spacing-subheading: 0.162em;
+    --spt-font-subheading: normal 700 1.4rem "Covered By Your Grace", sans-serif;
+    --spt-font-body-text: normal 500 1.2rem "Covered By Your Grace", sans-serif;
   }
 }
 
 @media screen and (max-width: 600px) {
   :root {
-    --ms1-navbar-height: 50px;
+    --spt-navbar-height: 50px;
   }
 }
 
@@ -63,20 +63,20 @@ html {
 }
 body {
   background-color: #000000;
-  background-color: var(--ms1-color-background);
-  /* background-image: var(--ms1-image-background-texture); */
+  background-color: var(--spt-color-background);
+  /* background-image: var(--spt-image-background-texture); */
   background-blend-mode: overlay;
   color: hsl(33 100% 96% / 1);
   color: #bb2b95;
-  color: var(--ms1-color-accent);
+  color: var(--spt-color-accent);
   font: normal 500 1.6rem "Kodchasan", sans-serif;
-  font: var(--ms1-font-body-text);
+  font: var(--spt-font-body-text);
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.6rem;
-  font: var(--ms1-font-body-text);
-  letter-spacing: var(--ms1-spacing-body-text);
+  font: var(--spt-font-body-text);
+  letter-spacing: var(--spt-spacing-body-text);
   overscroll-behavior: none;
 }
 p,
@@ -88,8 +88,8 @@ h5,
 h6,
 a,
 span {
-  background-color: var(--ms1-color-background);
-  background-image: var(--ms1-color-accent-gradient);
+  background-color: var(--spt-color-background);
+  background-image: var(--spt-color-accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -99,7 +99,7 @@ p {
 }
 
 a {
-  color: var(--ms1-color-accent);
+  color: var(--spt-color-accent);
 }
 code {
   /* font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -108,13 +108,13 @@ code {
 }
 
 h1 {
-  font: var(--ms1--font-heading);
-  letter-spacing: var(--ms1-spacing-heading);
+  font: var(--spt--font-heading);
+  letter-spacing: var(--spt-spacing-heading);
 }
 
 h2 {
-  font: var(--ms1-font-subheading);
-  letter-spacing: var(--ms1-spacing-subheading);
+  font: var(--spt-font-subheading);
+  letter-spacing: var(--spt-spacing-subheading);
 }
 
 /* SVG */
@@ -131,7 +131,7 @@ h2 {
 }
 /******/
 .section-title {
-  font: var(--ms1--font-heading-2);
-  letter-spacing: var(--ms1-spacing-heading);
+  font: var(--spt--font-heading-2);
+  letter-spacing: var(--spt-spacing-heading);
   word-wrap: break-word;
 }

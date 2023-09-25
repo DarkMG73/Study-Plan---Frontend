@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "./SessionHistoryBackup.module.css";
 import storage from "../../storage/storage";
 import PushButton from "../../UI/Buttons/PushButton/PushButton";
-import { catalogDataActions } from "../../store/catalogDataSlice";
+import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 import { toTitleCase } from "../../Hooks/utility";
 import CollapsibleElm from "../../UI/CollapsibleElm/CollapsibleElm";
 
 function Score() {
   const questionHistory = useSelector(
-    (state) => state.catalogData.questionHistory
+    (state) => state.studyPlanData.questionHistory
   );
   const user = useSelector((state) => state.auth.user);
   const currentUserID = user ? user.identifier : "local";
@@ -109,8 +109,10 @@ function Score() {
     );
 
     if (confirm) {
-      dispatch(catalogDataActions.updateQuestionHistory(data.questionHistory));
-      dispatch(catalogDataActions.questionHistoryStorageNeedsUpdate(true));
+      dispatch(
+        studyPlanDataActions.updateQuestionHistory(data.questionHistory)
+      );
+      dispatch(studyPlanDataActions.questionHistoryStorageNeedsUpdate(true));
     }
   };
 
@@ -200,7 +202,7 @@ function Score() {
   }
 
   return (
-    <div id="ms1-history-backup" className={styles["ms1-history-backup"]}>
+    <div id="spt-history-backup" className={styles["spt-history-backup"]}>
       <h1 className={styles["subtitle"] + " section-title"}>
         Session History Backup
       </h1>

@@ -49,10 +49,10 @@ export const formInputDataSlice = createSlice({
       if (!newState.hasOwnProperty(parentMasterID)) {
         newState[parentMasterID] = { [title]: outputValue };
       } else if (title === "sourceURLObj") {
-        newState[parentMasterID]["catalog"] = {
-          ...newState[parentMasterID]["catalog"],
+        newState[parentMasterID]["studyPlan"] = {
+          ...newState[parentMasterID]["studyPlan"],
           [title]: {
-            ...state.newFormInputDataObj[parentMasterID]["catalog"][title],
+            ...state.newFormInputDataObj[parentMasterID]["studyPlan"][title],
             ...outputValue,
           },
         };

@@ -6,12 +6,12 @@ import { isValidHttpUrl } from "../../Hooks/utility";
 import Card from "../../UI/Cards/Card/Card";
 import CollapsibleElm from "../../UI/CollapsibleElm/CollapsibleElm";
 import {
-  updateACatalogItem,
+  updateAStudyPlanItem,
   deleteDocFromDb,
 } from "../../storage/interviewQuestionsDB";
 import useStudyTopicIdAddToStorage from "../../Hooks/useStudyTopicIdAddToStorage";
 
-import { catalogDataActions } from "../../store/catalogDataSlice";
+import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 import { updateUserHistory } from "../../storage/userDB";
 import storage from "../../storage/storage";
 import SessionRowNotes from "./SessionRowNotes/SessionRowNotes";
@@ -27,7 +27,7 @@ function SessionResultsRow(props) {
   const [parentOpen, setParentOpen] = useState(false);
   const editedQuestions = useRef({ edits: {} });
   const { allQuestions, currentFilters, ...otherQuestionData } = useSelector(
-    (state) => state.catalogData
+    (state) => state.studyPlanData
   );
   const refToScrollTo = useRef();
   const studyTopicAddToStorage = useStudyTopicIdAddToStorage();
@@ -85,15 +85,15 @@ function SessionResultsRow(props) {
           delete newQuestionHistory[groupKey][key];
         }
       }
-      dispatch(catalogDataActions.updateQuestionHistory(newQuestionHistory));
-      dispatch(catalogDataActions.questionHistoryStorageNeedsUpdate(true));
+      dispatch(studyPlanDataActions.updateQuestionHistory(newQuestionHistory));
+      dispatch(studyPlanDataActions.questionHistoryStorageNeedsUpdate(true));
     }
   };
 
   const rowSaveButtonHandler = (e) => {
     // Use tempKey instead of key when in dev
     // const tempKey = "TESTTEST";
-    // updateACatalogItem(key, editedQuestions.current.edits[key], user);
+    // updateAStudyPlanItem(key, editedQuestions.current.edits[key], user);
 
     const newEdits = { ...editedQuestions.current.edits[key] };
     if (newEdits.hasOwnProperty("tags")) {
@@ -103,7 +103,7 @@ function SessionResultsRow(props) {
       );
     }
     if (user && user.isAdmin == true) {
-      updateACatalogItem(
+      updateAStudyPlanItem(
         questionHistory[k][key].identifier,
         newEdits,
         user

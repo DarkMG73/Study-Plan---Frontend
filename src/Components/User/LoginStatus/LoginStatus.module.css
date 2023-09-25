@@ -7,7 +7,7 @@
 .db-login-container h4 {
   margin: 0 auto 0.5em;
   padding: 0;
-  font: var(--ms1-font-subheading);
+  font: var(--spt-font-subheading);
 }
 
 .db-login-container,
@@ -61,23 +61,23 @@
   font-weight: 700;
   width: 100%;
 
-  /* border: 1px inset var(--ms1-color-background); */
-  background-color: var(--ms1-color-background);
-  color: var(--ms1-color-accent);
+  /* border: 1px inset var(--spt-color-background); */
+  background-color: var(--spt-color-background);
+  color: var(--spt-color-accent);
   border-radius: 50px;
   text-transform: uppercase;
 }
 
 .not-logged-in-text {
-  background: var(--ms1-color-accent);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent);
+  color: var(--spt-color-background);
   -webkit-text-fill-color: initial;
   font-size: 1em;
   font-size: calc(0.7em + 0.25vw);
   font-weight: 700;
-  /* border: 2px inset var(--ms1-color-accent); */
-  box-shadow: inset 1px 1px 3px -2px var(--ms1-color-background),
-    inset -1px -1px 3px -2px white, 2px 2px 3px -2px var(--ms1-color-accent);
+  /* border: 2px inset var(--spt-color-accent); */
+  box-shadow: inset 1px 1px 3px -2px var(--spt-color-background),
+    inset -1px -1px 3px -2px white, 2px 2px 3px -2px var(--spt-color-accent);
   padding: 0.5em 1em;
 }
 
@@ -118,21 +118,21 @@ body .form-container input[type="password"] {
   flex-grow: 1;
   justify-content: center;
   align-items: center;
-  /* background: var(--ms1-color-background-gradient); */
-  color: var(--ms1-color-accent);
+  /* background: var(--spt-color-background-gradient); */
+  color: var(--spt-color-accent);
   box-shadow: inset 1px 1px 1px rgb(255 255 255 / 25%),
     inset 1px -1px 1px rgb(0 0 0 / 15%), 1px 1px 5px -3px black;
   box-shadow: 3px 3px 7px -5px white inset,
     -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
   border: none;
-  font: var(--ms1-font-body-text);
+  font: var(--spt-font-body-text);
   font-size: 1em;
   font-weight: 700;
 }
 
 .button-container button:hover {
-  background: var(--ms1-color-accent);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent);
+  color: var(--spt-color-background);
   transform: none;
 }
 /* HORIZONTAL DISPLAY */
@@ -176,7 +176,7 @@ body .form-container input[type="password"] {
 
 .db-login-container.horizontal-display span button {
   margin-left: 1em;
-  color: var(--ms1-color-accent);
+  color: var(--spt-color-accent);
   text-shadow: 0 0 3px wheat;
   background: linear-gradient(rgb(255 135 0) 37%, rgba(0, 0, 0, 1) 100%);
 }

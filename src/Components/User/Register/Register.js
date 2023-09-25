@@ -6,7 +6,7 @@ import { registerAUser, sign_inAUser } from "../../../storage/userDB";
 import PushButton from "../../../UI/Buttons/PushButton/PushButton";
 import {} from "../../../storage/userDB";
 import { authActions } from "../../../store/authSlice";
-import { useRunGatherCatalogData } from "../../../Hooks/useRunGatherCatalogData";
+import { useRunGatherStudyPlanData } from "../../../Hooks/useRunGatherStudyPlanData";
 import ReactCaptcha from "modern-react-captcha";
 import reloadIcon from "../../../assets/media/reloadIcon.svg";
 import { toTitleCase } from "../../../Hooks/utility";
@@ -23,7 +23,7 @@ const Register = (props) => {
   });
   const [loginError, setLoginError] = useState(false);
   const [showLoginError, setShowLoginError] = useState(true);
-  const runGatherCatalogData = useRunGatherCatalogData();
+  const runGatherStudyPlanData = useRunGatherStudyPlanData();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -127,7 +127,7 @@ const Register = (props) => {
     // });
 
     dispatch(authActions.logIn(res.data));
-    runGatherCatalogData({ user });
+    runGatherStudyPlanData({ user });
   };
 
   const egister = (e) => {
@@ -168,7 +168,7 @@ const Register = (props) => {
                 } else if (res && res.hasOwnProperty("data")) {
                   setLoginError(false);
                   dispatch(authActions.logIn(res.data));
-                  runGatherCatalogData({ user });
+                  runGatherStudyPlanData({ user });
                 } else {
                   setLoginError(
                     "Unfortunately, something went wrong and we can not figure out what happened.  Please refresh and try again."
@@ -287,8 +287,8 @@ const Register = (props) => {
                 key={"captcha" + horizontalDisplay}
                 charset="un"
                 length={5}
-                color="var(--ms1-color-accent)"
-                bgColor="var(--ms1-color-background)"
+                color="var(--spt-color-accent)"
+                bgColor="var(--spt-color-background)"
                 reload={true}
                 reloadText="Reload Captcha"
                 reloadIcon={reloadIcon}

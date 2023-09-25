@@ -5,7 +5,7 @@ import FormInput from "../../../UI/Form/FormInput/FormInput";
 import { sign_inAUser, setUserCookie } from "../../../storage/userDB";
 import PushButton from "../../../UI/Buttons/PushButton/PushButton";
 import { authActions } from "../../../store/authSlice";
-import { useRunGatherCatalogData } from "../../../Hooks/useRunGatherCatalogData";
+import { useRunGatherStudyPlanData } from "../../../Hooks/useRunGatherStudyPlanData";
 import { loadingRequestsActions } from "../../../store/loadingRequestsSlice";
 import Iframe from "react-iframe";
 import { statusUpdateActions } from "../../../store/statusUpdateSlice";
@@ -15,7 +15,7 @@ const Login = (props) => {
     email: "",
     password: "",
   });
-  const runGatherCatalogData = useRunGatherCatalogData();
+  const runGatherStudyPlanData = useRunGatherStudyPlanData();
   const [loginError, seLoginError] = useState(false);
   const [showLoginError, setShowLoginError] = useState(true);
   const [showChangePasswordHTML, setShowChangePasswordHTML] = useState(false);
@@ -26,7 +26,7 @@ const Login = (props) => {
   const status = false;
 
   let forgotPasswordURL =
-    "https://api-ms1.glassinteractive.com/api/users/auth/forgot_password?";
+    "https://api-spt.glassinteractive.com/api/users/auth/forgot_password?";
   if (process.env.NODE_ENV === "development") {
     forgotPasswordURL = "http://localhost:8000/api/users/auth/forgot_password?";
   }
@@ -61,7 +61,7 @@ const Login = (props) => {
     <div
       style="font: normal 500 12px Kodchasan, sans-serif;
     background: #287094;
-    color: var(--ms1-color-background);
+    color: var(--spt-color-background);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -110,7 +110,7 @@ const Login = (props) => {
     });
 
     dispatch(authActions.logIn(res.data));
-    runGatherCatalogData({ user: res.data });
+    runGatherStudyPlanData({ user: res.data });
     removeLoadingRequest();
   };
 
@@ -244,7 +244,7 @@ const Login = (props) => {
             margin: "1em",
             boxShadow:
               "3px 3px 7px -5px white inset, -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset, 0 0 25px -2px",
-            border: "2px solid var(--ms1-color-accent)",
+            border: "2px solid var(--spt-color-accent)",
             fontWeight: "700",
           }}
           value="Add a Question"
@@ -297,7 +297,7 @@ const Login = (props) => {
               styles={{
                 boxShadow:
                   "3px 3px 7px -5px white inset, -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset, 0 0 25px -2px",
-                border: "2px solid var(--ms1-color-accent)",
+                border: "2px solid var(--spt-color-accent)",
 
                 fontWeight: "700",
               }}
@@ -329,7 +329,7 @@ const Login = (props) => {
             margin: "1em",
             boxShadow:
               "3px 3px 7px -5px white inset, -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset, 0 0 25px -2px",
-            border: "2px solid var(--ms1-color-accent)",
+            border: "2px solid var(--spt-color-accent)",
           }}
           value="Login"
           data=""

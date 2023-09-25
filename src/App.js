@@ -11,7 +11,7 @@ import BarLoader from "./UI/Loaders/BarLoader/BarLoader";
 import { ErrorBoundary } from "./HOC/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import LocalErrorDisplay from "./HOC/ErrorHandling/LocalErrorDisplay/LocalErrorDisplay";
 import { useUserDataInit } from "./Hooks/useUserDataInit";
-import { useRunGatherCatalogData } from "./Hooks/useRunGatherCatalogData";
+import { useRunGatherStudyPlanData } from "./Hooks/useRunGatherStudyPlanData";
 import { useRunGatherContentData } from "./Hooks/useRunGatherContentData";
 import axios from "axios";
 import { loadingRequestsActions } from "./store/loadingRequestsSlice";
@@ -35,18 +35,18 @@ function App() {
     (state) => state.loadingRequests.pendingLoadRequests
   );
   const dispatch = useDispatch();
-  // const catalogData = GatherCatalogData();
-  const catalog = useSelector((state) => state.catalogData);
+  // const studyPlanData = GatherStudyPlanData();
+  const studyPlan = useSelector((state) => state.studyPlanData);
   const contentData = useSelector((state) => state.contentData);
   if (
     (!process.env.NODE_ENV || process.env.NODE_ENV === "development") &&
-    catalog.hasOwnProperty("catalog") &&
-    catalog.catalog
+    studyPlan.hasOwnProperty("studyPlan") &&
+    studyPlan.studyPlan
   ) {
     console.log(
-      "%cCatalog Data:",
+      "%cStudyPlan Data:",
       "color:#fff;background:#be6502;padding:5px;border-radius:0 25px 25px 0",
-      catalog
+      studyPlan
     );
     console.log(
       "%cContent Data:",
@@ -142,7 +142,7 @@ function App() {
   ////////////////////////////////////////
   /// FUNCTIONALITY
   ////////////////////////////////////////
-  const runGatherCatalogData = useRunGatherCatalogData();
+  const runGatherStudyPlanData = useRunGatherStudyPlanData();
   const runGatherContentData = useRunGatherContentData();
 
   ////////////////////////////////////////
@@ -158,11 +158,11 @@ function App() {
   }, []);
 
   useEffect(() => {
-    runGatherCatalogData({ user: false, setLocalError });
+    runGatherStudyPlanData({ user: false, setLocalError });
     runGatherContentData({ user: false, setLocalError });
   }, []);
 
-  // Register error if catalog DB not accessible.
+  // Register error if studyPlan DB not accessible.
   useEffect(() => {
     if (localError.active) {
       setNoDBErrors({

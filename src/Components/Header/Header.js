@@ -1,7 +1,7 @@
 import styles from "./Header.module.css";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { ReactComponent as MS1Logo } from "../../assets/media/ms1-ring.svg";
+import { ReactComponent as sptLogo } from "../../assets/media/spt-ring.svg";
 import SubscribeCTA from "../SubscribeCTA/SubscribeCTA";
 import SocialConnectMenu from "../SocialConnectMenu/SocialConnectMenu";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
@@ -103,7 +103,7 @@ function Header(props) {
   }, [welcomeScrollPosition, initialWelcomePositionTop]);
 
   return (
-    <div id="ms1-header" className={styles.outerwrap}>
+    <div id="spt-header" className={styles.outerwrap}>
       <div
         className={
           styles["logo-title-outerwrap"] +
@@ -115,16 +115,16 @@ function Header(props) {
         <div className={styles["header-title-container"]}>
           <a href="/" alt="">
             <div className={styles["logo-wrap"]}>
-              <MS1Logo />
+              <sptLogo />
             </div>
             <div className={styles["title-wrap"]}>
-              <h1 className={styles["ms1-title"] + " " + styles["first-word"]}>
+              <h1 className={styles["spt-title"] + " " + styles["first-word"]}>
                 Ignite
               </h1>
-              <h1 className={styles["ms1-title"] + " " + styles["second-word"]}>
+              <h1 className={styles["spt-title"] + " " + styles["second-word"]}>
                 Revolution
               </h1>
-              <h3 className={styles["ms1-subtitle"]}>
+              <h3 className={styles["spt-subtitle"]}>
                 Unite in Rhythm | Elevate
               </h3>
             </div>
@@ -154,7 +154,7 @@ function Header(props) {
           )}
           {props.musicIsActive && (
             <a
-              href="#music-catalog"
+              href="#music-studyPlan"
               alt=""
               className={styles["small-header-nav"]}
             >
@@ -192,7 +192,11 @@ function Header(props) {
               </a>
             )}
             {props.musicIsActive && (
-              <a href="#music-catalog" alt="" onClick={mobileMenuButtonHandler}>
+              <a
+                href="#music-studyPlan"
+                alt=""
+                onClick={mobileMenuButtonHandler}
+              >
                 Music
               </a>
             )}

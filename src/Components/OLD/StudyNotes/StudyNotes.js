@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef, Fragment } from "react";
 import styles from "./StudyNotes.module.css";
-import { catalogDataActions } from "../../store/catalogDataSlice";
+import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 import { updateStudyNotes } from "../../storage/userDB";
 import storage from "../../storage/storage";
 import useStudyTopicIdAddToStorage from "../../Hooks/useStudyTopicIdAddToStorage";
@@ -15,11 +15,11 @@ import useViewport from "../../Hooks/useViewport";
 const StudyNotes = () => {
   const dispatch = useDispatch();
   const { studyNotes, ...otherQuestionData } = useSelector(
-    (state) => state.catalogData
+    (state) => state.studyPlanData
   );
   const user = useSelector((state) => state.auth.user);
   const studyTopicAddToStorage = useStudyTopicIdAddToStorage();
-  const allQuestions = useSelector((state) => state.catalogData.allQuestions);
+  const allQuestions = useSelector((state) => state.studyPlanData.allQuestions);
   const studyTopicIdentifierElm = useRef();
   const [inputError, setInputError] = useState(false);
 
@@ -81,7 +81,7 @@ const StudyNotes = () => {
     if (confirm) {
       const newStudyNotes = { ...studyNotes };
       newStudyNotes.studyTopicsIDs = [];
-      dispatch(catalogDataActions.clearStudyTopicsIDs());
+      dispatch(studyPlanDataActions.clearStudyTopicsIDs());
       if (user) updateStudyNotes({ user, dataObj: newStudyNotes });
       if (!user)
         storage("ADD", { studyNotes: newStudyNotes, ...otherQuestionData });
@@ -98,7 +98,7 @@ const StudyNotes = () => {
       "Are you sure you want to remove this item from your study topics list?"
     );
     if (confirm) {
-      dispatch(catalogDataActions.updateStudyNotes(newStudyNotes));
+      dispatch(studyPlanDataActions.updateStudyNotes(newStudyNotes));
       if (user) updateStudyNotes({ user, dataObj: newStudyNotes });
       if (!user)
         storage("ADD", { studyNotes: newStudyNotes, ...otherQuestionData });

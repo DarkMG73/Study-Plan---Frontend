@@ -3,9 +3,9 @@
   margin: 0;
   font-size: 1.25rem;
   font-weight: 700;
-  /* color: var(--ms1-color-accent); */
+  /* color: var(--spt-color-accent); */
   text-align: center;
-  /* background: var(--ms1-color-background); */
+  /* background: var(--spt-color-background); */
 
   /* box-shadow: 3px 3px 10px -3px, 1px 1px 10px -7px black, */
   /* inset -3px -3px 6px -4px black; */
@@ -20,8 +20,8 @@
 
 .text-zoom-controls .button-wrap {
   box-shadow: 1px 1px 3px -2px black, inset 2px 2px 3px -2px white;
-  background: var(--ms1-color-accent);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent);
+  color: var(--spt-color-background);
   border-radius: 50px;
 }
 .text-zoom-controls .button-wrap > button {
@@ -36,8 +36,8 @@
 }
 .text-zoom-controls .button-wrap > button:hover {
   /* transform: scale(1.25, 1); */
-  background: var(--ms1-color-background);
-  color: var(--ms1-color-accent);
+  background: var(--spt-color-background);
+  color: var(--spt-color-accent);
   /* box-shadow: inset 1px 1px 2px -1px white, inset -1px -1px 2px -1px black,
     1px 1px 7px -5px black; */
   z-index: 10;

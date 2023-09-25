@@ -1,31 +1,31 @@
-import { catalogData as catalogDataFunction } from "../storage/catalogDB.js";
+import { studyPlanData as studyPlanDataFunction } from "../storage/studyPlanDB.js";
 
-export default async function GatherCatalogData(user) {
-  const catalogData = {};
-  catalogData.catalog = {};
+export default async function GatherStudyPlanData(user) {
+  const studyPlanData = {};
+  studyPlanData.studyPlan = {};
 
-  const catalogFromDB = await catalogDataFunction();
+  const studyPlanFromDB = await studyPlanDataFunction();
 
-  if (catalogFromDB.length <= 0) {
+  if (studyPlanFromDB.length <= 0) {
     throw new Error(
       "There appears to be a problem reaching the servers. Please try again or contact the site admin if the problem continues."
     );
   }
-  catalogFromDB.forEach((catalogItem) => {
-    catalogData.catalog[catalogItem._id] = catalogItem;
-    // catalogData.catalog[catalogItem._id].sourceURLObj = JSON.parse(
-    //   catalogData.catalog[catalogItem._id].sourceURLObj
+  studyPlanFromDB.forEach((studyPlanItem) => {
+    studyPlanData.studyPlan[studyPlanItem._id] = studyPlanItem;
+    // studyPlanData.studyPlan[studyPlanItem._id].sourceURLObj = JSON.parse(
+    //   studyPlanData.studyPlan[studyPlanItem._id].sourceURLObj
     // );
   });
 
-  const ungroomedCatalogMetadata = gatherAllMetadata(catalogData.catalog);
-  const groomedCatalogMetadata = {};
-  for (const key in ungroomedCatalogMetadata) {
+  const ungroomedStudyPlanMetadata = gatherAllMetadata(studyPlanData.studyPlan);
+  const groomedStudyPlanMetadata = {};
+  for (const key in ungroomedStudyPlanMetadata) {
     const output = [];
     if (key === "tags") {
       const itmOutput = [];
 
-      ungroomedCatalogMetadata[key].forEach((itm) => {
+      ungroomedStudyPlanMetadata[key].forEach((itm) => {
         if (itm.constructor === String) {
           itmOutput.push(...itm.split(","));
         }
@@ -39,47 +39,49 @@ export default async function GatherCatalogData(user) {
       const flattenedArraysOutput = Array.from(flattenedArrays);
       output.push(flattenedArraysOutput.length, flattenedArraysOutput);
     } else {
-      output.push(ungroomedCatalogMetadata[key].length);
-      output.push(...ungroomedCatalogMetadata[key]);
+      output.push(ungroomedStudyPlanMetadata[key].length);
+      output.push(...ungroomedStudyPlanMetadata[key]);
     }
-    groomedCatalogMetadata[key] = [...output];
+    groomedStudyPlanMetadata[key] = [...output];
   }
 
   //Add available services array
   const rawAvailableServices = [];
-  for (const itemID in catalogData.catalog) {
-    if (catalogData.catalog[itemID].hasOwnProperty("sourceURLObj")) {
+  for (const itemID in studyPlanData.studyPlan) {
+    if (studyPlanData.studyPlan[itemID].hasOwnProperty("sourceURLObj")) {
       rawAvailableServices.push(
-        ...Object.keys(catalogData.catalog[itemID].sourceURLObj)
+        ...Object.keys(studyPlanData.studyPlan[itemID].sourceURLObj)
       );
     }
 
     if (
-      catalogData.catalog[itemID].hasOwnProperty("type") &&
-      catalogData.catalog[itemID].type === "service"
+      studyPlanData.studyPlan[itemID].hasOwnProperty("type") &&
+      studyPlanData.studyPlan[itemID].type === "service"
     ) {
-      rawAvailableServices.push(catalogData.catalog[itemID].slug);
+      rawAvailableServices.push(studyPlanData.studyPlan[itemID].slug);
     }
 
     const availableServicesSet = new Set(rawAvailableServices);
-    groomedCatalogMetadata.availableServices = Array.from(availableServicesSet);
+    groomedStudyPlanMetadata.availableServices = Array.from(
+      availableServicesSet
+    );
   }
 
-  catalogData.catalogMetadata = groomedCatalogMetadata;
-  catalogData.serviceEmbedJSXObj = { test: "one" };
-  for (const catalogValue of Object.values(catalogData.catalog)) {
+  studyPlanData.studyPlanMetadata = groomedStudyPlanMetadata;
+  studyPlanData.serviceEmbedJSXObj = { test: "one" };
+  for (const studyPlanValue of Object.values(studyPlanData.studyPlan)) {
     if (
-      catalogValue.hasOwnProperty("type") &&
-      catalogValue.type === "service" &&
-      catalogValue.hasOwnProperty("slug") &&
-      catalogValue.hasOwnProperty("iframeCustomAttributes")
+      studyPlanValue.hasOwnProperty("type") &&
+      studyPlanValue.type === "service" &&
+      studyPlanValue.hasOwnProperty("slug") &&
+      studyPlanValue.hasOwnProperty("iframeCustomAttributes")
     ) {
-      catalogData.serviceEmbedJSXObj[catalogValue.slug] =
-        catalogValue.iframeCustomAttributes;
+      studyPlanData.serviceEmbedJSXObj[studyPlanValue.slug] =
+        studyPlanValue.iframeCustomAttributes;
     }
   }
 
-  return catalogData;
+  return studyPlanData;
 }
 
 function gatherAllMetadata(dataObject) {

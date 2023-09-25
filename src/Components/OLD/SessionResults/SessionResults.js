@@ -8,14 +8,14 @@ import { ErrorBoundary } from "../../HOC/ErrorHandling/ErrorBoundary/ErrorBounda
 import { ReactComponent as BrainLogo } from "../../assets/images/brain-logo.svg";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
 import PushButton from "../../UI/Buttons/PushButton/PushButton";
-import { catalogDataActions } from "../../store/catalogDataSlice";
+import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 
 function SessionResults(props) {
   const dispatch = useDispatch();
-  const { allQuestions } = useSelector((state) => state.catalogData);
+  const { allQuestions } = useSelector((state) => state.studyPlanData);
 
   const questionHistory = useSelector(
-    (state) => state.catalogData.questionHistory
+    (state) => state.studyPlanData.questionHistory
   );
   const sessionResultsBox = useRef();
 
@@ -29,8 +29,8 @@ function SessionResults(props) {
         ...newQuestionHistory.questionPersonalNotes,
       };
       newQuestionHistory.questionPersonalNotes = {};
-      dispatch(catalogDataActions.updateQuestionHistory(newQuestionHistory));
-      dispatch(catalogDataActions.questionHistoryStorageNeedsUpdate(true));
+      dispatch(studyPlanDataActions.updateQuestionHistory(newQuestionHistory));
+      dispatch(studyPlanDataActions.questionHistoryStorageNeedsUpdate(true));
     }
   };
 

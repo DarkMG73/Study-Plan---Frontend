@@ -51,8 +51,8 @@ workspace-editor-btn-wrap {
 }
 
 .description-text button:hover {
-  background: var(--ms1-color-accent-light);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent-light);
+  color: var(--spt-color-background);
   transform: none;
 }
 
@@ -63,6 +63,6 @@ workspace-editor-btn-wrap {
 
 .editor-tab-btn-wrap button:hover {
   transform: none;
-  background: var(--ms1-color-accent-light);
-  color: var(--ms1-color-background);
+  background: var(--spt-color-accent-light);
+  color: var(--spt-color-background);
 }

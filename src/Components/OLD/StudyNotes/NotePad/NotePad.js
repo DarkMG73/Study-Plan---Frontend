@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef, Fragment } from "react";
 import styles from "./NotePad.module.css";
-import { catalogDataActions } from "../../../store/catalogDataSlice";
+import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 import { updateStudyNotes } from "../../../storage/userDB";
 import storage from "../../../storage/storage";
 import PushButton from "../../../UI/Buttons/PushButton/PushButton";
@@ -11,7 +11,7 @@ import BarLoader from "../../../UI/Loaders/BarLoader/BarLoader";
 const NotePad = (props) => {
   const dispatch = useDispatch();
   const { studyNotes, ...otherQuestionData } = useSelector(
-    (state) => state.catalogData
+    (state) => state.studyPlanData
   );
   const { user, recentLogin, recentLogout } = useSelector(
     (state) => state.auth
@@ -36,7 +36,7 @@ const NotePad = (props) => {
     e.preventDefault();
     const newStudyNotes = { ...studyNotes };
     newStudyNotes.notePad = notePadElm.current.value;
-    dispatch(catalogDataActions.updateStudyNotes(newStudyNotes));
+    dispatch(studyPlanDataActions.updateStudyNotes(newStudyNotes));
     if (user) updateStudyNotes({ user, dataObj: newStudyNotes });
     if (!user)
       storage("ADD", { studyNotes: newStudyNotes, ...otherQuestionData });
@@ -51,7 +51,7 @@ const NotePad = (props) => {
     if (confirm) {
       const newStudyNotes = { ...studyNotes };
       newStudyNotes.notePad = "Notes\n\n";
-      dispatch(catalogDataActions.updateStudyNotes(newStudyNotes));
+      dispatch(studyPlanDataActions.updateStudyNotes(newStudyNotes));
       setCurrentStudyNotesText(newStudyNotes.notePad);
       if (user) updateStudyNotes({ user, dataObj: newStudyNotes });
       if (!user) storage("ADD", { newStudyNotes, ...otherQuestionData });

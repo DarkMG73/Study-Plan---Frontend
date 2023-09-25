@@ -13,7 +13,7 @@
   text-transform: uppercase;
   font-variant: small-caps;
   font-weight: 700;
-  letter-spacing: var(--ms1-spacing-subheading);
+  letter-spacing: var(--spt-spacing-subheading);
   box-shadow: inset 0 8px 15px -13px rgb(0 0 0 / 30%), 0 -8px 15px -16px white;
   margin: 1.5em 0 1em;
   padding: 1.5em 0 0.5em;

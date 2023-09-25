@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./Score.module.css";
 import PushButton from "../../UI/Buttons/PushButton/PushButton";
-import { catalogDataActions } from "../../store/catalogDataSlice";
+import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 
 function Score(props) {
   const { questionHistory, filteredQuestionsIds } = useSelector(
-    (state) => state.catalogData
+    (state) => state.studyPlanData
   );
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
@@ -35,8 +35,8 @@ function Score(props) {
       ...otherQuestionHistory,
     };
     if (shouldDelete) {
-      dispatch(catalogDataActions.updateQuestionHistory(defaultUserHistory));
-      dispatch(catalogDataActions.questionHistoryStorageNeedsUpdate(true));
+      dispatch(studyPlanDataActions.updateQuestionHistory(defaultUserHistory));
+      dispatch(studyPlanDataActions.questionHistoryStorageNeedsUpdate(true));
     }
   };
 
@@ -49,9 +49,9 @@ function Score(props) {
   }
   return (
     <div
-      key="ms1-session-results"
-      id="ms1-session-results"
-      className={styles["ms1-session-results"]}
+      key="spt-session-results"
+      id="spt-session-results"
+      className={styles["spt-session-results"]}
     >
       {props.title && <h1 className={styles["subtitle"]}>props.title</h1>}
 

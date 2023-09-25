@@ -9,15 +9,15 @@
   bottom: 0;
   width: 100%;
   margin: 0 auto;
-  background: var(--ms1-color-background);
+  background: var(--spt-color-background);
   margin: 0 auto;
   border-radius: 50px 50px 0 0;
   box-shadow: inset 2px 2px 7px -5px rgb(255 255 255),
     inset -1px -1px 7px -5px rgb(0 0 0 / 50%), -1px -1px 15px -9px black;
   overflow: hidden;
   padding: 0 2vw;
-  /* background: var(--ms1-color-accent); */
-  color: var(--ms1-color-background);
+  /* background: var(--spt-color-accent); */
+  color: var(--spt-color-background);
   font-variant: small-caps;
   z-index: 99;
 }
@@ -55,8 +55,8 @@
   }
 }
 .not-logged-in {
-  background: var(--ms1-color-background);
-  color: var(--ms1-color-accent);
+  background: var(--spt-color-background);
+  color: var(--spt-color-accent);
   padding: 0 3em 0.2em;
   border-radius: 50px;
   box-shadow: inset 1px 1px 3px -2px black, inset -1px -1px 3px -2px white;
@@ -79,7 +79,7 @@
   max-width: 100%;
   min-height: 100%;
   max-height: 100%;
-  background-image: radial-gradient(var(--ms1-color-accent), #ffffffd4);
+  background-image: radial-gradient(var(--spt-color-accent), #ffffffd4);
   transition: 0.3s;
   opacity: 0;
   pointer-events: none;

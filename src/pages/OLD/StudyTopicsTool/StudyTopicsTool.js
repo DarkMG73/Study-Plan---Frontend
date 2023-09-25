@@ -13,13 +13,13 @@ import OutputControls from "../../Components/OutputControls/OutputControls";
 import Footer from "../../Components/Footer/Footer";
 import BottomBar from "../../Components/BottomBar/BottomBar";
 import LoginStatus from "../../Components/User/LoginStatus/LoginStatus";
-import { catalogDataActions } from "../../store/catalogDataSlice";
+import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 import { updateStudyNotes } from "../../storage/userDB";
 import storage from "../../storage/storage";
 
 function StudyTopicsTool() {
   const { studyNotes, ...otherQuestionData } = useSelector(
-    (state) => state.catalogData
+    (state) => state.studyPlanData
   );
   const { allQuestions, questionMetadata } = otherQuestionData;
   const user = useSelector((state) => state.auth.user);
@@ -69,7 +69,7 @@ function StudyTopicsTool() {
       "Are you sure you want to remove this item from your study topics list?"
     );
     if (confirm) {
-      dispatch(catalogDataActions.updateStudyNotes(newStudyNotes));
+      dispatch(studyPlanDataActions.updateStudyNotes(newStudyNotes));
       if (user) updateStudyNotes({ user, dataObj: newStudyNotes });
       if (!user)
         storage("ADD", { studyNotes: newStudyNotes, ...otherQuestionData });

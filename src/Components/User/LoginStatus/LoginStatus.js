@@ -6,8 +6,8 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import { authActions } from "../../../store/authSlice";
 import { deleteUserCookie } from "../../../storage/userDB";
-import { useRunGatherCatalogData } from "../../../Hooks/useRunGatherCatalogData";
-import { catalogDataActions } from "../../../store/catalogDataSlice";
+import { useRunGatherStudyPlanData } from "../../../Hooks/useRunGatherStudyPlanData";
+import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 
 function LoginStatus(props) {
   const userData = useSelector((state) => state.auth);
@@ -19,14 +19,14 @@ function LoginStatus(props) {
   // const [loginPassword, setLoginPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
   const horizontalDisplay = props.horizontalDisplay ? "horizontal-display" : "";
-  const runGatherCatalogData = useRunGatherCatalogData();
+  const runGatherStudyPlanData = useRunGatherStudyPlanData();
   const toggleSignupLoginButtonHandler = () => {
     setShowLoginForm(!showLoginForm);
     setShowSignupForm(!showSignupForm);
   };
 
   const addAToolButtonHandler = () => {
-    dispatch(catalogDataActions.goToAddATool());
+    dispatch(studyPlanDataActions.goToAddATool());
   };
 
   const logOutButtonHandler = async () => {
@@ -36,7 +36,7 @@ function LoginStatus(props) {
     try {
       deleteUserCookie();
       dispatch(authActions.logOut());
-      runGatherCatalogData({ user: false });
+      runGatherStudyPlanData({ user: false });
       setLoginError(false);
     } catch (error) {
       setLoginError(
@@ -123,7 +123,7 @@ function LoginStatus(props) {
           onClick={addAToolButtonHandler}
           styles={{
             width: "300px",
-            letterSpacing: "var(--ms1-spacing-subheading)",
+            letterSpacing: "var(--spt-spacing-subheading)",
             fontVariant: "small-caps",
             textAlign: "center",
             display: "flex",

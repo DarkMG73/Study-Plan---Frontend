@@ -2,21 +2,21 @@ import { createSlice } from "@reduxjs/toolkit";
 
 function InitState() {
   const initialState = {};
-  initialState.catalog = null;
-  initialState.catalogMetadata = null;
+  initialState.studyPlan = null;
+  initialState.studyPlanMetadata = null;
   initialState.serviceEmbedJSXObj = null;
   return initialState;
 }
 
-export const catalogDataSlice = createSlice({
-  name: "catalogData",
+export const studyPlanDataSlice = createSlice({
+  name: "studyPlanData",
   initialState: InitState(),
   reducers: {
     initState: (state, action) => {
       const payload = action.payload;
 
-      state.catalog = payload.catalog;
-      state.catalogMetadata = payload.catalogMetadata;
+      state.studyPlan = payload.studyPlan;
+      state.studyPlanMetadata = payload.studyPlanMetadata;
       state.serviceEmbedJSXObj = payload.serviceEmbedJSXObj;
     },
 
@@ -140,6 +140,6 @@ export const catalogDataSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const catalogDataActions = catalogDataSlice.actions;
+export const studyPlanDataActions = studyPlanDataSlice.actions;
 
-export default catalogDataSlice.reducer;
+export default studyPlanDataSlice.reducer;

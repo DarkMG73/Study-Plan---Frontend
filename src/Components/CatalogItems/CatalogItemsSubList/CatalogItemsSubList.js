@@ -1,11 +1,11 @@
 import React from "react";
-// import styles from "./CatalogItemsSubList.module.css";
-import CatalogItemsList from "../CatalogItemsList/CatalogItemsList";
+// import styles from "./StudyPlanItemsSubList.module.css";
+import StudyPlanItemsList from "../StudyPlanItemsList/StudyPlanItemsList";
 
-const CatalogItemsSubList = (props) => {
+const StudyPlanItemsSubList = (props) => {
   return (
-    <CatalogItemsList
-      catalogItemsObj={props.catalogItemsObj}
+    <StudyPlanItemsList
+      studyPlanItemsObj={props.studyPlanItemsObj}
       key={props.key}
       parentKey={props.parentKey}
       parentsParentKey={props.parentsParentKey}
@@ -21,4 +21,4 @@ const CatalogItemsSubList = (props) => {
   );
 };
 
-export default CatalogItemsSubList;
+export default StudyPlanItemsSubList;

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, Fragment, useRef } from "react";
 import { useSelector } from "react-redux";
-import styles from "./CatalogItemsList.module.css";
-import CatalogItemsSubList from "../CatalogItemsSubList/CatalogItemsSubList";
-import CatalogItem from "../CatalogItem/CatalogItem";
+import styles from "./StudyPlanItemsList.module.css";
+import StudyPlanItemsSubList from "../StudyPlanItemsSubList/StudyPlanItemsSubList";
+import StudyPlanItem from "../StudyPlanItem/StudyPlanItem";
 import {
-  updateACatalogItem,
+  updateAStudyPlanItem,
   deleteDocFromDb,
-} from "../../../storage/catalogDB";
+} from "../../../storage/studyPlanDB";
 
 import {
   updateAContentItem,
@@ -14,13 +14,13 @@ import {
 } from "../../../storage/contentDB";
 import CollapsibleElm from "../../../UI/CollapsibleElm/CollapsibleElm";
 
-const CatalogItemsList = (props) => {
+const StudyPlanItemsList = (props) => {
   const [refresh, setRefresh] = useState(1);
-  const catalogItemsObj = props.catalogItemsObj;
-  const { catalogMetadata } = catalogItemsObj;
+  const studyPlanItemsObj = props.studyPlanItemsObj;
+  const { studyPlanMetadata } = studyPlanItemsObj;
   let availableServices =
-    catalogMetadata && catalogMetadata.hasOwnProperty("availableServices")
-      ? [...catalogMetadata.availableServices]
+    studyPlanMetadata && studyPlanMetadata.hasOwnProperty("availableServices")
+      ? [...studyPlanMetadata.availableServices]
       : [""];
   const user = useSelector((state) => state.auth.user);
   const parentKey = props.parentKey;
@@ -136,8 +136,8 @@ const CatalogItemsList = (props) => {
     const parentMasterID = e.target.getAttribute("parentmasterid");
     const parentSection = e.target.getAttribute("section");
     const updateAnItem =
-      parentSection === "content" ? updateAContentItem : updateACatalogItem;
-    const rawItemWithNewEdits = { ...catalogItemsObj[parentMasterID] };
+      parentSection === "content" ? updateAContentItem : updateAStudyPlanItem;
+    const rawItemWithNewEdits = { ...studyPlanItemsObj[parentMasterID] };
     const itemWithNewEdits = {};
     const itemIdentifier = rawItemWithNewEdits.identifier;
 
@@ -235,14 +235,14 @@ const CatalogItemsList = (props) => {
 
     const parentMasterID = e.target.getAttribute("parentmasterid");
     const parentSection = e.target.getAttribute("section");
-    const itemIdentifier = catalogItemsObj[parentMasterID].identifier;
+    const itemIdentifier = studyPlanItemsObj[parentMasterID].identifier;
     const deleteItemFromDB =
       parentSection === "content" ? deleteContentDocFromDb : deleteDocFromDb;
     const confirm = window.confirm(
       "Are you sure you want to delete the " +
-        catalogItemsObj[parentMasterID].type +
+        studyPlanItemsObj[parentMasterID].type +
         ' titled "' +
-        catalogItemsObj[parentMasterID].title +
+        studyPlanItemsObj[parentMasterID].title +
         ' "?'
     );
     if (confirm && user && user.isAdmin == true) {
@@ -280,9 +280,9 @@ const CatalogItemsList = (props) => {
     }
   };
 
-  if (catalogItemsObj)
-    return Object.keys(catalogItemsObj).map((key) => {
-      if (catalogItemsObj[key] && typeof catalogItemsObj[key] === "object")
+  if (studyPlanItemsObj)
+    return Object.keys(studyPlanItemsObj).map((key) => {
+      if (studyPlanItemsObj[key] && typeof studyPlanItemsObj[key] === "object")
         return (
           <ul
             marker="CATALOG-ITEM-LIST"
@@ -354,23 +354,23 @@ const CatalogItemsList = (props) => {
                   styles.title
                 }
               >
-                {catalogItemsObj[key] &&
-                catalogItemsObj[key].hasOwnProperty("title") ? (
+                {studyPlanItemsObj[key] &&
+                studyPlanItemsObj[key].hasOwnProperty("title") ? (
                   <Fragment>
                     <span className={styles["title"]}>
-                      {catalogItemsObj[key].title}
+                      {studyPlanItemsObj[key].title}
                     </span>
                   </Fragment>
                 ) : (
                   key
                 )}
               </h2>
-              <CatalogItemsSubList
-                catalogItemsObj={catalogItemsObj[key]}
+              <StudyPlanItemsSubList
+                studyPlanItemsObj={studyPlanItemsObj[key]}
                 parentKey={key}
                 parentsParentKey={parentKey}
                 parentMasterID={
-                  parentMasterID ? parentMasterID : catalogItemsObj[key]._id
+                  parentMasterID ? parentMasterID : studyPlanItemsObj[key]._id
                 }
                 section={section}
                 displayConditions={displayConditions}
@@ -450,9 +450,9 @@ const CatalogItemsList = (props) => {
           </ul>
         );
       return (
-        <CatalogItem
+        <StudyPlanItem
           key={key}
-          catalogItemsObj={props}
+          studyPlanItemsObj={props}
           passedKey={key}
           parentKey={parentKey}
           parentsParentKey={parentsParentKey}
@@ -482,4 +482,4 @@ const CatalogItemsList = (props) => {
   );
 };
 
-export default CatalogItemsList;
+export default StudyPlanItemsList;
