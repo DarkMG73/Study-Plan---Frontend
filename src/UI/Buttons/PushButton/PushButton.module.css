@@ -1,0 +1,80 @@
+.button {
+  margin: 0 0.5em;
+  /* box-shadow: inset 1px 1px 1px rgb(255 255 255 / 25%),
+    inset 1px -1px 1px rgb(0 0 0 / 15%), 1px 1px 5px -3px black; */
+  box-shadow: 3px 3px 7px -5px white inset,
+    -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
+  border: none;
+  background: inherit;
+  color: inherit;
+  border-radius: 50px;
+  padding: 0.5em 1em;
+  margin-top: 1em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s all ease;
+  font-variant: small-caps;
+}
+
+.button:hover {
+  text-shadow: 0 0 1px;
+  transform: scale(1.1);
+  transition: 0.1s all ease;
+}
+
+/* Color Control */
+.button.primary {
+  background-color: var(--ms1-color-accent);
+  color: var(--ms1-color-background);
+}
+
+.button.primary.selected {
+  box-shadow: inset 1px 1px 1px rgb(255 255 255 / 25%),
+    inset 1px -1px 1px rgb(0 0 0 / 15%), 1px 1px 5px -3px black, 0 0 10px white,
+    inset 0 0 10px white;
+}
+
+.button.secondary {
+  background-color: var(--ms1-color-background);
+  color: var(--ms1-color-accent);
+}
+.button.secondary.selected {
+  box-shadow: inset 1px 1px 1px rgb(255 255 255 / 25%),
+    inset 1px -1px 1px rgb(0 0 0 / 15%), 1px 1px 5px -3px black, 0 0 10px white,
+    inset 0 0 10px white;
+}
+
+.button.basic {
+  background: var(--ms1-color-background);
+  color: var(--ms1-color-background-contrast);
+}
+
+/* Font Control */
+.button.heading {
+  letter-spacing: var(--ms1-spacing-heading);
+}
+.button.heading-2 {
+  font: var(--ms1--font-heading-2);
+  letter-spacing: var(--ms1-spacing-heading);
+}
+.button.subheading {
+  font: var(-font-subheading);
+  letter-spacing: var(--ms1-spacing-subheading);
+}
+.button.body {
+  font: var(--ms1-font-body-text);
+  font-weight: 700;
+}
+.button.small {
+  font: var(--ms1-font-body-text);
+  font-size: 0.75em;
+  font-size: calc(0.5em + 0.2vw);
+  font-weight: 700;
+}
+
+.button.large {
+  font: var(--ms1-font-body-text);
+  font-size: 1.5em;
+  font-size: calc(1em + 0.5vw);
+  font-weight: 700;
+}

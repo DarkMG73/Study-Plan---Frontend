@@ -1,0 +1,32 @@
+#add-quest-wrap p {
+  max-width: 800px;
+  margin: 2em auto;
+}
+
+.outerwrap {
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  /* border: 3px solid red; */
+  background: var(--ms1-color-background);
+  color: var(--ms1-color-accent);
+  padding: 2rem;
+  border-radius: 50px;
+  box-shadow: inset -1px -1px 14px -7px rgb(255 255 255),
+    inset 1px 1px 14px -7px rgb(0 0 0 / 50%);
+  box-shadow: inset 4px 4px 14px -7px rgb(255 255 255),
+    inset -4px -4px 14px -7px rgb(0 0 0 / 50%), 3px 3px 10px -8px black;
+  background-image: url(https://www.transparenttextures.com/patterns/buried.png);
+  background-blend-mode: overlay;
+  /* background-image: url("https://www.transparenttextures.com/patterns/subtle-stripes.png"); */
+  background-size: cover;
+}
+
+.outerwrap > a {
+  color: var(--ms1-color-accent);
+}
+
+.list-outer-wrap {
+  max-width: 100%;
+  width: 100%;
+}

@@ -1,0 +1,11 @@
+.error-container {
+  padding: 0 1vh;
+}
+
+.error-text-container {
+  max-width: 800px;
+}
+
+.error-text-container p {
+  white-space: break-spaces;
+}

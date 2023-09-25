@@ -1,0 +1,23 @@
+import styles from "./Navbar.module.css";
+import React from "react";
+import SocialConnectMenu from "../SocialConnectMenu/SocialConnectMenu";
+
+function Navbar(props) {
+  return (
+    <div className={styles["nav-container"]}>
+      {props.aboutIsActive && (
+        <a href="#about" alt="">
+          About
+        </a>
+      )}
+      {props.musicIsActive && (
+        <a href="#music-catalog" alt="">
+          Music
+        </a>
+      )}
+      <SocialConnectMenu />
+    </div>
+  );
+}
+
+export default Navbar;

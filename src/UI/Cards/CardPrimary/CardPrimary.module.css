@@ -1,0 +1,26 @@
+.card-primary {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--ms1-color-background);
+
+  padding: 2rem;
+  /* border-radius: 50px; */
+  box-shadow: inset 4px 4px 14px -7px rgb(255 255 255),
+    inset -4px -4px 14px -7px rgb(0 0 0 / 50%), 3px 3px 10px -8px black;
+}
+
+.card-primary p,
+.card-primary h1,
+.card-primary h2,
+.card-primary h3,
+.card-primary a,
+.card-primary span {
+  background-color: var(--ms1-color-background);
+  background-image: var(--ms1-color-accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-priimary a {
+  color: var(--ms1-color-accent);
+}

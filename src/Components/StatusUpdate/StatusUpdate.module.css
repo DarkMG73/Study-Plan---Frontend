@@ -1,0 +1,115 @@
+.status-update-container {
+  position: relative;
+  bottom: 0;
+  max-width: 100em;
+  z-index: 1000;
+  width: fit-content;
+}
+.status-update-container div {
+  max-width: 100%;
+  max-width: 100%;
+  word-break: break-word;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ms1-color-accent);
+  text-align: center;
+  /* background: var(--ms1-color-background); */
+  background: inherit;
+  color: inherit;
+  border-radius: 0 1.5em 1.5em 0;
+  /* box-shadow: 3px 3px 10px -3px, 1px 1px 10px -7px black,
+    inset -3px -3px 6px -4px black; */
+  /* box-shadow: 1px 1px 3px -2px black, inset 2px 2px 3px -2px white; */
+  box-shadow: none;
+  z-index: 10;
+  padding: 0.25em 1em 0.25em 0.5em;
+}
+.status-update-container p {
+  margin: 0;
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.error div {
+  font-size: 1.8rem;
+  background: #942828;
+  color: white;
+  margin: 1em;
+  border-radius: 50px;
+  padding: 1em;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+  overflow: hidden;
+}
+.warning div {
+  font-size: 1.6rem;
+  background: orangered;
+  color: white;
+}
+
+@keyframes transmitRight {
+  0% {
+    transform: scale(0) translateY(-8%) translateX(0%);
+  }
+  10% {
+    transform: scale(1, 1) translateY(-8%) translateX(10%);
+  }
+  50% {
+    transform: scale(1.5, 2) translateY(-8%) translateX(50%);
+  }
+  90% {
+    transform: scale(0.75, 2) translateY(-8%) translateX(90%);
+  }
+  100% {
+    transform: scale(0, 2) translateY(-8%) translateX(100%);
+  }
+}
+
+.transmit {
+  display: inline-block;
+  transform: scale(2) translateY(-8%) translateX(0);
+  padding-right: 1em;
+  /* transform-origin: right; */
+  animation: transmitRight 0.7s 0s infinite ease;
+}
+
+@media screen and (max-width: 900px) {
+  .status-update-container {
+    transform: translate(-100%, calc(-100% + -200px));
+    position: fixed;
+    top: 100%;
+    left: 0;
+    display: flex;
+    background: #ffffff;
+    justify-content: center;
+    align-items: center;
+    color: var(--ms1-color-accent);
+    font-size: 2em;
+    transition: 0.3s all ease;
+  }
+  .status-update-container div {
+    padding: 2em;
+    box-shadow: inset 3px 4px 3px -2px #dfdfdf, inset 3px 2px 7px -4px white,
+      3px 3px 7px -4px black;
+  }
+
+  .status-update-container p {
+    font-size: calc(6px + 2vw);
+  }
+
+  .loading {
+    transition-delay: 1000ms;
+    transform: translate(0%, calc(-100% + -200px));
+  }
+  .status-update-container.error,
+  .status-update-container.warning {
+    display: flex;
+  }
+}

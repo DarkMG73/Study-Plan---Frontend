@@ -1,0 +1,40 @@
+.inner-wrap {
+  font-size: 1.6rem;
+}
+
+.inner-wrap button:hover {
+  transform: none;
+  background: var(--ms1-color-accent);
+  color: var(--ms1-color-background);
+}
+
+.inner-wrap pre {
+  position: relative;
+  text-align: left;
+  overflow: hidden;
+}
+
+@keyframes slowRiseAndFall {
+  0% {
+    transform: translateY(150%);
+  }
+  50% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(150%);
+  }
+}
+.code:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50%;
+  width: 100%;
+  background: white;
+  transition: 0.3s all ease;
+  transform: translateY(-1%);
+  animation: slowRiseAndFall 10s linear infinite;
+  box-shadow: 0 0 100px white;
+}

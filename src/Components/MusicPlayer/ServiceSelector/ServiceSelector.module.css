@@ -1,0 +1,195 @@
+.tab {
+  position: relative;
+  background: var(--ms1-color-background);
+  border-radius: 0 0 50px 50px;
+  padding: 0 1em 2em;
+}
+
+.tab-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--ms1-color-background);
+  border-radius: 50px 50px 0 0;
+  box-shadow: inset 0 20px 20px -20px hsl(329.42deg 62.75% 48.43% / 65%),
+    inset 0px -21px 20px -20px var(--ms1-color-accent);
+  flex-direction: column;
+}
+
+.tab-container-inner-wrap {
+  display: flex;
+  margin: 0.5em auto 1.5em;
+  padding: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+}
+
+.tab-name {
+  position: relative;
+  background: var(--ms1-color-background);
+  color: var(--ms1-color-accent);
+  margin: 0 0.5em;
+  padding: 0em 2em 0;
+  /* border-radius: 50px 50px 0 0; */
+  margin-top: 0.5em;
+  border: none;
+  font-size: 1rem;
+  flex-grow: 1;
+  opacity: 0.7;
+}
+
+.tab-name:hover {
+  opacity: 1;
+  color: var(--ms1-color-background);
+  background: var(--ms1-color-accent-gradient);
+}
+
+.tab-name:hover h3 {
+  color: var(--ms1-color-background);
+  -webkit-text-fill-color: initial;
+  font-variant: none;
+}
+
+.tab-name.active-true {
+  position: relative;
+  color: var(--ms1-color-background);
+  background: var(--ms1-color-accent-gradient);
+  box-shadow: inset -1px -1px 3px -2px black, inset 1px 1px 3px -2px white,
+    2px 2px 3px -2px black;
+  /* border-radius: 50px 50px 0 0; */
+  position: absolute;
+  width: 100%;
+  min-width: min-content;
+  top: 100%;
+  transform: translate(-50%, 0%);
+  display: flex;
+  z-index: 1;
+  padding: 0.5em 2em;
+  left: 50%;
+  opacity: 1;
+}
+
+.tab-name.active-true h3 {
+  position: relative;
+  color: var(--ms1-color-background);
+  -webkit-text-fill-color: initial;
+  font-variant: none;
+}
+
+.tab-name h3 {
+  font-variant: none;
+  text-transform: none;
+  letter-spacing: 0.25em;
+  font-weight: 700;
+  margin: auto;
+  pointer-events: none;
+}
+
+.player-title {
+  font: var(--ms1-font-subheading);
+}
+
+@keyframes pulseYellow {
+  0% {
+    box-shadow: 0 0 0px 0px yellow;
+  }
+  10% {
+    box-shadow: 0 0 10px 3px yellow;
+  }
+  100% {
+    box-shadow: 0 0 0px 0px yellow;
+  }
+}
+
+@keyframes pulseWhite {
+  0% {
+    box-shadow: 0 0 0px 0px wheat;
+  }
+  10% {
+    box-shadow: 0 0 5px 3px wheat;
+  }
+  20% {
+    box-shadow: 0 0 0px 0px wheat;
+  }
+  100% {
+    box-shadow: 0 0 0px 0px wheat;
+  }
+}
+.not-logged-in {
+  background: var(--ms1-color-background);
+  color: var(--ms1-color-background);
+  padding: 0 3em 0.2em;
+  border-radius: 50px;
+  box-shadow: inset 1px 1px 3px -2px black, inset -1px -1px 3px -2px white;
+  animation: pulseYellow 30s ease 2, pulseWhite 60s ease 30s 10;
+}
+
+.right-arrow {
+  transform: scale(3, 2) translate(50%, 0%);
+  display: inline-block;
+}
+
+.login-modal {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  background-image: radial-gradient(var(--ms1-color-background), #ffffffd4);
+  transition: 0.3s;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.login-modal > div > div {
+  width: fit-content;
+  border-radius: 50px;
+  padding: 5vw;
+}
+
+.login-modal > div > button {
+  border-radius: inherit;
+  padding: 1vw;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  border: none;
+  box-shadow: 3px 3px 7px -5px white inset,
+    -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
+  cursor: pointer;
+  font-variant: small-caps;
+}
+
+.login-bar-button {
+  padding: 0 1em;
+  margin-left: 1em;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  border: none;
+  transition: 1s all ease;
+}
+
+.login-modal > div > div:last-child {
+  max-height: min-content;
+  padding: 1em 0;
+  margin: 1em auto;
+}
+
+@media screen and (max-width: 900px) {
+  .bottom-bar {
+    flex-direction: column;
+  }
+  .bottom-bar p {
+    font-size: calc(6px + 1vw);
+  }
+  .login-modal > div > div:last-child {
+    display: none;
+  }
+}

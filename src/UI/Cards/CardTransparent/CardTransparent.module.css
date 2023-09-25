@@ -1,0 +1,11 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  color: inherit;
+  border-radius: 0px;
+}
+header > div,
+.header > button {
+  margin: 0;
+}

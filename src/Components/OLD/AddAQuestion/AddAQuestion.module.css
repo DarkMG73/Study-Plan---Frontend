@@ -1,0 +1,30 @@
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-container > * {
+  max-width: 18rem;
+  width: 200px;
+  flex-grow: 1;
+}
+
+.add-question-container .button-container button {
+  border-radius: 50px;
+  padding: 1em 2em;
+  font-weight: 700;
+  min-width: 18em;
+  box-shadow: 3px 3px 7px -5px white inset,
+    -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
+  color: var(--ms1-color-accent);
+  background: var(--ms1-color-background);
+  font-variant: small-caps;
+}
+
+.add-question-container .button-container button:hover {
+  background: var(--ms1-color-accent);
+  color: var(--ms1-color-background);
+  transform: none;
+}

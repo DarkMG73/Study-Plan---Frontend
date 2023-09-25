@@ -1,0 +1,321 @@
+.question-result-container {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: max-content;
+  flex-basis: 25%;
+  max-width: 100%;
+  margin: 1em auto;
+  box-shadow: inset 0px 4px 4px rgba(255, 255, 255, 0.25),
+    inset 0px -4px 4px #d4d4ce;
+  border-radius: 50%;
+}
+
+.question-result-container > div {
+  box-shadow: inset 0px -4px 4px rgb(0 0 0 / 38%), inset 0px 4px 4px #e4e4e4;
+}
+
+.question-result-container > div > div {
+  display: grid;
+  grid-template:
+    auto/minmax(min-content, 5%)
+    minmax(min-content, 10%)
+    minmax(min-content, 70%)
+    minmax(min-content, 10%)
+    minmax(min-content, 5%);
+  grid-template-areas:
+    "topic level title time buttons"
+    "topic tags title time buttons"
+    " question question question question question"
+    " answer answer answer answer answer"
+    "search search search search search"
+    "notepad notepad notepad notepad notepad"
+    "credit  link link  id id"
+    "createdAt createdAt createdAt updatedAt updatedAt"
+    "identifier identifier identifier identifier identifier";
+  text-align: left;
+  word-break: break-word;
+}
+
+.question-result-container .grid-item {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  min-height: min-content;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font: var(--ms1-font-subheading);
+  font-size: 1rem;
+}
+
+.grid-item-title {
+  margin-right: 1em;
+  opacity: 0.5;
+  font-size: 1rem;
+}
+
+.grid-item-title::first-letter {
+  text-transform: capitalize;
+}
+
+.grid-item-text {
+  font-weight: 700;
+  color: var(--ms1-color-accent);
+}
+
+.grid-item-child {
+  position: relative;
+}
+
+.title-title {
+  display: none;
+}
+
+.level {
+  grid-area: level;
+  padding-bottom: 0;
+  min-width: max-content;
+}
+.topic {
+  grid-area: topic;
+  justify-content: center;
+
+  min-width: max-content;
+}
+.tags {
+  grid-area: tags;
+  padding-top: 0;
+  min-width: min-content;
+}
+
+.grid-item.tags,
+.grid-item.level {
+  align-self: center;
+  flex-direction: row;
+  min-width: fit-content;
+  flex-direction: row;
+}
+
+.question-result-container > div > div > div > [contenteditable="true"] {
+  /* width: max-content; */
+  padding: 0.25em 1em;
+  box-shadow: inset 1px 1px 3px -2px black, inset -1px -1px 3px -2px #e0e0e0,
+    0 0 20px -8px yellow;
+  border-radius: 3px;
+  font-size: 1.25em;
+  background: #fffb0021;
+  color: #5a5a5a;
+  /* min-width: min-content; */
+  /* word-break: normal; */
+  max-width: 100%;
+  border: 1px inset yellow;
+}
+
+.credit[contenteditable="true"] {
+  min-width: 200px;
+}
+
+.time {
+  grid-area: time;
+}
+
+.title {
+  grid-area: title;
+  font: var(--ms1-font-subheading);
+  min-height: 100%;
+}
+
+.title-text {
+  font: var(--ms1-font-subheading);
+  min-height: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.tags[contenteditable="true"],
+.topic[contenteditable="true"],
+.level[contenteditable="true"] {
+  width: max-content;
+  max-width: 100%;
+}
+.question {
+  grid-area: question;
+}
+.answer {
+  grid-area: answer;
+}
+
+._id {
+  grid-area: id;
+  transition: 0.2s all ease;
+  max-width: fit-content;
+}
+
+._id:hover {
+  transform: scale(1, 1.4);
+  transform-origin: left;
+}
+
+.identifier {
+  grid-area: identifier;
+}
+
+.createdAt {
+  grid-area: createdAt;
+}
+
+.updatedAt {
+  grid-area: updatedAt;
+}
+
+.answer > .grid-item-text,
+.question > .grid-item-text {
+  font: var(--ms1-font-body-text);
+  font-weight: 500;
+  border-radius: 27px;
+  border: 1px solid var(--ms1-color-accent);
+  padding: 1em 2em;
+  margin: 1em auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+.question,
+.answer {
+  background: var(--ms1-color-background);
+  color: var(--ms1-color-background-contrast);
+}
+
+.search {
+  grid-area: search;
+}
+
+.credit {
+  grid-area: credit;
+  width: max-content;
+}
+
+.link {
+  grid-area: link;
+  width: max-content;
+}
+
+button.edit {
+  /* Set within prop passed to button component */
+}
+
+.button-container {
+  grid-area: buttons;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(14%);
+}
+
+.button-container p {
+  text-align: center;
+  background: white;
+  color: var(--ms1-color-accent);
+}
+body .button-container button:hover {
+  background: var(--ms1-color-accent-light) !important;
+  color: white;
+  border-radius: 50px;
+  transform: none;
+}
+
+body .button-container button[value="remove"]:hover,
+body .button-container button[value="edit"]:hover {
+  background: #942828 !important;
+  color: white;
+  background: transparent !important;
+  color: var(--ms1-color-accent) !important;
+  border-radius: 50px;
+  transform: scale(1, 1.5);
+  text-align: center !important;
+  text-shadow: none;
+}
+
+.deleted {
+  border-radius: 3px !important;
+  font-size: 1.5em !important;
+  box-shadow: inset 1px 1px 7px -5px black, inset -4px -4px 7px -5px white !important;
+  padding: 1em !important;
+  opacity: 0.7 !important;
+}
+
+.notes-container {
+  grid-area: notepad;
+  height: fit-content;
+  border-radius: 27px;
+  border: 1px solid var(--ms1-color-accent);
+  overflow: hidden;
+}
+
+.question-result-container.parent-open-false > div {
+  padding: 1rem 2em 0;
+}
+
+.question-result-container.parent-open-false > div > button {
+  transform: translateY(0%) !important;
+}
+
+.parent-open-false .title-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+[contenteditable="true"] {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+@media screen and (max-width: 900px) {
+  .title-text {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .button-container {
+    transform: translateY(-4%);
+  }
+
+  .question-result-container .grid-item {
+    flex-direction: column;
+  }
+
+  .question-result-container > div > div {
+    max-height: 6em;
+    display: grid;
+    grid-template:
+      min-content/minmax(min-content, 25%)
+      minmax(min-content, 70%)
+      minmax(min-content, 25%);
+    grid-template-areas:
+      "title title title"
+      "buttons buttons buttons"
+      "topic level tags"
+      "topic time tags"
+      "question question question"
+      "question question question"
+      "answer answer answer"
+      "answer answer answer"
+      "search search search"
+      "notepad notepad notepad"
+      "notepad notepad notepad"
+      "credit link link"
+      "id id id"
+      "createdAt createdAt createdAt"
+      "updatedAt updatedAt updatedAt"
+      "identifier identifier identifier";
+    text-align: center;
+    word-break: break-word;
+  }
+  .button-container button {
+    font-size: 1rem;
+  }
+}

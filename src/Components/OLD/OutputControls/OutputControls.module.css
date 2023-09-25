@@ -1,0 +1,37 @@
+.outerwrap {
+  max-width: 100%;
+}
+
+.loader-wrap {
+  max-height: 200px;
+  position: relative;
+  min-height: 0;
+  display: flex;
+  width: auto;
+  overflow: visible;
+  padding: 12px;
+  border-radius: 50px;
+  margin: 0px auto;
+  z-index: 10;
+  transition: 0.2s all ease;
+}
+
+.outerwrap button {
+  border-radius: 50px;
+}
+.outerwrap button:hover {
+  background: var(--ms1-color-accent);
+  color: var(--ms1-color-background);
+  transform: none;
+}
+body .loader-wrap > * {
+  max-height: 200px;
+  min-height: 125px;
+  position: relative;
+  padding: 20px 0;
+  margin: 50px auto;
+  overflow: visible;
+  width: 100%;
+  min-width: 400px;
+  border-radius: inherit;
+}

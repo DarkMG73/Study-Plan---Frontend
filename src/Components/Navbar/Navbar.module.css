@@ -1,0 +1,414 @@
+.outerwrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1em;
+  /* Must be the same as the Service Selector */
+  height: 65px;
+  height: var(--ms1-navbar-height);
+}
+
+.logo-title-outerwrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 300px;
+  width: 60%;
+  z-index: 1;
+  transform: translate(-12.5%, 25%);
+  /* background: var(--ms1-color-background); */
+  border-radius: 0 0 50px 0;
+  transition: 0.2s all cubic-bezier(0, 0.27, 0.61, 0.98);
+  /* box-shadow: 10px 10px 15px 0 black; */
+}
+
+.header-title-container:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* box-shadow: 20px 0 0 0 var(--ms1-color-background); */
+  background: var(--ms1-color-background);
+  transform: scale(0.9) translate(10%, -11%);
+  /* background: red; */
+  border-radius: 50px;
+}
+
+.ms1-title {
+  margin: 0 auto;
+  font: var(--ms1--font-heading);
+  letter-spacing: var(--ms1-spacing-heading);
+}
+
+.ms1-title.first-word {
+  position: relative;
+  width: 204px;
+  height: 90px;
+  left: 0;
+  top: 0;
+  background: radial-gradient(50% 50% at 50% 50%, #ff4024 0%, #bb2b95 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-family: Covered By Your Grace;
+  font-size: 96px;
+  font-weight: 400;
+  line-height: 96px;
+  letter-spacing: 0em;
+  text-align: left;
+  font-variant: none;
+  text-transform: none;
+  z-index: 1;
+  display: inline;
+}
+
+.ms1-title.second-word {
+  position: relative;
+  width: 195px;
+  height: 77px;
+  left: 71px;
+  top: 0;
+  font-style: normal;
+  background: conic-gradient(
+    from -5.26deg at 32.03% 26.09%,
+    #201cff -12.83deg,
+    #0909a0 161.47deg,
+    #201cff 347.17deg,
+    #0909a0 521.47deg
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-family: Covered By Your Grace;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 48px;
+  letter-spacing: 0em;
+  text-align: left;
+  font-variant: none;
+  transform: translateY(-18%);
+}
+
+.ms1-subtitle {
+  font: var(--ms1-font-subheading);
+  letter-spacing: var(--ms1-spacing-subheading);
+  text-transform: capitalize;
+  margin: 0 auto;
+  position: relative;
+  width: 326.39px;
+  height: 48px;
+  left: 37px;
+  top: 0;
+  font-style: normal;
+  background: radial-gradient(50% 50% at 50% 50%, #ff4024 0%, #bb2b95 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-family: Covered By Your Grace;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  text-transform: none;
+  transform: scale(1, 1) translateY(-75%);
+}
+
+.logo-wrap {
+  display: flex;
+  display: none;
+  max-height: 100%;
+  position: absolute;
+  overflow: hidden;
+  height: max-content;
+  /* width: 100%; */
+  justify-content: center;
+  align-items: center;
+  /* margin-left: -0.75em; */
+  max-width: 75%;
+  transform: scale(0.5) translate(-50%, -50%);
+  top: 0;
+  left: 0;
+}
+
+.logo-wrap svg {
+  position: relative !important;
+  height: 100% !important;
+  align-items: center;
+  width: 100% !important;
+  top: auto !important;
+  left: auto !important;
+  /* max-height: 2.75em !important; */
+}
+
+.logo-wrap path,
+.logo-wrap circle {
+  fill: ivory !important;
+  fill: var(--ms1-color-accent) !important;
+  fill: url(#radial-gradient) !important;
+}
+
+.title-wrap {
+  margin: 0 1em;
+}
+
+.header-functions-container {
+  width: calc(100% - 155px);
+  max-width: 75%;
+  display: flex;
+  margin: 0 0 auto;
+  justify-content: space-between;
+}
+
+.subscribe-cta-wrap {
+  padding-right: 2em;
+  margin: 0 auto;
+}
+
+/* .logo-to-header-true,
+.logo-to-header-true .title-wrap {
+  display: flex;
+} */
+
+.logo-title-outerwrap .ms1-subtitle {
+  transition: 0.3s all ease;
+  transform-origin: top;
+  opacity: 1;
+}
+
+.logo-to-header-header .ms1-subtitle,
+.logo-to-header-medium .ms1-subtitle {
+  transition: 0.3s all ease;
+  transform-origin: top;
+  opacity: 0;
+}
+
+/* .logo-to-header-true h1 {
+  font-size: 3.6rem !important;
+  margin: 0;
+  top: 0 !important;
+  left: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+} */
+
+/* .logo-to-header-medium.logo-title-outerwrap {
+  transform: scale(0.75) translate(-25%, 0%) !important;
+} */
+
+.logo-to-header-small.logo-title-outerwrap {
+  transform: scale(0.5) translate(-50%, -25%);
+}
+
+.logo-to-header-header.logo-title-outerwrap {
+  transform: scale(0.25) translate(-125%, -125%) !important;
+  box-shadow: none;
+  background: none;
+}
+
+/* .logo-to-header-true .title-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-to-header-true .ms1-title.second-word {
+  top: 0;
+  left: 0.25em;
+  font-size: 96px;
+  transform: none;
+  height: auto;
+  line-height: 96px;
+} */
+
+.nav-container {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-evenly;
+  max-width: 75%;
+  margin: 0 0 0 auto;
+}
+
+.nav-container a {
+  transform: scale(1);
+  transition: 0.3s all ease;
+}
+
+.nav-container a:hover,
+.nav-container button:hover {
+  transform: scale(1.25);
+  transition: 0.3s all ease;
+  z-index: 10;
+}
+
+.social-connect-container {
+  display: flex;
+  width: calc(5em + 4vw);
+  max-width: 7em;
+}
+
+.social-connect-container a,
+.social-connect-container button {
+  min-width: fit-content;
+  margin: 0 0.125em;
+}
+
+.social-connect-container button {
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  border: none;
+  padding: inherit;
+  margin: inherit;
+}
+
+.links-container {
+  flex-shrink: 1;
+  display: flex;
+  overflow: hidden;
+  font-size: 0.8em;
+  height: 100%;
+  align-items: flex-end;
+}
+
+.login-modal .links-container {
+  flex-grow: 1;
+  display: flex;
+  overflow: hidden;
+  font-size: 1.5em;
+  height: 100%;
+  align-items: flex-end;
+  align-items: center;
+  min-width: min-content;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-modal .links-container a {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0.5% auto;
+}
+
+/* MODAL */
+.login-modal {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  background-image: radial-gradient(var(--ms1-color-accent), #ffffffd4);
+  transition: 0.3s;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.login-modal > div > div {
+  width: fit-content;
+  border-radius: 50px;
+  padding: calc(1em - 1vw);
+  flex-direction: column;
+  max-width: 100%;
+}
+
+.login-modal > div > button {
+  border-radius: inherit;
+  padding: 1vh 1vw;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  border: none;
+  box-shadow: 3px 3px 7px -5px white inset,
+    -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
+  cursor: pointer;
+  font-variant: small-caps;
+  margin-left: 1em;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  border: none;
+  transition: 0.5s all ease;
+}
+
+.login-modal > div > button:hover {
+  box-shadow: 3px 3px 7px -5px white inset,
+    -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
+  color: var(--ms1-color-background);
+  background: var(--ms1-color-accent-gradient);
+  transition: 0.5s all ease;
+  transform: none;
+}
+
+.login-bar-button {
+  padding: 0 1em;
+  margin-left: 1em;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  border: none;
+  transition: 1s all ease;
+}
+
+.login-modal > div > div:last-child {
+  max-height: min-content;
+  padding: 1em 0;
+  margin: 1em auto;
+}
+.subscribe-cta-wrap {
+  padding: 0 1em;
+  margin: 0 auto;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+@media screen and (max-width: 1024px) {
+  /* Needs to match with Bottom Bar becoming visible (in Home page) */
+  .subscribe-cta-wrap {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .bottom-bar {
+    flex-direction: column;
+  }
+  .bottom-bar p {
+    font-size: calc(6px + 1vw);
+  }
+  .login-modal > div > div:last-child {
+    display: none;
+  }
+  .header-title-container {
+    transform: scale(0.7) translate(-4%, -5%);
+  }
+  .social-connect-container {
+    width: calc(1em + 8vw);
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .header-title-container {
+    transform: scale(0.6) translate(-15%, -11%);
+  }
+
+  .social-connect-container {
+    width: calc(1em + 20vw);
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .header-title-container {
+    transform: scale(0.75) translate(7%, -18%);
+  }
+}

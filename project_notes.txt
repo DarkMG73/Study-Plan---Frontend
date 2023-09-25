@@ -1,0 +1,49 @@
+Outline for User and Question Interactions
+
+Non-logged in users:
+    can:
+        1. Gather all questions.
+        2. Send question edits via email to admin.
+        3. Send new questions to admin.
+        4. Save results to their browser's cache.
+    can not: 
+        1. Add questions directly to the main library.
+        2. Edit questions directly in the main library.
+        3. Save results and ongoing progress(when feature added) to the DB.
+        4. Access Super Admin functions.
+
+Logged-In users:
+    can: 
+        1. Gather all questions.
+        2. Send question edits via email to admin.
+        3. Send new questions to admin.
+        4. Save both results and ongoing progress(when feature added) to the DB.
+    can not:
+        1. Add new questions directly to the main library.
+        2. Edit questions directly in the main library.
+        3. Save results to their browser's cache.
+        4. Access Super Admin functions.
+
+Logged-In user-admins:
+    can:
+        1. Gather all questions.
+        2. Directly edit questions in the main library.
+        3. Directly add questions in the main library.
+        4. Save results and ongoing progress(when feature added) to the DB.
+    can not:
+        1. Save results to the browser.
+        2. Access Super Admin functions.
+
+TODO: FUTURE FEATURE - SUPER ADMINS 
+Logged-In Super Admins:
+    can:
+        1. Access Super Admin functions:
+            a. Edit User DB via directly (via special site GUI).
+            b. Edit Questions DB via directly (via special site GUI).
+        2. Directly edit questions in the main library.
+        3. Directly add questions in the main library.
+        4. Gather all questions.
+    can not:
+        1. Answer questions.
+        2. Save results and ongoing progress(when feature added) to the DB.
+        3. Save results to the browser's cache.

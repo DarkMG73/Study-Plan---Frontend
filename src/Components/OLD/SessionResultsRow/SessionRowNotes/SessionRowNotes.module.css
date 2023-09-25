@@ -1,0 +1,167 @@
+.study-notepad-container {
+  position: relative;
+  flex-basis: 100%;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  justify-content: center;
+  align-items: center;
+}
+.study-notepad-container > * {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.study-notepad-container textarea,
+.study-list {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  box-shadow: inset -1px -1px 7px -5px black, inset 3px 3px 7px -1px white;
+  border-radius: 3px;
+  padding: 1em;
+  border: 1px inset var(--ms1-color-accent);
+}
+
+.study-notepad-container h3,
+.study-notepad-container p {
+  margin: 0;
+}
+
+.study-notepad-container p {
+  font: var(--ms1-font-body-text);
+  font-size: 1rem;
+  max-width: 950px;
+}
+
+.grid-item {
+  position: relative;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font: var(--ms1-font-subheading);
+  font-size: 1rem;
+}
+
+.grid-item-title {
+  margin-right: 1em;
+  opacity: 0.5;
+  font-size: 1rem;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: hsl(22.76deg 99.14% 45.31%);
+  }
+  50% {
+    background-color: hsl(23, 100%, 50%);
+  }
+  100% {
+    background-color: hsl(22.76deg 99.14% 45.31%);
+  }
+}
+
+.notes-not-saved-button {
+  background-color: hsl(22.76deg 99.14% 45.31%);
+  font-size: 3rem;
+  color: white;
+  font-weight: 700;
+  animation: pulse 1s ease infinite;
+  transform-origin: bottom;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.notes-not-saved-button:hover {
+  transform: scale(1, 1.125) translateY(-3%);
+  background-color: hsl(23, 100%, 50%);
+}
+
+.notes-not-saved-button,
+.notes-are-saved-button {
+  width: 100%;
+  font-size: 3rem;
+  font-weight: 500;
+  border-radius: 10px 10px 0 0;
+  transition: 0.2s ease;
+  margin: 0 auto;
+  border: none;
+  z-index: 3;
+}
+
+.notes-are-saved-button {
+  background: transparent;
+  /* transform: scale(1, 0.5);
+  transform-origin: bottom; */
+}
+
+.list-item-clear-list button {
+  transform-origin: top;
+}
+
+.list-item-clear-list button:hover {
+  transform: scale(1, 1.125);
+}
+
+.paper {
+  border: none;
+}
+
+@keyframes pulseBorder {
+  0% {
+    border-color: hsl(22.76deg 99.14% 45.31%);
+  }
+  50% {
+    border-color: hsl(23, 100%, 50%);
+  }
+  100% {
+    border-color: hsl(22.76deg 99.14% 45.31%);
+  }
+}
+
+.notes-not-saved-frame {
+  border: 9px solid hsl(23, 100%, 50%);
+  animation: pulseBorder 1s ease infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  pointer-events: none;
+  border-radius: 20px;
+  border-right: none;
+  border-left: none;
+  z-index: 85;
+}
+
+.not-saved-frame-text {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  background: hsl(22.76deg 99.14% 45.31%);
+  animation: pulse 1s ease infinite;
+  padding: 0 4em;
+  transform: translate(-50%, -25%);
+  transform-origin: left;
+  border-radius: 0 0 50px 50px;
+  color: white;
+  font-weight: 700;
+  font-variant: small-caps;
+  font-size: calc(0.7rem + 0.5vw);
+  width: max-content;
+}
+
+.right-side {
+  left: 50%;
+  bottom: 0%;
+  top: auto;
+  transform: translate(-50%, 25%);
+  transform-origin: right;
+  width: max-content;
+  border-radius: 50px 50px 0 0;
+}

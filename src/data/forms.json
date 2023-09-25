@@ -1,0 +1,30 @@
+{
+    "services": 
+            {
+                "title": "text", 
+                "slug": "text", 
+                "logo": "url", 
+                "defaultEmbed": "url"
+    }, 
+    "catalog" : 
+            {                     
+                "songs": {   
+                                "title": "text",
+                                "artist": "text",
+                                "realeaseDate": "date",
+                                "sourceURLObj": "url"
+                },
+                "albums": {   
+                                "title": "text",
+                                "artist": "text",
+                                "realeaseDate": "date",
+                                "sourceURLObj": "url"   
+                },
+                "playlists": {   
+                                "title": "text",
+                                "artist": "text",
+                                "realeaseDate": "date",
+                                "sourceURLObj": "url"
+               }
+    }
+}

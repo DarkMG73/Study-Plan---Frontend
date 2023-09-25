@@ -1,0 +1,80 @@
+{"services": 
+        {
+        "soundcloud":{"title": "SoundCloud", "slug": "soundcloud", "logo": "", "defaultEmbed": "https://w.soundCloud.com/player/?url=https%3A//api.soundCloud.com/playlists/1309354504&color=%23070d07&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"},
+        "spotify":{ "title": "Spotify", "slug": "spotify", "logo": "", "defaultEmbed": "https://open.spotify.com/embed/album/1c9d2ta4kcDrx1msfFRHEj?utm_source=generator&theme=0"},
+        "appleMusic":{"title": "Apple Music", "slug": "appleMusic", "logo": "", "defaultEmbed": "https://embed.music.apple.com/us/album/kx5/1676361995"},
+        "youTube":{"title": "YouTube", "slug": "youTube", "logo": "", "defaultEmbed": ""}
+        }, 
+
+"catalog" : 
+        {    
+        "defaults": { "defaultPlaylist": {   
+                        "title": "Main Playlist",
+                        "artist": "Artist Default",
+                        "realeaseDate": "3-14-2023",
+                        "sourceURLObj": {         
+                                "soundCloud":
+                                    "https://w.soundCloud.com/player/?url=https%3A//api.soundCloud.com/playlists/1309354504&color=%23070d07&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
+                                "spotify":
+                                "https://open.spotify.com/embed/playlist/37i9dQZF1DX0018ciYu6bM?utm_source=generator&theme=0",
+                                "appleMusic": 
+                                    "https://embed.music.apple.com/us/album/kx5/1676361995"}
+                                }},
+                                
+        "songs": {
+
+                
+            "song1": {   
+                        "title": "Song One",
+                        "artist": "Artist One",
+                        "realeaseDate": "3-5-2023",
+                        "sourceURLObj": {         
+                                "soundCloud":
+                                    "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1590682816&color=%23b10a91&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
+                                "spotify":
+                                "https://open.spotify.com/embed/track/6UYwd8zr1kQSdvg9zctgnu?utm_source=generator&theme=0",
+                                "appleMusic": 
+                                    "https://embed.music.apple.com/us/album/kx5/1676361995"}
+                                }
+                    ,
+            "song2": {   
+                    "title": "Song Two",
+                    "artist": "Artist Two",
+                    "realeaseDate": "4-7-2023",
+                    "sourceURLObj": {         
+                            "soundCloud":
+                                "https://w.soundCloud.com/player/?url=https%3A//api.soundCloud.com/playlists/1309354504&color=%23070d07&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
+                            "spotify":
+                                "https://open.spotify.com/embed/album/1c9d2ta4kcDrx1msfFRHEj?utm_source=generator&theme=0",
+                            "appleMusic": 
+                                "https://embed.music.apple.com/us/album/kx5/1676361995"
+                            }
+                },
+            "song3": {   
+                        "title": "Song Three",
+                        "artist": "Artist Three",
+                        "realeaseDate": "1-17-2022",
+                        "sourceURLObj": {         
+                                "soundCloud":
+                                    "https://w.soundCloud.com/player/?url=https%3A//api.soundCloud.com/playlists/1309354504&color=%23070d07&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
+                                "spotify":
+                                    "https://open.spotify.com/embed/album/1c9d2ta4kcDrx1msfFRHEj?utm_source=generator&theme=0",
+                                "appleMusic": 
+                                    "https://embed.music.apple.com/us/album/kx5/1676361995"
+                                }
+                    },
+            "song4": {   
+                    "title": "Song Four",
+                    "artist": "Artist Four",
+                    "realeaseDate": "5-23-2023",
+                    "sourceURLObj": {         
+                            "soundCloud":
+                                "https://w.soundCloud.com/player/?url=https%3A//api.soundCloud.com/playlists/1309354504&color=%23070d07&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true",
+                            "spotify":
+                                "https://open.spotify.com/embed/album/1c9d2ta4kcDrx1msfFRHEj?utm_source=generator&theme=0",
+                            "appleMusic": 
+                                "https://embed.music.apple.com/us/album/kx5/1676361995"
+                            }
+                }},"albums":{}, "playlists": {}}
+
+        }
