@@ -6,8 +6,7 @@ import CardTransparent from "../../UI/Cards/CardTransparent/CardTransparent";
 import CardSecondary from "../../UI/Cards/CardSecondary/CardSecondary";
 import NotFound from "../../Components/NotFound/NotFound";
 import Footer from "../../Components/Footer/Footer";
-import MusicPlayer from "../../Components/MusicPlayer/MusicPlayer";
-import MusicStudyPlan from "../../Components/MusicStudyPlan/MusicStudyPlan";
+import StudyPlanItems from "../../Components/StudyPlanItems/StudyPlanItems";
 import About from "../../Components/About/About";
 import NoticeOne from "../../Components/NoticeOne/NoticeOne";
 import NoticeTwo from "../../Components/NoticeTwo/NoticeTwo";
@@ -27,11 +26,7 @@ const Home = (props) => {
   // const [scrollToAnswer, setScrollToAnswer] = useState(false);
   const angledRectangleRef = useRef();
   const dispatch = useDispatch();
-  const hideMusicStudyPlan = false;
-  const defaultSourceURLObj = determineDefaultSourceURLObj(
-    studyPlan,
-    studyPlanMetadata
-  );
+  const hideStudyPlan = false;
 
   ////////////////////////////////////////
   /// Effects
@@ -57,7 +52,7 @@ const Home = (props) => {
   /// Functionality
   ////////////////////////////////////////
   const checkIfContentSectionActive = (targetSectionName, contentData) => {
-    if (contentData) {
+    if (contentData && Object.keys(contentData).length > 0) {
       for (const key in contentData) {
         if (
           contentData[key].hasOwnProperty("type") &&
@@ -71,34 +66,6 @@ const Home = (props) => {
     }
     return false;
   };
-
-  function determineDefaultSourceURLObj(studyPlan, studyPlanMetadata) {
-    const allStudyPlanValues =
-      studyPlan &&
-      Object.values(studyPlan).filter((item) =>
-        item.sourceURLObj.hasOwnProperty("soundCloud")
-      );
-    const lastPlaylist =
-      allStudyPlanValues &&
-      allStudyPlanValues[allStudyPlanValues.length - 1].sourceURLObj;
-    const output =
-      studyPlan &&
-      studyPlanMetadata &&
-      studyPlanMetadata.hasOwnProperty("isDefaultPlaylist") &&
-      studyPlan[studyPlanMetadata.isDefaultPlaylist[1]].hasOwnProperty(
-        "sourceURLObj"
-      )
-        ? studyPlan[studyPlanMetadata.isDefaultPlaylist[1]].sourceURLObj
-        : studyPlan &&
-          studyPlanMetadata &&
-          studyPlanMetadata.hasOwnProperty("isFeaturedPlaylist") &&
-          studyPlan[studyPlanMetadata.isFeaturedPlaylist[1]].hasOwnProperty(
-            "sourceURLObj"
-          )
-        ? studyPlan[studyPlanMetadata.isFeaturedPlaylist[1]].sourceURLObj
-        : lastPlaylist;
-    return output;
-  }
 
   ////////////////////////////////////////
   /// Output
@@ -124,24 +91,6 @@ const Home = (props) => {
             </CardTransparent>
           )}
         </Fragment>
-        <Fragment>
-          <CardTransparent styles={{ overflow: "hidden" }}>
-            <ErrorBoundary>
-              <div className={styles["main-music-player"]}>
-                {defaultSourceURLObj && (
-                  <div className={styles["main-music-player-wrap"]}>
-                    <MusicPlayer
-                      title="Featured Music"
-                      passedStyles={{ boxShadow: "none" }}
-                      sourceURLObj={defaultSourceURLObj}
-                      fromHome={true}
-                    />
-                  </div>
-                )}
-              </div>
-            </ErrorBoundary>
-          </CardTransparent>
-        </Fragment>
       </div>
       {checkIfContentSectionActive("noticeOne", content) && (
         <CardPrimary
@@ -155,13 +104,31 @@ const Home = (props) => {
           </ErrorBoundary>
         </CardPrimary>
       )}
-      {!hideMusicStudyPlan && studyPlan && (
+      {!hideStudyPlan && studyPlan && (
         <CardTransparent>
           <ErrorBoundary>
-            <MusicStudyPlan
-              studyPlanData={{ studyPlan: studyPlan }}
-              hideServiceSelector={false}
-              musicIsActive={props.musicIsActive}
+            <StudyPlanItems
+              key="studyPlan-goals"
+              id="studyPlan-goals"
+              dataObjForEdit={studyPlan}
+              allStudyPlanItems={studyPlan}
+              user={props.user}
+              type={"goal"}
+              noEditButton={true}
+            />
+          </ErrorBoundary>
+        </CardTransparent>
+      )}
+      {!hideStudyPlan && studyPlan && (
+        <CardTransparent>
+          <ErrorBoundary>
+            <StudyPlanItems
+              key="studyPlan"
+              id="studyPlan"
+              dataObjForEdit={studyPlan}
+              user={props.user}
+              type={"step"}
+              noEditButton={true}
             />
           </ErrorBoundary>
         </CardTransparent>

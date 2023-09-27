@@ -15,6 +15,13 @@ import {
 import CollapsibleElm from "../../../UI/CollapsibleElm/CollapsibleElm";
 
 const StudyPlanItemsList = (props) => {
+  console.log(
+    "%c --> %cline:17%cprops",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
+    props
+  );
   const [refresh, setRefresh] = useState(1);
   const studyPlanItemsObj = props.studyPlanItemsObj;
   const { studyPlanMetadata } = studyPlanItemsObj;
@@ -282,6 +289,221 @@ const StudyPlanItemsList = (props) => {
 
   if (studyPlanItemsObj)
     return Object.keys(studyPlanItemsObj).map((key) => {
+      if (
+        studyPlanItemsObj[key] &&
+        studyPlanItemsObj[key].hasOwnProperty("dependencies") &&
+        studyPlanItemsObj[key].dependencies.length > 0
+      )
+        return (
+          <ul
+            marker="CATALOG-ITEM-LIST"
+            section={section}
+            key={key}
+            id={key}
+            className={
+              (subListLevel > 0 &&
+                styles.subgroup +
+                  " " +
+                  styles[!!parentKey && !parentsParentKey && "subgroup-set"] +
+                  " " +
+                  styles[!!parentKey && "subgroup-set-child"] +
+                  " " +
+                  styles["subgroup-" + key] +
+                  " " +
+                  styles["sub-level-" + subListLevel]) +
+              " " +
+              ((!subListLevel || subListLevel <= 0) &&
+                styles["master-parent-group"]) +
+              " " +
+              styles[key] +
+              " " +
+              styles[parentKey] +
+              " " +
+              styles[parentMasterID] +
+              " " +
+              (unlockProtectedVisible.includes(key) && styles["edited-list"]) +
+              (props.inModal && styles["in-modal"])
+            }
+          >
+            <CollapsibleElm
+              id={key + "-collapsible-elm"}
+              styles={{
+                position: "relative",
+              }}
+              maxHeight={"6em"}
+              s
+              inputOrButton="button"
+              buttonStyles={{
+                margin: "0 auto",
+                padding: "0.5em 2em",
+                letterSpacing: "0.25em",
+                fontVariant: "small-caps",
+                transform: "translateY(5%)",
+                transition: "0.7s all ease",
+                minWidth: "80%",
+                maxWidth: "80%",
+                textAlign: "center",
+                display: "flex",
+                alignItems: "center",
+                borderRadius: "50px",
+                fontFamily: "Arial",
+                border: "none",
+                boxShadow: "none",
+              }}
+              colorType="primary"
+              data=""
+              size="small"
+              open={false}
+            >
+              <h2
+                key={styles.title + parentKey}
+                className={
+                  styles["group-title"] +
+                  " " +
+                  styles[parentKey] +
+                  " " +
+                  styles.title
+                }
+              >
+                {studyPlanItemsObj[key] &&
+                studyPlanItemsObj[key].hasOwnProperty("title") ? (
+                  <Fragment>
+                    <span className={styles["title"]}>
+                      {studyPlanItemsObj[key].title}
+                    </span>
+                  </Fragment>
+                ) : (
+                  key
+                )}
+              </h2>
+              <StudyPlanItemsSubList
+                studyPlanItemsObj={studyPlanItemsObj[key]}
+                allStudyPlanItems={props.allStudyPlanItems}
+                parentKey={key}
+                parentsParentKey={parentKey}
+                parentMasterID={
+                  parentMasterID ? parentMasterID : studyPlanItemsObj[key]._id
+                }
+                section={section}
+                displayConditions={displayConditions}
+                subListLevel={subListLevel}
+                unlockProtectedVisible={
+                  props.unlockProtectedVisible
+                    ? props.unlockProtectedVisible
+                    : unlockProtectedVisible
+                }
+                showProtectedHidden={
+                  props.showProtectedHidden
+                    ? props.showProtectedHidden
+                    : showProtectedHidden
+                }
+                refresh={refresh}
+                onlyList={onlyList}
+                emptyForm={props.emptyForm}
+              />
+              <ul>
+                <h3>Dependencies</h3>
+                {props.allStudyPlanItems &&
+                  studyPlanItemsObj[key].dependencies.map(
+                    (dependencyIdentifier) => {
+                      const dependenciesObj = Object.values(
+                        props.allStudyPlanItems
+                      ).filter(
+                        (item) => dependencyIdentifier === item.identifier
+                      );
+
+                      return (
+                        <StudyPlanItemsSubList
+                          studyPlanItemsObj={dependenciesObj}
+                          allStudyPlanItems={props.allStudyPlanItems}
+                          parentKey={key}
+                          parentsParentKey={parentKey}
+                          parentMasterID={
+                            parentMasterID
+                              ? parentMasterID
+                              : studyPlanItemsObj[key]._id
+                          }
+                          section={section}
+                          displayConditions={displayConditions}
+                          subListLevel={subListLevel}
+                          unlockProtectedVisible={
+                            props.unlockProtectedVisible
+                              ? props.unlockProtectedVisible
+                              : unlockProtectedVisible
+                          }
+                          showProtectedHidden={
+                            props.showProtectedHidden
+                              ? props.showProtectedHidden
+                              : showProtectedHidden
+                          }
+                          refresh={refresh}
+                          onlyList={onlyList}
+                          emptyForm={props.emptyForm}
+                        />
+                      );
+                    }
+                  )}
+              </ul>
+              {!onlyList && !subListLevel && (
+                <div className={styles["button-container"]}>
+                  <button
+                    className={
+                      styles["form-button"] + " " + styles["edit-form-button"]
+                    }
+                    value={key}
+                    parentmasterid={key}
+                    onClick={unlockProtectedVisibleHandler}
+                  >
+                    Edit
+                  </button>{" "}
+                  <button
+                    className={
+                      styles["form-button"] +
+                      " " +
+                      styles["show-hidden-form-button"]
+                    }
+                    value={key}
+                    parentmasterid={key}
+                    onClick={showProtectedHiddenHandler}
+                  >
+                    Show Hidden
+                  </button>
+                  {!onlyList && unlockProtectedVisible.includes(key) && (
+                    <Fragment>
+                      {" "}
+                      <button
+                        className={
+                          styles["form-button"] +
+                          " " +
+                          styles["submit-form-button"]
+                        }
+                        value={key}
+                        parentmasterid={key}
+                        section={section}
+                        onClick={submitFormButtonHandler}
+                      >
+                        Submit Changes
+                      </button>{" "}
+                      <button
+                        className={
+                          styles["form-button"] +
+                          " " +
+                          styles["delete-form-button"]
+                        }
+                        value={key}
+                        parentmasterid={key}
+                        section={section}
+                        onClick={deleteFormButtonHandler}
+                      >
+                        Delete
+                      </button>
+                    </Fragment>
+                  )}
+                </div>
+              )}{" "}
+            </CollapsibleElm>
+          </ul>
+        );
       if (studyPlanItemsObj[key] && typeof studyPlanItemsObj[key] === "object")
         return (
           <ul
@@ -367,6 +589,7 @@ const StudyPlanItemsList = (props) => {
               </h2>
               <StudyPlanItemsSubList
                 studyPlanItemsObj={studyPlanItemsObj[key]}
+                allStudyPlanItems={props.allStudyPlanItems}
                 parentKey={key}
                 parentsParentKey={parentKey}
                 parentMasterID={

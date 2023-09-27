@@ -5,7 +5,6 @@ import authReducer from "./authSlice";
 import loadingRequestsReducer from "./loadingRequestsSlice";
 import statusUpdateReducer from "./statusUpdateSlice";
 import scrollPositionReducer from "./scrollPositionSlice";
-import musicPlayerReducer from "./musicPlayerSlice";
 import formInputDataReducer from "./formInputDataSlice";
 
 export default configureStore({
@@ -16,7 +15,6 @@ export default configureStore({
     loadingRequests: loadingRequestsReducer,
     statusUpdate: statusUpdateReducer,
     scrollPosition: scrollPositionReducer,
-    musicPlayer: musicPlayerReducer,
     formInputData: formInputDataReducer,
   },
 });

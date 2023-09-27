@@ -17,6 +17,11 @@
         "editor.lineHighlightBorder": "#a910cf12",
         "activityBar.background": "#2F2F0A",
         "titleBar.activeBackground": "#41420E",
-        "titleBar.activeForeground": "#FBFBEE"
+        "titleBar.activeForeground": "#FBFBEE",
+        "tab.activeBorder": "#F9FE09",
+        "tab.activeBackground": "#012144cc",
+        // "tab.unfocusedActiveBorder": "#000000",
+        // "tab.inactiveForeground": "#d3eaf2",
+        "tab.activeForeground": "#FFE082", 
     }
 }

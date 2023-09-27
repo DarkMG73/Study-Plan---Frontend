@@ -1,7 +1,7 @@
 import styles from "./Header.module.css";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { ReactComponent as sptLogo } from "../../assets/media/spt-ring.svg";
+import { ReactComponent as SptLogo } from "../../assets/media/spt-ring.svg";
 import SubscribeCTA from "../SubscribeCTA/SubscribeCTA";
 import SocialConnectMenu from "../SocialConnectMenu/SocialConnectMenu";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
@@ -115,17 +115,17 @@ function Header(props) {
         <div className={styles["header-title-container"]}>
           <a href="/" alt="">
             <div className={styles["logo-wrap"]}>
-              <sptLogo />
+              <SptLogo />
             </div>
             <div className={styles["title-wrap"]}>
               <h1 className={styles["spt-title"] + " " + styles["first-word"]}>
-                Ignite
+                Study
               </h1>
               <h1 className={styles["spt-title"] + " " + styles["second-word"]}>
-                Revolution
+                Plan
               </h1>
               <h3 className={styles["spt-subtitle"]}>
-                Unite in Rhythm | Elevate
+                One Goal | Every Steps | Time to Conquer
               </h3>
             </div>
           </a>
@@ -152,13 +152,14 @@ function Header(props) {
               About
             </a>
           )}
-          {props.musicIsActive && (
-            <a
-              href="#music-studyPlan"
-              alt=""
-              className={styles["small-header-nav"]}
-            >
-              Music
+          {props.goalsIsActive && (
+            <a href="#goals" alt="" className={styles["small-header-nav"]}>
+              Intentions
+            </a>
+          )}
+          {props.stepsIsActive && (
+            <a href="#steps" alt="" className={styles["small-header-nav"]}>
+              Steps
             </a>
           )}
           <button
@@ -191,13 +192,18 @@ function Header(props) {
                 About
               </a>
             )}
-            {props.musicIsActive && (
+            {props.goalsIsActive && (
               <a
                 href="#music-studyPlan"
                 alt=""
                 onClick={mobileMenuButtonHandler}
               >
-                Music
+                Intentions
+              </a>
+            )}
+            {props.stepsIsActive && (
+              <a href="#steps" alt="" onClick={mobileMenuButtonHandler}>
+                Steps
               </a>
             )}
             <SocialConnectMenu

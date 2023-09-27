@@ -83,6 +83,7 @@ export const refreshTokenSetup = (res) => {
 
 /// Convert string to title case /////////////////////////////
 export const toTitleCase = (str, spaceAtCamelCase, dashAtCamelCase) => {
+  if (!str) return "NO STRING PROVIDED TO toTitleCase";
   if (spaceAtCamelCase) {
     str = [...str].map((character) => {
       /* eslint eqeqeq: 0 */

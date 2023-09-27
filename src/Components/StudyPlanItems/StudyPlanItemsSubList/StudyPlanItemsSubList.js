@@ -6,6 +6,7 @@ const StudyPlanItemsSubList = (props) => {
   return (
     <StudyPlanItemsList
       studyPlanItemsObj={props.studyPlanItemsObj}
+      allStudyPlanItems={props.allStudyPlanItems}
       key={props.key}
       parentKey={props.parentKey}
       parentsParentKey={props.parentsParentKey}

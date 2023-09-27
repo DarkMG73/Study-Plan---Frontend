@@ -15,7 +15,7 @@ export const studyPlanData = async (user) => {
   }
 
   try {
-    const res = await axios.post("/api/spt/", user, axiosConfig);
+    const res = await axios.post("/api/studyPlan/", user, axiosConfig);
     return res.data;
   } catch (err) {
     console.log(
@@ -41,7 +41,11 @@ export const getQuestionBy_Id = async (user, question_Id) => {
     };
   }
 
-  const res = await axios.post("/api/spt/" + question_Id, user, axiosConfig);
+  const res = await axios.post(
+    "/api/studyPlan/" + question_Id,
+    user,
+    axiosConfig
+  );
   return res.data;
 };
 
@@ -55,7 +59,7 @@ export async function addDocToDB(userAndDataObject) {
   };
 
   const response = await axios
-    .post(`/api/spt/add/`, userAndDataObject, axiosConfig)
+    .post(`/api/studyPlan/add/`, userAndDataObject, axiosConfig)
     .then((res) => {
       return res;
     })
@@ -80,7 +84,7 @@ export async function saveManyStudyPlanItems(userAndDataObject) {
   };
 
   const response = await axios
-    .post(`/api/spt/add-many/`, userAndDataObject, axiosConfig)
+    .post(`/api/studyPlan/add-many/`, userAndDataObject, axiosConfig)
     .then((res) => {
       return res;
     })
@@ -106,7 +110,7 @@ export async function updateAStudyPlanItem(id, dataObj, user) {
   };
 
   const response = await axios
-    .post(`/api/spt/update/`, { dataObj }, axiosConfig)
+    .post(`/api/studyPlan/update/`, { dataObj }, axiosConfig)
     .then((res) => {
       return res;
     })
@@ -131,7 +135,7 @@ export async function deleteDocFromDb(id, user) {
     },
   };
   const response = await axios
-    .get(`/api/spt/${id}/delete/`, axiosConfig)
+    .get(`/api/studyPlan/${id}/delete/`, axiosConfig)
     .then((res) => {
       return res;
     })
@@ -155,7 +159,7 @@ export async function deleteAllQuestions(user) {
     },
   };
   const response = await axios
-    .get(`/api/spt/deleteAll/`, axiosConfig)
+    .get(`/api/studyPlan/deleteAll/`, axiosConfig)
     .then((res) => {
       return res;
     })
@@ -184,7 +188,7 @@ export async function getSchemaForStudyPlanItem() {
   };
 
   const output = await axios
-    .get(`/api/spt/model/`, axiosConfig)
+    .get(`/api/studyPlan/model/`, axiosConfig)
     .then((res) => {
       return res.data.model;
     })

@@ -25,6 +25,9 @@ const StudyPlanItems = (props) => {
   const id = props.id;
   const typeName = props.type;
   const dataObjForEdit = props.dataObjForEdit;
+  const [allStudyPlanItems, setAllStudyPlanItems] = useState(
+    props.allStudyPlanItems
+  );
   const [formInputData, setFormInputData] = useState({});
   const [newFormJSX, setNewFormJSX] = useState(false);
   const createNewForm = useCreateNewForm();
@@ -34,6 +37,46 @@ const StudyPlanItems = (props) => {
   const allFormInputData = useSelector((state) => state.formInputData);
   const dispatch = useDispatch();
 
+  const findDependencies = (objectIdentifier, masterListObj) => {
+    console.log(
+      "%c --> %cline:37%cmasterListObj",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(229, 187, 129);padding:3px;border-radius:2px",
+      masterListObj
+    );
+    console.log(
+      "%c --> %cline:37%cobjectIdentifier",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
+      objectIdentifier
+    );
+    const output = [];
+    for (const value of Object.values(masterListObj)) {
+      console.log(
+        "%c --> %cline:53%centry",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
+        value
+      );
+      console.log(
+        "%c --> %cline:54%centry.msup",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
+        value.msup
+      );
+      if (value.hasOwnProperty("msup") && value.msup === objectIdentifier)
+        output.push(value.identifier);
+
+      if (value.hasOwnProperty("msup") && value.msup === objectIdentifier)
+        console.log(value.msup);
+    }
+
+    return output;
+  };
   ////////////////////////////////////////////////////////////////////////
   /// EFFECTS
   ////////////////////////////////////////////////////////////////////////
@@ -47,45 +90,121 @@ const StudyPlanItems = (props) => {
       getSchema()
         .then((data) => {
           const output = {};
-          // Gather services available for sourceURLObj
-          let availableServices =
-            studyPlanMetadata &&
-            studyPlanMetadata.hasOwnProperty("availableServices")
-              ? [...studyPlanMetadata.availableServices]
-              : [""];
-
+          // Gather items to list based on type.
           for (const itemID in dataObjForEdit) {
+            if (
+              !dataObjForEdit[itemID].hasOwnProperty("type") ||
+              dataObjForEdit[itemID].type !== props.type
+            )
+              continue;
             output[itemID] = {};
-            for (const catName of Object.keys(data.tree)) {
-              // If sourceURLObj, add services
-              if (catName === "sourceURLObj") {
-                output[itemID][catName] = {};
-                availableServices.forEach((serviceName) => {
-                  if (serviceName === "") return;
 
-                  if (
-                    dataObjForEdit[itemID].hasOwnProperty(catName) &&
-                    dataObjForEdit[itemID][catName].hasOwnProperty(
-                      serviceName
-                    ) &&
-                    dataObjForEdit[itemID][catName][serviceName]
-                  ) {
-                    output[itemID][catName][serviceName] =
-                      dataObjForEdit[itemID][catName][serviceName];
-                  } else {
-                    output[itemID][catName][serviceName] = "";
-                  }
-                });
-              } else {
-                output[itemID][catName] = dataObjForEdit[itemID].hasOwnProperty(
-                  catName
-                )
-                  ? dataObjForEdit[itemID][catName]
-                  : "";
+            for (const catName of Object.keys(data.tree)) {
+              output[itemID][catName] = dataObjForEdit[itemID].hasOwnProperty(
+                catName
+              )
+                ? dataObjForEdit[itemID][catName]
+                : "";
+            }
+          }
+          console.log(
+            "%c --> %cline:73%coutput",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
+            props.type,
+            " | ",
+            output
+          );
+          const groomedOutput = { ...output };
+          const groomedAllItemOutput = {};
+          if (allStudyPlanItems) {
+            for (const [key, value] of Object.entries(allStudyPlanItems)) {
+              console.log(
+                "%c --> %cline:122%cvalue",
+                "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                "color:#fff;background:rgb(254, 67, 101);padding:3px;border-radius:2px",
+                value
+              );
+              groomedAllItemOutput[key] = {};
+              for (const [innerKey, innerValue] of Object.entries(value)) {
+                console.log(
+                  "%c --> %cline:125%cinnerValue",
+                  "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                  "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                  "color:#fff;background:rgb(96, 143, 159);padding:3px;border-radius:2px",
+                  innerValue
+                );
+                groomedAllItemOutput[key][innerKey] = innerValue;
+              }
+            }
+            console.log(
+              "%c --> %cline:128%cgroomedAllItemOutput",
+              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+              "color:#fff;background:rgb(248, 214, 110);padding:3px;border-radius:2px",
+              groomedAllItemOutput
+            );
+          }
+
+          if (props.type === "goal") {
+            for (const [key, value] of Object.entries(output)) {
+              groomedOutput[key].dependencies = findDependencies(
+                value.identifier,
+                dataObjForEdit
+              );
+            }
+
+            if (allStudyPlanItems) {
+              for (const [key, value] of Object.entries(allStudyPlanItems)) {
+                console.log(
+                  "%c --> %cline:97%callStudyPlanItems key",
+                  "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                  "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                  "color:#fff;background:rgb(20, 68, 106);padding:3px;border-radius:2px",
+                  key
+                );
+                console.log(
+                  "%c --> %cline:97%callStudyPlanItems value",
+                  "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                  "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                  "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
+                  value
+                );
+                console.log(
+                  "%c --> %cline:176%cgroomedAllItemOutput[key]",
+                  "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                  "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                  "color:#fff;background:rgb(251, 178, 23);padding:3px;border-radius:2px",
+                  groomedAllItemOutput[key]
+                );
+                groomedAllItemOutput[key].dependencies = findDependencies(
+                  value.identifier,
+                  allStudyPlanItems
+                );
               }
             }
           }
-          setFormInputData(output);
+          console.log(
+            "%c --> %cline:73%c--groomedOutput",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
+            props.type,
+            " | ",
+            groomedOutput
+          );
+          console.log(
+            "%c --> %cline:181%c--groomedAllItemOutput",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
+            groomedAllItemOutput
+          );
+
+          setAllStudyPlanItems(groomedAllItemOutput);
+          setFormInputData(groomedOutput);
         })
         .catch((err) => {
           console.log("ERROR->", err);
@@ -252,7 +371,9 @@ const StudyPlanItems = (props) => {
   };
 
   const outputName =
-    dataObjForEdit[id] && dataObjForEdit[id].hasOwnProperty("title") ? (
+    dataObjForEdit &&
+    dataObjForEdit[id] &&
+    dataObjForEdit[id].hasOwnProperty("title") ? (
       <Fragment>
         <div>{dataObjForEdit[id].title}</div>
         <div>{id}</div>
@@ -317,6 +438,7 @@ const StudyPlanItems = (props) => {
         {formInputData && Object.keys(formInputData).length > 0 && (
           <StudyPlanItemsList
             studyPlanItemsObj={formInputData}
+            allStudyPlanItems={allStudyPlanItems}
             parentKey={false}
             parentsParentKey={false}
             parentMasterID={false}

@@ -23,7 +23,7 @@ export const useRunGatherStudyPlanData = (props) => {
       .then((data) => {
         if (process.env.NODE_ENV === "development")
           console.log(
-            "%c Getting tool data from DB:",
+            "%c Getting study plan data from DB:",
             "color:#fff;background:#777;padding:5px;border-radius:0 25px 25px 0",
             data
           );

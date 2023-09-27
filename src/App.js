@@ -82,62 +82,62 @@ function App() {
   ////////////////////////////////////////
   /// Network Communication
   ////////////////////////////////////////
-  axios.interceptors.request.use(
-    (request) => {
-      dispatch(loadingRequestsActions.addToLoadRequest());
-      return request;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
+  // axios.interceptors.request.use(
+  //   (request) => {
+  //     dispatch(loadingRequestsActions.addToLoadRequest());
+  //     return request;
+  //   },
+  //   (error) => {
+  //     return Promise.reject(error);
+  //   }
+  // );
 
-  axios.interceptors.response.use(
-    (response) => {
-      const serverRateLimitRemaining = response.headers["ratelimit-remaining"];
-      if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
-        console.log(
-          "%cRate Limit Remaining: ",
-          "color:#fff;background:#ccd62d;padding:5px;border-radius:0 25px 25px 0",
-          serverRateLimitRemaining
-        );
-      }
-      dispatch(loadingRequestsActions.removeFromLoadRequest());
-      dispatch(
-        statusUpdateActions.updateStatus({
-          status: response.status,
-          statusText: response.statusText,
-          rateLimitRemaining: serverRateLimitRemaining,
-        })
-      );
-      setTimeout(() => {
-        dispatch(authActions.resetRecentLogout());
-        dispatch(authActions.resetRecentLogin());
-      }, 3000);
+  // axios.interceptors.response.use(
+  //   (response) => {
+  //     const serverRateLimitRemaining = response.headers["ratelimit-remaining"];
+  //     if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+  //       console.log(
+  //         "%cRate Limit Remaining: ",
+  //         "color:#fff;background:#ccd62d;padding:5px;border-radius:0 25px 25px 0",
+  //         serverRateLimitRemaining
+  //       );
+  //     }
+  //     dispatch(loadingRequestsActions.removeFromLoadRequest());
+  //     dispatch(
+  //       statusUpdateActions.updateStatus({
+  //         status: response.status,
+  //         statusText: response.statusText,
+  //         rateLimitRemaining: serverRateLimitRemaining,
+  //       })
+  //     );
+  //     setTimeout(() => {
+  //       dispatch(authActions.resetRecentLogout());
+  //       dispatch(authActions.resetRecentLogin());
+  //     }, 3000);
 
-      return response;
-    },
-    (error) => {
-      console.log(
-        "%cERROR:",
-        "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        error
-      );
-      dispatch(
-        statusUpdateActions.updateStatus({
-          status:
-            error.hasOwnProperty("response") && error.response.status
-              ? error.response.status
-              : 500,
-          statusText:
-            error.hasOwnProperty("response") && error.response.statusText
-              ? error.response.statusText
-              : error.message,
-        })
-      );
-      return Promise.reject(error);
-    }
-  );
+  //     return response;
+  //   },
+  //   (error) => {
+  //     console.log(
+  //       "%cERROR:",
+  //       "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
+  //       error
+  //     );
+  //     dispatch(
+  //       statusUpdateActions.updateStatus({
+  //         status:
+  //           error.hasOwnProperty("response") && error.response.status
+  //             ? error.response.status
+  //             : 500,
+  //         statusText:
+  //           error.hasOwnProperty("response") && error.response.statusText
+  //             ? error.response.statusText
+  //             : error.message,
+  //       })
+  //     );
+  //     return Promise.reject(error);
+  //   }
+  // );
 
   ////////////////////////////////////////
   /// FUNCTIONALITY
@@ -191,6 +191,7 @@ function App() {
       );
   }, [noDBErrors.status]);
 
+  console.log("------------");
   ////////////////////////////////////////
   /// Output
   ////////////////////////////////////////
@@ -199,7 +200,11 @@ function App() {
       <ErrorBoundary>
         <header className="App-header">
           <CardTransparent>
-            <Header aboutIsActive={aboutIsActive} musicIsActive={true} />
+            <Header
+              aboutIsActive={aboutIsActive}
+              goalsIsActive={true}
+              stepsIsActive={true}
+            />
           </CardTransparent>
         </header>
       </ErrorBoundary>
@@ -266,6 +271,7 @@ function App() {
                     setNoDBErrors={setNoDBErrors}
                     aboutIsActive={aboutIsActive}
                     musicIsActive={true}
+                    user={user}
                   />
                 }
               />
