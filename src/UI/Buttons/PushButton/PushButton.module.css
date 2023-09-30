@@ -22,6 +22,11 @@
   transition: 0.1s all ease;
 }
 
+.button span {
+  background: transparent;
+  color: inherit;
+}
+
 /* Color Control */
 .button.primary {
   background-color: var(--spt-color-accent);
@@ -35,9 +40,10 @@
 }
 
 .button.secondary {
-  background-color: var(--spt-color-background);
+  background: var(--spt-color-accent-light);
   color: var(--spt-color-accent);
 }
+
 .button.secondary.selected {
   box-shadow: inset 1px 1px 1px rgb(255 255 255 / 25%),
     inset 1px -1px 1px rgb(0 0 0 / 15%), 1px 1px 5px -3px black, 0 0 10px white,

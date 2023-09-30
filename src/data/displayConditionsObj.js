@@ -11,10 +11,10 @@ const displayConditions = {
       "_id",
       "iframeCustomAttributes",
     ],
+    forSlideButton: ["markcomplete", "markforreview"],
     protectedVisible: [
       "PROTECT-ALL",
       "title",
-      "releaseDate",
       "createdAt",
       "updatedAt",
       "slug",

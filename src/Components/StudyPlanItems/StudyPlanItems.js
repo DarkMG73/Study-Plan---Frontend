@@ -36,7 +36,31 @@ const StudyPlanItems = (props) => {
   newFormInputValuesObjRef.current = newFormInputValuesObj;
   const allFormInputData = useSelector((state) => state.formInputData);
   const dispatch = useDispatch();
-
+  const updateStudyPlan = useSelector((state) => state.updateStudyPlan);
+  const orderOfOutputArray = [
+    "progressbar",
+    "name",
+    "method",
+    "priority",
+    "msup",
+    "asup",
+    "des",
+    "url",
+    "type",
+    "author",
+    "platform",
+    "start",
+    "acomp",
+    "status",
+    "lectureTime",
+    "labTime",
+    "markcomplete",
+    "markforreview",
+    "demonstratedskillurl",
+    "demonstratedskillsdesc",
+    "tags",
+    "itemnotes",
+  ];
   const findDependencies = (objectIdentifier, masterListObj) => {
     console.log(
       "%c --> %cline:37%cmasterListObj",
@@ -90,6 +114,11 @@ const StudyPlanItems = (props) => {
       getSchema()
         .then((data) => {
           const output = {};
+          // const groomedSchema = {}
+          // // Organize Schema
+          // orderOfOutputArray.forEach(topic=>{
+          //   groomedSchema[topic] = data.tree[topic]
+          // })
           // Gather items to list based on type.
           for (const itemID in dataObjForEdit) {
             if (
@@ -370,7 +399,7 @@ const StudyPlanItems = (props) => {
     });
   };
 
-  const outputName =
+  let outputName =
     dataObjForEdit &&
     dataObjForEdit[id] &&
     dataObjForEdit[id].hasOwnProperty("title") ? (
@@ -383,12 +412,15 @@ const StudyPlanItems = (props) => {
     ) : (
       id
     );
+
+  if (outputName === "goals") outputName = "Goal & Curriculum";
+  if (outputName === "steps") outputName = "Syllabus";
   ////////////////////////////////////////////////////////////////////////
   /// Output
   ////////////////////////////////////////////////////////////////////////
   return (
     <ul
-      marker="CATALOG-ITEMS"
+      marker="STUDYPLAN-ITEMS"
       section={id}
       id={id}
       type={typeName}
@@ -406,8 +438,9 @@ const StudyPlanItems = (props) => {
         styles={{
           position: "relative",
         }}
-        maxHeight={"0em"}
-        s
+        maxHeight={
+          id.includes("goal") || id.includes("studyPlan") ? "none" : "8em"
+        }
         inputOrButton="button"
         buttonStyles={{
           margin: "0 auto",
@@ -421,12 +454,8 @@ const StudyPlanItems = (props) => {
           textAlign: "center",
           display: "flex",
           alignItems: "center",
-
           borderRadius: "0 0 50px 50px",
-          fontFamily: "Arial",
-
-          boxShadow: "none",
-          border: "3px solid var(--spt-color-accent-dark)",
+          fontFamily: "Good Times RG",
         }}
         colorType="primary"
         data=""
@@ -445,6 +474,8 @@ const StudyPlanItems = (props) => {
             displayConditions={displayConditions.formWithPreFilledData}
             user={user}
             section={id}
+            onlyList={props.onlyList}
+            noEditButton={props.noEditButton}
           />
         )}
         {newFormJSX && (

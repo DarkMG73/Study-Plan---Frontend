@@ -15,6 +15,7 @@ import BottomBar from "../../Components/BottomBar/BottomBar";
 import backgroundVideo from "../../assets/media/backgrounds/background-energy6.mp4";
 import { ErrorBoundary } from "../../HOC/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import { scrollPositionActions } from "../../store/scrollPositionSlice";
+import LoginStatus from "../../Components/User/LoginStatus/LoginStatus";
 
 const Home = (props) => {
   const { studyPlan, studyPlanMetadata } = useSelector(
@@ -104,6 +105,13 @@ const Home = (props) => {
           </ErrorBoundary>
         </CardPrimary>
       )}
+
+      <CardPrimary>
+        <ErrorBoundary>
+          <LoginStatus />
+        </ErrorBoundary>
+      </CardPrimary>
+
       {!hideStudyPlan && studyPlan && (
         <CardTransparent>
           <ErrorBoundary>
@@ -128,7 +136,7 @@ const Home = (props) => {
               dataObjForEdit={studyPlan}
               user={props.user}
               type={"step"}
-              noEditButton={true}
+              noEditButton={false}
             />
           </ErrorBoundary>
         </CardTransparent>

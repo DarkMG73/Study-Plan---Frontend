@@ -27,11 +27,12 @@
   line-height: normal !important;
 }
 
-.title {
-  font: inherit;
-  letter-spacing: inherit;
+.name {
 }
 
+.name label {
+  display: none;
+}
 /* li { */
 /* width: 100%; */
 /* flex-grow: 1;
@@ -102,6 +103,9 @@
   font-size: 1em;
   overflow: hidden;
   max-height: 10em;
+  font: var(--spt-font-body-text);
+  font-weight: 700;
+  text-shadow: -1px -1px 1px #00000026, 1px 1px 1px #80808017;
 }
 
 ::placeholder {
@@ -166,8 +170,126 @@ select {
 .type {
   /* max-width: 10em; */
   min-width: fit-content;
+  grid-area: left2;
 }
 
+/* Grid Areas */
+.group-title {
+  grid-area: title;
+}
+.progressbar {
+  grid-area: progressbar;
+  width: 100%;
+}
+.progressbar > div {
+  width: 100%;
+  box-shadow: 2px 2px 4px -3px inset black, -2px -2px 4px -3px inset white,
+    1px 1px 4px -3px white, -1px -1px 4px -3px black;
+  border-radius: 50px;
+  background: hsl(0deg 0% 0% / 5%);
+}
+.progressbar label {
+  display: none;
+}
+.name {
+  grid-area: name;
+}
+.method {
+  grid-area: method;
+}
+.priority {
+  grid-area: priority;
+}
+.msup {
+  grid-area: msup;
+}
+.asup {
+  grid-area: asup;
+}
+.des {
+  grid-area: des;
+}
+.url {
+  grid-area: url;
+}
+.type {
+  grid-area: type;
+}
+.author {
+  grid-area: author;
+}
+.platform {
+  grid-area: platform;
+}
+.start {
+  grid-area: start;
+}
+.acomp {
+  grid-area: acomp;
+}
+.status {
+  grid-area: status;
+}
+.lectureTime {
+  grid-area: lectureTime;
+}
+.labTime {
+  grid-area: labTime;
+}
+.markcomplete {
+  grid-area: markcomplete;
+}
+.markforreview {
+  grid-area: markforreview;
+}
+.demonstratedskillsdesc {
+  grid-area: demonstratedskillsdesc;
+}
+.demonstratedskillurl {
+  grid-area: demonstratedskillurl;
+}
+.itemnotes {
+  grid-area: itemnotes;
+}
+.createdAt {
+  grid-area: createdAt;
+}
+.updatedAt {
+  grid-area: updatedAt;
+}
+.identifier {
+  grid-area: identifier;
+}
+._id {
+  grid-area: _id;
+}
+h4._id {
+  margin: 1em auto;
+  background: inherit;
+  color: inherit;
+}
+h4._id:before {
+  content: "Database ID ";
+  font: inherit;
+  letter-spacing: inherit;
+  background: inherit;
+  color: inherit;
+  -webkit-text-fill-color: inherit;
+  font-feature-settings: "smcp", "c2sc";
+  font-variant: all-small-caps;
+  opacity: 0.5;
+}
+.id {
+  grid-area: id;
+}
+.slug {
+  grid-area: slug;
+}
+.masterLibraryID {
+  grid-area: masterLibraryID;
+}
+
+/* ********** */
 @keyframes pulseYellow {
   0% {
     box-shadow: 0 0 0px 0px yellow;

@@ -65,7 +65,7 @@ function LoginStatus(props) {
               }
             >
               {" "}
-              No one is logged in. Progress will save to the browser.
+              Login to access your study plan or sign up to get started!
             </span>
           )}
         </span>

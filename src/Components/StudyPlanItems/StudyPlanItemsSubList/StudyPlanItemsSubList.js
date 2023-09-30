@@ -17,6 +17,7 @@ const StudyPlanItemsSubList = (props) => {
       showProtectedHidden={props.showProtectedHidden}
       refresh={props.refresh}
       onlyList={props.onlyList}
+      noEditButton={props.noEditButton}
       emptyForm={props.emptyForm}
     />
   );

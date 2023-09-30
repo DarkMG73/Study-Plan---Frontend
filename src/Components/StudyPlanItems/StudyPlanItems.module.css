@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  font-family: Arial;
+  /* font-family: Arial; */
   text-align: left;
   font-size: 16px;
   min-width: 100%;
@@ -14,14 +14,57 @@
   list-style: none;
   padding: 0;
 }
+.group-studyPlan-goals ul,
+.group-studyPlan ul {
+  color: white;
+  font-weight: bold;
+  /* text-shadow: 1px 1px 1px grey, 0px 0px 0px #000000; */
+}
+
+.group-studyPlan-goals ul {
+  background: var(--spt-color-accent-2-gradient);
+}
+
+.group-studyPlan-goals > button {
+  background: var(--spt-color-accent-2-gradient);
+  border: none;
+}
+
+.group-studyPlan ul {
+  background: var(--spt-color-accent-gradient);
+}
+
+.group-studyPlan ul > div {
+  display: grid;
+  grid-gap: 0;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-areas:
+    "title progressbar  name  name method   priority"
+    "slug slug slug slug slug slug"
+    "msup msup   msup asup asup asup"
+    "des   des  des   des des des"
+    "url   url  url   url url url"
+    "type   author  author  author platform platform"
+    "lectureTime labTime    start    acomp  status status"
+    "markcomplete  markcomplete markcomplete markforreview  markforreview markforreview"
+    "demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc"
+    "demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl"
+    "itemnotes itemnotes itemnotes itemnotes itemnotes itemnotes"
+    "tags tags tags tags tags tags"
+    "createdAt createdAt createdAt updatedAt updatedAt updatedAt"
+    "_id _id _id _id _id _id" "id id id id id id" "identifier identifier identifier identifier identifier identifier" "masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID"
+    "buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer";
+
+  grid-auto-flow: row dense;
+  max-width: 100%;
+}
 
 .group-title {
-  background: var(--spt-color-accent-gradient);
-  color: var(--spt-color-background);
+  /* background: var(--spt-color-accent-gradient);
+  color: var(--spt-color-background); */
   background-clip: unset;
   -webkit-text-fill-color: unset;
   padding: 0.5em 1em;
-  font-size: 1.6em;
   min-width: 100%;
   text-transform: capitalize;
   margin-bottom: 0;

@@ -66,6 +66,21 @@ function CollapsibleElm(props) {
     );
   }
 
+  const theChildren = { ...props.children };
+  // theChildren((item) => {
+  //   console.log("item", item);
+  // });
+
+  // In case props need to be passed in the future.
+  const childrenWithProps = React.Children.map(props.children, (child) => {
+    // Checking isValidElement is the safe way and avoids a
+    // typescript error too.
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, {});
+    }
+    return child;
+  });
+
   output = (
     <Fragment key={props.elmId}>
       <div
@@ -73,7 +88,7 @@ function CollapsibleElm(props) {
         className={styles["collapsible-elm"]}
         style={elmOpenStyles}
       >
-        {props.children}
+        {childrenWithProps}
       </div>
       {!elmOpen && !overflowActive ? null : (
         <PushButton

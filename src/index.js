@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 import axios from "axios";
 import { ErrorBoundary } from "./HOC/ErrorHandling/ErrorBoundary/ErrorBoundary";
+import "./assets/fonts/good_times/good_times_rg.ttf";
 
 ////////////////////////
 ///    Axios Config

@@ -15,13 +15,6 @@ import {
 import CollapsibleElm from "../../../UI/CollapsibleElm/CollapsibleElm";
 
 const StudyPlanItemsList = (props) => {
-  console.log(
-    "%c --> %cline:17%cprops",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
-    props
-  );
   const [refresh, setRefresh] = useState(1);
   const studyPlanItemsObj = props.studyPlanItemsObj;
   const { studyPlanMetadata } = studyPlanItemsObj;
@@ -38,6 +31,7 @@ const StudyPlanItemsList = (props) => {
   const formInputData = useSelector((state) => state.formInputData);
   const displayConditions = props.displayConditions;
   const onlyList = props.onlyList;
+  const noEditButton = props.noEditButton;
   const [showProtectedHidden, setShowProtectedHidden] = useState(
     props.showProtectedHidden ? props.showProtectedHidden : []
   );
@@ -103,6 +97,42 @@ const StudyPlanItemsList = (props) => {
   }, [existingFormInputValuesObj]);
 
   useEffect(() => {}, [existingFormInputValuesObjRef.current]);
+
+  useEffect(() => {
+    /* eslint eqeqeq: 0 */
+    if (user && user.isAdmin == true) {
+      // if (true) {
+      updateAnItem(itemIdentifier, itemWithNewEdits, user).then((res) => {
+        const status = res.status ? res.status : res.response.status;
+        if (status >= 400) {
+          alert("There was an error: " + res.response.data.message);
+        } else if (status >= 200) {
+          alert("Success! The item has been updated.");
+          // setInEditMode(false);
+        } else {
+          alert("there was an error: " + +res.message);
+        }
+      });
+    } else {
+      const sendEmail = window.confirm(
+        'Thank you for contributing. All contributions must be reviewed before becoming public. Click "OK" to send this via email for review and, if approved, to be included. Click "Cancel" to cancel this and not send an email.'
+      );
+      if (sendEmail) {
+        const questionAdminEmail = "general@glassinteractive.com";
+        const subject =
+          "A Question Edit Request for the Interview Questions Tool";
+        const body = `A question edit is being recommended: ${JSON
+          .stringify
+          // editedQuestions.current.edits
+          ()}`;
+        window.open(
+          `mailto:${questionAdminEmail}?subject=${subject}l&body=${encodeURIComponent(
+            body
+          )}`
+        );
+      }
+    }
+  }, [existingFormInputValuesObjRef.current]);
 
   ////////////////////////////////////////////////////////////////////////
   /// HANDLERS
@@ -201,40 +231,6 @@ const StudyPlanItemsList = (props) => {
         itemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
       }
     }
-
-    /* eslint eqeqeq: 0 */
-    if (user && user.isAdmin == true) {
-      // if (true) {
-      updateAnItem(itemIdentifier, itemWithNewEdits, user).then((res) => {
-        const status = res.status ? res.status : res.response.status;
-        if (status >= 400) {
-          alert("There was an error: " + res.response.data.message);
-        } else if (status >= 200) {
-          alert("Success! The item has been updated.");
-          // setInEditMode(false);
-        } else {
-          alert("there was an error: " + +res.message);
-        }
-      });
-    } else {
-      const sendEmail = window.confirm(
-        'Thank you for contributing. All contributions must be reviewed before becoming public. Click "OK" to send this via email for review and, if approved, to be included. Click "Cancel" to cancel this and not send an email.'
-      );
-      if (sendEmail) {
-        const questionAdminEmail = "general@glassinteractive.com";
-        const subject =
-          "A Question Edit Request for the Interview Questions Tool";
-        const body = `A question edit is being recommended: ${JSON
-          .stringify
-          // editedQuestions.current.edits
-          ()}`;
-        window.open(
-          `mailto:${questionAdminEmail}?subject=${subject}l&body=${encodeURIComponent(
-            body
-          )}`
-        );
-      }
-    }
   };
 
   const deleteFormButtonHandler = (e) => {
@@ -330,25 +326,34 @@ const StudyPlanItemsList = (props) => {
               styles={{
                 position: "relative",
               }}
-              maxHeight={"6em"}
+              maxHeight={"3em"}
               s
               inputOrButton="button"
               buttonStyles={{
                 margin: "0 auto",
                 padding: "0.5em 2em",
-                letterSpacing: "0.25em",
-                fontVariant: "small-caps",
-                transform: "translateY(5%)",
                 transition: "0.7s all ease",
-                minWidth: "80%",
                 maxWidth: "80%",
                 textAlign: "center",
                 display: "flex",
                 alignItems: "center",
-                borderRadius: "50px",
+                borderRadius: "0 0 50px 0",
                 fontFamily: "Arial",
                 border: "none",
-                boxShadow: "none",
+                position: "absolute",
+                top: "0",
+                left: "0",
+                flexGrow: "1",
+                minWidth: "4.5em",
+                boxShadow:
+                  "inset 3px 3px 5px 0px #ffffffe0, inset -3px -3px 5px 0px #00000038",
+                fontSize: "1.2rem",
+                fontVariant: "all-small-caps",
+                letterSpacing: "0.2em",
+                cursor: "pointer",
+                height: "100%",
+                maxHeight: "4em",
+                transformOrigin: "left",
               }}
               colorType="primary"
               data=""
@@ -366,10 +371,10 @@ const StudyPlanItemsList = (props) => {
                 }
               >
                 {studyPlanItemsObj[key] &&
-                studyPlanItemsObj[key].hasOwnProperty("title") ? (
+                studyPlanItemsObj[key].hasOwnProperty("name") ? (
                   <Fragment>
                     <span className={styles["title"]}>
-                      {studyPlanItemsObj[key].title}
+                      {studyPlanItemsObj[key].name}
                     </span>
                   </Fragment>
                 ) : (
@@ -446,16 +451,18 @@ const StudyPlanItemsList = (props) => {
               </ul>
               {!onlyList && !subListLevel && (
                 <div className={styles["button-container"]}>
-                  <button
-                    className={
-                      styles["form-button"] + " " + styles["edit-form-button"]
-                    }
-                    value={key}
-                    parentmasterid={key}
-                    onClick={unlockProtectedVisibleHandler}
-                  >
-                    Edit
-                  </button>{" "}
+                  {!noEditButton && (
+                    <button
+                      className={
+                        styles["form-button"] + " " + styles["edit-form-button"]
+                      }
+                      value={key}
+                      parentmasterid={key}
+                      onClick={unlockProtectedVisibleHandler}
+                    >
+                      Edit ONE {noEditButton}
+                    </button>
+                  )}
                   <button
                     className={
                       styles["form-button"] +
@@ -541,27 +548,36 @@ const StudyPlanItemsList = (props) => {
               styles={{
                 position: "relative",
               }}
-              maxHeight={"6em"}
+              maxHeight={"3em"}
               s
               inputOrButton="button"
               buttonStyles={{
                 margin: "0 auto",
-                padding: "0.5em 2em",
-                letterSpacing: "0.25em",
-                fontVariant: "small-caps",
-                transform: "translateY(5%)",
+                padding: "0 2em 0 2em",
                 transition: "0.7s all ease",
-                minWidth: "80%",
                 maxWidth: "80%",
                 textAlign: "center",
                 display: "flex",
                 alignItems: "center",
-                borderRadius: "50px",
+                borderRadius: "0 0 50px 0",
                 fontFamily: "Arial",
                 border: "none",
-                boxShadow: "none",
+                position: "absolute",
+                top: "0",
+                left: "0",
+                flexGrow: "1",
+                minWidth: "4.5em",
+                height: "100%",
+                maxHeight: "4em",
+                boxShadow:
+                  "inset 3px 3px 5px 0px #ffffffe0, inset -3px -3px 5px 0px #00000038",
+                fontSize: "1.2rem",
+                fontVariant: "all-small-caps",
+                letterSpacing: "0.2em",
+                cursor: "pointer",
+                transformOrigin: "left",
               }}
-              colorType="primary"
+              colorType="secondary"
               data=""
               size="small"
               open={false}
@@ -577,10 +593,10 @@ const StudyPlanItemsList = (props) => {
                 }
               >
                 {studyPlanItemsObj[key] &&
-                studyPlanItemsObj[key].hasOwnProperty("title") ? (
+                studyPlanItemsObj[key].hasOwnProperty("name") ? (
                   <Fragment>
                     <span className={styles["title"]}>
-                      {studyPlanItemsObj[key].title}
+                      {studyPlanItemsObj[key].name}
                     </span>
                   </Fragment>
                 ) : (
@@ -614,16 +630,18 @@ const StudyPlanItemsList = (props) => {
               />{" "}
               {!onlyList && !subListLevel && (
                 <div className={styles["button-container"]}>
-                  <button
-                    className={
-                      styles["form-button"] + " " + styles["edit-form-button"]
-                    }
-                    value={key}
-                    parentmasterid={key}
-                    onClick={unlockProtectedVisibleHandler}
-                  >
-                    Edit
-                  </button>{" "}
+                  {!noEditButton && (
+                    <button
+                      className={
+                        styles["form-button"] + " " + styles["edit-form-button"]
+                      }
+                      value={key}
+                      parentmasterid={key}
+                      onClick={unlockProtectedVisibleHandler}
+                    >
+                      Edit TWO
+                    </button>
+                  )}{" "}
                   <button
                     className={
                       styles["form-button"] +

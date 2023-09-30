@@ -5,6 +5,7 @@ function InitState() {
   initialState.studyPlan = null;
   initialState.studyPlanMetadata = null;
   initialState.serviceEmbedJSXObj = null;
+  initialState.updateStudyPlan = null;
   return initialState;
 }
 
@@ -18,8 +19,31 @@ export const studyPlanDataSlice = createSlice({
       state.studyPlan = payload.studyPlan;
       state.studyPlanMetadata = payload.studyPlanMetadata;
       state.serviceEmbedJSXObj = payload.serviceEmbedJSXObj;
+      state.updateStudyPlan = payload.updateStudyPlan;
     },
 
+    updateOneStudyPlanItem: (state, action) => {
+      console.log(
+        "%c --> %cline:25%caction",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(229, 187, 129);padding:3px;border-radius:2px",
+        action
+      );
+      const newStudyPlan = { ...state.studyPlan };
+      newStudyPlan[action.payload._id] = action.payload.item;
+      state.studyPlan = newStudyPlan;
+    },
+    updateStudyPlanDB: (state, action) => {
+      state.updateStudyPlan = true;
+    },
+    resetUpdateStudyPlan: (state, action) => {
+      state.updateStudyPlan = false;
+    },
+
+    // currentFilterStorageNeedsUpdate: (state, action) => {
+    //   state.currentFilterStorageNeedsUpdate = action.payload;
+    // },
     // addToHistoryCorrect: (state) => {
     //   const currentQuestionId = state.currentQuestionData.identifier;
 
@@ -116,9 +140,7 @@ export const studyPlanDataSlice = createSlice({
     // questionHistoryStorageNeedsUpdate: (state, action) => {
     //   state.questionHistoryStorageNeedsUpdate = action.payload;
     // },
-    // currentFilterStorageNeedsUpdate: (state, action) => {
-    //   state.currentFilterStorageNeedsUpdate = action.payload;
-    // },
+
     // addStudyTopicID: (state, action) => {
     //   const newStudyTopics = [
     //     ...state.studyNotes.studyTopicsIDs,
