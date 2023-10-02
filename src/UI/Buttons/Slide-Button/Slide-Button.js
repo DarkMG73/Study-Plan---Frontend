@@ -4,10 +4,10 @@ import { useEffect } from "react";
 const SlideButton = (props) => {
   return (
     <div className={styles["slide-button-wrap"]}>
-      <span className={styles.title}>{props.label}</span>
+      {props.label && <span className={styles.title}>{props.label}</span>}
       <label className={styles.switch}>
         <input
-          key={props.label + props.refresh}
+          key={props.label}
           type="checkbox"
           name={props.label}
           onClick={props.onClick}
@@ -15,7 +15,13 @@ const SlideButton = (props) => {
           value={props.label}
           defaultChecked={props.checked}
         />
-        <span className={styles["slider"]}></span>
+        <span
+          className={
+            styles["slider"] +
+            " " +
+            styles["checked-" + props.checked.toString()]
+          }
+        ></span>
       </label>
     </div>
   );

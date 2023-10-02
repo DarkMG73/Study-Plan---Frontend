@@ -120,7 +120,7 @@ function SessionResultsRow(props) {
       });
     } else {
       const sendEmail = window.confirm(
-        'Thank you for contributing. All contributions must be reviewed before becoming public. Click "OK" to send this via email for review and, if approved, to be included. Click "Cancel" to cancel this and not send an email.'
+        '000000Thank you for contributing. All contributions must be reviewed before becoming public. Click "OK" to send this via email for review and, if approved, to be included. Click "Cancel" to cancel this and not send an email.'
       );
       if (sendEmail) {
         const questionAdminEmail = "general@glassinteractive.com";

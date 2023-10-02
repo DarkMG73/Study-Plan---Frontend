@@ -35,13 +35,14 @@
   width: 50%;
   right: 0;
   background-color: var(--spt-color-accent);
-  box-shadow: inset -1px -1px 7px -5px black,
-    inset 7px 7px 30px -23px rgb(255 255 255 / 51%), 1px 1px 7px -5px white,
+  box-shadow: inset -3px -3px 7px -5px black,
+    inset 18px 18px 30px -23px rgb(255 255 255 / 75%), 1px 1px 7px -5px white,
     inset 4px 4px 7px -5px #ffffff7d, 2px 2px 7px -5px black;
   transition: 0.2s all linear;
+  border-top: 1px solid rgb(0 0 0 / 3%);
 }
 
-input:checked + .slider {
+.checked-false {
   background-color: var(--spt-color-background);
 }
 
@@ -49,7 +50,7 @@ input:checked + .slider {
   background-color: var(--spt-color-accent);
 } */
 
-input:checked + .slider:before {
+.checked-false:before {
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
   transform: translateX(-100%);

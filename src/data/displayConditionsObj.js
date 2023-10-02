@@ -2,7 +2,7 @@ const displayConditions = {
   formWithPreFilledData: {
     isURL: ["link", "sourceURLbj"],
     isBoolean: ["isDefaultPlaylist", "isFeaturedPlaylist"],
-    isDate: ["releaseDate", "createdAt", "updatedAt"],
+    isDate: ["releaseDate", "createdAt", "updatedAt", "start", "acomp"],
     protectedHidden: [
       "title",
       "slug",

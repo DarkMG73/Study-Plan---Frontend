@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styles from "./StudyPlanItemsList.module.css";
 import StudyPlanItemsSubList from "../StudyPlanItemsSubList/StudyPlanItemsSubList";
 import StudyPlanItem from "../StudyPlanItem/StudyPlanItem";
@@ -13,9 +13,11 @@ import {
   deleteContentDocFromDb,
 } from "../../../storage/contentDB";
 import CollapsibleElm from "../../../UI/CollapsibleElm/CollapsibleElm";
+import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 
 const StudyPlanItemsList = (props) => {
   const [refresh, setRefresh] = useState(1);
+
   const studyPlanItemsObj = props.studyPlanItemsObj;
   const { studyPlanMetadata } = studyPlanItemsObj;
   let availableServices =
@@ -46,6 +48,7 @@ const StudyPlanItemsList = (props) => {
     {}
   );
   const existingFormInputValuesObjRef = useRef();
+  const dispatch = useDispatch();
 
   ////////////////////////////////////////////////////////////////
   /// Functionality
@@ -88,51 +91,22 @@ const StudyPlanItemsList = (props) => {
   ////////////////////////////////////////////////////////////////////////
   /// Effects
   ////////////////////////////////////////////////////////////////////////
-  useEffect(() => {
-    setRefresh(refresh + 1);
-  }, [showProtectedHidden, unlockProtectedVisible]);
+  // useEffect(() => {
+  //   console.log(
+  //     "%c --> %cline:98%c||||||||||||||||||||||refresh",
+  //     "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+  //     "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+  //     "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
+  //     refresh
+  //   );
+  //   setRefresh(refresh + 1);
+  // }, [showProtectedHidden, unlockProtectedVisible, refresh]);
 
   useEffect(() => {
     existingFormInputValuesObjRef.current = existingFormInputValuesObj;
   }, [existingFormInputValuesObj]);
 
-  useEffect(() => {}, [existingFormInputValuesObjRef.current]);
-
-  useEffect(() => {
-    /* eslint eqeqeq: 0 */
-    if (user && user.isAdmin == true) {
-      // if (true) {
-      updateAnItem(itemIdentifier, itemWithNewEdits, user).then((res) => {
-        const status = res.status ? res.status : res.response.status;
-        if (status >= 400) {
-          alert("There was an error: " + res.response.data.message);
-        } else if (status >= 200) {
-          alert("Success! The item has been updated.");
-          // setInEditMode(false);
-        } else {
-          alert("there was an error: " + +res.message);
-        }
-      });
-    } else {
-      const sendEmail = window.confirm(
-        'Thank you for contributing. All contributions must be reviewed before becoming public. Click "OK" to send this via email for review and, if approved, to be included. Click "Cancel" to cancel this and not send an email.'
-      );
-      if (sendEmail) {
-        const questionAdminEmail = "general@glassinteractive.com";
-        const subject =
-          "A Question Edit Request for the Interview Questions Tool";
-        const body = `A question edit is being recommended: ${JSON
-          .stringify
-          // editedQuestions.current.edits
-          ()}`;
-        window.open(
-          `mailto:${questionAdminEmail}?subject=${subject}l&body=${encodeURIComponent(
-            body
-          )}`
-        );
-      }
-    }
-  }, [existingFormInputValuesObjRef.current]);
+  // useEffect(() => {}, [existingFormInputValuesObjRef.current]);
 
   ////////////////////////////////////////////////////////////////////////
   /// HANDLERS
@@ -172,11 +146,17 @@ const StudyPlanItemsList = (props) => {
 
     const parentMasterID = e.target.getAttribute("parentmasterid");
     const parentSection = e.target.getAttribute("section");
-    const updateAnItem =
-      parentSection === "content" ? updateAContentItem : updateAStudyPlanItem;
+
     const rawItemWithNewEdits = { ...studyPlanItemsObj[parentMasterID] };
-    const itemWithNewEdits = {};
-    const itemIdentifier = rawItemWithNewEdits.identifier;
+    console.log(
+      "%c --> %cline:150%crawItemWithNewEdits",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(251, 178, 23);padding:3px;border-radius:2px",
+      rawItemWithNewEdits
+    );
+    const itemWithNewEdits = { ...rawItemWithNewEdits };
+    const _id = rawItemWithNewEdits._id;
 
     const existingFormEdits = { ...formInputData.existingFormInputDataObj };
 
@@ -231,6 +211,30 @@ const StudyPlanItemsList = (props) => {
         itemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
       }
     }
+
+    if (user) {
+      console.log(
+        "%c --> %cline:204 BEFORE UPDATE STATE ======== %citemWithNewEdits",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(3, 38, 58);padding:3px;border-radius:2px",
+        itemWithNewEdits
+      );
+
+      dispatch(
+        studyPlanDataActions.updateOneStudyPlanItem({
+          _id: _id,
+          item: itemWithNewEdits,
+        })
+      );
+
+      dispatch(
+        studyPlanDataActions.updateStudyPlanDB({ itemWithNewEdits, user })
+      );
+      // updateAStudyPlanItem(dataObj, user);
+    } else {
+      alert("You must be logged in to be able to make changes.");
+    }
   };
 
   const deleteFormButtonHandler = (e) => {
@@ -264,7 +268,7 @@ const StudyPlanItemsList = (props) => {
       });
     } else if (confirm) {
       const sendEmail = window.confirm(
-        'Thank you for contributing. All contributions must be reviewed before becoming public. Click "OK" to send this via email for review and, if approved, to be included. Click "Cancel" to cancel this and not send an email.'
+        '2222 Thank you for contributing. All contributions must be reviewed before becoming public. Click "OK" to send this via email for review and, if approved, to be included. Click "Cancel" to cancel this and not send an email.'
       );
       if (sendEmail) {
         const questionAdminEmail = "general@glassinteractive.com";
@@ -382,6 +386,7 @@ const StudyPlanItemsList = (props) => {
                 )}
               </h2>
               <StudyPlanItemsSubList
+                key={studyPlanItemsObj[key]}
                 studyPlanItemsObj={studyPlanItemsObj[key]}
                 allStudyPlanItems={props.allStudyPlanItems}
                 parentKey={key}
@@ -419,6 +424,7 @@ const StudyPlanItemsList = (props) => {
 
                       return (
                         <StudyPlanItemsSubList
+                          key={key}
                           studyPlanItemsObj={dependenciesObj}
                           allStudyPlanItems={props.allStudyPlanItems}
                           parentKey={key}
@@ -604,6 +610,7 @@ const StudyPlanItemsList = (props) => {
                 )}
               </h2>
               <StudyPlanItemsSubList
+                key={studyPlanItemsObj[key]}
                 studyPlanItemsObj={studyPlanItemsObj[key]}
                 allStudyPlanItems={props.allStudyPlanItems}
                 parentKey={key}
@@ -692,7 +699,7 @@ const StudyPlanItemsList = (props) => {
         );
       return (
         <StudyPlanItem
-          key={key}
+          key={parentMasterID + parentsParentKey + parentKey + key}
           studyPlanItemsObj={props}
           passedKey={key}
           parentKey={parentKey}

@@ -32,12 +32,41 @@ export const studyPlanDataSlice = createSlice({
       );
       const newStudyPlan = { ...state.studyPlan };
       newStudyPlan[action.payload._id] = action.payload.item;
+      newStudyPlan["count"] = newStudyPlan.hasOwnProperty("count")
+        ? [...newStudyPlan.count, action.payload._id]
+        : [action.payload._id];
       state.studyPlan = newStudyPlan;
     },
     updateStudyPlanDB: (state, action) => {
-      state.updateStudyPlan = true;
+      console.log(
+        "%c --> %cline:38%caction.payload",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(3, 38, 58);padding:3px;border-radius:2px",
+        action.payload
+      );
+      if (action.payload && !action.payload.hasOwnProperty("itemWithNewEdits"))
+        alert(
+          "There is a problem with missing data. Please alert the website admin."
+        );
+
+      const output = {
+        itemWithNewEdits: action.payload.itemWithNewEdits,
+        user: action.payload.user ? action.payload.user : false,
+        parentSection: action.payload.parentSection
+          ? action.payload.parentSection
+          : false,
+      };
+      state.updateStudyPlan = output;
     },
     resetUpdateStudyPlan: (state, action) => {
+      console.log(
+        "%c --> %cline:61%c777777777777777777action",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(114, 83, 52);padding:3px;border-radius:2px",
+        action
+      );
       state.updateStudyPlan = false;
     },
 

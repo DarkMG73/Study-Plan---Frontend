@@ -81,13 +81,15 @@
   width: 100%;
 }
 
-.item label {
+.item label,
+.item:before {
   opacity: 0.5;
   font-variant: all-small-caps;
   transition: 0.2s all ease;
 }
 
-.item:hover label {
+.item:hover label,
+.item:hover:before {
   opacity: 1;
 }
 
@@ -134,6 +136,24 @@ select {
   text-align: center;
 }
 
+.slider-button-wrap {
+  width: 100%;
+  margin: 0 1em;
+}
+
+.slider-button-wrap > div {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.slider-button-wrap label {
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 2em;
+}
+
 .subgroup-tags textarea,
 .subgroup .notes,
 .subgroup .description {
@@ -163,7 +183,7 @@ select {
   margin: 0;
   flex-grow: 1;
   padding: 0.25em 0.5em;
-  max-width: ;
+  max-width: 100%;
 }
 
 .releaseDate,
@@ -191,17 +211,58 @@ select {
 .progressbar label {
   display: none;
 }
+.name label {
+  display: none;
+}
 .name {
   grid-area: name;
 }
 .method {
   grid-area: method;
 }
+.method label {
+  display: none;
+}
+.method {
+  grid-area: method;
+}
 .priority {
   grid-area: priority;
+  display: flex;
+  flex-direction: column;
+}
+.priority label {
+  display: none;
+}
+.priority:before {
+  content: "Priority";
+  position: relative;
+  font-size: 1rem;
+  transform: translateY(25%);
+  text-align: center;
+  line-height: 1rem;
+  margin: 0 auto;
+  padding: 0 0;
+}
+.priority textarea {
+  text-align: center;
 }
 .msup {
   grid-area: msup;
+}
+.msup label {
+  display: none;
+}
+.msup:before,
+.goal-msup:before {
+  content: "Main goal this supports: ";
+}
+.asup:before,
+.goal-asup:before {
+  content: "Secondary goal this supports: ";
+}
+.asup label {
+  display: none;
 }
 .asup {
   grid-area: asup;
@@ -209,8 +270,27 @@ select {
 .des {
   grid-area: des;
 }
+.des label {
+  display: none;
+}
+.des:before,
+.goal-des:before {
+  content: "Description:  ";
+}
 .url {
   grid-area: url;
+}
+.url label {
+  display: none;
+}
+.url:before {
+  content: "Link:  ";
+}
+.type {
+  grid-area: type;
+}
+.type label {
+  display: none;
 }
 .type {
   grid-area: type;
@@ -218,14 +298,47 @@ select {
 .author {
   grid-area: author;
 }
+.author label {
+  display: none;
+}
+.author:before {
+  content: "author";
+}
 .platform {
   grid-area: platform;
+}
+.platform label {
+  display: none;
+}
+.platform:before {
+  content: "Platform:  ";
 }
 .start {
   grid-area: start;
 }
+.start label {
+  display: none;
+}
+.start:before,
+.goal-start:before {
+  content: "Start:  ";
+}
 .acomp {
   grid-area: acomp;
+}
+.acomp label {
+  display: none;
+}
+.acomp:before,
+.goal-acomp:before {
+  content: "Finish:  ";
+}
+.status:before,
+.goal-status:before {
+  content: "Status:  ";
+}
+.status label {
+  display: none;
 }
 .status {
   grid-area: status;
@@ -233,26 +346,94 @@ select {
 .lectureTime {
   grid-area: lectureTime;
 }
+.lectureTime label {
+  display: none;
+}
+.lectureTime:before,
+.goal-lectureTime:before {
+  content: "Lecture Time:  ";
+}
 .labTime {
   grid-area: labTime;
+}
+.labTime label {
+  display: none;
+}
+.labTime:before,
+.goal-labTime:before {
+  content: "Lab Time:  ";
 }
 .markcomplete {
   grid-area: markcomplete;
 }
+.markcomplete > label {
+  display: none;
+}
+.markcomplete:before {
+  content: "Complete";
+  margin-bottom: 0.5em;
+}
 .markforreview {
   grid-area: markforreview;
+}
+.markforreview > label {
+  display: none;
+}
+.markforreview:before {
+  content: "Mark for Later Review";
+  margin-bottom: 0.5em;
+}
+div .markforreview,
+div .markcomplete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1em;
+  box-shadow: 0 -9px 10px -12px white, 0 9px 10px -12px black;
+  min-height: 5em;
 }
 .demonstratedskillsdesc {
   grid-area: demonstratedskillsdesc;
 }
+.demonstratedskillsdesc label {
+  display: none;
+}
+.demonstratedskillsdesc:before {
+  content: "Demontration of Skills:  ";
+}
 .demonstratedskillurl {
   grid-area: demonstratedskillurl;
+}
+.demonstratedskillurl label {
+  display: none;
+}
+.demonstratedskillurl:before {
+  content: "Demontration URL:  ";
 }
 .itemnotes {
   grid-area: itemnotes;
 }
+.itemnotes label {
+  display: none;
+}
+.itemnotes:before {
+  content: "Notes:  ";
+}
 .createdAt {
   grid-area: createdAt;
+}
+.createdAt label {
+  display: none;
+}
+.createdAt {
+  grid-area: createdAt;
+}
+.updatedAt label {
+  display: none;
+}
+.updatedAt {
+  grid-area: updatedAt;
 }
 .updatedAt {
   grid-area: updatedAt;

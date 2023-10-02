@@ -16,11 +16,23 @@ import {
   getSchemaForContentItem,
 } from "../../storage/contentDB";
 import CollapsibleElm from "../../UI/CollapsibleElm/CollapsibleElm";
+import {
+  updateAStudyPlanItem,
+  deleteDocFromDb,
+} from "../../storage/studyPlanDB";
+import {
+  updateAContentItem,
+  deleteContentDocFromDb,
+} from "../../storage/contentDB";
+import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 
 const StudyPlanItems = (props) => {
   const user = useSelector((state) => state.auth.user);
   const studyPlanMetadata = useSelector(
     (state) => state.studyPlanData.studyPlanMetadata
+  );
+  const updateStudyPlan = useSelector(
+    (state) => state.studyPlanData.updateStudyPlan
   );
   const id = props.id;
   const typeName = props.type;
@@ -36,31 +48,30 @@ const StudyPlanItems = (props) => {
   newFormInputValuesObjRef.current = newFormInputValuesObj;
   const allFormInputData = useSelector((state) => state.formInputData);
   const dispatch = useDispatch();
-  const updateStudyPlan = useSelector((state) => state.updateStudyPlan);
-  const orderOfOutputArray = [
-    "progressbar",
-    "name",
-    "method",
-    "priority",
-    "msup",
-    "asup",
-    "des",
-    "url",
-    "type",
-    "author",
-    "platform",
-    "start",
-    "acomp",
-    "status",
-    "lectureTime",
-    "labTime",
-    "markcomplete",
-    "markforreview",
-    "demonstratedskillurl",
-    "demonstratedskillsdesc",
-    "tags",
-    "itemnotes",
-  ];
+  // const orderOfOutputArray = [
+  //   "progressbar",
+  //   "name",
+  //   "method",
+  //   "priority",
+  //   "msup",
+  //   "asup",
+  //   "des",
+  //   "url",
+  //   "type",
+  //   "author",
+  //   "platform",
+  //   "start",
+  //   "acomp",
+  //   "status",
+  //   "lectureTime",
+  //   "labTime",
+  //   "markcomplete",
+  //   "markforreview",
+  //   "demonstratedskillurl",
+  //   "demonstratedskillsdesc",
+  //   "tags",
+  //   "itemnotes",
+  // ];
   const findDependencies = (objectIdentifier, masterListObj) => {
     console.log(
       "%c --> %cline:37%cmasterListObj",
@@ -383,6 +394,86 @@ const StudyPlanItems = (props) => {
     }
   }, [allFormInputData.allNewForms]);
 
+  useEffect(() => {
+    if (!updateStudyPlan) return;
+    console.log(
+      "%c --> %cline:114%c-------------------updateStudyPlan",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(114, 83, 52);padding:3px;border-radius:2px",
+      updateStudyPlan
+    );
+    const { itemWithNewEdits, user, parentSection } = updateStudyPlan;
+    console.log(
+      "%c --> %cline:406%cparentSection",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(229, 187, 129);padding:3px;border-radius:2px",
+      parentSection
+    );
+    console.log(
+      "%c --> %cline:406%cuser",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(96, 143, 159);padding:3px;border-radius:2px",
+      user
+    );
+    console.log(
+      "%c --> %cline:406%citemWithNewEdits",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(131, 175, 155);padding:3px;border-radius:2px",
+      itemWithNewEdits
+    );
+    const updateAnItem =
+      parentSection === "content" ? updateAContentItem : updateAStudyPlanItem;
+
+    /* eslint eqeqeq: 0 */
+    if (user && user.isAdmin == true) {
+      updateAnItem(itemWithNewEdits, user)
+        .then((res) => {
+          console.log(
+            "%c --> %cline:433%cres",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(60, 79, 57);padding:3px;border-radius:2px",
+            res
+          );
+          const status = res.status ? res.status : res.response.status;
+          if (status >= 400) {
+            alert("There was an error: " + res.response.data.message);
+          } else if (status >= 200) {
+            alert("Success! The item has been updated.");
+            // setInEditMode(false);
+          } else {
+            alert("there was an error: " + +res.message);
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
+      dispatch(studyPlanDataActions.resetUpdateStudyPlan(false));
+    } else {
+      const sendEmail = window.confirm(
+        'Thank you for contributing. All contributions must be reviewed before becoming public. Click "OK" to send this via email for review and, if approved, to be included. Click "Cancel" to cancel this and not send an email.'
+      );
+      if (sendEmail) {
+        const questionAdminEmail = "general@glassinteractive.com";
+        const subject =
+          "A Question Edit Request for the Interview Questions Tool";
+        const body = `A question edit is being recommended: ${JSON
+          .stringify
+          // editedQuestions.current.edits
+          ()}`;
+        window.open(
+          `mailto:${questionAdminEmail}?subject=${subject}l&body=${encodeURIComponent(
+            body
+          )}`
+        );
+      }
+      dispatch(studyPlanDataActions.resetUpdateStudyPlan(false));
+    }
+  }, [updateStudyPlan]);
   ////////////////////////////////////////////////////////////////////////
   /// HANDLERS
   ////////////////////////////////////////////////////////////////////////

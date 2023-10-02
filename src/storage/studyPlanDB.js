@@ -115,10 +115,18 @@ export async function updateAStudyPlanItem(dataObj, user) {
     "color:#fff;background:rgb(39, 72, 98);padding:3px;border-radius:2px",
     user
   );
-  if (dataObj.hasOwnProperty("identifier"))
-    return Error(
-      "Error: this item appears to be incomplete. Contact the site admin and provide this error code: SPDB-MIS-IDENT"
+  if (!dataObj.hasOwnProperty("identifier")) {
+    console.log(
+      "%c --> %cERROR -------->>>> line:118%cdataObj",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(114, 83, 52);padding:3px;border-radius:2px",
+      dataObj
     );
+    throw Error(
+      "This item appears to be incomplete. Contact the site admin and provide this error code: SPDB-MIS-IDENT"
+    );
+  }
   const axiosConfig = {
     headers: {
       "Content-Type": "application/json",
