@@ -37,7 +37,10 @@ export default async function GatherContentData(user) {
       const flattenedArrays = new Set(itmOutput.map((value) => value.trim()));
 
       const flattenedArraysOutput = Array.from(flattenedArrays);
-      output.push(flattenedArraysOutput.length, flattenedArraysOutput);
+      output.push(
+        flattenedArraysOutput.length,
+        flattenedArraysOutput.join(", ")
+      );
     } else {
       output.push(ungroomedContentMetadata[key].length);
       output.push(...ungroomedContentMetadata[key]);

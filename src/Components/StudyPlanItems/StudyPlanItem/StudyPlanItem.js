@@ -20,6 +20,7 @@ const StudyPlanItem = (props) => {
   const parentKey = props.parentKey;
   const parentsParentKey = props.parentsParentKey;
   const parentMasterID = props.parentMasterID;
+  const parentMasterType = props.parentMasterType;
   const emptyForm = props.emptyForm;
   const [editedField, setEditedField] = useState(false);
   const dispatch = useDispatch();
@@ -97,13 +98,8 @@ const StudyPlanItem = (props) => {
   ////////////////////////////////
 
   function findElementType(itemKey) {
-    console.log(
-      "%c --> %cline:70%citemKey",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
-      itemKey
-    );
+    const parentsParentKey = props.parentsParentKey;
+
     let output = "textarea";
 
     // ID & Progress Bar
@@ -172,6 +168,8 @@ const StudyPlanItem = (props) => {
         ] +
         " " +
         styles[parentKey] +
+        " " +
+        styles[parentMasterType] +
         " " +
         styles[parentKey + "-" + key] +
         " " +

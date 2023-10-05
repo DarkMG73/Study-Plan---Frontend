@@ -193,7 +193,7 @@ select {
   grid-area: left2;
 }
 
-/* Grid Areas */
+/* Standard Grid Areas */
 .group-title {
   grid-area: title;
 }
@@ -383,6 +383,9 @@ select {
   content: "Mark for Later Review";
   margin-bottom: 0.5em;
 }
+.tags {
+  grid-area: tags;
+}
 div .markforreview,
 div .markcomplete {
   display: flex;
@@ -469,7 +472,20 @@ h4._id:before {
 .masterLibraryID {
   grid-area: masterLibraryID;
 }
+li[class*="__v"] {
+  display: none;
+}
+/* ********** */
 
+/* Goal Section Grid Adjustments */
+ul[type="goal"] .priority,
+ul[type="goal"] .method,
+ul[type="goal"] .labTime,
+ul[type="goal"] .lectureTime,
+ul[type="goal"] .platform,
+ul[type="goal"] .author {
+  display: none;
+}
 /* ********** */
 @keyframes pulseYellow {
   0% {

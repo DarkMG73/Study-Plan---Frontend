@@ -19,6 +19,13 @@ export default async function GatherStudyPlanData(user) {
   });
 
   const ungroomedStudyPlanMetadata = gatherAllMetadata(studyPlanData.studyPlan);
+  console.log(
+    "%c --> %cline:21%cungroomedStudyPlanMetadata",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(229, 187, 129);padding:3px;border-radius:2px",
+    ungroomedStudyPlanMetadata
+  );
   const groomedStudyPlanMetadata = {};
   for (const key in ungroomedStudyPlanMetadata) {
     const output = [];
@@ -37,6 +44,13 @@ export default async function GatherStudyPlanData(user) {
 
       const flattenedArrays = new Set(itmOutput.map((value) => value.trim()));
       const flattenedArraysOutput = Array.from(flattenedArrays);
+      console.log(
+        "%c --> %cline:39%cflattenedArraysOutput",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(39, 72, 98);padding:3px;border-radius:2px",
+        flattenedArraysOutput
+      );
       output.push(flattenedArraysOutput.length, flattenedArraysOutput);
     } else {
       output.push(ungroomedStudyPlanMetadata[key].length);
@@ -86,33 +100,43 @@ export default async function GatherStudyPlanData(user) {
 
 function gatherAllMetadata(dataObject) {
   const itemsToInclude = [
-    "topic",
-    " _id",
-    "title",
+    "_id",
+    "name",
     "slug",
     "type",
-    "artist",
-    "isFeaturedPlaylist",
-    "isDefaultPlaylist",
-    "releaseDate",
-    "sourceURLObj",
-    "songs",
-    "album",
-    "description",
-    "link",
-    "producer",
-    "engineer",
-    "studio",
-    "featuredIn",
-    "tags",
-    "notes",
+    "asup",
+    "author",
+    "des",
+    "demonstratedskillsdesc",
+    "demonstratedskillurl",
+    "markcomplete",
+    "markforreview",
+    "lectureTime",
+    "labTime",
+    "method",
+    "msup",
+    "itemnotes",
+    "platform",
+    "priority",
+    "progressbar",
+    "status",
+    "start",
+    "acomp",
+    "url",
     "identifier",
     "masterLibraryID",
+    "createdAt",
+    "updatedAt",
+    "__v",
   ];
+  const onlyCollectID = ["markcomplete", "markforreview"];
+  const addTogether = ["lectureTime", "labTime"];
   const valuesToExclude = ["undefined", "", " "];
   const outputSet = objectExtractAllValuesPerKey(
     dataObject,
     itemsToInclude,
+    onlyCollectID,
+    addTogether,
     valuesToExclude
   );
 
@@ -122,10 +146,12 @@ function gatherAllMetadata(dataObject) {
 function objectExtractAllValuesPerKey(
   objectToLoop,
   itemsToInclude,
+  onlyCollectID,
+  addTogether,
   valuesToExclude
 ) {
   const outputObject = {};
-  // Grab each question
+  // Grab each item
   for (const i in objectToLoop) {
     // Get each item withing that question (ID, topic, answer, etc)
     for (let key in objectToLoop[i]) {
@@ -136,8 +162,29 @@ function objectExtractAllValuesPerKey(
         itemsToInclude.includes(key) &&
         !valuesToExclude.includes(objectToLoop[i][key])
       ) {
+        // Handle items that need to be added together
+        if (addTogether.includes(key)) {
+          if (!outputObject.hasOwnProperty(key)) outputObject[key] = [0];
+          if (objectToLoop[i][key]) {
+            outputObject[key][0] += objectToLoop[i][key] * 1;
+            console.log(
+              "%c --> %cline:169%cobjectToLoop[i][key]",
+              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+              "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
+              objectToLoop[i][key]
+            );
+          }
+        }
+        // Handle some items by only gathering the _id
+        else if (onlyCollectID.includes(key)) {
+          if (!outputObject.hasOwnProperty(key)) outputObject[key] = new Set();
+          if (objectToLoop[i][key] && objectToLoop[i][key] != false) {
+            outputObject[key].add(objectToLoop[i]._id);
+          }
+        }
         // If the value is a list, separate at the comma
-        if (
+        else if (
           objectToLoop[i][key] &&
           objectToLoop[i][key].constructor === String &&
           objectToLoop[i][key].indexOf(",") >= 0
@@ -202,7 +249,7 @@ function objectExtractAllValuesPerKey(
                 ? rawValue[0].replaceAll(" ", "").toString()
                 : "";
 
-              // Check if  the value is valid
+              // Check if the value is valid
               if (!valuesToExclude.includes(value)) {
                 if (outputObject.hasOwnProperty(key)) {
                   outputObject[key].add(value);

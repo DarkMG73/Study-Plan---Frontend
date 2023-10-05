@@ -73,41 +73,10 @@ const StudyPlanItems = (props) => {
   //   "itemnotes",
   // ];
   const findDependencies = (objectIdentifier, masterListObj) => {
-    console.log(
-      "%c --> %cline:37%cmasterListObj",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(229, 187, 129);padding:3px;border-radius:2px",
-      masterListObj
-    );
-    console.log(
-      "%c --> %cline:37%cobjectIdentifier",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
-      objectIdentifier
-    );
     const output = [];
     for (const value of Object.values(masterListObj)) {
-      console.log(
-        "%c --> %cline:53%centry",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
-        value
-      );
-      console.log(
-        "%c --> %cline:54%centry.msup",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
-        value.msup
-      );
       if (value.hasOwnProperty("msup") && value.msup === objectIdentifier)
         output.push(value.identifier);
-
-      if (value.hasOwnProperty("msup") && value.msup === objectIdentifier)
-        console.log(value.msup);
     }
 
     return output;
@@ -147,45 +116,16 @@ const StudyPlanItems = (props) => {
                 : "";
             }
           }
-          console.log(
-            "%c --> %cline:73%coutput",
-            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-            "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
-            props.type,
-            " | ",
-            output
-          );
+
           const groomedOutput = { ...output };
           const groomedAllItemOutput = {};
           if (allStudyPlanItems) {
             for (const [key, value] of Object.entries(allStudyPlanItems)) {
-              console.log(
-                "%c --> %cline:122%cvalue",
-                "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-                "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-                "color:#fff;background:rgb(254, 67, 101);padding:3px;border-radius:2px",
-                value
-              );
               groomedAllItemOutput[key] = {};
               for (const [innerKey, innerValue] of Object.entries(value)) {
-                console.log(
-                  "%c --> %cline:125%cinnerValue",
-                  "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-                  "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-                  "color:#fff;background:rgb(96, 143, 159);padding:3px;border-radius:2px",
-                  innerValue
-                );
                 groomedAllItemOutput[key][innerKey] = innerValue;
               }
             }
-            console.log(
-              "%c --> %cline:128%cgroomedAllItemOutput",
-              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-              "color:#fff;background:rgb(248, 214, 110);padding:3px;border-radius:2px",
-              groomedAllItemOutput
-            );
           }
 
           if (props.type === "goal") {
@@ -198,27 +138,6 @@ const StudyPlanItems = (props) => {
 
             if (allStudyPlanItems) {
               for (const [key, value] of Object.entries(allStudyPlanItems)) {
-                console.log(
-                  "%c --> %cline:97%callStudyPlanItems key",
-                  "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-                  "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-                  "color:#fff;background:rgb(20, 68, 106);padding:3px;border-radius:2px",
-                  key
-                );
-                console.log(
-                  "%c --> %cline:97%callStudyPlanItems value",
-                  "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-                  "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-                  "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
-                  value
-                );
-                console.log(
-                  "%c --> %cline:176%cgroomedAllItemOutput[key]",
-                  "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-                  "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-                  "color:#fff;background:rgb(251, 178, 23);padding:3px;border-radius:2px",
-                  groomedAllItemOutput[key]
-                );
                 groomedAllItemOutput[key].dependencies = findDependencies(
                   value.identifier,
                   allStudyPlanItems
@@ -226,22 +145,6 @@ const StudyPlanItems = (props) => {
               }
             }
           }
-          console.log(
-            "%c --> %cline:73%c--groomedOutput",
-            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-            "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
-            props.type,
-            " | ",
-            groomedOutput
-          );
-          console.log(
-            "%c --> %cline:181%c--groomedAllItemOutput",
-            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-            "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
-            groomedAllItemOutput
-          );
 
           setAllStudyPlanItems(groomedAllItemOutput);
           setFormInputData(groomedOutput);
@@ -396,35 +299,9 @@ const StudyPlanItems = (props) => {
 
   useEffect(() => {
     if (!updateStudyPlan) return;
-    console.log(
-      "%c --> %cline:114%c-------------------updateStudyPlan",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(114, 83, 52);padding:3px;border-radius:2px",
-      updateStudyPlan
-    );
+
     const { itemWithNewEdits, user, parentSection } = updateStudyPlan;
-    console.log(
-      "%c --> %cline:406%cparentSection",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(229, 187, 129);padding:3px;border-radius:2px",
-      parentSection
-    );
-    console.log(
-      "%c --> %cline:406%cuser",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(96, 143, 159);padding:3px;border-radius:2px",
-      user
-    );
-    console.log(
-      "%c --> %cline:406%citemWithNewEdits",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(131, 175, 155);padding:3px;border-radius:2px",
-      itemWithNewEdits
-    );
+
     const updateAnItem =
       parentSection === "content" ? updateAContentItem : updateAStudyPlanItem;
 
@@ -432,13 +309,6 @@ const StudyPlanItems = (props) => {
     if (user && user.isAdmin == true) {
       updateAnItem(itemWithNewEdits, user)
         .then((res) => {
-          console.log(
-            "%c --> %cline:433%cres",
-            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-            "color:#fff;background:rgb(60, 79, 57);padding:3px;border-radius:2px",
-            res
-          );
           const status = res.status ? res.status : res.response.status;
           if (status >= 400) {
             alert("There was an error: " + res.response.data.message);

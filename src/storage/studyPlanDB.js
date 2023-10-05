@@ -101,28 +101,7 @@ export async function saveManyStudyPlanItems(userAndDataObject) {
 
 /// UPDATE //////////////////////////////////
 export async function updateAStudyPlanItem(dataObj, user) {
-  console.log(
-    "%c --> %cline:103%cdataObj",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(229, 187, 129);padding:3px;border-radius:2px",
-    dataObj
-  );
-  console.log(
-    "%c --> %cline:103%cuser",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(39, 72, 98);padding:3px;border-radius:2px",
-    user
-  );
   if (!dataObj.hasOwnProperty("identifier")) {
-    console.log(
-      "%c --> %cERROR -------->>>> line:118%cdataObj",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(114, 83, 52);padding:3px;border-radius:2px",
-      dataObj
-    );
     throw Error(
       "This item appears to be incomplete. Contact the site admin and provide this error code: SPDB-MIS-IDENT"
     );

@@ -16,6 +16,7 @@ import backgroundVideo from "../../assets/media/backgrounds/background-energy6.m
 import { ErrorBoundary } from "../../HOC/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import { scrollPositionActions } from "../../store/scrollPositionSlice";
 import LoginStatus from "../../Components/User/LoginStatus/LoginStatus";
+import Stats from "../../Components/Stats/Stats";
 
 const Home = (props) => {
   const { studyPlan, studyPlanMetadata } = useSelector(
@@ -111,7 +112,11 @@ const Home = (props) => {
           <LoginStatus />
         </ErrorBoundary>
       </CardPrimary>
-
+      <CardPrimary>
+        <ErrorBoundary>
+          <Stats />
+        </ErrorBoundary>
+      </CardPrimary>
       {!hideStudyPlan && studyPlan && (
         <CardTransparent>
           <ErrorBoundary>

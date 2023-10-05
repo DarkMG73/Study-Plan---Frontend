@@ -1,0 +1,93 @@
+.hours-wrap {
+  max-height: none;
+  height: auto;
+  max-width: 61rem;
+  box-shadow: none;
+  border: none;
+  overflow: visible;
+}
+
+.hours-wrap .inner-block {
+  max-height: none;
+  text-align: center;
+  transition: 0.1s all ease;
+  transition-timing-function: cubic-bezier(0.48, -0.3, 0.4, 1.37);
+  -webkit-font-smoothing: subpixel-antialiased;
+  transform: scale(1) translate3d(0, 0, 0) translateZ(0);
+  backface-visibility: hidden;
+  font-size: 0.7em;
+  padding-bottom: 0;
+  opacity: 0.7;
+}
+
+.hours-wrap:before {
+  content: "Stats";
+  text-align: center;
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid #00000017;
+  padding-bottom: 0.5em;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+  font-size: 75%;
+  opacity: 0.7;
+}
+
+.hours-wrap .inner-block.reviewhrsadjusted,
+.hours-wrap .inner-block.completehrstotal,
+.hours-wrap .inner-block.collegecredithours {
+  flex-direction: column-reverse;
+  flex-basis: 33.333%;
+  font-size: 1.25em;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+}
+
+.hours-wrap .inner-block:hover {
+  transform: scale(1.5) translate3d(0, 0, 0) translateZ(0);
+  backface-visibility: hidden;
+  opacity: 1;
+}
+
+.hours-wrap .inner-block.reviewhrsadjusted:hover,
+.hours-wrap .inner-block.completehrstotal:hover {
+  transform: scale(1.15) translate3d(0, 0, 0) translateZ(0);
+  backface-visibility: hidden;
+  opacity: 1;
+}
+
+.hours-wrap .inner-block:before {
+  display: block;
+  font-size: 0.6em;
+}
+
+.hours-wrap .labhrstotal:before {
+  content: "Total Lab Hours";
+}
+
+.hours-wrap .lecturehrstotal:before {
+  content: "Total Lecture Hours";
+}
+
+.hours-wrap .completehrstotal:before {
+  content: "Total Hours Completed";
+}
+
+.hours-wrap .reviewhrstotal:before {
+  content: "Full Review Hours";
+}
+
+.hours-wrap .reviewhrsadjusted:before {
+  content: "Review Hours Needed";
+}
+
+.hours-wrap .totalhours:before {
+  content: "Total Program Length";
+}
+
+.hours-wrap .collegecredithours:before {
+  content: "Simulated College Credits";
+  margin-right: 1em;
+}

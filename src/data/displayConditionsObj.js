@@ -10,6 +10,9 @@ const displayConditions = {
       "masterLibraryID",
       "_id",
       "iframeCustomAttributes",
+      "id",
+      "createdAt",
+      "updatedAt",
     ],
     forSlideButton: ["markcomplete", "markforreview"],
     protectedVisible: [

@@ -14,6 +14,7 @@
   list-style: none;
   padding: 0;
 }
+
 .group-studyPlan-goals ul,
 .group-studyPlan ul {
   color: white;
@@ -25,6 +26,31 @@
   background: var(--spt-color-accent-2-gradient);
 }
 
+.group-studyPlan-goals ul > div {
+  display: grid;
+  grid-gap: 0;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-areas:
+    "title progressbar  name  name method   priority"
+    "slug slug slug slug slug slug"
+    "msup msup   msup asup asup asup"
+    "des   des  des   des des des"
+    "url   url  url   url url url"
+    "type   author  author  author platform platform"
+    "lectureTime labTime    start    acomp  status status"
+    "demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc"
+    "demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl"
+    "itemnotes itemnotes itemnotes itemnotes itemnotes itemnotes"
+    "tags tags tags tags tags tags"
+    "markforreview  markforreview markforreview markcomplete  markcomplete markcomplete"
+    "createdAt createdAt createdAt updatedAt updatedAt updatedAt"
+    "_id _id _id _id _id _id" "id id id id id id" "identifier identifier identifier identifier identifier identifier" "masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID"
+    "buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer"
+    "dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container";
+
+  grid-auto-flow: row dense;
+  max-width: 100%;
+}
 .group-studyPlan-goals > button {
   background: var(--spt-color-accent-2-gradient);
   border: none;
@@ -49,8 +75,8 @@
     "demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc"
     "demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl"
     "itemnotes itemnotes itemnotes itemnotes itemnotes itemnotes"
-    "markforreview  markforreview markforreview markcomplete  markcomplete markcomplete"
     "tags tags tags tags tags tags"
+    "markforreview  markforreview markforreview markcomplete  markcomplete markcomplete"
     "createdAt createdAt createdAt updatedAt updatedAt updatedAt"
     "_id _id _id _id _id _id" "id id id id id id" "identifier identifier identifier identifier identifier identifier" "masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID"
     "buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer";

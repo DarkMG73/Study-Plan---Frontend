@@ -28,6 +28,7 @@ const StudyPlanItemsList = (props) => {
   const parentKey = props.parentKey;
   const parentsParentKey = props.parentsParentKey;
   const parentMasterID = props.parentMasterID;
+  const parentMasterType = props.parentMasterType;
   const section = props.section;
   const subListLevel = props.subListLevel;
   const formInputData = useSelector((state) => state.formInputData);
@@ -146,18 +147,9 @@ const StudyPlanItemsList = (props) => {
 
     const parentMasterID = e.target.getAttribute("parentmasterid");
     const parentSection = e.target.getAttribute("section");
-
     const rawItemWithNewEdits = { ...studyPlanItemsObj[parentMasterID] };
-    console.log(
-      "%c --> %cline:150%crawItemWithNewEdits",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(251, 178, 23);padding:3px;border-radius:2px",
-      rawItemWithNewEdits
-    );
     const itemWithNewEdits = { ...rawItemWithNewEdits };
     const _id = rawItemWithNewEdits._id;
-
     const existingFormEdits = { ...formInputData.existingFormInputDataObj };
 
     for (const key in existingFormEdits[parentMasterID]) {
@@ -300,6 +292,9 @@ const StudyPlanItemsList = (props) => {
             section={section}
             key={key}
             id={key}
+            parentMasterType={
+              parentMasterType ? parentMasterType : studyPlanItemsObj[key].type
+            }
             className={
               (subListLevel > 0 &&
                 styles.subgroup +
@@ -394,6 +389,11 @@ const StudyPlanItemsList = (props) => {
                 parentMasterID={
                   parentMasterID ? parentMasterID : studyPlanItemsObj[key]._id
                 }
+                parentMasterType={
+                  parentMasterType
+                    ? parentMasterType
+                    : studyPlanItemsObj[key].type
+                }
                 section={section}
                 displayConditions={displayConditions}
                 subListLevel={subListLevel}
@@ -411,8 +411,9 @@ const StudyPlanItemsList = (props) => {
                 onlyList={onlyList}
                 emptyForm={props.emptyForm}
               />
-              <ul>
-                <h3>Dependencies</h3>
+              <ul className={styles["dependencies-container"]}>
+                <h3>The Path to {studyPlanItemsObj[key].name}</h3>
+
                 {props.allStudyPlanItems &&
                   studyPlanItemsObj[key].dependencies.map(
                     (dependencyIdentifier) => {
@@ -433,6 +434,11 @@ const StudyPlanItemsList = (props) => {
                             parentMasterID
                               ? parentMasterID
                               : studyPlanItemsObj[key]._id
+                          }
+                          parentMasterType={
+                            parentMasterType
+                              ? parentMasterType
+                              : studyPlanItemsObj[key].type
                           }
                           section={section}
                           displayConditions={displayConditions}
@@ -524,6 +530,9 @@ const StudyPlanItemsList = (props) => {
             section={section}
             key={key}
             id={key}
+            parentMasterType={
+              parentMasterType ? parentMasterType : studyPlanItemsObj[key].type
+            }
             className={
               (subListLevel > 0 &&
                 styles.subgroup +
@@ -618,6 +627,11 @@ const StudyPlanItemsList = (props) => {
                 parentMasterID={
                   parentMasterID ? parentMasterID : studyPlanItemsObj[key]._id
                 }
+                parentMasterType={
+                  parentMasterType
+                    ? parentMasterType
+                    : studyPlanItemsObj[key].type
+                }
                 section={section}
                 displayConditions={displayConditions}
                 subListLevel={subListLevel}
@@ -646,7 +660,7 @@ const StudyPlanItemsList = (props) => {
                       parentmasterid={key}
                       onClick={unlockProtectedVisibleHandler}
                     >
-                      Edit TWO
+                      Edit
                     </button>
                   )}{" "}
                   <button
@@ -705,6 +719,7 @@ const StudyPlanItemsList = (props) => {
           parentKey={parentKey}
           parentsParentKey={parentsParentKey}
           parentMasterID={parentMasterID}
+          parentMasterType={parentMasterType}
           displayConditions={displayConditions}
           unlockProtectedVisible={
             props.unlockProtectedVisible
