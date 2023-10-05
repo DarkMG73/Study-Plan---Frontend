@@ -164,16 +164,10 @@ function objectExtractAllValuesPerKey(
       ) {
         // Handle items that need to be added together
         if (addTogether.includes(key)) {
+          if (objectToLoop[i].type.toLowerCase() === "goal") continue;
           if (!outputObject.hasOwnProperty(key)) outputObject[key] = [0];
           if (objectToLoop[i][key]) {
             outputObject[key][0] += objectToLoop[i][key] * 1;
-            console.log(
-              "%c --> %cline:169%cobjectToLoop[i][key]",
-              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-              "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
-              objectToLoop[i][key]
-            );
           }
         }
         // Handle some items by only gathering the _id

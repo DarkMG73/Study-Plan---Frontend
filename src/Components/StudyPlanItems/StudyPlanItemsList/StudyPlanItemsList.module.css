@@ -235,16 +235,15 @@ body .dependencies-container [parentMasterType="step"] {
   max-width: 80%;
   width: 80%;
   margin: auto;
-  height: 5em;
   padding: 1em;
-  /* alternate style */
   max-width: none;
   width: 100%;
   margin: auto;
-  height: 5em;
   padding: 1em;
   background: #00000021;
+
   border-radius: 0 0 50px 50px;
+  box-shadow: inset -1px 8px 10px -12px black;
 }
 
 .form-button {
@@ -331,11 +330,11 @@ body .dependencies-container [parentMasterType="step"] {
 
 .submit-form-button {
   position: relative;
-  color: var(--spt-color-accent-light);
+  color: var(--spt-color-accent);
   border: none;
-  border-radius: inherit;
+  border-radius: 50px;
   padding: 1em 2em 0.5em;
-  background: var(--spt-color-background);
+  /* background: var(--spt-color-background); */
   box-shadow: inset 1px 1px 4px -2px white, inset -1px -1px 4px -2px black;
   cursor: pointer;
   width: 100%;
@@ -343,7 +342,9 @@ body .dependencies-container [parentMasterType="step"] {
   font-size: 2.4rem;
   letter-spacing: var(--spt-spacing-subheading);
   border: 1px outset var(--spt-color-accent);
-  animation: jumpPulseAccent 2s ease infinite;
+  animation: StudyPlanItemsList_jumpPulseAccent__ErEur 2s ease infinite;
+  background: var(--spt-color-background-warm);
+  margin: 1em;
 }
 
 .form-button:hover {
