@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./StudyPlanItems.module.css";
 import StudyPlanItemsList from "./StudyPlanItemsList/StudyPlanItemsList";
+import CompletedStudyPlanItems from "./CompletedStudyPlanItems/CompletedStudyPlanItems";
 import displayConditions from "../../data/displayConditionsObj.js";
 import useCreateNewForm from "../../Hooks/useCreateNewForm";
 import { formInputDataActions as allFormInputDataActions } from "../../store/formInputDataSlice";
@@ -36,6 +37,14 @@ const StudyPlanItems = (props) => {
   );
   const id = props.id;
   const typeName = props.type;
+  const section = props.section;
+  console.log(
+    "%c --> %cline:40%csection",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
+    section
+  );
   const dataObjForEdit = props.dataObjForEdit;
   const [allStudyPlanItems, setAllStudyPlanItems] = useState(
     props.allStudyPlanItems
@@ -394,6 +403,15 @@ const StudyPlanItems = (props) => {
       }
     >
       <h2 className={styles["group-title"] + " " + styles[id]}>{outputName}</h2>
+      <CompletedStudyPlanItems
+        allStudyPlanItems={allStudyPlanItems}
+        parentKey={false}
+        parentsParentKey={false}
+        parentMasterID={false}
+        displayConditions={displayConditions}
+        user={props.user}
+        section={"completed-items"}
+      />
       <CollapsibleElm
         id={id + "-collapsible-elm"}
         styles={{
