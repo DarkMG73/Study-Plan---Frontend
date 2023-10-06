@@ -1,4 +1,4 @@
-import styles from "./StatusUpdate.module.css";
+import styles from "./StatusUpdate.module.scss";
 import React, { useState, useEffect } from "react";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
 

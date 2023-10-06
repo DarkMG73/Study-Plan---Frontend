@@ -1,40 +1,31 @@
-import styles from "./NoticeOne.module.css";
+import styles from "./About.module.scss";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const NoticeOne = () => {
+const About = () => {
   const { content } = useSelector((state) => state.contentData);
-  const [noticeOneData, setNoticeOneData] = useState({});
+  const [aboutData, setAboutData] = useState({});
 
   useEffect(() => {
     if (content) {
       Object.keys(content).forEach((key) =>
         Object.entries(content[key]).forEach((entry) => {
-          const test =
-            entry[0].includes("type") && entry[1].includes("noticeOne");
-          if (test) setNoticeOneData(content[key]);
+          const test = entry[0].includes("type") && entry[1] === "about";
+          if (test) setAboutData(content[key]);
         })
       );
     }
   }, [content]);
 
   return (
-    <div className={styles["noticeOne-container"]}>
-      <a
-        name="noticeOne"
-        href="#noticeOne"
-        className={styles["anchor-page-bookmark"]}
-      >
-        <span></span>
-      </a>
-      <div className={styles["noticeOne-text-container"]}>
-        {(noticeOneData.imageOneURL || noticeOneData.title) && (
+    <div className={styles["about-container"]}>
+      <div className={styles["about-text-container"]}>
+        {(aboutData.imageOneURL || aboutData.title) && (
           <div className={styles["title-container"]}>
-            {noticeOneData.imageOneURL && (
+            {aboutData.imageOneURL && (
               <div className={styles["image-wrap"]}>
-                {" "}
                 <img
-                  src={noticeOneData.imageOneURL}
+                  src={aboutData.imageOneURL}
                   className={
                     styles["image"] +
                     " " +
@@ -42,20 +33,29 @@ const NoticeOne = () => {
                     " " +
                     styles["content"]
                   }
-                  alt={noticeOneData.title + " fist image"}
+                  alt={aboutData.title + " first image "}
                 />
               </div>
             )}
-            {noticeOneData.title && (
+
+            {aboutData.title && (
               <div className={styles["sub-title-background"]}>
+                <a
+                  name="about"
+                  href="#about"
+                  className={styles["anchor-page-bookmark"]}
+                >
+                  About page bookmark
+                </a>
+                <br />
                 <h3 className={`sub-title ${styles["sub-title"]}`}>
-                  {noticeOneData.title}
+                  {aboutData.title}
                 </h3>
               </div>
             )}
           </div>
         )}
-        {noticeOneData.text && (
+        {aboutData.text && (
           <p
             className={
               styles["text"] +
@@ -65,10 +65,10 @@ const NoticeOne = () => {
               styles["content"]
             }
           >
-            {noticeOneData.text}
+            {aboutData.text}
           </p>
         )}
-        {(noticeOneData.imageOneURL || noticeOneData.textTwo) && (
+        {(aboutData.imageOneURL || aboutData.textTwo) && (
           <div
             className={
               styles["text-pic-container"] +
@@ -76,11 +76,10 @@ const NoticeOne = () => {
               styles["text-pic-container-two"]
             }
           >
-            {" "}
-            {noticeOneData.imageTwoURL && (
+            {aboutData.imageTwoURL && (
               <div className={styles["image-wrap"]}>
                 <img
-                  src={noticeOneData.imageTwoURL}
+                  src={aboutData.imageTwoURL}
                   className={
                     styles["image"] +
                     " " +
@@ -88,11 +87,11 @@ const NoticeOne = () => {
                     " " +
                     styles["content"]
                   }
-                  alt={noticeOneData.title + " second image"}
+                  alt={aboutData.title + " second image "}
                 />
               </div>
             )}{" "}
-            {noticeOneData.textTwo && (
+            {aboutData.textTwo && (
               <p
                 className={
                   styles["text"] +
@@ -102,12 +101,12 @@ const NoticeOne = () => {
                   styles["content"]
                 }
               >
-                {noticeOneData.textTwo}
+                {aboutData.textTwo}
               </p>
             )}{" "}
           </div>
         )}
-        {(noticeOneData.imageThreeURL || noticeOneData.textThree) && (
+        {(aboutData.imageThreeURL || aboutData.textThree) && (
           <div
             className={
               styles["text-pic-container"] +
@@ -115,7 +114,7 @@ const NoticeOne = () => {
               styles["text-pic-container-three"]
             }
           >
-            {noticeOneData.textThree && (
+            {aboutData.textThree && (
               <p
                 className={
                   styles["text"] +
@@ -125,13 +124,13 @@ const NoticeOne = () => {
                   styles["content"]
                 }
               >
-                {noticeOneData.textThree}
+                {aboutData.textThree}
               </p>
             )}
-            {noticeOneData.imageThreeURL && (
+            {aboutData.imageThreeURL && (
               <div className={styles["image-wrap"]}>
                 <img
-                  src={noticeOneData.imageThreeURL}
+                  src={aboutData.imageThreeURL}
                   className={
                     styles["image"] +
                     " " +
@@ -139,13 +138,13 @@ const NoticeOne = () => {
                     " " +
                     styles["content"]
                   }
-                  alt={noticeOneData.title + " third image"}
+                  alt={aboutData.title + " third image "}
                 />{" "}
               </div>
             )}
           </div>
         )}
-        {(noticeOneData.imageFourURL || noticeOneData.textFour) && (
+        {(aboutData.imageFourURL || aboutData.textFour) && (
           <div
             className={
               styles["text-pic-container"] +
@@ -154,7 +153,7 @@ const NoticeOne = () => {
             }
           >
             {" "}
-            {noticeOneData.textFour && (
+            {aboutData.textFour && (
               <p
                 className={
                   styles["text"] +
@@ -164,14 +163,14 @@ const NoticeOne = () => {
                   styles["content"]
                 }
               >
-                {noticeOneData.textFour}
+                {aboutData.textFour}
               </p>
             )}
-            {noticeOneData.imageFourURL && (
+            {aboutData.imageFourURL && (
               <div className={styles["image-wrap"]}>
                 {" "}
                 <img
-                  src={noticeOneData.imageFourURL}
+                  src={aboutData.imageFourURL}
                   className={
                     styles["image"] +
                     " " +
@@ -179,7 +178,7 @@ const NoticeOne = () => {
                     " " +
                     styles["content"]
                   }
-                  alt={noticeOneData.title + " fourth image"}
+                  alt={aboutData.title + " fourth image "}
                 />
               </div>
             )}
@@ -190,4 +189,4 @@ const NoticeOne = () => {
   );
 };
 
-export default NoticeOne;
+export default About;

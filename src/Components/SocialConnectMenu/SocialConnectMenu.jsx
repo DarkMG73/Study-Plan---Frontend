@@ -1,4 +1,4 @@
-import styles from "./SocialConnectMenu.module.css";
+import styles from "./SocialConnectMenu.module.scss";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import * as icons from "react-icons/fa";

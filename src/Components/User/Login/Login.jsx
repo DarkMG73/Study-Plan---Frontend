@@ -1,4 +1,4 @@
-import styles from "./Login.module.css";
+import styles from "./Login.module.scss";
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import FormInput from "../../../UI/Form/FormInput/FormInput";

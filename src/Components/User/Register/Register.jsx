@@ -1,4 +1,4 @@
-import styles from "./Register.module.css";
+import styles from "./Register.module.scss";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import FormInput from "../../../UI/Form/FormInput/FormInput";

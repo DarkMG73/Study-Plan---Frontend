@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styles from "./StudyPlanItem.module.css";
+import styles from "./StudyPlanItem.module.scss";
 import { formInputDataActions } from "../../../store/formInputDataSlice";
 import ProgressBar from "@ramonak/react-progress-bar";
 import SlideButton from "../../../UI/Buttons/Slide-Button/Slide-Button";

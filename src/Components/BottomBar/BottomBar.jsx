@@ -1,4 +1,4 @@
-import styles from "./BottomBar.module.css";
+import styles from "./BottomBar.module.scss";
 import React, { useState } from "react";
 import StatusUpdate from "../../Components/StatusUpdate/StatusUpdate";
 import TextZoomControls from "../../Components/TextZoomControls/TextZoomControls";

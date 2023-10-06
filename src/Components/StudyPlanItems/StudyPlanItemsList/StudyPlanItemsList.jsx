@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styles from "./StudyPlanItemsList.module.css";
+import styles from "./StudyPlanItemsList.module.scss";
 import StudyPlanItemsSubList from "../StudyPlanItemsSubList/StudyPlanItemsSubList";
 import StudyPlanItem from "../StudyPlanItem/StudyPlanItem";
 import {

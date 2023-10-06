@@ -1,4 +1,4 @@
-import styles from "./TextZoomControls.module.css";
+import styles from "./TextZoomControls.module.scss";
 import React from "react";
 const TextZoomControls = (props) => {
   const upClickButtonHandler = () => {

@@ -1,63 +1,75 @@
-import styles from "./NoticeTwo.module.css";
+import styles from "./NoticeThree.module.scss";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const NoticeTwo = () => {
+const NoticeThree = () => {
   const { content } = useSelector((state) => state.contentData);
-  const [noticeTwoData, setNoticeTwoData] = useState({});
+  const [noticeThreeData, setNoticeThreeData] = useState({});
 
   useEffect(() => {
     if (content) {
       Object.keys(content).forEach((key) =>
         Object.entries(content[key]).forEach((entry) => {
           const test =
-            entry[0].includes("type") && entry[1].includes("noticeTwo");
-          if (test) setNoticeTwoData(content[key]);
+            entry[0].includes("type") && entry[1].includes("noticeThree");
+          if (test) setNoticeThreeData(content[key]);
         })
       );
     }
   }, [content]);
 
   return (
-    <div className={styles["noticeTwo-container"]}>
-      <a
-        name="noticeTwo"
-        href="#noticeTwo"
-        className={styles["anchor-page-bookmark"]}
-      >
-        <span></span>
-      </a>
-      <div
-        className={styles["noticeTwo-fixed-image-container"]}
-        style={{ backgroundImage: `url(${noticeTwoData.imageOneURL})` }}
-      >
-        {(noticeTwoData.imageOneURL || noticeTwoData.title) && (
+    <div className={styles["noticeThree-container"]}>
+      <div className={styles["noticeThree-text-container"]}>
+        {(noticeThreeData.imageOneURL || noticeThreeData.title) && (
           <div className={styles["title-container"]}>
-            {noticeTwoData.title && (
+            {noticeThreeData.imageOneURL && (
+              <div className={styles["image-wrap"]}>
+                {" "}
+                <img
+                  src={noticeThreeData.imageOneURL}
+                  className={
+                    styles["image"] +
+                    " " +
+                    styles["image-one"] +
+                    " " +
+                    styles["content"]
+                  }
+                  alt={noticeThreeData.title + " first image "}
+                />
+              </div>
+            )}
+            {noticeThreeData.title && (
               <div className={styles["sub-title-background"]}>
+                {" "}
+                <a
+                  name="noticeThree"
+                  href="#noticeThree"
+                  className={styles["anchor-page-bookmark"]}
+                >
+                  <span></span>
+                </a>
                 <h3 className={`sub-title ${styles["sub-title"]}`}>
-                  {noticeTwoData.title}
+                  {noticeThreeData.title}
                 </h3>{" "}
-                {noticeTwoData.text && (
-                  <p
-                    className={
-                      styles["text"] +
-                      " " +
-                      styles["text-one"] +
-                      " " +
-                      styles["content"]
-                    }
-                  >
-                    {noticeTwoData.text}
-                  </p>
-                )}
               </div>
             )}
           </div>
         )}
-      </div>
-      <div className={styles["noticeTwo-text-container"]}>
-        {(noticeTwoData.imageOneURL || noticeTwoData.textTwo) && (
+        {noticeThreeData.text && (
+          <p
+            className={
+              styles["text"] +
+              " " +
+              styles["text-one"] +
+              " " +
+              styles["content"]
+            }
+          >
+            {noticeThreeData.text}
+          </p>
+        )}
+        {(noticeThreeData.imageOneURL || noticeThreeData.textTwo) && (
           <div
             className={
               styles["text-pic-container"] +
@@ -66,10 +78,10 @@ const NoticeTwo = () => {
             }
           >
             {" "}
-            {noticeTwoData.imageTwoURL && (
+            {noticeThreeData.imageTwoURL && (
               <div className={styles["image-wrap"]}>
                 <img
-                  src={noticeTwoData.imageTwoURL}
+                  src={noticeThreeData.imageTwoURL}
                   className={
                     styles["image"] +
                     " " +
@@ -77,11 +89,11 @@ const NoticeTwo = () => {
                     " " +
                     styles["content"]
                   }
-                  alt={noticeTwoData.title + " photo 1"}
+                  alt={noticeThreeData.title + " second image "}
                 />
               </div>
             )}{" "}
-            {noticeTwoData.textTwo && (
+            {noticeThreeData.textTwo && (
               <p
                 className={
                   styles["text"] +
@@ -91,12 +103,12 @@ const NoticeTwo = () => {
                   styles["content"]
                 }
               >
-                {noticeTwoData.textTwo}
+                {noticeThreeData.textTwo}
               </p>
             )}{" "}
           </div>
         )}
-        {(noticeTwoData.imageThreeURL || noticeTwoData.textThree) && (
+        {(noticeThreeData.imageThreeURL || noticeThreeData.textThree) && (
           <div
             className={
               styles["text-pic-container"] +
@@ -104,7 +116,7 @@ const NoticeTwo = () => {
               styles["text-pic-container-three"]
             }
           >
-            {noticeTwoData.textThree && (
+            {noticeThreeData.textThree && (
               <p
                 className={
                   styles["text"] +
@@ -114,13 +126,13 @@ const NoticeTwo = () => {
                   styles["content"]
                 }
               >
-                {noticeTwoData.textThree}
+                {noticeThreeData.textThree}
               </p>
             )}
-            {noticeTwoData.imageThreeURL && (
+            {noticeThreeData.imageThreeURL && (
               <div className={styles["image-wrap"]}>
                 <img
-                  src={noticeTwoData.imageThreeURL}
+                  src={noticeThreeData.imageThreeURL}
                   className={
                     styles["image"] +
                     " " +
@@ -128,13 +140,13 @@ const NoticeTwo = () => {
                     " " +
                     styles["content"]
                   }
-                  alt={noticeTwoData.title + " photo 2"}
-                />
+                  alt={noticeThreeData.title + " third image "}
+                />{" "}
               </div>
             )}
           </div>
         )}
-        {(noticeTwoData.imageFourURL || noticeTwoData.textFour) && (
+        {(noticeThreeData.imageFourURL || noticeThreeData.textFour) && (
           <div
             className={
               styles["text-pic-container"] +
@@ -143,7 +155,7 @@ const NoticeTwo = () => {
             }
           >
             {" "}
-            {noticeTwoData.textFour && (
+            {noticeThreeData.textFour && (
               <p
                 className={
                   styles["text"] +
@@ -153,14 +165,14 @@ const NoticeTwo = () => {
                   styles["content"]
                 }
               >
-                {noticeTwoData.textFour}
+                {noticeThreeData.textFour}
               </p>
             )}
-            {noticeTwoData.imageFourURL && (
+            {noticeThreeData.imageFourURL && (
               <div className={styles["image-wrap"]}>
                 {" "}
                 <img
-                  src={noticeTwoData.imageFourURL}
+                  src={noticeThreeData.imageFourURL}
                   className={
                     styles["image"] +
                     " " +
@@ -168,7 +180,7 @@ const NoticeTwo = () => {
                     " " +
                     styles["content"]
                   }
-                  alt={noticeTwoData.title + " photo 3"}
+                  alt={noticeThreeData.title + " fourth image "}
                 />
               </div>
             )}
@@ -179,4 +191,4 @@ const NoticeTwo = () => {
   );
 };
 
-export default NoticeTwo;
+export default NoticeThree;

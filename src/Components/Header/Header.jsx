@@ -1,4 +1,4 @@
-import styles from "./Header.module.css";
+import styles from "./Header.module.scss";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ReactComponent as SptLogo } from "../../assets/media/spt-ring.svg";

@@ -1,4 +1,4 @@
-import styles from "./SubscribeCTA.module.css";
+import styles from "./SubscribeCTA.module.scss";
 import React from "react";
 
 const SubscribeCTA = () => {

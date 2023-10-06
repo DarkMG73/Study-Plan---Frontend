@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { useDispatch } from "react-redux";
-import styles from "./FormItemEmpty.module.css";
+import styles from "./FormItemEmpty.module.scss";
 import { formInputDataActions } from "../../../store/formInputDataSlice";
 
 const FormItemEmpty = (props) => {

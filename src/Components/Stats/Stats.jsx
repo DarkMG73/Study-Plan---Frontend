@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import styles from "./Stats.module.css";
+import styles from "./Stats.module.scss";
 
 const Stats = (props) => {
   const { studyPlan, studyPlanMetadata } = useSelector(

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styles from "./StudyPlanItems.module.css";
+import styles from "./StudyPlanItems.module.scss";
 import StudyPlanItemsList from "./StudyPlanItemsList/StudyPlanItemsList";
 import CompletedStudyPlanItems from "./CompletedStudyPlanItems/CompletedStudyPlanItems";
 import displayConditions from "../../data/displayConditionsObj.js";

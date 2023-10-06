@@ -6,7 +6,7 @@ import React, {
   useRef,
 } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styles from "./Manage.module.css";
+import styles from "./Manage.module.scss";
 import CardTransparent from "../../UI/Cards/CardTransparent/CardTransparent";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
 import CardSecondary from "../../UI/Cards/CardSecondary/CardSecondary";

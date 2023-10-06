@@ -1,4 +1,4 @@
-import styles from "./Navbar.module.css";
+import styles from "./Navbar.module.scss";
 import React from "react";
 import SocialConnectMenu from "../SocialConnectMenu/SocialConnectMenu";
 

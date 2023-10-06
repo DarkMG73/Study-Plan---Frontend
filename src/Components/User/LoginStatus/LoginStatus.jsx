@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styles from "./LoginStatus.module.css";
+import styles from "./LoginStatus.module.scss";
 import PushButton from "../../../UI/Buttons/PushButton/PushButton";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
