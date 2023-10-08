@@ -425,3 +425,7 @@ ul[class*="edited-list"] label {
   align-items: center;
   width: 100%;
 }
+
+.is-complete-true {
+  filter: grayscale(1);
+}

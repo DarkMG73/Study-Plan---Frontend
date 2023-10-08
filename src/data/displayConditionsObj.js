@@ -3,6 +3,7 @@ const displayConditions = {
     isURL: ["link", "sourceURLbj"],
     isBoolean: ["isDefaultPlaylist", "isFeaturedPlaylist"],
     isDate: ["releaseDate", "createdAt", "updatedAt", "start", "acomp"],
+    forSlideButton: ["markcomplete", "markforreview"],
     protectedHidden: [
       "title",
       "slug",
@@ -14,7 +15,7 @@ const displayConditions = {
       "createdAt",
       "updatedAt",
     ],
-    forSlideButton: ["markcomplete", "markforreview"],
+
     protectedVisible: [
       "PROTECT-ALL",
       "title",

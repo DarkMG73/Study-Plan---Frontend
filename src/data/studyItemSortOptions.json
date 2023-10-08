@@ -1,0 +1,18 @@
+{
+    "name": "Name",
+    "type": "Type",
+    "msup": "Main Supported Item",
+    "asup": "Secondary Supported Item",
+    "author": "Author",
+    "lectureTime": "Lecture Time",
+    "labTime": "Lab Time",
+    "method": "Method",
+    "platform": "Platform",
+    "priority": "Priority",
+    "status": "Status",
+    "start": "Start Date",
+    "createdAt": "Date Created",
+    "updatedAt": "Date Last Updated",
+    "acomp": "Date Finished (Completed area only)"
+}
+

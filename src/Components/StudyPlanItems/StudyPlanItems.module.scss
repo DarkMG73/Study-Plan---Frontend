@@ -94,6 +94,7 @@
   min-width: 100%;
   text-transform: capitalize;
   margin-bottom: 0;
+  font-variant:small-caps;
 }
 
 .section-title {
@@ -194,6 +195,10 @@
   border: 1px solid var(--spt-color-accent-dark);
   /* border-top: 1px solid var(--spt-color-accent-light); */
   /* border-left: 1px solid var(--spt-color-accent-light); */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: var(--spt-color-accent-gradient);
+  border: none;
 }
 
 .new-form-button:hover {

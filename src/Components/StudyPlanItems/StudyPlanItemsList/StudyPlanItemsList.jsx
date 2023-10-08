@@ -17,15 +17,7 @@ import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 
 const StudyPlanItemsList = (props) => {
   const [refresh, setRefresh] = useState(1);
-
   const studyPlanItemsObj = props.studyPlanItemsObj;
-  console.log(
-    "%c --> %cline:21%cstudyPlanItemsObj",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(130, 57, 53);padding:3px;border-radius:2px",
-    studyPlanItemsObj
-  );
   const { studyPlanMetadata } = studyPlanItemsObj;
   let availableServices =
     studyPlanMetadata && studyPlanMetadata.hasOwnProperty("availableServices")
@@ -212,14 +204,6 @@ const StudyPlanItemsList = (props) => {
     }
 
     if (user) {
-      console.log(
-        "%c --> %cline:204 BEFORE UPDATE STATE ======== %citemWithNewEdits",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(3, 38, 58);padding:3px;border-radius:2px",
-        itemWithNewEdits
-      );
-
       dispatch(
         studyPlanDataActions.updateOneStudyPlanItem({
           _id: _id,
@@ -562,7 +546,15 @@ const StudyPlanItemsList = (props) => {
               styles[parentMasterID] +
               " " +
               (unlockProtectedVisible.includes(key) && styles["edited-list"]) +
-              (props.inModal && styles["in-modal"])
+              (props.inModal && styles["in-modal"]) +
+              " " +
+              styles[
+                "is-complete-" +
+                  (studyPlanItemsObj[key] &&
+                    studyPlanItemsObj[key].hasOwnProperty("markcomplete") &&
+                    studyPlanItemsObj[key].markcomplete &&
+                    studyPlanItemsObj[key].marcomplete !== "false")
+              ]
             }
           >
             <CollapsibleElm
