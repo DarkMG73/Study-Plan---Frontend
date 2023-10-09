@@ -1,15 +1,22 @@
-const useInitStudyPlanItems = () => {
+const useSortList = () => {
   const outputFunction = (props) => {
-    const { typeArray, sortMethod, objectToBeSorted } = props;
+    const { sortMethod, objectToBeSorted } = props;
 
     console.log(
-      "%c --> %cline:14%ctypeArray",
+      "%c --> %cline:3%cobjectToBeSorted",
       "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
       "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
-      typeArray
+      "color:#fff;background:rgb(254, 67, 101);padding:3px;border-radius:2px",
+      objectToBeSorted
     );
-
+    console.log(
+      "%c --> %cline:3%csortMethod",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(39, 72, 98);padding:3px;border-radius:2px",
+      sortMethod
+    );
+    if (!objectToBeSorted) return objectToBeSorted;
     const sortBy = sortMethod ? sortMethod : "priority";
 
     const sortNumbers = (fieldName, direction) => {
@@ -129,4 +136,4 @@ const useInitStudyPlanItems = () => {
   return outputFunction;
 };
 
-export default useInitStudyPlanItems;
+export default useSortList;

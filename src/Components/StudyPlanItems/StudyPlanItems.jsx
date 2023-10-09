@@ -28,6 +28,7 @@ import {
   deleteContentDocFromDb,
 } from "../../storage/contentDB";
 import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
+import useSortList from "../../Hooks/useSortList";
 
 const StudyPlanItems = (props) => {
   const user = useSelector((state) => state.auth.user);
@@ -58,6 +59,7 @@ const StudyPlanItems = (props) => {
   newFormInputValuesObjRef.current = newFormInputValuesObj;
   const allFormInputData = useSelector((state) => state.formInputData);
   const dispatch = useDispatch();
+  const sortList = useSortList();
   let outputName =
     dataObjForEdit &&
     dataObjForEdit[id] &&
@@ -90,31 +92,15 @@ const StudyPlanItems = (props) => {
       setAllStudyPlanItems,
       setFormInputData,
     });
-  }, [sortMethod]);
+  }, []);
 
   useEffect(() => {
-    if (changeListArray) {
-      initStudyPlanItems({
-        id,
-        sortMethod: sortMethod,
-        typeArray: changeListArray,
-        dataObjForEdit,
-        getSchemaForStudyPlanItem,
-        getSchemaForContentItem,
-        allStudyPlanItems,
-        setAllStudyPlanItems,
-        setFormInputData,
-      });
-      setChangeListArray(false);
-    }
-  }, [
-    changeListArray,
-    allStudyPlanItems,
-    dataObjForEdit,
-    id,
-    initStudyPlanItems,
-    sortMethod,
-  ]);
+    const sortedGroomedOutput = sortList({
+      sortMethod: sortMethod,
+      objectToBeSorted: formInputData,
+    });
+    setFormInputData(sortedGroomedOutput);
+  }, [sortMethod]);
 
   useEffect(() => {
     console.log(
