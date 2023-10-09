@@ -2,7 +2,7 @@ const useInitStudyPlanItems = () => {
   const outputFunction = (props) => {
     const {
       id,
-      type,
+      typeArray,
       sortMethod,
       dataObjForEdit,
       getSchemaForStudyPlanItem,
@@ -11,6 +11,14 @@ const useInitStudyPlanItems = () => {
       setAllStudyPlanItems,
       setFormInputData,
     } = props;
+
+    console.log(
+      "%c --> %cline:14%ctypeArray",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
+      typeArray
+    );
     const findDependencies = (objectIdentifier, masterListObj) => {
       const output = [];
       for (const value of Object.values(masterListObj)) {
@@ -35,11 +43,11 @@ const useInitStudyPlanItems = () => {
           //   groomedSchema[topic] = data.tree[topic]
           // })
 
-          // Gather items to list based on type.
+          // Gather items to list based on typeArray.
           for (const itemID in dataObjForEdit) {
             if (
               !dataObjForEdit[itemID].hasOwnProperty("type") ||
-              dataObjForEdit[itemID].type !== type
+              !typeArray.includes(dataObjForEdit[itemID].type)
             )
               continue;
             output[itemID] = {};
@@ -64,7 +72,7 @@ const useInitStudyPlanItems = () => {
             }
           }
 
-          if (type === "goal") {
+          if (typeArray.includes("goal")) {
             for (const [key, value] of Object.entries(output)) {
               groomedOutput[key].dependencies = findDependencies(
                 value.identifier,

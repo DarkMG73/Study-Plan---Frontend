@@ -38,7 +38,8 @@ const StudyPlanItems = (props) => {
     (state) => state.studyPlanData.updateStudyPlan
   );
   const [sortMethod, setSortMethod] = useState("priority");
-
+  const [changeListArray, setChangeListArray] = useState(false);
+  const [showListResetButton, setShowListResetButton] = useState(false);
   const id = props.id;
   const typeName = props.type;
   const section = props.section;
@@ -81,7 +82,7 @@ const StudyPlanItems = (props) => {
     initStudyPlanItems({
       id,
       sortMethod: sortMethod,
-      type: typeName,
+      typeArray: [typeName],
       dataObjForEdit,
       getSchemaForStudyPlanItem,
       getSchemaForContentItem,
@@ -90,6 +91,40 @@ const StudyPlanItems = (props) => {
       setFormInputData,
     });
   }, [sortMethod]);
+
+  useEffect(() => {
+    if (changeListArray) {
+      initStudyPlanItems({
+        id,
+        sortMethod: sortMethod,
+        typeArray: changeListArray,
+        dataObjForEdit,
+        getSchemaForStudyPlanItem,
+        getSchemaForContentItem,
+        allStudyPlanItems,
+        setAllStudyPlanItems,
+        setFormInputData,
+      });
+      setChangeListArray(false);
+    }
+  }, [
+    changeListArray,
+    allStudyPlanItems,
+    dataObjForEdit,
+    id,
+    initStudyPlanItems,
+    sortMethod,
+  ]);
+
+  useEffect(() => {
+    console.log(
+      "%c --> %cline:135%cchangeListArray",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
+      changeListArray
+    );
+  }, [changeListArray]);
 
   useEffect(() => {
     processAllFormInputData({
@@ -101,7 +136,13 @@ const StudyPlanItems = (props) => {
       getSchemaForContentItem,
       saveManyContentItems,
     });
-  }, [allFormInputData.allNewForms]);
+  }, [
+    allFormInputData.allNewForms,
+    user,
+    dispatch,
+    allFormInputData,
+    processAllFormInputData,
+  ]);
 
   useEffect(() => {
     processUpdateStudyPlan({
@@ -129,14 +170,19 @@ const StudyPlanItems = (props) => {
   };
 
   const sortMethodButtonHandler = (e) => {
-    console.log(
-      "%c --> %cline:130%ce.target.value",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(178, 190, 126);padding:3px;border-radius:2px",
-      e.target.value
-    );
     setSortMethod(e.target.value);
+  };
+
+  const showAllItemsButtonHandler = (e) => {
+    if (studyPlanMetadata && studyPlanMetadata.hasOwnProperty("type")) {
+      setShowListResetButton(true);
+      setChangeListArray([...studyPlanMetadata.type]);
+    }
+  };
+
+  const showDefaultItemsButtonHandler = (e) => {
+    setShowListResetButton(false);
+    setChangeListArray(["step"]);
   };
   ////////////////////////////////////////////////////////////////////////
   /// Output
@@ -350,7 +396,32 @@ const StudyPlanItems = (props) => {
                 </option>
               </Fragment>
             ))}
-          </select>
+          </select>{" "}
+          <div
+            id="list-button-container"
+            className={styles["list-button-container"]}
+          >
+            {!showListResetButton && (
+              <button
+                className={styles["new-form-button"]}
+                value={id}
+                parentmasterid={id}
+                onClick={showAllItemsButtonHandler}
+              >
+                List All Goals & Tasks
+              </button>
+            )}
+            {showListResetButton && (
+              <button
+                className={styles["new-form-button"]}
+                value={id}
+                parentmasterid={id}
+                onClick={showDefaultItemsButtonHandler}
+              >
+                Show Only Steps
+              </button>
+            )}
+          </div>
         </label>
         {formInputData && Object.keys(formInputData).length > 0 && (
           <StudyPlanItemsList
