@@ -75,6 +75,18 @@ const Home = (props) => {
   return (
     <div className={styles["page-wrap"]}>
       <div className={styles["welcome-section-container"]}>
+        <ErrorBoundary>
+          <div className={styles["login-stats-container"]}>
+            <div className={styles["login-outer-wrap"]}>
+              {" "}
+              <LoginStatus hideTitles={true} />
+            </div>
+            <div className={styles["stats-outer-wrap"]}>
+              {" "}
+              <Stats />
+            </div>
+          </div>
+        </ErrorBoundary>
         <div className={styles["angled-rectangle"]} ref={angledRectangleRef}>
           <div className={styles["background-video-wrap"]}>
             <video className={styles["background-video"]} autoPlay loop muted>
@@ -107,16 +119,6 @@ const Home = (props) => {
         </CardPrimary>
       )}
 
-      <CardPrimary>
-        <ErrorBoundary>
-          <LoginStatus />
-        </ErrorBoundary>
-      </CardPrimary>
-      <CardPrimary>
-        <ErrorBoundary>
-          <Stats />
-        </ErrorBoundary>
-      </CardPrimary>
       {!hideStudyPlan && studyPlan && (
         <CardTransparent>
           <ErrorBoundary>

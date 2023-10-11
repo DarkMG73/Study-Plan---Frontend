@@ -59,28 +59,6 @@ export default async function GatherStudyPlanData(user) {
     groomedStudyPlanMetadata[key] = [...output];
   }
 
-  //Add available services array
-  const rawAvailableServices = [];
-  for (const itemID in studyPlanData.studyPlan) {
-    if (studyPlanData.studyPlan[itemID].hasOwnProperty("sourceURLObj")) {
-      rawAvailableServices.push(
-        ...Object.keys(studyPlanData.studyPlan[itemID].sourceURLObj)
-      );
-    }
-
-    if (
-      studyPlanData.studyPlan[itemID].hasOwnProperty("type") &&
-      studyPlanData.studyPlan[itemID].type === "service"
-    ) {
-      rawAvailableServices.push(studyPlanData.studyPlan[itemID].slug);
-    }
-
-    const availableServicesSet = new Set(rawAvailableServices);
-    groomedStudyPlanMetadata.availableServices = Array.from(
-      availableServicesSet
-    );
-  }
-
   studyPlanData.studyPlanMetadata = groomedStudyPlanMetadata;
   studyPlanData.serviceEmbedJSXObj = { test: "one" };
   for (const studyPlanValue of Object.values(studyPlanData.studyPlan)) {

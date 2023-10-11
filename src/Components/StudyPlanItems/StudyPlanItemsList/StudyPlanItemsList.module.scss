@@ -8,8 +8,9 @@
   display: flex;
   flex-wrap: wrap;
   flex-basis: min-content;
-  border-radius: 50px;
+  border-radius: 50px 50px 50px 0;
   margin: 1em 1em 0.1em;
+  overflow: hidden;
 }
 
 .master-parent-group > button:hover {
@@ -180,7 +181,9 @@
 .subgroup .tags .group-title {
   display: none;
 }
-
+.dependencies-container:not([section=studyPlan-goals] ){
+  display: none;
+}
 body .master-parent-group .dependencies-container {
   grid-area: dependencies-container;
   overflow: hidden;
@@ -253,7 +256,6 @@ body .dependencies-container [parentMasterType="step"] {
   border: none;
   border-radius: 0;
   padding: 0.5em 2em;
-
   box-shadow: inset 5px 5px 9px -5px var(--spt-color-accent-light),
     inset -5px -5px 9px -5px var(--spt-color-accent-dark);
   transition: 0.3s all ease;
@@ -263,6 +265,10 @@ body .dependencies-container [parentMasterType="step"] {
   border-radius: 50px;
 }
 
+.form-button span {
+  pointer-events: none;
+  background: transparent;
+}
 .show-hidden-form-button {
   flex-shrink: 1;
   flex-grow: 0;

@@ -9,13 +9,6 @@ const CompletedStudyPlanItems = (props) => {
   );
   const studyPlanSet = props.studyPlanSet ? props.studyPlanSet : {};
   const filterKey = props.filterKey;
-  console.log(
-    "%c --> %cline:10%cstudyPlanSet",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(3, 101, 100);padding:3px;border-radius:2px",
-    studyPlanSet
-  );
   const filteredItems = {};
   if (studyPlanMetadata.hasOwnProperty(filterKey)) {
     studyPlanMetadata[filterKey].forEach((id) => {

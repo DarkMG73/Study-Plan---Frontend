@@ -13,6 +13,7 @@
   padding: 1em;
   list-style: none;
   padding: 0;
+  box-shadow: inset 0px -13px 7px -14px black, inset 0px 14px 7px -14px #00000087;
 }
 
 .group-studyPlan-goals ul,
@@ -22,10 +23,11 @@
   /* text-shadow: 1px 1px 1px grey, 0px 0px 0px #000000; */
 }
 
-.group-studyPlan-goals ul {
+.studyPlan-items-group ul[type=goal] {
   background: var(--spt-color-accent-2-gradient);
 }
 
+.goal { border: 10px solid red !important; }
 .group-studyPlan-goals ul > div {
   display: grid;
   grid-gap: 0;
@@ -79,7 +81,8 @@
     "markforreview  markforreview markforreview markcomplete  markcomplete markcomplete"
     "createdAt createdAt createdAt updatedAt updatedAt updatedAt"
     "_id _id _id _id _id _id" "id id id id id id" "identifier identifier identifier identifier identifier identifier" "masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID"
-    "buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer";
+    "buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer"
+    "dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container";
 
   grid-auto-flow: row dense;
   max-width: 100%;

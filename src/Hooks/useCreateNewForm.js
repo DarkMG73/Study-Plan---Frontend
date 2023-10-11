@@ -17,10 +17,6 @@ const useCreateNewForm = () => {
     const setNewFormJSX = props.setNewFormJSX;
     const setNewFormInputValuesObj = props.setNewFormInputValuesObj;
     const id = props.id;
-    let availableServices =
-      studyPlanMetadata && studyPlanMetadata.hasOwnProperty("availableServices")
-        ? [...studyPlanMetadata.availableServices]
-        : [""];
     const user = props.user;
     const getSchema =
       id === "studyPlan" ? getSchemaForStudyPlanItem : getSchemaForContentItem;
@@ -70,16 +66,7 @@ const useCreateNewForm = () => {
       // const itemsToRemove = ['$timestamps', ]
       const cleansedFormData = {};
       Object.keys(targetFormDataObj).forEach((key) => {
-        // If sourceURLObj, add services
-        if (key === "sourceURLObj") {
-          cleansedFormData[key] = {};
-          availableServices.forEach((serviceName) => {
-            if (serviceName === "") return;
-            cleansedFormData[key][serviceName] = "";
-          });
-        } else {
-          cleansedFormData[key] = "";
-        }
+        cleansedFormData[key] = "";
       });
 
       const additionalFormElm = function () {

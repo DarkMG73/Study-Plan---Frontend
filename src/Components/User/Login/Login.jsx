@@ -244,7 +244,7 @@ const Login = (props) => {
             margin: "1em",
             boxShadow:
               "3px 3px 7px -5px white inset, -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset, 0 0 25px -2px",
-            border: "2px solid var(--spt-color-accent)",
+            border: "2px solid var(--spt-color-accent-2)",
             fontWeight: "700",
           }}
           value="Add a Question"
@@ -297,7 +297,7 @@ const Login = (props) => {
               styles={{
                 boxShadow:
                   "3px 3px 7px -5px white inset, -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset, 0 0 25px -2px",
-                border: "2px solid var(--spt-color-accent)",
+                border: "2px solid var(--spt-color-accent-2)",
 
                 fontWeight: "700",
               }}
@@ -329,7 +329,8 @@ const Login = (props) => {
             margin: "1em",
             boxShadow:
               "3px 3px 7px -5px white inset, -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset, 0 0 25px -2px",
-            border: "2px solid var(--spt-color-accent)",
+            border: "2px solid var(--spt-color-accent-2)",
+            color: "2px solid var(--spt-color-accent-2)",
           }}
           value="Login"
           data=""

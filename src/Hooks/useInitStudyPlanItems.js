@@ -1,7 +1,9 @@
 import useSortList from "./useSortList";
+import useAssembleStudyPlanList from "./useAssembleStudyPlanList";
 
 const useInitStudyPlanItems = () => {
   const sortList = useSortList();
+  const assembleStudyPlanList = useAssembleStudyPlanList();
   const outputFunction = (props) => {
     const {
       id,
@@ -39,7 +41,6 @@ const useInitStudyPlanItems = () => {
 
       getSchema()
         .then((data) => {
-          const output = {};
           // const groomedSchema = {}
           // // Organize Schema
           // orderOfOutputArray.forEach(topic=>{
@@ -47,50 +48,14 @@ const useInitStudyPlanItems = () => {
           // })
 
           // Gather items to list based on typeArray.
-          for (const itemID in dataObjForEdit) {
-            if (
-              !dataObjForEdit[itemID].hasOwnProperty("type") ||
-              !typeArray.includes(dataObjForEdit[itemID].type)
-            )
-              continue;
-            output[itemID] = {};
-
-            for (const catName of Object.keys(data.tree)) {
-              output[itemID][catName] = dataObjForEdit[itemID].hasOwnProperty(
-                catName
-              )
-                ? dataObjForEdit[itemID][catName]
-                : "";
+          const { groomedOutput, groomedAllItemOutput } = assembleStudyPlanList(
+            {
+              typeArray,
+              keysToUseArray: Object.keys(data.tree),
+              dataObjForEdit,
+              allStudyPlanItems,
             }
-          }
-
-          const groomedOutput = { ...output };
-          const groomedAllItemOutput = {};
-          if (allStudyPlanItems) {
-            for (const [key, value] of Object.entries(allStudyPlanItems)) {
-              groomedAllItemOutput[key] = {};
-              for (const [innerKey, innerValue] of Object.entries(value)) {
-                groomedAllItemOutput[key][innerKey] = innerValue;
-              }
-            }
-          }
-
-          if (typeArray.includes("goal")) {
-            for (const [key, value] of Object.entries(output)) {
-              groomedOutput[key].dependencies = findDependencies(
-                value.identifier,
-                dataObjForEdit
-              );
-            }
-            if (allStudyPlanItems) {
-              for (const [key, value] of Object.entries(allStudyPlanItems)) {
-                groomedAllItemOutput[key].dependencies = findDependencies(
-                  value.identifier,
-                  allStudyPlanItems
-                );
-              }
-            }
-          }
+          );
 
           ////////////////////////////////////////////////////////////////////////
           /// Sort groomedOutput
@@ -100,7 +65,13 @@ const useInitStudyPlanItems = () => {
           )
             ? sortMethod
             : "priority";
-
+          console.log(
+            "%c --> %cline:106%cgroomedOutput",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(251, 178, 23);padding:3px;border-radius:2px",
+            groomedOutput
+          );
           const sortedGroomedOutput = sortList({
             sortMethod: sortBy,
             objectToBeSorted: groomedOutput,

@@ -41,6 +41,7 @@
   padding: 0;
   width: 100%;
   max-width: 39em;
+  width: 75%;
 }
 
 .db-login-container button {
@@ -63,21 +64,20 @@
 
   /* border: 1px inset var(--spt-color-background); */
   background-color: var(--spt-color-background);
-  color: var(--spt-color-accent);
+  color: var(--spt-color-accent-2);
   border-radius: 50px;
   text-transform: uppercase;
 }
 
 .not-logged-in-text {
-  background: var(--spt-color-accent);
+  background: var(--spt-color-accent-2);
   color: var(--spt-color-background);
   -webkit-text-fill-color: initial;
   font-size: 1em;
   font-size: calc(0.7em + 0.25vw);
   font-weight: 700;
   /* border: 2px inset var(--spt-color-accent); */
-  box-shadow: inset 1px 1px 3px -2px var(--spt-color-background),
-    inset -1px -1px 3px -2px white, 2px 2px 3px -2px var(--spt-color-accent);
+  box-shadow: inset 1px 1px 3px -2px var(--spt-color-background), inset -1px -1px 3px -2px white, 2px 2px 3px -2px var(--spt-color-accent-2);
   padding: 0.5em 1em;
 }
 
@@ -88,8 +88,9 @@
 }
 
 .form-container {
-  box-shadow: 3px 3px 10px -7px inset black, -3px -3px 10px -7px inset white,
-    2px 2px 3px -2px #ffffff99;
+  // box-shadow: 3px 3px 10px -7px inset black, -3px -3px 10px -7px inset white,
+  //   2px 2px 3px -2px #ffffff99;
+  box-shadow: none;
   width: 100%;
   max-width: none;
   border-radius: 50px;
@@ -119,7 +120,7 @@ body .form-container input[type="password"] {
   justify-content: center;
   align-items: center;
   /* background: var(--spt-color-background-gradient); */
-  color: var(--spt-color-accent);
+  color: var(--spt-color-accent-2);
   box-shadow: inset 1px 1px 1px rgb(255 255 255 / 25%),
     inset 1px -1px 1px rgb(0 0 0 / 15%), 1px 1px 5px -3px black;
   box-shadow: 3px 3px 7px -5px white inset,
@@ -131,7 +132,7 @@ body .form-container input[type="password"] {
 }
 
 .button-container button:hover {
-  background: var(--spt-color-accent);
+  background: var(--spt-color-accent-2);
   color: var(--spt-color-background);
   transform: none;
 }
@@ -176,7 +177,7 @@ body .form-container input[type="password"] {
 
 .db-login-container.horizontal-display span button {
   margin-left: 1em;
-  color: var(--spt-color-accent);
+  color: var(--spt-color-accent-2);
   text-shadow: 0 0 3px wheat;
   background: linear-gradient(rgb(255 135 0) 37%, rgba(0, 0, 0, 1) 100%);
 }

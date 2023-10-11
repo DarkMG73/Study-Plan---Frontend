@@ -29,16 +29,18 @@ import {
 } from "../../storage/contentDB";
 import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 import useSortList from "../../Hooks/useSortList";
+import useAssembleStudyPlanList from "../../Hooks/useAssembleStudyPlanList";
 
 const StudyPlanItems = (props) => {
   const user = useSelector((state) => state.auth.user);
-  const studyPlanMetadata = useSelector(
-    (state) => state.studyPlanData.studyPlanMetadata
+  const { studyPlan, studyPlanMetadata } = useSelector(
+    (state) => state.studyPlanData
   );
   const updateStudyPlan = useSelector(
     (state) => state.studyPlanData.updateStudyPlan
   );
   const [sortMethod, setSortMethod] = useState("priority");
+  const [refresh, setRefresh] = useState(0);
   const [changeListArray, setChangeListArray] = useState(false);
   const [showListResetButton, setShowListResetButton] = useState(false);
   const id = props.id;
@@ -60,6 +62,7 @@ const StudyPlanItems = (props) => {
   const allFormInputData = useSelector((state) => state.formInputData);
   const dispatch = useDispatch();
   const sortList = useSortList();
+  const assembleStudyPlanList = useAssembleStudyPlanList();
   let outputName =
     dataObjForEdit &&
     dataObjForEdit[id] &&
@@ -95,11 +98,18 @@ const StudyPlanItems = (props) => {
   }, []);
 
   useEffect(() => {
+    const enumerableFormInputData = {};
+    for (const [key, value] of Object.entries(formInputData)) {
+      enumerableFormInputData[key] = value;
+    }
+
     const sortedGroomedOutput = sortList({
       sortMethod: sortMethod,
-      objectToBeSorted: formInputData,
+      objectToBeSorted: { ...enumerableFormInputData },
     });
+
     setFormInputData(sortedGroomedOutput);
+    setRefresh(refresh + 1);
   }, [sortMethod]);
 
   useEffect(() => {
@@ -110,6 +120,58 @@ const StudyPlanItems = (props) => {
       "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
       changeListArray
     );
+    if (changeListArray) {
+      const keysToUseArray = studyPlanMetadata
+        ? Object.keys(studyPlanMetadata)
+        : [];
+      console.log(
+        "%c --> %cline:127%ckeysToUseArray",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(252, 157, 154);padding:3px;border-radius:2px",
+        keysToUseArray
+      );
+      console.log(
+        "%c --> %cline:129%callStudyPlanItems",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(217, 104, 49);padding:3px;border-radius:2px",
+        allStudyPlanItems
+      );
+      console.log(
+        "%c --> %cline:142%cstudyPlan",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(161, 23, 21);padding:3px;border-radius:2px",
+        studyPlan
+      );
+      console.log(
+        "%c --> %cline:49%cdataObjForEdit",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
+        dataObjForEdit
+      );
+      const { groomedOutput } = assembleStudyPlanList({
+        typeArray: changeListArray,
+        keysToUseArray,
+        dataObjForEdit,
+        allStudyPlanItems: studyPlan,
+      });
+
+      console.log(
+        "%c --> %cline:125%cgroomedOutput",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
+        groomedOutput
+      );
+      const sortedGroomedOutput = sortList({
+        sortMethod: sortMethod,
+        objectToBeSorted: { ...groomedOutput },
+      });
+      setFormInputData(sortedGroomedOutput);
+    }
   }, [changeListArray]);
 
   useEffect(() => {
@@ -409,7 +471,7 @@ const StudyPlanItems = (props) => {
             )}
           </div>
         </label>
-        {formInputData && Object.keys(formInputData).length > 0 && (
+        {formInputData && refresh && Object.keys(formInputData).length > 0 && (
           <StudyPlanItemsList
             studyPlanItemsObj={formInputData}
             allStudyPlanItems={allStudyPlanItems}
@@ -421,6 +483,7 @@ const StudyPlanItems = (props) => {
             section={id}
             onlyList={props.onlyList}
             noEditButton={props.noEditButton}
+            refresh={refresh}
           />
         )}
         {newFormJSX && (

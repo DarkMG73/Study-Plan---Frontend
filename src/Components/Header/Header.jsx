@@ -124,9 +124,7 @@ function Header(props) {
               <h1 className={styles["spt-title"] + " " + styles["second-word"]}>
                 Plan
               </h1>
-              <h3 className={styles["spt-subtitle"]}>
-                One Goal | Every Steps | Time to Conquer
-              </h3>
+              <h3 className={styles["spt-subtitle"]}>One Goal | Many Steps</h3>
             </div>
           </a>
         </div>

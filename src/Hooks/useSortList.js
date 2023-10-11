@@ -17,6 +17,7 @@ const useSortList = () => {
       sortMethod
     );
     if (!objectToBeSorted) return objectToBeSorted;
+
     const sortBy = sortMethod ? sortMethod : "priority";
 
     const sortNumbers = (fieldName, direction) => {
@@ -29,7 +30,7 @@ const useSortList = () => {
       const name = fieldName.replace("-reverse", "");
       if (direction === "reverse") {
         sortedArray = Object.values(objectToBeSorted).sort(
-          (v1, v2) => v1[name] + v2[name]
+          (v1, v2) => v2[name] - v1[name]
         );
       } else {
         sortedArray = Object.values(objectToBeSorted).sort(
@@ -63,39 +64,11 @@ const useSortList = () => {
           return 0;
         });
       } else {
-        console.log(
-          "%c --> %cline:119%cname",
-          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-          "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
-          name
-        );
         sortedArray = Object.values(objectToBeSorted).sort((v1, v2) => {
           if (v1[name] < v2[name]) {
-            console.log(
-              "%c --> %cline:149%cv1[name] < v2[name]",
-              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-              "color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px",
-              v1[name]
-            );
-            console.log(
-              "%c --> %cline:149%cv1[name] < v2[name]",
-              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-              "color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px",
-              v2[name]
-            );
             return -1;
           }
           if (v1[name] > v2[name]) {
-            console.log(
-              "%c --> %cline:153%cv1[name] > v2[name]",
-              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-              "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
-              v1[name] > v2[name]
-            );
             return 1;
           }
           return 0;
@@ -104,13 +77,7 @@ const useSortList = () => {
       sortedArray.forEach((item) => {
         outputObj[item._id] = item;
       });
-      console.log(
-        "%c --> %cline:150%coutputObj",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(96, 143, 159);padding:3px;border-radius:2px",
-        outputObj
-      );
+
       return outputObj;
     };
 
@@ -123,10 +90,24 @@ const useSortList = () => {
     ];
 
     const direction = sortBy.includes("-reverse") ? "reverse" : "forward";
+    console.log(
+      "%c --> %cline:125%cdirection",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(153, 80, 84);padding:3px;border-radius:2px",
+      direction
+    );
     let sortedGroomedOutput = {};
 
     if (forNumberSort.includes(sortBy.replace("-reverse", ""))) {
       sortedGroomedOutput = sortNumbers(sortBy, direction);
+      console.log(
+        "%c --> %cline:136%csortedGroomedOutput",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(254, 67, 101);padding:3px;border-radius:2px",
+        sortedGroomedOutput
+      );
     } else {
       sortedGroomedOutput = sortWords(sortBy, direction);
     }

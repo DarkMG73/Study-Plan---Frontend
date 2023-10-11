@@ -19,10 +19,6 @@ const StudyPlanItemsList = (props) => {
   const [refresh, setRefresh] = useState(1);
   const studyPlanItemsObj = props.studyPlanItemsObj;
   const { studyPlanMetadata } = studyPlanItemsObj;
-  let availableServices =
-    studyPlanMetadata && studyPlanMetadata.hasOwnProperty("availableServices")
-      ? [...studyPlanMetadata.availableServices]
-      : [""];
   const user = useSelector((state) => state.auth.user);
   const parentKey = props.parentKey;
   const parentsParentKey = props.parentsParentKey;
@@ -172,14 +168,6 @@ const StudyPlanItemsList = (props) => {
           }
         }
 
-        availableServices.forEach((serviceName) => {
-          if (!newInnerItemWithNewEdits.hasOwnProperty(serviceName)) {
-            newInnerItemWithNewEdits[serviceName] = "";
-          } else {
-            newInnerItemWithNewEdits[serviceName] =
-              existingFormEdits[parentMasterID][key][serviceName];
-          }
-        });
         itemWithNewEdits[key] = newInnerItemWithNewEdits;
       } else if (
         existingFormEdits[parentMasterID][key] &&
@@ -283,6 +271,7 @@ const StudyPlanItemsList = (props) => {
             section={section}
             key={key}
             id={key}
+            type={studyPlanItemsObj[key].type}
             parentMasterType={
               parentMasterType ? parentMasterType : studyPlanItemsObj[key].type
             }
@@ -308,6 +297,7 @@ const StudyPlanItemsList = (props) => {
               styles[parentMasterID] +
               " " +
               (unlockProtectedVisible.includes(key) && styles["edited-list"]) +
+              " " +
               (props.inModal && styles["in-modal"])
             }
           >
@@ -402,7 +392,10 @@ const StudyPlanItemsList = (props) => {
                 onlyList={onlyList}
                 emptyForm={props.emptyForm}
               />
-              <ul className={styles["dependencies-container"]}>
+              <ul
+                className={styles["dependencies-container"]}
+                section={section}
+              >
                 <h3>The Path to {studyPlanItemsObj[key].name}</h3>
 
                 {props.allStudyPlanItems &&
@@ -463,7 +456,15 @@ const StudyPlanItemsList = (props) => {
                       parentmasterid={key}
                       onClick={unlockProtectedVisibleHandler}
                     >
-                      Edit ONE {noEditButton}
+                      {!unlockProtectedVisible.includes(key) && (
+                        <Fragment>
+                          {" "}
+                          Edit
+                          <span className={styles["edit-buttton-target-name"]}>
+                            {studyPlanItemsObj[key].name}
+                          </span>
+                        </Fragment>
+                      )}
                     </button>
                   )}
                   <button
@@ -476,7 +477,7 @@ const StudyPlanItemsList = (props) => {
                     parentmasterid={key}
                     onClick={showProtectedHiddenHandler}
                   >
-                    Show Hidden
+                    Show Hidden Fields
                   </button>
                   {!onlyList && unlockProtectedVisible.includes(key) && (
                     <Fragment>
@@ -521,6 +522,7 @@ const StudyPlanItemsList = (props) => {
             section={section}
             key={key}
             id={key}
+            type={studyPlanItemsObj[key].type}
             parentMasterType={
               parentMasterType ? parentMasterType : studyPlanItemsObj[key].type
             }
@@ -546,6 +548,7 @@ const StudyPlanItemsList = (props) => {
               styles[parentMasterID] +
               " " +
               (unlockProtectedVisible.includes(key) && styles["edited-list"]) +
+              " " +
               (props.inModal && styles["in-modal"]) +
               " " +
               styles[
@@ -567,7 +570,7 @@ const StudyPlanItemsList = (props) => {
               inputOrButton="button"
               buttonStyles={{
                 margin: "0 auto",
-                padding: "0 2em 0 2em",
+                padding: "0.5em 2em",
                 transition: "0.7s all ease",
                 maxWidth: "80%",
                 textAlign: "center",
@@ -659,7 +662,25 @@ const StudyPlanItemsList = (props) => {
                       parentmasterid={key}
                       onClick={unlockProtectedVisibleHandler}
                     >
-                      Edit
+                      {!unlockProtectedVisible.includes(key) && (
+                        <Fragment>
+                          {" "}
+                          <span className={styles["edit-button-title"]}>
+                            Edit{" "}
+                          </span>
+                          <span className={styles["edit-buttton-target-name"]}>
+                            {studyPlanItemsObj[key].name}
+                          </span>
+                        </Fragment>
+                      )}
+                      {unlockProtectedVisible.includes(key) && (
+                        <Fragment>
+                          {" "}
+                          <span className={styles["edit-button-cancel-title"]}>
+                            Cancel Editor
+                          </span>
+                        </Fragment>
+                      )}
                     </button>
                   )}{" "}
                   <button
@@ -672,7 +693,7 @@ const StudyPlanItemsList = (props) => {
                     parentmasterid={key}
                     onClick={showProtectedHiddenHandler}
                   >
-                    Show Hidden
+                    Show Hidden Fields
                   </button>
                   {!onlyList && unlockProtectedVisible.includes(key) && (
                     <Fragment>
