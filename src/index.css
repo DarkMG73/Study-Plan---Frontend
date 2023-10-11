@@ -11,28 +11,60 @@
   font-weight: bold;
 }
 
-/* Neon Purple*/
+/* Orange & Blue - Bright */
+/* 
+Oranges #fca075  
+Blues: rgb(67, 144, 233) hsl(212 79% 97% / 1)
+*/
 :root {
+  /* 
+  Primary Accent: 
+      Contrasts background.
+      Strong touches, possibly limited, throughout the page. 
+  */
   --spt-color-accent: #fca075;
+  --spt-color-accent-light: hsl(19 96% 88% / 1); /*14 lightness up */
+  --spt-color-accent-dark: hsl(19 96% 58% / 1); /*14 lightness down */
   --spt-color-accent-gradient: radial-gradient(
     circle at 10% 20%,
     rgb(253, 193, 104) 0%,
     rgb(251, 128, 128) 90%
   );
-  --spt-color-accent-2: lightblue;
+  /* 
+  Secondary Accent:  
+      Compliments and possibly contrasts primary accent.
+      Adds variety to the page.
+  */
+  --spt-color-accent-2: rgb(67, 144, 233);
+  --spt-color-accent-light: hsl(212 79% 73% / 1); /*14 lightness up */
+  --spt-color-accent-dark: hsl(212 79% 45% / 1); /*14 lightness down */
   --spt-color-accent-2-gradient: radial-gradient(
     circle at 10% 20%,
     rgb(67, 144, 233) 0%,
     rgb(78, 226, 198) 90.1%
   );
-  --spt-color-accent-light: #ffffffb0;
-  /* --spt-color-accent-dark: hsl(205 78% 22% / 1); */
-  --spt-color-accent-dark: #470d28;
+  /* 
+  Ancillary accents: spot use or with gradients.
+  */
+  --spt-color-accent-3: rgb(251, 128, 128);
+  --spt-color-accent-4: rgb(78, 226, 198);
+
+  /* Background */
   --spt-color-background: #ffffff;
+  --spt-color-background-warm: hsl(19 96% 97% / 1);
+  --spt-color-background-cool: hsl(212 79% 97% / 1);
   --spt-image-background-texture: url("https://www.transparenttextures.com/patterns/brushed-alum.png");
-  --spt-color-background-warm: hsl(33 100% 96% / 1);
-  --spt-color-background-cool: #c7cfd1;
-  --spt-color-background-contrast: #64656e;
+
+  /* 
+  Background Contrast: text and anything needing maximum readability
+  */
+  --spt-color-background-contrast: hsl(0 0% 50% / 1);
+  --spt-color-background-contrast-light: hsl(0 0% 75% / 1);
+  --spt-color-background-contrast-dark: hsl(0 0% 25% / 1);
+
+  /*
+  Font Settings
+*/
   --spt--font-heading: normal 700 3.6rem "Covered By Your Grace", sans-serif;
   --spt--font-heading-2: normal 700 3rem "Covered By Your Grace", sans-serif;
   --spt-spacing-heading: 0.25em;
@@ -72,6 +104,10 @@ html {
 }
 * {
   box-sizing: border-box;
+}
+:focus {
+  border: 7px solid var(--spt-color-accent);
+  outline: none;
 }
 body {
   background-color: #000000;

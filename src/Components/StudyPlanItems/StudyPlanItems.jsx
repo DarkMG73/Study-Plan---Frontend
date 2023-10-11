@@ -9,6 +9,7 @@ import useCreateNewForm from "../../Hooks/useCreateNewForm";
 import useProcessAllFormInputData from "../../Hooks/useProcessAllFormInputData";
 import useInitStudyPlanItems from "../../Hooks/useInitStudyPlanItems";
 import useProcessUpdateStudyPlan from "../../Hooks/useProcessUpdateStudyPlan";
+import PushButton from "../../UI/Buttons/PushButton/PushButton";
 import { toTitleCase } from "../../Hooks/utility";
 import {
   saveManyStudyPlanItems,
@@ -280,34 +281,21 @@ const StudyPlanItems = (props) => {
               inputOrButton="button"
               buttonStyles={{
                 margin: "auto",
-                padding: "0.5em 2em",
-                transition: "0.7s all ease",
-                width: "24em",
+                width: "21em",
                 maxWidth: "100%",
-                textAlign: "center",
                 display: "flex",
                 alignItems: "center",
-                borderRadius: "50px",
-                fontFamily: "Arial",
-                border: "none",
                 position: "absolute",
                 top: "0",
                 left: "0",
                 flexGrow: "1",
                 minWidth: "min-content",
-                boxShadow:
-                  "inset 3px 3px 5px 0px #ffffffe0, inset -3px -3px 5px 0px #00000038",
-                fontSize: "1.2rem",
-                fontVariant: "all-small-caps",
-                letterSpacing: "0.2em",
-                cursor: "pointer",
                 height: "100%",
                 maxHeight: "3em",
+                textAlign: "left",
                 transformOrigin: "left",
-                background: "var(--spt-color-background-warm)",
-                color: "var(--spt-color-accent)",
               }}
-              colorType="primary"
+              colorType="secondary"
               data=""
               size="small"
               buttonTextOpened={"Close Completed Items"}
@@ -344,34 +332,21 @@ const StudyPlanItems = (props) => {
               inputOrButton="button"
               buttonStyles={{
                 margin: "auto",
-                padding: "0.5em 2em",
-                transition: "0.7s all ease",
-                width: "24em",
+                width: "21em",
                 maxWidth: "100%",
-                textAlign: "center",
                 display: "flex",
                 alignItems: "center",
-                borderRadius: "50px",
-                fontFamily: "Arial",
-                border: "none",
                 position: "absolute",
                 top: "0",
                 left: "0",
                 flexGrow: "1",
                 minWidth: "min-content",
-                boxShadow:
-                  "inset 3px 3px 5px 0px #ffffffe0, inset -3px -3px 5px 0px #00000038",
-                fontSize: "1.2rem",
-                fontVariant: "all-small-caps",
-                letterSpacing: "0.2em",
-                cursor: "pointer",
                 height: "100%",
                 maxHeight: "3em",
+                textAlign: "left",
                 transformOrigin: "left",
-                background: "var(--spt-color-background-warm)",
-                color: "var(--spt-color-accent)",
               }}
-              colorType="primary"
+              colorType="secondary"
               data=""
               size="small"
               buttonTextOpened={"Close Items Needing Review"}
@@ -427,50 +402,64 @@ const StudyPlanItems = (props) => {
         buttonTextClosed={"- Open All " + toTitleCase(outputName) + " -"}
         open={false}
       >
-        <label>
-          Sort
-          <select
-            className={styles["new-form-button"]}
-            parentmasterid={id}
-            onChange={sortMethodButtonHandler}
-            value={sortMethod}
-          >
-            {Object.entries(studyItemSortOptions).map((entry) => (
-              <Fragment>
-                {" "}
-                <option value={entry[0]}>{entry[1]}</option>{" "}
-                <option value={entry[0] + "-reverse"}>
-                  {"Reverse " + entry[1]}
-                </option>
-              </Fragment>
-            ))}
-          </select>{" "}
+        <div className={styles["sort-button-container"]} type={typeName}>
           <div
             id="list-button-container"
             className={styles["list-button-container"]}
           >
             {!showListResetButton && (
-              <button
-                className={styles["new-form-button"]}
-                value={id}
-                parentmasterid={id}
-                onClick={showAllItemsButtonHandler}
-              >
-                List All Goals & Tasks
-              </button>
+              <Fragment>
+                <PushButton
+                  inputOrButton="button"
+                  id="create-entry-btn"
+                  colorType="secondary"
+                  styles={{}}
+                  value={id}
+                  parentmasterid={id}
+                  data=""
+                  size="small"
+                  onClick={showAllItemsButtonHandler}
+                >
+                  List All Goals & Tasks
+                </PushButton>
+              </Fragment>
             )}
             {showListResetButton && (
-              <button
-                className={styles["new-form-button"]}
+              <PushButton
+                inputOrButton="button"
+                id="create-entry-btn"
+                colorType="secondary"
+                styles={{}}
                 value={id}
                 parentmasterid={id}
+                data=""
+                size="small"
                 onClick={showDefaultItemsButtonHandler}
               >
                 Show Only Steps
-              </button>
+              </PushButton>
             )}
           </div>
-        </label>
+          <label className={styles["sort-button-wrap"]}>
+            Sort by:
+            <select
+              className={styles["new-form-button"]}
+              parentmasterid={IdleDeadline}
+              onChange={sortMethodButtonHandler}
+              value={sortMethod}
+            >
+              {Object.entries(studyItemSortOptions).map((entry) => (
+                <Fragment>
+                  {" "}
+                  <option value={entry[0]}>{entry[1]}</option>{" "}
+                  <option value={entry[0] + "-reverse"}>
+                    {"Reverse " + entry[1]}
+                  </option>
+                </Fragment>
+              ))}
+            </select>{" "}
+          </label>
+        </div>
         {formInputData && refresh && Object.keys(formInputData).length > 0 && (
           <StudyPlanItemsList
             studyPlanItemsObj={formInputData}
@@ -492,14 +481,21 @@ const StudyPlanItems = (props) => {
           </div>
         )}
       </CollapsibleElm>
-      <button
-        className={styles["new-form-button"]}
-        value={id}
-        parentmasterid={id}
-        onClick={addFormButtonHandler}
-      >
-        Add to <span>{id}</span>
-      </button>
+      <div className={styles["new-form-button-wrap"]}>
+        <PushButton
+          inputOrButton="button"
+          id="create-entry-btn"
+          colorType="primary"
+          styles={{}}
+          value={id}
+          parentmasterid={id}
+          data=""
+          size="medium"
+          onClick={addFormButtonHandler}
+        >
+          Add to <span>{id}</span>
+        </PushButton>
+      </div>
     </ul>
   );
 };

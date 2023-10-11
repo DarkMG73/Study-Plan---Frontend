@@ -1,8 +1,9 @@
 .footer-container {
   background: var(--spt-color-background);
   border-radius: inherit;
-  box-shadow: inherit;
-  padding: 2em;
+  box-shadow: inset 0px -13px 7px -14px black, inset 0px 14px 7px -14px rgb(15 15 15 / 53%), 3px 3px 7px -4px #00000094;
+  padding: 3em;
+  margin: 1em;
 }
 
 .footer-column a {

@@ -10,5 +10,5 @@
   background: var(--spt-color-background);
   color: var(--spt-color-background-contrast);
   padding: 2rem;
-  border-radius: 50px;
+  border-radius: 3px;
 }

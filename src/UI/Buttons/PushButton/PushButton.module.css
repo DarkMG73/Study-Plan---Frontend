@@ -12,7 +12,7 @@
   margin-top: 1em;
   font-weight: 700;
   cursor: pointer;
-  transition: 0.2s all ease;
+  transition: 0.3s all ease;
   font-variant: small-caps;
 }
 
@@ -25,6 +25,8 @@
 .button span {
   background: transparent;
   color: inherit;
+  text-align: inherit;
+  width: 100%;
 }
 
 /* Color Control */
@@ -40,8 +42,8 @@
 }
 
 .button.secondary {
-  background: var(--spt-color-accent-light);
-  color: var(--spt-color-accent);
+  background: var(--spt-color-background-warm);
+  color: var(--spt-color-background-contrast-light);
 }
 
 .button.secondary.selected {
@@ -74,7 +76,9 @@
 .button.small {
   font: var(--spt-font-body-text);
   font-size: 0.75em;
-  font-size: calc(0.5em + 0.2vw);
+  /* font-size: calc(0.5em + 0.2vw); */
+  font-variant: all-small-caps;
+  letter-spacing: 0.125em;
   font-weight: 700;
 }
 

@@ -120,7 +120,7 @@ const Home = (props) => {
       )}
 
       {!hideStudyPlan && studyPlan && (
-        <CardTransparent>
+        <CardPrimary>
           <ErrorBoundary>
             <StudyPlanItems
               key="studyPlan-goals"
@@ -132,10 +132,10 @@ const Home = (props) => {
               noEditButton={true}
             />
           </ErrorBoundary>
-        </CardTransparent>
+        </CardPrimary>
       )}
       {!hideStudyPlan && studyPlan && (
-        <CardTransparent>
+        <CardPrimary>
           <ErrorBoundary>
             <StudyPlanItems
               key="studyPlan"
@@ -146,7 +146,7 @@ const Home = (props) => {
               noEditButton={false}
             />
           </ErrorBoundary>
-        </CardTransparent>
+        </CardPrimary>
       )}
       {checkIfContentSectionActive("noticeTwo", content) && (
         <CardPrimary
@@ -162,11 +162,11 @@ const Home = (props) => {
         </CardPrimary>
       )}
       {props.aboutIsActive && (
-        <CardTransparent>
+        <CardPrimary>
           <ErrorBoundary>
             <About />
           </ErrorBoundary>
-        </CardTransparent>
+        </CardPrimary>
       )}
       {checkIfContentSectionActive("noticeThree", content) && (
         <CardPrimary
@@ -181,7 +181,7 @@ const Home = (props) => {
         </CardPrimary>
       )}
 
-      <CardSecondary styles={{ margin: "0" }}>
+      <CardSecondary>
         <ErrorBoundary>
           <Footer />
         </ErrorBoundary>

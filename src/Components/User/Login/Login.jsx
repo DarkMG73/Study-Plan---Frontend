@@ -331,6 +331,7 @@ const Login = (props) => {
               "3px 3px 7px -5px white inset, -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset, 0 0 25px -2px",
             border: "2px solid var(--spt-color-accent-2)",
             color: "2px solid var(--spt-color-accent-2)",
+            fontSize: "75%",
           }}
           value="Login"
           data=""

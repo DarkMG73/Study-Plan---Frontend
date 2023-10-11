@@ -40,6 +40,10 @@
   justify-content: center;
 }
 
+.form > *{
+  flex-basis: 19.33%;
+  flex-grow: 1;
+}
 .form input[type="text"],
 .form input[type="password"],
 .form input[type="email"],
@@ -250,6 +254,7 @@
 .form > *,
 .input-container {
   flex-grow: 1;
+  flex-basis: min-content;
 }
 
 .form button {

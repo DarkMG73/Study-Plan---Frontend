@@ -14,6 +14,9 @@
   background-blend-mode: overlay;
   /* background-image: url("https://www.transparenttextures.com/patterns/subtle-stripes.png"); */
   background-size: cover;
+  box-shadow: inset 0px -13px 7px -14px black,
+    inset 0px 14px 7px -14px rgba(0, 0, 0, 0.5294117647);
+  margin-top: 2em 0;
 }
 
 card-secondary a {

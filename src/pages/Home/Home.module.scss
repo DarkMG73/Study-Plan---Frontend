@@ -9,8 +9,8 @@
   box-shadow: 40px 40px 40px -40px var(--spt-color-accent);
   box-shadow: 3px 0px 40px 7px var(--spt-color-accent-2);
   /* padding: 0 3rem 3rem; */
-  border-radius: 0 0 50px 50px;
-  border: 9px solid var(--spt-color-background);
+  border-radius: 0;
+  // border: 9px solid var(--spt-color-background);
 }
 
 .outerwrap {
@@ -40,7 +40,9 @@
   margin: 0;
   padding: 0;
   flex-wrap: wrap;
-  width: fit-content;
+  // width: fit-content;
+  width: 100%;
+    max-width: 100%;
 }
 
 .login-outer-wrap p {
