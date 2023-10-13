@@ -1,8 +1,12 @@
 const displayConditions = {
   formWithPreFilledData: {
-    isURL: ["link", "sourceURLbj"],
+    isURL: ["link", "url", "sourceURLbj"],
     isBoolean: ["isDefaultPlaylist", "isFeaturedPlaylist"],
-    isDate: ["releaseDate", "createdAt", "updatedAt", "start", "acomp"],
+    isDate: ["createdAt", "updatedAt", "start", "acomp"],
+    isNumber: ["labTime", "lectureTime"],
+    isList: ["author", "method", "platform", "tags"], // List with compiled options.
+    isSuggestionsList: ["method", "msup", "asup"], // List with fixed & compiled options.
+    isLimitedList: ["type"], // List with no input box and fixed options.
     forSlideButton: ["markcomplete", "markforreview"],
     protectedHidden: [
       "title",
@@ -27,9 +31,11 @@ const displayConditions = {
     ],
   },
   emptyForm: {
-    isURL: ["link", "sourceURLbj"],
+    isURL: ["url", "sourceURLbj"],
     isBoolean: ["isDefaultPlaylist", "isFeaturedPlaylist"],
-    isDate: ["releaseDate", "createdAt", "updatedAt"],
+    isDate: ["createdAt", "updatedAt", "start", "acomp"],
+    isNumber: ["labTime", "lectureTime", "priority"],
+    isList: ["author", "type", "method", "msup", "asup", "platform", "tags"],
     protectedHidden: ["identifier"],
     protectedVisible: [],
   },

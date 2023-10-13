@@ -1,29 +1,18 @@
 import useSortList from "./useSortList";
 import useAssembleStudyPlanList from "./useAssembleStudyPlanList";
-import { useSelector, useDispatch } from "react-redux";
-import { studyPlanDataActions } from "../store/studyPlanDataSlice";
+import { useSelector } from "react-redux";
 
 const useInitStudyPlanItems = () => {
-  const dispatch = useDispatch();
   const studyPlanItemSchema = useSelector(
     (state) => state.studyPlanData.schema
-  );
-  console.log(
-    "%c --> %cline:6%cstudyPlanItemSchema",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
-    studyPlanItemSchema
   );
   const sortList = useSortList();
   const assembleStudyPlanList = useAssembleStudyPlanList();
   const outputFunction = (props) => {
     const {
-      id,
       typeArray,
       sortMethod,
       dataObjForEdit,
-      getSchemaForContentItem,
       allStudyPlanItems,
       setAllStudyPlanItems,
       setFormInputData,

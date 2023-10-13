@@ -19,9 +19,7 @@ import LoginStatus from "../../Components/User/LoginStatus/LoginStatus";
 import Stats from "../../Components/Stats/Stats";
 
 const Home = (props) => {
-  const { studyPlan, studyPlanMetadata } = useSelector(
-    (state) => state.studyPlanData
-  );
+  const { studyPlan } = useSelector((state) => state.studyPlanData);
   const { content } = useSelector((state) => state.contentData);
   // const [scrollToElm, setScrollToElm] = useState(false);
   // const [scrollToSessionResults, setScrollToSessionResults] = useState(false);
@@ -30,13 +28,6 @@ const Home = (props) => {
   const dispatch = useDispatch();
   const hideStudyPlan = false;
 
-  console.log(
-    "%c --> %cline:22%cstudyPlan",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
-    studyPlan
-  );
   ////////////////////////////////////////
   /// Effects
   ////////////////////////////////////////

@@ -223,17 +223,26 @@ select {
 .method label {
   display: none;
 }
+
+.method label:after {
+  content:' (corse, tutorial, project, etc.)';
+  font-size: 75%;
+}
+
 .method {
   grid-area: method;
 }
+
 .priority {
   grid-area: priority;
   display: flex;
   flex-direction: column;
 }
+
 .priority label {
   display: none;
 }
+
 .priority:before {
   content: "Priority";
   position: relative;
@@ -542,4 +551,16 @@ ul[type="goal"] .author {
 }
 textarea {
   max-width: 100%;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

@@ -15,13 +15,6 @@ export const studyPlanDataSlice = createSlice({
   reducers: {
     initState: (state, action) => {
       const payload = action.payload;
-      console.log(
-        "%c --> %cline:17%cpayload",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(131, 175, 155);padding:3px;border-radius:2px",
-        payload
-      );
 
       state.studyPlan = payload.studyPlan;
       state.studyPlanMetadata = payload.studyPlanMetadata;
@@ -30,14 +23,8 @@ export const studyPlanDataSlice = createSlice({
     },
 
     updateOneStudyPlanItem: (state, action) => {
-      console.log(
-        "%c --> %cline:25%caction",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(229, 187, 129);padding:3px;border-radius:2px",
-        action
-      );
       const newStudyPlan = { ...state.studyPlan };
+
       newStudyPlan[action.payload._id] = action.payload.item;
       newStudyPlan["count"] = newStudyPlan.hasOwnProperty("count")
         ? [...newStudyPlan.count, action.payload._id]
@@ -45,13 +32,6 @@ export const studyPlanDataSlice = createSlice({
       state.studyPlan = newStudyPlan;
     },
     updateStudyPlanDB: (state, action) => {
-      console.log(
-        "%c --> %cline:38%caction.payload",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(3, 38, 58);padding:3px;border-radius:2px",
-        action.payload
-      );
       if (action.payload && !action.payload.hasOwnProperty("itemWithNewEdits"))
         alert(
           "There is a problem with missing data. Please alert the website admin."
@@ -67,23 +47,9 @@ export const studyPlanDataSlice = createSlice({
       state.updateStudyPlan = output;
     },
     resetUpdateStudyPlan: (state, action) => {
-      console.log(
-        "%c --> %cline:61%c777777777777777777action",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(114, 83, 52);padding:3px;border-radius:2px",
-        action
-      );
       state.updateStudyPlan = false;
     },
     updateSchema: (state, action) => {
-      console.log(
-        "%c --> %cline:76%c777777777777777777action",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(114, 83, 52);padding:3px;border-radius:2px",
-        action.payload
-      );
       state.schema = { ...action.payload };
     },
 

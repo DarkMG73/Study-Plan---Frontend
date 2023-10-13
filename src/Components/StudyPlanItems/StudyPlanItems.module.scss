@@ -134,11 +134,18 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--spt-color-accent-gradient);
-  background: linear-gradient( 180deg, transparent 0, var(--spt-color-accent) 25%, var(--spt-color-accent-dark) 75% ,transparent 100% );
+  // background: var(--spt-color-accent-gradient);
+  // background: linear-gradient( 180deg, transparent 0, var(--spt-color-accent) 25%, var(--spt-color-accent-dark) 75% ,transparent 100% );
+  background: var(--spt-color-accent-2-gradient);
   color: var(--spt-color-background);
   overflow: scroll;
   z-index: 10000;
+}
+
+.new-form-modal  ul > .group-title {
+  text-align: center;
+  font-variant: small-caps;
+  font-size: 1.5em;
 }
 
 .new-form-modal div {
@@ -146,23 +153,29 @@
 }
 
 .new-form-modal form  ul{
-  background: var(--spt-color-accent-dark);
+  background: var(--spt-color-accent-2-dark);
+  padding: 0;
+  margin: auto;
+  border-radius: 50px;
+  overflow: hidden;
 }
-
-.new-form-modal form  div[class*=new-form-wrap] ul{
-  background: var(--spt-color-accent-dark);
+.new-form-wrap {
+  position: relative;
+}
+.new-form-modal form  ul[id*=newForm] {
   display: grid;
   grid-gap: 0;
   grid-template-columns: repeat(1, 1fr);
   grid-template-areas:
     "name"
+    "type"
     "method"
     "priority"
     "slug"
-    "msup" "asup"
+    "msup" 
+    "asup"
     "des"
     "url"
-    "type"
     "author"  
     "platform"
     "lectureTime"
@@ -184,7 +197,9 @@
 
 .new-form-modal ul > div {
   margin: 0;
-  padding: 0;
+  padding: 0 1em;
+  box-shadow: inset -1px -1px 3px -2px white, inset 1px 1px 3px -2px black;
+  background: transparent;
 }
 
 .new-form-modal form {
@@ -205,18 +220,19 @@ color: inherit;
 }
 
 .new-form .new-form {
-
+position: relative;
   flex-basis: fit-content;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 margin: 0 auto 2em;
+
 }
 
 .new-form .new-form > ul {
   list-style: none;
   /* border: 3px solid; */
-  padding: 0 1em;
+  padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -224,8 +240,11 @@ margin: 0 auto 2em;
   width: 100%;
   justify-content: flex-start;
   position: relative;
-  box-shadow: 0px 24px 33px 0px var(--spt-color-accent);
+  /* box-shadow: 0px 24px 33px 0px var(--spt-color-accent); */
   max-width: 100%;
+  background: none;
+  border-radius: 0;
+  overflow: auto;
 }
 
 .new-form-button-wrap {
@@ -251,13 +270,20 @@ justify-content: center;
   transform: none;
 }
 
+.new-form-modal form li[class*=name], .new-form-modal form li[class*=type]
+{
+  border: 3px solid var(--spt-color-accent-dark);
+background: var(--spt-color-accent-dark);}
+
 .new-form-modal form li[class*=markcomplete], 
 .new-form-modal form li[class*=markforreview] ,
 .new-form-modal form li[class*=masterLibraryID] ,
 .new-form-modal form li[class*=slug] ,
 .new-form-modal form li[class*=progressbar] ,
 .new-form-modal form li[class*=demonstratedskill],
-.new-form-modal form li[class*=demonstratedskilssls] 
+.new-form-modal form li[class*=demonstratedskilssls] ,
+.new-form-modal form li[class*=_id] ,
+.new-form-modal form li[class*=createdAt]
 {
   display: none;
 }
@@ -284,13 +310,29 @@ justify-content: center;
   transition: 0.2s all ease;
   font-feature-settings: "smcp";
   font-variant: small-caps;
+
 }
 
+.new-form-modal .new-form-button{
+  background: var(--spt-color-accent-gradient);
+  color: var(--spt-color-background);
+  width: 100%;
+  margin: 1em;
+  padding: 0.5em;
+  font-size: 1em;
+  transition: 0.2s all ease;
+}
+
+.new-form-modal .new-form-button:last-child {
+  font-size: 1.8em;
+  margin-top: 0;
+}
 .new-form-button:hover {
   position: relative;
-  background: var(--spt-color-accent-2);
+  background: var(--spt-color-accent-dark);
   color: var(--spt-color-background);
   transition: 0.3s all ease;
+  transform: scale(1,1.125);
 }
 
 .new-form-button span {
@@ -302,12 +344,7 @@ justify-content: center;
   -webkit-text-fill-color: unset;
   pointer-events: none;
 }
-.new-form-modal button {
-  width: 100%;
-  margin: 1em;
-  padding: 1em;
-  font-size: 1.8rem;
-}
+
 // Goal New Item Forms
 [type=goal] .new-form-button-wrap {
   display: none;

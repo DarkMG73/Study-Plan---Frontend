@@ -1,25 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSchemaForContentItem } from "../storage/contentDB";
 import StudyPlanItemsList from "../Components/StudyPlanItems/StudyPlanItemsList/StudyPlanItemsList";
 import displayConditions from "../data/displayConditionsObj.js";
 import { formInputDataActions } from "../store/formInputDataSlice";
-import { studyPlanDataActions } from "../store/studyPlanDataSlice";
 
 const useCreateNewForm = () => {
   const dispatch = useDispatch();
-  const studyPlanMetadata = useSelector(
-    (state) => state.studyPlanData.studyPlanMetadata
-  );
   const studyPlanItemSchema = useSelector(
     (state) => state.studyPlanData.schema
-  );
-  console.log(
-    "%c --> %cline:6%cstudyPlanItemSchema",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
-    studyPlanItemSchema
   );
   const outputFunction = (props) => {
     const e = props.e;

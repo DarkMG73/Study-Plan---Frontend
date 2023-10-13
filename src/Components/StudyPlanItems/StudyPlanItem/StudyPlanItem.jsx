@@ -9,6 +9,9 @@ import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 const StudyPlanItem = (props) => {
   const studyPlanItemsObj = props.studyPlanItemsObj.studyPlanItemsObj;
   const user = useSelector((state) => state.auth.user);
+  const studyPlanMetadata = useSelector(
+    (state) => state.studyPlanData.studyPlanMetadata
+  );
   const showProtectedHidden = props.showProtectedHidden;
   const unlockProtectedVisible = props.unlockProtectedVisible;
   const displayConditions = props.displayConditions;
@@ -133,6 +136,20 @@ const StudyPlanItem = (props) => {
         displayConditions.isURL.includes(key)
       )
         output = "isURL";
+
+      // Number
+      if (
+        displayConditions.hasOwnProperty("isNumber") &&
+        displayConditions.isNumber.includes(key)
+      )
+        output = "isNumber";
+
+      // Lists
+      if (
+        displayConditions.hasOwnProperty("isList") &&
+        displayConditions.isList.includes(key)
+      )
+        output = "isList";
     }
 
     return output;
@@ -356,7 +373,79 @@ const StudyPlanItem = (props) => {
             name={parentKey + "-" + key}
             defaultValue={studyPlanItemsObj[key]}
             category={key}
-            placeholder={key}
+            placeholder={"Valid URL only..."}
+            title={key}
+            parentkey={parentKey}
+            parentsparentkey={
+              parentsParentKey ? parentsParentKey.toString() : ""
+            }
+            parentmasterid={parentMasterID}
+            onChange={addInputData}
+            className={
+              styles[
+                "protectedHidden-" +
+                  displayConditions.protectedHidden.includes(key)
+              ] +
+              " " +
+              styles[
+                "protectedVisible-" +
+                  (displayConditions.protectedVisible.includes("PROTECT-ALL") &&
+                    !unlockProtectedVisible.includes(parentMasterID)) ||
+                  (displayConditions.protectedVisible.includes(key) &&
+                    !unlockProtectedVisible.includes(parentMasterID))
+              ]
+            }
+          />
+        </Fragment>
+      )}
+      {!onlyList && elementTypeNeeded === "isNumber" && (
+        <Fragment>
+          <label
+            id={
+              parentMasterID +
+              "-" +
+              parentsParentKey +
+              "-" +
+              parentKey +
+              "-" +
+              key +
+              "label"
+            }
+            htmlFor={parentKey + "-" + key}
+            className={
+              styles[
+                "protectedHidden-" +
+                  displayConditions.protectedHidden.includes(key)
+              ] +
+              " " +
+              styles[
+                "protectedVisible-" +
+                  (displayConditions.protectedVisible.includes("PROTECT-ALL") &&
+                    !unlockProtectedVisible.includes(parentMasterID)) ||
+                  (displayConditions.protectedVisible.includes(key) &&
+                    !unlockProtectedVisible.includes(parentMasterID))
+              ]
+            }
+          >
+            {key}:
+          </label>
+          <input
+            type="number"
+            id={
+              parentMasterID +
+              "-" +
+              parentsParentKey +
+              "-" +
+              parentKey +
+              "-" +
+              key +
+              "url"
+            }
+            key={parentKey + "-" + key}
+            name={parentKey + "-" + key}
+            defaultValue={studyPlanItemsObj[key]}
+            category={key}
+            placeholder={"numbers only..."}
             title={key}
             parentkey={parentKey}
             parentsparentkey={
@@ -454,6 +543,103 @@ const StudyPlanItem = (props) => {
             <option value={false}>False</option>
             <option value={true}>True</option>
           </select>
+        </Fragment>
+      )}
+      {!onlyList && elementTypeNeeded === "isList" && (
+        <Fragment>
+          <label
+            id={
+              parentMasterID +
+              "-" +
+              parentsParentKey +
+              "-" +
+              parentKey +
+              "-" +
+              key +
+              "label"
+            }
+            htmlFor={parentKey + "-" + key}
+            className={
+              styles[
+                "protectedHidden-" +
+                  displayConditions.protectedHidden.includes(key)
+              ] +
+              " " +
+              styles[
+                "protectedVisible-" +
+                  (displayConditions.protectedVisible.includes("PROTECT-ALL") &&
+                    !unlockProtectedVisible.includes(parentMasterID)) ||
+                  (displayConditions.protectedVisible.includes(key) &&
+                    !unlockProtectedVisible.includes(parentMasterID))
+              ]
+            }
+          >
+            {key}:
+          </label>
+          <datalist
+            id={parentKey + "-" + key + "datalist"}
+            key={parentKey + "-" + key + "datalist"}
+            name={parentKey + "-" + key + "datalist"}
+            defaultValue={studyPlanItemsObj[key]}
+            category={key}
+            placeholder={key}
+            title={key}
+            parentkey={parentKey}
+            parentsparentkey={
+              parentsParentKey ? parentsParentKey.toString() : ""
+            }
+            parentmasterid={parentMasterID}
+            className={
+              styles[
+                "protectedHidden-" +
+                  displayConditions.protectedHidden.includes(key)
+              ] +
+              " " +
+              styles[
+                "protectedVisible-" +
+                  (displayConditions.protectedVisible.includes("PROTECT-ALL") &&
+                    !unlockProtectedVisible.includes(parentMasterID)) ||
+                  (displayConditions.protectedVisible.includes(key) &&
+                    !unlockProtectedVisible.includes(parentMasterID))
+              ]
+            }
+          >
+            {studyPlanMetadata.hasOwnProperty(key) &&
+              studyPlanMetadata[key].map((option) => (
+                <option value={option}></option>
+              ))}
+          </datalist>
+          <input
+            type="text"
+            list={parentKey + "-" + key + "datalist"}
+            id={parentKey + "-" + key}
+            name={parentKey + "-" + key}
+            size="50"
+            autocomplete="off"
+            category={key}
+            placeholder={"numbers only..."}
+            title={key}
+            parentkey={parentKey}
+            parentsparentkey={
+              parentsParentKey ? parentsParentKey.toString() : ""
+            }
+            parentmasterid={parentMasterID}
+            onChange={addInputData}
+            className={
+              styles[
+                "protectedHidden-" +
+                  displayConditions.protectedHidden.includes(key)
+              ] +
+              " " +
+              styles[
+                "protectedVisible-" +
+                  (displayConditions.protectedVisible.includes("PROTECT-ALL") &&
+                    !unlockProtectedVisible.includes(parentMasterID)) ||
+                  (displayConditions.protectedVisible.includes(key) &&
+                    !unlockProtectedVisible.includes(parentMasterID))
+              ]
+            }
+          />
         </Fragment>
       )}
       {!onlyList && elementTypeNeeded === "isDate" && (
