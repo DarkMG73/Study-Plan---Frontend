@@ -2,35 +2,22 @@ import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect, Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
+import { authActions } from "./store/authSlice";
+import { loadingRequestsActions } from "./store/loadingRequestsSlice";
+import { statusUpdateActions } from "./store/statusUpdateSlice";
+import { useUserDataInit } from "./Hooks/useUserDataInit";
+import { useRunGatherStudyPlanData } from "./Hooks/useRunGatherStudyPlanData";
+import { useRunGatherContentData } from "./Hooks/useRunGatherContentData";
 import Home from "./pages/Home/Home";
 import Manage from "./pages/Manage/Manage";
 import CardTransparent from "./UI/Cards/CardTransparent/CardTransparent";
 import Header from "./Components/Header/Header";
-import { authActions } from "./store/authSlice";
 import BarLoader from "./UI/Loaders/BarLoader/BarLoader";
 import { ErrorBoundary } from "./HOC/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import LocalErrorDisplay from "./HOC/ErrorHandling/LocalErrorDisplay/LocalErrorDisplay";
-import { useUserDataInit } from "./Hooks/useUserDataInit";
-import { useRunGatherStudyPlanData } from "./Hooks/useRunGatherStudyPlanData";
-import { useRunGatherContentData } from "./Hooks/useRunGatherContentData";
-import axios from "axios";
-import { loadingRequestsActions } from "./store/loadingRequestsSlice";
-import { statusUpdateActions } from "./store/statusUpdateSlice";
 import * as icons from "react-icons/fa";
 
 function App() {
-  const fallbackArtistSocialLInks = [
-    {
-      name: "Spotify",
-      profileLink: "https://open.spotify.com/user/313ndmlrf7icszoy3cat7wikxwqi",
-      faIcon: "FaSpotify",
-    },
-    {
-      name: "SoundCloud",
-      profileLink: "https://soundcloud.com/ignite-revolution-music",
-      faIcon: "FaSoundcloud",
-    },
-  ];
   const loadingStatus = useSelector(
     (state) => state.loadingRequests.pendingLoadRequests
   );
@@ -54,8 +41,9 @@ function App() {
       contentData
     );
   }
-  const [user, setUser] = useState();
-  const { userLoggedIn = user } = useSelector((state) => state.auth);
+  const [schemaInitComplete, setSchemaInitComplete] = useState(false);
+  const [userInitComplete, setUserInitComplete] = useState(false);
+  const { user } = useSelector((state) => state.auth);
   const [localError, setLocalError] = useState({
     title: null,
     active: false,
@@ -150,17 +138,17 @@ function App() {
   ////////////////////////////////////////
 
   ///////
-  // Initial user & data setup.
-  // Login user if needed (triggers data setup on user change).
-  // If no user, initiate data gathering.
+  // Login user at startup if active user cookie.
   useEffect(() => {
-    userDataInit({ setLocalError, setUser });
+    userDataInit({ setLocalError, setUserInitComplete });
   }, []);
 
   useEffect(() => {
-    runGatherStudyPlanData({ user: false, setLocalError });
-    runGatherContentData({ user: false, setLocalError });
-  }, []);
+    if (userInitComplete) {
+      runGatherStudyPlanData({ user: user, setLocalError });
+      runGatherContentData({ user: user, setLocalError });
+    }
+  }, [user, userInitComplete]);
 
   // Register error if studyPlan DB not accessible.
   useEffect(() => {
@@ -174,12 +162,20 @@ function App() {
 
   useEffect(() => {
     if (
-      (userLoggedIn && !process.env.NODE_ENV) ||
+      (user && !process.env.NODE_ENV) ||
       process.env.NODE_ENV === "development"
     )
-      setUser(userLoggedIn);
-    if (userLoggedIn !== "not logged in") dispatch(authActions.logIn(user));
-  }, [userLoggedIn]);
+      console.log(
+        "%c --> %cline:181%cuser",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(56, 13, 49);padding:3px;border-radius:2px",
+        user
+      );
+    // if (user && user !== "not logged in")
+    //   // setUser(userLoggedIn);
+    //   dispatch(authActions.logIn(user));
+  }, [user]);
 
   useEffect(() => {
     if (!noDBErrors.status)
@@ -216,17 +212,6 @@ function App() {
                 title={localError.title}
                 message={localError.message}
               />
-              <p>
-                If you prefer, connect with Ignite Revolution Music using the
-                links below!
-              </p>
-              <ul className="error-modal-link-wrap">
-                {fallbackArtistSocialLInks.map((item) => (
-                  <a href={item.profileLink} target="_blank">
-                    {icons[item.faIcon]} {item.name}
-                  </a>
-                ))}
-              </ul>
             </div>
           </div>
         )}
@@ -259,6 +244,8 @@ function App() {
                     setNoDBErrors={setNoDBErrors}
                     aboutIsActive={aboutIsActive}
                     musicIsActive={true}
+                    userInitComplete={userInitComplete}
+                    user={user}
                   />
                 }
               />
@@ -271,6 +258,7 @@ function App() {
                     setNoDBErrors={setNoDBErrors}
                     aboutIsActive={aboutIsActive}
                     musicIsActive={true}
+                    userInitComplete={userInitComplete}
                     user={user}
                   />
                 }

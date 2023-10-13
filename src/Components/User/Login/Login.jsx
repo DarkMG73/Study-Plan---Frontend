@@ -1,21 +1,20 @@
 import styles from "./Login.module.scss";
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import FormInput from "../../../UI/Form/FormInput/FormInput";
-import { sign_inAUser, setUserCookie } from "../../../storage/userDB";
-import PushButton from "../../../UI/Buttons/PushButton/PushButton";
-import { authActions } from "../../../store/authSlice";
-import { useRunGatherStudyPlanData } from "../../../Hooks/useRunGatherStudyPlanData";
-import { loadingRequestsActions } from "../../../store/loadingRequestsSlice";
-import Iframe from "react-iframe";
 import { statusUpdateActions } from "../../../store/statusUpdateSlice";
+import { sign_inAUser, setUserCookie } from "../../../storage/userDB";
+import { authActions } from "../../../store/authSlice";
+import { loadingRequestsActions } from "../../../store/loadingRequestsSlice";
+import FormInput from "../../../UI/Form/FormInput/FormInput";
+import PushButton from "../../../UI/Buttons/PushButton/PushButton";
+import Iframe from "react-iframe";
 
 const Login = (props) => {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
-  const runGatherStudyPlanData = useRunGatherStudyPlanData();
+
   const [loginError, seLoginError] = useState(false);
   const [showLoginError, setShowLoginError] = useState(true);
   const [showChangePasswordHTML, setShowChangePasswordHTML] = useState(false);
@@ -110,7 +109,6 @@ const Login = (props) => {
     });
 
     dispatch(authActions.logIn(res.data));
-    runGatherStudyPlanData({ user: res.data });
     removeLoadingRequest();
   };
 

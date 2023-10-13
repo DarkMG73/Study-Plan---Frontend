@@ -1,7 +1,7 @@
 .card-primary {
   display: flex;
   flex-direction: column;
-  background-color: var(--spt-color-background);
+  background-color: var(--spt-color-background-warm);
   color: var(--spt-color-background-contrast);
   padding: 2rem;
   /* border-radius: 50px; */

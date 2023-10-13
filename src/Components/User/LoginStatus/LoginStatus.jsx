@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./LoginStatus.module.scss";
+import { authActions } from "../../../store/authSlice";
+import { deleteUserCookie } from "../../../storage/userDB";
+import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 import PushButton from "../../../UI/Buttons/PushButton/PushButton";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
-import { authActions } from "../../../store/authSlice";
-import { deleteUserCookie } from "../../../storage/userDB";
-import { useRunGatherStudyPlanData } from "../../../Hooks/useRunGatherStudyPlanData";
-import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 
 function LoginStatus(props) {
   const userData = useSelector((state) => state.auth);
@@ -19,7 +18,7 @@ function LoginStatus(props) {
   // const [loginPassword, setLoginPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
   const horizontalDisplay = props.horizontalDisplay ? "horizontal-display" : "";
-  const runGatherStudyPlanData = useRunGatherStudyPlanData();
+
   const toggleSignupLoginButtonHandler = () => {
     setShowLoginForm(!showLoginForm);
     setShowSignupForm(!showSignupForm);
@@ -36,7 +35,6 @@ function LoginStatus(props) {
     try {
       deleteUserCookie();
       dispatch(authActions.logOut());
-      runGatherStudyPlanData({ user: false });
       setLoginError(false);
     } catch (error) {
       setLoginError(

@@ -1,16 +1,21 @@
 import { studyPlanData as studyPlanDataFunction } from "../storage/studyPlanDB.js";
+import runGetSchemaForStudyPlanItems from "./runGetSchemaForStudyPlanItems";
 
-export default async function GatherStudyPlanData(user) {
+export default async function GatherStudyPlanData(studyPlanItemSchema, user) {
   const studyPlanData = {};
   studyPlanData.studyPlan = {};
 
-  const studyPlanFromDB = await studyPlanDataFunction();
+  let studyPlanFromDB = [];
+  studyPlanFromDB = await studyPlanDataFunction(user);
+  studyPlanData.schema = studyPlanItemSchema
+    ? studyPlanItemSchema
+    : await runGetSchemaForStudyPlanItems();
 
-  if (studyPlanFromDB.length <= 0) {
-    throw new Error(
-      "There appears to be a problem reaching the servers. Please try again or contact the site admin if the problem continues."
-    );
-  }
+  // if (user && studyPlanFromDB.length <= 0) {
+  //   throw new Error(
+  //     "There appears to be a problem reaching the servers. Please try again or contact the site admin if the problem continues."
+  //   );
+  // }
   studyPlanFromDB.forEach((studyPlanItem) => {
     studyPlanData.studyPlan[studyPlanItem._id] = studyPlanItem;
     // studyPlanData.studyPlan[studyPlanItem._id].sourceURLObj = JSON.parse(
@@ -19,13 +24,6 @@ export default async function GatherStudyPlanData(user) {
   });
 
   const ungroomedStudyPlanMetadata = gatherAllMetadata(studyPlanData.studyPlan);
-  console.log(
-    "%c --> %cline:21%cungroomedStudyPlanMetadata",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(229, 187, 129);padding:3px;border-radius:2px",
-    ungroomedStudyPlanMetadata
-  );
   const groomedStudyPlanMetadata = {};
   for (const key in ungroomedStudyPlanMetadata) {
     const output = [];
@@ -44,13 +42,7 @@ export default async function GatherStudyPlanData(user) {
 
       const flattenedArrays = new Set(itmOutput.map((value) => value.trim()));
       const flattenedArraysOutput = Array.from(flattenedArrays);
-      console.log(
-        "%c --> %cline:39%cflattenedArraysOutput",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(39, 72, 98);padding:3px;border-radius:2px",
-        flattenedArraysOutput
-      );
+
       output.push(flattenedArraysOutput.length, flattenedArraysOutput);
     } else {
       output.push(ungroomedStudyPlanMetadata[key].length);
@@ -60,7 +52,7 @@ export default async function GatherStudyPlanData(user) {
   }
 
   studyPlanData.studyPlanMetadata = groomedStudyPlanMetadata;
-  studyPlanData.serviceEmbedJSXObj = { test: "one" };
+
   for (const studyPlanValue of Object.values(studyPlanData.studyPlan)) {
     if (
       studyPlanValue.hasOwnProperty("type") &&
@@ -72,6 +64,14 @@ export default async function GatherStudyPlanData(user) {
         studyPlanValue.iframeCustomAttributes;
     }
   }
+
+  console.log(
+    "%c --> %cline:83%cstudyPlanData",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(60, 79, 57);padding:3px;border-radius:2px",
+    studyPlanData
+  );
 
   return studyPlanData;
 }

@@ -109,7 +109,7 @@ export const toTitleCase = (str, spaceAtCamelCase, dashAtCamelCase) => {
   });
 };
 
-/// Convert string to title case /////////////////////////////
+/// Convert string to camel case /////////////////////////////
 export const toCamelCase = (str) => {
   const trimStr = str.trim();
   let nextLetterToUpper = false;

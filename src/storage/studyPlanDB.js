@@ -1,7 +1,15 @@
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
-/// GET THE CATALOG ITEMS /////////////////////////////
+/// GET THE STUDY PLAN ITEMS /////////////////////////////
 export const studyPlanData = async (user) => {
+  console.log(
+    "%c --> %cline:4%cuser",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(254, 67, 101);padding:3px;border-radius:2px",
+    user
+  );
   let axiosConfig = null;
 
   if (user) {
@@ -27,7 +35,7 @@ export const studyPlanData = async (user) => {
   }
 };
 
-/// GET ONE CATALOG ITEM /////////////////////////////
+/// GET ONE STUDY PLAN ITEM /////////////////////////////
 export const getQuestionBy_Id = async (user, question_Id) => {
   let axiosConfig = null;
 
@@ -183,8 +191,9 @@ export async function deleteAllQuestions(user) {
   return response;
 }
 
-/// GET CATALOG ITEM SCHEMA //////////////
+/// GET STUDY PLAN ITEM SCHEMA //////////////
 export async function getSchemaForStudyPlanItem() {
+  alert("Calling for Schema");
   const axiosConfig = {
     headers: {
       "Content-Type": "application/json",

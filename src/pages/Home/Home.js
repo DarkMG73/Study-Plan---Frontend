@@ -30,6 +30,13 @@ const Home = (props) => {
   const dispatch = useDispatch();
   const hideStudyPlan = false;
 
+  console.log(
+    "%c --> %cline:22%cstudyPlan",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
+    studyPlan
+  );
   ////////////////////////////////////////
   /// Effects
   ////////////////////////////////////////
@@ -122,29 +129,33 @@ const Home = (props) => {
       {!hideStudyPlan && studyPlan && (
         <CardPrimary>
           <ErrorBoundary>
-            <StudyPlanItems
-              key="studyPlan-goals"
-              id="studyPlan-goals"
-              dataObjForEdit={studyPlan}
-              allStudyPlanItems={studyPlan}
-              user={props.user}
-              type={"goal"}
-              noEditButton={true}
-            />
+            {props.userInitComplete && (
+              <StudyPlanItems
+                key="studyPlan-goals"
+                id="studyPlan-goals"
+                dataObjForEdit={studyPlan}
+                allStudyPlanItems={studyPlan}
+                user={props.user}
+                type={"goal"}
+                noEditButton={true}
+              />
+            )}
           </ErrorBoundary>
         </CardPrimary>
       )}
       {!hideStudyPlan && studyPlan && (
         <CardPrimary>
           <ErrorBoundary>
-            <StudyPlanItems
-              key="studyPlan"
-              id="studyPlan"
-              dataObjForEdit={studyPlan}
-              user={props.user}
-              type={"step"}
-              noEditButton={false}
-            />
+            {props.userInitComplete && (
+              <StudyPlanItems
+                key="studyPlan"
+                id="studyPlan"
+                dataObjForEdit={studyPlan}
+                user={props.user}
+                type={"step"}
+                noEditButton={false}
+              />
+            )}
           </ErrorBoundary>
         </CardPrimary>
       )}

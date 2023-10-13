@@ -27,6 +27,7 @@
   color: inherit;
   text-align: inherit;
   width: 100%;
+  pointer-events: none;
 }
 
 /* Color Control */
@@ -42,8 +43,12 @@
 }
 
 .button.secondary {
-  background: var(--spt-color-background-warm);
+  background: var(--spt-color-background);
   color: var(--spt-color-background-contrast-light);
+}
+
+.button.secondary:hover {
+  color: var(--spt-color-background-contrast);
 }
 
 .button.secondary.selected {

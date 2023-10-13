@@ -4,8 +4,8 @@ function InitState() {
   const initialState = {};
   initialState.studyPlan = null;
   initialState.studyPlanMetadata = null;
-  initialState.serviceEmbedJSXObj = null;
   initialState.updateStudyPlan = null;
+  initialState.schema = null;
   return initialState;
 }
 
@@ -15,11 +15,18 @@ export const studyPlanDataSlice = createSlice({
   reducers: {
     initState: (state, action) => {
       const payload = action.payload;
+      console.log(
+        "%c --> %cline:17%cpayload",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(131, 175, 155);padding:3px;border-radius:2px",
+        payload
+      );
 
       state.studyPlan = payload.studyPlan;
       state.studyPlanMetadata = payload.studyPlanMetadata;
-      state.serviceEmbedJSXObj = payload.serviceEmbedJSXObj;
       state.updateStudyPlan = payload.updateStudyPlan;
+      state.schema = payload.schema;
     },
 
     updateOneStudyPlanItem: (state, action) => {
@@ -68,6 +75,16 @@ export const studyPlanDataSlice = createSlice({
         action
       );
       state.updateStudyPlan = false;
+    },
+    updateSchema: (state, action) => {
+      console.log(
+        "%c --> %cline:76%c777777777777777777action",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(114, 83, 52);padding:3px;border-radius:2px",
+        action.payload
+      );
+      state.schema = { ...action.payload };
     },
 
     // currentFilterStorageNeedsUpdate: (state, action) => {

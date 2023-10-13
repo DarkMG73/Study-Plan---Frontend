@@ -11,22 +11,22 @@ export const authSlice = createSlice({
   initialState: initState,
   reducers: {
     logIn: (state, action) => {
-      state.recentLogin = true;
-      state.user = action.payload;
+      // state.recentLogin = true;
+      state.user = { ...action.payload };
       if (action.payload && action.payload.hasOwnProperty("token"))
         state.authToken = action.payload.token;
     },
     logOut: (state) => {
       const recentLogoutState = { ...initState };
-      recentLogoutState.recentLogout = true;
+      // recentLogoutState.recentLogout = true;
       return recentLogoutState;
     },
-    resetRecentLogout: (state) => {
-      state.recentLogout = false;
-    },
-    resetRecentLogin: (state) => {
-      state.recentLogin = false;
-    },
+    // resetRecentLogout: (state) => {
+    //   state.recentLogout = false;
+    // },
+    // resetRecentLogin: (state) => {
+    //   state.recentLogin = false;
+    // },
   },
 });
 

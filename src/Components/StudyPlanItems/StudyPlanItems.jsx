@@ -11,10 +11,8 @@ import useInitStudyPlanItems from "../../Hooks/useInitStudyPlanItems";
 import useProcessUpdateStudyPlan from "../../Hooks/useProcessUpdateStudyPlan";
 import PushButton from "../../UI/Buttons/PushButton/PushButton";
 import { toTitleCase } from "../../Hooks/utility";
-import {
-  saveManyStudyPlanItems,
-  getSchemaForStudyPlanItem,
-} from "../../storage/studyPlanDB";
+
+import { saveManyStudyPlanItems } from "../../storage/studyPlanDB";
 import {
   saveManyContentItems,
   getSchemaForContentItem,
@@ -90,13 +88,12 @@ const StudyPlanItems = (props) => {
       sortMethod: sortMethod,
       typeArray: [typeName],
       dataObjForEdit,
-      getSchemaForStudyPlanItem,
       getSchemaForContentItem,
       allStudyPlanItems,
       setAllStudyPlanItems,
       setFormInputData,
     });
-  }, []);
+  }, [dataObjForEdit, user]);
 
   useEffect(() => {
     const enumerableFormInputData = {};
@@ -114,45 +111,11 @@ const StudyPlanItems = (props) => {
   }, [sortMethod]);
 
   useEffect(() => {
-    console.log(
-      "%c --> %cline:135%cchangeListArray",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
-      changeListArray
-    );
     if (changeListArray) {
       const keysToUseArray = studyPlanMetadata
         ? Object.keys(studyPlanMetadata)
         : [];
-      console.log(
-        "%c --> %cline:127%ckeysToUseArray",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(252, 157, 154);padding:3px;border-radius:2px",
-        keysToUseArray
-      );
-      console.log(
-        "%c --> %cline:129%callStudyPlanItems",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(217, 104, 49);padding:3px;border-radius:2px",
-        allStudyPlanItems
-      );
-      console.log(
-        "%c --> %cline:142%cstudyPlan",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(161, 23, 21);padding:3px;border-radius:2px",
-        studyPlan
-      );
-      console.log(
-        "%c --> %cline:49%cdataObjForEdit",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
-        dataObjForEdit
-      );
+
       const { groomedOutput } = assembleStudyPlanList({
         typeArray: changeListArray,
         keysToUseArray,
@@ -160,13 +123,6 @@ const StudyPlanItems = (props) => {
         allStudyPlanItems: studyPlan,
       });
 
-      console.log(
-        "%c --> %cline:125%cgroomedOutput",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
-        groomedOutput
-      );
       const sortedGroomedOutput = sortList({
         sortMethod: sortMethod,
         objectToBeSorted: { ...groomedOutput },
@@ -180,7 +136,6 @@ const StudyPlanItems = (props) => {
       user,
       dispatch,
       allFormInputData,
-      getSchemaForStudyPlanItem,
       saveManyStudyPlanItems,
       getSchemaForContentItem,
       saveManyContentItems,
@@ -207,15 +162,21 @@ const StudyPlanItems = (props) => {
   ////////////////////////////////////////////////////////////////////////
   const addFormButtonHandler = (e) => {
     e.preventDefault();
-    createNewForm({
-      e,
-      styles,
-      setNewFormJSX,
-      id,
-      user,
-      setNewFormInputValuesObj,
-      currentNewFormInputValuesObjRef: newFormInputValuesObjRef.current,
-    });
+    if (user) {
+      createNewForm({
+        e,
+        styles,
+        setNewFormJSX,
+        id,
+        user,
+        setNewFormInputValuesObj,
+        currentNewFormInputValuesObjRef: newFormInputValuesObjRef.current,
+      });
+    } else {
+      alert(
+        'Please log in to add to your study plan. If you do not yet have a profile, click "Sign Up" at the top of the page to get started.'
+      );
+    }
   };
 
   const sortMethodButtonHandler = (e) => {
@@ -265,8 +226,6 @@ const StudyPlanItems = (props) => {
         >
           <div
             style={{
-              position: "relative",
-              minHeight: "2em",
               margin: "0.5em 1em 0",
             }}
           >
@@ -276,7 +235,7 @@ const StudyPlanItems = (props) => {
               styles={{
                 position: "relative",
               }}
-              maxHeight={"1em"}
+              maxHeight={"0"}
               s
               inputOrButton="button"
               buttonStyles={{
@@ -317,8 +276,6 @@ const StudyPlanItems = (props) => {
           </div>
           <div
             style={{
-              position: "relative",
-              minHeight: "2em",
               margin: "0.25em 1em 0",
             }}
           >
@@ -327,7 +284,7 @@ const StudyPlanItems = (props) => {
               styles={{
                 position: "relative",
               }}
-              maxHeight={"1em"}
+              maxHeight={"0"}
               s
               inputOrButton="button"
               buttonStyles={{
@@ -338,7 +295,7 @@ const StudyPlanItems = (props) => {
                 alignItems: "center",
                 position: "absolute",
                 top: "0",
-                left: "0",
+                left: "24em",
                 flexGrow: "1",
                 minWidth: "min-content",
                 height: "100%",
@@ -370,7 +327,21 @@ const StudyPlanItems = (props) => {
           </div>
         </div>
       )}
-
+      <div className={styles["new-form-button-wrap"]}>
+        <PushButton
+          inputOrButton="button"
+          id="create-entry-btn"
+          colorType="primary"
+          styles={{}}
+          value={id}
+          parentmasterid={id}
+          data=""
+          size="medium"
+          onClick={addFormButtonHandler}
+        >
+          Add to <span>{toTitleCase(id, true)}</span>
+        </PushButton>
+      </div>
       <CollapsibleElm
         id={id + "-collapsible-elm"}
         styles={{
@@ -468,7 +439,7 @@ const StudyPlanItems = (props) => {
             parentsParentKey={false}
             parentMasterID={false}
             displayConditions={displayConditions.formWithPreFilledData}
-            user={user}
+            user={props.user}
             section={id}
             onlyList={props.onlyList}
             noEditButton={props.noEditButton}
@@ -476,26 +447,15 @@ const StudyPlanItems = (props) => {
           />
         )}
         {newFormJSX && (
-          <div id="new-form-modal" className={styles["new-form-modal"]}>
+          <div
+            id="new-form-modal"
+            className={styles["new-form-modal"]}
+            type={typeName}
+          >
             <form>{newFormJSX}</form>
           </div>
         )}
       </CollapsibleElm>
-      <div className={styles["new-form-button-wrap"]}>
-        <PushButton
-          inputOrButton="button"
-          id="create-entry-btn"
-          colorType="primary"
-          styles={{}}
-          value={id}
-          parentmasterid={id}
-          data=""
-          size="medium"
-          onClick={addFormButtonHandler}
-        >
-          Add to <span>{id}</span>
-        </PushButton>
-      </div>
     </ul>
   );
 };

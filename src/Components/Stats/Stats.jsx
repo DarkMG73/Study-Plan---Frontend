@@ -5,9 +5,14 @@ const Stats = (props) => {
   const { studyPlan, studyPlanMetadata } = useSelector(
     (state) => state.studyPlanData
   );
-  const totalLabTime = studyPlanMetadata && studyPlanMetadata.labTime[1];
+  const totalLabTime =
+    studyPlanMetadata &&
+    studyPlanMetadata.hasOwnProperty("labTime") &&
+    studyPlanMetadata.labTime[1];
   const totalLectureTime =
-    studyPlanMetadata && studyPlanMetadata.lectureTime[1];
+    studyPlanMetadata &&
+    studyPlanMetadata.hasOwnProperty("lectureTime") &&
+    studyPlanMetadata.lectureTime[1];
   const totalHours = totalLectureTime + totalLabTime;
   const reviewHoursTotal = findAndAddTime("markforreview", studyPlanMetadata);
   const completedHoursTotal = findAndAddTime("markcomplete", studyPlanMetadata);

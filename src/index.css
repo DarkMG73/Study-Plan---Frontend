@@ -36,8 +36,8 @@ Blues: rgb(67, 144, 233) hsl(212 79% 97% / 1)
       Adds variety to the page.
   */
   --spt-color-accent-2: rgb(67, 144, 233);
-  --spt-color-accent-light: hsl(212 79% 73% / 1); /*14 lightness up */
-  --spt-color-accent-dark: hsl(212 79% 45% / 1); /*14 lightness down */
+  --spt-color-accent-2-light: hsl(212 79% 73% / 1); /*14 lightness up */
+  --spt-color-accent-2-dark: hsl(212 79% 45% / 1); /*14 lightness down */
   --spt-color-accent-2-gradient: radial-gradient(
     circle at 10% 20%,
     rgb(67, 144, 233) 0%,

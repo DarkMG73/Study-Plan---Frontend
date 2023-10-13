@@ -1,15 +1,25 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSchemaForStudyPlanItem } from "../storage/studyPlanDB";
 import { getSchemaForContentItem } from "../storage/contentDB";
 import StudyPlanItemsList from "../Components/StudyPlanItems/StudyPlanItemsList/StudyPlanItemsList";
 import displayConditions from "../data/displayConditionsObj.js";
 import { formInputDataActions } from "../store/formInputDataSlice";
+import { studyPlanDataActions } from "../store/studyPlanDataSlice";
 
 const useCreateNewForm = () => {
   const dispatch = useDispatch();
   const studyPlanMetadata = useSelector(
     (state) => state.studyPlanData.studyPlanMetadata
+  );
+  const studyPlanItemSchema = useSelector(
+    (state) => state.studyPlanData.schema
+  );
+  console.log(
+    "%c --> %cline:6%cstudyPlanItemSchema",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
+    studyPlanItemSchema
   );
   const outputFunction = (props) => {
     const e = props.e;
@@ -18,8 +28,7 @@ const useCreateNewForm = () => {
     const setNewFormInputValuesObj = props.setNewFormInputValuesObj;
     const id = props.id;
     const user = props.user;
-    const getSchema =
-      id === "studyPlan" ? getSchemaForStudyPlanItem : getSchemaForContentItem;
+
     ////////////////////////////////////////////////////////////////
     /// Handlers
     ////////////////////////////////////////////////////////////////
@@ -61,8 +70,8 @@ const useCreateNewForm = () => {
     const parentMasterID = e.target.getAttribute("parentmasterid");
     const amountToAdd = prompt("How many would you like to add?");
 
-    getSchema().then((data) => {
-      const targetFormDataObj = data.obj;
+    const processNewFormWithSchema = (schema) => {
+      const targetFormDataObj = schema;
       // const itemsToRemove = ['$timestamps', ]
       const cleansedFormData = {};
       Object.keys(targetFormDataObj).forEach((key) => {
@@ -74,7 +83,7 @@ const useCreateNewForm = () => {
 
         for (let i = 0; i < amountToAdd; i++) {
           output.push(
-            <ul
+            <div
               id={"newForm-" + i}
               parentmasterid={"newForm-" + i}
               className={styles["new-form-" + i] + " " + styles["new-form"]}
@@ -96,20 +105,29 @@ const useCreateNewForm = () => {
               >
                 &nbsp; Entry {i + 1}
               </h2>
-
-              {cleansedFormData && (
-                <StudyPlanItemsList
-                  studyPlanItemsObj={cleansedFormData}
-                  id={"newForm-" + i}
-                  parentKey={id}
-                  displayConditions={displayConditions.emptyForm}
-                  parentMasterID={"newForm-" + i}
-                  user={user}
-                  emptyForm={true}
-                  inModal={true}
-                />
-              )}
-            </ul>
+              <ul
+                id={"newForm-" + i + "-wrap"}
+                parentmasterid={"newForm-" + i}
+                className={
+                  styles["new-form-" + i + "-wrap"] +
+                  " " +
+                  styles["new-form-inner-wrap"]
+                }
+              >
+                {cleansedFormData && (
+                  <StudyPlanItemsList
+                    studyPlanItemsObj={cleansedFormData}
+                    id={"newForm-" + i}
+                    parentKey={id}
+                    displayConditions={displayConditions.emptyForm}
+                    parentMasterID={"newForm-" + i}
+                    user={user}
+                    emptyForm={true}
+                    inModal={true}
+                  />
+                )}
+              </ul>
+            </div>
           );
         }
         return output;
@@ -157,7 +175,9 @@ const useCreateNewForm = () => {
         </ul>
       );
       setNewFormJSX(groomedNewFormElement);
-    });
+    };
+
+    processNewFormWithSchema(studyPlanItemSchema);
   };
   return outputFunction;
 };

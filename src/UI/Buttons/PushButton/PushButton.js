@@ -2,55 +2,73 @@ import syles from "./PushButton.module.css";
 import React, { Fragment } from "react";
 
 function PushButton(props) {
+  const {
+    inputOrButton,
+    children,
+    name,
+    label,
+    type,
+    colorType,
+    size,
+    active,
+    selected,
+    styles,
+    identifier,
+    value,
+    data,
+    onClick,
+    ...otherProps
+  } = props;
   let output;
-  if (props.inputOrButton === "button") {
+  if (inputOrButton === "button") {
     output = (
       <Fragment>
         <button
           className={
             syles["button"] +
             " " +
-            syles[props.colorType] +
+            syles[colorType] +
             " " +
-            syles[props.size] +
+            syles[size] +
             " " +
-            syles[props.active] +
+            syles[active] +
             " " +
-            syles[props.selected]
+            syles[selected]
           }
-          style={props.styles}
-          id={props.identifier}
-          value={props.value}
-          data-data={props.data}
-          onClick={props.onClick}
+          style={styles}
+          id={identifier}
+          value={value}
+          data-data={data}
+          onClick={onClick}
+          {...otherProps}
         >
-          {props.children}
+          {children}
         </button>
       </Fragment>
     );
   } else {
     output = (
       <Fragment>
-        <label htmlFor={props.name}>{props.label}</label>
+        <label htmlFor={name}>{label}</label>
         <input
-          key={props.name}
+          key={name}
           className={
             syles["button"] +
             " " +
-            syles[props.colorType] +
+            syles[colorType] +
             " " +
-            syles[props.size] +
+            syles[size] +
             " " +
-            syles[props.active] +
+            syles[active] +
             " " +
-            syles[props.selected]
+            syles[selected]
           }
-          style={props.styles}
-          type={props.type}
-          name={props.name}
-          value={props.value}
-          data-data={props.data}
-          onClick={props.onClick}
+          style={styles}
+          type={type}
+          name={name}
+          value={value}
+          data-data={data}
+          onClick={onClick}
         />
       </Fragment>
     );

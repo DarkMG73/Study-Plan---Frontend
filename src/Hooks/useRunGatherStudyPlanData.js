@@ -1,7 +1,7 @@
+import { useSelector, useDispatch } from "react-redux";
 import GatherStudyPlanData from "./GatherStudyPlanData";
 import { studyPlanDataActions } from "../store/studyPlanDataSlice";
 import { loadingRequestsActions } from "../store/loadingRequestsSlice";
-import { useSelector, useDispatch } from "react-redux";
 import { statusUpdateActions } from "../store/statusUpdateSlice";
 
 export const useRunGatherStudyPlanData = (props) => {
@@ -12,14 +12,16 @@ export const useRunGatherStudyPlanData = (props) => {
     dispatch(loadingRequestsActions.removeFromLoadRequest());
   };
   const currentStatus = useSelector((state) => state.statusUpdate);
-
   const dispatch = useDispatch();
+  const studyPlanItemSchema = useSelector(
+    (state) => state.studyPlanData.schema
+  );
 
   const runGatherStudyPlanData = (props) => {
     const user = props.user;
     const setLocalError = props.setLocalError;
     makeLoadingRequest();
-    GatherStudyPlanData(user)
+    GatherStudyPlanData(studyPlanItemSchema, user)
       .then((data) => {
         if (process.env.NODE_ENV === "development")
           console.log(
