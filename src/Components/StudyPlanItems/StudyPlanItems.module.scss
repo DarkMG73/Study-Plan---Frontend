@@ -169,7 +169,8 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-areas:
     "name name  name name"
-    "type method method priority"
+    "type type   priority priority"
+    "method method method method"
     "msup msup msup msup" 
     "asup asup asup asup"
     "des des des des"
