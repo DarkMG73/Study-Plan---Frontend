@@ -1,12 +1,20 @@
 const displayConditions = {
   formWithPreFilledData: {
-    isURL: ["link", "url", "sourceURLbj"],
-    isBoolean: ["isDefaultPlaylist", "isFeaturedPlaylist"],
+    isURL: ["url"],
+    isBoolean: [],
     isDate: ["createdAt", "updatedAt", "start", "acomp"],
-    isNumber: ["labTime", "lectureTime"],
-    isList: ["author", "method", "platform", "tags"], // List with compiled options.
-    isSuggestionsList: ["method", "msup", "asup"], // List with fixed & compiled options.
-    isLimitedList: ["type"], // List with no input box and fixed options.
+    isNumber: {
+      labTime: { min: "0", max: "" },
+      lectureTime: { min: "0", max: "" },
+      status: { min: "0", max: "100" },
+    },
+    isList: ["author", "platform", "tags"], // List with compiled options.
+    isSuggestionsList: { method: ["corse", "project", "tutorial"] }, // List with fixed & compiled options.
+    isLimitedList: {
+      type: ["- Select one -", "step", "goal", "hold"],
+      priority: ["0", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"],
+    }, // List with no input box and fixed options.
+    isFixedCompiledList: ["msup", "asup"], // List with no input box and compiled options.
     forSlideButton: ["markcomplete", "markforreview"],
     protectedHidden: [
       "title",
@@ -31,11 +39,21 @@ const displayConditions = {
     ],
   },
   emptyForm: {
-    isURL: ["url", "sourceURLbj"],
-    isBoolean: ["isDefaultPlaylist", "isFeaturedPlaylist"],
+    isURL: ["url"],
+    isBoolean: [],
     isDate: ["createdAt", "updatedAt", "start", "acomp"],
-    isNumber: ["labTime", "lectureTime", "priority"],
-    isList: ["author", "type", "method", "msup", "asup", "platform", "tags"],
+    isNumber: {
+      labTime: { min: "0", max: "" },
+      lectureTime: { min: "0", max: "" },
+      status: { min: "0", max: "100" },
+    },
+    isList: ["author", "platform", "tags"], // List with compiled options.
+    isSuggestionsList: { method: ["corse", "project", "tutorial"] }, // List with fixed & compiled options.
+    isLimitedList: {
+      type: ["- Select one -", "step", "goal", "hold"],
+      priority: ["0", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"],
+    }, // List with no input box and fixed options.
+    isFixedCompiledList: ["msup", "asup"], // List with no input box and compiled options.
     protectedHidden: ["identifier"],
     protectedVisible: [],
   },

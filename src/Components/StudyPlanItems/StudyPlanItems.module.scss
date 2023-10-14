@@ -153,6 +153,7 @@
 }
 
 .new-form-modal form  ul{
+  display: flex;
   background: var(--spt-color-accent-2-dark);
   padding: 0;
   margin: auto;
@@ -165,31 +166,19 @@
 .new-form-modal form  ul[id*=newForm] {
   display: grid;
   grid-gap: 0;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-areas:
-    "name"
-    "type"
-    "method"
-    "priority"
-    "slug"
-    "msup" 
-    "asup"
-    "des"
-    "url"
-    "author"  
-    "platform"
-    "lectureTime"
-    "labTime"   
-    "start"    
-    "acomp"  
-    "status" 
-    "itemnotes"
-    "tags"
-    "markforreview" 
-    "markcomplete"
-    "createdAt" 
-    "updatedAt"
-    "buttonContainer"
+    "name name  name name"
+    "type method method priority"
+    "msup msup msup msup" 
+    "asup asup asup asup"
+    "des des des des"
+    "url url url url"
+    "author author platform platform"  
+    "lectureTime lectureTime labTime labTime"
+    "start status acomp acomp"    
+    "itemnotes itemnotes itemnotes itemnotes"
+    "tags tags tags tags"
 ;
   grid-auto-flow: row dense;
   max-width: 100%;
@@ -221,12 +210,14 @@ color: inherit;
 
 .new-form .new-form {
 position: relative;
-  flex-basis: fit-content;
+  flex-basis: fit-content; 
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-margin: 0 auto 2em;
-
+  margin: 0 auto 2em;
+  flex-basis: 33.33%;
+  min-width: 400px;
+  max-width: 800px;
 }
 
 .new-form .new-form > ul {
@@ -245,6 +236,17 @@ margin: 0 auto 2em;
   background: none;
   border-radius: 0;
   overflow: auto;
+}
+
+.new-form li {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+}
+
+.new-form li select {
+width: 100%;
 }
 
 .new-form-button-wrap {
