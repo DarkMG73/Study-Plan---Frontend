@@ -150,7 +150,7 @@ const StudyPlanItem = (props) => {
   }
 
   const numberFormat = (num) => {
-    return num + "$";
+    return num + "%";
   };
   ////////////////////////////////
   /// Output
@@ -441,7 +441,7 @@ const StudyPlanItem = (props) => {
             name={parentKey + "-" + key}
             defaultValue={studyPlanItemsObj[key]}
             category={key}
-            placeholder={"numbers only..."}
+            placeholder={"Numbers only..."}
             title={key}
             parentkey={parentKey}
             parentsparentkey={
@@ -615,7 +615,7 @@ const StudyPlanItem = (props) => {
             size="50"
             autocomplete="off"
             category={key}
-            placeholder={"numbers only..."}
+            placeholder={""}
             title={key}
             parentkey={parentKey}
             parentsparentkey={
@@ -717,7 +717,7 @@ const StudyPlanItem = (props) => {
             size="50"
             autocomplete="off"
             category={key}
-            placeholder={"numbers only..."}
+            placeholder={""}
             title={key}
             parentkey={parentKey}
             parentsparentkey={
@@ -812,17 +812,9 @@ const StudyPlanItem = (props) => {
             }
           >
             {studyPlanMetadata.hasOwnProperty(key) &&
-              studyPlanMetadata[key].map((option) => {
-                console.log(
-                  "%c --> %cline:811%coption",
-                  "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-                  "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-                  "color:#fff;background:rgb(130, 57, 53);padding:3px;border-radius:2px",
-                  option
-                );
-
-                return <option value={option}>{option}</option>;
-              })}
+              studyPlanMetadata[key].map((option) => (
+                <option value={option}>{option}</option>
+              ))}
           </select>
         </Fragment>
       )}

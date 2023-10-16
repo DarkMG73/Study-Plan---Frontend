@@ -148,28 +148,7 @@ const StudyPlanItemsList = (props) => {
     const existingFormEdits = { ...formInputData.existingFormInputDataObj };
 
     for (const key in existingFormEdits[parentMasterID]) {
-      if (key === "sourceURLObj") {
-        const newInnerItemWithNewEdits = {
-          ...rawItemWithNewEdits[key],
-        };
-
-        for (const [entryKey, value] of Object.entries(
-          existingFormEdits[parentMasterID][key]
-        )) {
-          newInnerItemWithNewEdits[entryKey] = value;
-        }
-
-        for (const i in newInnerItemWithNewEdits) {
-          if (
-            !newInnerItemWithNewEdits[i] ||
-            newInnerItemWithNewEdits[i] === ""
-          ) {
-            delete newInnerItemWithNewEdits[i];
-          }
-        }
-
-        itemWithNewEdits[key] = newInnerItemWithNewEdits;
-      } else if (
+      if (
         existingFormEdits[parentMasterID][key] &&
         existingFormEdits[parentMasterID][key].constructor === Object
       ) {
@@ -186,6 +165,17 @@ const StudyPlanItemsList = (props) => {
         } else {
           itemWithNewEdits[key] = { ...newInnerItemWithNewEdits };
         }
+      } else if (
+        key === "markcomplete" ||
+        (key === "markforreview" &&
+          existingFormEdits[parentMasterID][key].constructor !== Boolean)
+      ) {
+        if (existingFormEdits[parentMasterID][key] === "false")
+          itemWithNewEdits[key] = false;
+        else {
+          itemWithNewEdits[key] = true;
+        }
+        itemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
       } else {
         itemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
       }

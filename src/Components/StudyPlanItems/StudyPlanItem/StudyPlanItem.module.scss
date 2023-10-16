@@ -264,11 +264,11 @@ select {
 }
 .msup:before,
 .goal-msup:before {
-  content: "Main goal this supports: ";
+  content: "Goal or Step this Directly Works Towards";
 }
 .asup:before,
 .goal-asup:before {
-  content: "Secondary goal this supports: ";
+  content: "This also supports... ";
 }
 .asup label {
   display: none;

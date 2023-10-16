@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./StudyPlanItems.module.scss";
 import StudyPlanItemsList from "./StudyPlanItemsList/StudyPlanItemsList";
+import Welcome from "../Welcome/Welcome";
 import FilteredStudyPlanItems from "./FilteredStudyPlanItems/FilteredStudyPlanItems";
 import displayConditions from "../../data/displayConditionsObj.js";
 import studyItemSortOptions from "../../data/studyItemSortOptions.json";
@@ -198,188 +199,209 @@ const StudyPlanItems = (props) => {
   /// Output
   ////////////////////////////////////////////////////////////////////////
   return (
-    <ul
-      marker="STUDYPLAN-ITEMS"
-      section={id}
-      id={id}
-      type={typeName}
-      className={
-        styles["studyPlan-items-group"] +
-        " " +
-        styles["group-" + id] +
-        " " +
-        styles[id]
-      }
-    >
-      <h2 className={styles["group-title"] + " " + styles[id]}>{outputName}</h2>
-      {outputName.toLowerCase().includes("syllabus") && (
-        <div
-          section="history-list-section"
-          id={id}
-          className={
-            styles["studyPlan-history-list-container"] +
-            " " +
-            styles["group-" + id] +
-            " " +
-            styles[id]
-          }
-        >
-          <div
-            style={{
-              margin: "0.5em 1em 0",
-            }}
-          >
-            {" "}
-            <CollapsibleElm
-              id={id + "-collapsible-elm"}
-              styles={{
-                position: "relative",
-              }}
-              maxHeight={"0"}
-              s
-              inputOrButton="button"
-              buttonStyles={{
-                margin: "auto",
-                width: "21em",
-                maxWidth: "100%",
-                display: "flex",
-                alignItems: "center",
-                position: "absolute",
-                top: "0",
-                left: "0",
-                flexGrow: "1",
-                minWidth: "min-content",
-                height: "100%",
-                maxHeight: "3em",
-                textAlign: "left",
-                transformOrigin: "left",
-              }}
-              colorType="secondary"
-              data=""
-              size="small"
-              buttonTextOpened={"Close Completed Items"}
-              buttonTextClosed={"Open Completed Items"}
-              open={false}
-            >
-              <FilteredStudyPlanItems
-                filterKey={"markcomplete"}
-                section={"completed-items"}
-                sectionTitle={"Completed"}
-                sectionSubText={"All completed steps and goals"}
-                messageIfNone="There are no completed items. Time to get to work! :)"
-                studyPlanSet={formInputData}
-                allStudyPlanItems={allStudyPlanItems}
-                displayConditions={displayConditions}
-                user={props.user}
-              />{" "}
-            </CollapsibleElm>{" "}
-          </div>
-          <div
-            style={{
-              margin: "0.25em 1em 0",
-            }}
-          >
-            <CollapsibleElm
-              id={id + "-collapsible-elm"}
-              styles={{
-                position: "relative",
-              }}
-              maxHeight={"0"}
-              s
-              inputOrButton="button"
-              buttonStyles={{
-                margin: "auto",
-                width: "21em",
-                maxWidth: "100%",
-                display: "flex",
-                alignItems: "center",
-                position: "absolute",
-                top: "0",
-                left: "24em",
-                flexGrow: "1",
-                minWidth: "min-content",
-                height: "100%",
-                maxHeight: "3em",
-                textAlign: "left",
-                transformOrigin: "left",
-              }}
-              colorType="secondary"
-              data=""
-              size="small"
-              buttonTextOpened={"Close Items Needing Review"}
-              buttonTextClosed={"Open Items Needing Review"}
-              open={false}
-            >
-              <FilteredStudyPlanItems
-                filterKey={"markforreview"}
-                section={"review-items"}
-                sectionTitle={"Items for Review"}
-                sectionSubText={
-                  "All goals or steps that have been marked for review."
-                }
-                messageIfNone='There are no items for review right now. If you completed a step or a goal, but feel you need to review the material at a later date to ensure understanding, use the "Mark for Review" button at the bottom of each item to set it for later followup.'
-                studyPlanSet={formInputData}
-                allStudyPlanItems={allStudyPlanItems}
-                displayConditions={displayConditions}
-                user={props.user}
-              />
-            </CollapsibleElm>{" "}
-          </div>
-        </div>
-      )}
-      <div className={styles["new-form-button-wrap"]}>
-        <PushButton
-          inputOrButton="button"
-          id="create-entry-btn"
-          colorType="primary"
-          styles={{}}
-          value={id}
-          parentmasterid={id}
-          data=""
-          size="medium"
-          onClick={addFormButtonHandler}
-        >
-          Add to <span>{toTitleCase(id, true)}</span>
-        </PushButton>
-      </div>
-      <CollapsibleElm
-        id={id + "-collapsible-elm"}
-        styles={{
-          position: "relative",
-        }}
-        maxHeight={
-          id.includes("goal") || id.includes("studyPlan") ? "none" : "8em"
+    <Fragment>
+      {Object.keys(formInputData).length <= 0 &&
+        outputName.includes("Goal") && <Welcome />}
+      <ul
+        marker="STUDYPLAN-ITEMS"
+        section={id}
+        id={id}
+        type={typeName}
+        className={
+          styles["studyPlan-items-group"] +
+          " " +
+          styles["group-" + id] +
+          " " +
+          styles[id]
         }
-        inputOrButton="button"
-        buttonStyles={{
-          margin: "0 auto",
-          padding: "0.5em 2em",
-          letterSpacing: "0.25em",
-          fontVariant: "small-caps",
-          transform: "translateY(0%)",
-          transition: "0.7s all ease",
-          minWidth: "80%",
-          maxWidth: "80%",
-          textAlign: "center",
-          display: "flex",
-          alignItems: "center",
-          borderRadius: "0 0 50px 50px",
-          fontFamily: "Good Times RG",
-        }}
-        colorType="primary"
-        data=""
-        size="small"
-        buttonTextOpened={"- Close All " + toTitleCase(outputName) + " -"}
-        buttonTextClosed={"- Open All " + toTitleCase(outputName) + " -"}
-        open={false}
       >
-        <div className={styles["sort-button-container"]} type={typeName}>
+        <h2 className={styles["group-title"] + " " + styles[id]}>
+          {outputName}
+        </h2>
+        {outputName.toLowerCase().includes("syllabus") && (
           <div
-            id="list-button-container"
-            className={styles["list-button-container"]}
+            section="history-list-section"
+            id={id}
+            className={
+              styles["studyPlan-history-list-container"] +
+              " " +
+              styles["group-" + id] +
+              " " +
+              styles[id]
+            }
           >
-            {!showListResetButton && (
-              <Fragment>
+            <div
+              style={{
+                margin: "0.5em 1em 0",
+              }}
+            >
+              {" "}
+              <CollapsibleElm
+                id={id + "-collapsible-elm"}
+                styles={{
+                  position: "relative",
+                }}
+                maxHeight={"0"}
+                s
+                inputOrButton="button"
+                buttonStyles={{
+                  margin: "auto",
+                  width: "21em",
+                  maxWidth: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  position: "absolute",
+                  top: "0",
+                  left: "0",
+                  flexGrow: "1",
+                  minWidth: "min-content",
+                  height: "100%",
+                  maxHeight: "3em",
+                  textAlign: "left",
+                  transformOrigin: "left",
+                }}
+                colorType="secondary"
+                data=""
+                size="small"
+                buttonTextOpened={"Close Completed Items"}
+                buttonTextClosed={"Open Completed Items"}
+                open={false}
+              >
+                <FilteredStudyPlanItems
+                  filterKey={"markcomplete"}
+                  section={"completed-items"}
+                  sectionTitle={"Completed"}
+                  sectionSubText={"All completed steps and goals"}
+                  messageIfNone="There are no completed items. Time to get to work! :)"
+                  studyPlanSet={formInputData}
+                  allStudyPlanItems={allStudyPlanItems}
+                  displayConditions={displayConditions}
+                  user={props.user}
+                />{" "}
+              </CollapsibleElm>{" "}
+            </div>
+            <div
+              style={{
+                margin: "0.25em 1em 0",
+              }}
+            >
+              <CollapsibleElm
+                id={id + "-collapsible-elm"}
+                styles={{
+                  position: "relative",
+                }}
+                maxHeight={"0"}
+                s
+                inputOrButton="button"
+                buttonStyles={{
+                  margin: "auto",
+                  width: "21em",
+                  maxWidth: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  position: "absolute",
+                  top: "0",
+                  left: "24em",
+                  flexGrow: "1",
+                  minWidth: "min-content",
+                  height: "100%",
+                  maxHeight: "3em",
+                  textAlign: "left",
+                  transformOrigin: "left",
+                }}
+                colorType="secondary"
+                data=""
+                size="small"
+                buttonTextOpened={"Close Items Needing Review"}
+                buttonTextClosed={"Open Items Needing Review"}
+                open={false}
+              >
+                <FilteredStudyPlanItems
+                  filterKey={"markforreview"}
+                  section={"review-items"}
+                  sectionTitle={"Items for Review"}
+                  sectionSubText={
+                    "All goals or steps that have been marked for review."
+                  }
+                  messageIfNone='There are no items for review right now. If you completed a step or a goal, but feel you need to review the material at a later date to ensure understanding, use the "Mark for Review" button at the bottom of each item to set it for later followup.'
+                  studyPlanSet={formInputData}
+                  allStudyPlanItems={allStudyPlanItems}
+                  displayConditions={displayConditions}
+                  user={props.user}
+                />
+              </CollapsibleElm>{" "}
+            </div>
+          </div>
+        )}
+        <div className={styles["new-form-button-wrap"]}>
+          <PushButton
+            inputOrButton="button"
+            id="create-entry-btn"
+            colorType="primary"
+            styles={{}}
+            value={id}
+            parentmasterid={id}
+            data=""
+            size="medium"
+            onClick={addFormButtonHandler}
+          >
+            Add to <span>{toTitleCase(id, true)}</span>
+          </PushButton>
+        </div>
+        <CollapsibleElm
+          id={id + "-collapsible-elm"}
+          styles={{
+            position: "relative",
+          }}
+          maxHeight={
+            id.includes("goal") || id.includes("studyPlan") ? "none" : "8em"
+          }
+          inputOrButton="button"
+          buttonStyles={{
+            margin: "0 auto",
+            padding: "0.5em 2em",
+            letterSpacing: "0.25em",
+            fontVariant: "small-caps",
+            transform: "translateY(0%)",
+            transition: "0.7s all ease",
+            minWidth: "80%",
+            maxWidth: "80%",
+            textAlign: "center",
+            display: "flex",
+            alignItems: "center",
+            borderRadius: "0 0 50px 50px",
+            fontFamily: "Good Times RG",
+          }}
+          colorType="primary"
+          data=""
+          size="small"
+          buttonTextOpened={"- Close All " + toTitleCase(outputName) + " -"}
+          buttonTextClosed={"- Open All " + toTitleCase(outputName) + " -"}
+          open={false}
+        >
+          <div className={styles["sort-button-container"]} type={typeName}>
+            <div
+              id="list-button-container"
+              className={styles["list-button-container"]}
+            >
+              {!showListResetButton && (
+                <Fragment>
+                  <PushButton
+                    inputOrButton="button"
+                    id="create-entry-btn"
+                    colorType="secondary"
+                    styles={{}}
+                    value={id}
+                    parentmasterid={id}
+                    data=""
+                    size="small"
+                    onClick={showAllItemsButtonHandler}
+                  >
+                    List All Goals & Tasks
+                  </PushButton>
+                </Fragment>
+              )}
+              {showListResetButton && (
                 <PushButton
                   inputOrButton="button"
                   id="create-entry-btn"
@@ -389,74 +411,84 @@ const StudyPlanItems = (props) => {
                   parentmasterid={id}
                   data=""
                   size="small"
-                  onClick={showAllItemsButtonHandler}
+                  onClick={showDefaultItemsButtonHandler}
                 >
-                  List All Goals & Tasks
+                  Show Only Steps
                 </PushButton>
-              </Fragment>
-            )}
-            {showListResetButton && (
-              <PushButton
-                inputOrButton="button"
-                id="create-entry-btn"
-                colorType="secondary"
-                styles={{}}
-                value={id}
-                parentmasterid={id}
-                data=""
-                size="small"
-                onClick={showDefaultItemsButtonHandler}
+              )}
+            </div>
+            <label className={styles["sort-button-wrap"]}>
+              Sort by:
+              <select
+                className={styles["new-form-button"]}
+                parentmasterid={IdleDeadline}
+                onChange={sortMethodButtonHandler}
+                value={sortMethod}
               >
-                Show Only Steps
-              </PushButton>
+                {Object.entries(studyItemSortOptions).map((entry) => (
+                  <Fragment>
+                    {" "}
+                    <option value={entry[0]}>{entry[1]}</option>{" "}
+                    <option value={entry[0] + "-reverse"}>
+                      {"Reverse " + entry[1]}
+                    </option>
+                  </Fragment>
+                ))}
+              </select>{" "}
+            </label>
+          </div>
+          {Object.keys(formInputData).length > 0 &&
+            outputName.includes("Goal") && (
+              <h3>
+                It appears you are missing your primary and supporting goals. :(
+                It is very important to start with one main large objective and
+                detail that objective clearly. Mark it as "Goal" in the type
+                section of the form. Then, make sure every single goal and step
+                you add after that is connected either to this main goal in the
+                "Goal or Step this Directly Works Towards" setting or to another
+                goal or step. Everything should lead tot his main goal, so there
+                should only be one goal in this "Goals and Curriculum" section.
+                Opening that goal, should all fo the sub-goals and steps
+                supporting this.
+              </h3>
             )}
-          </div>
-          <label className={styles["sort-button-wrap"]}>
-            Sort by:
-            <select
-              className={styles["new-form-button"]}
-              parentmasterid={IdleDeadline}
-              onChange={sortMethodButtonHandler}
-              value={sortMethod}
+
+          {Object.keys(formInputData).length <= 0 &&
+            !outputName.includes("Goal") && (
+              <h3>
+                It appears nothing has been added to your study plan. See below
+                for how to get started. :)
+              </h3>
+            )}
+          {formInputData &&
+            refresh &&
+            Object.keys(formInputData).length > 0 && (
+              <StudyPlanItemsList
+                studyPlanItemsObj={formInputData}
+                allStudyPlanItems={allStudyPlanItems}
+                parentKey={false}
+                parentsParentKey={false}
+                parentMasterID={false}
+                displayConditions={displayConditions.formWithPreFilledData}
+                user={props.user}
+                section={id}
+                onlyList={props.onlyList}
+                noEditButton={props.noEditButton}
+                refresh={refresh}
+              />
+            )}
+          {newFormJSX && (
+            <div
+              id="new-form-modal"
+              className={styles["new-form-modal"]}
+              type={typeName}
             >
-              {Object.entries(studyItemSortOptions).map((entry) => (
-                <Fragment>
-                  {" "}
-                  <option value={entry[0]}>{entry[1]}</option>{" "}
-                  <option value={entry[0] + "-reverse"}>
-                    {"Reverse " + entry[1]}
-                  </option>
-                </Fragment>
-              ))}
-            </select>{" "}
-          </label>
-        </div>
-        {formInputData && refresh && Object.keys(formInputData).length > 0 && (
-          <StudyPlanItemsList
-            studyPlanItemsObj={formInputData}
-            allStudyPlanItems={allStudyPlanItems}
-            parentKey={false}
-            parentsParentKey={false}
-            parentMasterID={false}
-            displayConditions={displayConditions.formWithPreFilledData}
-            user={props.user}
-            section={id}
-            onlyList={props.onlyList}
-            noEditButton={props.noEditButton}
-            refresh={refresh}
-          />
-        )}
-        {newFormJSX && (
-          <div
-            id="new-form-modal"
-            className={styles["new-form-modal"]}
-            type={typeName}
-          >
-            <form>{newFormJSX}</form>
-          </div>
-        )}
-      </CollapsibleElm>
-    </ul>
+              <form>{newFormJSX}</form>
+            </div>
+          )}
+        </CollapsibleElm>
+      </ul>
+    </Fragment>
   );
 };
 

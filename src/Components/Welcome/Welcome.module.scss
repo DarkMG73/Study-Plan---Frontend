@@ -1,0 +1,15 @@
+.welcome-container {
+    width: 100%;
+    margin:auto;
+    background: var(--spt-color-background);
+    display: flex;justify-content: center;
+}
+
+ .text-container p, .text-container ol{
+max-width: 800px;
+text-align:left;
+}
+
+.text-container ol {
+    max-width: 800px;
+}

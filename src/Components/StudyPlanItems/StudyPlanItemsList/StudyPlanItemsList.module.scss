@@ -393,20 +393,57 @@ ul[class*="edited-list"] li {
   width: 100%;
   max-width: 100%;
   min-width: 100px;
+  max-height: none !important;
 }
 
-ul[class*="edited-list"] textarea,
-ul[class*="edited-list"] input {
+ul[class*=edited-list] textarea, ul[class*=edited-list] input, ul[class*=edited-list] select {
+  min-height: 2em;
+  font: inherit;
   padding: 0.125em 1em;
   line-height: normal;
   border-radius: 10px;
   box-shadow: inset 2px 2px 3px -2px black, inset -2px 2px 3px -2px lightgrey;
+  border: none;
 }
 
 ul[class*="edited-list"] label {
   opacity: 1;
-  font-size: 1.5em;
+  // font-size: 1.5em;
 }
+
+:not([class*=edited-list]) li[class *=method] {
+  max-height: 2em;
+}
+
+ul[class*=edited-list] [class*=method]:before {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  content: 'method';
+}
+
+ul[class*=edited-list] li[class*=progressbar] {
+  display: none;
+}
+
+ul[class*=edited-list] li[class*=name] {
+  grid-column-start: 2;
+}
+
+ul[class*=edited-list] :before {
+  position: relative;
+  /* font-size: 1em; */
+  /* transform: translateY(-50%); */
+  text-align: center;
+  /* line-height: 1em; */
+  margin: 0 auto;
+  padding: 0 0;
+  opacity: 1;
+}
+
+ul[class*=edited-list] li[class*=type] label {
+display: initial;
+}
+
 
 /*** FOR LISTS ***/
 .list {

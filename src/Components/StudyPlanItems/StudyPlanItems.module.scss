@@ -348,6 +348,17 @@ background: var(--spt-color-accent-dark);}
   pointer-events: none;
 }
 
+.new-form-modal form li input, .new-form-modal form li select, .new-form-modal form li textarea {
+  min-height: 2em;
+  height: 2.5em;
+  font: var(--spt-font-body-text);
+  font-size: 1em;
+}
+
+.new-form-modal form li[class*=method] {
+  max-height: 100%;
+}
+
 // Goal New Item Forms
 [type=goal] .new-form-button-wrap {
   display: none;
@@ -403,8 +414,10 @@ background: var(--spt-color-accent-dark);}
   right: 0;
   width: min-content;
   border-radius: 0 0 0 50px;
-  padding: 0 0 0.5em 0.5em;
+  padding: 0.5em;
   margin: 0;
+  border-radius: 50%;
+  transform: translate(-16%,-50%);
 }
 
 .new-form .cancel-single-form-button:hover {

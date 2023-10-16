@@ -129,6 +129,9 @@ const useProcessAllFormInputData = () => {
               value = date;
             }
 
+            if (key === "priority" && value === "") {
+              value = "0";
+            }
             newForm[key] = value;
           });
           return newForm;
@@ -136,7 +139,7 @@ const useProcessAllFormInputData = () => {
 
         outputDataArray.push(...newFormData);
         saveManyItems({ user, outputDataArray }).then((data) => {
-          console.log("Success! An item has been saved to the studyPlan.");
+          console.log("Success! An item has been updated in your study plan.");
           dispatch(allFormInputDataActions.resetSubmitAllNewForms());
         });
       };

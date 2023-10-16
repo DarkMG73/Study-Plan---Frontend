@@ -30,11 +30,11 @@ const useSortList = () => {
       const name = fieldName.replace("-reverse", "");
       if (direction === "reverse") {
         sortedArray = Object.values(objectToBeSorted).sort(
-          (v1, v2) => v2[name] - v1[name]
+          (v1, v2) => v2[name] * 1 - v1[name] * 1
         );
       } else {
         sortedArray = Object.values(objectToBeSorted).sort(
-          (v1, v2) => v1[name] - v2[name]
+          (v1, v2) => v1[name] * 1 - v2[name] * 1
         );
       }
       sortedArray.forEach((item) => {
