@@ -5,6 +5,7 @@
   /* font-family: Arial; */
   text-align: left;
   font-size: 16px;
+  font: var(--spt-font-body-text);
   min-width: 100%;
   flex-basis: 100%;
   flex-wrap: wrap;
@@ -16,6 +17,7 @@
   padding: 0;
   // box-shadow: inset 0px -13px 7px -14px black, inset 0px 14px 7px -14px #00000087;
 }
+
 
 .group-studyPlan-goals ul,
 .group-studyPlan ul {
@@ -119,6 +121,16 @@
   display: flex;
   justify-content: left;
 }
+
+.new-form-button-wrap {
+  display: flex;
+}
+
+.new-form-button-wrap button {
+  width: 80%;
+  margin: auto;
+}
+
 
 /* New Form Modal*/
 .in-modal {
@@ -239,125 +251,156 @@ position: relative;
   overflow: auto;
 }
 
-.new-form li {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  text-align: center;
+
+
+.new-form-modal {
+  .new-form li {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    margin: 0.25em;
+    width: auto;
+  }
+
+  li, input, textarea , select{
+  border-radius: 6.25px;
+  border: none;
+  
+}
+input, textarea, select {
+  box-shadow: inset -1px -1px 3px -2px white, inset 1px 1px 3px -2px black;
 }
 
 .new-form li select {
-width: 100%;
-}
-
-.new-form-button-wrap {
-display: flex;
-justify-content: center;
-}
-
-.new-form-button-wrap > button {
-  min-width: 100%;
-}
-.new-form-button-wrap > button:hover {
-  transform: scale(1, 1.25);
-}
-
-.new-form-modal form label,.new-form-modal form li:before {
-  opacity: 1;
-  font-variant: all-small-caps;
-  transition: 0.2s all ease;
-  font-size: 1em;
-}
-.new-form-modal form [for*=type], .new-form-modal form [for*=name], .new-form-modal form [for*=method], .new-form-modal form [class*=priority]  {
-  display: initial;
-  transform: none;
-}
-
-.new-form-modal form li[class*=name], .new-form-modal form li[class*=type]
-{
-  border: 3px solid var(--spt-color-accent-dark);
-background: var(--spt-color-accent-dark);}
-
-.new-form-modal form li[class*=markcomplete], 
-.new-form-modal form li[class*=markforreview] ,
-.new-form-modal form li[class*=masterLibraryID] ,
-.new-form-modal form li[class*=slug] ,
-.new-form-modal form li[class*=progressbar] ,
-.new-form-modal form li[class*=demonstratedskill],
-.new-form-modal form li[class*=demonstratedskilssls] ,
-.new-form-modal form li[class*=_id] ,
-.new-form-modal form li[class*=createdAt]
-{
-  display: none;
-}
-
-
-.new-form-button {
-  position: relative;
-  width: fit-content;
-  font: var(--spt-font-subheading);
-  letter-spacing: var(--spt-spacing-subheading);
-  font-family: Arial;
-  font-size: 1.2rem;
-  z-index: 10;
-  margin: 0 0.5em;
-  /* box-shadow: inset 1px 1px 1px rgb(255 255 255 / 25%), inset 1px -1px 1px rgb(0 0 0 / 15%), 1px 1px 5px -3px black; */
-  box-shadow: 3px 3px 7px -5px white inset, -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
-  border: none;
-  background: var(--spt-color-background);
-  color: var(--spt-color-accent);
-  border-radius: 50px;
-  padding: 0.5em 1em;
-  font-weight: 700;
-  cursor: pointer;
-  transition: 0.2s all ease;
-  font-feature-settings: "smcp";
-  font-variant: small-caps;
-
-}
-
-.new-form-modal .new-form-button{
-  background: var(--spt-color-accent-gradient);
-  color: var(--spt-color-background);
   width: 100%;
-  margin: 1em;
-  padding: 0.5em;
-  font-size: 1em;
-  transition: 0.2s all ease;
-}
-
-.new-form-modal .new-form-button:last-child {
-  font-size: 1.8em;
-  margin-top: 0;
-}
-.new-form-button:hover {
-  position: relative;
+  }
+  
+  .new-form-button-wrap {
+  display: flex;
+  justify-content: center;
+  }
+  
+  .new-form-button-wrap > button {
+    min-width: 100%;
+  }
+  .new-form-button-wrap > button:hover {
+    transform: scale(1, 1.25);
+  }
+  
+  form label,form li:before {
+    opacity: 1;
+    font-variant: all-small-caps;
+    transition: 0.2s all ease;
+    font-size: 1em;
+  }
+  
+  form [for*=type], form [for*=name], form [for*=method], form [class*=priority]  {
+    display: initial;
+    transform: none;
+  }
+  
+  form li[class*=name], form li[class*=type]
+  {
+    border: 3px solid var(--spt-color-accent-dark);
   background: var(--spt-color-accent-dark);
-  color: var(--spt-color-background);
-  transition: 0.3s all ease;
-  transform: scale(1,1.125);
+  }
+  
+  
+  form li[class*=name]:before, form li[class*=type]:before {
+    content: "*";
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(0, -30%);
+    font-size: 2em;
+  }
+  
+  
+  form li[class*=markcomplete], 
+  form li[class*=markforreview] ,
+  form li[class*=masterLibraryID] ,
+  form li[class*=slug] ,
+  form li[class*=progressbar] ,
+  form li[class*=demonstratedskill],
+  form li[class*=demonstratedskilssls] ,
+  form li[class*=_id] ,
+  form li[class*=createdAt]
+  {
+    display: none;
+  }
+  
+  
+  .new-form-button {
+    position: relative;
+    width: fit-content;
+    font: var(--spt-font-subheading);
+    letter-spacing: var(--spt-spacing-subheading);
+    font-family: Arial;
+    font-size: 1.2rem;
+    z-index: 10;
+    margin: 0 0.5em;
+    /* box-shadow: inset 1px 1px 1px rgb(255 255 255 / 25%), inset 1px -1px 1px rgb(0 0 0 / 15%), 1px 1px 5px -3px black; */
+    box-shadow: 3px 3px 7px -5px white inset, -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
+    border: none;
+    background: var(--spt-color-background);
+    color: var(--spt-color-accent);
+    border-radius: 50px;
+    padding: 0.5em 1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s all ease;
+    font-feature-settings: "smcp";
+    font-variant: small-caps;
+  
+  }
+  
+  .new-form-button{
+    background: var(--spt-color-accent-gradient);
+    color: var(--spt-color-background);
+    width: 100%;
+    margin: 1em;
+    padding: 0.5em;
+    font-size: 1em;
+    transition: 0.2s all ease;
+  }
+  
+  .new-form-button:last-child {
+    font-size: 1.8em;
+    margin-top: 0;
+  }
+  .new-form-button:hover {
+    position: relative;
+    background: var(--spt-color-accent-dark);
+    color: var(--spt-color-background);
+    transition: 0.3s all ease;
+    transform: scale(1,1.125);
+  }
+  
+  .new-form-button span {
+    text-transform: capitalize;
+    text-transform: capitalize;
+    -webkit-background-clip: unset;
+    color: inherit;
+    background: transparent;
+    -webkit-text-fill-color: unset;
+    pointer-events: none;
+  }
+  
+  form li input, form li select, form li textarea {
+    min-height: 2em;
+    height: 2.5em;
+    font: var(--spt-font-body-text);
+    font-size: 1em;
+  }
+  
+  form li[class*=method] {
+    max-height: 100%;
+  }
+
 }
 
-.new-form-button span {
-  text-transform: capitalize;
-  text-transform: capitalize;
-  -webkit-background-clip: unset;
-  color: inherit;
-  background: transparent;
-  -webkit-text-fill-color: unset;
-  pointer-events: none;
-}
 
-.new-form-modal form li input, .new-form-modal form li select, .new-form-modal form li textarea {
-  min-height: 2em;
-  height: 2.5em;
-  font: var(--spt-font-body-text);
-  font-size: 1em;
-}
-
-.new-form-modal form li[class*=method] {
-  max-height: 100%;
-}
 
 // Goal New Item Forms
 [type=goal] .new-form-button-wrap {
@@ -402,10 +445,17 @@ background: var(--spt-color-accent-dark);}
 
 // .sort-button-wrap option { direction: rtl; }
 .sort-button-wrap select  {
-  -webkit-appearance: none;
+  webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
-  text-overflow: '';
+  text-overflow: ellipsis;
+  border-radius: 6.25px;
+  border: none;
+  box-shadow: inset -1px -1px 3px -2px white, inset 1px 1px 3px -2px black;
+  transition: 0.7s all ease;
+  background: var(--spt-color-background);
+  color: var(--spt-color-background-contrast);
+  font: var(--spt-font-body-text-12);
 }
 
 .new-form .cancel-single-form-button {
@@ -413,19 +463,54 @@ background: var(--spt-color-accent-dark);}
   top: 0;
   right: 0;
   width: min-content;
-  border-radius: 0 0 0 50px;
-  padding: 0.5em;
+  background: var(--spt-color-accent-2-dark);
+  color: inherit;
   margin: 0;
-  border-radius: 50%;
-  transform: translate(-16%,-50%);
+  box-shadow: none;
+  text-align: center;
+  padding: 0;
+  padding: 0.125em;
+  text-indent: 0.375em;
+  border-radius: 0 0 0 12.5px;
 }
 
 .new-form .cancel-single-form-button:hover {
   position: absolute;
   top: 0;
   right: 0;
-  width: min-content;
-  border-radius: 0 0 0 50px;
-  padding: 0 0 0.5em 0.5em;
-  margin: 0;
+  background: var(--spt-color-accent-2-light);
+  border-radius: 6.25px;
+  transform: translate(0, 6.25%) scale(1.125);
 }
+
+.no-items-text {
+  background: var(--spt-color-background);
+  color: var(--spt-color-background-contrast);
+  padding: 0 1em;
+}
+
+.instructions-container, .no-items-text {
+  background: inherit;
+  color: inherit;
+  font: var(--spt-font-body-text-12);
+  max-width: 800px;
+  text-align: left;
+  margin: 0 auto;
+  width: 100%;
+  margin: auto;
+  background: var(--spt-color-background);
+  display: flex;
+  justify-content: center;
+  font: var(--spt-font-body-text-12);
+  box-shadow: 3px 3px 7px -3px rgba(0, 0, 0, 0.5), inset 3px 3px 7px -3px #ffffff;
+  border-radius: 6.25px;
+  padding: 1em 3% 2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.studyPlan-items-group {
+  p,  ol {
+    opacity:1;
+  }
+} 

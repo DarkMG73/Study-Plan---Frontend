@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { shallowEqual, useSelector, useDispatch } from "react-redux";
 import styles from "./StudyPlanItems.module.scss";
 import StudyPlanItemsList from "./StudyPlanItemsList/StudyPlanItemsList";
 import Welcome from "../Welcome/Welcome";
@@ -12,7 +12,6 @@ import useInitStudyPlanItems from "../../Hooks/useInitStudyPlanItems";
 import useProcessUpdateStudyPlan from "../../Hooks/useProcessUpdateStudyPlan";
 import PushButton from "../../UI/Buttons/PushButton/PushButton";
 import { toTitleCase } from "../../Hooks/utility";
-
 import { saveManyStudyPlanItems } from "../../storage/studyPlanDB";
 import {
   saveManyContentItems,
@@ -39,6 +38,7 @@ const StudyPlanItems = (props) => {
   const updateStudyPlan = useSelector(
     (state) => state.studyPlanData.updateStudyPlan
   );
+  let saveManyItems = saveManyStudyPlanItems;
   const [sortMethod, setSortMethod] = useState("priority");
   const [refresh, setRefresh] = useState(0);
   const [changeListArray, setChangeListArray] = useState(false);
@@ -59,7 +59,7 @@ const StudyPlanItems = (props) => {
   const [newFormInputValuesObj, setNewFormInputValuesObj] = useState({});
   const newFormInputValuesObjRef = useRef();
   newFormInputValuesObjRef.current = newFormInputValuesObj;
-  const allFormInputData = useSelector((state) => state.formInputData);
+  const allFormInputData = useSelector((state) => state.formInputData, shallowEqual);
   const dispatch = useDispatch();
   const sortList = useSortList();
   const assembleStudyPlanList = useAssembleStudyPlanList();
@@ -77,6 +77,7 @@ const StudyPlanItems = (props) => {
       id
     );
 
+   
   if (outputName === "goals") outputName = "Goal & Curriculum";
   if (outputName === "steps") outputName = "Syllabus";
 
@@ -132,22 +133,7 @@ const StudyPlanItems = (props) => {
     }
   }, [changeListArray]);
 
-  useEffect(() => {
-    processAllFormInputData({
-      user,
-      dispatch,
-      allFormInputData,
-      saveManyStudyPlanItems,
-      getSchemaForContentItem,
-      saveManyContentItems,
-    });
-  }, [
-    allFormInputData.allNewForms,
-    user,
-    dispatch,
-    allFormInputData,
-    processAllFormInputData,
-  ]);
+
 
   useEffect(() => {
     processUpdateStudyPlan({
@@ -195,13 +181,45 @@ const StudyPlanItems = (props) => {
     setShowListResetButton(false);
     setChangeListArray(["step"]);
   };
+
   ////////////////////////////////////////////////////////////////////////
   /// Output
   ////////////////////////////////////////////////////////////////////////
-  return (
+ if( props.onlyAddToButton)     
+    return  <Fragment>
+    <PushButton
+      inputOrButton="button"
+      id="create-entry-btn"
+      colorType="primary"
+      styles={{}}
+      value={id}
+      parentmasterid={id}
+      data=""
+      size="medium"
+      onClick={addFormButtonHandler}
+    >
+      Add to <span>{toTitleCase(id, true)}</span>
+ 
+    </PushButton>   {newFormJSX && (
+    <div
+      id="new-form-modal"
+      className={styles["new-form-modal"]}
+      type={typeName}
+    >
+      <form>{newFormJSX}</form>
+    </div>
+  )}
+  </Fragment> 
+ return (
     <Fragment>
-      {Object.keys(formInputData).length <= 0 &&
+      {!user &&
         outputName.includes("Goal") && <Welcome />}
+      {user && outputName.includes("Goal") && 
+      
+      (!studyPlanMetadata.hasOwnProperty('_id') || 
+        ( studyPlanMetadata.hasOwnProperty('_id') && studyPlanMetadata._id.length <= 0 ))  && <Welcome user={user}/>}
+
+        {user && Object.keys(formInputData).length >= 0  && studyPlanMetadata.hasOwnProperty('_id') && studyPlanMetadata._id.length > 0 &&
       <ul
         marker="STUDYPLAN-ITEMS"
         section={id}
@@ -218,7 +236,9 @@ const StudyPlanItems = (props) => {
         <h2 className={styles["group-title"] + " " + styles[id]}>
           {outputName}
         </h2>
-        {outputName.toLowerCase().includes("syllabus") && (
+        
+        {outputName.toLowerCase().includes("syllabus") &&  Object.keys(formInputData).length > 0  &&
+        !outputName.includes("Goal") && (
           <div
             section="history-list-section"
             id={id}
@@ -379,7 +399,7 @@ const StudyPlanItems = (props) => {
           buttonTextClosed={"- Open All " + toTitleCase(outputName) + " -"}
           open={false}
         >
-          <div className={styles["sort-button-container"]} type={typeName}>
+      { Object.keys(formInputData).length > 0  &&   <div className={styles["sort-button-container"]} type={typeName}>
             <div
               id="list-button-container"
               className={styles["list-button-container"]}
@@ -436,34 +456,55 @@ const StudyPlanItems = (props) => {
                 ))}
               </select>{" "}
             </label>
-          </div>
-          {Object.keys(formInputData).length > 0 &&
+          </div>}
+          {Object.keys(formInputData).length <= 0 &&
             outputName.includes("Goal") && (
-              <h3>
-                It appears you are missing your primary and supporting goals. :(
-                It is very important to start with one main large objective and
-                detail that objective clearly. Mark it as "Goal" in the type
-                section of the form. Then, make sure every single goal and step
-                you add after that is connected either to this main goal in the
-                "Goal or Step this Directly Works Towards" setting or to another
-                goal or step. Everything should lead tot his main goal, so there
-                should only be one goal in this "Goals and Curriculum" section.
-                Opening that goal, should all fo the sub-goals and steps
-                supporting this.
-              </h3>
+              <div className={styles['instructions-container']}>
+              <p>
+                It appears you are missing your main goal. :(
+                It is very important to start with one main large goal. Everything should lead to this main goal, so there should only be one goal (and no more) in this "Goals and Curriculum" section.  Opening that goal, should reveal all of the sub-goals and steps supporting this goal.
+                </p>
+<h4>To do this: </h4>
+<ol>
+ <li>Open the new entry form with: {<StudyPlanItems id='studyPlan' onlyAddToButton={true} />}</li>
+ <li>Mark it as "Goal" in the "Type" section of the form.</li> 
+ <li>Save the main goal</li>
+ <li>Then, make sure every single goal and step added after that is connected either to this main goal or to another
+ goal or step (which would be in support of the main goal). This is set in the "Goal or Step this Directly Works Towards" setting. It will be empty when making your original main goal, but with
+ each subsequent goal or step all previous goals or steps will be
+ available to select. </li>
+                </ol>
+                <p> 
+                <b>IMPORTANT NOTE</b>:{" "}
+                <i>
+                  If you find yourself adding something that does not
+                  actually support an existing goal or step, either do not add it
+                  (because it is not actually helping you) or mark the "Type" setting
+                  as "Hold" until you figure where it fits into this journey to the
+                  one main goal. When it is time to add it to the flow, just change
+                  the Type to a Step or Goal.
+                </i>
+              </p></div>
             )}
 
-          {Object.keys(formInputData).length <= 0 &&
+          {Object.keys(formInputData).length <= 0 && studyPlanMetadata.hasOwnProperty('_id') && studyPlanMetadata._id.length > 0 &&
             !outputName.includes("Goal") && (
+              <div
+              id="no-items-text"
+              className={styles["no-items-text"]}
+              type={typeName}
+            >
               <h3>
-                It appears nothing has been added to your study plan. See below
-                for how to get started. :)
+                It appears you have a goal; GREAT! Unfortunately, there are no steps to get there. See below for how to add steps towards your main goal. :)
               </h3>
+              <Welcome onlyInstructions={true} />
+              </div>
             )}
           {formInputData &&
             refresh &&
             Object.keys(formInputData).length > 0 && (
               <StudyPlanItemsList
+              key={'spi-list' + id}
                 studyPlanItemsObj={formInputData}
                 allStudyPlanItems={allStudyPlanItems}
                 parentKey={false}
@@ -487,7 +528,7 @@ const StudyPlanItems = (props) => {
             </div>
           )}
         </CollapsibleElm>
-      </ul>
+      </ul>}
     </Fragment>
   );
 };

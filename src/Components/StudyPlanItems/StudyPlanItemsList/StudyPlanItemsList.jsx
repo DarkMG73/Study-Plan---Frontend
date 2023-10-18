@@ -143,12 +143,22 @@ const StudyPlanItemsList = (props) => {
     const parentMasterID = e.target.getAttribute("parentmasterid");
     const parentSection = e.target.getAttribute("section");
     const rawItemWithNewEdits = { ...studyPlanItemsObj[parentMasterID] };
-    const itemWithNewEdits = { ...rawItemWithNewEdits };
     const _id = rawItemWithNewEdits._id;
     const existingFormEdits = { ...formInputData.existingFormInputDataObj };
 
     for (const key in existingFormEdits[parentMasterID]) {
       if (
+        key === "markcomplete" ||
+        (key === "markforreview" &&
+          existingFormEdits[parentMasterID][key].constructor !== Boolean)
+      ) {
+        if (existingFormEdits[parentMasterID][key] === "false")
+          rawItemWithNewEdits[key] = false;
+        else {
+          rawItemWithNewEdits[key] = true;
+        }
+        rawItemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
+      } if (
         existingFormEdits[parentMasterID][key] &&
         existingFormEdits[parentMasterID][key].constructor === Object
       ) {
@@ -161,26 +171,36 @@ const StudyPlanItemsList = (props) => {
 
         if (key == 0) {
           const newKey = Object.keys(newInnerItemWithNewEdits)[0];
-          itemWithNewEdits[newKey] = newInnerItemWithNewEdits[newKey];
+          rawItemWithNewEdits[newKey] = newInnerItemWithNewEdits[newKey];
         } else {
-          itemWithNewEdits[key] = { ...newInnerItemWithNewEdits };
+          rawItemWithNewEdits[key] = { ...newInnerItemWithNewEdits };
         }
-      } else if (
-        key === "markcomplete" ||
-        (key === "markforreview" &&
-          existingFormEdits[parentMasterID][key].constructor !== Boolean)
-      ) {
-        if (existingFormEdits[parentMasterID][key] === "false")
-          itemWithNewEdits[key] = false;
-        else {
-          itemWithNewEdits[key] = true;
-        }
-        itemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
-      } else {
-        itemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
+      }   else {
+        rawItemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
       }
     }
+    console.log('%c --> %cline:186%crawItemWithNewEdits', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(114, 83, 52);padding:3px;border-radius:2px', rawItemWithNewEdits)
 
+    // Clean itemWithNewEdits
+   const  itemWithNewEdits = {}
+   for(const [key, value] of Object.entries(rawItemWithNewEdits)) {
+    console.log('%c --> %cline:186%ckey', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(252, 157, 154);padding:3px;border-radius:2px', key)
+if(key === '_id') {delete itemWithNewEdits[key]} else
+if (
+ ( key === "markcomplete" ||
+  key === "markforreview") &&
+  rawItemWithNewEdits[key].constructor !== Boolean
+) {
+
+  if (['', "false"].includes(existingFormEdits[parentMasterID][key]) )
+  {itemWithNewEdits[key] = false;}
+  else {
+    itemWithNewEdits[key] = true;
+  }
+} else
+   { itemWithNewEdits[key] = value}
+   }
+   console.log('%c --> %cline:200%citemWithNewEdits', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(237, 222, 139);padding:3px;border-radius:2px', itemWithNewEdits)
     if (user) {
       dispatch(
         studyPlanDataActions.updateOneStudyPlanItem({
@@ -210,7 +230,7 @@ const StudyPlanItemsList = (props) => {
       "Are you sure you want to delete the " +
         studyPlanItemsObj[parentMasterID].type +
         ' titled "' +
-        studyPlanItemsObj[parentMasterID].title +
+        studyPlanItemsObj[parentMasterID].name +
         ' "?'
     );
     if (confirm && user && user.isAdmin == true) {

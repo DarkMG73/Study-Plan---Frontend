@@ -8,7 +8,7 @@ const useProcessAllFormInputData = () => {
   const studyPlanItemSchema = useSelector(
     (state) => state.studyPlanData.schema
   );
-  const outputFunction = (props) => {
+  const outputFunction =  (props) => {
     const {
       user,
 
@@ -29,6 +29,7 @@ const useProcessAllFormInputData = () => {
           }
         }
       });
+      
       const processWithSchema = (schema) => {
         const outputDataArray = [];
         const requiredFields = [];
@@ -137,15 +138,14 @@ const useProcessAllFormInputData = () => {
           return newForm;
         });
 
-        outputDataArray.push(...newFormData);
-        saveManyItems({ user, outputDataArray }).then((data) => {
-          console.log("Success! An item has been updated in your study plan.");
-          dispatch(allFormInputDataActions.resetSubmitAllNewForms());
-        });
+       outputDataArray.push(...newFormData);
+       return outputDataArray
       };
 
+    
       alert("process with existing schema");
-      processWithSchema(schema);
+     const data = processWithSchema(schema);
+return data
     }
   };
 

@@ -22,7 +22,6 @@ const useCreateNewForm = () => {
     ////////////////////////////////////////////////////////////////
     const submitNewFormButtonHandler = (e) => {
       e.preventDefault();
-
       dispatch(formInputDataActions.submitAllNewForms());
     };
 
@@ -84,9 +83,7 @@ const useCreateNewForm = () => {
                 }
                 value={"newForm-" + i}
                 onClick={cancelFormButtonHandler}
-              >
-                X
-              </button>
+              >X</button>
               <h2
                 id={parentMasterID}
                 className={styles["group-title"] + " " + styles[parentMasterID]}

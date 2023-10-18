@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, Fragment, useRef } from "react";
+import React, { useEffect, useLayoutEffect, Fragment, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./Home.module.scss";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
@@ -17,17 +17,29 @@ import { ErrorBoundary } from "../../HOC/ErrorHandling/ErrorBoundary/ErrorBounda
 import { scrollPositionActions } from "../../store/scrollPositionSlice";
 import LoginStatus from "../../Components/User/LoginStatus/LoginStatus";
 import Stats from "../../Components/Stats/Stats";
+import { saveManyStudyPlanItems } from "../../storage/studyPlanDB";
+import {
+  saveManyContentItems,
+  getSchemaForContentItem,
+} from "../../storage/contentDB";
+import useProcessAllFormInputData from "../../Hooks/useProcessAllFormInputData";
+
+
 
 const Home = (props) => {
   const { studyPlan } = useSelector((state) => state.studyPlanData);
   const { content } = useSelector((state) => state.contentData);
+  const user = useSelector((state) => state.auth.user);
   // const [scrollToElm, setScrollToElm] = useState(false);
   // const [scrollToSessionResults, setScrollToSessionResults] = useState(false);
   // const [scrollToAnswer, setScrollToAnswer] = useState(false);
   const angledRectangleRef = useRef();
   const dispatch = useDispatch();
   const hideStudyPlan = false;
-
+  const allFormInputData = useSelector((state) => state.formInputData);
+  const processAllFormInputData = useProcessAllFormInputData();
+  let saveManyItems = saveManyStudyPlanItems;
+  
   ////////////////////////////////////////
   /// Effects
   ////////////////////////////////////////
@@ -48,6 +60,37 @@ const Home = (props) => {
     return () => window.removeEventListener("scroll", updateScrollPosition);
   }, []);
 
+  useEffect(() => {
+    if( allFormInputData.allNewForms && 
+      user && 
+      allFormInputData )
+{   
+
+  const data = processAllFormInputData({
+      user,
+      dispatch,
+      allFormInputData,
+      saveManyStudyPlanItems,
+      getSchemaForContentItem,
+      saveManyContentItems,
+    });
+  
+    saveManyItems({ user, outputDataArray: data }).then((res) => {
+ 
+      if (res.status >= 400) {
+        alert("There was an error: " + res.response.data.message);
+      } else if (res.status >= 200) {
+        alert("Success! An item has been updated in your study plan.");
+        console.log("Success! An item has been updated in your study plan.");
+      } else {
+        alert("there was an error: " + +res.message);
+      }
+    }); 
+} 
+  }, [
+    allFormInputData.allNewForms,
+  
+  ]);
   ////////////////////////////////////////
   /// Functionality
   ////////////////////////////////////////

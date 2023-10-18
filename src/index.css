@@ -72,6 +72,7 @@ Blues: rgb(67, 144, 233) hsl(212 79% 97% / 1)
   --spt-spacing-body-text: 0.125em;
   --spt-font-subheading: normal 700 2rem "Covered By Your Grace", sans-serif;
   --spt-font-body-text: normal 500 1.6rem "Kodchasan", sans-serif;
+  --spt-font-body-text-12: normal 500 1.2rem "Kodchasan", sans-serif;
 }
 
 :root {
@@ -86,6 +87,7 @@ Blues: rgb(67, 144, 233) hsl(212 79% 97% / 1)
     --spt-spacing-subheading: 0.162em;
     --spt-font-subheading: normal 700 1.4rem "Covered By Your Grace", sans-serif;
     --spt-font-body-text: normal 500 1.2rem "Covered By Your Grace", sans-serif;
+    --spt-font-body-text-12: normal 500 0.75rem "Covered By Your Grace", sans-serif;
   }
 }
 
