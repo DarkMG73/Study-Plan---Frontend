@@ -42,6 +42,7 @@ const StudyPlanItems = (props) => {
   const [sortMethod, setSortMethod] = useState("priority");
   const [refresh, setRefresh] = useState(0);
   const [changeListArray, setChangeListArray] = useState(false);
+  const [hideAllSubGoals, setHideAllSubGoals] = useState(true);
   const [showListResetButton, setShowListResetButton] = useState(false);
   const id = props.id;
   const typeName = props.type;
@@ -182,6 +183,15 @@ const StudyPlanItems = (props) => {
     setChangeListArray(["step"]);
   };
 
+  const hideAllSubGoalsButtonHandler = (e) => {
+    if (studyPlanMetadata && studyPlanMetadata.hasOwnProperty("type")) {
+      setHideAllSubGoals(!hideAllSubGoals);
+      
+    }
+  };
+
+
+
   ////////////////////////////////////////////////////////////////////////
   /// Output
   ////////////////////////////////////////////////////////////////////////
@@ -225,6 +235,8 @@ const StudyPlanItems = (props) => {
         section={id}
         id={id}
         type={typeName}
+        hiddeItems={'' + (hideAllSubGoals && outputName.toLowerCase().includes("goal") &&
+        !outputName.includes("Syllabus"))}
         className={
           styles["studyPlan-items-group"] +
           " " +
@@ -236,7 +248,44 @@ const StudyPlanItems = (props) => {
         <h2 className={styles["group-title"] + " " + styles[id]}>
           {outputName}
         </h2>
-        
+        {outputName.toLowerCase().includes("goal") &&  Object.keys(formInputData).length > 0  &&
+        !outputName.includes("Syllabus") &&  <div
+           id="list-button-container"
+           className={styles["goal-button-container"]}
+         >
+           {hideAllSubGoals && (
+             <Fragment>
+               <PushButton
+                 inputOrButton="button"
+                 id="create-entry-btn"
+                 colorType="secondary"
+                 styles={{}}
+                 value={id}
+                 parentmasterid={id}
+                 data=""
+                 size="small"
+                 onClick={hideAllSubGoalsButtonHandler}
+               >
+                 Show Sub-goals as a list
+               </PushButton>
+             </Fragment>
+           )}
+           {!hideAllSubGoals && (
+             <PushButton
+               inputOrButton="button"
+               id="create-entry-btn"
+               colorType="secondary"
+               styles={{}}
+               value={id}
+               parentmasterid={id}
+               data=""
+               size="small"
+               onClick={hideAllSubGoalsButtonHandler}
+             >
+               Sub-Goal Tree (Inside Main Goal)
+             </PushButton>
+           )}
+         </div>}
         {outputName.toLowerCase().includes("syllabus") &&  Object.keys(formInputData).length > 0  &&
         !outputName.includes("Goal") && (
           <div
@@ -255,7 +304,6 @@ const StudyPlanItems = (props) => {
                 margin: "0.5em 1em 0",
               }}
             >
-              {" "}
               <CollapsibleElm
                 id={id + "-collapsible-elm"}
                 styles={{
@@ -445,7 +493,7 @@ const StudyPlanItems = (props) => {
                 onChange={sortMethodButtonHandler}
                 value={sortMethod}
               >
-                {Object.entries(studyItemSortOptions).map((entry) => (
+                {Object.entries(studyItemSortOptions).sort((a, b) => a[1].toLowerCase().localeCompare(b[1].toLowerCase())).map((entry) => (
                   <Fragment>
                     {" "}
                     <option value={entry[0]}>{entry[1]}</option>{" "}

@@ -18,6 +18,7 @@ import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 const StudyPlanItemsList = (props) => {
   const [refresh, setRefresh] = useState(1);
   const studyPlanItemsObj = props.studyPlanItemsObj;
+  console.log('studyPlanItemsObj: ', studyPlanItemsObj);
   const { studyPlanMetadata } = studyPlanItemsObj;
   const user = useSelector((state) => state.auth.user);
   const parentKey = props.parentKey;
@@ -179,12 +180,10 @@ const StudyPlanItemsList = (props) => {
         rawItemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
       }
     }
-    console.log('%c --> %cline:186%crawItemWithNewEdits', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(114, 83, 52);padding:3px;border-radius:2px', rawItemWithNewEdits)
 
     // Clean itemWithNewEdits
    const  itemWithNewEdits = {}
    for(const [key, value] of Object.entries(rawItemWithNewEdits)) {
-    console.log('%c --> %cline:186%ckey', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(252, 157, 154);padding:3px;border-radius:2px', key)
 if(key === '_id') {delete itemWithNewEdits[key]} else
 if (
  ( key === "markcomplete" ||
@@ -200,7 +199,6 @@ if (
 } else
    { itemWithNewEdits[key] = value}
    }
-   console.log('%c --> %cline:200%citemWithNewEdits', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(237, 222, 139);padding:3px;border-radius:2px', itemWithNewEdits)
     if (user) {
       dispatch(
         studyPlanDataActions.updateOneStudyPlanItem({
@@ -285,6 +283,7 @@ if (
             parentMasterType={
               parentMasterType ? parentMasterType : studyPlanItemsObj[key].type
             }
+            mainGoal={'' + (studyPlanItemsObj[key].hasOwnProperty('msup') && studyPlanItemsObj[key].msup.trim() === '') }
             className={
               (subListLevel > 0 &&
                 styles.subgroup +
@@ -536,6 +535,7 @@ if (
             parentMasterType={
               parentMasterType ? parentMasterType : studyPlanItemsObj[key].type
             }
+            mainGoal={'' + (studyPlanItemsObj[key].hasOwnProperty('msup') && studyPlanItemsObj[key].msup.trim() === '') }
             className={
               (subListLevel > 0 &&
                 styles.subgroup +
@@ -567,6 +567,13 @@ if (
                     studyPlanItemsObj[key].hasOwnProperty("markcomplete") &&
                     studyPlanItemsObj[key].markcomplete &&
                     studyPlanItemsObj[key].marcomplete !== "false")
+              ] + ' ' + 
+              styles[
+                "is-for-review-" +
+                  (studyPlanItemsObj[key] &&
+                    studyPlanItemsObj[key].hasOwnProperty("markforreview") &&
+                    studyPlanItemsObj[key].markforreview &&
+                    studyPlanItemsObj[key].markforreview !== "false")
               ]
             }
           >
@@ -604,7 +611,7 @@ if (
                 cursor: "pointer",
                 transformOrigin: "left",
               }}
-              colorType="secondary"
+              colorType="primary"
               data=""
               size="small"
               open={false}
@@ -770,7 +777,7 @@ if (
     });
   return (
     <div>
-      <h2>There are no Category Items to List.</h2>
+      <h2>There are no items to list.</h2>
     </div>
   );
 };

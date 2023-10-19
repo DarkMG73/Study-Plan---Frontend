@@ -48,9 +48,10 @@ const useAssembleStudyPlanList = () => {
         }
       }
 
-      if ((typeArray.lenght = 1 && typeArray.includes("goal"))) {
+      // if ((typeArray.lenght = 1 && typeArray.includes("goal"))) {
+        if (true) {
         for (const [key, value] of Object.entries(output)) {
-          if (value.type !== "goal") continue;
+          // if (value.type !== "goal") continue;
           groomedOutput[key].dependencies = findDependencies(
             value.identifier,
             dataObjForEdit

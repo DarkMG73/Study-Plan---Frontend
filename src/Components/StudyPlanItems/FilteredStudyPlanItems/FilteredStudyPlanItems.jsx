@@ -10,6 +10,7 @@ const CompletedStudyPlanItems = (props) => {
   const studyPlanSet = props.studyPlanSet ? props.studyPlanSet : {};
   const filterKey = props.filterKey;
   const filteredItems = {};
+
   if (studyPlanMetadata.hasOwnProperty(filterKey)) {
     studyPlanMetadata[filterKey].forEach((id) => {
       if (studyPlanSet.hasOwnProperty(id)) {
@@ -22,6 +23,7 @@ const CompletedStudyPlanItems = (props) => {
       }
     });
   }
+ 
   return (
     <div className={Styles["filtered-items-container"]}>
       <h3 className={"subtitle " + Styles["filtered-items-title"]}>

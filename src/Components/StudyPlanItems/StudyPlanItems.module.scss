@@ -30,6 +30,10 @@
   background: var(--spt-color-accent-2-gradient);
 }
 
+[hiddeItems=true] > div > [mainGoal=false][type=goal] {
+ height: 0;
+}
+
 .goal { border: 10px solid red !important; }
 .group-studyPlan-goals ul > div {
   display: grid;
@@ -441,7 +445,8 @@ input, textarea, select {
 
 .sort-button-wrap select { 
   text-align-last: left; 
-  box-shadow: inset 1px 1px 4px -3px black, inset -1px -1px 3px -2px #b8b8b8;}
+  box-shadow: inset 1px 1px 4px -3px black, inset -1px -1px 3px -2px #b8b8b8;
+} 
 
 // .sort-button-wrap option { direction: rtl; }
 .sort-button-wrap select  {
@@ -456,6 +461,13 @@ input, textarea, select {
   background: var(--spt-color-background);
   color: var(--spt-color-background-contrast);
   font: var(--spt-font-body-text-12);
+}
+
+.sort-button-wrap select:hover {
+  background: var(--spt-color-accent-dark);
+  color: var(--spt-color-background);
+  font-weight: 700;
+  transition: 0.3s all ease;
 }
 
 .new-form .cancel-single-form-button {

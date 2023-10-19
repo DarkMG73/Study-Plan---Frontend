@@ -181,18 +181,22 @@
 .subgroup .tags .group-title {
   display: none;
 }
-.dependencies-container:not([section=studyPlan-goals] ){
+.dependencies-container {
   display: none;
+}
+
+[section=studyPlan-goals] .dependencies-container {
+  display: initial;
 }
 body .master-parent-group .dependencies-container {
   grid-area: dependencies-container;
   overflow: hidden;
   max-width: 100%;
-  margin: 3em 1em;
+  margin: 1em 1%;
   background: var(--spt-color-background-contrast);
   box-shadow: inset 1px 1px 3px -2px black, inset -1px -1px 3px -2px white;
-  padding: 0 0.5em;
-  border-radius: 25px 6.25px;
+  padding: 0 1%;
+  border-radius: 25px 6.25px 50px;
   /* border: 1px solid var(--spt-color-accent) !important; */
   /* border-left: 7px solid var(--spt-color-accent) !important; */
   color: var(--spt-color-background);
@@ -429,7 +433,7 @@ ul[class*=edited-list] li[class*=name] {
   grid-column-start: 2;
 }
 
-ul[class*=edited-list] :before {
+ul[class*=edited-list] li:before {
   position: relative;
   /* font-size: 1em; */
   /* transform: translateY(-50%); */
@@ -472,3 +476,23 @@ display: initial;
 .is-complete-true {
   filter: grayscale(1);
 }
+
+.is-for-review-true {
+  filter: grayscale(0.5);
+  border: 3px solid yellow;
+}
+
+.is-for-review-true:after {
+content: 'Review Needed';
+position: absolute;
+top: 0;
+right:2em;
+font-size: 1rem;
+background: yellow;
+color: black;
+padding: 0 0.5em;
+border-radius: 25px;
+}
+
+
+

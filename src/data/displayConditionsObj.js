@@ -14,7 +14,8 @@ const displayConditions = {
       type: ["- Select one -", "step", "goal", "hold"],
       priority: ["0", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"],
     }, // List with no input box and fixed options.
-    isFixedCompiledList: ["msup", "asup"], // List with no input box and compiled options.
+    isFixedCompiledList: [], // List with no input box and compiled options.
+    isOtherKeyFixedCompiledList: {msup: {keyToSave: 'identifier', keyToDisplay: 'name'}, asup: {keyToSave: 'identifier', keyToDisplay: 'name'}}, // Select with options to display and save different keys & values.  
     forSlideButton: ["markcomplete", "markforreview"],
     protectedHidden: [
       "title",
@@ -53,7 +54,8 @@ const displayConditions = {
       type: ["- Select one -", "step", "goal", "hold"],
       priority: ["0", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"],
     }, // List with no input box and fixed options.
-    isFixedCompiledList: ["msup", "asup"], // List with no input box and compiled options.
+    isFixedCompiledList: [], // List with no input box and compiled options.
+    isOtherKeyFixedCompiledList: {msup: {keyToSave: 'identifier', keyToDisplay: 'name'}, asup: {keyToSave: 'identifier', keyToDisplay: 'name'}}, // Select with options to display and save different keys & values.  
     protectedHidden: ["identifier"],
     protectedVisible: [],
   },

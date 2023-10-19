@@ -56,7 +56,7 @@ const useCreateNewForm = () => {
     ////////////////////////////////////////////////////////////////
     const parentMasterID = e.target.getAttribute("parentmasterid");
     const amountToAdd = prompt("How many would you like to add?");
-
+if(amountToAdd <= 0) return false
     const processNewFormWithSchema = (schema) => {
       const targetFormDataObj = schema;
       // const itemsToRemove = ['$timestamps', ]

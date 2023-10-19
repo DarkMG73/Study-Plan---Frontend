@@ -51,7 +51,14 @@ export default async function GatherStudyPlanData(studyPlanItemSchema, user) {
     groomedStudyPlanMetadata[key] = [...output];
   }
 
-  studyPlanData.studyPlanMetadata = groomedStudyPlanMetadata;
+  // alphabetic sort while building output for organized list displays
+  studyPlanData.studyPlanMetadata = {}
+ for(const [key, value] of Object.entries( groomedStudyPlanMetadata)) {
+  studyPlanData.studyPlanMetadata[key] = [value[0] , ...value.splice(1).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))]
+ }
+
+
+ 
 
   for (const studyPlanValue of Object.values(studyPlanData.studyPlan)) {
     if (

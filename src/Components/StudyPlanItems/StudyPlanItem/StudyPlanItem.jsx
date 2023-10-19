@@ -9,8 +9,8 @@ import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 const StudyPlanItem = (props) => {
   const studyPlanItemsObj = props.studyPlanItemsObj.studyPlanItemsObj;
   const user = useSelector((state) => state.auth.user);
-  const studyPlanMetadata = useSelector(
-    (state) => state.studyPlanData.studyPlanMetadata
+  const {studyPlan, studyPlanMetadata} = useSelector(
+    (state) => state.studyPlanData
   );
   const showProtectedHidden = props.showProtectedHidden;
   const unlockProtectedVisible = props.unlockProtectedVisible;
@@ -144,6 +144,8 @@ const StudyPlanItem = (props) => {
         output = "isLimitedList";
       if (checkIfNameInDisplayCond(key, "isFixedCompiledList"))
         output = "isFixedCompiledList";
+      if (checkIfNameInDisplayCond(key, "isOtherKeyFixedCompiledList"))
+        output = "isOtherKeyFixedCompiledList";
     }
 
     return output;
@@ -603,7 +605,7 @@ const StudyPlanItem = (props) => {
             }
           >
             {studyPlanMetadata.hasOwnProperty(key) &&
-              studyPlanMetadata[key].map((option) => (
+              studyPlanMetadata[key].slice(1).map((option) => (
                 <option value={option}></option>
               ))}
           </datalist>
@@ -700,7 +702,7 @@ const StudyPlanItem = (props) => {
             }
           >
             {studyPlanMetadata.hasOwnProperty(key) &&
-              studyPlanMetadata[key].map((option) => (
+              studyPlanMetadata[key].slice(1).map((option) => (
                 <option value={option}></option>
               ))}
             {Object.values(displayConditions["isSuggestionsList"][key]).map(
@@ -812,9 +814,95 @@ const StudyPlanItem = (props) => {
             }
           >
             {studyPlanMetadata.hasOwnProperty(key) &&
-              studyPlanMetadata[key].map((option) => (
+              studyPlanMetadata[key].slice(1).map((option) => (
                 <option value={option}>{option}</option>
               ))}
+          </select>
+        </Fragment>
+      )}
+
+
+
+      {!onlyList && elementTypeNeeded === "isOtherKeyFixedCompiledList" && (
+        <Fragment>
+          <label 
+            id={
+              parentMasterID +
+              "-" +
+              parentsParentKey +
+              "-" +
+              parentKey +
+              "-" +
+              key +
+              "label"
+            }
+            htmlFor={parentKey + "-" + key}
+            className={
+              styles[
+                "protectedHidden-" +
+                  displayConditions.protectedHidden.includes(key)
+              ] +
+              " " +
+              styles[
+                "protectedVisible-" +
+                  (displayConditions.protectedVisible.includes("PROTECT-ALL") &&
+                    !unlockProtectedVisible.includes(parentMasterID)) ||
+                  (displayConditions.protectedVisible.includes(key) &&
+                    !unlockProtectedVisible.includes(parentMasterID))
+              ]
+            }
+          >
+            {key}:
+          </label>
+          <select
+            id={
+              parentMasterID +
+              "-" +
+              parentsParentKey +
+              "-" +
+              parentKey +
+              "-" +
+              key +
+              "select"
+            }
+            key={parentKey + "-" + key}
+            name={parentKey + "-" + key}
+            defaultValue={studyPlanItemsObj[key]}
+            category={key}
+            placeholder={key}
+            title={key}
+            parentkey={parentKey}
+            parentsparentkey={
+              parentsParentKey ? parentsParentKey.toString() : ""
+            }
+            parentmasterid={parentMasterID}
+            onChange={addInputData}
+            className={
+              styles[
+                "protectedHidden-" +
+                  displayConditions.protectedHidden.includes(key)
+              ] +
+              " " +
+              styles[
+                "protectedVisible-" +
+                  (displayConditions.protectedVisible.includes("PROTECT-ALL") &&
+                    !unlockProtectedVisible.includes(parentMasterID)) ||
+                  (displayConditions.protectedVisible.includes(key) &&
+                    !unlockProtectedVisible.includes(parentMasterID))
+              ]
+            }
+          >
+          <option value=''>-Select One-</option>
+            {
+              studyPlanMetadata.hasOwnProperty(displayConditions.isOtherKeyFixedCompiledList[key].keyToDisplay) &&
+              studyPlanMetadata[displayConditions.isOtherKeyFixedCompiledList[key].keyToDisplay].slice(1).map((option) => 
+               { 
+                if(studyPlanItemsObj.name === option) return false
+                const keyToSave= displayConditions.isOtherKeyFixedCompiledList[key].keyToSave
+                const targetIdentifier =  Object.values(studyPlan).filter(item=>item.name === option)[0][keyToSave]
+                
+                return <option value={targetIdentifier}>{option}</option>}
+              )}
           </select>
         </Fragment>
       )}
