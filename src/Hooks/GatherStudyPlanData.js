@@ -40,6 +40,9 @@ export default async function GatherStudyPlanData(studyPlanItemSchema, user) {
         }
       });
 
+
+    
+
       const flattenedArrays = new Set(itmOutput.map((value) => value.trim()));
       const flattenedArraysOutput = Array.from(flattenedArrays);
 
@@ -71,14 +74,6 @@ export default async function GatherStudyPlanData(studyPlanItemSchema, user) {
         studyPlanValue.iframeCustomAttributes;
     }
   }
-
-  console.log(
-    "%c --> %cline:83%cstudyPlanData",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(60, 79, 57);padding:3px;border-radius:2px",
-    studyPlanData
-  );
 
   return studyPlanData;
 }

@@ -74,6 +74,8 @@ const Home = (props) => {
       getSchemaForContentItem,
       saveManyContentItems,
     });
+
+    console.log('%c⚪️►►►► %cline:69%cdata', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(95, 92, 51);padding:3px;border-radius:2px', data)
   
     saveManyItems({ user, outputDataArray: data }).then((res) => {
  
@@ -187,6 +189,22 @@ const Home = (props) => {
                 dataObjForEdit={studyPlan}
                 user={props.user}
                 type={"step"}
+                noEditButton={false}
+              />
+            )}
+          </ErrorBoundary>
+        </CardPrimary>
+      )}
+      {!hideStudyPlan && studyPlan && (
+        <CardPrimary>
+          <ErrorBoundary>
+            {props.userInitComplete && (
+              <StudyPlanItems
+                key="studyPlan"
+                id="studyPlan"
+                dataObjForEdit={studyPlan}
+                user={props.user}
+                type={"hold"}
                 noEditButton={false}
               />
             )}

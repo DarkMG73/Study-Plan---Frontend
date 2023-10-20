@@ -30,9 +30,15 @@
   background: var(--spt-color-accent-2-gradient);
 }
 
-[hiddeItems=true] > div > [mainGoal=false][type=goal] {
- height: 0;
+ul {
+  transition: 0.3s all ease;
 }
+
+[section*=goal][hiddeItems=true] > div > [mainGoal=false][type=goal], ul[section=studyPlan][hiddeitems=true] > div  >  ul[class*=is-for-review-true], ul[section=studyPlan][hiddeitems=true] > div  >  ul[class*=is-complete-true] {
+ height: 0;
+ opacity: 0;
+}
+
 
 .goal { border: 10px solid red !important; }
 .group-studyPlan-goals ul > div {
@@ -201,6 +207,44 @@
   max-width: 100%;
 }
 
+.new-form-modal form   [newformtype="goal"]  ul[id*=newForm] {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "name name"
+    "type type"
+    "method method"
+    "msup msup" 
+    "asup asup"
+    "des des"
+    "start start"   
+    "itemnotes itemnotes"
+    "tags tags"
+;
+  grid-auto-flow: row dense;
+  max-width: 100%;
+}
+
+.new-form-modal form   [newformtype="goal"]   {
+  background: var(--spt-color-background-warm);
+  color: var(--spt-color-background-contrast) ;
+  border: 3px outset var(--spt-color-background);
+}
+.new-form-modal form   [newformtype="step"]   {
+  background: var(--spt-color-accent);
+  border: 3px outset var(--spt-color-accent-dark);
+}
+
+.new-form-modal form   [newformtype="hold"]   {
+  background: var(--spt-color-background-contrast-dark);
+  color:var(--spt-color-background-warm);
+  border: 3px outset var(--spt-color-background-contrast-dark);
+}
+
+.new-form-modal form  { [newformtype="hold"],  [newformtype="step"]  , [newformtype="goal"] {ul, li, button{
+  background: inherit;
+  color: inherit !important;
+}
+}}
 .new-form-modal ul > div {
   margin: 0;
   padding: 0 1em;

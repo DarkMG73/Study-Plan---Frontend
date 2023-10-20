@@ -3,13 +3,6 @@ import { useDispatch } from "react-redux";
 
 /// GET THE STUDY PLAN ITEMS /////////////////////////////
 export const studyPlanData = async (user) => {
-  console.log(
-    "%c --> %cline:4%cuser",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(254, 67, 101);padding:3px;border-radius:2px",
-    user
-  );
   let axiosConfig = null;
 
   if (user) {

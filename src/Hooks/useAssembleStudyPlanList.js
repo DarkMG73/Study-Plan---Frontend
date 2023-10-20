@@ -48,6 +48,7 @@ const useAssembleStudyPlanList = () => {
         }
       }
 
+      // TODO: confirm direction here.
       // if ((typeArray.lenght = 1 && typeArray.includes("goal"))) {
         if (true) {
         for (const [key, value] of Object.entries(output)) {
@@ -66,6 +67,8 @@ const useAssembleStudyPlanList = () => {
           }
         }
       }
+
+
       return { groomedOutput, groomedAllItemOutput };
     } else {
       return false;

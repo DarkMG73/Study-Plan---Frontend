@@ -19,6 +19,7 @@ const StudyPlanItemsSubList = (props) => {
       onlyList={props.onlyList}
       noEditButton={props.noEditButton}
       emptyForm={props.emptyForm}
+      setFormType={props.setFormType}
     />
   );
 };

@@ -164,14 +164,12 @@ function App() {
     if (
       (user && !process.env.NODE_ENV) ||
       process.env.NODE_ENV === "development"
-    )
-      console.log(
-        "%c --> %cline:181%cuser",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(56, 13, 49);padding:3px;border-radius:2px",
-        user
-      );
+    )     console.log(
+      "%cUser:",
+      "color:#fff;background:#007215;padding:5px;border-radius:0 25px 25px 0",
+      user
+    );
+
     // if (user && user !== "not logged in")
     //   // setUser(userLoggedIn);
     //   dispatch(authActions.logIn(user));

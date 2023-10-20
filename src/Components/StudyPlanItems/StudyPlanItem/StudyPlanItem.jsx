@@ -18,7 +18,6 @@ const StudyPlanItem = (props) => {
   const onlyList = props.onlyList;
   // const key = studyPlanItemsObj._id;
   const key = props.passedKey;
-
   // const setExistingFormInputValuesObj = props.setExistingFormInputValuesObj;
   const parentKey = props.parentKey;
   const parentsParentKey = props.parentsParentKey;
@@ -29,7 +28,7 @@ const StudyPlanItem = (props) => {
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(studyPlanItemsObj[key] != false);
   const elementTypeNeeded = findElementType(key);
-
+  const setFormType = props.setFormType
   ////////////////////////////////
   /// Handlers
   ////////////////////////////////
@@ -65,6 +64,10 @@ const StudyPlanItem = (props) => {
     const parentsParentKey = e.target.getAttribute("parentsParentKey");
     let title = e.target.getAttribute("title");
     let outputValue = e.target.value;
+ 
+    if ( title === 'type' ) document.getElementById(parentMasterID).setAttribute('newFormType', outputValue)
+
+    
 
     if (parentMasterID !== parentKey) {
       if (parentMasterID === parentsParentKey) {
@@ -75,6 +78,11 @@ const StudyPlanItem = (props) => {
         title = parentKey;
       }
     }
+
+    
+    
+
+    
 
     if (emptyForm)
       dispatch(

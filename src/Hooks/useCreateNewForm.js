@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import StudyPlanItemsList from "../Components/StudyPlanItems/StudyPlanItemsList/StudyPlanItemsList";
 import displayConditions from "../data/displayConditionsObj.js";
@@ -9,6 +9,12 @@ const useCreateNewForm = () => {
   const studyPlanItemSchema = useSelector(
     (state) => state.studyPlanData.schema
   );
+  const [formType, setFormType] = useState('all')
+
+  useEffect(()=>{
+
+console.log('formType',formType)
+  }, [formType])
   const outputFunction = (props) => {
     const e = props.e;
     const styles = props.styles;
@@ -74,7 +80,9 @@ if(amountToAdd <= 0) return false
               id={"newForm-" + i}
               parentmasterid={"newForm-" + i}
               className={styles["new-form-" + i] + " " + styles["new-form"]}
+              formType={'type-' + formType}
             >
+            {formType}
               <button
                 className={
                   styles["new-form-button"] +
@@ -109,6 +117,7 @@ if(amountToAdd <= 0) return false
                     user={user}
                     emptyForm={true}
                     inModal={true}
+                    setFormType={setFormType}
                   />
                 )}
               </ul>

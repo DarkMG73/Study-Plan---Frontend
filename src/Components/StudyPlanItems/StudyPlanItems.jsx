@@ -63,6 +63,7 @@ const StudyPlanItems = (props) => {
   const allFormInputData = useSelector((state) => state.formInputData, shallowEqual);
   const dispatch = useDispatch();
   const sortList = useSortList();
+  const [formType, setFormType] = useState('all')
   const assembleStudyPlanList = useAssembleStudyPlanList();
   let outputName =
     dataObjForEdit &&
@@ -81,6 +82,7 @@ const StudyPlanItems = (props) => {
    
   if (outputName === "goals") outputName = "Goal & Curriculum";
   if (outputName === "steps") outputName = "Syllabus";
+  if (outputName === "holds") outputName = "Holding Area";
 
   ////////////////////////////////////////////////////////////////////////
   /// EFFECTS
@@ -130,10 +132,19 @@ const StudyPlanItems = (props) => {
         sortMethod: sortMethod,
         objectToBeSorted: { ...groomedOutput },
       });
+      
       setFormInputData(sortedGroomedOutput);
     }
   }, [changeListArray]);
 
+
+  useEffect(()=>{
+  
+    console.log('%c⚪️►►►► %cline:17%ctypeSelection', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px', formType)
+
+console.log('formType',formType)
+  }, [formType])
+  
 
 
   useEffect(() => {
@@ -159,6 +170,7 @@ const StudyPlanItems = (props) => {
         user,
         setNewFormInputValuesObj,
         currentNewFormInputValuesObjRef: newFormInputValuesObjRef.current,
+        formTypeGroup: {formType, setFormType}
       });
     } else {
       alert(
@@ -175,12 +187,14 @@ const StudyPlanItems = (props) => {
     if (studyPlanMetadata && studyPlanMetadata.hasOwnProperty("type")) {
       setShowListResetButton(true);
       setChangeListArray([...studyPlanMetadata.type]);
+      setHideAllSubGoals(false);
     }
   };
 
   const showDefaultItemsButtonHandler = (e) => {
     setShowListResetButton(false);
     setChangeListArray(["step"]);
+    setHideAllSubGoals(true);
   };
 
   const hideAllSubGoalsButtonHandler = (e) => {
@@ -189,6 +203,8 @@ const StudyPlanItems = (props) => {
       
     }
   };
+
+
 
 
 
@@ -235,8 +251,7 @@ const StudyPlanItems = (props) => {
         section={id}
         id={id}
         type={typeName}
-        hiddeItems={'' + (hideAllSubGoals && outputName.toLowerCase().includes("goal") &&
-        !outputName.includes("Syllabus"))}
+        hiddeItems={'' + (hideAllSubGoals)}
         className={
           styles["studyPlan-items-group"] +
           " " +

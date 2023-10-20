@@ -18,7 +18,6 @@ import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 const StudyPlanItemsList = (props) => {
   const [refresh, setRefresh] = useState(1);
   const studyPlanItemsObj = props.studyPlanItemsObj;
-  console.log('studyPlanItemsObj: ', studyPlanItemsObj);
   const { studyPlanMetadata } = studyPlanItemsObj;
   const user = useSelector((state) => state.auth.user);
   const parentKey = props.parentKey;
@@ -88,17 +87,6 @@ const StudyPlanItemsList = (props) => {
   ////////////////////////////////////////////////////////////////////////
   /// Effects
   ////////////////////////////////////////////////////////////////////////
-  // useEffect(() => {
-  //   console.log(
-  //     "%c --> %cline:98%c||||||||||||||||||||||refresh",
-  //     "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-  //     "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-  //     "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
-  //     refresh
-  //   );
-  //   setRefresh(refresh + 1);
-  // }, [showProtectedHidden, unlockProtectedVisible, refresh]);
-
   useEffect(() => {
     existingFormInputValuesObjRef.current = existingFormInputValuesObj;
   }, [existingFormInputValuesObj]);
@@ -191,7 +179,7 @@ if (
   rawItemWithNewEdits[key].constructor !== Boolean
 ) {
 
-  if (['', "false"].includes(existingFormEdits[parentMasterID][key]) )
+  if (existingFormEdits[parentMasterID] && ['', "false"].includes(existingFormEdits[parentMasterID][key]) )
   {itemWithNewEdits[key] = false;}
   else {
     itemWithNewEdits[key] = true;
@@ -400,6 +388,7 @@ if (
                 refresh={refresh}
                 onlyList={onlyList}
                 emptyForm={props.emptyForm}
+                setFormType={props.setFormType}
               />
               <ul
                 className={styles["dependencies-container"]}
@@ -449,6 +438,7 @@ if (
                           refresh={refresh}
                           onlyList={onlyList}
                           emptyForm={props.emptyForm}
+                          setFormType={props.setFormType}
                         />
                       );
                     }
@@ -625,7 +615,7 @@ if (
                   " " +
                   styles.title
                 }
-              >
+              >        
                 {studyPlanItemsObj[key] &&
                 studyPlanItemsObj[key].hasOwnProperty("name") ? (
                   <Fragment>
@@ -667,6 +657,7 @@ if (
                 refresh={refresh}
                 onlyList={onlyList}
                 emptyForm={props.emptyForm}
+                setFormType={props.setFormType}
               />{" "}
               {!onlyList && !subListLevel && (
                 <div className={styles["button-container"]}>
@@ -772,6 +763,8 @@ if (
           setExistingFormInputValuesObj={updateExistingFormState}
           emptyForm={props.emptyForm}
           onlyList={onlyList}
+          setFormType={props.setFormType}
+          formType={props.formType}   
         />
       );
     });

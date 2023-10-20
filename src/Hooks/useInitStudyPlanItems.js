@@ -56,13 +56,7 @@ const useInitStudyPlanItems = () => {
       )
         ? sortMethod
         : "priority";
-      console.log(
-        "%c --> %cline:106%cgroomedOutput",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(251, 178, 23);padding:3px;border-radius:2px",
-        groomedOutput
-      );
+        
       const sortedGroomedOutput = sortList({
         sortMethod: sortBy,
         objectToBeSorted: groomedOutput,
@@ -72,24 +66,6 @@ const useInitStudyPlanItems = () => {
     };
 
     processDataWithSchema(schema);
-    // if (!studyPlanItemSchema)
-    //   getSchema()
-    //     .then((data) => {
-    //       console.log(
-    //         "%c uuuuuuuuuuu--> %cline:40%cdata",
-    //         "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    //         "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    //         "color:#fff;background:rgb(3, 38, 58);padding:3px;border-radius:2px",
-    //         data
-    //       );
-
-    //       dispatch(studyPlanDataActions.updateSchema(data.tree));
-
-    //       processDataWithSchema(data.tree);
-    //     })
-    //     .catch((err) => {
-    //       console.log("ERROR->", err);
-    //     });
   };
   return outputFunction;
 };

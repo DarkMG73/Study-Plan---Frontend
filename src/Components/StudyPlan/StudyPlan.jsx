@@ -3,13 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const StudyPlan = (props) => {
-  console.log(
-    "%c --> %cline:5%cprops",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(227, 160, 93);padding:3px;border-radius:2px",
-    props
-  );
+
   // Can use https://www.browserling.com/tools/extract-urls
   // for extracting URL from iframe code (mostly works)
 
@@ -23,13 +17,6 @@ const StudyPlan = (props) => {
     goals: [],
   };
 
-  console.log(
-    "%c --> %cline:21%csortedStudyPlanItems",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(3, 38, 58);padding:3px;border-radius:2px",
-    sortedStudyPlanItems
-  );
 
   for (const itemValues of Object.values(props.studyPlanData.studyPlan)) {
     if (itemValues.hasOwnProperty("type") && itemValues.type === "step") {

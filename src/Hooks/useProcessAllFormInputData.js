@@ -18,6 +18,9 @@ const useProcessAllFormInputData = () => {
       getSchemaForContentItem,
       saveManyContentItems,
     } = props;
+  const   unusedFieldsForGoals = ['url','priority','method','lectureTime','labTime','author', 'status','platform','method', 'acomp']
+  const unusedFieldsForHolds  = ['priority','status','acomp','start']
+
     if (allFormInputData && allFormInputData.allNewForms && user) {
       let schema = studyPlanItemSchema;
       let saveManyItems = saveManyStudyPlanItems;
@@ -64,7 +67,9 @@ const useProcessAllFormInputData = () => {
               outputArray.push(newObject);
             }
           }
+
           return outputArray;
+          
         };
 
         /////// Begin processing  ///////
@@ -133,13 +138,25 @@ const useProcessAllFormInputData = () => {
             if (key === "priority" && value === "") {
               value = "0";
             }
+
+            // Clean Goals unused data (available before selecting type "goal")
+if(formData.hasOwnProperty('type') && formData.type === 'goal') {
+  if(unusedFieldsForGoals.includes(key)) {value = ''} 
+  }
+  
+  if(formData.hasOwnProperty('type') && formData.type === 'hold') {
+    if(unusedFieldsForHolds.includes(key)) {value = ''} 
+    }
             newForm[key] = value;
+            
           });
           return newForm;
         });
 
        outputDataArray.push(...newFormData);
+      
        return outputDataArray
+       
       };
 
     
