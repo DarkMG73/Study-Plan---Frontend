@@ -6,6 +6,7 @@ import SubscribeCTA from "../SubscribeCTA/SubscribeCTA";
 import SocialConnectMenu from "../SocialConnectMenu/SocialConnectMenu";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
 import useViewport from "../../Hooks/useViewport";
+import LoginStatus from "../User/LoginStatus/LoginStatus";
 
 function Header(props) {
   const [logoToHeaderBar, setLogoToHeaderBar] = useState(false);
@@ -13,12 +14,13 @@ function Header(props) {
   const { content } = useSelector((state) => state.contentData);
   const [width, height] = useViewport();
   const { welcomeScrollPosition } = useSelector(
-    (state) => state.scrollPosition
+    (state) => state.scrollPosition,
   );
+  const [scrolledUp, setScrolledUp] = useState(false);
+  const scrollPositionToAtivateLoginStatus = 95;
   const [logoTitleSize, setLogoTitleSize] = useState(100);
-  const [initialWelcomePositionTop, setInitialWelcomePositionTop] = useState(
-    false
-  );
+  const [initialWelcomePositionTop, setInitialWelcomePositionTop] =
+    useState(false);
   let xChange = logoTitleSize - 100;
   let yChange = logoTitleSize - 79;
   let logoTitleTransform = {
@@ -102,6 +104,22 @@ function Header(props) {
     }
   }, [welcomeScrollPosition, initialWelcomePositionTop]);
 
+  useEffect(() => {
+    function onScroll() {
+      let currentPosition = window.pageYOffset; // or use document.documentElement.scrollTop;
+      if (currentPosition < scrollPositionToAtivateLoginStatus) {
+        // downscroll code
+        setScrolledUp(false);
+      } else {
+        // upscroll code
+        setScrolledUp(true);
+      }
+    }
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <div id="spt-header" className={styles.outerwrap}>
       <div
@@ -130,8 +148,15 @@ function Header(props) {
         </div>
       </div>
       <div className={styles["header-functions-container"]}>
-        <div className={styles["subscribe-cta-wrap"]}>
-          <SubscribeCTA />
+        <div
+          className={
+            styles["login-status-wrap"] +
+            " " +
+            styles["scrolled-up-" + scrolledUp.toString()]
+          }
+        >
+          ----{scrolledUp.toString()}
+          <LoginStatus horizontalDisplay={true} />
         </div>
         <div className={styles["nav-container"]}>
           {navLinks &&
