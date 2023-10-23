@@ -11,7 +11,9 @@ import LoginStatus from "../User/LoginStatus/LoginStatus";
 function Header(props) {
   const [logoToHeaderBar, setLogoToHeaderBar] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
   const { content } = useSelector((state) => state.contentData);
+  const { user } = useSelector((state) => state.auth);
   const [width, height] = useViewport();
   const { welcomeScrollPosition } = useSelector(
     (state) => state.scrollPosition,
@@ -56,7 +58,15 @@ function Header(props) {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const loginModalButtonHandler = () => {
+    setLoginModalOpen(!mobileMenuOpen);
+  };
+
   const menuModalToggleStyles = mobileMenuOpen
+    ? { opacity: "1", pointerEvents: "all", left: "0" }
+    : {};
+
+  const loginModalToggleStyles = mobileMenuOpen
     ? { opacity: "1", pointerEvents: "all", left: "0" }
     : {};
 
@@ -155,8 +165,14 @@ function Header(props) {
             styles["scrolled-up-" + scrolledUp.toString()]
           }
         >
-          ----{scrolledUp.toString()}
-          <LoginStatus horizontalDisplay={true} />
+        
+        {user && <div className={styles["user-info-container"]}><h4>{user.userName ? user.userName : user.email}</h4></div>}
+ { !user &&     
+   <button
+        className={styles["mobile-menu-button"]}
+        onClick={loginModalButtonHandler}
+      >Log In or Sign Up
+      </button>}
         </div>
         <div className={styles["nav-container"]}>
           {navLinks &&
@@ -245,6 +261,14 @@ function Header(props) {
           <button onClick={mobileMenuButtonHandler}>Close</button>
         </CardPrimary>
       </div>
+      <div className={styles["menu-modal"]} style={loginModalToggleStyles}>
+      <CardPrimary styles={{ maxHeight: "100vh", maxWidth: "100vw" }}>
+        <div className={styles["login-container"]}>
+      <loginStatus />
+        </div>
+        <button onClick={mobileMenuButtonHandler}>Close</button>
+      </CardPrimary>
+    </div>
     </div>
   );
 }

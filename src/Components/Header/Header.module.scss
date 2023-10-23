@@ -254,6 +254,7 @@
   max-width: fit-content;
   // max-height: 3em;
   overflow: hidden;
+  max-height: 21px;
 }
 
 .scrolled-up-false {
@@ -275,6 +276,31 @@
 //   transform-origin: top;
 //   transition: 0.2s all ease;
 // }
+.login-status-wrap {
+ [id=button-container-header-login] {
+      button, input {
+        margin: 0 auto !important;
+        padding: 0 !important;
+        max-height: 20px !important;
+        min-height: 0 !important;
+        transform: none !important;
+    }
+    button {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+  }
+    div {
+      max-height: 20px !important;
+    }
+    [class*=login-question] {
+      display: none !important;
+    }
+  [id=form-container-header-login] div  span {
+      margin: 0 auto;
+    }
+  }
+}
 
 .nav-container {
   display: flex;

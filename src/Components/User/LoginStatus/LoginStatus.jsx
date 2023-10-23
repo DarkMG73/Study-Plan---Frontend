@@ -18,7 +18,7 @@ function LoginStatus(props) {
   // const [loginPassword, setLoginPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
   const horizontalDisplay = props.horizontalDisplay ? "horizontal-display" : "";
-
+const uniqueID = props.uniqueID
   const toggleSignupLoginButtonHandler = () => {
     setShowLoginForm(!showLoginForm);
     setShowSignupForm(!showSignupForm);
@@ -46,18 +46,18 @@ function LoginStatus(props) {
 
   return (
     <div
-      id="db-login-container"
+      id={"db-login-container-" + uniqueID}
       className={`${styles["inner-wrap "]}  ${styles["db-login-container"]} ${styles[horizontalDisplay]}`}
     >
-      <p className={styles["db-login-status-container"]}>
-        <span id="db-login-status" className={styles["db-login-status"]}>
+      <p id={"db-login-status-container" + uniqueID} className={styles["db-login-status-container"]}>
+        <span id={"db-login-status" + uniqueID} className={styles["db-login-status"]}>
           {user ? (
-            <span className={styles["login-text"]}>
+            <span  id={"login-text-" + uniqueID}  className={styles["login-text"]}>
               {" "}
               {user.email} is Logged In{" "}
             </span>
           ) : (
-            <span
+            <span  id={"login-text-" + uniqueID}
               className={
                 styles["login-text"] + " " + styles["not-logged-in-text"]
               }
@@ -68,12 +68,12 @@ function LoginStatus(props) {
           )}
         </span>
       </p>
-      <div className={styles["button-container"]}>
+      <div id={"button-container-" + uniqueID} className={styles["button-container"]+ uniqueID}> 
         {!user && (
           <>
-            <div className={styles["form-container"]}>
+            <div id={"form-container-" + uniqueID} className={styles["form-container"]}>
               {showLoginForm && (
-                <Login
+                <Login 
                   toggleSignupLoginButtonHandler={
                     toggleSignupLoginButtonHandler
                   }
