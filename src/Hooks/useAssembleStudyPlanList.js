@@ -10,7 +10,7 @@ const useAssembleStudyPlanList = () => {
     const findDependencies = (objectIdentifier, masterListObj) => {
       const output = [];
       for (const value of Object.values(masterListObj)) {
-        if (value.hasOwnProperty("msup") && value.msup === objectIdentifier)
+        if (Object.hasOwn(value,"msup") && value.msup === objectIdentifier)
           output.push(value.identifier);
       }
       return output;
@@ -22,14 +22,14 @@ const useAssembleStudyPlanList = () => {
       // Gather items to list based on typeArray.
       for (const itemID in dataObjForEdit) {
         if (
-          !dataObjForEdit[itemID].hasOwnProperty("type") ||
+          !Object.hasOwn(dataObjForEdit[itemID],"type") ||
           !typeArray.includes(dataObjForEdit[itemID].type)
         )
           continue;
         output[itemID] = {};
 
         for (const catName of keysToUseArray) {
-          output[itemID][catName] = dataObjForEdit[itemID].hasOwnProperty(
+          output[itemID][catName] = Object.hasOwn(dataObjForEdit[itemID],
             catName
           )
             ? dataObjForEdit[itemID][catName]
@@ -50,7 +50,7 @@ const useAssembleStudyPlanList = () => {
 
       // TODO: confirm direction here.
       // if ((typeArray.lenght = 1 && typeArray.includes("goal"))) {
-        if (true) {
+     
         for (const [key, value] of Object.entries(output)) {
           // if (value.type !== "goal") continue;
           groomedOutput[key].dependencies = findDependencies(
@@ -66,7 +66,7 @@ const useAssembleStudyPlanList = () => {
             );
           }
         }
-      }
+      
 
 
       return { groomedOutput, groomedAllItemOutput };

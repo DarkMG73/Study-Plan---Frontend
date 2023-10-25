@@ -49,8 +49,8 @@ const uniqueID = props.uniqueID
       id={"db-login-container-" + uniqueID}
       className={`${styles["inner-wrap "]}  ${styles["db-login-container"]} ${styles[horizontalDisplay]}`}
     >
-      <p id={"db-login-status-container" + uniqueID} className={styles["db-login-status-container"]}>
-        <span id={"db-login-status" + uniqueID} className={styles["db-login-status"]}>
+      <p id={"db-login-status-container-" + uniqueID} className={styles["db-login-status-container"]}>
+        <span id={"db-login-status-" + uniqueID} className={styles["db-login-status"]}>
           {user ? (
             <span  id={"login-text-" + uniqueID}  className={styles["login-text"]}>
               {" "}

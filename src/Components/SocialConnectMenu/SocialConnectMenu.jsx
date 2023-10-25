@@ -21,18 +21,18 @@ function SocialConnectMenu(props) {
   for (const value of Object.values(socialConnections)) {
     const name = "Fa" + toTitleCase(value.slug);
     if (
-      value.hasOwnProperty("active") &&
+      Object.hasOwn(value, "active") &&
       (!value.active ||
         value.active.replace(" ", "") === "" ||
         value.active.replace(" ", "") === "false")
     )
       continue;
-    if (iconObj.hasOwnProperty(name)) {
+    if (Object.hasOwn(iconObj, name)) {
       const Module = iconObj[name];
       outputArray.push(
         <a
           key={iconObj[name]}
-          href={value.hasOwnProperty("link") ? value.link : "#"}
+          href={Object.hasOwn(value,"link") ? value.link : "#"}
           alt=""
           target="_blank"
           rel="noopener noreferrer"

@@ -55,7 +55,7 @@ export default async function GatherContentData(user) {
   const rawSocialConnections = {};
   for (const itemID in contentData.content) {
     if (
-      contentData.content[itemID].hasOwnProperty("type") &&
+      Object.hasOwn(contentData.content[itemID],"type") &&
       contentData.content[itemID].type.trim() === "socialConnection"
     ) {
       rawSocialConnections[itemID] = contentData.content[itemID];
@@ -130,7 +130,7 @@ function objectExtractAllValuesPerKey(
             const value = term.trim().toString();
 
             // Add to Set. If key Set does not exist, create it.
-            if (outputObject.hasOwnProperty(key)) {
+            if (Object.hasOwn(outputObject,key)) {
               outputObject[key].add(value);
             } else {
               outputObject[key] = new Set();
@@ -144,7 +144,7 @@ function objectExtractAllValuesPerKey(
         ) {
           if (objectToLoop[i][key].constructor === Object) {
             Object.values(objectToLoop[i][key]).forEach((val) => {
-              if (outputObject.hasOwnProperty(key)) {
+              if (Object.hasOwn(outputObject,key)) {
                 outputObject[key].add(val);
               } else {
                 outputObject[key] = new Set();
@@ -156,7 +156,7 @@ function objectExtractAllValuesPerKey(
               objectToLoop[i][key].toString().trim() +
               "-" +
               i.toString().trim();
-            if (outputObject.hasOwnProperty(key)) {
+            if (Object.hasOwn(outputObject,key)) {
               outputObject[key].add(value);
             } else {
               outputObject[key] = new Set();
@@ -164,7 +164,7 @@ function objectExtractAllValuesPerKey(
             }
           } else {
             const value = objectToLoop[i][key].toString().trim();
-            if (outputObject.hasOwnProperty(key)) {
+            if (Object.hasOwn(outputObject,key)) {
               outputObject[key].add(value);
             } else {
               outputObject[key] = new Set();
@@ -190,7 +190,7 @@ function objectExtractAllValuesPerKey(
               let value = [...objectToLoop[i][key][0].split(",")];
               // Check if  the value is valid
               if (!valuesToExclude.includes(value)) {
-                if (outputObject.hasOwnProperty(key)) {
+                if (Object.hasOwn(outputObject,key)) {
                   outputObject[key].add(value);
                 } else {
                   outputObject[key] = new Set();
@@ -200,7 +200,7 @@ function objectExtractAllValuesPerKey(
             }
           } else {
             // If the above does not app;y, return a Set() if it si not already there.
-            if (!outputObject.hasOwnProperty(key))
+            if (!Object.hasOwn(outputObject,key))
               outputObject[key] = new Set();
           }
         }

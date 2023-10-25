@@ -19,7 +19,7 @@ const FormItemEmpty = (props) => {
 
   const addInputData = (e) => {
     e.preventDefault();
-    const parentMasterID = e.target.getAttribute("parentmasterid");
+    const parentMasterID = e.target.getAttribute("data-parentmasterid");
     const parentKey = e.target.getAttribute("parentkey");
     let title = e.target.getAttribute("title");
     let outputValue = e.target.value;
@@ -41,7 +41,7 @@ const FormItemEmpty = (props) => {
 
   const output = (
     <li
-      marker="CATALOG-ITEM"
+      data-marker="CATALOG-ITEM"
       id={
         parentMasterID +
         "-" +
@@ -59,7 +59,7 @@ const FormItemEmpty = (props) => {
         styles[
           "protectedHidden-" +
             (displayConditions &&
-              displayConditions.hasOwnProperty("protectedHidden") &&
+              Object.hasOwn(displayConditions,"protectedHidden") &&
               displayConditions.protectedHidden.includes(key) &&
               !showProtectedHidden.includes(parentMasterID))
         ] +
@@ -78,7 +78,7 @@ const FormItemEmpty = (props) => {
       )}
       {key !== "_id" &&
         displayConditions &&
-        displayConditions.hasOwnProperty("isBoolean") &&
+        Object.hasOwn(displayConditions,"isBoolean") &&
         !displayConditions.isBoolean.includes(key) &&
         !displayConditions.isDate.includes(key) &&
         !displayConditions.isURL.includes(key) && (
@@ -124,7 +124,7 @@ const FormItemEmpty = (props) => {
               title={key}
               parentkey={parentKey}
               parentsparentkey={parentsParentKey}
-              parentmasterid={parentMasterID}
+              data-parentmasterid={parentMasterID}
               onChange={addInputData}
               className={
                 styles[
@@ -133,7 +133,7 @@ const FormItemEmpty = (props) => {
                       "PROTECT-ALL"
                     ) && !unlockProtectedVisible.includes(parentMasterID)) ||
                     (displayConditions &&
-                      displayConditions.hasOwnProperty("protectedVisible") &&
+                      Object.hasOwn(displayConditions,"protectedVisible") &&
                       displayConditions.protectedVisible.includes(key) &&
                       !unlockProtectedVisible.includes(parentMasterID))
                 ]
@@ -144,7 +144,7 @@ const FormItemEmpty = (props) => {
           </Fragment>
         )}
       {displayConditions &&
-        displayConditions.hasOwnProperty("isBoolean") &&
+        Object.hasOwn(displayConditions,"isBoolean") &&
         displayConditions.isBoolean.includes(key) && (
           <Fragment>
             <label
@@ -195,7 +195,7 @@ const FormItemEmpty = (props) => {
               title={key}
               parentkey={parentKey}
               parentsparentkey={parentsParentKey}
-              parentmasterid={parentMasterID}
+              data-parentmasterid={parentMasterID}
               onChange={addInputData}
               className={
                 styles[
@@ -220,7 +220,7 @@ const FormItemEmpty = (props) => {
           </Fragment>
         )}
       {displayConditions &&
-        displayConditions.hasOwnProperty("isDate") &&
+        Object.hasOwn(displayConditions,"isDate") &&
         displayConditions.isDate.includes(key) && (
           <Fragment>
             <label
@@ -271,7 +271,7 @@ const FormItemEmpty = (props) => {
               title={key}
               parentkey={parentKey}
               parentsparentkey={parentsParentKey}
-              parentmasterid={parentMasterID}
+              data-parentmasterid={parentMasterID}
               onChange={addInputData}
               defaultValue={
                 studyPlanItemsObj[key]

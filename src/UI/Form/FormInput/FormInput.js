@@ -32,7 +32,7 @@ const FormInput = (props) => {
 
   useEffect(() => {
     if (
-      setInputValue.hasOwnProperty("constructor") &&
+      Object.hasOwn(setInputValue,"constructor") &&
       inputValue.constructor === String
     ) {
       setInputValue(inputValue.replaceAll('"', ""));
@@ -65,7 +65,7 @@ const FormInput = (props) => {
   /// FUNCTIONALITY
   ////////////////////////////////////////
   let groomedOptions;
-  if (input.hasOwnProperty("options"))
+  if (Object.hasOwn(input,"options"))
     groomedOptions = input.options.map((option) => option.trim());
 
   if (input.type === "textarea") {

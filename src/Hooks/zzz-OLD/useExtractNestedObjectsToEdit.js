@@ -40,7 +40,7 @@ const useExtractNestedObjectsToEdit = (props) => {
                   styles.title
                 }
               >
-                {obj[key] && obj[key].hasOwnProperty("title") ? (
+                {obj[key] && Object.hasOwn(obj[key],"title") ? (
                   <Fragment>
                     <div>{obj[key].title}</div>
                     <div>{key}</div>
@@ -62,7 +62,7 @@ const useExtractNestedObjectsToEdit = (props) => {
                 <button
                   className={styles["submit-form-button"]}
                   value={key}
-                  parentmasterid={key}
+                  data-parentmasterid={key}
                   onClick={submitFormButtonHandler}
                 >
                   Submit Changes <span>{key}</span>
@@ -72,6 +72,7 @@ const useExtractNestedObjectsToEdit = (props) => {
           );
         return (
           <li
+          key={parentKey + "-" + key}
             className={
               styles[
                 "protectedHidden-" +
@@ -113,7 +114,7 @@ const useExtractNestedObjectsToEdit = (props) => {
                     title={key}
                     parentkey={parentKey}
                     parentsparentkey={parentsParentKey}
-                    parentmasterid={parentMasterID}
+                    data-parentmasterid={parentMasterID}
                     onChange={addInputData}
                     className={
                       styles[
@@ -154,7 +155,7 @@ const useExtractNestedObjectsToEdit = (props) => {
                   title={key}
                   parentkey={parentKey}
                   parentsparentkey={parentsParentKey}
-                  parentmasterid={parentMasterID}
+                  data-parentmasterid={parentMasterID}
                   onChange={addInputData}
                   className={
                     styles[
@@ -202,7 +203,7 @@ const useExtractNestedObjectsToEdit = (props) => {
                   title={key}
                   parentkey={parentKey}
                   parentsparentkey={parentsParentKey}
-                  parentmasterid={parentMasterID}
+                  data-parentmasterid={parentMasterID}
                   onChange={addInputData}
                   defaultValue={new Date(
                     new Date(obj[key]).getTime() -

@@ -102,7 +102,7 @@ export async function saveManyStudyPlanItems(userAndDataObject) {
 
 /// UPDATE //////////////////////////////////
 export async function updateAStudyPlanItem(dataObj, user) {
-  if (!dataObj.hasOwnProperty("identifier")) {
+  if (!Object.hasOwn(dataObj,"identifier")) {
     throw Error(
       "This item appears to be incomplete. Contact the site admin and provide this error code: SPDB-MIS-IDENT"
     );

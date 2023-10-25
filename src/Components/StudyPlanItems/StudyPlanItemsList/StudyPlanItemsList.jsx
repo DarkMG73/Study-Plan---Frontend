@@ -60,10 +60,10 @@ const StudyPlanItemsList = (props) => {
     setExistingFormInputValuesObj((prevState) => {
       const outputObj = { ...prevState };
 
-      if (!outputObj.hasOwnProperty(parentMasterID)) {
+      if (!Object.hasOwn(outputObj,parentMasterID)) {
         outputObj[parentMasterID] = { [title]: outputValue };
       } else if (
-        outputObj[parentMasterID].hasOwnProperty(title) &&
+        Object.hasOwn(outputObj[parentMasterID],title) &&
         !["String", "Array", "number", "Boolean"].includes(
           outputObj[parentMasterID][title].constructor.name
         )
@@ -129,8 +129,8 @@ const StudyPlanItemsList = (props) => {
   const submitFormButtonHandler = (e) => {
     e.preventDefault();
 
-    const parentMasterID = e.target.getAttribute("parentmasterid");
-    const parentSection = e.target.getAttribute("section");
+    const parentMasterID = e.target.getAttribute("data-parentmasterid");
+    // const parentSection = e.target.getAttribute("data-section");
     const rawItemWithNewEdits = { ...studyPlanItemsObj[parentMasterID] };
     const _id = rawItemWithNewEdits._id;
     const existingFormEdits = { ...formInputData.existingFormInputDataObj };
@@ -208,8 +208,8 @@ if (
   const deleteFormButtonHandler = (e) => {
     e.preventDefault();
 
-    const parentMasterID = e.target.getAttribute("parentmasterid");
-    const parentSection = e.target.getAttribute("section");
+    const parentMasterID = e.target.getAttribute("data-parentmasterid");
+    const parentSection = e.target.getAttribute("data-section");
     const itemIdentifier = studyPlanItemsObj[parentMasterID].identifier;
     const deleteItemFromDB =
       parentSection === "content" ? deleteContentDocFromDb : deleteDocFromDb;
@@ -259,20 +259,20 @@ if (
     return Object.keys(studyPlanItemsObj).map((key) => {
       if (
         studyPlanItemsObj[key] &&
-        studyPlanItemsObj[key].hasOwnProperty("dependencies") &&
+        Object.hasOwn(studyPlanItemsObj[key],"dependencies") &&
         studyPlanItemsObj[key].dependencies.length > 0
       )
         return (
           <ul
-            marker="CATALOG-ITEM-LIST"
-            section={section}
+            data-marker="CATALOG-ITEM-LIST"
+            data-section={section}
             key={key}
             id={key}
             type={studyPlanItemsObj[key].type}
-            parentMasterType={
+            data-parentMasterType={
               parentMasterType ? parentMasterType : studyPlanItemsObj[key].type
             }
-            mainGoal={'' + (studyPlanItemsObj[key].hasOwnProperty('msup') && studyPlanItemsObj[key].msup.trim() === '') }
+            data-mainGoal={'' + (Object.hasOwn(studyPlanItemsObj[key],'msup') && studyPlanItemsObj[key].msup.trim() === '') }
             className={
               (subListLevel > 0 &&
                 styles.subgroup +
@@ -349,7 +349,7 @@ if (
                 }
               >
                 {studyPlanItemsObj[key] &&
-                studyPlanItemsObj[key].hasOwnProperty("name") ? (
+                Object.hasOwn(studyPlanItemsObj[key],"name") ? (
                   <Fragment>
                     <span className={styles["title"]}>
                       {studyPlanItemsObj[key].name}
@@ -393,7 +393,7 @@ if (
               />
               <ul
                 className={styles["dependencies-container"]}
-                section={section}
+                data-section={section}
               >
                 <h3>The Path to {studyPlanItemsObj[key].name}</h3>
 
@@ -418,7 +418,7 @@ if (
                               ? parentMasterID
                               : studyPlanItemsObj[key]._id
                           }
-                          parentMasterType={
+                         parentMasterType={
                             parentMasterType
                               ? parentMasterType
                               : studyPlanItemsObj[key].type
@@ -453,7 +453,7 @@ if (
                         styles["form-button"] + " " + styles["edit-form-button"]
                       }
                       value={key}
-                      parentmasterid={key}
+                      data-parentmasterid={key}
                       onClick={unlockProtectedVisibleHandler}
                     >
                       {!unlockProtectedVisible.includes(key) && (
@@ -474,7 +474,7 @@ if (
                       styles["show-hidden-form-button"]
                     }
                     value={key}
-                    parentmasterid={key}
+                    data-parentmasterid={key}
                     onClick={showProtectedHiddenHandler}
                   >
                     Show Hidden Fields
@@ -489,8 +489,8 @@ if (
                           styles["submit-form-button"]
                         }
                         value={key}
-                        parentmasterid={key}
-                        section={section}
+                        data-parentmasterid={key}
+                       data-section={section}
                         onClick={submitFormButtonHandler}
                       >
                         Submit Changes
@@ -502,8 +502,8 @@ if (
                           styles["delete-form-button"]
                         }
                         value={key}
-                        parentmasterid={key}
-                        section={section}
+                        data-parentmasterid={key}
+                        data-section={section}
                         onClick={deleteFormButtonHandler}
                       >
                         Delete
@@ -518,15 +518,15 @@ if (
       if (studyPlanItemsObj[key] && typeof studyPlanItemsObj[key] === "object")
         return (
           <ul
-            marker="CATALOG-ITEM-LIST"
-            section={section}
+            data-marker="CATALOG-ITEM-LIST"
+            data-section={section}
             key={key}
             id={key}
             type={studyPlanItemsObj[key].type}
-            parentMasterType={
+            data-parentMasterType={
               parentMasterType ? parentMasterType : studyPlanItemsObj[key].type
             }
-            mainGoal={'' + (studyPlanItemsObj[key].hasOwnProperty('msup') && studyPlanItemsObj[key].msup.trim() === '') }
+            data-mainGoal={'' + (Object.hasOwn(studyPlanItemsObj[key],'msup') && studyPlanItemsObj[key].msup.trim() === '') }
             className={
               (subListLevel > 0 &&
                 styles.subgroup +
@@ -555,14 +555,14 @@ if (
               styles[
                 "is-complete-" +
                   (studyPlanItemsObj[key] &&
-                    studyPlanItemsObj[key].hasOwnProperty("markcomplete") &&
+                    Object.hasOwn(studyPlanItemsObj[key],"markcomplete") &&
                     studyPlanItemsObj[key].markcomplete &&
                     studyPlanItemsObj[key].marcomplete !== "false")
               ] + ' ' + 
               styles[
                 "is-for-review-" +
                   (studyPlanItemsObj[key] &&
-                    studyPlanItemsObj[key].hasOwnProperty("markforreview") &&
+                    Object.hasOwn(studyPlanItemsObj[key],"markforreview") &&
                     studyPlanItemsObj[key].markforreview &&
                     studyPlanItemsObj[key].markforreview !== "false")
               ]
@@ -618,7 +618,7 @@ if (
                 }
               >        
                 {studyPlanItemsObj[key] &&
-                studyPlanItemsObj[key].hasOwnProperty("name") ? (
+              Object.hasOwn(  studyPlanItemsObj[key],"name") ? (
                   <Fragment>
                     <span className={styles["title"]}>
                       {studyPlanItemsObj[key].name}
@@ -668,7 +668,7 @@ if (
                         styles["form-button"] + " " + styles["edit-form-button"]
                       }
                       value={key}
-                      parentmasterid={key}
+                      data-parentmasterid={key}
                       onClick={unlockProtectedVisibleHandler}
                     >
                       {!unlockProtectedVisible.includes(key) && (
@@ -699,7 +699,7 @@ if (
                       styles["show-hidden-form-button"]
                     }
                     value={key}
-                    parentmasterid={key}
+                    data-parentmasterid={key}
                     onClick={showProtectedHiddenHandler}
                   >
                     Show Hidden Fields
@@ -714,8 +714,8 @@ if (
                           styles["submit-form-button"]
                         }
                         value={key}
-                        parentmasterid={key}
-                        section={section}
+                        data-parentmasterid={key}
+                        data-section={section}
                         onClick={submitFormButtonHandler}
                       >
                         Submit Changes
@@ -727,8 +727,8 @@ if (
                           styles["delete-form-button"]
                         }
                         value={key}
-                        parentmasterid={key}
-                        section={section}
+                        data-parentmasterid={key}
+                        data-section={section}
                         onClick={deleteFormButtonHandler}
                       >
                         Delete
@@ -748,7 +748,7 @@ if (
           parentKey={parentKey}
           parentsParentKey={parentsParentKey}
           parentMasterID={parentMasterID}
-          parentMasterType={parentMasterType}
+         parentMasterType={parentMasterType}
           displayConditions={displayConditions}
           unlockProtectedVisible={
             props.unlockProtectedVisible

@@ -59,7 +59,7 @@ const StudyPlanItem = (props) => {
 
   const addInputData = (e) => {
     e.preventDefault();
-    const parentMasterID = e.target.getAttribute("parentmasterid");
+    const parentMasterID = e.target.getAttribute("data-parentmasterid");
     const parentKey = e.target.getAttribute("parentkey");
     const parentsParentKey = e.target.getAttribute("parentsParentKey");
     let title = e.target.getAttribute("title");
@@ -110,10 +110,10 @@ const StudyPlanItem = (props) => {
   function findElementType(itemKey) {
     const parentsParentKey = props.parentsParentKey;
     const checkIfNameInDisplayCond = (name, condition) => {
-      if (displayConditions.hasOwnProperty(condition)) {
+      if (Object.hasOwn(displayConditions,condition)) {
         if (Array.isArray(displayConditions[condition])) {
           return (
-            displayConditions.hasOwnProperty(condition) &&
+            Object.hasOwn(displayConditions,condition) &&
             displayConditions[condition].includes(name)
           );
         } else {
@@ -168,7 +168,7 @@ const StudyPlanItem = (props) => {
   const output = (
     <li
       key={key}
-      marker="CATALOG-ITEM"
+      data-marker="CATALOG-ITEM"
       id={
         parentMasterID +
         "-" +
@@ -186,7 +186,7 @@ const StudyPlanItem = (props) => {
         styles[
           "protectedHidden-" +
             (displayConditions &&
-              displayConditions.hasOwnProperty("protectedHidden") &&
+              Object.hasOwn(displayConditions,"protectedHidden") &&
               displayConditions.protectedHidden.includes(key) &&
               !showProtectedHidden.includes(parentMasterID))
         ] +
@@ -211,7 +211,7 @@ const StudyPlanItem = (props) => {
             styles[
               "protectedHidden-" +
                 (displayConditions &&
-                  displayConditions.hasOwnProperty("protectedHidden") &&
+                  Object.hasOwn(displayConditions,"protectedHidden") &&
                   displayConditions.protectedHidden.includes(key) &&
                   !showProtectedHidden.includes(parentMasterID))
             ] +
@@ -314,7 +314,7 @@ const StudyPlanItem = (props) => {
             title={key}
             parentkey={parentKey}
             parentsparentkey={parentsParentKey ? parentsParentKey : ""}
-            parentmasterid={parentMasterID}
+            data-parentmasterid={parentMasterID}
             onChange={addInputData}
             defaultValue={studyPlanItemsObj[key]}
             className={
@@ -323,7 +323,7 @@ const StudyPlanItem = (props) => {
                   (displayConditions.protectedVisible.includes("PROTECT-ALL") &&
                     !unlockProtectedVisible.includes(parentMasterID)) ||
                   (displayConditions &&
-                    displayConditions.hasOwnProperty("protectedVisible") &&
+                    Object.hasOwn(displayConditions,"protectedVisible") &&
                     displayConditions.protectedVisible.includes(key) &&
                     !unlockProtectedVisible.includes(parentMasterID))
               ]
@@ -384,7 +384,7 @@ const StudyPlanItem = (props) => {
             parentsparentkey={
               parentsParentKey ? parentsParentKey.toString() : ""
             }
-            parentmasterid={parentMasterID}
+            data-parentmasterid={parentMasterID}
             onChange={addInputData}
             className={
               styles[
@@ -457,7 +457,7 @@ const StudyPlanItem = (props) => {
             parentsparentkey={
               parentsParentKey ? parentsParentKey.toString() : ""
             }
-            parentmasterid={parentMasterID}
+            data-parentmasterid={parentMasterID}
             onChange={addInputData}
             min={displayConditions.isNumber[key].min * 1}
             max={displayConditions.isNumber[key].max}
@@ -530,7 +530,7 @@ const StudyPlanItem = (props) => {
             parentsparentkey={
               parentsParentKey ? parentsParentKey.toString() : ""
             }
-            parentmasterid={parentMasterID}
+            data-parentmasterid={parentMasterID}
             onChange={addInputData}
             className={
               styles[
@@ -596,7 +596,7 @@ const StudyPlanItem = (props) => {
             parentsparentkey={
               parentsParentKey ? parentsParentKey.toString() : ""
             }
-            parentmasterid={parentMasterID}
+            data-parentmasterid={parentMasterID}
             className={
               styles[
                 "protectedHidden-" +
@@ -612,7 +612,7 @@ const StudyPlanItem = (props) => {
               ]
             }
           >
-            {studyPlanMetadata.hasOwnProperty(key) &&
+            {Object.hasOwn(studyPlanMetadata,key) &&
               studyPlanMetadata[key].slice(1).map((option) => (
                 <option value={option}></option>
               ))}
@@ -631,7 +631,7 @@ const StudyPlanItem = (props) => {
             parentsparentkey={
               parentsParentKey ? parentsParentKey.toString() : ""
             }
-            parentmasterid={parentMasterID}
+            data-parentmasterid={parentMasterID}
             onChange={addInputData}
             className={
               styles[
@@ -693,7 +693,7 @@ const StudyPlanItem = (props) => {
             parentsparentkey={
               parentsParentKey ? parentsParentKey.toString() : ""
             }
-            parentmasterid={parentMasterID}
+            data-parentmasterid={parentMasterID}
             className={
               styles[
                 "protectedHidden-" +
@@ -709,7 +709,7 @@ const StudyPlanItem = (props) => {
               ]
             }
           >
-            {studyPlanMetadata.hasOwnProperty(key) &&
+            {Object.hasOwn(studyPlanMetadata,key) &&
               studyPlanMetadata[key].slice(1).map((option) => (
                 <option value={option}></option>
               ))}
@@ -733,7 +733,7 @@ const StudyPlanItem = (props) => {
             parentsparentkey={
               parentsParentKey ? parentsParentKey.toString() : ""
             }
-            parentmasterid={parentMasterID}
+            data-parentmasterid={parentMasterID}
             onChange={addInputData}
             className={
               styles[
@@ -804,7 +804,7 @@ const StudyPlanItem = (props) => {
             parentsparentkey={
               parentsParentKey ? parentsParentKey.toString() : ""
             }
-            parentmasterid={parentMasterID}
+            data-parentmasterid={parentMasterID}
             onChange={addInputData}
             className={
               styles[
@@ -821,7 +821,7 @@ const StudyPlanItem = (props) => {
               ]
             }
           >
-            {studyPlanMetadata.hasOwnProperty(key) &&
+            {Object.hasOwn(studyPlanMetadata,key) &&
               studyPlanMetadata[key].slice(1).map((option) => (
                 <option value={option}>{option}</option>
               ))}
@@ -883,7 +883,7 @@ const StudyPlanItem = (props) => {
             parentsparentkey={
               parentsParentKey ? parentsParentKey.toString() : ""
             }
-            parentmasterid={parentMasterID}
+            data-parentmasterid={parentMasterID}
             onChange={addInputData}
             className={
               styles[
@@ -902,7 +902,7 @@ const StudyPlanItem = (props) => {
           >
           <option value=''>-Select One-</option>
             {
-              studyPlanMetadata.hasOwnProperty(displayConditions.isOtherKeyFixedCompiledList[key].keyToDisplay) &&
+              Object.hasOwn(studyPlanMetadata,displayConditions.isOtherKeyFixedCompiledList[key].keyToDisplay) &&
               studyPlanMetadata[displayConditions.isOtherKeyFixedCompiledList[key].keyToDisplay].slice(1).map((option) => 
                { 
                 if(studyPlanItemsObj.name === option) return false
@@ -966,7 +966,7 @@ const StudyPlanItem = (props) => {
             parentsparentkey={
               parentsParentKey ? parentsParentKey.toString() : ""
             }
-            parentmasterid={parentMasterID}
+            data-parentmasterid={parentMasterID}
             onChange={addInputData}
             className={
               styles[
@@ -1042,7 +1042,7 @@ const StudyPlanItem = (props) => {
             parentsparentkey={
               parentsParentKey ? parentsParentKey.toString() : ""
             }
-            parentmasterid={parentMasterID}
+            data-parentmasterid={parentMasterID}
             onChange={addInputData}
             defaultValue={
               studyPlanItemsObj[key]

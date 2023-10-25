@@ -27,7 +27,7 @@ function App() {
   const contentData = useSelector((state) => state.contentData);
   if (
     (!process.env.NODE_ENV || process.env.NODE_ENV === "development") &&
-    studyPlan.hasOwnProperty("studyPlan") &&
+    Object.hasOwn(studyPlan, "studyPlan") &&
     studyPlan.studyPlan
   ) {
     console.log(
@@ -59,7 +59,7 @@ function App() {
   if (contentData.content) {
     aboutIsActive = Object.values(contentData.content).filter((value) => {
       if (value.type.replace(" ", "") !== "about") return false;
-      const activeValue = value.hasOwnProperty("active")
+      const activeValue = Object.hasOwn(value, "active")
         ? value.active.replace(" ", "")
         : null;
       return activeValue && activeValue !== "false";
@@ -185,7 +185,6 @@ function App() {
       );
   }, [noDBErrors.status]);
 
-  console.log("------------");
   ////////////////////////////////////////
   /// Output
   ////////////////////////////////////////

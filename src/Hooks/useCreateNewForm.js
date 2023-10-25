@@ -60,7 +60,7 @@ console.log('formType',formType)
     ////////////////////////////////////////////////////////////////
     /// Functionality
     ////////////////////////////////////////////////////////////////
-    const parentMasterID = e.target.getAttribute("parentmasterid");
+    const parentMasterID = e.target.getAttribute("data-parentmasterid");
     const amountToAdd = prompt("How many would you like to add?");
 if(amountToAdd <= 0) return false
     const processNewFormWithSchema = (schema) => {
@@ -78,7 +78,7 @@ if(amountToAdd <= 0) return false
           output.push(
             <div
               id={"newForm-" + i}
-              parentmasterid={"newForm-" + i}
+              data-parentmasterid={"newForm-" + i}
               className={styles["new-form-" + i] + " " + styles["new-form"]}
               formType={'type-' + formType}
             >
@@ -100,7 +100,7 @@ if(amountToAdd <= 0) return false
               </h2>
               <ul
                 id={"newForm-" + i + "-wrap"}
-                parentmasterid={"newForm-" + i}
+                data-parentmasterid={"newForm-" + i}
                 className={
                   styles["new-form-" + i + "-wrap"] +
                   " " +
@@ -146,7 +146,7 @@ if(amountToAdd <= 0) return false
             id={parentMasterID}
             className={styles["group-title"] + " " + styles[parentMasterID]}
           >
-            &nbsp;{parentMasterID.toUpperCase()}
+            &nbsp;{parentMasterID && parentMasterID.toUpperCase()}
           </h2>{" "}
           <button
             className={

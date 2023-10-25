@@ -100,9 +100,9 @@ const Home = (props) => {
     if (contentData && Object.keys(contentData).length > 0) {
       for (const key in contentData) {
         if (
-          contentData[key].hasOwnProperty("type") &&
+          Object.hasOwn(contentData[key],"type") &&
           contentData[key].type === targetSectionName &&
-          contentData[key].hasOwnProperty("active") &&
+          Object.hasOwn(contentData[key],"active") &&
           contentData[key].active !== false &&
           contentData[key].active.replace(" ", "") !== ""
         )
@@ -173,6 +173,7 @@ const Home = (props) => {
                 allStudyPlanItems={studyPlan}
                 user={props.user}
                 type={"goal"}
+                maxCollapsableElmHeight={'none'}
                 noEditButton={true}
               />
             )}
@@ -189,6 +190,7 @@ const Home = (props) => {
                 dataObjForEdit={studyPlan}
                 user={props.user}
                 type={"step"}
+                maxCollapsableElmHeight={'28em'}
                 noEditButton={false}
               />
             )}
@@ -200,12 +202,16 @@ const Home = (props) => {
           <ErrorBoundary>
             {props.userInitComplete && (
               <StudyPlanItems
-                key="studyPlan"
-                id="studyPlan"
+                key="hold"
+                id="hold"
+                subText='If you want to add a book, corse or similar item, but are not yet sure where it fits in the path to achieving the main goal, simply mark the Type as "hold" when filling out the new item form. All items on hold will appear in this section until you edit the item and change the Type to either "goal" or "step"'
                 dataObjForEdit={studyPlan}
                 user={props.user}
                 type={"hold"}
+                 maxCollapsableElmHeight={'0'}
                 noEditButton={false}
+                hideAddToButton={true}
+               hideShowAllButton={true}
               />
             )}
           </ErrorBoundary>

@@ -17,12 +17,12 @@ export async function registerAUser(user) {
       );
       const error = err.response;
       if (
-        error.hasOwnProperty("data") &&
-        error.data.hasOwnProperty("message")
+        Object.hasOwn(error,"data") &&
+        Object.hasOwn(error.data,"message")
       ) {
         if (error.data.message.constructor === String) return error;
 
-        if (error.data.message.hasOwnProperty("code")) {
+        if (Object.hasOwn(error.data.message,"code")) {
           // MongoDB error 11000 is a duplicate error
           if (error.data.message.code === 11000) {
             const errorMessage = {
@@ -42,7 +42,7 @@ export async function registerAUser(user) {
         error
       );
 
-      if (error.hasOwnProperty("data") && error.data.hasOwnProperty("message"))
+      if (Object.hasOwn(error,"data") && Object.hasOwn(error.data,"message"))
         console.log(
           "%cERROR Message:",
           "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
@@ -130,7 +130,7 @@ export async function sign_inAUser(token) {
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
         error
       );
-      if (error.hasOwnProperty("data") && error.data.hasOwnProperty("message"))
+      if (Object.hasOwn(error,"data") && Object.hasOwn(error.data,"message"))
         console.log(
           "%cERROR Message:",
           "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",

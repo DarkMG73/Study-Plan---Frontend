@@ -87,6 +87,15 @@
   font-weight: 700;
 }
 
+.button.medium {
+  font: var(--spt-font-body-text);
+  font-size: 1em;
+  /* font-size: calc(0.5em + 0.2vw); */
+  font-variant: all-small-caps;
+  letter-spacing: 0.125em;
+  font-weight: 700;
+}
+
 .button.large {
   font: var(--spt-font-body-text);
   font-size: 1.5em;

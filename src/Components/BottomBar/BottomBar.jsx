@@ -9,7 +9,7 @@ import SubscribeCTA from "../SubscribeCTA/SubscribeCTA";
 const BottomBar = (props) => {
   const user = false;
   const [toggleLoginModal, setToggleLoginModal] = useState(false);
-
+let {showLogin} = props;
   const toggleLoginModalButtonHandler = () => {
     setToggleLoginModal(!toggleLoginModal);
   };
@@ -24,7 +24,7 @@ const BottomBar = (props) => {
         <SubscribeCTA />
       </div>
       {false && <StatusUpdate />}
-      {props.showLogin && user && (
+      {showLogin && user && (
         <p>
           Login Status: {user.userName ? user.userName : user.email} is
           currently logged in. &nbsp;&nbsp;
@@ -37,7 +37,7 @@ const BottomBar = (props) => {
           </button>
         </p>
       )}
-      {props.showLogin && !user && (
+      {showLogin && !user && (
         <p>
           <span className={styles["not-logged-in"]}>
             No one is logged in.

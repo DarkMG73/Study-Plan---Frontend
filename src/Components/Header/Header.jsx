@@ -2,10 +2,11 @@ import styles from "./Header.module.scss";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ReactComponent as SptLogo } from "../../assets/media/spt-ring.svg";
-import SubscribeCTA from "../SubscribeCTA/SubscribeCTA";
+// import SubscribeCTA from "../SubscribeCTA/SubscribeCTA";
 import SocialConnectMenu from "../SocialConnectMenu/SocialConnectMenu";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
 import useViewport from "../../Hooks/useViewport";
+import PushButton from "../../UI/Buttons/PushButton/PushButton";
 import LoginStatus from "../User/LoginStatus/LoginStatus";
 
 function Header(props) {
@@ -14,15 +15,16 @@ function Header(props) {
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const { content } = useSelector((state) => state.contentData);
   const { user } = useSelector((state) => state.auth);
-  const [width, height] = useViewport();
+  const [width] = useViewport();
   const { welcomeScrollPosition } = useSelector(
-    (state) => state.scrollPosition,
+    (state) => state.scrollPosition
   );
   const [scrolledUp, setScrolledUp] = useState(false);
-  const scrollPositionToAtivateLoginStatus = 95;
+  const scrollPositionToAtivateLoginStatus = 270;
   const [logoTitleSize, setLogoTitleSize] = useState(100);
-  const [initialWelcomePositionTop, setInitialWelcomePositionTop] =
-    useState(false);
+  const [initialWelcomePositionTop, setInitialWelcomePositionTop] = useState(
+    false
+  );
   let xChange = logoTitleSize - 100;
   let yChange = logoTitleSize - 79;
   let logoTitleTransform = {
@@ -40,12 +42,12 @@ function Header(props) {
   if (content) {
     for (const value of Object.values(content)) {
       if (
-        value.hasOwnProperty("active") &&
+        Object.hasOwn(value,"active") &&
         value.active &&
         value.active.replace(" ", "") !== ""
       ) {
         if (
-          value.hasOwnProperty("addToNavMenu") &&
+          Object.hasOwn(value, "addToNavMenu") &&
           value.addToNavMenu &&
           value.addToNavMenu.replace(" ", "") !== ""
         )
@@ -59,14 +61,14 @@ function Header(props) {
   };
 
   const loginModalButtonHandler = () => {
-    setLoginModalOpen(!mobileMenuOpen);
+    setLoginModalOpen(!loginModalOpen);
   };
 
   const menuModalToggleStyles = mobileMenuOpen
     ? { opacity: "1", pointerEvents: "all", left: "0" }
     : {};
 
-  const loginModalToggleStyles = mobileMenuOpen
+  const loginModalToggleStyles = loginModalOpen
     ? { opacity: "1", pointerEvents: "all", left: "0" }
     : {};
 
@@ -89,12 +91,12 @@ function Header(props) {
     if (
       !initialWelcomePositionTop &&
       welcomeScrollPosition &&
-      welcomeScrollPosition.hasOwnProperty("top")
+      Object.hasOwn(welcomeScrollPosition, "top")
     ) {
       setInitialWelcomePositionTop(64);
     } else if (
       welcomeScrollPosition &&
-      welcomeScrollPosition.hasOwnProperty("top")
+      Object.hasOwn(welcomeScrollPosition, "top")
     ) {
       let newSizeValue =
         100 + (welcomeScrollPosition.top - initialWelcomePositionTop) / 5;
@@ -165,14 +167,29 @@ function Header(props) {
             styles["scrolled-up-" + scrolledUp.toString()]
           }
         >
-        
-        {user && <div className={styles["user-info-container"]}><h4>{user.userName ? user.userName : user.email}</h4></div>}
- { !user &&     
-   <button
-        className={styles["mobile-menu-button"]}
-        onClick={loginModalButtonHandler}
-      >Log In or Sign Up
-      </button>}
+          {user && (
+            <div className={styles["user-info-container"]}>
+              <h4>{user.userName ? user.userName : user.email}</h4>
+            </div>
+          )}
+
+          {!user && (
+            <PushButton
+              inputOrButton="button"
+              id="create-entry-btn"
+              colorType="primary"
+              styles={{
+                fontWeight: "700",
+              }}
+              value="Login"
+              data=""
+              size="small"
+              buttonuse="header-login"
+              onClick={loginModalButtonHandler}
+            >
+              Login or Sign Up
+            </PushButton>
+          )}
         </div>
         <div className={styles["nav-container"]}>
           {navLinks &&
@@ -191,9 +208,10 @@ function Header(props) {
               About
             </a>
           )}
+
           {props.goalsIsActive && (
             <a href="#goals" alt="" className={styles["small-header-nav"]}>
-              Intentions
+              Goals
             </a>
           )}
           {props.stepsIsActive && (
@@ -240,6 +258,7 @@ function Header(props) {
                 Intentions
               </a>
             )}
+
             {props.stepsIsActive && (
               <a href="#steps" alt="" onClick={mobileMenuButtonHandler}>
                 Steps
@@ -261,14 +280,22 @@ function Header(props) {
           <button onClick={mobileMenuButtonHandler}>Close</button>
         </CardPrimary>
       </div>
-      <div className={styles["menu-modal"]} style={loginModalToggleStyles}>
-      <CardPrimary styles={{ maxHeight: "100vh", maxWidth: "100vw" }}>
-        <div className={styles["login-container"]}>
-      <loginStatus />
-        </div>
-        <button onClick={mobileMenuButtonHandler}>Close</button>
-      </CardPrimary>
-    </div>
+      <div
+        className={styles["menu-modal"] + " " + styles["login-modal-wrap"]}
+        style={loginModalToggleStyles}
+      >
+        <CardPrimary styles={{ maxHeight: "100vh", maxWidth: "100vw" }}>
+          <div className={styles["login-wrap"]}>
+            <LoginStatus uniqueID="header-login" />
+          </div>
+          <button
+            className={styles["login-modal-close-button"]}
+            onClick={loginModalButtonHandler}
+          >
+            Close
+          </button>
+        </CardPrimary>
+      </div>
     </div>
   );
 }

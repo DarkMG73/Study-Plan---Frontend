@@ -185,7 +185,7 @@
   display: none;
 }
 
-[section=studyPlan-goals] .dependencies-container {
+[data-section=studyPlan-goals] .dependencies-container {
   display: initial;
 }
 body .master-parent-group .dependencies-container {
@@ -227,7 +227,7 @@ body .master-parent-group .dependencies-container > ul.subgroup {
   padding: 0;
 }
 
-body .dependencies-container [parentMasterType="step"] {
+body .dependencies-container [data-parentMasterType="step"] {
   background: var(--spt-color-accent-gradient);
 }
 

@@ -62,5 +62,8 @@
     "universal-cookie": "^6.1.1",
     "web-vitals": "^3.4.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^8.52.0",
+    "eslint-plugin-react": "^7.33.2"
+  }
 }

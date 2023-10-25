@@ -6,7 +6,7 @@ const Welcome = (props) => {
 let userName = false
 
 if (props.user) {
-if (props.user.hasOwnProperty('userName') && props.user.userName.trim() !== '') {
+if (Object.hasOwn(props.user,'userName') && props.user.userName.trim() !== '') {
   userName = props.user.userName
 } else {userName = props.user.email}
 

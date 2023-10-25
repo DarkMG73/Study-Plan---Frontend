@@ -77,7 +77,7 @@ const useProcessAllFormInputData = () => {
         for (const schemaKey in schema) {
           if (schemaKey === "_id") continue;
           if (
-            schema[schemaKey].hasOwnProperty("required") &&
+            Object.hasOwn(schema[schemaKey],"required") &&
             schema[schemaKey].required
           )
             requiredFields.push(schemaKey);
@@ -140,11 +140,11 @@ const useProcessAllFormInputData = () => {
             }
 
             // Clean Goals unused data (available before selecting type "goal")
-if(formData.hasOwnProperty('type') && formData.type === 'goal') {
+if(Object.hasOwn(formData,'type') && formData.type === 'goal') {
   if(unusedFieldsForGoals.includes(key)) {value = ''} 
   }
   
-  if(formData.hasOwnProperty('type') && formData.type === 'hold') {
+  if(Object.hasOwn(formData,'type') && formData.type === 'hold') {
     if(unusedFieldsForHolds.includes(key)) {value = ''} 
     }
             newForm[key] = value;

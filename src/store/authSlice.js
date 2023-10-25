@@ -13,7 +13,7 @@ export const authSlice = createSlice({
     logIn: (state, action) => {
       // state.recentLogin = true;
       state.user = { ...action.payload };
-      if (action.payload && action.payload.hasOwnProperty("token"))
+      if (action.payload && Object.hasOwn(action.payload,"token"))
         state.authToken = action.payload.token;
     },
     logOut: (state) => {

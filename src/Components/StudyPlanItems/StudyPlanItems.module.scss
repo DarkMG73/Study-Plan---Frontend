@@ -18,7 +18,6 @@
   // box-shadow: inset 0px -13px 7px -14px black, inset 0px 14px 7px -14px #00000087;
 }
 
-
 .group-studyPlan-goals ul,
 .group-studyPlan ul {
   color: white;
@@ -26,7 +25,7 @@
   /* text-shadow: 1px 1px 1px grey, 0px 0px 0px #000000; */
 }
 
-.studyPlan-items-group ul[type=goal] {
+.studyPlan-items-group ul[type="goal"] {
   background: var(--spt-color-accent-2-gradient);
 }
 
@@ -34,13 +33,23 @@ ul {
   transition: 0.3s all ease;
 }
 
-[section*=goal][hiddeItems=true] > div > [mainGoal=false][type=goal], ul[section=studyPlan][hiddeitems=true] > div  >  ul[class*=is-for-review-true], ul[section=studyPlan][hiddeitems=true] > div  >  ul[class*=is-complete-true] {
- height: 0;
- opacity: 0;
+[data-section*="goal"][hiddeItems="true"]
+  > div
+  > [data-mainGoal="false"][type="goal"],
+ul[data-section="studyPlan"][hiddeitems="true"]
+  > div
+  > ul[class*="is-for-review-true"],
+ul[data-section="studyPlan"][hiddeitems="true"]
+  > div
+  > ul[class*="is-complete-true"] {
+  height: 0;
+  opacity: 0;
+  margin: 0;
 }
 
-
-.goal { border: 10px solid red !important; }
+.goal {
+  border: 10px solid red !important;
+}
 .group-studyPlan-goals ul > div {
   display: grid;
   grid-gap: 0;
@@ -75,7 +84,8 @@ ul {
   background: var(--spt-color-accent-gradient);
 }
 
-.group-studyPlan ul > div {
+.group-studyPlan ul > div,
+.group-hold ul > div {
   display: grid;
   grid-gap: 0;
   grid-template-columns: repeat(6, 1fr);
@@ -110,7 +120,7 @@ ul {
   min-width: 100%;
   text-transform: capitalize;
   margin-bottom: 0;
-  font-variant:small-caps;
+  font-variant: small-caps;
 }
 
 .section-title {
@@ -123,6 +133,12 @@ ul {
   font-family: arial;
   border-left: 37px solid;
   margin-left: 1em;
+}
+
+.subtext {
+  background: inherit;
+  color: inherit;
+  font: var(--spt-font-body-text-12);
 }
 
 .button-container {
@@ -140,7 +156,6 @@ ul {
   width: 80%;
   margin: auto;
 }
-
 
 /* New Form Modal*/
 .in-modal {
@@ -164,7 +179,7 @@ ul {
   z-index: 10000;
 }
 
-.new-form-modal  ul > .group-title {
+.new-form-modal ul > .group-title {
   text-align: center;
   font-variant: small-caps;
   font-size: 1.5em;
@@ -174,7 +189,7 @@ ul {
   max-height: none !important;
 }
 
-.new-form-modal form  ul{
+.new-form-modal form ul {
   display: flex;
   background: var(--spt-color-accent-2-dark);
   padding: 0;
@@ -185,7 +200,7 @@ ul {
 .new-form-wrap {
   position: relative;
 }
-.new-form-modal form  ul[id*=newForm] {
+.new-form-modal form ul[id*="newForm"] {
   display: grid;
   grid-gap: 0;
   grid-template-columns: repeat(4, 1fr);
@@ -193,58 +208,63 @@ ul {
     "name name  name name"
     "type type   priority priority"
     "method method method method"
-    "msup msup msup msup" 
+    "msup msup msup msup"
     "asup asup asup asup"
     "des des des des"
     "url url url url"
-    "author author platform platform"  
+    "author author platform platform"
     "lectureTime lectureTime labTime labTime"
-    "start status acomp acomp"    
+    "start status acomp acomp"
     "itemnotes itemnotes itemnotes itemnotes"
-    "tags tags tags tags"
-;
+    "tags tags tags tags";
   grid-auto-flow: row dense;
   max-width: 100%;
 }
 
-.new-form-modal form   [newformtype="goal"]  ul[id*=newForm] {
+.new-form-modal form [newformtype="goal"] ul[id*="newForm"] {
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
     "name name"
     "type type"
     "method method"
-    "msup msup" 
+    "msup msup"
     "asup asup"
     "des des"
-    "start start"   
+    "start start"
     "itemnotes itemnotes"
-    "tags tags"
-;
+    "tags tags";
   grid-auto-flow: row dense;
   max-width: 100%;
 }
 
-.new-form-modal form   [newformtype="goal"]   {
+.new-form-modal form [newformtype="goal"] {
   background: var(--spt-color-background-warm);
-  color: var(--spt-color-background-contrast) ;
+  color: var(--spt-color-background-contrast);
   border: 3px outset var(--spt-color-background);
 }
-.new-form-modal form   [newformtype="step"]   {
+.new-form-modal form [newformtype="step"] {
   background: var(--spt-color-accent);
   border: 3px outset var(--spt-color-accent-dark);
 }
 
-.new-form-modal form   [newformtype="hold"]   {
+.new-form-modal form [newformtype="hold"] {
   background: var(--spt-color-background-contrast-dark);
-  color:var(--spt-color-background-warm);
+  color: var(--spt-color-background-warm);
   border: 3px outset var(--spt-color-background-contrast-dark);
 }
 
-.new-form-modal form  { [newformtype="hold"],  [newformtype="step"]  , [newformtype="goal"] {ul, li, button{
-  background: inherit;
-  color: inherit !important;
+.new-form-modal form {
+  [newformtype="hold"],
+  [newformtype="step"],
+  [newformtype="goal"] {
+    ul,
+    li,
+    button {
+      background: inherit;
+      color: inherit !important;
+    }
+  }
 }
-}}
 .new-form-modal ul > div {
   margin: 0;
   padding: 0 1em;
@@ -253,7 +273,7 @@ ul {
 }
 
 .new-form-modal form {
-color: inherit;
+  color: inherit;
   background: inherit;
   padding: 3em;
   max-width: 100%;
@@ -270,8 +290,8 @@ color: inherit;
 }
 
 .new-form .new-form {
-position: relative;
-  flex-basis: fit-content; 
+  position: relative;
+  flex-basis: fit-content;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -299,8 +319,6 @@ position: relative;
   overflow: auto;
 }
 
-
-
 .new-form-modal {
   .new-form li {
     display: flex;
@@ -311,51 +329,59 @@ position: relative;
     width: auto;
   }
 
-  li, input, textarea , select{
-  border-radius: 6.25px;
-  border: none;
-  
-}
-input, textarea, select {
-  box-shadow: inset -1px -1px 3px -2px white, inset 1px 1px 3px -2px black;
-}
+  li,
+  input,
+  textarea,
+  select {
+    border-radius: 6.25px;
+    border: none;
+  }
+  input,
+  textarea,
+  select {
+    box-shadow: inset -1px -1px 3px -2px white, inset 1px 1px 3px -2px black;
+  }
 
-.new-form li select {
-  width: 100%;
+  .new-form li select {
+    width: 100%;
   }
-  
+
   .new-form-button-wrap {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
   }
-  
+
   .new-form-button-wrap > button {
     min-width: 100%;
   }
   .new-form-button-wrap > button:hover {
     transform: scale(1, 1.25);
   }
-  
-  form label,form li:before {
+
+  form label,
+  form li:before {
     opacity: 1;
     font-variant: all-small-caps;
     transition: 0.2s all ease;
     font-size: 1em;
   }
-  
-  form [for*=type], form [for*=name], form [for*=method], form [class*=priority]  {
+
+  form [for*="type"],
+  form [for*="name"],
+  form [for*="method"],
+  form [class*="priority"] {
     display: initial;
     transform: none;
   }
-  
-  form li[class*=name], form li[class*=type]
-  {
+
+  form li[class*="name"],
+  form li[class*="type"] {
     border: 3px solid var(--spt-color-accent-dark);
-  background: var(--spt-color-accent-dark);
+    background: var(--spt-color-accent-dark);
   }
-  
-  
-  form li[class*=name]:before, form li[class*=type]:before {
+
+  form li[class*="name"]:before,
+  form li[class*="type"]:before {
     content: "*";
     position: absolute;
     top: 0;
@@ -363,22 +389,19 @@ input, textarea, select {
     transform: translate(0, -30%);
     font-size: 2em;
   }
-  
-  
-  form li[class*=markcomplete], 
-  form li[class*=markforreview] ,
-  form li[class*=masterLibraryID] ,
-  form li[class*=slug] ,
-  form li[class*=progressbar] ,
-  form li[class*=demonstratedskill],
-  form li[class*=demonstratedskilssls] ,
-  form li[class*=_id] ,
-  form li[class*=createdAt]
-  {
+
+  form li[class*="markcomplete"],
+  form li[class*="markforreview"],
+  form li[class*="masterLibraryID"],
+  form li[class*="slug"],
+  form li[class*="progressbar"],
+  form li[class*="demonstratedskill"],
+  form li[class*="demonstratedskilssls"],
+  form li[class*="_id"],
+  form li[class*="createdAt"] {
     display: none;
   }
-  
-  
+
   .new-form-button {
     position: relative;
     width: fit-content;
@@ -389,7 +412,8 @@ input, textarea, select {
     z-index: 10;
     margin: 0 0.5em;
     /* box-shadow: inset 1px 1px 1px rgb(255 255 255 / 25%), inset 1px -1px 1px rgb(0 0 0 / 15%), 1px 1px 5px -3px black; */
-    box-shadow: 3px 3px 7px -5px white inset, -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
+    box-shadow: 3px 3px 7px -5px white inset,
+      -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
     border: none;
     background: var(--spt-color-background);
     color: var(--spt-color-accent);
@@ -400,10 +424,9 @@ input, textarea, select {
     transition: 0.2s all ease;
     font-feature-settings: "smcp";
     font-variant: small-caps;
-  
   }
-  
-  .new-form-button{
+
+  .new-form-button {
     background: var(--spt-color-accent-gradient);
     color: var(--spt-color-background);
     width: 100%;
@@ -412,7 +435,7 @@ input, textarea, select {
     font-size: 1em;
     transition: 0.2s all ease;
   }
-  
+
   .new-form-button:last-child {
     font-size: 1.8em;
     margin-top: 0;
@@ -422,9 +445,9 @@ input, textarea, select {
     background: var(--spt-color-accent-dark);
     color: var(--spt-color-background);
     transition: 0.3s all ease;
-    transform: scale(1,1.125);
+    transform: scale(1, 1.125);
   }
-  
+
   .new-form-button span {
     text-transform: capitalize;
     text-transform: capitalize;
@@ -434,30 +457,46 @@ input, textarea, select {
     -webkit-text-fill-color: unset;
     pointer-events: none;
   }
-  
-  form li input, form li select, form li textarea {
+
+  form li input,
+  form li select,
+  form li textarea {
     min-height: 2em;
     height: 2.5em;
     font: var(--spt-font-body-text);
     font-size: 1em;
   }
-  
-  form li[class*=method] {
+
+  form li[class*="method"] {
     max-height: 100%;
   }
-
 }
 
-
-
 // Goal New Item Forms
-[type=goal] .new-form-button-wrap {
+[type="goal"] .new-form-button-wrap {
   display: none;
 }
 
 ////////////////////////////////////////////////////////////////
-[type=goal] .list-button-container {
+[type="goal"] .list-button-container {
   display: none;
+}
+
+ul[type="hold"] {
+  background: var(--spt-color-background-contrast-dark);
+  color: var(--spt-color-background-warm);
+}
+
+.studyPlan-items-group[type="hold"] {
+  padding: 2em;
+  box-shadow: inset 3px 3px 7px -4px #000000, inset -3px -3px 7px -4px white;
+  border-radius: 25px;
+}
+
+.studyPlan-items-group[type="hold"] subtext {
+  box-shadow: inset 1px 1px 4px -3px #000000, inset -1px -1px 4px -3px white;
+  padding: 1.5em 2em;
+  border-radius: inherit;
 }
 
 .studyPlan-history-list-container {
@@ -471,29 +510,29 @@ input, textarea, select {
 
 .sort-button-container {
   display: flex;
-    align-items: center;
-    margin: 1em;
+  align-items: center;
+  margin: 1em;
 }
 
 .sort-button-container > * {
   margin: 0 1em 0 0;
 }
- .sort-button-container[type=goal] {
+.sort-button-container[type="goal"] {
   display: none;
 }
 
 .sort-button-wrap {
   display: flex;
-    align-items: center;
+  align-items: center;
 }
 
-.sort-button-wrap select { 
-  text-align-last: left; 
+.sort-button-wrap select {
+  text-align-last: left;
   box-shadow: inset 1px 1px 4px -3px black, inset -1px -1px 3px -2px #b8b8b8;
-} 
+}
 
 // .sort-button-wrap option { direction: rtl; }
-.sort-button-wrap select  {
+.sort-button-wrap select {
   webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
@@ -545,7 +584,8 @@ input, textarea, select {
   padding: 0 1em;
 }
 
-.instructions-container, .no-items-text {
+.instructions-container,
+.no-items-text {
   background: inherit;
   color: inherit;
   font: var(--spt-font-body-text-12);
@@ -558,7 +598,8 @@ input, textarea, select {
   display: flex;
   justify-content: center;
   font: var(--spt-font-body-text-12);
-  box-shadow: 3px 3px 7px -3px rgba(0, 0, 0, 0.5), inset 3px 3px 7px -3px #ffffff;
+  box-shadow: 3px 3px 7px -3px rgba(0, 0, 0, 0.5),
+    inset 3px 3px 7px -3px #ffffff;
   border-radius: 6.25px;
   padding: 1em 3% 2em;
   display: flex;
@@ -566,7 +607,8 @@ input, textarea, select {
 }
 
 .studyPlan-items-group {
-  p,  ol {
-    opacity:1;
+  p,
+  ol {
+    opacity: 1;
   }
-} 
+}

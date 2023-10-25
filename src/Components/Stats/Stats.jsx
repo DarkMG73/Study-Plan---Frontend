@@ -7,11 +7,11 @@ const Stats = (props) => {
   );
   const totalLabTime =
     studyPlanMetadata &&
-    studyPlanMetadata.hasOwnProperty("labTime") &&
+    Object.hasOwn(studyPlanMetadata, "labTime") &&
     studyPlanMetadata.labTime[1];
   const totalLectureTime =
     studyPlanMetadata &&
-    studyPlanMetadata.hasOwnProperty("lectureTime") &&
+    Object.hasOwn(studyPlanMetadata,"lectureTime") &&
     studyPlanMetadata.lectureTime[1];
   const totalHours = totalLectureTime + totalLabTime;
   const reviewHoursTotal = findAndAddTime("markforreview", studyPlanMetadata);
@@ -20,7 +20,7 @@ const Stats = (props) => {
 
   function addTime(fieldName, studyPlanMetadata) {
     let outputTime = 0;
-    if (studyPlanMetadata && studyPlanMetadata.hasOwnProperty(fieldName))
+    if (studyPlanMetadata && Object.hasOwn(studyPlanMetadata, fieldName))
       studyPlanMetadata[fieldName].forEach((time) => {
         outputTime += time * 1;
       });
@@ -30,7 +30,7 @@ const Stats = (props) => {
     let outputTotalHours = 0;
     if (
       studyPlanMetadata &&
-      studyPlanMetadata.hasOwnProperty(fieldName) &&
+      Object.hasOwn(studyPlanMetadata,fieldName) &&
       studyPlanMetadata[fieldName] &&
       studyPlanMetadata[fieldName] !== "false"
     ) {
@@ -38,12 +38,12 @@ const Stats = (props) => {
         if (id.constructor !== String) return;
 
         if (
-          studyPlan.hasOwnProperty(id) &&
-          studyPlan[id].hasOwnProperty("labTime")
+          Object.hasOwn(studyPlan, id) &&
+          Object.hasOwn(studyPlan[id], "labTime")
         ) {
           outputTotalHours += studyPlan[id].labTime * 1;
         }
-        if (studyPlan[id].hasOwnProperty("lectureTime")) {
+        if (Object.hasOwn(studyPlan[id], "lectureTime")) {
           outputTotalHours += studyPlan[id].lectureTime * 1;
         }
       });

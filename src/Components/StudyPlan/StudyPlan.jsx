@@ -19,10 +19,10 @@ const StudyPlan = (props) => {
 
 
   for (const itemValues of Object.values(props.studyPlanData.studyPlan)) {
-    if (itemValues.hasOwnProperty("type") && itemValues.type === "step") {
+    if (Object.hasOwn(itemValues, "type") && itemValues.type === "step") {
       sortedStudyPlanItems.steps.push(itemValues);
     } else {
-      if (itemValues.hasOwnProperty("type") && itemValues.type === "goal")
+      if (Object.hasOwn(itemValues,"type") && itemValues.type === "goal")
         sortedStudyPlanItems.goals.push(itemValues);
     }
   }
@@ -51,7 +51,7 @@ const StudyPlan = (props) => {
             styles[
               "hide-" +
                 (welcomeScrollPosition &&
-                  welcomeScrollPosition.hasOwnProperty("top") &&
+                  Object.hasOwn(welcomeScrollPosition,"top") &&
                   welcomeScrollPosition.top >= -50)
             ]
           }

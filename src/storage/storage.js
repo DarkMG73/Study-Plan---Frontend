@@ -13,7 +13,7 @@ function storage(action, data, name) {
     output = localStorage.getItem(storageFileName);
     try {
       output = JSON.parse(output);
-    } catch {}
+    } catch (err) {console.Console.log(err)}
   }
 
   if (action === "DELETE") {
@@ -24,7 +24,7 @@ function storage(action, data, name) {
 }
 
 export function StorageForSession(action, data, name) {
-  if (data && Object.keys(data).length > 0 && data.hasOwnProperty("token"))
+  if (data && Object.keys(data).length > 0 && Object.hasOwn(data,"token"))
     data = JSON.stringify(data.token);
 
   const storageFileName = name ? name : appCookieName;
@@ -43,11 +43,7 @@ export function StorageForSession(action, data, name) {
 
   if (action === "GET") {
     output = cookies.get(storageFileName);
-    // output = sessionStorage.getItem(storageFileName);
-    try {
-      output = JSON.parse(output);
-    } catch (error) {}
-    if (output && output.hasOwnProperty("token")) output = output.token;
+    if (output && Object.hasOwn(output,"token")) output = output.token;
   }
 
   if (action === "DELETE") {

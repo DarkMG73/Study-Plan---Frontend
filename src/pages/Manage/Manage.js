@@ -73,7 +73,7 @@ const Manage = (props) => {
           const sortedDataObject = {};
           for (const i in dataObjForEdit[key]) {
             const type = dataObjForEdit[key][i].type;
-            if (!sortedDataObject.hasOwnProperty(type))
+            if (!Object.hasOwn(sortedDataObject,type))
               sortedDataObject[type] = {};
             sortedDataObject[type][i] = dataObjForEdit[key][i];
           }
@@ -195,7 +195,7 @@ const Manage = (props) => {
           const sortedDataObject = {};
           for (const i in dataObjForEdit[key]) {
             const type = dataObjForEdit[key][i].type;
-            if (!sortedDataObject.hasOwnProperty(type))
+            if (!Object.hasOwn(sortedDataObject,type))
               sortedDataObject[type] = {};
             sortedDataObject[type][i] = dataObjForEdit[key][i];
           }

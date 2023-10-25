@@ -157,7 +157,7 @@ const Login = (props) => {
       sign_inAUser(user)
         .then((res) => {
           removeLoadingRequest();
-          if (res && res.hasOwnProperty("status")) {
+          if (res && Object.hasOwn(res,"status")) {
             if (res.status >= 200 && res.status < 400) {
               completeSignInProcedures(res);
             } else if (res.status === 0 || res.status === 404) {
@@ -171,16 +171,16 @@ const Login = (props) => {
             } else if (res.status >= 400) {
               let groomedErrorMessage =
                 "No error message given| Status is " + res.status;
-              if (res.hasOwnProperty("data")) {
-                if (res.data.hasOwnProperty("message"))
+              if (Object.hasOwn(res,"data")) {
+                if (Object.hasOwn(res.data,"message"))
                   groomedErrorMessage = res.data.message;
-                if (res.data.hasOwnProperty("statusText"))
+                if (Object.hasOwn(res.data,"statusText"))
                   groomedErrorMessage = res.statusText;
               }
               seLoginError(groomedErrorMessage);
               setShowLoginError(true);
             }
-          } else if (res && res.hasOwnProperty("data")) {
+          } else if (res && Object.hasOwn(res,"data")) {
             if (res.data) {
               completeSignInProcedures(res);
             } else {

@@ -25,7 +25,7 @@ const StatusUpdate = () => {
   useEffect(() => {
     if (
       status &&
-      status.hasOwnProperty("rateLimitRemaining") &&
+      Object.hasOwn(status, "rateLimitRemaining") &&
       status.rateLimitRemaining < 10
     ) {
       if (status.rateLimitRemaining <= 0) {
@@ -46,12 +46,12 @@ const StatusUpdate = () => {
             " calls to the server left. If the limit is reached, please wait about ten minutes before continuing."
         );
       }
-    } else if (status && status.hasOwnProperty("statusText")) {
-      if (status.hasOwnProperty("status") && status.status == 401) {
+    } else if (status && Object.hasOwn(status, "statusText")) {
+      if (Object.hasOwn(status, "status") && status.status == 401) {
         setErrorStatus("all-fine");
         setStatusText("OK");
       } else if (
-        (status.hasOwnProperty("status") && !status.status) ||
+        (Object.hasOwn(status, "status") && !status.status) ||
         status.status >= 400 ||
         (status.status >= 400 && status.statusText === "") ||
         status.status == 0

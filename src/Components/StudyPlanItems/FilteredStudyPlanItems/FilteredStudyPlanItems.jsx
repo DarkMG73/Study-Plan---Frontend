@@ -11,11 +11,11 @@ const CompletedStudyPlanItems = (props) => {
   const filterKey = props.filterKey;
   const filteredItems = {};
 
-  if (studyPlanMetadata.hasOwnProperty(filterKey)) {
+  if (Object.hasOwn(studyPlanMetadata, filterKey)) {
     studyPlanMetadata[filterKey].forEach((id) => {
-      if (studyPlanSet.hasOwnProperty(id)) {
+      if (Object.hasOwn(studyPlanSet, id)) {
         if (
-          studyPlanSet[id].hasOwnProperty(filterKey) &&
+          Object.hasOwn(studyPlanSet[id], filterKey) &&
           studyPlanSet[id][filterKey] &&
           studyPlanSet[id][filterKey] !== "false"
         )

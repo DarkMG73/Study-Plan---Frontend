@@ -24,10 +24,10 @@ export const formInputDataSlice = createSlice({
       const newState = { ...state.existingFormInputDataObj };
       const { parentMasterID, title, outputValue } = action.payload;
 
-      if (!newState.hasOwnProperty(parentMasterID)) {
+      if (!Object.hasOwn(newState,parentMasterID)) {
         newState[parentMasterID] = { [title]: outputValue };
       } else if (
-        newState[parentMasterID].hasOwnProperty(title) &&
+        Object.hasOwn(newState[parentMasterID],title) &&
         !["String", "Array", "number", "Boolean"].includes(
           newState[parentMasterID][title].constructor.name
         )
@@ -46,7 +46,7 @@ export const formInputDataSlice = createSlice({
       const newState = { ...state.newFormInputDataObj };
       const { parentMasterID, title, outputValue } = action.payload;
 
-      if (!newState.hasOwnProperty(parentMasterID)) {
+      if (!Object.hasOwn(newState,parentMasterID)) {
         newState[parentMasterID] = { [title]: outputValue };
       } else if (title === "sourceURLObj") {
         newState[parentMasterID]["studyPlan"] = {
@@ -57,7 +57,7 @@ export const formInputDataSlice = createSlice({
           },
         };
       } else if (
-        newState[parentMasterID].hasOwnProperty(title) &&
+        Object.hasOwn(newState[parentMasterID],title) &&
         !["String", "Array", "number", "Boolean"].includes(
           newState[parentMasterID][title].constructor.name
         )

@@ -65,10 +65,10 @@ export default async function GatherStudyPlanData(studyPlanItemSchema, user) {
 
   for (const studyPlanValue of Object.values(studyPlanData.studyPlan)) {
     if (
-      studyPlanValue.hasOwnProperty("type") &&
+      Object.hasOwn(studyPlanValue,"type") &&
       studyPlanValue.type === "service" &&
-      studyPlanValue.hasOwnProperty("slug") &&
-      studyPlanValue.hasOwnProperty("iframeCustomAttributes")
+      Object.hasOwn(studyPlanValue,"slug") &&
+      Object.hasOwn(studyPlanValue,"iframeCustomAttributes")
     ) {
       studyPlanData.serviceEmbedJSXObj[studyPlanValue.slug] =
         studyPlanValue.iframeCustomAttributes;
@@ -145,14 +145,14 @@ function objectExtractAllValuesPerKey(
         // Handle items that need to be added together
         if (addTogether.includes(key)) {
           if (objectToLoop[i].type.toLowerCase() === "goal") continue;
-          if (!outputObject.hasOwnProperty(key)) outputObject[key] = [0];
+          if (!Object.hasOwn(outputObject,key)) outputObject[key] = [0];
           if (objectToLoop[i][key]) {
             outputObject[key][0] += objectToLoop[i][key] * 1;
           }
         }
         // Handle some items by only gathering the _id
         else if (onlyCollectID.includes(key)) {
-          if (!outputObject.hasOwnProperty(key)) outputObject[key] = new Set();
+          if (!Object.hasOwn(outputObject,key)) outputObject[key] = new Set();
           if (objectToLoop[i][key] && objectToLoop[i][key] != false) {
             outputObject[key].add(objectToLoop[i]._id);
           }
@@ -171,7 +171,7 @@ function objectExtractAllValuesPerKey(
             const value = term.trim().toString();
 
             // Add to Set. If key Set does not exist, create it.
-            if (outputObject.hasOwnProperty(key)) {
+            if (Object.hasOwn(outputObject,key)) {
               outputObject[key].add(value);
             } else {
               outputObject[key] = new Set();
@@ -185,7 +185,7 @@ function objectExtractAllValuesPerKey(
         ) {
           if (objectToLoop[i][key].constructor === Object) {
             Object.values(objectToLoop[i][key]).forEach((val) => {
-              if (outputObject.hasOwnProperty(key)) {
+              if (Object.hasOwn(outputObject,key)) {
                 outputObject[key].add(val);
               } else {
                 outputObject[key] = new Set();
@@ -194,7 +194,7 @@ function objectExtractAllValuesPerKey(
             });
           } else if (objectToLoop[i][key].constructor === Boolean) {
             const value = i.toString().trim();
-            if (outputObject.hasOwnProperty(key)) {
+            if (Object.hasOwn(outputObject,key)) {
               outputObject[key].add(value);
             } else {
               outputObject[key] = new Set();
@@ -202,7 +202,7 @@ function objectExtractAllValuesPerKey(
             }
           } else {
             const value = objectToLoop[i][key].toString().trim();
-            if (outputObject.hasOwnProperty(key)) {
+            if (Object.hasOwn(outputObject,key)) {
               outputObject[key].add(value);
             } else {
               outputObject[key] = new Set();
@@ -225,7 +225,7 @@ function objectExtractAllValuesPerKey(
 
               // Check if the value is valid
               if (!valuesToExclude.includes(value)) {
-                if (outputObject.hasOwnProperty(key)) {
+                if (Object.hasOwn(outputObject,key)) {
                   outputObject[key].add(value);
                 } else {
                   outputObject[key] = new Set();
@@ -235,7 +235,7 @@ function objectExtractAllValuesPerKey(
             });
           } else {
             // If the above does not app;y, return a Set() if it si not already there.
-            if (!outputObject.hasOwnProperty(key))
+            if (!Object.hasOwn(outputObject,key))
               outputObject[key] = new Set();
           }
         }

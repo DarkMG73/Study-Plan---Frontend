@@ -249,22 +249,27 @@
 } */
 
 .login-status-wrap {
-  flex-basis: 50%;
+  flex-basis: auto;
   // width: 1000000px;
+  width: 10em;
   max-width: fit-content;
   // max-height: 3em;
-  overflow: hidden;
+  // overflow: hidden;
   max-height: 21px;
+  margin: 0 auto;
+  transform: scale(1, 1);
+  transition: 0.7s all ease;
 }
 
 .scrolled-up-false {
-  flex-basis: 0;
+  // flex-basis: 0;
   // width: 1000000px;
   // max-width: 0;
 
   // transform: scale(0);
+  transform: scale(1, 0);
   transform-origin: top;
-  transition: 0.2s all ease;
+  transition: 0.7s all ease;
 }
 
 // .scrolled-up-true {
@@ -277,28 +282,26 @@
 //   transition: 0.2s all ease;
 // }
 .login-status-wrap {
- [id=button-container-header-login] {
-      button, input {
-        margin: 0 auto !important;
-        padding: 0 !important;
-        max-height: 20px !important;
-        min-height: 0 !important;
-        transform: none !important;
-    }
-    button {
-      background: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
+  [buttonuse="header-login"],
+  .user-info-container {
+    // flex-basis: 50%;
+    // padding: 0 0.75em;
+    margin: 0 auto;
+    width: fit-content;
+    max-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--spt-color-accent-2-gradient);
+    height: 100%;
+    margin: 0 0.5em;
+    transition: 0.7s all ease;
   }
-    div {
-      max-height: 20px !important;
-    }
-    [class*=login-question] {
-      display: none !important;
-    }
-  [id=form-container-header-login] div  span {
-      margin: 0 auto;
-    }
+
+  .user-info-container h4 {
+    color: var(--spt-color-accent-2);
+    color: var(--spt-color-accent-2);
+    font-size: 0.75em;
   }
 }
 
@@ -328,7 +331,7 @@
   z-index: 10;
 }
 
-/* MODAL */
+/* MOBILE MODAL */
 .mobile-menu-button {
   position: fixed;
   display: none;
@@ -416,11 +419,9 @@
   letter-spacing: 0.25em;
   text-transform: uppercase;
   border: none;
-  box-shadow:
-    3px 3px 7px -5px white inset,
+  box-shadow: 3px 3px 7px -5px white inset,
     -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset,
-    -3px -3px 7px -5px #606060 inset,
-    3px 3px 7px -5px rgb(75 75 75 / 50%) inset;
+    -3px -3px 7px -5px #606060 inset, 3px 3px 7px -5px rgb(75 75 75 / 50%) inset;
   cursor: pointer;
   font-variant: small-caps;
   /* margin-left: 1em; */
@@ -434,8 +435,7 @@
 }
 
 .menu-modal > div > button:hover {
-  box-shadow:
-    3px 3px 7px -5px white inset,
+  box-shadow: 3px 3px 7px -5px white inset,
     -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
   color: var(--spt-color-background);
   background: var(--spt-color-accent-gradient);
@@ -444,6 +444,22 @@
 }
 /* ******* */
 
+.login-modal-wrap {
+  .login-wrap {
+    max-width: 800px;
+  }
+  .login-modal-close-button {
+    background: var(--spt-color-accent-2-dark);
+    color: var(--spt-color-background);
+    font: inherit;
+    font-weight: 700;
+    letter-spacing: 0.75em;
+  }
+  [id="db-login-container-header-login"] button {
+    background: var(--spt-color-accent-2);
+    color: var(--spt-color-background) !important;
+  }
+}
 /* RESPONSIVE BREAKPOINTS */
 @media screen and (max-width: 1024px) {
   /* Needs to match with Bottom Bar becoming visible (in Home page) */

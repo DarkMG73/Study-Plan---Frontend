@@ -46,7 +46,7 @@ const StudyPlanItems = (props) => {
   const [showListResetButton, setShowListResetButton] = useState(false);
   const id = props.id;
   const typeName = props.type;
-  const section = props.section;
+  const section = props.section; 
   const dataObjForEdit = props.dataObjForEdit;
   const processAllFormInputData = useProcessAllFormInputData();
   const initStudyPlanItems = useInitStudyPlanItems();
@@ -71,7 +71,7 @@ const StudyPlanItems = (props) => {
   let outputName =
     dataObjForEdit &&
     dataObjForEdit[id] &&
-    dataObjForEdit[id].hasOwnProperty("title") ? (
+    Object.hasOwn(dataObjForEdit[id], "title") ? (
       <Fragment>
         <div>{dataObjForEdit[id].title}</div>
         <div>{id}</div>
@@ -188,7 +188,7 @@ const StudyPlanItems = (props) => {
   };
 
   const showAllItemsButtonHandler = (e) => {
-    if (studyPlanMetadata && studyPlanMetadata.hasOwnProperty("type")) {
+    if (studyPlanMetadata && Object.hasOwn(studyPlanMetadata, "type")) {
       setShowListResetButton(true);
       setChangeListArray([...studyPlanMetadata.type]);
       setHideAllSubGoals(false);
@@ -202,7 +202,7 @@ const StudyPlanItems = (props) => {
   };
 
   const hideAllSubGoalsButtonHandler = (e) => {
-    if (studyPlanMetadata && studyPlanMetadata.hasOwnProperty("type")) {
+    if (studyPlanMetadata && Object.hasOwn(studyPlanMetadata, "type")) {
       setHideAllSubGoals(!hideAllSubGoals);
     }
   };
@@ -242,17 +242,17 @@ const StudyPlanItems = (props) => {
       {!user && outputName.includes("Goal") && <Welcome />}
       {user &&
         outputName.includes("Goal") &&
-        (!studyPlanMetadata.hasOwnProperty("_id") ||
-          (studyPlanMetadata.hasOwnProperty("_id") &&
+        (!Object.hasOwn(studyPlanMetadata, "_id") ||
+          (Object.hasOwn(studyPlanMetadata,"_id") &&
             studyPlanMetadata._id.length <= 0)) && <Welcome user={user} />}
 
       {user &&
         Object.keys(formInputData).length >= 0 &&
-        studyPlanMetadata.hasOwnProperty("_id") &&
+        Object.hasOwn(studyPlanMetadata, "_id") &&
         studyPlanMetadata._id.length > 0 && (
           <ul
-            marker="STUDYPLAN-ITEMS"
-            section={id}
+            data-marker="STUDYPLAN-ITEMS"
+            data-section={id}
             id={id}
             type={typeName}
             hiddeItems={"" + hideAllSubGoals}
@@ -267,6 +267,7 @@ const StudyPlanItems = (props) => {
             <h2 className={styles["group-title"] + " " + styles[id]}>
               {outputName}
             </h2>
+            {props.subText && <p className={styles['subtext']}>{props.subText}</p>}
             {outputName.toLowerCase().includes("goal") &&
               Object.keys(formInputData).length > 0 &&
               !outputName.includes("Syllabus") && (
@@ -312,7 +313,7 @@ const StudyPlanItems = (props) => {
               Object.keys(formInputData).length > 0 &&
               !outputName.includes("Goal") && (
                 <div
-                  section="history-list-section"
+                  data-section="history-list-data-section"
                   id={id}
                   className={
                     styles["studyPlan-history-list-container"] +
@@ -424,7 +425,7 @@ const StudyPlanItems = (props) => {
                   </div>
                 </div>
               )}
-            <div className={styles["new-form-button-wrap"]}>
+  { !props.hideShowAllButton &&        <div className={styles["new-form-button-wrap"]}>
               <PushButton
                 inputOrButton="button"
                 id="create-entry-btn"
@@ -438,14 +439,14 @@ const StudyPlanItems = (props) => {
               >
                 Add to <span>{toTitleCase(id, true)}</span>
               </PushButton>
-            </div>
+            </div>}
             <CollapsibleElm
               id={id + "-collapsible-elm"}
               styles={{
                 position: "relative",
               }}
               maxHeight={
-                id.includes("goal") || id.includes("studyPlan") ? "none" : "8em"
+                props.maxCollapsableElmHeight ?  props.maxCollapsableElmHeight  : "7em"
               }
               inputOrButton="button"
               buttonStyles={{
@@ -475,7 +476,7 @@ const StudyPlanItems = (props) => {
                   className={styles["sort-button-container"]}
                   type={typeName}
                 >
-                  <div
+           {!props.hideShowAllButton &&        <div
                     id="list-button-container"
                     className={styles["list-button-container"]}
                   >
@@ -492,7 +493,7 @@ const StudyPlanItems = (props) => {
                           size="small"
                           onClick={showAllItemsButtonHandler}
                         >
-                          List All Goals & Tasks
+                          Show All Goals, Steps & Holds
                         </PushButton>
                       </Fragment>
                     )}
@@ -511,12 +512,12 @@ const StudyPlanItems = (props) => {
                         Show Only Steps
                       </PushButton>
                     )}
-                  </div>
+                  </div>}
                   <label className={styles["sort-button-wrap"]}>
                     Sort by:
                     <select
                       className={styles["new-form-button"]}
-                      parentmasterid={IdleDeadline}
+                      data-parentmasterid={IdleDeadline}
                       onChange={sortMethodButtonHandler}
                       value={sortMethod}
                     >
@@ -590,18 +591,18 @@ const StudyPlanItems = (props) => {
                 )}
 
               {Object.keys(formInputData).length <= 0 &&
-                studyPlanMetadata.hasOwnProperty("_id") &&
+                Object.hasOwn(studyPlanMetadata,"_id") &&
                 studyPlanMetadata._id.length > 0 &&
-                !outputName.includes("Goal") && (
+                !outputName.includes("Goal") && !outputName.includes("Holding") && (
                   <div
                     id="no-items-text"
                     className={styles["no-items-text"]}
                     type={typeName}
                   >
                     <h3>
-                      It appears you have a goal; GREAT! Unfortunately, there
-                      are no steps to get there. See below for how to add steps
-                      towards your main goal. :)
+                      Hmmmm...unfortunately, there
+                      are no steps yet. See below for how to add steps
+                      towards your main goal. 
                     </h3>
                     <Welcome onlyInstructions={true} />
                   </div>

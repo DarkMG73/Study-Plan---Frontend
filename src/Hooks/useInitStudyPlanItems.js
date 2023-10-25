@@ -22,7 +22,7 @@ const useInitStudyPlanItems = () => {
       const output = [];
 
       for (const value of Object.values(masterListObj)) {
-        if (value.hasOwnProperty("msup") && value.msup === objectIdentifier)
+        if (Object.hasOwn(value,"msup") && value.msup === objectIdentifier)
           output.push(value.identifier);
       }
       return output;

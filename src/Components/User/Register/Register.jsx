@@ -144,7 +144,7 @@ const Register = (props) => {
           if (res && res.status < 400) {
             sign_inAUser(user)
               .then((res) => {
-                if (res && res.hasOwnProperty("status")) {
+                if (res && Object.hasOwn(res,"status")) {
                   if (res.status >= 200 && res.status < 400) {
                     completeSignInProcedures(res);
                   } else if (res.status === 404) {
@@ -161,7 +161,7 @@ const Register = (props) => {
                     );
                     setShowLoginError(true);
                   }
-                } else if (res && res.hasOwnProperty("data")) {
+                } else if (res && Object.hasOwn(res,"data")) {
                   setLoginError(false);
                   dispatch(authActions.logIn(res.data));
                 } else {
