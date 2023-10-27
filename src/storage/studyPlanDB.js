@@ -102,7 +102,7 @@ export async function saveManyStudyPlanItems(userAndDataObject) {
 
 /// UPDATE //////////////////////////////////
 export async function updateAStudyPlanItem(dataObj, user) {
-  if (!Object.hasOwn(dataObj,"identifier")) {
+  if (!Object.hasOwn(dataObj, "identifier")) {
     throw Error(
       "This item appears to be incomplete. Contact the site admin and provide this error code: SPDB-MIS-IDENT"
     );
@@ -156,7 +156,7 @@ export async function deleteDocFromDb(id, user) {
 }
 
 /// DELETE ALL ///////////////////////////
-export async function deleteAllQuestions(user) {
+export async function deleteAllStudyTopics(user) {
   const axiosConfig = {
     headers: {
       "Content-Type": "application/json",

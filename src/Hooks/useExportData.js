@@ -1,60 +1,62 @@
 import { useSelector } from "react-redux";
 
 const useExportData = (props) => {
-  const { allQuestions, questionHistory, filteredQuestionsIds } = useSelector(
+  const { studyPlan, studyPlanMetadata } = useSelector(
     (state) => state.studyPlanData
   );
-  if (!filteredQuestionsIds) return null;
-  const totalQuestions = filteredQuestionsIds.length;
-  const { correct, incorrect, unmarked } = questionHistory;
-  const correctAmount = tallyItemsInObject(correct);
-  const incorrectAmount = tallyItemsInObject(incorrect);
-  const unmarkedAmount = tallyItemsInObject(unmarked);
-  const totalCompleted = correctAmount + incorrectAmount + unmarkedAmount;
-  const score =
-    ((correctAmount / totalCompleted) * 100).toFixed(1) + "% Correct";
-  function tallyItemsInObject(obj) {
-    let output = 0;
-    for (const i in obj) {
-      output++;
-    }
-    return output;
+  if (!studyPlan || Object.keys(studyPlan).length <= 0) return null;
+  const totalStudyPlanItems =
+    Object.hasOwn(studyPlanMetadata, "_id") && studyPlanMetadata._id.length;
+  const { labTime, lectureTime } = studyPlanMetadata;
+  const totalLabTime = labTime[1];
+  const totalLectureTime = lectureTime[1];
+  const totalCompleted = studyPlanMetadata.markcomplete ? studyPlanMetadata.markcomplete : ['0'];
+  const status = (totalCompleted.length / totalStudyPlanItems) * 100;
+  const allSteps = {};
+  for (const [key, value] of Object.entries(studyPlan)) {
+    if (value.type === "step") allSteps[key] = value;
   }
 
   const generateExport = function (props) {
+    ////////////////////////////////////////////////////////////////
+    // Export to JSON
+    ////////////////////////////////////////////////////////////////
     if (props.type === "json") {
-      if (props.exportAll) {
-        exportAllQuestionsJSON(allQuestions);
+      if (props.exportStepsOnly) {
+        exportStepsOnlyJSON(allSteps, status, totalStudyPlanItems);
       } else {
-        exportSessionHistoryJSON(questionHistory, score, totalQuestions);
+        exportAllStudyPlanItemsJSON(studyPlan);
       }
     } else {
+      ////////////////////////////////////////////////////////////////
+      // Export to CVS
+      ////////////////////////////////////////////////////////////////
       const headers = props.headers
         ? props.headers
         : {
-            score: score,
-            totalQuestions:
-              totalCompleted + " answered of " + totalQuestions + "questions.",
-            level: "Level",
-            topic: "Topic",
-            title: "Question",
-            question: "Question Detail".replace(/,/g, ""), // remove commas to avoid errors
-            answer: "Answer",
-            time: "Time",
+            status: status + "% completed",
+            totalStudyPlanItems: totalStudyPlanItems + "studyPlanItems.",
+            totalLabTime: "Lab Time",
+            totalLectureTime: "Lecture Time",
+            name: "Study Plan",
+            description: "StudyPlanItem Detail",
           };
 
-      const dataObj = props.dataObj
-        ? props.dataObj
-        : questionHistory["incorrect"];
+      const dataObj = props.dataObj ? props.dataObj : studyPlan;
 
-      const itemsReadyForCVS = props.exportStudyNotePad
-        ? studyNotePadFormatAnObject(dataObj)
-        : formatAnObject(dataObj);
+      const itemsReadyForCVS = formatAnObject(dataObj, headers);
+      console.log(
+        "%c⚪️►►►► %cline:47%citemsReadyForCVS",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(56, 13, 49);padding:3px;border-radius:2px",
+        itemsReadyForCVS
+      );
 
       const fileName = prompt(
         "Would you like to name the file?\nClicking CANCEL will save the files with a stock name\n"
       );
-      let exportFileName = fileName || "interview_questions_list.json";
+      let exportFileName = fileName || "study_plan_items_list.json";
       exportCSVFile(headers, itemsReadyForCVS, exportFileName); // call the exportCSVFile() function to process the JSON and trigger the download
     }
   };
@@ -62,39 +64,25 @@ const useExportData = (props) => {
   return generateExport;
 };
 
-function exportCSVFile(headers, items, fileTitle) {
-  if (headers) {
-    items.unshift(headers);
-  }
+////////////////////////////////////////////////////////////////////////
+/// Support Functions
+////////////////////////////////////////////////////////////////////////
+const exportAllStudyPlanItemsJSON = function (studyPlanItemSet) {
+  const newStudyPlanItemsObj = {
+    ...studyPlanItemSet,
+  };
+  const fileName = prompt("What would you like to name the file?");
+  let dataStr = JSON.stringify(newStudyPlanItemsObj);
+  let dataUri =
+    "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
 
-  // Convert Object to JSON
-  var jsonObject = JSON.stringify(items);
+  let exportFileName = fileName || "study_plan_item_list.json";
 
-  var csv = convertToCSV(jsonObject);
-
-  var exportedFilenmae = fileTitle + ".csv" || "export.csv";
-
-  var blob = new Blob([csv], {
-    type: "text/csv;charset=utf-8;",
-  });
-  if (navigator.msSaveBlob) {
-    // IE 10+
-    navigator.msSaveBlob(blob, exportedFilenmae);
-  } else {
-    var link = document.createElement("a");
-    if (link.download !== undefined) {
-      // feature detection
-      // Browsers that support HTML5 download attribute
-      var url = URL.createObjectURL(blob);
-      link.setAttribute("href", url);
-      link.setAttribute("download", exportedFilenmae);
-      link.style.visibility = "hidden";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  }
-}
+  let linkElement = document.createElement("a");
+  linkElement.setAttribute("href", dataUri);
+  linkElement.setAttribute("download", exportFileName);
+  linkElement.click();
+};
 
 function convertToCSV(objArray) {
   var array = typeof objArray != "object" ? JSON.parse(objArray) : objArray;
@@ -114,41 +102,58 @@ function convertToCSV(objArray) {
   return str;
 }
 
-const exportSessionHistoryJSON = function (
-  questionHistory,
-  score,
-  totalQuestions
+function exportCSVFile(headers, items, fileTitle) {
+  if (headers) {
+    items.unshift(headers);
+  }
+
+  // Convert Object to JSON
+  var jsonObject = JSON.stringify(items);
+
+  var csv = convertToCSV(jsonObject);
+
+  var exportedFilename = fileTitle + ".csv" || "export.csv";
+
+  var blob = new Blob([csv], {
+    type: "text/csv;charset=utf-8;",
+  });
+  if (navigator.msSaveBlob) {
+    // IE 10+
+    navigator.msSaveBlob(blob, exportedFilename);
+  } else {
+    var link = document.createElement("a");
+    if (link.download !== undefined) {
+      // feature detection
+      // Browsers that support HTML5 download attribute
+      var url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", exportedFilename);
+      link.style.visibility = "hidden";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  }
+}
+
+const exportStepsOnlyJSON = function (
+  studyPlanSteps,
+  status,
+  totalStudyPlanItems
 ) {
   const fileName = prompt("What would you like to name the file?");
-  const newQuestRecord = {
-    ...questionHistory,
+  const newStudyPlanSteps = {
+    ...studyPlanSteps,
   };
-  newQuestRecord.stats = {
-    score: score,
-    totalQuestions: totalQuestions,
+  newStudyPlanSteps.status = {
+    status: status + "% completed.",
+    totalStudyPlanItems: totalStudyPlanItems,
   };
-  let dataStr = JSON.stringify(newQuestRecord);
+  let dataStr = JSON.stringify(newStudyPlanSteps);
   let dataUri =
     "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
 
-  let exportFileName = fileName || "interview_questions_list.json";
-
-  let linkElement = document.createElement("a");
-  linkElement.setAttribute("href", dataUri);
-  linkElement.setAttribute("download", exportFileName);
-  linkElement.click();
-};
-
-const exportAllQuestionsJSON = function (questionSet) {
-  const newQuestRecord = {
-    ...questionSet,
-  };
-  const fileName = prompt("What would you like to name the file?");
-  let dataStr = JSON.stringify(newQuestRecord);
-  let dataUri =
-    "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
-
-  let exportFileName = fileName || "interview_questions_list.json";
+  let exportFileName = fileName || "study_plan_items_list.json";
 
   let linkElement = document.createElement("a");
   linkElement.setAttribute("href", dataUri);
@@ -157,62 +162,33 @@ const exportAllQuestionsJSON = function (questionSet) {
 };
 
 // format the data
-function formatAnObject(obj) {
+function formatAnObject(obj, headers) {
+  console.log(
+    "%c⚪️►►►► %cline:165%cobj",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(60, 79, 57);padding:3px;border-radius:2px",
+    obj
+  );
   var itemsFormatted = [];
   let count = 1;
   for (const key in obj) {
     const item = obj[key];
-    itemsFormatted.push({
-      score: count,
-      totalQuestions: key,
-      level: JSON.stringify(item.level || "-"),
-      topic: JSON.stringify(item.topic || "-"),
-      title: JSON.stringify(item.title) || "-",
-      question: JSON.stringify(item.question.replace(/,/g, "") || "-"), // remove commas to avoid errors,
-      answer: JSON.stringify(item.answer.replace(/,/g, "")) || "-",
-      time: JSON.stringify(item.time),
-    });
-    count++;
-  }
-
-  return itemsFormatted;
-}
-
-function studyNotePadFormatAnObject(obj) {
-  var output = [
-    {
-      score: "|",
-      Notes: JSON.stringify(
-        obj || "*** Nothing is written in your notepad ***"
-      ).replace(/\n/g, "~"),
-    },
-  ];
-  let newDataObj = JSON.stringify(obj.studyNotePadText);
-  newDataObj = newDataObj.replace(/\\n/g, "~");
-  newDataObj = JSON.parse(newDataObj);
-  const studyNotesSeparatedAtLineBreaks = [];
-  let cntr = 0;
-  for (const letter of newDataObj) {
-    if (studyNotesSeparatedAtLineBreaks.length <= 0) {
-      studyNotesSeparatedAtLineBreaks[cntr] = letter;
-    } else if (letter === "~") {
-      cntr++;
-      studyNotesSeparatedAtLineBreaks[cntr] = "";
-    } else {
-      studyNotesSeparatedAtLineBreaks[cntr] =
-        studyNotesSeparatedAtLineBreaks[cntr] + letter;
+    const newObj = {
+      number: count,
+      name: headers && Object.hasOwn(headers, "name") ? headers.name : "name",
+    };
+    for (const [key, value] of Object.entries(item)) {
+      // remove commas to avoid errors
+      const newValue =
+        value.constructor === String ? value.replace(/,/g, "") : value;
+      newObj[key] = JSON.stringify(newValue || "-");
     }
-  }
-
-  const itemsFormatted = [];
-  let count = 1;
-  for (const value of studyNotesSeparatedAtLineBreaks) {
-    itemsFormatted.push({
-      row: value,
-    });
+    itemsFormatted.push(newObj);
     count++;
   }
 
   return itemsFormatted;
 }
+
 export default useExportData;

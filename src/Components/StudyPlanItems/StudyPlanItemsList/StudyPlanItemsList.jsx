@@ -273,6 +273,14 @@ if (
               parentMasterType ? parentMasterType : studyPlanItemsObj[key].type
             }
             data-mainGoal={'' + (Object.hasOwn(studyPlanItemsObj[key],'msup') && studyPlanItemsObj[key].msup.trim() === '') }
+            data-forReview={'' + 
+            ( Object.hasOwn(studyPlanItemsObj[key],"markforreview") &&
+            studyPlanItemsObj[key].markforreview &&
+            studyPlanItemsObj[key].markforreview !== "false")}
+            data-markedComplete={'' + 
+            ( Object.hasOwn(studyPlanItemsObj[key],"markcomplete") &&
+            studyPlanItemsObj[key].markcomplete &&
+            studyPlanItemsObj[key].marcomplete !== "false")}
             className={
               (subListLevel > 0 &&
                 styles.subgroup +
@@ -459,9 +467,19 @@ if (
                       {!unlockProtectedVisible.includes(key) && (
                         <Fragment>
                           {" "}
-                          Edit
+                          Edit 
                           <span className={styles["edit-buttton-target-name"]}>
                             {studyPlanItemsObj[key].name}
+                          </span>
+                        </Fragment>
+                      )}
+                      {unlockProtectedVisible.includes(key) && (
+                        <Fragment>
+                          Cancel Editing  <span className={styles["edit-buttton-target-name"]}>
+                            {studyPlanItemsObj[key].name}
+                          </span>
+                          <span className={styles["edit-button-cancel-title"]}>
+                           
                           </span>
                         </Fragment>
                       )}
@@ -527,6 +545,14 @@ if (
               parentMasterType ? parentMasterType : studyPlanItemsObj[key].type
             }
             data-mainGoal={'' + (Object.hasOwn(studyPlanItemsObj[key],'msup') && studyPlanItemsObj[key].msup.trim() === '') }
+            data-forReview={'' + 
+                   ( Object.hasOwn(studyPlanItemsObj[key],"markforreview") &&
+                    studyPlanItemsObj[key].markforreview &&
+                    studyPlanItemsObj[key].markforreview !== "false")}
+                         data-markedComplete={'' + 
+                   ( Object.hasOwn(studyPlanItemsObj[key],"markcomplete") &&
+                    studyPlanItemsObj[key].markcomplete &&
+                    studyPlanItemsObj[key].marcomplete !== "false")}
             className={
               (subListLevel > 0 &&
                 styles.subgroup +
@@ -550,22 +576,8 @@ if (
               " " +
               (unlockProtectedVisible.includes(key) && styles["edited-list"]) +
               " " +
-              (props.inModal && styles["in-modal"]) +
-              " " +
-              styles[
-                "is-complete-" +
-                  (studyPlanItemsObj[key] &&
-                    Object.hasOwn(studyPlanItemsObj[key],"markcomplete") &&
-                    studyPlanItemsObj[key].markcomplete &&
-                    studyPlanItemsObj[key].marcomplete !== "false")
-              ] + ' ' + 
-              styles[
-                "is-for-review-" +
-                  (studyPlanItemsObj[key] &&
-                    Object.hasOwn(studyPlanItemsObj[key],"markforreview") &&
-                    studyPlanItemsObj[key].markforreview &&
-                    studyPlanItemsObj[key].markforreview !== "false")
-              ]
+              (props.inModal && styles["in-modal"]) 
+       
             }
           >
             <CollapsibleElm
@@ -677,7 +689,7 @@ if (
                           <span className={styles["edit-button-title"]}>
                             Edit{" "}
                           </span>
-                          <span className={styles["edit-buttton-target-name"]}>
+                          <span className={styles["edit-button-target-name"]}>
                             {studyPlanItemsObj[key].name}
                           </span>
                         </Fragment>

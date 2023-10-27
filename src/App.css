@@ -27,7 +27,7 @@
   align-items: stretch;
   justify-content: center;
   margin: 0 auto;
-  font-size: calc(1rem + 1vmin);
+  font-size: calc(0.75rem + 1vmin);
   color: var(--spt-color-accent);
   background: linear-gradient(180deg, #000000 80%, transparent);
   background: var(--spt-color-background);

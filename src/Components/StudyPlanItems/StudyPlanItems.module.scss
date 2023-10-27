@@ -38,10 +38,10 @@ ul {
   > [data-mainGoal="false"][type="goal"],
 ul[data-section="studyPlan"][hiddeitems="true"]
   > div
-  > ul[class*="is-for-review-true"],
+  > ul[data-forReview="true"],
 ul[data-section="studyPlan"][hiddeitems="true"]
   > div
-  > ul[class*="is-complete-true"] {
+  > ul[data-markedComplete="true"] {
   height: 0;
   opacity: 0;
   margin: 0;
@@ -55,7 +55,7 @@ ul[data-section="studyPlan"][hiddeitems="true"]
   grid-gap: 0;
   grid-template-columns: repeat(6, 1fr);
   grid-template-areas:
-    "title progressbar  name  name method   priority"
+    "title progressbar  name  name name url-arrow"
     "slug slug slug slug slug slug"
     "msup msup   msup asup asup asup"
     "des   des  des   des des des"
@@ -88,25 +88,27 @@ ul[data-section="studyPlan"][hiddeitems="true"]
 .group-hold ul > div {
   display: grid;
   grid-gap: 0;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(6, 1fr) 4em;
   grid-template-areas:
-    "title progressbar  name  name method   priority"
-    "slug slug slug slug slug slug"
-    "msup msup   msup asup asup asup"
-    "des   des  des   des des des"
-    "url   url  url   url url url"
-    "type   author  author  author platform platform"
-    "lectureTime labTime    start    acomp  status status"
-    "demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc"
-    "demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl"
-    "itemnotes itemnotes itemnotes itemnotes itemnotes itemnotes"
-    "tags tags tags tags tags tags"
-    "markforreview  markforreview markforreview markcomplete  markcomplete markcomplete"
-    "createdAt createdAt createdAt updatedAt updatedAt updatedAt"
-    "_id _id _id _id _id _id" "id id id id id id" "identifier identifier identifier identifier identifier identifier" "masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID"
-    "buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer"
-    "dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container";
-
+    "title  progressbar  name  name method   priority url-arrow"
+    "slug   slug  slug slug slug slug slug"
+    "msup   msup   msup asup asup asup asup"
+    "des    des   des   des des des des"
+    "url    url   url   url url url url"
+    "type   author  author  author platform platform platform"
+    "lectureTime  labTime    start    acomp  status status status"
+    "demonstratedskillsdesc   demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc"
+    "demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl"
+    "itemnotes itemnotes itemnotes itemnotes itemnotes itemnotes itemnotes"
+    "tags tags tags tags tags tags tags"
+    "markforreview  markforreview markforreview markcomplete  markcomplete markcomplete markcomplete"
+    "createdAt createdAt createdAt updatedAt updatedAt updatedAt updatedAt"
+    "_id _id _id _id _id _id _id"
+    "id id id id id id id"
+    "identifier identifier identifier identifier identifier identifier identifier "
+    "masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID"
+    "buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer"
+    "dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container";
   grid-auto-flow: row dense;
   max-width: 100%;
 }
@@ -491,6 +493,8 @@ ul[type="hold"] {
   padding: 2em;
   box-shadow: inset 3px 3px 7px -4px #000000, inset -3px -3px 7px -4px white;
   border-radius: 25px;
+  background: var(--spt-color-accent);
+  color: var(--spt-color-background-contrast-dark);
 }
 
 .studyPlan-items-group[type="hold"] subtext {

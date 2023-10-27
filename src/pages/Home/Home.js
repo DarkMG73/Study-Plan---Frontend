@@ -5,6 +5,7 @@ import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
 import CardTransparent from "../../UI/Cards/CardTransparent/CardTransparent";
 import CardSecondary from "../../UI/Cards/CardSecondary/CardSecondary";
 import NotFound from "../../Components/NotFound/NotFound";
+import OutputControls from "../../Components/OutputControls/OutputControls";
 import Footer from "../../Components/Footer/Footer";
 import StudyPlanItems from "../../Components/StudyPlanItems/StudyPlanItems";
 import About from "../../Components/About/About";
@@ -249,7 +250,16 @@ const Home = (props) => {
           </ErrorBoundary>
         </CardPrimary>
       )}
-
+{studyPlan &&  Object.keys(studyPlan).length > 0 &&   <CardPrimary
+          styles={{
+            boxShadow:
+              "inset 0 21px 30px -20px var(--spt-color-accent), inset 0px -21px 20px -20px var(--spt-color-accent)",
+          }}
+        >
+          <ErrorBoundary>
+            <OutputControls />
+          </ErrorBoundary>
+        </CardPrimary>}
       <CardSecondary>
         <ErrorBoundary>
           <Footer />

@@ -79,11 +79,6 @@ const StudyPlanItem = (props) => {
       }
     }
 
-    
-    
-
-    
-
     if (emptyForm)
       dispatch(
         formInputDataActions.addToNewFormInputDataObj({
@@ -166,6 +161,7 @@ const StudyPlanItem = (props) => {
   /// Output
   ////////////////////////////////
   const output = (
+    <Fragment>
     <li
       key={key}
       data-marker="CATALOG-ITEM"
@@ -333,6 +329,36 @@ const StudyPlanItem = (props) => {
       )}
       {!onlyList && elementTypeNeeded === "isURL" && (
         <Fragment>
+           <a   id={'arrow' +
+              parentMasterID +
+              "-" +
+              parentsParentKey +
+              "-" +
+              parentKey +
+              "-" +
+              key +
+              "url"
+            }
+            key={'arrow' + parentKey + "-" + key} 
+            href={studyPlanItemsObj[key]} 
+            rel="noreferrer"
+            target='_blank'
+            className={
+              styles['url-arrow'] + ' ' +
+              styles[
+                "protectedHidden-" +
+                  displayConditions.protectedHidden.includes(key)
+              ] +
+              " " +
+              styles[
+                "protectedVisible-" +
+                  (displayConditions.protectedVisible.includes("PROTECT-ALL") &&
+                    !unlockProtectedVisible.includes(parentMasterID)) ||
+                  (displayConditions.protectedVisible.includes(key) &&
+                    !unlockProtectedVisible.includes(parentMasterID))
+              ]
+            }
+            >Go &rarr;</a>
           <label
             id={
               parentMasterID +
@@ -401,6 +427,7 @@ const StudyPlanItem = (props) => {
               ]
             }
           />
+  
         </Fragment>
       )}
       {!onlyList && elementTypeNeeded === "isNumber" && (
@@ -627,6 +654,8 @@ const StudyPlanItem = (props) => {
             category={key}
             placeholder={""}
             title={key}
+            name={parentKey + "-" + key + "datalist"}
+            defaultValue={studyPlanItemsObj[key]}
             parentkey={parentKey}
             parentsparentkey={
               parentsParentKey ? parentsParentKey.toString() : ""
@@ -681,6 +710,39 @@ const StudyPlanItem = (props) => {
           >
             {key}:
           </label>{" "}
+                    <input
+            type="text"
+            list={parentKey + "-" + key + "datalist"}
+            id={parentKey + "-" + key}
+            name={parentKey + "-" + key}
+            size="50"
+            autocomplete="off"
+            category={key}
+            placeholder={""}
+            title={key}
+             name={parentKey + "-" + key + "datalist"}
+            defaultValue={studyPlanItemsObj[key]}
+            parentkey={parentKey}
+            parentsparentkey={
+              parentsParentKey ? parentsParentKey.toString() : ""
+            }
+            data-parentmasterid={parentMasterID}
+            onChange={addInputData}
+            className={
+              styles[
+                "protectedHidden-" +
+                  displayConditions.protectedHidden.includes(key)
+              ] +
+              " " +
+              styles[
+                "protectedVisible-" +
+                  (displayConditions.protectedVisible.includes("PROTECT-ALL") &&
+                    !unlockProtectedVisible.includes(parentMasterID)) ||
+                  (displayConditions.protectedVisible.includes(key) &&
+                    !unlockProtectedVisible.includes(parentMasterID))
+              ]
+            }
+          />
           <datalist
             id={parentKey + "-" + key + "datalist"}
             key={parentKey + "-" + key + "datalist"}
@@ -709,47 +771,22 @@ const StudyPlanItem = (props) => {
               ]
             }
           >
-            {Object.hasOwn(studyPlanMetadata,key) &&
-              studyPlanMetadata[key].slice(1).map((option) => (
-                <option value={option}></option>
-              ))}
             {Object.values(displayConditions["isSuggestionsList"][key]).map(
               (option) => (
                 <option value={option}></option>
               )
             )}
+
+
+
+            {Object.hasOwn(studyPlanMetadata,key) &&
+              studyPlanMetadata[key].slice(1).map((option) => {
+            
+                    if(!displayConditions["isSuggestionsList"][key].includes(option)) return <option value={option}></option>
+              })}
+   
           </datalist>
-          <input
-            type="text"
-            list={parentKey + "-" + key + "datalist"}
-            id={parentKey + "-" + key}
-            name={parentKey + "-" + key}
-            size="50"
-            autocomplete="off"
-            category={key}
-            placeholder={""}
-            title={key}
-            parentkey={parentKey}
-            parentsparentkey={
-              parentsParentKey ? parentsParentKey.toString() : ""
-            }
-            data-parentmasterid={parentMasterID}
-            onChange={addInputData}
-            className={
-              styles[
-                "protectedHidden-" +
-                  displayConditions.protectedHidden.includes(key)
-              ] +
-              " " +
-              styles[
-                "protectedVisible-" +
-                  (displayConditions.protectedVisible.includes("PROTECT-ALL") &&
-                    !unlockProtectedVisible.includes(parentMasterID)) ||
-                  (displayConditions.protectedVisible.includes(key) &&
-                    !unlockProtectedVisible.includes(parentMasterID))
-              ]
-            }
-          />
+
         </Fragment>
       )}
       {!onlyList && elementTypeNeeded === "isFixedCompiledList" && (
@@ -1123,7 +1160,46 @@ const StudyPlanItem = (props) => {
         </Fragment>
       )}
       {onlyList && <span>{studyPlanItemsObj[key]}</span>}
+
     </li>
+          { // The main URL link needs to be on its own for grid placement
+          }
+          {elementTypeNeeded === "isURL" && key === 'url' &&       
+          <li
+           id={'arrow' +
+              parentMasterID +
+              "-" +
+              parentsParentKey +
+              "-" +
+              parentKey +
+              "-" +
+              key +
+              "url"
+            }
+            key={'arrow' + parentKey + "-" + key} 
+            href={studyPlanItemsObj[key]} 
+            rel="noreferrer"
+            target='_blank'
+                  className={
+                   styles['featured-url-arrow'] + ' ' +
+              styles[
+                "protectedHidden-" +
+                  displayConditions.protectedHidden.includes(key)
+              ] +
+              " " +
+              styles[
+                "protectedVisible-" +
+                  (displayConditions.protectedVisible.includes("PROTECT-ALL") &&
+                    !unlockProtectedVisible.includes(parentMasterID)) ||
+                  (displayConditions.protectedVisible.includes(key) &&
+                    !unlockProtectedVisible.includes(parentMasterID))
+              ]
+            }
+        >
+         <a     >Go &rarr;
+            </a>
+          </li>
+        } </Fragment>
   );
 
   return output;

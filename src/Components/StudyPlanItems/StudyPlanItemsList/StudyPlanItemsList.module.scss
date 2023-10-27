@@ -1,6 +1,6 @@
 .master-parent-group {
   position: relative;
-  box-shadow: 0 0 12px;
+  box-shadow: inset -2px -2px 4px -3px #000000, inset 2px 2px 4px -2px white;
   flex-grow: 1;
   padding: 0 2em;
   list-style: none;
@@ -185,7 +185,7 @@
   display: none;
 }
 
-[data-section=studyPlan-goals] .dependencies-container {
+[data-section="studyPlan-goals"] .dependencies-container {
   display: initial;
 }
 body .master-parent-group .dependencies-container {
@@ -256,7 +256,8 @@ body .dependencies-container [data-parentMasterType="step"] {
 .form-button {
   position: relative;
   background: var(--spt-color-accent-light);
-  color: var(--spt-color-accent);
+  color: var(--spt-color-accent-dark);
+  font-weight: 700;
   border: none;
   border-radius: 0;
   padding: 0.5em 2em;
@@ -364,6 +365,16 @@ body .dependencies-container [data-parentMasterType="step"] {
   transition: 0.2s all ease;
 }
 
+.master-parent-group select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.master-parent-group.edited-list select {
+  -webkit-appearance: auto;
+  -moz-appearance: auto;
+}
+
 .edited-list .form-button:hover {
   position: relative;
   background: yellow;
@@ -373,6 +384,10 @@ body .dependencies-container [data-parentMasterType="step"] {
 
 .edited-list .form-button {
   margin: 0.5em auto;
+}
+.edit-buttton-target-name {
+  color: inherit;
+  font-style: italics;
 }
 .submit-form-button span {
   text-transform: capitalize;
@@ -400,7 +415,9 @@ ul[class*="edited-list"] li {
   max-height: none !important;
 }
 
-ul[class*=edited-list] textarea, ul[class*=edited-list] input, ul[class*=edited-list] select {
+ul[class*="edited-list"] textarea,
+ul[class*="edited-list"] input,
+ul[class*="edited-list"] select {
   min-height: 2em;
   font: inherit;
   padding: 0.125em 1em;
@@ -415,25 +432,25 @@ ul[class*="edited-list"] label {
   // font-size: 1.5em;
 }
 
-:not([class*=edited-list]) li[class *=method] {
+:not([class*="edited-list"]) li[class*="method"] {
   max-height: 2em;
 }
 
-ul[class*=edited-list] [class*=method]:before {
+ul[class*="edited-list"] [class*="method"]:before {
   text-overflow: ellipsis;
   overflow: hidden;
-  content: 'method';
+  content: "method";
 }
 
-ul[class*=edited-list] li[class*=progressbar] {
+ul[class*="edited-list"] li[class*="progressbar"] {
   display: none;
 }
 
-ul[class*=edited-list] li[class*=name] {
+ul[class*="edited-list"] li[class*="name"] {
   grid-column-start: 2;
 }
 
-ul[class*=edited-list] li:before {
+ul[class*="edited-list"] li:before {
   position: relative;
   /* font-size: 1em; */
   /* transform: translateY(-50%); */
@@ -444,10 +461,9 @@ ul[class*=edited-list] li:before {
   opacity: 1;
 }
 
-ul[class*=edited-list] li[class*=type] label {
-display: initial;
+ul[class*="edited-list"] li[class*="type"] label {
+  display: initial;
 }
-
 
 /*** FOR LISTS ***/
 .list {
@@ -473,26 +489,62 @@ display: initial;
   width: 100%;
 }
 
-.is-complete-true {
+[data-markedComplete="true"] {
   filter: grayscale(1);
 }
 
-.is-for-review-true {
+[data-markedComplete="true"]:after {
+  content: "Completed";
+  position: absolute;
+  top: 0;
+  left: 80%;
+  transform: translate(-50%, 0);
+  width: fit-content;
+  min-width: 10em;
+  text-align: center;
+  font-size: 1rem;
+  background: white;
+  color: black;
+  padding: 0 0.5em;
+  border-radius: 25px;
+  font-weight: 500;
+}
+
+[data-forReview="true"] {
   filter: grayscale(0.5);
-  border: 3px solid yellow;
+  // border: 3px solid yellow;
 }
 
-.is-for-review-true:after {
-content: 'Review Needed';
-position: absolute;
-top: 0;
-right:2em;
-font-size: 1rem;
-background: yellow;
-color: black;
-padding: 0 0.5em;
-border-radius: 25px;
+[data-forReview="true"]:after {
+  content: "Review Needed";
+  position: absolute;
+  top: 0;
+  left: 80%;
+  transform: translate(-50%, 0);
+  width: fit-content;
+  min-width: 10em;
+  text-align: center;
+  font-size: 1rem;
+  background: yellow;
+  color: black;
+  padding: 0 0.5em;
+  border-radius: 25px;
+  font-weight: 500;
 }
 
-
-
+ul[type="hold"]:after {
+  content: "On Hold";
+  position: absolute;
+  top: 0;
+  left: 80%;
+  transform: translate(-50%, 0);
+  width: fit-content;
+  min-width: 10em;
+  text-align: center;
+  font-size: 1rem;
+  background: var(--spt-color-accent);
+  color: black;
+  padding: 0 0.5em;
+  border-radius: 25px;
+  font-weight: 500;
+}

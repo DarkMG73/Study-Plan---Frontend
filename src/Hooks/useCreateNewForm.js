@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import StudyPlanItemsList from "../Components/StudyPlanItems/StudyPlanItemsList/StudyPlanItemsList";
 import displayConditions from "../data/displayConditionsObj.js";
@@ -9,12 +9,12 @@ const useCreateNewForm = () => {
   const studyPlanItemSchema = useSelector(
     (state) => state.studyPlanData.schema
   );
-  const [formType, setFormType] = useState('all')
+  const [formType, setFormType] = useState("all");
 
-  useEffect(()=>{
+  useEffect(() => {
+    console.log("formType", formType);
+  }, [formType]);
 
-console.log('formType',formType)
-  }, [formType])
   const outputFunction = (props) => {
     const e = props.e;
     const styles = props.styles;
@@ -22,7 +22,8 @@ console.log('formType',formType)
     const setNewFormInputValuesObj = props.setNewFormInputValuesObj;
     const id = props.id;
     const user = props.user;
-
+    const emptyForm = props.emptyForm ? props.emptyForm : true;
+    const dataObj = props.dataObj;
     ////////////////////////////////////////////////////////////////
     /// Handlers
     ////////////////////////////////////////////////////////////////
@@ -62,7 +63,7 @@ console.log('formType',formType)
     ////////////////////////////////////////////////////////////////
     const parentMasterID = e.target.getAttribute("data-parentmasterid");
     const amountToAdd = prompt("How many would you like to add?");
-if(amountToAdd <= 0) return false
+    if (amountToAdd <= 0) return false;
     const processNewFormWithSchema = (schema) => {
       const targetFormDataObj = schema;
       // const itemsToRemove = ['$timestamps', ]
@@ -80,9 +81,9 @@ if(amountToAdd <= 0) return false
               id={"newForm-" + i}
               data-parentmasterid={"newForm-" + i}
               className={styles["new-form-" + i] + " " + styles["new-form"]}
-              formType={'type-' + formType}
+              formType={"type-" + formType}
             >
-            {formType}
+              {formType}
               <button
                 className={
                   styles["new-form-button"] +
@@ -91,7 +92,9 @@ if(amountToAdd <= 0) return false
                 }
                 value={"newForm-" + i}
                 onClick={cancelFormButtonHandler}
-              >X</button>
+              >
+                X
+              </button>
               <h2
                 id={parentMasterID}
                 className={styles["group-title"] + " " + styles[parentMasterID]}
@@ -115,7 +118,7 @@ if(amountToAdd <= 0) return false
                     displayConditions={displayConditions.emptyForm}
                     parentMasterID={"newForm-" + i}
                     user={user}
-                    emptyForm={true}
+                    emptyForm={emptyForm}
                     inModal={true}
                     setFormType={setFormType}
                   />

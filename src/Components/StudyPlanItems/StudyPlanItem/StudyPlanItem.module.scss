@@ -103,11 +103,17 @@
   /* word-break: break-all; */
   /* box-shadow: inset 0px -3px 3px -3px; */
   font-size: 1em;
-  overflow: hidden;
-  max-height: 10em;
+
+  min-height: 1.25em;
   font: var(--spt-font-body-text);
   font-weight: 700;
   text-shadow: -1px -1px 1px #00000026, 1px 1px 1px #80808017;
+}
+
+.item textarea,
+.item input {
+  max-height: 10em;
+  overflow: hidden;
 }
 
 ::placeholder {
@@ -200,9 +206,11 @@ select {
 .progressbar {
   grid-area: progressbar;
   width: 100%;
+  transform: translate(0, -25%);
 }
 .progressbar > div {
   width: 100%;
+  height: 1em;
   box-shadow: 2px 2px 4px -3px inset black, -2px -2px 4px -3px inset white,
     1px 1px 4px -3px white, -1px -1px 4px -3px black;
   border-radius: 50px;
@@ -214,29 +222,38 @@ select {
 .name label {
   display: none;
 }
-.name {
+body .name {
   grid-area: name;
+  padding-top: 0.25em;
 }
 .method {
   grid-area: method;
+  font: var(--spt-font-body-text-12);
 }
 .method label {
   display: none;
 }
 
+
 .method label:after {
-  content:' (corse, tutorial, project, etc.)';
+  content: " (corse, tutorial, project, etc.)";
   font-size: 75%;
+  
 }
 
-.method {
-  grid-area: method;
+.method input {
+  font: inherit;
+  font-weight: 700;
+  overflow: visible;
+  text-overflow: ellipsis;
+  min-width: 10em;
 }
 
 .priority {
   grid-area: priority;
   display: flex;
   flex-direction: column;
+  transform: translateY(-25%);
 }
 
 .priority label {
@@ -295,12 +312,47 @@ select {
 .url:before {
   content: "Link:  ";
 }
+
+.url-arrow {
+  grid-area: url-arrow;
+  text-decoration: none;
+}
+
+body ul[class*="edited-list"],
+body [id*="new-form"] {
+  .url-arrow,
+  .featured-url-arrow {
+    display: none;
+  }
+}
+body .featured-url-arrow {
+  padding: 0;
+  height: 100%;
+  grid-area: url-arrow;
+  display: flex;
+  align-items: center;
+  /* background: var(--spt-color-accent-gradient); */
+  justify-content: center;
+  text-decoration: none;
+  transition: 0.3s all ease;
+  pointer-events: none;
+  cursor: pointer;
+}
+.featured-url-arrow a {
+  background: transparent;
+  transform: scale(0.75, 1.25) translate(0, -25%);
+  color: inherit;
+  pointer-events: all;
+}
+.featured-url-arrow:hover {
+  background: var(--spt-color-accent-gradient);
+}
 .type {
   grid-area: type;
 }
-.type label {
-  display: none;
-}
+// .type label {
+//   display: none;
+// }
 .type {
   grid-area: type;
 }
@@ -495,45 +547,57 @@ ul[type="goal"] .platform,
 ul[type="goal"] .author {
   display: none;
 }
+
 /* ********** */
 
 /* New Entry Form Goal Adjustments */
-[newformtype="goal"] { li[id*=studyPlan-url], li[id*=studyPlan-priority], li[id*=studyPlan-method], li[id*=studyPlan-lectureTime], li[id*=studyPlan-labTime], li[id*=studyPlan-author], li[id*=studyPlan-status], li[id*=studyPlan-platform], li[id*=studyPlan-method], li[id*=studyPlan-acomp] {
-  // border: 7px solid red;
-  background: gray;
-  opacity: 0.5;
-  pointer-events: none;
-  display: none;
-}
+[newformtype="goal"] {
+  li[id*="studyPlan-url"],
+  li[id*="studyPlan-priority"],
+  li[id*="studyPlan-method"],
+  li[id*="studyPlan-lectureTime"],
+  li[id*="studyPlan-labTime"],
+  li[id*="studyPlan-author"],
+  li[id*="studyPlan-status"],
+  li[id*="studyPlan-platform"],
+  li[id*="studyPlan-method"],
+  li[id*="studyPlan-acomp"] {
+    // border: 7px solid red;
+    background: gray;
+    opacity: 0.5;
+    pointer-events: none;
+    display: none;
+  }
 
-
-
-
-// li[id*=studyPlan-url]:after, li[id*=studyPlan-priority]:after , li[id*=studyPlan-method]:after {
-//   // border: 7px solid red;
-//   content: 'Not used for Goals';
-//   background: gray;
-//   position: absolute;
-//   top:0;
-//   left:0;
-// width: 100%;
-// height: 100%;
-//   pointer-events: none;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// }
+  // li[id*=studyPlan-url]:after, li[id*=studyPlan-priority]:after , li[id*=studyPlan-method]:after {
+  //   // border: 7px solid red;
+  //   content: 'Not used for Goals';
+  //   background: gray;
+  //   position: absolute;
+  //   top:0;
+  //   left:0;
+  // width: 100%;
+  // height: 100%;
+  //   pointer-events: none;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  // }
 }
 /* ********** */
 
 /* New Entry Form Hold Adjustments */
-[newformtype="hold"] { li[id*=studyPlan-priority],  li[id*=studyPlan-status], li[id*=studyPlan-acomp], li[id*=studyPlan-start] {
-  // border: 7px solid red;
-  background: gray;
-  opacity: 0.5;
-  pointer-events: none;
-  display: none;
-}
+[newformtype="hold"] {
+  li[id*="studyPlan-priority"],
+  li[id*="studyPlan-status"],
+  li[id*="studyPlan-acomp"],
+  li[id*="studyPlan-start"] {
+    // border: 7px solid red;
+    background: gray;
+    opacity: 0.5;
+    pointer-events: none;
+    display: none;
+  }
 }
 /* ********** */
 
@@ -588,7 +652,6 @@ ul[type="goal"] .author {
   line-height: 1em;
   vertical-align: middle;
   height: auto;
-  
 }
 textarea {
   max-width: 100%;
@@ -602,6 +665,6 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
