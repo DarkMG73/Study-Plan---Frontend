@@ -5,6 +5,7 @@ function InitState() {
   initialState.existingFormInputDataObj = null;
   initialState.newFormInputDataObj = null;
   initialState.allNewForms = null;
+  initialState.uploadedForms = null;
   return initialState;
 }
 
@@ -18,16 +19,17 @@ export const formInputDataSlice = createSlice({
       state.existingFormInputDataObj = payload.existingFormInputDataObj;
       state.newFormInputDataObj = payload.newFormInputDataObj;
       state.allNewForms = payload.allNewForms;
+      state.uploadedForms = payload.uploadedForms;
     },
 
     addToExistingFormInputDataObj: (state, action) => {
       const newState = { ...state.existingFormInputDataObj };
       const { parentMasterID, title, outputValue } = action.payload;
 
-      if (!Object.hasOwn(newState,parentMasterID)) {
+      if (!Object.hasOwn(newState, parentMasterID)) {
         newState[parentMasterID] = { [title]: outputValue };
       } else if (
-        Object.hasOwn(newState[parentMasterID],title) &&
+        Object.hasOwn(newState[parentMasterID], title) &&
         !["String", "Array", "number", "Boolean"].includes(
           newState[parentMasterID][title].constructor.name
         )
@@ -46,7 +48,7 @@ export const formInputDataSlice = createSlice({
       const newState = { ...state.newFormInputDataObj };
       const { parentMasterID, title, outputValue } = action.payload;
 
-      if (!Object.hasOwn(newState,parentMasterID)) {
+      if (!Object.hasOwn(newState, parentMasterID)) {
         newState[parentMasterID] = { [title]: outputValue };
       } else if (title === "sourceURLObj") {
         newState[parentMasterID]["studyPlan"] = {
@@ -57,7 +59,7 @@ export const formInputDataSlice = createSlice({
           },
         };
       } else if (
-        Object.hasOwn(newState[parentMasterID],title) &&
+        Object.hasOwn(newState[parentMasterID], title) &&
         !["String", "Array", "number", "Boolean"].includes(
           newState[parentMasterID][title].constructor.name
         )
@@ -77,6 +79,28 @@ export const formInputDataSlice = createSlice({
     resetSubmitAllNewForms: (state) => {
       state.allNewForms = null;
     },
+    submitUploadedForm: (state, action) => {
+      console.log(
+        "%c⚪️►►►► %cline:37%caction.payload",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
+        action.payload
+      );
+      state.uploadedForms = action.payload;
+    },
+    resetsubmitUploadedForm: (state) => {
+      state.uploadedForms = null;
+    },
+    // const newStudyPlan = { ...state.studyPlan };
+
+    // newStudyPlan[action.payload._id] = action.payload.item;
+
+    // newStudyPlan["count"] = Object.hasOwn(newStudyPlan, "count")
+    //   ? [...newStudyPlan.count, action.payload._id]
+    //   : [action.payload._id];
+    // state.studyPlan = newStudyPlan;
+    // },
     // addToHistoryCorrect: (state) => {
     //   const currentQuestionId = state.currentQuestionData.identifier;
 

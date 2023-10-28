@@ -24,8 +24,7 @@ import {
   getSchemaForContentItem,
 } from "../../storage/contentDB";
 import useProcessAllFormInputData from "../../Hooks/useProcessAllFormInputData";
-
-
+import useProcessUploadedFormInputData from "../../Hooks/useProcessUploadedFormInputData";
 
 const Home = (props) => {
   const { studyPlan } = useSelector((state) => state.studyPlanData);
@@ -39,8 +38,9 @@ const Home = (props) => {
   const hideStudyPlan = false;
   const allFormInputData = useSelector((state) => state.formInputData);
   const processAllFormInputData = useProcessAllFormInputData();
+  const processUploadedFormInputData = useProcessUploadedFormInputData();
   let saveManyItems = saveManyStudyPlanItems;
-  
+
   ////////////////////////////////////////
   /// Effects
   ////////////////////////////////////////
@@ -48,7 +48,8 @@ const Home = (props) => {
     const updateScrollPosition = () => {
       if (!angledRectangleRef.current) return;
 
-      const welcomeScrollPosition = angledRectangleRef.current.getBoundingClientRect();
+      const welcomeScrollPosition =
+        angledRectangleRef.current.getBoundingClientRect();
 
       dispatch(
         scrollPositionActions.updateWelcomeScrollPosition(
@@ -62,24 +63,37 @@ const Home = (props) => {
   }, []);
 
   useEffect(() => {
-    if( allFormInputData.allNewForms && 
-      user && 
-      allFormInputData )
-{   
+    if (!user || !allFormInputData) return;
+    let data = {};
+    if (allFormInputData.uploadedForms) {
+      data = processUploadedFormInputData({
+        user,
+        dispatch,
+        dataForSendingToDB: allFormInputData.uploadedForms,
+        saveManyStudyPlanItems,
+        getSchemaForContentItem,
+        saveManyContentItems,
+      });
+    } else if (allFormInputData.allNewForms) {
+      data = processAllFormInputData({
+        user,
+        dispatch,
+        allFormInputData,
+        saveManyStudyPlanItems,
+        getSchemaForContentItem,
+        saveManyContentItems,
+      });
+    }
 
-  const data = processAllFormInputData({
-      user,
-      dispatch,
-      allFormInputData,
-      saveManyStudyPlanItems,
-      getSchemaForContentItem,
-      saveManyContentItems,
-    });
+    console.log(
+      "%c⚪️►►►► %cline:69%cdata",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(95, 92, 51);padding:3px;border-radius:2px",
+      data
+    );
 
-    console.log('%c⚪️►►►► %cline:69%cdata', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(95, 92, 51);padding:3px;border-radius:2px', data)
-  
     saveManyItems({ user, outputDataArray: data }).then((res) => {
- 
       if (res.status >= 400) {
         alert("There was an error: " + res.response.data.message);
       } else if (res.status >= 200) {
@@ -88,12 +102,8 @@ const Home = (props) => {
       } else {
         alert("there was an error: " + +res.message);
       }
-    }); 
-} 
-  }, [
-    allFormInputData.allNewForms,
-  
-  ]);
+    });
+  }, [allFormInputData.allNewForms, allFormInputData.uploadedForms]);
   ////////////////////////////////////////
   /// Functionality
   ////////////////////////////////////////
@@ -101,9 +111,9 @@ const Home = (props) => {
     if (contentData && Object.keys(contentData).length > 0) {
       for (const key in contentData) {
         if (
-          Object.hasOwn(contentData[key],"type") &&
+          Object.hasOwn(contentData[key], "type") &&
           contentData[key].type === targetSectionName &&
-          Object.hasOwn(contentData[key],"active") &&
+          Object.hasOwn(contentData[key], "active") &&
           contentData[key].active !== false &&
           contentData[key].active.replace(" ", "") !== ""
         )
@@ -174,7 +184,7 @@ const Home = (props) => {
                 allStudyPlanItems={studyPlan}
                 user={props.user}
                 type={"goal"}
-                maxCollapsableElmHeight={'none'}
+                maxCollapsableElmHeight={"none"}
                 noEditButton={true}
               />
             )}
@@ -191,7 +201,7 @@ const Home = (props) => {
                 dataObjForEdit={studyPlan}
                 user={props.user}
                 type={"step"}
-                maxCollapsableElmHeight={'28em'}
+                maxCollapsableElmHeight={"28em"}
                 noEditButton={false}
               />
             )}
@@ -209,10 +219,10 @@ const Home = (props) => {
                 dataObjForEdit={studyPlan}
                 user={props.user}
                 type={"hold"}
-                 maxCollapsableElmHeight={'0'}
+                maxCollapsableElmHeight={"0"}
                 noEditButton={false}
                 hideAddToButton={true}
-               hideShowAllButton={true}
+                hideShowAllButton={true}
               />
             )}
           </ErrorBoundary>
@@ -250,7 +260,8 @@ const Home = (props) => {
           </ErrorBoundary>
         </CardPrimary>
       )}
-{studyPlan &&  Object.keys(studyPlan).length > 0 &&   <CardPrimary
+      {user && (
+        <CardPrimary
           styles={{
             boxShadow:
               "inset 0 21px 30px -20px var(--spt-color-accent), inset 0px -21px 20px -20px var(--spt-color-accent)",
@@ -259,7 +270,8 @@ const Home = (props) => {
           <ErrorBoundary>
             <OutputControls />
           </ErrorBoundary>
-        </CardPrimary>}
+        </CardPrimary>
+      )}
       <CardSecondary>
         <ErrorBoundary>
           <Footer />

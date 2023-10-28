@@ -1,0 +1,132 @@
+.outerwrap {
+  max-width: 100%;
+}
+
+.loader-wrap {
+  max-height: 200px;
+  position: relative;
+  min-height: 0;
+  display: flex;
+  width: auto;
+  overflow: visible;
+  padding: 12px;
+  border-radius: 50px;
+  margin: 0px auto;
+  z-index: 10;
+  transition: 0.2s all ease;
+}
+
+.outerwrap button {
+  border-radius: 50px;
+}
+.outerwrap button:hover {
+  background: var(--spt-color-accent);
+  color: var(--spt-color-background);
+  transform: none;
+}
+body .loader-wrap > * {
+  max-height: 200px;
+  min-height: 125px;
+  position: relative;
+  padding: 20px 0;
+  margin: 50px auto;
+  overflow: visible;
+  width: 100%;
+  min-width: 400px;
+  border-radius: inherit;
+}
+
+.uploaded-json-container .uploaded-json-wrap {
+  > ul {
+    padding: 0 2em;
+  }
+  > ul > div {
+    min-height: 5em;
+    display: grid;
+    grid-gap: 0;
+    grid-template-columns: repeat(6, 1fr) 4em;
+    grid-template-areas:
+      "title  name  name  name method  method priority  "
+      "slug   slug  slug slug slug slug slug"
+      "msup   msup   msup asup asup asup asup"
+      "des    des   des   des des des des"
+      "url    url   url   url url url url"
+      "type   author  author  author platform platform platform"
+      "lectureTime  labTime    start    acomp  status status status"
+      "demonstratedskillsdesc   demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc"
+      "demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl"
+      "itemnotes itemnotes itemnotes itemnotes itemnotes itemnotes itemnotes"
+      "tags tags tags tags tags tags tags"
+      "markforreview  markforreview markforreview markcomplete  markcomplete markcomplete markcomplete"
+      "createdAt createdAt createdAt updatedAt updatedAt updatedAt updatedAt"
+      "_id _id _id _id _id _id _id"
+      "id id id id id id id"
+      "identifier identifier identifier identifier identifier identifier identifier "
+      "masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID"
+      "buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer"
+      "dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container";
+    grid-auto-flow: row dense;
+    max-width: 100%;
+  }
+  li span {
+    background: var(--spt-color-accent-dark);
+    color: var(--spt-color-background);
+    padding: 0.5em;
+    border-radius: 3px;
+    margin: 0.5em;
+    border: 1px inset;
+    min-height: 2em;
+    text-align: left;
+  }
+  li::before,
+  li label {
+    display: flex;
+    opacity: 1;
+    text-align: left;
+    font-size: inherit;
+    justify-content: left;
+  }
+
+  li,
+  [class*="priority"] {
+    display: flex;
+    transform: none;
+    height: 100%;
+    max-height: none !important;
+    justify-content: center;
+
+    span {
+      width: 100%;
+      min-height: 2.5em;
+      height: 59%;
+    }
+  }
+  [class*="name"]::before {
+    content: "Name";
+  }
+  [class*="slug"]::before {
+    content: "Slug";
+  }
+  [class*="type"]::before {
+    content: "Type";
+  }
+  [class*="tags"]::before {
+    content: "Tags";
+  }
+  [class*="identifier"]::before {
+    content: "Identifier";
+  }
+  [class*="masterLibraryID"]::before {
+    content: "Master Library ID";
+  }
+  [class*="method"]::before {
+    content: "Method (corse, book, etc...)";
+  }
+
+  [class*="progressbar"],
+  [class*="url-arrow"],
+  [class*="createdAt"],
+  [class*="_id"] {
+    display: none;
+  }
+}

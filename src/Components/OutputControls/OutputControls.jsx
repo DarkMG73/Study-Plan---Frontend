@@ -1,6 +1,6 @@
-import styles from "./OutputControls.module.css";
+import styles from "./OutputControls.module.scss";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import PushButton from "../../UI/Buttons/PushButton/PushButton";
 import useExportData, { formatAnObject } from "../../Hooks/useExportData";
@@ -8,8 +8,15 @@ import BarLoader from "../../UI/Loaders/BarLoader/BarLoader";
 import { deleteAllStudyTopics } from "../../storage/studyPlanDB";
 // import CSVReader from "./CSVReader/CSVReader";
 import useCreateNewForm from "../../Hooks/useCreateNewForm";
+import StudyPlanItemsList from "../StudyPlanItems/StudyPlanItemsList/StudyPlanItemsList";
+import displayConditions from "../../data/displayConditionsObj.js";
+import CardSecondary from "../../UI/Cards/CardSecondary/CardSecondary";
+import CollapsibleElm from "../../UI/CollapsibleElm/CollapsibleElm";
+import { formInputDataActions } from "../../store/formInputDataSlice";
+import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 
 function OutputControls(props) {
+  const dispatch = useDispatch();
   let navigate = useNavigate();
   const exportData = useExportData({ type: "" });
   const [showAllStudyPlanItemPageLoader, setAllStudyPlanItemPageLoader] =
@@ -17,8 +24,13 @@ function OutputControls(props) {
   const { studyPlan, studyPlanMetadata } = useSelector(
     (state) => state.studyPlanData
   );
+  const studyPlanItemSchema = useSelector(
+    (state) => state.studyPlanData.schema
+  );
   const user = useSelector((state) => state.auth.user);
   const [fileUploadArray, setFileUploadArray] = useState(false);
+  const [uploadedJSONData, setUploadedJSONData] = useState(false);
+  const [uploadedJSONJSX, setUploadedJSONJSX] = useState(false);
   const [errorData, setErrorData] = useState(false);
   const createNewForm = useCreateNewForm();
   const cvsItemOrder = [
@@ -64,22 +76,59 @@ function OutputControls(props) {
     );
   }, [errorData]);
 
+  useEffect(() => {
+    if (uploadedJSONData) {
+      console.log(
+        "%c⚪️►►►► %cline:83%cuploadedJSONData",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px",
+        uploadedJSONData
+      );
+
+      if (user) {
+        console.log("SUCCESS! dataObj: ", uploadedJSONData);
+
+        const outputJSX = (
+          <StudyPlanItemsList
+            key={"uploaded-json-list"}
+            studyPlanItemsObj={uploadedJSONData}
+            allStudyPlanItems={uploadedJSONData}
+            parentKey={false}
+            parentsParentKey={false}
+            parentMasterID={false}
+            displayConditions={displayConditions.jsonUpload}
+            user={props.user}
+            section={"uploadedJSON"}
+            type={"uploadedJSON"}
+            onlyList={true}
+            noEditButton={props.noEditButton}
+          />
+        );
+        setUploadedJSONJSX(outputJSX);
+      } else {
+        alert(
+          'Please log in to add to your study plan. If you do not yet have a profile, click "Sign Up" at the top of the page to get started.'
+        );
+      }
+    }
+  }, [uploadedJSONData]);
+
   //////////////////////
   /// FUNCTIONS
   /////////////////////
   const readFileOnUpload = (uploadedFile) => {
     const fileReader = new FileReader();
-    let output = false;
     fileReader.onloadend = () => {
       try {
-        output = JSON.parse(fileReader.result);
+        setUploadedJSONData(JSON.parse(fileReader.result));
         setErrorData(null);
       } catch (e) {
         setErrorData("*** Unfortunately, this is not a valid JSON file. ***");
       }
     };
+
     if (uploadedFile !== undefined) fileReader.readAsText(uploadedFile);
-    return output;
   };
 
   //////////////////////
@@ -130,19 +179,7 @@ function OutputControls(props) {
   }
 
   function uploadJsonButtonHandler(e) {
-    const dataObj = readFileOnUpload(e.target.files[0]);
-    if (!dataObj)
-      alert(
-        "Something went wrong trying to retrieve the data from teh JSON. Please check the data and try again."
-      );
-
-    if (user) {
-      console.log();
-    } else {
-      alert(
-        'Please log in to add to your study plan. If you do not yet have a profile, click "Sign Up" at the top of the page to get started.'
-      );
-    }
+    readFileOnUpload(e.target.files[0]);
   }
 
   function resetDatabaseButtonHandler() {
@@ -184,86 +221,131 @@ function OutputControls(props) {
         });
   }
 
+  const submitFormButtonHandler = (e) => {
+    e.preventDefault();
+
+    const newUploadedJSONData = { ...uploadedJSONData };
+    const _id = newUploadedJSONData._id;
+
+    const groomedUploadedData = {};
+    for (const [key, value] of Object.entries(newUploadedJSONData)) {
+      groomedUploadedData[key] = {};
+
+      for (const catName in studyPlanItemSchema) {
+        if (["_id", "createdAt"].includes(catName)) continue;
+        groomedUploadedData[key][catName] = Object.hasOwn(
+          newUploadedJSONData[key],
+          catName
+        )
+          ? newUploadedJSONData[key][catName]
+          : "";
+      }
+    }
+    if (user) {
+      dispatch(
+        formInputDataActions.submitUploadedForm({
+          _id: _id,
+          item: newUploadedJSONData,
+        })
+      );
+
+      // dispatch(
+      //   studyPlanDataActions.updateStudyPlanDB({
+      //     itemWithNewEdits: newUploadedJSONData,
+      //     user,
+      //   })
+      // );
+      // updateAStudyPlanItem(dataObj, user);
+    } else {
+      alert("You must be logged in to be able to make changes.");
+    }
+  };
+
   return (
     <div id="output-controls" className={styles.outerwrap}>
       <h2 className="section-title">Controls & Output</h2>
-      <h3 className={styles["section-title"]}>Database Output</h3>
 
-      <div
-        className={`${styles["inner-wrap"]} 
+      {studyPlan && Object.keys(studyPlan).length > 0 && (
+        <div
+          className={`${styles["inner-wrap"]} 
       ${styles["button-wrap"]} `}
-      >
-        {!props.hideExportAllToCSVButton && (
-          <PushButton
-            inputOrButton="button"
-            id="export-cvs-btn"
-            colorType="secondary"
-            value="export-cvs"
-            data-value="export-cvs"
-            size="medium"
-            onClick={exportAllToCSVButtonHandler}
-          >
-            Export Study Plan to Cvs
-          </PushButton>
-        )}
-
-        {!props.hideExportStepsOnlyToCSV && (
-          <PushButton
-            inputOrButton="button"
-            id="export-cvs-btn"
-            colorType="secondary"
-            value="export-cvs"
-            data-value="export-cvs"
-            size="medium"
-            onClick={exportStepsCSVButtonHandler}
-          >
-            Export Only Steps to CSV
-          </PushButton>
-        )}
-
-        {!props.hideExportStudyPlanToJSONButton && (
-          <PushButton
-            inputOrButton="button"
-            id="export-json-btn"
-            colorType="secondary"
-            value="export-json"
-            data-value="export-json"
-            size="medium"
-            onClick={exportJSONButtonHandler}
-          >
-            Export Study Plan to JSON
-          </PushButton>
-        )}
-
-        {showAllStudyPlanItemPageLoader && (
-          <div className={styles["loader-wrap"]}>
-            <BarLoader />
-          </div>
-        )}
-        {props.showExportAllStudyPlanItems && (
-          <PushButton
-            inputOrButton="button"
-            id="all-quest-link"
-            colorType="secondary"
-            value="export-all-questions-json"
-            href="./list-of-all-questions"
-            data-value="link-all-quests-page"
-            size="medium"
-            onClick={exportAllToJSONButtonHandler}
-          >
-            Export All StudyPlanItems to JSON
-          </PushButton>
-        )}
-      </div>
+        >
+          {" "}
+          <h3 className={styles["section-title"]}>Database Output</h3>
+          {!props.hideExportAllToCSVButton && (
+            <PushButton
+              inputOrButton="button"
+              id="export-cvs-btn"
+              colorType="secondary"
+              value="export-cvs"
+              data-value="export-cvs"
+              size="medium"
+              onClick={exportAllToCSVButtonHandler}
+            >
+              Export Study Plan to Cvs
+            </PushButton>
+          )}
+          {!props.hideExportStepsOnlyToCSV && (
+            <PushButton
+              inputOrButton="button"
+              id="export-cvs-btn"
+              colorType="secondary"
+              value="export-cvs"
+              data-value="export-cvs"
+              size="medium"
+              onClick={exportStepsCSVButtonHandler}
+            >
+              Export Only Steps to CSV
+            </PushButton>
+          )}
+          {!props.hideExportStudyPlanToJSONButton && (
+            <PushButton
+              inputOrButton="button"
+              id="export-json-btn"
+              colorType="secondary"
+              value="export-json"
+              data-value="export-json"
+              size="medium"
+              onClick={exportJSONButtonHandler}
+            >
+              Export Study Plan to JSON
+            </PushButton>
+          )}
+          {showAllStudyPlanItemPageLoader && (
+            <div className={styles["loader-wrap"]}>
+              <BarLoader />
+            </div>
+          )}
+          {props.showExportAllStudyPlanItems && (
+            <PushButton
+              inputOrButton="button"
+              id="all-quest-link"
+              colorType="secondary"
+              value="export-all-questions-json"
+              href="./list-of-all-questions"
+              data-value="link-all-quests-page"
+              size="medium"
+              onClick={exportAllToJSONButtonHandler}
+            >
+              Export All StudyPlanItems to JSON
+            </PushButton>
+          )}
+        </div>
+      )}
       <br />
       <br></br>
       <br></br>
-      <h3 className={styles["section-title"]}>Study Plan Database</h3>
+
       <div
         className={`${styles["inner-wrap"]} 
       ${styles["button-wrap"]} `}
       >
-        <input type="file" onChange={uploadJsonButtonHandler} />
+        <h3 className={styles["section-title"]}>Study Plan Database</h3>
+        <input
+          className={styles["upload-json-input"]}
+          type="file"
+          onChange={uploadJsonButtonHandler}
+        />
         {errorData && <p>{errorData}</p>}
         <PushButton
           inputOrButton="button"
@@ -297,6 +379,60 @@ function OutputControls(props) {
         <br></br>
         <br></br>
       </div>
+
+      {uploadedJSONJSX && (
+        <CardSecondary>
+          <div className={styles["uploaded-json-container"]}>
+            <CollapsibleElm
+              id={"uploaded-json-collapsible-elm"}
+              styles={{
+                position: "relative",
+              }}
+              maxHeight={"10em"}
+              s
+              inputOrButton="button"
+              buttonStyles={{
+                margin: "auto",
+                width: "98%",
+                maxWidth: "100%",
+                display: "flex",
+                alignItems: "center",
+                position: "relative",
+                flexGrow: "1",
+                minWidth: "min-content",
+                height: "100%",
+                maxHeight: "4em",
+                textAlign: "center",
+                transformOrigin: "center",
+              }}
+              colorType="secondary"
+              data=""
+              size="medium"
+              buttonTextOpened={"Close Uploaded Items"}
+              buttonTextClosed={"Open Uploaded Items"}
+              open={false}
+            >
+              <ul className={styles["uploaded-json-wrap"]}>
+                {uploadedJSONJSX}
+              </ul>
+              <PushButton
+                inputOrButton="button"
+                id="import-json-submit-btn"
+                colorType="primary"
+                value="uploadedJSON"
+                data-value="uploadedJSON"
+                size="large"
+                onClick={submitFormButtonHandler}
+              >
+                Submit All New Items
+              </PushButton>
+              <br />
+              <br />
+              <br />
+            </CollapsibleElm>{" "}
+          </div>
+        </CardSecondary>
+      )}
     </div>
   );
 }

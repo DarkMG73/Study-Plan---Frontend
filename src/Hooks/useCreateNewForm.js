@@ -14,7 +14,6 @@ const useCreateNewForm = () => {
   useEffect(() => {
     console.log("formType", formType);
   }, [formType]);
-
   const outputFunction = (props) => {
     const e = props.e;
     const styles = props.styles;
@@ -22,8 +21,7 @@ const useCreateNewForm = () => {
     const setNewFormInputValuesObj = props.setNewFormInputValuesObj;
     const id = props.id;
     const user = props.user;
-    const emptyForm = props.emptyForm ? props.emptyForm : true;
-    const dataObj = props.dataObj;
+
     ////////////////////////////////////////////////////////////////
     /// Handlers
     ////////////////////////////////////////////////////////////////
@@ -118,7 +116,7 @@ const useCreateNewForm = () => {
                     displayConditions={displayConditions.emptyForm}
                     parentMasterID={"newForm-" + i}
                     user={user}
-                    emptyForm={emptyForm}
+                    emptyForm={true}
                     inModal={true}
                     setFormType={setFormType}
                   />

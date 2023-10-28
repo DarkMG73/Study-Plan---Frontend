@@ -60,10 +60,10 @@ const StudyPlanItemsList = (props) => {
     setExistingFormInputValuesObj((prevState) => {
       const outputObj = { ...prevState };
 
-      if (!Object.hasOwn(outputObj,parentMasterID)) {
+      if (!Object.hasOwn(outputObj, parentMasterID)) {
         outputObj[parentMasterID] = { [title]: outputValue };
       } else if (
-        Object.hasOwn(outputObj[parentMasterID],title) &&
+        Object.hasOwn(outputObj[parentMasterID], title) &&
         !["String", "Array", "number", "Boolean"].includes(
           outputObj[parentMasterID][title].constructor.name
         )
@@ -147,7 +147,8 @@ const StudyPlanItemsList = (props) => {
           rawItemWithNewEdits[key] = true;
         }
         rawItemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
-      } if (
+      }
+      if (
         existingFormEdits[parentMasterID][key] &&
         existingFormEdits[parentMasterID][key].constructor === Object
       ) {
@@ -164,30 +165,32 @@ const StudyPlanItemsList = (props) => {
         } else {
           rawItemWithNewEdits[key] = { ...newInnerItemWithNewEdits };
         }
-      }   else {
+      } else {
         rawItemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
       }
     }
 
     // Clean itemWithNewEdits
-   const  itemWithNewEdits = {}
-   for(const [key, value] of Object.entries(rawItemWithNewEdits)) {
-if(key === '_id') {delete itemWithNewEdits[key]} else
-if (
- ( key === "markcomplete" ||
-  key === "markforreview") &&
-  rawItemWithNewEdits[key].constructor !== Boolean
-) {
-
-  
-  if (existingFormEdits[parentMasterID] && ['', "false"].includes(existingFormEdits[parentMasterID][key]) )
-  {itemWithNewEdits[key] = false;}
-  else {
-    itemWithNewEdits[key] = true;
-  }
-} else
-   { itemWithNewEdits[key] = value}
-   }
+    const itemWithNewEdits = {};
+    for (const [key, value] of Object.entries(rawItemWithNewEdits)) {
+      if (key === "_id") {
+        delete itemWithNewEdits[key];
+      } else if (
+        (key === "markcomplete" || key === "markforreview") &&
+        rawItemWithNewEdits[key].constructor !== Boolean
+      ) {
+        if (
+          existingFormEdits[parentMasterID] &&
+          ["", "false"].includes(existingFormEdits[parentMasterID][key])
+        ) {
+          itemWithNewEdits[key] = false;
+        } else {
+          itemWithNewEdits[key] = true;
+        }
+      } else {
+        itemWithNewEdits[key] = value;
+      }
+    }
     if (user) {
       dispatch(
         studyPlanDataActions.updateOneStudyPlanItem({
@@ -259,7 +262,7 @@ if (
     return Object.keys(studyPlanItemsObj).map((key) => {
       if (
         studyPlanItemsObj[key] &&
-        Object.hasOwn(studyPlanItemsObj[key],"dependencies") &&
+        Object.hasOwn(studyPlanItemsObj[key], "dependencies") &&
         studyPlanItemsObj[key].dependencies.length > 0
       )
         return (
@@ -268,19 +271,27 @@ if (
             data-section={section}
             key={key}
             id={key}
-            type={studyPlanItemsObj[key].type}
+            type={props.type ? props.type : studyPlanItemsObj[key].type}
             data-parentMasterType={
               parentMasterType ? parentMasterType : studyPlanItemsObj[key].type
             }
-            data-mainGoal={'' + (Object.hasOwn(studyPlanItemsObj[key],'msup') && studyPlanItemsObj[key].msup.trim() === '') }
-            data-forReview={'' + 
-            ( Object.hasOwn(studyPlanItemsObj[key],"markforreview") &&
-            studyPlanItemsObj[key].markforreview &&
-            studyPlanItemsObj[key].markforreview !== "false")}
-            data-markedComplete={'' + 
-            ( Object.hasOwn(studyPlanItemsObj[key],"markcomplete") &&
-            studyPlanItemsObj[key].markcomplete &&
-            studyPlanItemsObj[key].marcomplete !== "false")}
+            data-mainGoal={
+              "" +
+              (Object.hasOwn(studyPlanItemsObj[key], "msup") &&
+                studyPlanItemsObj[key].msup.trim() === "")
+            }
+            data-forReview={
+              "" +
+              (Object.hasOwn(studyPlanItemsObj[key], "markforreview") &&
+                studyPlanItemsObj[key].markforreview &&
+                studyPlanItemsObj[key].markforreview !== "false")
+            }
+            data-markedComplete={
+              "" +
+              (Object.hasOwn(studyPlanItemsObj[key], "markcomplete") &&
+                studyPlanItemsObj[key].markcomplete &&
+                studyPlanItemsObj[key].marcomplete !== "false")
+            }
             className={
               (subListLevel > 0 &&
                 styles.subgroup +
@@ -357,7 +368,7 @@ if (
                 }
               >
                 {studyPlanItemsObj[key] &&
-                Object.hasOwn(studyPlanItemsObj[key],"name") ? (
+                Object.hasOwn(studyPlanItemsObj[key], "name") ? (
                   <Fragment>
                     <span className={styles["title"]}>
                       {studyPlanItemsObj[key].name}
@@ -426,7 +437,7 @@ if (
                               ? parentMasterID
                               : studyPlanItemsObj[key]._id
                           }
-                         parentMasterType={
+                          parentMasterType={
                             parentMasterType
                               ? parentMasterType
                               : studyPlanItemsObj[key].type
@@ -467,7 +478,7 @@ if (
                       {!unlockProtectedVisible.includes(key) && (
                         <Fragment>
                           {" "}
-                          Edit 
+                          Edit
                           <span className={styles["edit-buttton-target-name"]}>
                             {studyPlanItemsObj[key].name}
                           </span>
@@ -475,12 +486,13 @@ if (
                       )}
                       {unlockProtectedVisible.includes(key) && (
                         <Fragment>
-                          Cancel Editing  <span className={styles["edit-buttton-target-name"]}>
+                          Cancel Editing{" "}
+                          <span className={styles["edit-buttton-target-name"]}>
                             {studyPlanItemsObj[key].name}
                           </span>
-                          <span className={styles["edit-button-cancel-title"]}>
-                           
-                          </span>
+                          <span
+                            className={styles["edit-button-cancel-title"]}
+                          ></span>
                         </Fragment>
                       )}
                     </button>
@@ -499,7 +511,6 @@ if (
                   </button>
                   {!onlyList && unlockProtectedVisible.includes(key) && (
                     <Fragment>
-                      {" "}
                       <button
                         className={
                           styles["form-button"] +
@@ -508,7 +519,7 @@ if (
                         }
                         value={key}
                         data-parentmasterid={key}
-                       data-section={section}
+                        data-section={section}
                         onClick={submitFormButtonHandler}
                       >
                         Submit Changes
@@ -540,19 +551,27 @@ if (
             data-section={section}
             key={key}
             id={key}
-            type={studyPlanItemsObj[key].type}
+            type={props.type ? props.type : studyPlanItemsObj[key].type}
             data-parentMasterType={
               parentMasterType ? parentMasterType : studyPlanItemsObj[key].type
             }
-            data-mainGoal={'' + (Object.hasOwn(studyPlanItemsObj[key],'msup') && studyPlanItemsObj[key].msup.trim() === '') }
-            data-forReview={'' + 
-                   ( Object.hasOwn(studyPlanItemsObj[key],"markforreview") &&
-                    studyPlanItemsObj[key].markforreview &&
-                    studyPlanItemsObj[key].markforreview !== "false")}
-                         data-markedComplete={'' + 
-                   ( Object.hasOwn(studyPlanItemsObj[key],"markcomplete") &&
-                    studyPlanItemsObj[key].markcomplete &&
-                    studyPlanItemsObj[key].marcomplete !== "false")}
+            data-mainGoal={
+              "" +
+              (Object.hasOwn(studyPlanItemsObj[key], "msup") &&
+                studyPlanItemsObj[key].msup.trim() === "")
+            }
+            data-forReview={
+              "" +
+              (Object.hasOwn(studyPlanItemsObj[key], "markforreview") &&
+                studyPlanItemsObj[key].markforreview &&
+                studyPlanItemsObj[key].markforreview !== "false")
+            }
+            data-markedComplete={
+              "" +
+              (Object.hasOwn(studyPlanItemsObj[key], "markcomplete") &&
+                studyPlanItemsObj[key].markcomplete &&
+                studyPlanItemsObj[key].marcomplete !== "false")
+            }
             className={
               (subListLevel > 0 &&
                 styles.subgroup +
@@ -576,8 +595,7 @@ if (
               " " +
               (unlockProtectedVisible.includes(key) && styles["edited-list"]) +
               " " +
-              (props.inModal && styles["in-modal"]) 
-       
+              (props.inModal && styles["in-modal"])
             }
           >
             <CollapsibleElm
@@ -628,9 +646,9 @@ if (
                   " " +
                   styles.title
                 }
-              >        
+              >
                 {studyPlanItemsObj[key] &&
-              Object.hasOwn(  studyPlanItemsObj[key],"name") ? (
+                Object.hasOwn(studyPlanItemsObj[key], "name") ? (
                   <Fragment>
                     <span className={styles["title"]}>
                       {studyPlanItemsObj[key].name}
@@ -760,7 +778,7 @@ if (
           parentKey={parentKey}
           parentsParentKey={parentsParentKey}
           parentMasterID={parentMasterID}
-         parentMasterType={parentMasterType}
+          parentMasterType={parentMasterType}
           displayConditions={displayConditions}
           unlockProtectedVisible={
             props.unlockProtectedVisible
@@ -777,7 +795,7 @@ if (
           emptyForm={props.emptyForm}
           onlyList={onlyList}
           setFormType={props.setFormType}
-          formType={props.formType}   
+          formType={props.formType}
         />
       );
     });

@@ -26,13 +26,14 @@ export const studyPlanDataSlice = createSlice({
       const newStudyPlan = { ...state.studyPlan };
 
       newStudyPlan[action.payload._id] = action.payload.item;
-      newStudyPlan["count"] = Object.hasOwn(newStudyPlan,"count")
+      newStudyPlan["count"] = Object.hasOwn(newStudyPlan, "count")
         ? [...newStudyPlan.count, action.payload._id]
         : [action.payload._id];
       state.studyPlan = newStudyPlan;
     },
+
     updateStudyPlanDB: (state, action) => {
-      if (action.payload && !Object.hasOwn(action.payload,"itemWithNewEdits"))
+      if (action.payload && !Object.hasOwn(action.payload, "itemWithNewEdits"))
         alert(
           "There is a problem with missing data. Please alert the website admin."
         );

@@ -3,7 +3,7 @@ import { sha256 } from "js-sha256";
 import { formInputDataActions as allFormInputDataActions } from "../store/formInputDataSlice";
 import { studyPlanDataActions } from "../store/studyPlanDataSlice";
 
-const useProcessAllFormInputData = () => {
+const useProcessUploadedFormInputData = () => {
   const dispatch = useDispatch();
   const studyPlanItemSchema = useSelector(
     (state) => state.studyPlanData.schema
@@ -12,8 +12,7 @@ const useProcessAllFormInputData = () => {
     const {
       user,
 
-      allFormInputData,
-
+      dataForSendingToDB,
       saveManyStudyPlanItems,
       getSchemaForContentItem,
       saveManyContentItems,
@@ -32,24 +31,24 @@ const useProcessAllFormInputData = () => {
     ];
     const unusedFieldsForHolds = ["priority", "status", "acomp", "start"];
 
-    if (allFormInputData && allFormInputData.allNewForms && user) {
+    if (dataForSendingToDB && user) {
       let schema = studyPlanItemSchema;
       let saveManyItems = saveManyStudyPlanItems;
-      Object.keys(allFormInputData.allNewForms).forEach((formName) => {
-        for (const categoryName in allFormInputData.allNewForms[formName]) {
-          if (categoryName === "content") {
-            schema = getSchemaForContentItem;
-            saveManyItems = saveManyContentItems;
-          }
-        }
-      });
+      // Object.keys(dataForSendingToDB).forEach((formName) => {
+      //   for (const categoryName in dataForSendingToDB[formName]) {
+      //     if (categoryName === "content") {
+      //       schema = getSchemaForContentItem;
+      //       saveManyItems = saveManyContentItems;
+      //     }
+      //   }
+      // });
 
       const processWithSchema = (schema) => {
         const outputDataArray = [];
         const requiredFields = [];
         const groomedBlankForm = {};
 
-        /////// Functions for later use ///////
+        /////// Functions ///////
         const lookForMissingRequirements = (measureArray, testObj) => {
           const filteredTestObj = {};
           for (const [key, value] of Object.entries(testObj)) {
@@ -95,9 +94,13 @@ const useProcessAllFormInputData = () => {
           groomedBlankForm[schemaKey] = "";
         }
 
-        const flatInputDataArray = flattenNestedObjToArr(
-          allFormInputData.allNewForms,
-          2
+        const flatInputDataArray = flattenNestedObjToArr(dataForSendingToDB, 2);
+        console.log(
+          "%c⚪️►►►► %cline:97%cflatInputDataArray",
+          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+          "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
+          flatInputDataArray
         );
 
         // Check requirements
@@ -180,4 +183,4 @@ const useProcessAllFormInputData = () => {
   return outputFunction;
 };
 
-export default useProcessAllFormInputData;
+export default useProcessUploadedFormInputData;
