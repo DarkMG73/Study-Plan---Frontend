@@ -2,6 +2,34 @@
   max-width: 100%;
 }
 
+.outerwrap h2 {
+  margin-bottom: 0;
+}
+
+.outerwrap h3 {
+  margin: 0 auto;
+  padding: 1em;
+  font: var(--spt-image-background-texture);
+  box-shadow: inset 0 3px 10px -7px var(--spt-color-accent),
+    0px -3px 10px -7px #fca0757d;
+}
+
+.outerwrap {
+  > div {
+    padding-bottom: 1em;
+    box-shadow: inset 0 3px 10px -7px var(--spt-color-accent-light),
+      0px -3px 10px -7px var(--spt-color-accent);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  p {
+    padding: 1em;
+    font: var(--spt-font-body-text-12);
+    margin: 0 auto;
+  }
+}
+
 .loader-wrap {
   max-height: 200px;
   position: relative;
@@ -21,7 +49,7 @@
 }
 .outerwrap button:hover {
   background: var(--spt-color-accent);
-  color: var(--spt-color-background);
+  color: var(--spt-color-background) !important;
   transform: none;
 }
 body .loader-wrap > * {
@@ -36,6 +64,82 @@ body .loader-wrap > * {
   border-radius: inherit;
 }
 
+.json-upload-wrap > div {
+  padding: 1em 1em 0;
+}
+
+.upload-json-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding-bottom: 1em;
+  margin-bottom: 2em;
+  color: inherit;
+}
+
+.upload-json-input:focus {
+  border: none;
+}
+
+.upload-json-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.upload-json-input.show-input-data-false {
+  color: transparent;
+  margin: auto;
+  padding: 0;
+}
+.upload-json-input.show-input-data-true {
+  color: inherit;
+}
+.upload-json-input::before {
+  content: "Upload Study Plan JSON";
+  margin: 0 0.5em;
+  box-shadow: 3px 3px 7px -5px white inset,
+    -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
+  border: none;
+  background: inherit;
+  color: inherit;
+  border-radius: 50px;
+  padding: 0.5em 1em;
+  margin-top: 1em;
+  cursor: pointer;
+  transition: 0.3s all ease;
+  font: var(--spt-font-body-text);
+  /* font-size: calc(0.5em + 0.2vw); */
+  font-feature-settings: "smcp", "c2sc";
+  font-variant: all-small-caps;
+  letter-spacing: 0.125em;
+  font-weight: 700;
+  background: var(--spt-color-background);
+  color: var(--spt-color-background-contrast-light);
+  text-align: center;
+}
+.upload-json-input:hover::before {
+  background: var(--spt-color-accent);
+  color: var(--spt-color-background) !important;
+  transform: none;
+}
+.upload-json-input:active::before {
+  background: var(--spt-color-accent-dark);
+}
+
+.uploaded-json-container button:hover {
+  background: var(--spt-color-accent-dark) !important;
+  color: var(--spt-color-background) !important;
+  box-shadow: inset 3px 3px 10px -3px white, inset -3px -3px 10px -3px #0000007a;
+}
+.uploaded-json-container .uploaded-json-message {
+  background: var(--spt-color-background-warm);
+  color: var(--spt-color-background-contrast);
+  border-radius: 50px;
+  /* overflow: hidden; */
+  box-shadow: inset 0px -13px 7px -14px #aeaeae,
+    inset 0px 14px 7px -14px rgba(0, 0, 0, 0.5294117647);
+  padding: 1em;
+}
 .uploaded-json-container .uploaded-json-wrap {
   > ul {
     padding: 0 2em;
@@ -78,6 +182,7 @@ body .loader-wrap > * {
     min-height: 2em;
     text-align: left;
   }
+
   li::before,
   li label {
     display: flex;

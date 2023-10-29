@@ -1,5 +1,5 @@
 import styles from "./OutputControls.module.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import PushButton from "../../UI/Buttons/PushButton/PushButton";
@@ -31,6 +31,7 @@ function OutputControls(props) {
   const [fileUploadArray, setFileUploadArray] = useState(false);
   const [uploadedJSONData, setUploadedJSONData] = useState(false);
   const [uploadedJSONJSX, setUploadedJSONJSX] = useState(false);
+  const [showUploadInputData, setShowUploadInputData] = useState(false);
   const [errorData, setErrorData] = useState(false);
   const createNewForm = useCreateNewForm();
   const cvsItemOrder = [
@@ -131,6 +132,15 @@ function OutputControls(props) {
     if (uploadedFile !== undefined) fileReader.readAsText(uploadedFile);
   };
 
+  function requiredFunction(msg, requiredText) {
+    var answer = prompt(msg);
+    if (!answer) return answer;
+    if (answer && answer.trim() !== requiredText.trim()) {
+      requiredFunction(msg, requiredText);
+    }
+    return answer;
+  }
+
   //////////////////////
   /// HANDLERS
   /////////////////////
@@ -180,45 +190,64 @@ function OutputControls(props) {
 
   function uploadJsonButtonHandler(e) {
     readFileOnUpload(e.target.files[0]);
+    setShowUploadInputData(true);
   }
 
   function resetDatabaseButtonHandler() {
     const confirmation = window.confirm(
-      "Are you sure you want to erase all of the items from your study plan? This can not be undone. It might be a good idea to backup your data using the CSV export. This will enable you to add everything back easily, if you need.",
+      "Are you sure you want to erase all of the items from your study plan? This can not be undone. It might be a good idea to backup your data using the JSON export button (above). This will enable you to add everything back easily, if you need.",
       'Should we continue permanent erasing all items from your study plan? Clicking "Confirm" erases the study plan and clicking "Cancel" will not erase the study plan.'
     );
-    if (confirmation)
-      deleteAllStudyTopics(user)
-        .then((res) => {
-          if (res.status < 299) {
-            window.location.reload();
-          } else {
-            console.log(
-              "%c --> %cline:29%cThere was an error when trying reset the database. Please try again later. If the problem continues, please contact the website administrator. Here is the message from the server: ",
-              res.response.data
-            );
+    if (confirmation) {
+      const msg =
+        "If you are sure you want to permanently delete all items in your study plan, copy and paste this exactly as it is (including both *) into the box below:\n\n*DELETE THE STUDY PLAN FOR " +
+        user.email +
+        '*\n\nNext click "OK" and everything will be deleted. If you click cancel here, nothing will be removed.';
+      const requiredText = "*DELETE THE STUDY PLAN FOR " + user.email + "*";
 
+      const prompt = requiredFunction(msg, requiredText);
+
+      console.log(
+        "%c⚪️►►►► %cline:194%cprompt",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
+        prompt
+      );
+      if (!prompt) return;
+      if (prompt)
+        deleteAllStudyTopics(user)
+          .then((res) => {
+            if (res.status < 299) {
+              window.location.reload();
+            } else {
+              console.log(
+                "%c --> %cline:29%cThere was an error when trying reset the database. Please try again later. If the problem continues, please contact the website administrator. Here is the message from the server: ",
+                res.response.data
+              );
+
+              alert(
+                "There was an error when trying reset the database. Please try again later. If the problem continues, please contact the website administrator. Here is the message from the server: " +
+                  res.response.data.message
+              );
+            }
+          })
+          .catch((err) => {
+            console.log(
+              "%c --> %cline:47%cerr",
+              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+              "color:#fff;background:rgb(217, 104, 49);padding:3px;border-radius:2px",
+              err
+            );
             alert(
               "There was an error when trying reset the database. Please try again later. If the problem continues, please contact the website administrator. Here is the message from the server: " +
-                res.response.data.message
+                err.response.status +
+                " | " +
+                err.response.data
             );
-          }
-        })
-        .catch((err) => {
-          console.log(
-            "%c --> %cline:47%cerr",
-            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-            "color:#fff;background:rgb(217, 104, 49);padding:3px;border-radius:2px",
-            err
-          );
-          alert(
-            "There was an error when trying reset the database. Please try again later. If the problem continues, please contact the website administrator. Here is the message from the server: " +
-              err.response.status +
-              " | " +
-              err.response.data
-          );
-        });
+          });
+    }
   }
 
   const submitFormButtonHandler = (e) => {
@@ -332,107 +361,119 @@ function OutputControls(props) {
           )}
         </div>
       )}
-      <br />
-      <br></br>
-      <br></br>
 
       <div
         className={`${styles["inner-wrap"]} 
-      ${styles["button-wrap"]} `}
+      ${styles["button-wrap"]} 
+      ${styles["json-upload-wrap"]} 
+      `}
       >
         <h3 className={styles["section-title"]}>Study Plan Database</h3>
         <input
-          className={styles["upload-json-input"]}
+          className={
+            styles["upload-json-input"] +
+            " " +
+            styles["show-input-data-" + showUploadInputData]
+          }
           type="file"
           onChange={uploadJsonButtonHandler}
         />
         {errorData && <p>{errorData}</p>}
-        <PushButton
-          inputOrButton="button"
-          id="export-cvs-btn"
-          colorType="secondary"
-          value="session-record"
-          data-value="export-cvs"
-          size="medium"
-          onClick={resetDatabaseButtonHandler}
-        >
-          Upload Study Plan JSON
-        </PushButton>
-      </div>
-
-      <div
-        className={`${styles["inner-wrap"]} 
-      ${styles["button-wrap"]} `}
-      >
-        <PushButton
-          inputOrButton="button"
-          id="export-cvs-btn"
-          colorType="secondary"
-          value="session-record"
-          data-value="export-cvs"
-          size="medium"
-          onClick={resetDatabaseButtonHandler}
-        >
-          Clear the Database (Reset)
-        </PushButton>
-        <br />
-        <br></br>
-        <br></br>
-      </div>
-
-      {uploadedJSONJSX && (
-        <CardSecondary>
-          <div className={styles["uploaded-json-container"]}>
-            <CollapsibleElm
-              id={"uploaded-json-collapsible-elm"}
-              styles={{
-                position: "relative",
-              }}
-              maxHeight={"10em"}
-              s
-              inputOrButton="button"
-              buttonStyles={{
-                margin: "auto",
-                width: "98%",
-                maxWidth: "100%",
-                display: "flex",
-                alignItems: "center",
-                position: "relative",
-                flexGrow: "1",
-                minWidth: "min-content",
-                height: "100%",
-                maxHeight: "4em",
-                textAlign: "center",
-                transformOrigin: "center",
-              }}
-              colorType="secondary"
-              data=""
-              size="medium"
-              buttonTextOpened={"Close Uploaded Items"}
-              buttonTextClosed={"Open Uploaded Items"}
-              open={false}
-            >
-              <ul className={styles["uploaded-json-wrap"]}>
-                {uploadedJSONJSX}
-              </ul>
+        {uploadedJSONJSX && (
+          <CardSecondary>
+            <div className={styles["uploaded-json-container"]}>
+              <CollapsibleElm
+                id={"uploaded-json-collapsible-elm"}
+                styles={{
+                  position: "relative",
+                }}
+                maxHeight={"10em"}
+                s
+                inputOrButton="button"
+                buttonStyles={{
+                  margin: "auto",
+                  width: "98%",
+                  maxWidth: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  position: "relative",
+                  flexGrow: "1",
+                  minWidth: "min-content",
+                  height: "100%",
+                  maxHeight: "4em",
+                  textAlign: "center",
+                  transformOrigin: "center",
+                  color: " var(--spt-color-accent-light)",
+                  background: "var(--spt-color-background-contrast)",
+                }}
+                colorType="primary"
+                data=""
+                size="medium"
+                buttonTextOpened={"Close Uploaded Items"}
+                buttonTextClosed={"Open Uploaded Items"}
+                open={false}
+              >
+                <div className={styles["uploaded-json-message"]}>
+                  <h4>New Items for Upload</h4>
+                  <p>
+                    Look over the data and make sure it is as you want. If
+                    changes need to be made before saving to the database, make
+                    those changes in the JSON file and re-upload the JSON file.
+                    All other changes can be made in the Syllabus section after
+                    saving to the database and refreshing the page.
+                  </p>
+                </div>
+                <ul className={styles["uploaded-json-wrap"]}>
+                  {uploadedJSONJSX}
+                </ul>
+              </CollapsibleElm>
               <PushButton
                 inputOrButton="button"
                 id="import-json-submit-btn"
-                colorType="primary"
+                colorType="secondary"
                 value="uploadedJSON"
                 data-value="uploadedJSON"
                 size="large"
+                styles={{
+                  background: "var(--spt-color-background-contrast)",
+                  margin: "1em",
+                  width: "20em",
+                  minWidth: "min-content",
+                  font: "var(--spt--font-heading-2)",
+                  fontVariant: "small-caps",
+                  letterSpacing: "var(--spt-spacing-heading)",
+                }}
                 onClick={submitFormButtonHandler}
               >
                 Submit All New Items
               </PushButton>
-              <br />
-              <br />
-              <br />
-            </CollapsibleElm>{" "}
-          </div>
-        </CardSecondary>
-      )}
+            </div>
+          </CardSecondary>
+        )}
+        {studyPlan && Object.keys(studyPlan).length > 0 && (
+          <Fragment>
+            <p>
+              Use caution when clearing the database. This will permanently
+              erase every goal, step ans item on hold. Consider exporting the
+              database as a JSON (above) to save a backup. If you ever want to
+              restore this version of your study plan, you can load the study
+              plan JSON above.
+            </p>
+            <PushButton
+              inputOrButton="button"
+              id="export-cvs-btn"
+              colorType="secondary"
+              value="session-record"
+              data-value="export-cvs"
+              size="medium"
+              onClick={resetDatabaseButtonHandler}
+              styles={{ margin: "0 auto" }}
+            >
+              Clear the Database (Reset)
+            </PushButton>
+          </Fragment>
+        )}
+      </div>
     </div>
   );
 }

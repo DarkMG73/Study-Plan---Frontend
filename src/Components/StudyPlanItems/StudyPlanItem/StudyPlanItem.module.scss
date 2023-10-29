@@ -234,11 +234,9 @@ body .name {
   display: none;
 }
 
-
 .method label:after {
   content: " (corse, tutorial, project, etc.)";
   font-size: 75%;
-  
 }
 
 .method input {
@@ -548,42 +546,6 @@ ul[type="goal"] .author {
   display: none;
 }
 
-/* ********** */
-
-/* New Entry Form Goal Adjustments */
-[newformtype="goal"] {
-  li[id*="studyPlan-url"],
-  li[id*="studyPlan-priority"],
-  li[id*="studyPlan-method"],
-  li[id*="studyPlan-lectureTime"],
-  li[id*="studyPlan-labTime"],
-  li[id*="studyPlan-author"],
-  li[id*="studyPlan-status"],
-  li[id*="studyPlan-platform"],
-  li[id*="studyPlan-method"],
-  li[id*="studyPlan-acomp"] {
-    // border: 7px solid red;
-    background: gray;
-    opacity: 0.5;
-    pointer-events: none;
-    display: none;
-  }
-
-  // li[id*=studyPlan-url]:after, li[id*=studyPlan-priority]:after , li[id*=studyPlan-method]:after {
-  //   // border: 7px solid red;
-  //   content: 'Not used for Goals';
-  //   background: gray;
-  //   position: absolute;
-  //   top:0;
-  //   left:0;
-  // width: 100%;
-  // height: 100%;
-  //   pointer-events: none;
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  // }
-}
 /* ********** */
 
 /* New Entry Form Hold Adjustments */

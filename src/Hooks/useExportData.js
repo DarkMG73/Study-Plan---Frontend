@@ -8,9 +8,11 @@ const useExportData = (props) => {
   const totalStudyPlanItems =
     Object.hasOwn(studyPlanMetadata, "_id") && studyPlanMetadata._id.length;
   const { labTime, lectureTime } = studyPlanMetadata;
-  const totalLabTime = labTime[1];
-  const totalLectureTime = lectureTime[1];
-  const totalCompleted = studyPlanMetadata.markcomplete ? studyPlanMetadata.markcomplete : ['0'];
+  const totalLabTime = labTime ? labTime[1] : 0;
+  const totalLectureTime = lectureTime ? lectureTime[1] : "0";
+  const totalCompleted = studyPlanMetadata.markcomplete
+    ? studyPlanMetadata.markcomplete
+    : ["0"];
   const status = (totalCompleted.length / totalStudyPlanItems) * 100;
   const allSteps = {};
   for (const [key, value] of Object.entries(studyPlan)) {

@@ -25,7 +25,7 @@
   /* text-shadow: 1px 1px 1px grey, 0px 0px 0px #000000; */
 }
 
-.studyPlan-items-group ul[type="goal"] {
+ul[type="goal"] {
   background: var(--spt-color-accent-2-gradient);
 }
 
@@ -239,11 +239,28 @@ ul[data-section="studyPlan"][hiddeitems="true"]
   max-width: 100%;
 }
 
+/* New Entry Form Goal Adjustments */
 .new-form-modal form [newformtype="goal"] {
   background: var(--spt-color-background-warm);
   color: var(--spt-color-background-contrast);
   border: 3px outset var(--spt-color-background);
-}
+  li[id*="studyPlan-url"],
+  li[id*="studyPlan-priority"],
+  li[id*="studyPlan-method"],
+  li[id*="studyPlan-lectureTime"],
+  li[id*="studyPlan-labTime"],
+  li[id*="studyPlan-author"],
+  li[id*="studyPlan-status"],
+  li[id*="studyPlan-platform"],
+  li[id*="studyPlan-method"],
+  li[id*="studyPlan-acomp"] {
+    // border: 7px solid red;
+    background: gray;
+    opacity: 0.5;
+    pointer-events: none;
+    display: none;
+  }
+} /* ********** */
 .new-form-modal form [newformtype="step"] {
   background: var(--spt-color-accent);
   border: 3px outset var(--spt-color-accent-dark);
@@ -400,7 +417,8 @@ ul[data-section="studyPlan"][hiddeitems="true"]
   form li[class*="demonstratedskill"],
   form li[class*="demonstratedskilssls"],
   form li[class*="_id"],
-  form li[class*="createdAt"] {
+  form li[class*="createdAt"],
+  form li[class*="featured-url-arrow"] {
     display: none;
   }
 
