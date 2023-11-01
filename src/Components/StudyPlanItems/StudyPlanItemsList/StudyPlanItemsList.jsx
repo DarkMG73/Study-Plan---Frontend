@@ -272,21 +272,21 @@ const StudyPlanItemsList = (props) => {
             key={key}
             id={key}
             type={props.type ? props.type : studyPlanItemsObj[key].type}
-            data-parentMasterType={
+            data-parentmastertype={
               parentMasterType ? parentMasterType : studyPlanItemsObj[key].type
             }
-            data-mainGoal={
+            data-maingoal={
               "" +
               (Object.hasOwn(studyPlanItemsObj[key], "msup") &&
                 studyPlanItemsObj[key].msup.trim() === "")
             }
-            data-forReview={
+            data-forreview={
               "" +
               (Object.hasOwn(studyPlanItemsObj[key], "markforreview") &&
                 studyPlanItemsObj[key].markforreview &&
                 studyPlanItemsObj[key].markforreview !== "false")
             }
-            data-markedComplete={
+            data-markedcomplete={
               "" +
               (Object.hasOwn(studyPlanItemsObj[key], "markcomplete") &&
                 studyPlanItemsObj[key].markcomplete &&
@@ -358,7 +358,7 @@ const StudyPlanItemsList = (props) => {
               open={false}
             >
               <h2
-                key={styles.title + parentKey}
+                key={parentKey}
                 className={
                   styles["group-title"] +
                   " " +
@@ -424,42 +424,113 @@ const StudyPlanItemsList = (props) => {
                       ).filter(
                         (item) => dependencyIdentifier === item.identifier
                       );
-
+                      if (dependenciesObj.length <= 0) return false;
                       return (
-                        <StudyPlanItemsSubList
-                          key={key}
-                          studyPlanItemsObj={dependenciesObj}
-                          allStudyPlanItems={props.allStudyPlanItems}
-                          parentKey={key}
-                          parentsParentKey={parentKey}
-                          parentMasterID={
-                            parentMasterID
-                              ? parentMasterID
-                              : studyPlanItemsObj[key]._id
+                        <div
+                          key={
+                            key +
+                            "-" +
+                            subListLevel +
+                            "-" +
+                            (props.type
+                              ? props.type
+                              : studyPlanItemsObj[key].type +
+                                "-" +
+                                (dependenciesObj &&
+                                  dependenciesObj.length > 0 &&
+                                  Object.hasOwn(dependenciesObj[0], "_id") &&
+                                  dependenciesObj[0]._id))
                           }
-                          parentMasterType={
-                            parentMasterType
-                              ? parentMasterType
-                              : studyPlanItemsObj[key].type
-                          }
-                          section={section}
-                          displayConditions={displayConditions}
-                          subListLevel={subListLevel}
-                          unlockProtectedVisible={
-                            props.unlockProtectedVisible
-                              ? props.unlockProtectedVisible
-                              : unlockProtectedVisible
-                          }
-                          showProtectedHidden={
-                            props.showProtectedHidden
-                              ? props.showProtectedHidden
-                              : showProtectedHidden
-                          }
-                          refresh={refresh}
-                          onlyList={onlyList}
-                          emptyForm={props.emptyForm}
-                          setFormType={props.setFormType}
-                        />
+                        >
+                          <h1
+                            key={
+                              Math.random(10).toString() +
+                              props.parentMasterID +
+                              "in-sub--1"
+                            }
+                          >
+                            OOOOO-
+                            {key +
+                              "-" +
+                              (parentMasterID
+                                ? parentMasterID
+                                : studyPlanItemsObj[key]._id) +
+                              "-" +
+                              subListLevel +
+                              "-" +
+                              (props.type
+                                ? props.type
+                                : studyPlanItemsObj[key].type +
+                                  "-" +
+                                  (dependenciesObj &&
+                                    dependenciesObj.length > 0 &&
+                                    Object.hasOwn(dependenciesObj[0], "_id") &&
+                                    dependenciesObj[0]._id))}
+                          </h1>
+                          {console.log(
+                            "dependenciesObj",
+                            dependenciesObj &&
+                              dependenciesObj.length > 0 &&
+                              Object.hasOwn(dependenciesObj[0], "_id") &&
+                              dependenciesObj[0]._id
+                          )}
+                          <StudyPlanItemsSubList
+                            key={
+                              key +
+                              "-" +
+                              section +
+                              "-" +
+                              parentKey +
+                              "-" +
+                              (parentMasterID
+                                ? parentMasterID
+                                : studyPlanItemsObj[key]._id) +
+                              "-" +
+                              subListLevel +
+                              "-" +
+                              (props.type
+                                ? props.type
+                                : studyPlanItemsObj[key].type +
+                                  "-" +
+                                  (dependenciesObj &&
+                                    dependenciesObj.length > 0 &&
+                                    Object.hasOwn(dependenciesObj[0], "_id") &&
+                                    dependenciesObj[0]._id) +
+                                  "-sub--2")
+                            }
+                            studyPlanItemsObj={dependenciesObj}
+                            allStudyPlanItems={props.allStudyPlanItems}
+                            parentKey={key}
+                            parentsParentKey={parentKey}
+                            parentMasterID={
+                              parentMasterID
+                                ? parentMasterID
+                                : studyPlanItemsObj[key]._id
+                            }
+                            parentMasterType={
+                              parentMasterType
+                                ? parentMasterType
+                                : studyPlanItemsObj[key].type
+                            }
+                            section={section}
+                            displayConditions={displayConditions}
+                            subListLevel={subListLevel}
+                            unlockProtectedVisible={
+                              props.unlockProtectedVisible
+                                ? props.unlockProtectedVisible
+                                : unlockProtectedVisible
+                            }
+                            showProtectedHidden={
+                              props.showProtectedHidden
+                                ? props.showProtectedHidden
+                                : showProtectedHidden
+                            }
+                            refresh={refresh}
+                            onlyList={onlyList}
+                            emptyForm={props.emptyForm}
+                            setFormType={props.setFormType}
+                          />
+                        </div>
                       );
                     }
                   )}
@@ -549,24 +620,34 @@ const StudyPlanItemsList = (props) => {
           <ul
             data-marker="CATALOG-ITEM-LIST"
             data-section={section}
-            key={key}
+            key={
+              key +
+              section +
+              parentKey +
+              parentMasterType +
+              subListLevel +
+              onlyList +
+              (props.type
+                ? props.type
+                : studyPlanItemsObj[key].type + "-sub--2")
+            }
             id={key}
             type={props.type ? props.type : studyPlanItemsObj[key].type}
-            data-parentMasterType={
+            data-parentmastertype={
               parentMasterType ? parentMasterType : studyPlanItemsObj[key].type
             }
-            data-mainGoal={
+            data-maingoal={
               "" +
               (Object.hasOwn(studyPlanItemsObj[key], "msup") &&
                 studyPlanItemsObj[key].msup.trim() === "")
             }
-            data-forReview={
+            data-forreview={
               "" +
               (Object.hasOwn(studyPlanItemsObj[key], "markforreview") &&
                 studyPlanItemsObj[key].markforreview &&
                 studyPlanItemsObj[key].markforreview !== "false")
             }
-            data-markedComplete={
+            data-markedcomplete={
               "" +
               (Object.hasOwn(studyPlanItemsObj[key], "markcomplete") &&
                 studyPlanItemsObj[key].markcomplete &&
@@ -638,7 +719,6 @@ const StudyPlanItemsList = (props) => {
               open={false}
             >
               <h2
-                key={styles.title + parentKey}
                 className={
                   styles["group-title"] +
                   " " +

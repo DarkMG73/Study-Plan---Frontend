@@ -155,9 +155,6 @@ const StudyPlanItem = (props) => {
     return output;
   }
 
-  const numberFormat = (num) => {
-    return num + "%";
-  };
   ////////////////////////////////
   /// Output
   ////////////////////////////////
@@ -260,11 +257,11 @@ const StudyPlanItem = (props) => {
               width="100%"
               padding="0 1em 0 0"
               borderRadius="50px"
-              labelAlignment
+              labelAlignment="center"
               labelColor="var(--spt-color-accent"
               labelSize="0.5em"
               animateOnRender={true}
-              dir
+              dir="auto"
               transitionDuration="3s"
               customLabelStyles={{ background: "transparent" }}
             />
@@ -308,7 +305,7 @@ const StudyPlanItem = (props) => {
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
               category={studyPlanItemsObj[key]}
-              placeholder={false}
+              placeholder={""}
               title={key}
               parentkey={parentKey}
               parentsparentkey={parentsParentKey ? parentsParentKey : ""}
@@ -484,7 +481,6 @@ const StudyPlanItem = (props) => {
                 key +
                 "url"
               }
-              format={numberFormat}
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
               defaultValue={studyPlanItemsObj[key]}
@@ -549,6 +545,7 @@ const StudyPlanItem = (props) => {
             >
               {key}:
             </label>
+
             <select
               id={
                 parentMasterID +
@@ -589,8 +586,12 @@ const StudyPlanItem = (props) => {
               }
             >
               {" "}
-              <option value={false}>False</option>
-              <option value={true}>True</option>
+              <option key={"false"} value={false}>
+                False
+              </option>
+              <option key={"true"} value={true}>
+                True
+              </option>
             </select>
           </Fragment>
         )}
@@ -658,7 +659,9 @@ const StudyPlanItem = (props) => {
               {Object.hasOwn(studyPlanMetadata, key) &&
                 studyPlanMetadata[key]
                   .slice(1)
-                  .map((option) => <option value={option}></option>)}
+                  .map((option) => (
+                    <option key={option} value={option}></option>
+                  ))}
             </datalist>
             <input
               type="text"
@@ -666,7 +669,7 @@ const StudyPlanItem = (props) => {
               id={parentKey + "-" + key}
               name={parentKey + "-" + key}
               size="50"
-              autocomplete="off"
+              autoComplete="off"
               category={key}
               placeholder={""}
               title={key}
@@ -734,7 +737,7 @@ const StudyPlanItem = (props) => {
               id={parentKey + "-" + key}
               name={parentKey + "-" + key}
               size="50"
-              autocomplete="off"
+              autoComplete="off"
               category={key}
               placeholder={""}
               title={key}
@@ -793,7 +796,7 @@ const StudyPlanItem = (props) => {
             >
               {Object.values(displayConditions["isSuggestionsList"][key]).map(
                 (option) => (
-                  <option value={option}></option>
+                  <option key={option} value={option}></option>
                 )
               )}
 
@@ -804,7 +807,7 @@ const StudyPlanItem = (props) => {
                       option
                     )
                   )
-                    return <option value={option}></option>;
+                    return <option key={option} value={option}></option>;
                 })}
             </datalist>
           </Fragment>
@@ -857,7 +860,7 @@ const StudyPlanItem = (props) => {
               defaultValue={studyPlanItemsObj[key]}
               category={key}
               placeholder={key}
-              title={key}
+              title
               parentkey={parentKey}
               parentsparentkey={
                 parentsParentKey ? parentsParentKey.toString() : ""
@@ -881,9 +884,11 @@ const StudyPlanItem = (props) => {
               }
             >
               {Object.hasOwn(studyPlanMetadata, key) &&
-                studyPlanMetadata[key]
-                  .slice(1)
-                  .map((option) => <option value={option}>{option}</option>)}
+                studyPlanMetadata[key].slice(1).map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
             </select>
           </Fragment>
         )}
@@ -958,7 +963,9 @@ const StudyPlanItem = (props) => {
                 ]
               }
             >
-              <option value="">-Select One-</option>
+              <option key="-Select One-" value="">
+                -Select One-
+              </option>
               {Object.hasOwn(
                 studyPlanMetadata,
                 displayConditions.isOtherKeyFixedCompiledList[key].keyToDisplay
@@ -977,7 +984,11 @@ const StudyPlanItem = (props) => {
                       (item) => item.name === option
                     );
                     targetIdentifier = targetIdentifier[0][keyToSave];
-                    return <option value={targetIdentifier}>{option}</option>;
+                    return (
+                      <option key={targetIdentifier} value={targetIdentifier}>
+                        {option}
+                      </option>
+                    );
                   })}
             </select>
           </Fragment>
@@ -1055,7 +1066,9 @@ const StudyPlanItem = (props) => {
             >
               {Object.values(displayConditions["isLimitedList"][key]).map(
                 (option) => (
-                  <option value={option}>{option}</option>
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
                 )
               )}
             </select>
@@ -1187,7 +1200,7 @@ const StudyPlanItem = (props) => {
                   "-" +
                   key
                 }
-                label={false}
+                label={""}
                 refresh={false}
                 onClick={slideButtonHandler}
                 checked={checked}

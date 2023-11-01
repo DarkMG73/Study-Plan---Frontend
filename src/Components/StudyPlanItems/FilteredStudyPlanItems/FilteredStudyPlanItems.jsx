@@ -23,9 +23,12 @@ const CompletedStudyPlanItems = (props) => {
       }
     });
   }
- 
+
   return (
-    <div className={Styles["filtered-items-container"]}>
+    <div
+      key="filtered-items-container"
+      className={Styles["filtered-items-container"]}
+    >
       <h3 className={"subtitle " + Styles["filtered-items-title"]}>
         {props.sectionTitle}
       </h3>
@@ -34,6 +37,7 @@ const CompletedStudyPlanItems = (props) => {
       </p>
       {Object.keys(filteredItems).length > 0 && (
         <StudyPlanItemsList
+          key={props.section}
           studyPlanItemsObj={filteredItems}
           allStudyPlanItems={studyPlanSet}
           parentKey={false}

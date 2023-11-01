@@ -72,9 +72,9 @@ const StudyPlanItems = (props) => {
     dataObjForEdit &&
     dataObjForEdit[id] &&
     Object.hasOwn(dataObjForEdit[id], "title") ? (
-      <Fragment>
-        <div>{dataObjForEdit[id].title}</div>
-        <div>{id}</div>
+      <Fragment key={dataObjForEdit[id].title + id}>
+        <div key={dataObjForEdit[id].title}>{dataObjForEdit[id].title}</div>
+        <div key={id}>{id}</div>
       </Fragment>
     ) : typeName ? (
       typeName + "s"
@@ -200,8 +200,9 @@ const StudyPlanItems = (props) => {
   ////////////////////////////////////////////////////////////////////////
   if (props.onlyAddToButton)
     return (
-      <Fragment>
+      <Fragment key={id}>
         <PushButton
+          key={id}
           inputOrButton="button"
           id="create-entry-btn"
           colorType="primary"
@@ -216,34 +217,38 @@ const StudyPlanItems = (props) => {
         </PushButton>{" "}
         {newFormJSX && (
           <div
+            key={id}
             id="new-form-modal"
             className={styles["new-form-modal"]}
             type={typeName}
           >
-            <form>{newFormJSX}</form>
+            <form key={id}>{newFormJSX}</form>
           </div>
         )}
       </Fragment>
     );
   return (
-    <Fragment>
+    <Fragment key={"Welcome"}>
       {!user && outputName.includes("Goal") && <Welcome />}
       {user &&
         outputName.includes("Goal") &&
         (!Object.hasOwn(studyPlanMetadata, "_id") ||
           (Object.hasOwn(studyPlanMetadata, "_id") &&
-            studyPlanMetadata._id.length <= 0)) && <Welcome user={user} />}
+            studyPlanMetadata._id.length <= 0)) && (
+          <Welcome key={"Welcome"} user={user} />
+        )}
 
       {user &&
         Object.keys(formInputData).length >= 0 &&
         Object.hasOwn(studyPlanMetadata, "_id") &&
         studyPlanMetadata._id.length > 0 && (
           <ul
+            key={id}
             data-marker="STUDYPLAN-ITEMS"
             data-section={id}
             id={id}
             type={typeName}
-            data-hiddeItems={"" + hideAllSubGoals}
+            data-hiddeitems={"" + hideAllSubGoals}
             className={
               styles["studyPlan-items-group"] +
               " " +
@@ -262,12 +267,14 @@ const StudyPlanItems = (props) => {
               Object.keys(formInputData).length > 0 &&
               !outputName.includes("Syllabus") && (
                 <div
+                  key={id}
                   id="list-button-container"
                   className={styles["goal-button-container"]}
                 >
                   {hideAllSubGoals && (
-                    <Fragment>
+                    <Fragment key={id}>
                       <PushButton
+                        key={id}
                         inputOrButton="button"
                         id="create-entry-btn"
                         colorType="secondary"
@@ -284,6 +291,7 @@ const StudyPlanItems = (props) => {
                   )}
                   {!hideAllSubGoals && (
                     <PushButton
+                      key={id}
                       inputOrButton="button"
                       id="create-entry-btn"
                       colorType="secondary"
@@ -303,6 +311,7 @@ const StudyPlanItems = (props) => {
               Object.keys(formInputData).length > 0 &&
               !outputName.includes("Goal") && (
                 <div
+                  key={id}
                   data-section="history-list-data-section"
                   id={id}
                   className={
@@ -314,11 +323,13 @@ const StudyPlanItems = (props) => {
                   }
                 >
                   <div
+                    key={id}
                     style={{
                       margin: "0.5em 1em 0",
                     }}
                   >
                     <CollapsibleElm
+                      key={id + "-collapsible-elm"}
                       id={id + "-collapsible-elm"}
                       styles={{
                         position: "relative",
@@ -350,6 +361,7 @@ const StudyPlanItems = (props) => {
                       open={false}
                     >
                       <FilteredStudyPlanItems
+                        key={id + "Filtered Items"}
                         filterKey={"markcomplete"}
                         section={"completed-items"}
                         sectionTitle={"Completed"}
@@ -368,6 +380,7 @@ const StudyPlanItems = (props) => {
                     }}
                   >
                     <CollapsibleElm
+                      key={id + "-collapsible-elm"}
                       id={id + "-collapsible-elm"}
                       styles={{
                         position: "relative",
@@ -399,6 +412,7 @@ const StudyPlanItems = (props) => {
                       open={false}
                     >
                       <FilteredStudyPlanItems
+                        key={id + "Filtered Items"}
                         filterKey={"markforreview"}
                         section={"review-items"}
                         sectionTitle={"Items for Review"}
@@ -433,6 +447,7 @@ const StudyPlanItems = (props) => {
               </div>
             )}
             <CollapsibleElm
+              key={id + "-collapsible-elm"}
               id={id + "-collapsible-elm"}
               styles={{
                 position: "relative",
@@ -472,12 +487,14 @@ const StudyPlanItems = (props) => {
                 >
                   {!props.hideShowAllButton && (
                     <div
+                      key={id}
                       id="list-button-container"
                       className={styles["list-button-container"]}
                     >
                       {!showListResetButton && (
                         <Fragment>
                           <PushButton
+                            key={id}
                             inputOrButton="button"
                             id="create-entry-btn"
                             colorType="secondary"
@@ -494,6 +511,7 @@ const StudyPlanItems = (props) => {
                       )}
                       {showListResetButton && (
                         <PushButton
+                          key={id}
                           inputOrButton="button"
                           id="create-entry-btn"
                           colorType="secondary"
@@ -509,11 +527,15 @@ const StudyPlanItems = (props) => {
                       )}
                     </div>
                   )}
-                  <label className={styles["sort-button-wrap"]}>
+                  <label
+                    key={id + sortMethod}
+                    className={styles["sort-button-wrap"]}
+                  >
                     Sort by:
                     <select
+                      key={id + sortMethod}
                       className={styles["new-form-button"]}
-                      data-parentmasterid={IdleDeadline}
+                      data-parentmasterid={id}
                       onChange={sortMethodButtonHandler}
                       value={sortMethod}
                     >
@@ -555,20 +577,21 @@ const StudyPlanItems = (props) => {
                     </p>
                     <h4>To do this: </h4>
                     <ol>
-                      <li>
+                      <li key="studyPlan">
                         Open the new entry form with:{" "}
                         {
                           <StudyPlanItems
+                            key="studyPlan"
                             id="studyPlan"
                             onlyAddToButton={true}
                           />
                         }
                       </li>
-                      <li>
+                      <li key={2}>
                         Mark it as "Goal" in the "Type" section of the form.
                       </li>
-                      <li>Save the main goal</li>
-                      <li>
+                      <li key={3}>Save the main goal</li>
+                      <li key={4}>
                         Then, make sure every single goal and step added after
                         that is connected either to this main goal or to another
                         goal or step (which would be in support of the main
@@ -579,7 +602,7 @@ const StudyPlanItems = (props) => {
                         select.{" "}
                       </li>
                     </ol>
-                    <p>
+                    <p key={5}>
                       <b>IMPORTANT NOTE</b>:{" "}
                       <i>
                         If you find yourself adding something that does not
@@ -600,6 +623,7 @@ const StudyPlanItems = (props) => {
                 !outputName.includes("Goal") &&
                 !outputName.includes("Holding") && (
                   <div
+                    key={typeName + "sno-items-text"}
                     id="no-items-text"
                     className={styles["no-items-text"]}
                     type={typeName}
@@ -631,6 +655,7 @@ const StudyPlanItems = (props) => {
                 )}
               {newFormJSX && (
                 <div
+                  key={typeName + "new-form-modal"}
                   id="new-form-modal"
                   className={styles["new-form-modal"]}
                   type={typeName}

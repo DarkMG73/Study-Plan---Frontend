@@ -156,7 +156,6 @@ const StudyNotes = () => {
           </p>
           <div className={styles["study-topics-input-container"]}>
             <input
-              key={Math.random()}
               name="Question-ID"
               ref={studyTopicIdentifierElm}
               placeholder="Paste a question ID here..."

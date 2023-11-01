@@ -95,13 +95,6 @@ const useProcessUploadedFormInputData = () => {
         }
 
         const flatInputDataArray = flattenNestedObjToArr(dataForSendingToDB, 2);
-        console.log(
-          "%c⚪️►►►► %cline:97%cflatInputDataArray",
-          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-          "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
-          flatInputDataArray
-        );
 
         // Check requirements
         const missingRequiredFields = [];

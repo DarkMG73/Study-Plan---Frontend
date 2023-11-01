@@ -47,13 +47,6 @@ const useExportData = (props) => {
       const dataObj = props.dataObj ? props.dataObj : studyPlan;
 
       const itemsReadyForCVS = formatAnObject(dataObj, headers);
-      console.log(
-        "%c⚪️►►►► %cline:47%citemsReadyForCVS",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(56, 13, 49);padding:3px;border-radius:2px",
-        itemsReadyForCVS
-      );
 
       const fileName = prompt(
         "Would you like to name the file?\nClicking CANCEL will save the files with a stock name\n"
@@ -165,13 +158,6 @@ const exportStepsOnlyJSON = function (
 
 // format the data
 function formatAnObject(obj, headers) {
-  console.log(
-    "%c⚪️►►►► %cline:165%cobj",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(60, 79, 57);padding:3px;border-radius:2px",
-    obj
-  );
   var itemsFormatted = [];
   let count = 1;
   for (const key in obj) {

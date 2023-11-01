@@ -7,7 +7,7 @@ const StudyPlanItemsSubList = (props) => {
     <StudyPlanItemsList
       studyPlanItemsObj={props.studyPlanItemsObj}
       allStudyPlanItems={props.allStudyPlanItems}
-      key={props.key}
+      key={props.parentMasterID + "in-sub--1"}
       parentKey={props.parentKey}
       parentsParentKey={props.parentsParentKey}
       parentMasterID={props.parentMasterID}

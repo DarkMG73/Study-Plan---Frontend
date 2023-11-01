@@ -58,9 +58,6 @@ axios.interceptors.request.use(
         request
       );
 
-    Object.values(request).forEach((value, i) =>
-      console.log("item: " + i + ": " + value)
-    );
     // Edit request config
     return request;
   },

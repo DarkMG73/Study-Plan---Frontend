@@ -47,15 +47,15 @@ ul {
   transition: 0.3s all ease;
 }
 
-[data-section*="goal"][data-hiddeItems="true"]
+[data-section*="goal"][data-hiddeitems="true"]
   > div
-  > [data-mainGoal="false"][type="goal"],
-ul[data-section="studyPlan"][data-hiddeItems="true"]
+  > [data-maingoal="false"][type="goal"],
+ul[data-section="studyPlan"][data-hiddeitems="true"]
   > div
-  > ul[data-forReview="true"],
-ul[data-section="studyPlan"][data-hiddeItems="true"]
+  > ul[data-forreview="true"],
+ul[data-section="studyPlan"][data-hiddeitems="true"]
   > div
-  > ul[data-markedComplete="true"] {
+  > ul[data-markedcomplete="true"] {
   height: 0;
   opacity: 0;
   margin: 0;

@@ -5,7 +5,6 @@ const useSortList = () => {
     if (!objectToBeSorted) return objectToBeSorted;
 
     const sortBy = sortMethod ? sortMethod : "priority";
-    console.log('%c⚪️►►►► %cline:7%csortBy', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(3, 38, 58);padding:3px;border-radius:2px', sortBy)
 
     const sortNumbers = (fieldName, direction) => {
       const outputObj = {};
@@ -13,7 +12,7 @@ const useSortList = () => {
       const name = fieldName.replace("-reverse", "");
       if (direction === "reverse") {
         sortedArray = Object.values(objectToBeSorted).sort(
-          (v1, v2) => v1[name] * 1 - v2[name] * 1 
+          (v1, v2) => v1[name] * 1 - v2[name] * 1
         );
       } else {
         sortedArray = Object.values(objectToBeSorted).sort(

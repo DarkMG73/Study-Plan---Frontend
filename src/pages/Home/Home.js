@@ -115,13 +115,7 @@ const Home = (props) => {
           );
           return;
         }
-        console.log(
-          "%c⚪️►►►► %cline:110%cres",
-          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-          "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
-          res
-        );
+
         const data =
           Object.hasOwn(res.response, "data") &&
           Object.hasOwn(res.response.data, "err")
@@ -129,20 +123,7 @@ const Home = (props) => {
             : false;
         const err = data && Object.hasOwn(data, "err") ? data.err : false;
         const message = Object.hasOwn(data, "message") ? data.message : "";
-        console.log(
-          "%c⚪️►►►► %cline:123%cdata",
-          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-          "color:#fff;background:rgb(252, 157, 154);padding:3px;border-radius:2px",
-          data
-        );
-        console.log(
-          "%c⚪️►►►► %cline:128%cmessage",
-          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-          "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
-          message
-        );
+
         const code = err && Object.hasOwn(err, "code") ? err.code : 0;
         const writeErrors =
           err && Object.hasOwn(err, "writeErrors")
