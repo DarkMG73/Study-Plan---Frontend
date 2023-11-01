@@ -57,6 +57,10 @@ axios.interceptors.request.use(
         "color:#94283a;background:#f0f0ef;padding:5px;border-radius:0 25px 25px 0",
         request
       );
+
+    Object.values(request).forEach((value, i) =>
+      console.log("item: " + i + ": " + value)
+    );
     // Edit request config
     return request;
   },

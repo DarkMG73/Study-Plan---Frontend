@@ -13,7 +13,6 @@ import displayConditions from "../../data/displayConditionsObj.js";
 import CardSecondary from "../../UI/Cards/CardSecondary/CardSecondary";
 import CollapsibleElm from "../../UI/CollapsibleElm/CollapsibleElm";
 import { formInputDataActions } from "../../store/formInputDataSlice";
-import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 
 function OutputControls(props) {
   const dispatch = useDispatch();
@@ -27,6 +26,7 @@ function OutputControls(props) {
   const studyPlanItemSchema = useSelector(
     (state) => state.studyPlanData.schema
   );
+  const { uploadedForms } = useSelector((state) => state.formInputData);
   const user = useSelector((state) => state.auth.user);
   const [fileUploadArray, setFileUploadArray] = useState(false);
   const [uploadedJSONData, setUploadedJSONData] = useState(false);
@@ -79,14 +79,6 @@ function OutputControls(props) {
 
   useEffect(() => {
     if (uploadedJSONData) {
-      console.log(
-        "%c⚪️►►►► %cline:83%cuploadedJSONData",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px",
-        uploadedJSONData
-      );
-
       if (user) {
         console.log("SUCCESS! dataObj: ", uploadedJSONData);
 
@@ -101,7 +93,7 @@ function OutputControls(props) {
             displayConditions={displayConditions.jsonUpload}
             user={props.user}
             section={"uploadedJSON"}
-            type={"uploadedJSON"}
+            type={false}
             onlyList={true}
             noEditButton={props.noEditButton}
           />
@@ -114,6 +106,14 @@ function OutputControls(props) {
       }
     }
   }, [uploadedJSONData]);
+
+  useEffect(() => {
+    if (!uploadedForms) {
+      console.log("RESET! dataObj: ", uploadedJSONData);
+
+      setUploadedJSONJSX(false);
+    }
+  }, [uploadedForms]);
 
   //////////////////////
   /// FUNCTIONS
@@ -133,12 +133,18 @@ function OutputControls(props) {
   };
 
   function requiredFunction(msg, requiredText) {
-    var answer = prompt(msg);
-    if (!answer) return answer;
-    if (answer && answer.trim() !== requiredText.trim()) {
-      requiredFunction(msg, requiredText);
+    const answer = prompt(msg);
+    let output = false;
+
+    if (typeof answer === "string") {
+      if (answer.trim() === requiredText.trim()) {
+        output = true;
+      } else {
+        return requiredFunction(msg, requiredText);
+      }
     }
-    return answer;
+
+    return output;
   }
 
   //////////////////////
@@ -200,10 +206,8 @@ function OutputControls(props) {
     );
     if (confirmation) {
       const msg =
-        "If you are sure you want to permanently delete all items in your study plan, copy and paste this exactly as it is (including both *) into the box below:\n\n*DELETE THE STUDY PLAN FOR " +
-        user.email +
-        '*\n\nNext click "OK" and everything will be deleted. If you click cancel here, nothing will be removed.';
-      const requiredText = "*DELETE THE STUDY PLAN FOR " + user.email + "*";
+        'If you are sure you want to permanently delete all items in your study plan, type this exactly as it is (including both *) into the box below:\n\n*reset*\n\nNext click "OK" and everything will be deleted. If you click cancel here, nothing will be removed.';
+      const requiredText = "*reset*";
 
       const prompt = requiredFunction(msg, requiredText);
 
@@ -277,14 +281,6 @@ function OutputControls(props) {
           item: newUploadedJSONData,
         })
       );
-
-      // dispatch(
-      //   studyPlanDataActions.updateStudyPlanDB({
-      //     itemWithNewEdits: newUploadedJSONData,
-      //     user,
-      //   })
-      // );
-      // updateAStudyPlanItem(dataObj, user);
     } else {
       alert("You must be logged in to be able to make changes.");
     }
@@ -387,12 +383,12 @@ function OutputControls(props) {
                 styles={{
                   position: "relative",
                 }}
-                maxHeight={"10em"}
+                maxHeight={"7.5em"}
                 s
                 inputOrButton="button"
                 buttonStyles={{
                   margin: "auto",
-                  width: "98%",
+                  width: "95%",
                   maxWidth: "100%",
                   display: "flex",
                   alignItems: "center",

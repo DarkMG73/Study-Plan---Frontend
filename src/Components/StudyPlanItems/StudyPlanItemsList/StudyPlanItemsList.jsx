@@ -234,7 +234,7 @@ const StudyPlanItemsList = (props) => {
           alert("Success! The item has been deleted.");
           // setInEditMode(false);
         } else {
-          alert("there was an error: " + +res.message);
+          alert("there was an error: " + res.message);
         }
       });
     } else if (confirm) {

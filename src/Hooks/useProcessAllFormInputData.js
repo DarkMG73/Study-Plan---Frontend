@@ -11,9 +11,7 @@ const useProcessAllFormInputData = () => {
   const outputFunction = (props) => {
     const {
       user,
-
       allFormInputData,
-
       saveManyStudyPlanItems,
       getSchemaForContentItem,
       saveManyContentItems,
@@ -171,7 +169,6 @@ const useProcessAllFormInputData = () => {
         return outputDataArray;
       };
 
-      alert("process with existing schema");
       const data = processWithSchema(schema);
       return data;
     }

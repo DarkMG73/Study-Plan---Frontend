@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect, Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
 import { authActions } from "./store/authSlice";
+import { studyPlanDataActions } from "./store/studyPlanDataSlice";
 import { loadingRequestsActions } from "./store/loadingRequestsSlice";
 import { statusUpdateActions } from "./store/statusUpdateSlice";
 import { useUserDataInit } from "./Hooks/useUserDataInit";
@@ -24,6 +25,7 @@ function App() {
   const dispatch = useDispatch();
   // const studyPlanData = GatherStudyPlanData();
   const studyPlan = useSelector((state) => state.studyPlanData);
+  const { reGatherStudyPlan } = studyPlan;
   const contentData = useSelector((state) => state.contentData);
   if (
     (!process.env.NODE_ENV || process.env.NODE_ENV === "development") &&
@@ -150,6 +152,13 @@ function App() {
     }
   }, [user, userInitComplete]);
 
+  useEffect(() => {
+    if (reGatherStudyPlan) {
+      runGatherStudyPlanData({ user: user, setLocalError });
+      dispatch(studyPlanDataActions.reGatherStudyPlan(false));
+    }
+  }, [reGatherStudyPlan]);
+
   // Register error if studyPlan DB not accessible.
   useEffect(() => {
     if (localError.active) {
@@ -164,11 +173,12 @@ function App() {
     if (
       (user && !process.env.NODE_ENV) ||
       process.env.NODE_ENV === "development"
-    )     console.log(
-      "%cUser:",
-      "color:#fff;background:#007215;padding:5px;border-radius:0 25px 25px 0",
-      user
-    );
+    )
+      console.log(
+        "%cUser:",
+        "color:#fff;background:#007215;padding:5px;border-radius:0 25px 25px 0",
+        user
+      );
 
     // if (user && user !== "not logged in")
     //   // setUser(userLoggedIn);

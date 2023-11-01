@@ -19,10 +19,8 @@ import SessionRowNotes from "./SessionRowNotes/SessionRowNotes";
 function SessionResultsRow(props) {
   const dispatch = useDispatch();
   const [inEditMode, setInEditMode] = useState(false);
-  const [
-    showQuestionPersonalNotepad,
-    setShowQuestionPersonalNotepad,
-  ] = useState(false);
+  const [showQuestionPersonalNotepad, setShowQuestionPersonalNotepad] =
+    useState(false);
   const [deleted, setDeleted] = useState(false);
   const [parentOpen, setParentOpen] = useState(false);
   const editedQuestions = useRef({ edits: {} });
@@ -115,7 +113,7 @@ function SessionResultsRow(props) {
           alert("Success! The item has been updated.");
           setInEditMode(false);
         } else {
-          alert("there was an error: " + +res.message);
+          alert("There was an error: " + res.message);
         }
       });
     } else {

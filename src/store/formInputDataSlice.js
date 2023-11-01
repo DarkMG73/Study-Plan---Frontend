@@ -89,7 +89,7 @@ export const formInputDataSlice = createSlice({
       );
       state.uploadedForms = action.payload;
     },
-    resetsubmitUploadedForm: (state) => {
+    resetSubmitUploadedForm: (state) => {
       state.uploadedForms = null;
     },
     // const newStudyPlan = { ...state.studyPlan };

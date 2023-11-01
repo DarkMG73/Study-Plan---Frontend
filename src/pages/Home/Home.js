@@ -16,6 +16,8 @@ import BottomBar from "../../Components/BottomBar/BottomBar";
 import backgroundVideo from "../../assets/media/backgrounds/background-energy6.mp4";
 import { ErrorBoundary } from "../../HOC/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import { scrollPositionActions } from "../../store/scrollPositionSlice";
+import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
+import { formInputDataActions } from "../../store/formInputDataSlice";
 import LoginStatus from "../../Components/User/LoginStatus/LoginStatus";
 import Stats from "../../Components/Stats/Stats";
 import { saveManyStudyPlanItems } from "../../storage/studyPlanDB";
@@ -85,22 +87,82 @@ const Home = (props) => {
       });
     }
 
-    console.log(
-      "%c⚪️►►►► %cline:69%cdata",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(95, 92, 51);padding:3px;border-radius:2px",
-      data
-    );
-
     saveManyItems({ user, outputDataArray: data }).then((res) => {
       if (res.status >= 400) {
         alert("There was an error: " + res.response.data.message);
+
+        // updateAStudyPlanItem(dataObj, user);
       } else if (res.status >= 200) {
-        alert("Success! An item has been updated in your study plan.");
-        console.log("Success! An item has been updated in your study plan.");
+        alert("Success! You have added to your study plan!");
+        dispatch(studyPlanDataActions.reGatherStudyPlan(true));
+        if (allFormInputData.uploadedForms)
+          dispatch(formInputDataActions.resetSubmitUploadedForm());
       } else {
-        alert("there was an error: " + +res.message);
+        if (!Object.hasOwn(res, "response")) {
+          alert(
+            "There was an error. Try again or contact the web admin to alert of the issue. "
+          );
+          return;
+        }
+        console.log(
+          "%c⚪️►►►► %cline:110%cres",
+          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+          "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
+          res
+        );
+        const data =
+          Object.hasOwn(res.response, "data") &&
+          Object.hasOwn(res.response.data, "err")
+            ? res.response.data
+            : false;
+        const err = data && Object.hasOwn(data, "err") ? data.err : false;
+        const message = Object.hasOwn(data, "message") ? data.message : "";
+        console.log(
+          "%c⚪️►►►► %cline:123%cdata",
+          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+          "color:#fff;background:rgb(252, 157, 154);padding:3px;border-radius:2px",
+          data
+        );
+        console.log(
+          "%c⚪️►►►► %cline:128%cmessage",
+          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+          "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
+          message
+        );
+        const code = err && Object.hasOwn(err, "code") ? err.code : 0;
+        const writeErrors =
+          err && Object.hasOwn(err, "writeErrors")
+            ? err.writeErrors
+            : [{ code: err, errmsg: "" }];
+
+        // Handle duplicate entries specifically
+        if (code === 11000) {
+          alert(
+            "It looks you might have tried to add a field that must be unique and already exists." +
+              message +
+              "\n\nThe following items already exist. please change each item before submitting the form." +
+              writeErrors.map(
+                (errObj) =>
+                  "\n   " + errObj.errmsg.split("{")[1].replace("}", "")
+              ) +
+              "\n\nCode: " +
+              code
+          );
+        } else {
+          console.log("else--:");
+          alert(
+            "There was an error: " +
+              message +
+              "\nError Detail " +
+              "\nCode: " +
+              code +
+              "\nitem(s) with issues: " +
+              writeErrors.map((errObj) => "\n   Error:" + errObj.errmsg)
+          );
+        }
       }
     });
   }, [allFormInputData.allNewForms, allFormInputData.uploadedForms]);

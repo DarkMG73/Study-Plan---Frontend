@@ -66,6 +66,7 @@ body .loader-wrap > * {
 
 .json-upload-wrap > div {
   padding: 1em 1em 0;
+  background: var(--spt-color-accent-light);
 }
 
 .upload-json-input {
@@ -139,13 +140,25 @@ body .loader-wrap > * {
   box-shadow: inset 0px -13px 7px -14px #aeaeae,
     inset 0px 14px 7px -14px rgba(0, 0, 0, 0.5294117647);
   padding: 1em;
+  p,
+  h4 {
+    margin: 0 auto;
+    background: inherit;
+    color: inherit;
+    max-width: 800px;
+    opacity: 1;
+  }
 }
 .uploaded-json-container .uploaded-json-wrap {
+  padding: 0 1em;
+
   > ul {
     padding: 0 2em;
+    border-radius: 50px;
   }
   > ul > div {
     min-height: 5em;
+
     display: grid;
     grid-gap: 0;
     grid-template-columns: repeat(6, 1fr) 4em;
@@ -173,12 +186,11 @@ body .loader-wrap > * {
     max-width: 100%;
   }
   li span {
-    background: var(--spt-color-accent-dark);
-    color: var(--spt-color-background);
+    background: inherit;
+    color: inherit;
     padding: 0.5em;
     border-radius: 3px;
     margin: 0.5em;
-    border: 1px inset;
     min-height: 2em;
     text-align: left;
   }

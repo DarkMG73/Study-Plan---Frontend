@@ -25,9 +25,23 @@
   /* text-shadow: 1px 1px 1px grey, 0px 0px 0px #000000; */
 }
 
-ul[type="goal"] {
+////////////////////////////////////////////////////////////////
+/// Consistent Color For Like Items Throughout App
+////////////////////////////////////////////////////////////////
+ul[type="goal"][data-parentmastertype="goal"] {
   background: var(--spt-color-accent-2-gradient);
 }
+
+// Color all Steps
+ul[type="step"][data-parentmastertype="step"] {
+  background: var(--spt-color-accent-gradient);
+}
+
+ul[type="hold"][data-parentmastertype="hold"] {
+  background: var(--spt-color-background-contrast-dark);
+  color: var(--spt-color-background-warm);
+}
+////////////////////////////////////////////////////////////////
 
 ul {
   transition: 0.3s all ease;
@@ -78,10 +92,6 @@ ul[data-section="studyPlan"][hiddeitems="true"]
 .group-studyPlan-goals > button {
   background: var(--spt-color-accent-2-gradient);
   border: none;
-}
-
-.group-studyPlan ul {
-  background: var(--spt-color-accent-gradient);
 }
 
 .group-studyPlan ul > div,
@@ -500,11 +510,6 @@ ul[data-section="studyPlan"][hiddeitems="true"]
 ////////////////////////////////////////////////////////////////
 [type="goal"] .list-button-container {
   display: none;
-}
-
-ul[type="hold"] {
-  background: var(--spt-color-background-contrast-dark);
-  color: var(--spt-color-background-warm);
 }
 
 .studyPlan-items-group[type="hold"] {

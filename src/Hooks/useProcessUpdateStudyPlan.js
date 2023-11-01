@@ -26,7 +26,7 @@ const useProcessUpdateStudyPlan = () => {
             alert("Success! The item has been updated.");
             // setInEditMode(false);
           } else {
-            alert("there was an error: " + +res.message);
+            alert("there was an error: " + res.message);
           }
         })
         .catch((err) => {

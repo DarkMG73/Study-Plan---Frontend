@@ -6,6 +6,7 @@ function InitState() {
   initialState.studyPlanMetadata = null;
   initialState.updateStudyPlan = null;
   initialState.schema = null;
+  initialState.reGatherStudyPlan = null;
   return initialState;
 }
 
@@ -20,6 +21,7 @@ export const studyPlanDataSlice = createSlice({
       state.studyPlanMetadata = payload.studyPlanMetadata;
       state.updateStudyPlan = payload.updateStudyPlan;
       state.schema = payload.schema;
+      state.reGatherStudyPlan = payload.reGatherStudyPlan;
     },
 
     updateOneStudyPlanItem: (state, action) => {
@@ -52,6 +54,9 @@ export const studyPlanDataSlice = createSlice({
     },
     updateSchema: (state, action) => {
       state.schema = { ...action.payload };
+    },
+    reGatherStudyPlan: (state, action) => {
+      state.reGatherStudyPlan = action.payload;
     },
 
     // currentFilterStorageNeedsUpdate: (state, action) => {
