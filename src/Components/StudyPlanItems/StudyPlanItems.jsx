@@ -33,10 +33,10 @@ import useAssembleStudyPlanList from "../../Hooks/useAssembleStudyPlanList";
 const StudyPlanItems = (props) => {
   const user = useSelector((state) => state.auth.user);
   const { studyPlan, studyPlanMetadata } = useSelector(
-    (state) => state.studyPlanData,
+    (state) => state.studyPlanData
   );
   const updateStudyPlan = useSelector(
-    (state) => state.studyPlanData.updateStudyPlan,
+    (state) => state.studyPlanData.updateStudyPlan
   );
   let saveManyItems = saveManyStudyPlanItems;
   const [sortMethod, setSortMethod] = useState("priority");
@@ -46,13 +46,13 @@ const StudyPlanItems = (props) => {
   const [showListResetButton, setShowListResetButton] = useState(false);
   const id = props.id;
   const typeName = props.type;
-  const section = props.section; 
+  const section = props.section;
   const dataObjForEdit = props.dataObjForEdit;
   const processAllFormInputData = useProcessAllFormInputData();
   const initStudyPlanItems = useInitStudyPlanItems();
   const processUpdateStudyPlan = useProcessUpdateStudyPlan();
   const [allStudyPlanItems, setAllStudyPlanItems] = useState(
-    props.allStudyPlanItems,
+    props.allStudyPlanItems
   );
   const [formInputData, setFormInputData] = useState({});
   const [newFormJSX, setNewFormJSX] = useState(false);
@@ -62,7 +62,7 @@ const StudyPlanItems = (props) => {
   newFormInputValuesObjRef.current = newFormInputValuesObj;
   const allFormInputData = useSelector(
     (state) => state.formInputData,
-    shallowEqual,
+    shallowEqual
   );
   const dispatch = useDispatch();
   const sortList = useSortList();
@@ -140,18 +140,6 @@ const StudyPlanItems = (props) => {
   }, [changeListArray]);
 
   useEffect(() => {
-    console.log(
-      "%c⚪️►►►► %cline:17%ctypeSelection",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
-      formType,
-    );
-
-    console.log("formType", formType);
-  }, [formType]);
-
-  useEffect(() => {
     processUpdateStudyPlan({
       updateStudyPlan,
       updateAContentItem,
@@ -178,7 +166,7 @@ const StudyPlanItems = (props) => {
       });
     } else {
       alert(
-        'Please log in to add to your study plan. If you do not yet have a profile, click "Sign Up" at the top of the page to get started.',
+        'Please log in to add to your study plan. If you do not yet have a profile, click "Sign Up" at the top of the page to get started.'
       );
     }
   };
@@ -243,7 +231,7 @@ const StudyPlanItems = (props) => {
       {user &&
         outputName.includes("Goal") &&
         (!Object.hasOwn(studyPlanMetadata, "_id") ||
-          (Object.hasOwn(studyPlanMetadata,"_id") &&
+          (Object.hasOwn(studyPlanMetadata, "_id") &&
             studyPlanMetadata._id.length <= 0)) && <Welcome user={user} />}
 
       {user &&
@@ -255,7 +243,7 @@ const StudyPlanItems = (props) => {
             data-section={id}
             id={id}
             type={typeName}
-            hiddeItems={"" + hideAllSubGoals}
+            data-hiddeItems={"" + hideAllSubGoals}
             className={
               styles["studyPlan-items-group"] +
               " " +
@@ -267,7 +255,9 @@ const StudyPlanItems = (props) => {
             <h2 className={styles["group-title"] + " " + styles[id]}>
               {outputName}
             </h2>
-            {props.subText && <p className={styles['subtext']}>{props.subText}</p>}
+            {props.subText && (
+              <p className={styles["subtext"]}>{props.subText}</p>
+            )}
             {outputName.toLowerCase().includes("goal") &&
               Object.keys(formInputData).length > 0 &&
               !outputName.includes("Syllabus") && (
@@ -425,28 +415,32 @@ const StudyPlanItems = (props) => {
                   </div>
                 </div>
               )}
-  { !props.hideShowAllButton &&        <div className={styles["new-form-button-wrap"]}>
-              <PushButton
-                inputOrButton="button"
-                id="create-entry-btn"
-                colorType="primary"
-                styles={{}}
-                value={id}
-                parentmasterid={id}
-                data=""
-                size="medium"
-                onClick={addFormButtonHandler}
-              >
-                Add to <span>{toTitleCase(id, true)}</span>
-              </PushButton>
-            </div>}
+            {!props.hideShowAllButton && (
+              <div className={styles["new-form-button-wrap"]}>
+                <PushButton
+                  inputOrButton="button"
+                  id="create-entry-btn"
+                  colorType="primary"
+                  styles={{}}
+                  value={id}
+                  parentmasterid={id}
+                  data=""
+                  size="medium"
+                  onClick={addFormButtonHandler}
+                >
+                  Add to <span>{toTitleCase(id, true)}</span>
+                </PushButton>
+              </div>
+            )}
             <CollapsibleElm
               id={id + "-collapsible-elm"}
               styles={{
                 position: "relative",
               }}
               maxHeight={
-                props.maxCollapsableElmHeight ?  props.maxCollapsableElmHeight  : "7em"
+                props.maxCollapsableElmHeight
+                  ? props.maxCollapsableElmHeight
+                  : "7em"
               }
               inputOrButton="button"
               buttonStyles={{
@@ -476,12 +470,29 @@ const StudyPlanItems = (props) => {
                   className={styles["sort-button-container"]}
                   type={typeName}
                 >
-           {!props.hideShowAllButton &&        <div
-                    id="list-button-container"
-                    className={styles["list-button-container"]}
-                  >
-                    {!showListResetButton && (
-                      <Fragment>
+                  {!props.hideShowAllButton && (
+                    <div
+                      id="list-button-container"
+                      className={styles["list-button-container"]}
+                    >
+                      {!showListResetButton && (
+                        <Fragment>
+                          <PushButton
+                            inputOrButton="button"
+                            id="create-entry-btn"
+                            colorType="secondary"
+                            styles={{}}
+                            value={id}
+                            parentmasterid={id}
+                            data=""
+                            size="small"
+                            onClick={showAllItemsButtonHandler}
+                          >
+                            Show All Goals, Steps & Holds
+                          </PushButton>
+                        </Fragment>
+                      )}
+                      {showListResetButton && (
                         <PushButton
                           inputOrButton="button"
                           id="create-entry-btn"
@@ -491,28 +502,13 @@ const StudyPlanItems = (props) => {
                           parentmasterid={id}
                           data=""
                           size="small"
-                          onClick={showAllItemsButtonHandler}
+                          onClick={showDefaultItemsButtonHandler}
                         >
-                          Show All Goals, Steps & Holds
+                          Show Only Steps
                         </PushButton>
-                      </Fragment>
-                    )}
-                    {showListResetButton && (
-                      <PushButton
-                        inputOrButton="button"
-                        id="create-entry-btn"
-                        colorType="secondary"
-                        styles={{}}
-                        value={id}
-                        parentmasterid={id}
-                        data=""
-                        size="small"
-                        onClick={showDefaultItemsButtonHandler}
-                      >
-                        Show Only Steps
-                      </PushButton>
-                    )}
-                  </div>}
+                      )}
+                    </div>
+                  )}
                   <label className={styles["sort-button-wrap"]}>
                     Sort by:
                     <select
@@ -523,13 +519,21 @@ const StudyPlanItems = (props) => {
                     >
                       {Object.entries(studyItemSortOptions)
                         .sort((a, b) =>
-                          a[1].toLowerCase().localeCompare(b[1].toLowerCase()),
+                          a[1].toLowerCase().localeCompare(b[1].toLowerCase())
                         )
                         .map((entry) => (
-                          <Fragment>
+                          <Fragment key={"1+r" + entry[0] + entry[1]}>
                             {" "}
-                            <option value={entry[0]}>{entry[1]}</option>{" "}
-                            <option value={entry[0] + "-reverse"}>
+                            <option
+                              key={"1" + entry[0] + entry[1]}
+                              value={entry[0]}
+                            >
+                              {entry[1]}
+                            </option>{" "}
+                            <option
+                              key={"r" + entry[0] + entry[1]}
+                              value={entry[0] + "-reverse"}
+                            >
                               {"Reverse " + entry[1]}
                             </option>
                           </Fragment>
@@ -591,18 +595,18 @@ const StudyPlanItems = (props) => {
                 )}
 
               {Object.keys(formInputData).length <= 0 &&
-                Object.hasOwn(studyPlanMetadata,"_id") &&
+                Object.hasOwn(studyPlanMetadata, "_id") &&
                 studyPlanMetadata._id.length > 0 &&
-                !outputName.includes("Goal") && !outputName.includes("Holding") && (
+                !outputName.includes("Goal") &&
+                !outputName.includes("Holding") && (
                   <div
                     id="no-items-text"
                     className={styles["no-items-text"]}
                     type={typeName}
                   >
                     <h3>
-                      Hmmmm...unfortunately, there
-                      are no steps yet. See below for how to add steps
-                      towards your main goal. 
+                      Hmmmm...unfortunately, there are no steps yet. See below
+                      for how to add steps towards your main goal.
                     </h3>
                     <Welcome onlyInstructions={true} />
                   </div>

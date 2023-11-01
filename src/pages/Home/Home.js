@@ -65,7 +65,12 @@ const Home = (props) => {
   }, []);
 
   useEffect(() => {
-    if (!user || !allFormInputData) return;
+    if (
+      !user ||
+      !allFormInputData ||
+      (!allFormInputData.uploadedForms && !allFormInputData.allNewForms)
+    )
+      return;
     let data = {};
     if (allFormInputData.uploadedForms) {
       data = processUploadedFormInputData({
@@ -87,6 +92,12 @@ const Home = (props) => {
       });
     }
 
+    if (!data || Object.keys(data).length <= 0) {
+      alert(
+        "There seems to have been a problem trying process items before saving them. We are sorry for the trouble. Please check the data and try again. If the problem continues, let the web admin know you received this error."
+      );
+      return;
+    }
     saveManyItems({ user, outputDataArray: data }).then((res) => {
       if (res.status >= 400) {
         alert("There was an error: " + res.response.data.message);

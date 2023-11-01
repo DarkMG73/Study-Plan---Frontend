@@ -67,15 +67,6 @@ function OutputControls(props) {
   //////////////////////
   /// EFFECTS
   /////////////////////
-  useEffect(() => {
-    console.log(
-      "%c⚪️►►►► %cline:60%cerrorData",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(131, 175, 155);padding:3px;border-radius:2px",
-      errorData
-    );
-  }, [errorData]);
 
   useEffect(() => {
     if (uploadedJSONData) {
@@ -211,13 +202,6 @@ function OutputControls(props) {
 
       const prompt = requiredFunction(msg, requiredText);
 
-      console.log(
-        "%c⚪️►►►► %cline:194%cprompt",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
-        prompt
-      );
       if (!prompt) return;
       if (prompt)
         deleteAllStudyTopics(user)

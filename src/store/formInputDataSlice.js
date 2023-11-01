@@ -80,13 +80,6 @@ export const formInputDataSlice = createSlice({
       state.allNewForms = null;
     },
     submitUploadedForm: (state, action) => {
-      console.log(
-        "%c⚪️►►►► %cline:37%caction.payload",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
-        action.payload
-      );
       state.uploadedForms = action.payload;
     },
     resetSubmitUploadedForm: (state) => {

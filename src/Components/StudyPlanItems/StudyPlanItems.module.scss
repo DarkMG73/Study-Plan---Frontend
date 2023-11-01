@@ -47,13 +47,13 @@ ul {
   transition: 0.3s all ease;
 }
 
-[data-section*="goal"][hiddeItems="true"]
+[data-section*="goal"][data-hiddeItems="true"]
   > div
   > [data-mainGoal="false"][type="goal"],
-ul[data-section="studyPlan"][hiddeitems="true"]
+ul[data-section="studyPlan"][data-hiddeItems="true"]
   > div
   > ul[data-forReview="true"],
-ul[data-section="studyPlan"][hiddeitems="true"]
+ul[data-section="studyPlan"][data-hiddeItems="true"]
   > div
   > ul[data-markedComplete="true"] {
   height: 0;

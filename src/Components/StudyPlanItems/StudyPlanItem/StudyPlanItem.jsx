@@ -976,13 +976,6 @@ const StudyPlanItem = (props) => {
                     let targetIdentifier = Object.values(studyPlan).filter(
                       (item) => item.name === option
                     );
-                    console.log(
-                      "%c⚪️►►►► %cline:947%ctargetIdentifier",
-                      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-                      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-                      "color:#fff;background:rgb(39, 72, 98);padding:3px;border-radius:2px",
-                      targetIdentifier
-                    );
                     targetIdentifier = targetIdentifier[0][keyToSave];
                     return <option value={targetIdentifier}>{option}</option>;
                   })}
