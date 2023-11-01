@@ -157,7 +157,7 @@ const Login = (props) => {
       sign_inAUser(user)
         .then((res) => {
           removeLoadingRequest();
-          if (res && Object.hasOwn(res,"status")) {
+          if (res && Object.hasOwn(res, "status")) {
             if (res.status >= 200 && res.status < 400) {
               completeSignInProcedures(res);
             } else if (res.status === 0 || res.status === 404) {
@@ -171,16 +171,16 @@ const Login = (props) => {
             } else if (res.status >= 400) {
               let groomedErrorMessage =
                 "No error message given| Status is " + res.status;
-              if (Object.hasOwn(res,"data")) {
-                if (Object.hasOwn(res.data,"message"))
+              if (Object.hasOwn(res, "data")) {
+                if (Object.hasOwn(res.data, "message"))
                   groomedErrorMessage = res.data.message;
-                if (Object.hasOwn(res.data,"statusText"))
+                if (Object.hasOwn(res.data, "statusText"))
                   groomedErrorMessage = res.statusText;
               }
               seLoginError(groomedErrorMessage);
               setShowLoginError(true);
             }
-          } else if (res && Object.hasOwn(res,"data")) {
+          } else if (res && Object.hasOwn(res, "data")) {
             if (res.data) {
               completeSignInProcedures(res);
             } else {
@@ -235,7 +235,6 @@ const Login = (props) => {
         Need to register?
         <PushButton
           inputOrButton="button"
-          id="create-entry-btn"
           colorType="secondary"
           styles={{
             ...props.signUpButtonStyles,
@@ -290,7 +289,6 @@ const Login = (props) => {
           <div className={styles["form-submit-button-wrap"]}>
             <PushButton
               inputOrButton="button"
-              id="create-entry-btn"
               colorType="secondary"
               styles={{
                 boxShadow:
@@ -321,7 +319,6 @@ const Login = (props) => {
         )}{" "}
         <PushButton
           inputOrButton="button"
-          id="create-entry-btn"
           colorType="secondary"
           styles={{
             margin: "1em",

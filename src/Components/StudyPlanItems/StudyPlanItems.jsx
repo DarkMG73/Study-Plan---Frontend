@@ -204,7 +204,7 @@ const StudyPlanItems = (props) => {
         <PushButton
           key={id}
           inputOrButton="button"
-          id="create-entry-btn"
+          id={"create-entry-btn" + id}
           colorType="primary"
           styles={{}}
           value={id}
@@ -276,7 +276,7 @@ const StudyPlanItems = (props) => {
                       <PushButton
                         key={id}
                         inputOrButton="button"
-                        id="create-entry-btn"
+                        id={"create-entry-btn" + id}
                         colorType="secondary"
                         styles={{}}
                         value={id}
@@ -293,7 +293,7 @@ const StudyPlanItems = (props) => {
                     <PushButton
                       key={id}
                       inputOrButton="button"
-                      id="create-entry-btn"
+                      id={"create-entry-btn" + id}
                       colorType="secondary"
                       styles={{}}
                       value={id}
@@ -433,7 +433,7 @@ const StudyPlanItems = (props) => {
               <div className={styles["new-form-button-wrap"]}>
                 <PushButton
                   inputOrButton="button"
-                  id="create-entry-btn"
+                  id={"create-entry-btn" + id}
                   colorType="primary"
                   styles={{}}
                   value={id}
@@ -496,7 +496,7 @@ const StudyPlanItems = (props) => {
                           <PushButton
                             key={id}
                             inputOrButton="button"
-                            id="create-entry-btn"
+                            id={"create-entry-btn" + id}
                             colorType="secondary"
                             styles={{}}
                             value={id}
@@ -513,7 +513,7 @@ const StudyPlanItems = (props) => {
                         <PushButton
                           key={id}
                           inputOrButton="button"
-                          id="create-entry-btn"
+                          id={"create-entry-btn" + id}
                           colorType="secondary"
                           styles={{}}
                           value={id}

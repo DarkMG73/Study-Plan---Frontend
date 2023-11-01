@@ -48,7 +48,8 @@ const Register = (props) => {
     /////////////////
     //INPUT CRITERIA
     //////////////////
-    const validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const validEmailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     for (const key in inputNameObject) {
       if (
@@ -144,7 +145,7 @@ const Register = (props) => {
           if (res && res.status < 400) {
             sign_inAUser(user)
               .then((res) => {
-                if (res && Object.hasOwn(res,"status")) {
+                if (res && Object.hasOwn(res, "status")) {
                   if (res.status >= 200 && res.status < 400) {
                     completeSignInProcedures(res);
                   } else if (res.status === 404) {
@@ -161,7 +162,7 @@ const Register = (props) => {
                     );
                     setShowLoginError(true);
                   }
-                } else if (res && Object.hasOwn(res,"data")) {
+                } else if (res && Object.hasOwn(res, "data")) {
                   setLoginError(false);
                   dispatch(authActions.logIn(res.data));
                 } else {
@@ -210,7 +211,6 @@ const Register = (props) => {
         Already have an account ?
         <PushButton
           inputOrButton="button"
-          id="create-entry-btn"
           colorType="secondary"
           value="login"
           data=""
@@ -296,7 +296,6 @@ const Register = (props) => {
           <div className={styles["form-submit-button-wrap"]}>
             <PushButton
               inputOrButton="button"
-              id="create-entry-btn"
               colorType="secondary"
               value="login"
               data=""
