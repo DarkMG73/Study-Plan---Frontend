@@ -217,7 +217,7 @@ const StudyPlanItems = (props) => {
         </PushButton>{" "}
         {newFormJSX && (
           <div
-            key={id}
+            key={id + typeName}
             id="new-form-modal"
             className={styles["new-form-modal"]}
             type={typeName}
@@ -333,6 +333,7 @@ const StudyPlanItems = (props) => {
                       id={id + "-collapsible-elm"}
                       styles={{
                         position: "relative",
+                        maxWidth: "100%",
                       }}
                       maxHeight={"0"}
                       s
@@ -384,6 +385,7 @@ const StudyPlanItems = (props) => {
                       id={id + "-collapsible-elm"}
                       styles={{
                         position: "relative",
+                        maxWidth: "100%",
                       }}
                       maxHeight={"0"}
                       s
@@ -451,6 +453,7 @@ const StudyPlanItems = (props) => {
               id={id + "-collapsible-elm"}
               styles={{
                 position: "relative",
+                maxWidth: "100%",
               }}
               maxHeight={
                 props.maxCollapsableElmHeight

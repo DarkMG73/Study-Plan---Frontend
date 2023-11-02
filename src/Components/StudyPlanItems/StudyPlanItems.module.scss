@@ -529,6 +529,17 @@ ul[data-section="studyPlan"][data-hiddeitems="true"]
 .studyPlan-history-list-container {
   position: relative;
   padding-top: 2em;
+  max-width: 100%;
+}
+.studyPlan-history-list-container div {
+  max-width: 100%;
+}
+
+.studyPlan-history-list-container button {
+  position: relative !important;
+  width: 100%;
+  left: 0;
+  transform: none;
 }
 
 .list-button-container button {

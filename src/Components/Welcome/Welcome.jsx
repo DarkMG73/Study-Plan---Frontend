@@ -1,100 +1,122 @@
 import React from "react";
 import Styles from "./Welcome.module.scss";
-import StudyPlanItems from '../StudyPlanItems/StudyPlanItems'
+import StudyPlanItems from "../StudyPlanItems/StudyPlanItems";
 
 const Welcome = (props) => {
-let userName = false
+  let userName = false;
 
-if (props.user) {
-if (Object.hasOwn(props.user,'userName') && props.user.userName.trim() !== '') {
-  userName = props.user.userName
-} else {userName = props.user.email}
+  if (props.user) {
+    if (
+      Object.hasOwn(props.user, "userName") &&
+      props.user.userName.trim() !== ""
+    ) {
+      userName = props.user.userName;
+    } else {
+      userName = props.user.email;
+    }
+  }
+  const instructionsJSX = (
+    <div className={Styles["instructions-container"]}>
+      {" "}
+      <h3>Basic Use</h3>
+      <ol>
+        <li key="0">Create a profile.</li>
+        <li key="1">
+          click the "Add to Study Plan button" to open the new entry form.{" "}
+          <span className={Styles["new-form-button"]}>
+            {<StudyPlanItems id="studyPlan" onlyAddToButton={true} />}
+          </span>
+        </li>
 
-}
-  const instructionsJSX = <div className={Styles['instructions-container']}>  <h3>Basic Use</h3>
-  <ol>
-  <li>Create a profile.</li>
-    <li>
-      click the "Add to Study Plan button" to open the new entry form. <span className={Styles['new-form-button']}>{<StudyPlanItems id='studyPlan' onlyAddToButton={true} />}</span> 
-    </li>
-
-    <li>
-      Fill out the small form. The name and type are required, and the
-      "Goal or Step this Directly Works Towards" setting is important to
-      be filled out for every item except one main goal.
-    </li>
-    <li>Submit the form using the button at the bottom.</li>
-    <li>
-      Make sure there is no more or less than one goal showing in the
-      Goals and Curriculum section. opening this goal will reveal all
-      supporting goals and steps.
-    </li>
-    <li>
-      The Syllabus section shows all of the steps in order of the priority
-      you set. WOrk this list from the highest priority first. (of course,
-      you can change the sort order of these items with this sort tool,
-      but it will always go back to sorting be priority).
-    </li>
-    <li>
-      Mark the "Status" as you progress through a step to keep a clear
-      view of where you are at with each item.{" "}
-    </li>
-    <li>
-      When finished, fill out the "Skill Demonstrations" boxes with detail
-      about what you did, what you learned and, ideally, specific
-      takeaways that can be used later on a resume or as part of
-      conversations at an interview. A link box is provided if you have a
-      link to where an example of what you created would be.
-    </li>
-    <li>
-      Mark the "Status" as 100 and click the "Complete" button. If you
-      feel you need to come back at a later date and review the material,
-      click the Review Needed? button.
-    </li>
-    <li>
-      Move on to the next item in the Syllabus list until every ons is
-      completed.
-    </li>
-    <li>
-      At this point, <b>you have achieved your main goal!</b> Time to
-      celebrate briefly, then get to work using this new knowledge to
-      improve your life and the lives of others.
-    </li>
-  </ol>
-  <p>
-    <b>IMPORTANT NOTE</b>:{" "}
-    <i>
-      The most important setting in any new addition here is the
-      aforementioned "Goal or Step this Directly Works Towards" dropdown
-      menu. It will be empty when making your original main goal, but with
-      each subsequent goal or step all previous goals or steps will be
-      available to select. This directly points them towards some part of
-      your main goal. If you find yourself adding something that does not
-      actually support an existing goal or step, either do not add it
-      (because it is not actually helping you) or mark the "Type" setting
-      as "Hold" until you figure where it fits into this journey to the
-      one main goal. When it is time to add it to the flow, just change
-      the Type to a Step or Goal.
-    </i>
-  </p>
-  </div>
-  if(props.onlyInstructions) return instructionsJSX
+        <li key="2">
+          Fill out the small form. The name and type are required, and the "Goal
+          or Step this Directly Works Towards" setting is important to be filled
+          out for every item except one main goal.
+        </li>
+        <li key="3">Submit the form using the button at the bottom.</li>
+        <li>
+          Make sure there is no more or less than one goal showing in the Goals
+          and Curriculum section. opening this goal will reveal all supporting
+          goals and steps.
+        </li>
+        <li key="4">
+          The Syllabus section shows all of the steps in order of the priority
+          you set. WOrk this list from the highest priority first. (of course,
+          you can change the sort order of these items with this sort tool, but
+          it will always go back to sorting be priority).
+        </li>
+        <li key="5">
+          Mark the "Status" as you progress through a step to keep a clear view
+          of where you are at with each item.{" "}
+        </li>
+        <li key="6">
+          When finished, fill out the "Skill Demonstrations" boxes with detail
+          about what you did, what you learned and, ideally, specific takeaways
+          that can be used later on a resume or as part of conversations at an
+          interview. A link box is provided if you have a link to where an
+          example of what you created would be.
+        </li>
+        <li key="7">
+          Mark the "Status" as 100 and click the "Complete" button. If you feel
+          you need to come back at a later date and review the material, click
+          the Review Needed? button.
+        </li>
+        <li>
+          Move on to the next item in the Syllabus list until every ons is
+          completed.
+        </li>
+        <li key="8">
+          At this point, <b>you have achieved your main goal!</b> Time to
+          celebrate briefly, then get to work using this new knowledge to
+          improve your life and the lives of others.
+        </li>
+      </ol>
+      <p>
+        <b>IMPORTANT NOTE</b>:{" "}
+        <i>
+          The most important setting in any new addition here is the
+          aforementioned "Goal or Step this Directly Works Towards" dropdown
+          menu. It will be empty when making your original main goal, but with
+          each subsequent goal or step all previous goals or steps will be
+          available to select. This directly points them towards some part of
+          your main goal. If you find yourself adding something that does not
+          actually support an existing goal or step, either do not add it
+          (because it is not actually helping you) or mark the "Type" setting as
+          "Hold" until you figure where it fits into this journey to the one
+          main goal. When it is time to add it to the flow, just change the Type
+          to a Step or Goal.
+        </i>
+      </p>
+    </div>
+  );
+  if (props.onlyInstructions) return instructionsJSX;
   return (
     <div className={Styles["welcome-container"]}>
       <div className={Styles["text-container"]}>
         <h2>Welcome{userName && <span> {userName}</span>}!</h2>
         Time to get started on your journey!
         <div>
-        
-{!userName    &&    <p style={{textAlign: 'center'}}>Log in or sign up then <span className={Styles['new-form-button']}>{<StudyPlanItems id='studyPlan' onlyAddToButton={true} />}</span></p>}
+          {!userName && (
+            <div style={{ textAlign: "center" }}>
+              Log in or sign up then{" "}
+              <div className={Styles["new-form-button"]}>
+                {<StudyPlanItems id="studyPlan" onlyAddToButton={true} />}
+              </div>
+            </div>
+          )}
 
-{userName    &&    <p style={{textAlign: 'center'}}><span className={Styles['new-form-button']}>{<StudyPlanItems id='studyPlan' onlyAddToButton={true} />}</span></p>}
-        
+          {userName && (
+            <div style={{ textAlign: "center" }}>
+              <div className={Styles["new-form-button"]}>
+                {<StudyPlanItems id="studyPlan" onlyAddToButton={true} />}
+              </div>
+            </div>
+          )}
         </div>
         <p>
-          First, this is <b>NOT</b> a todo list or planner app. This is a tool to
-          effectively take one huge, possibly overwhelming goal and provide an
-          easy space to quickly break it down into the steps to conquer...no
+          First, this is <b>NOT</b> a todo list or planner app. This is a tool
+          to effectively take one huge, possibly overwhelming goal and provide
+          an easy space to quickly break it down into the steps to conquer...no
           matter how small, large, easy or difficult...and actually work each
           step to achieve the main goal.
         </p>

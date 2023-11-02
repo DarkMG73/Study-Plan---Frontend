@@ -322,6 +322,7 @@ const StudyPlanItemsList = (props) => {
               id={key + "-collapsible-elm"}
               styles={{
                 position: "relative",
+                maxWidth: "100%",
               }}
               maxHeight={"3em"}
               s
@@ -426,9 +427,17 @@ const StudyPlanItemsList = (props) => {
                       );
                       if (dependenciesObj.length <= 0) return false;
                       return (
-                        <div
+                        <StudyPlanItemsSubList
                           key={
                             key +
+                            "-" +
+                            section +
+                            "-" +
+                            parentKey +
+                            "-" +
+                            (parentMasterID
+                              ? parentMasterID
+                              : studyPlanItemsObj[key]._id) +
                             "-" +
                             subListLevel +
                             "-" +
@@ -439,98 +448,41 @@ const StudyPlanItemsList = (props) => {
                                 (dependenciesObj &&
                                   dependenciesObj.length > 0 &&
                                   Object.hasOwn(dependenciesObj[0], "_id") &&
-                                  dependenciesObj[0]._id))
+                                  dependenciesObj[0]._id) +
+                                "-sub--2")
                           }
-                        >
-                          <h1
-                            key={
-                              Math.random(10).toString() +
-                              props.parentMasterID +
-                              "in-sub--1"
-                            }
-                          >
-                            OOOOO-
-                            {key +
-                              "-" +
-                              (parentMasterID
-                                ? parentMasterID
-                                : studyPlanItemsObj[key]._id) +
-                              "-" +
-                              subListLevel +
-                              "-" +
-                              (props.type
-                                ? props.type
-                                : studyPlanItemsObj[key].type +
-                                  "-" +
-                                  (dependenciesObj &&
-                                    dependenciesObj.length > 0 &&
-                                    Object.hasOwn(dependenciesObj[0], "_id") &&
-                                    dependenciesObj[0]._id))}
-                          </h1>
-                          {console.log(
-                            "dependenciesObj",
-                            dependenciesObj &&
-                              dependenciesObj.length > 0 &&
-                              Object.hasOwn(dependenciesObj[0], "_id") &&
-                              dependenciesObj[0]._id
-                          )}
-                          <StudyPlanItemsSubList
-                            key={
-                              key +
-                              "-" +
-                              section +
-                              "-" +
-                              parentKey +
-                              "-" +
-                              (parentMasterID
-                                ? parentMasterID
-                                : studyPlanItemsObj[key]._id) +
-                              "-" +
-                              subListLevel +
-                              "-" +
-                              (props.type
-                                ? props.type
-                                : studyPlanItemsObj[key].type +
-                                  "-" +
-                                  (dependenciesObj &&
-                                    dependenciesObj.length > 0 &&
-                                    Object.hasOwn(dependenciesObj[0], "_id") &&
-                                    dependenciesObj[0]._id) +
-                                  "-sub--2")
-                            }
-                            studyPlanItemsObj={dependenciesObj}
-                            allStudyPlanItems={props.allStudyPlanItems}
-                            parentKey={key}
-                            parentsParentKey={parentKey}
-                            parentMasterID={
-                              parentMasterID
-                                ? parentMasterID
-                                : studyPlanItemsObj[key]._id
-                            }
-                            parentMasterType={
-                              parentMasterType
-                                ? parentMasterType
-                                : studyPlanItemsObj[key].type
-                            }
-                            section={section}
-                            displayConditions={displayConditions}
-                            subListLevel={subListLevel}
-                            unlockProtectedVisible={
-                              props.unlockProtectedVisible
-                                ? props.unlockProtectedVisible
-                                : unlockProtectedVisible
-                            }
-                            showProtectedHidden={
-                              props.showProtectedHidden
-                                ? props.showProtectedHidden
-                                : showProtectedHidden
-                            }
-                            refresh={refresh}
-                            onlyList={onlyList}
-                            emptyForm={props.emptyForm}
-                            setFormType={props.setFormType}
-                          />
-                        </div>
+                          studyPlanItemsObj={dependenciesObj}
+                          allStudyPlanItems={props.allStudyPlanItems}
+                          parentKey={key}
+                          parentsParentKey={parentKey}
+                          parentMasterID={
+                            parentMasterID
+                              ? parentMasterID
+                              : studyPlanItemsObj[key]._id
+                          }
+                          parentMasterType={
+                            parentMasterType
+                              ? parentMasterType
+                              : studyPlanItemsObj[key].type
+                          }
+                          section={section}
+                          displayConditions={displayConditions}
+                          subListLevel={subListLevel}
+                          unlockProtectedVisible={
+                            props.unlockProtectedVisible
+                              ? props.unlockProtectedVisible
+                              : unlockProtectedVisible
+                          }
+                          showProtectedHidden={
+                            props.showProtectedHidden
+                              ? props.showProtectedHidden
+                              : showProtectedHidden
+                          }
+                          refresh={refresh}
+                          onlyList={onlyList}
+                          emptyForm={props.emptyForm}
+                          setFormType={props.setFormType}
+                        />
                       );
                     }
                   )}
@@ -683,6 +635,7 @@ const StudyPlanItemsList = (props) => {
               id={key + "-collapsible-elm"}
               styles={{
                 position: "relative",
+                maxWidth: "100%",
               }}
               maxHeight={"3em"}
               s

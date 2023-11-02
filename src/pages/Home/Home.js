@@ -132,8 +132,99 @@ const Home = (props) => {
 
         // Handle duplicate entries specifically
         if (code === 11000) {
+          console.log(
+            "%c⚪️►►►► %cline:128%cwriteErrors",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(130, 57, 53);padding:3px;border-radius:2px",
+            writeErrors
+          );
+          console.log(
+            "%c⚪️►►►► %cline:135%callFormInputData.allNewForms;",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
+            allFormInputData.allNewForms
+          );
+
+          const newAllNewFormsObj = { ...allFormInputData.allNewForms };
+          const filteredAllNewFormsObj = {};
+          const namesWithIssuesArray = [];
+          writeErrors.forEach((group) =>
+            namesWithIssuesArray.push(group.op.name)
+          );
+
+          console.log(
+            "%c⚪️►►►► %cline:152%cnamesWithIssuesArray",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(251, 178, 23);padding:3px;border-radius:2px",
+            namesWithIssuesArray
+          );
+
+          for (const [key, value] of Object.entries(newAllNewFormsObj)) {
+            console.log(
+              "%c⚪️►►►► %cline:161%ckey",
+              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+              "color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px",
+              key
+            );
+
+            filteredAllNewFormsObj[key] = {};
+            console.log(
+              "%c⚪️►►►► %cline:161%cvalue",
+              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+              "color:#fff;background:rgb(131, 175, 155);padding:3px;border-radius:2px",
+              value
+            );
+            // new-form
+            for (const l1Key in value) {
+              console.log(
+                "%c⚪️►►►► %cline:164%cl1Key",
+                "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                "color:#fff;background:rgb(248, 214, 110);padding:3px;border-radius:2px",
+                l1Key
+              );
+              console.log(
+                "%c⚪️►►►► %cline:165%cvalue[l1Key",
+                "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                "color:#fff;background:rgb(95, 92, 51);padding:3px;border-radius:2px",
+                value[l1Key]
+              );
+              // StudyPlan
+
+              // The base form
+              console.log(
+                "%c⚪️►►►► %cline:168%cvalue[l1Key]",
+                "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                "color:#fff;background:rgb(130, 57, 53);padding:3px;border-radius:2px",
+                value[l1Key]
+              );
+
+              if (namesWithIssuesArray.includes(value[l1Key].name)) {
+                filteredAllNewFormsObj[key][l1Key] = value[l1Key];
+              }
+            }
+          }
+
+          console.log(
+            "%c⚪️►►►► %cline:168%cfilteredAllNewFormsObj",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px",
+            filteredAllNewFormsObj
+          );
+
+          dispatch(
+            formInputDataActions.setNewFormInputDataObj(filteredAllNewFormsObj)
+          );
           alert(
-            "It looks you might have tried to add a field that must be unique and already exists." +
+            "It looks like you might have tried to add a field that must be unique and already exists." +
               message +
               "\n\nThe following items already exist. please change each item before submitting the form." +
               writeErrors.map(

@@ -11,9 +11,6 @@ const useCreateNewForm = () => {
   );
   const [formType, setFormType] = useState("all");
 
-  useEffect(() => {
-    console.log("formType", formType);
-  }, [formType]);
   const outputFunction = (props) => {
     const e = props.e;
     const styles = props.styles;
@@ -76,15 +73,14 @@ const useCreateNewForm = () => {
         for (let i = 0; i < amountToAdd; i++) {
           output.push(
             <div
-              key={Math.random(10)}
+              key={parentMasterID + "newForm-" + i}
               id={"newForm-" + i}
               data-parentmasterid={"newForm-" + i}
               className={styles["new-form-" + i] + " " + styles["new-form"]}
-              formType={"type-" + formType}
+              data-formtype={"type-" + formType}
             >
-              {formType}
               <button
-                key={Math.random(10)}
+                key={parentMasterID + "newForm-" + i + "button"}
                 className={
                   styles["new-form-button"] +
                   " " +
@@ -96,14 +92,13 @@ const useCreateNewForm = () => {
                 X
               </button>
               <h2
-                key={Math.random(10)}
                 id={parentMasterID}
                 className={styles["group-title"] + " " + styles[parentMasterID]}
               >
                 &nbsp; Entry {i + 1}
               </h2>
               <ul
-                key={Math.random(10)}
+                key={parentMasterID + "newForm-" + i}
                 id={"newForm-" + i + "-wrap"}
                 data-parentmasterid={"newForm-" + i}
                 className={
@@ -114,7 +109,7 @@ const useCreateNewForm = () => {
               >
                 {cleansedFormData && (
                   <StudyPlanItemsList
-                    key={Math.random(10)}
+                    key={parentMasterID + "newForm-" + i}
                     studyPlanItemsObj={cleansedFormData}
                     id={"newForm-" + i}
                     parentKey={id}
@@ -135,7 +130,7 @@ const useCreateNewForm = () => {
 
       const groomedNewFormElement = (
         <ul
-          key={Math.random(10)}
+          key={parentMasterID}
           className={
             styles.subgroup +
             " " +
