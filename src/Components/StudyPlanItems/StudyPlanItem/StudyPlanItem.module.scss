@@ -166,17 +166,6 @@ select {
   width: 100%;
 }
 
-.isDefaultPlaylist,
-.isFeaturedPlaylist,
-.isDefaultPlaylist select,
-.isFeaturedPlaylist select {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  min-width: 10em;
-  max-width: min-content;
-}
-
 .isDefaultPlaylist select,
 .isFeaturedPlaylist select {
   flex-grow: 1;
@@ -537,13 +526,16 @@ li[class*="__v"] {
 /* ********** */
 
 /* Goal Section Grid Adjustments */
-ul[type="goal"] .priority,
-ul[type="goal"] .method,
-ul[type="goal"] .labTime,
-ul[type="goal"] .lectureTime,
-ul[type="goal"] .platform,
-ul[type="goal"] .author {
-  display: none;
+ul[type="goal"] {
+  .priority,
+  .method,
+  .labTime,
+  .lectureTime,
+  .platform,
+  .author,
+  .progressbar {
+    display: none;
+  }
 }
 
 /* ********** */

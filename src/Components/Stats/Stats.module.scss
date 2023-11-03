@@ -71,7 +71,6 @@
   font-size: 0.6em;
 }
 
-
 .hours-wrap .labhrstotal:before {
   content: "Total Lab Hours";
 }
@@ -92,14 +91,14 @@
   content: "Review Hours Needed";
 }
 
-.hours-wrap .totalhours{
-    flex-basis: 31.33%;
-    flex-grow: 1;
-    // background: var(--spt-color-accent);
-    background: var(--spt-color-accent-2);
-    color: var(--spt-color-background);
-    border-radius: 50px;
-    padding: 0.5em;
+.hours-wrap .totalhours {
+  flex-basis: 31.33%;
+  flex-grow: 1;
+  // background: var(--spt-color-accent);
+  background: var(--spt-color-accent-2);
+  color: var(--spt-color-background);
+  border-radius: 50px;
+  padding: 0.5em;
 }
 
 .hours-wrap .totalhours:before {
@@ -109,4 +108,23 @@
 .hours-wrap .collegecredithours:before {
   content: "Simulated College Credits";
   margin-right: 1em;
+}
+
+@media screen and (max-width: 900px) {
+  // .hours-wrap .totalhours {
+  //   padding: 1em;
+  // }
+}
+
+@media screen and (max-width: 550px) {
+  .hours-wrap {
+    .totalhours {
+      flex-basis: 100%;
+      padding: 1em;
+    }
+    .labhrstotal,
+    .lecturehrstotal {
+      flex-basis: 50%;
+    }
+  }
 }

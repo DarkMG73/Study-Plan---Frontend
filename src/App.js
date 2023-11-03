@@ -207,6 +207,9 @@ function App() {
               aboutIsActive={aboutIsActive}
               goalsIsActive={true}
               stepsIsActive={true}
+              holdsIsActive={true}
+              controlsIsActive={true}
+              socialIsActive={false}
             />
           </CardTransparent>
         </header>

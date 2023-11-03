@@ -1,16 +1,29 @@
 {
-  "main.css": "/static/css/somecss.css",
-  "main.js": "/static/js/all_in_one_file.js",
-  "main.js.map": "/static/js/all_in_one_file.js.map",
-  "static/js/1.a04d9e4e.chunk.js": "/static/js/1.a04d9e4e.chunk.js",
-  "static/js/1.a04d9e4e.chunk.js.map": "/static/js/1.a04d9e4e.chunk.js.map",
-  "index.html": "/index.html",
-  "precache-manifest.ceaaad9d96e5a994a6c7d33724cfefba.js": "/precache-manifest.ceaaad9d96e5a994a6c7d33724cfefba.js",
-  "service-worker.js": "/service-worker.js",
-  "static/css/somecss.css.map": "/static/css/somecss.css.map",
-  "static/media/background-energy6.mp4": "/static/media/background-energy6.c102ac62.mp4",
-  "static/media/400.css": "/static/media/covered-by-your-grace-latin-400-normal.e42d0aba.woff2",
-  "static/media/index.css": "/static/media/kodchasan-vietnamese-400-normal.2989003c.woff2",
-  "static/media/studyPlanner-ring.9731d037.svg": "/static/media/studyPlan-ring.9731d037.svg",
-  "static/media/reloadIcon.svg": "/static/media/reloadIcon.d56c1ee1.svg"
+  "files": {
+    "main.css": "/static/css/somecss.css",
+    "main.js": "/static/js/all_in_one_file.js",
+    "static/js/496.5e5beaae.chunk.js": "/static/js/496.5e5beaae.chunk.js",
+    "static/media/background-energy6.mp4": "/static/media/background-energy6.39123d81b0f187f297c4.mp4",
+    "static/media/spt-ring.svg": "/static/media/spt-ring.44bc5099787193df5d496a3b0cc475fa.svg",
+    "static/media/good_times_rg.ttf": "/static/media/good_times_rg.772115132e8c32d4da43.ttf",
+    "static/media/kodchasan-latin-400-normal.woff": "/static/media/kodchasan-latin-400-normal.3f520fc52b1e39ccd22a.woff",
+    "static/media/covered-by-your-grace-latin-400-normal.woff": "/static/media/covered-by-your-grace-latin-400-normal.a2db57170bceeb8eaae0.woff",
+    "static/media/covered-by-your-grace-latin-400-normal.woff2": "/static/media/covered-by-your-grace-latin-400-normal.222c649fe1eb7f8ba3aa.woff2",
+    "static/media/kodchasan-latin-ext-400-normal.woff": "/static/media/kodchasan-latin-ext-400-normal.427dc12d3bd750da6249.woff",
+    "static/media/kodchasan-latin-400-normal.woff2": "/static/media/kodchasan-latin-400-normal.a49a8ccc4901b7e9c7f9.woff2",
+    "static/media/kodchasan-thai-400-normal.woff": "/static/media/kodchasan-thai-400-normal.85ff2015c186b31a4136.woff",
+    "static/media/kodchasan-latin-ext-400-normal.woff2": "/static/media/kodchasan-latin-ext-400-normal.1bc5de5fedd32c04aebe.woff2",
+    "static/media/kodchasan-thai-400-normal.woff2": "/static/media/kodchasan-thai-400-normal.043f048d3f171594dfe7.woff2",
+    "static/media/kodchasan-vietnamese-400-normal.woff": "/static/media/kodchasan-vietnamese-400-normal.30a7b89e1621fe1e13c5.woff",
+    "static/media/kodchasan-vietnamese-400-normal.woff2": "/static/media/kodchasan-vietnamese-400-normal.d09176c6307111f6087f.woff2",
+    "static/media/reloadIcon.svg": "/static/media/reloadIcon.26bd4b9a720ac3fd1b7f08be92ac9f07.svg",
+    "index.html": "/index.html",
+    "somecss.css.map": "/static/css/somecss.css.map",
+    "all_in_one_file.js.map": "/static/js/all_in_one_file.js.map",
+    "496.5e5beaae.chunk.js.map": "/static/js/496.5e5beaae.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/somecss.css",
+    "static/js/all_in_one_file.js"
+  ]
 }

@@ -314,12 +314,23 @@
   flex-wrap: wrap;
 }
 
+.modal-nav-container > div {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  min-height: 50vh;
+  max-height: 100%;
+  width: 100%;
+  max-width: 100%;
+  font-size: calc(1rem + 7vmin);
+}
+
 .nav-container a {
   transform: scale(1);
   transition: 0.3s all ease;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 5em;
+  max-width: 6em;
   min-height: 1em;
   overflow: hidden;
 }
@@ -376,6 +387,11 @@
   opacity: 0;
   pointer-events: none;
   z-index: 1000;
+  > div {
+    border-radius: 50px;
+    padding: 12vmin;
+    background: var(--spt-color-background-warm);
+  }
 }
 
 .menu-modal > div > .nav-container {
@@ -432,6 +448,7 @@
   border: none;
   transition: 0.5s all ease;
   min-height: 3em;
+  background: var(--spt-color-accent-light);
 }
 
 .menu-modal > div > button:hover {
@@ -463,7 +480,8 @@
 /* RESPONSIVE BREAKPOINTS */
 @media screen and (max-width: 1024px) {
   /* Needs to match with Bottom Bar becoming visible (in Home page) */
-  .subscribe-cta-wrap {
+  .subscribe-cta-wrap,
+  .login-status-wrap {
     display: none;
   }
 }
@@ -476,7 +494,10 @@
     font-size: calc(6px + 1vw);
   }
   .header-title-container {
-    transform: scale(0.7) translate(-4%, -5%);
+    transform: scale(0.8) translate(-21%, -3%);
+  }
+  .logo-to-header-header.logo-title-outerwrap {
+    transform: scale(0.5) translate(-43%, -54%) !important;
   }
   .social-connect-container {
     width: calc(1em + 8vw);
@@ -485,17 +506,19 @@
 
 @media only screen and (max-width: 650px) {
   .header-title-container {
-    transform: scale(0.6) translate(-15%, -11%);
+    transform: scale(0.9) translate(-16%, -5%);
   }
 
   .social-connect-container {
     width: calc(1em + 20vw);
   }
 
-  .small-header-nav {
+  .nav-container a {
     display: none;
   }
-
+  .modal-nav-container .small-header-nav {
+    display: flex;
+  }
   .mobile-menu-button {
     display: flex;
     width: 3em;
@@ -505,6 +528,10 @@
 
 @media only screen and (max-width: 550px) {
   .header-title-container {
-    transform: scale(0.75) translate(7%, -18%);
+    transform: scale(0.95) translate(-18%, 3%);
+  }
+
+  .logo-to-header-header.logo-title-outerwrap {
+    transform: scale(0.5) translate(-43%, -46%) !important;
   }
 }

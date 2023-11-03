@@ -94,15 +94,26 @@ const Welcome = (props) => {
     <div className={Styles["welcome-container"]}>
       <div className={Styles["text-container"]}>
         <h2>Welcome{userName && <span> {userName}</span>}!</h2>
-        Time to get started on your journey!
+        <p>Time to get started on your journey!</p>
+        <p>
+          Check out this{" "}
+          <a
+            href="https://studyplan.glassinteractive.com/demo"
+            target="_blank"
+            rel="noreferrer"
+            alt=""
+          >
+            demo to see what this tool can do for you &rarr;
+          </a>
+        </p>
         <div>
           {!userName && (
-            <div style={{ textAlign: "center" }}>
-              Log in or sign up then{" "}
-              <div className={Styles["new-form-button"]}>
+            <p className={Styles["login-text"]}>
+              Log in or sign up then &nbsp;
+              <span className={Styles["new-form-button"]}>
                 {<StudyPlanItems id="studyPlan" onlyAddToButton={true} />}
-              </div>
-            </div>
+              </span>
+            </p>
           )}
 
           {userName && (

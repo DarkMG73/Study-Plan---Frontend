@@ -272,6 +272,7 @@ function OutputControls(props) {
 
   return (
     <div id="output-controls" className={styles.outerwrap}>
+      <a name="section-controls" className={styles['"section-anchor"']}></a>
       <h2 className="section-title">Controls & Output</h2>
 
       {studyPlan && Object.keys(studyPlan).length > 0 && (

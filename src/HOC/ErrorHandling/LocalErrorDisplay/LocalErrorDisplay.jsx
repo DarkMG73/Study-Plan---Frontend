@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./LocalErrorDisplay.module.css";
+import styles from "./LocalErrorDisplay.module.scss";
 import CardPrimary from "../../../UI/Cards/CardPrimary/CardPrimary";
 
 const LocalErrorDisplay = (props) => {

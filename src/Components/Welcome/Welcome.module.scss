@@ -1,39 +1,48 @@
 .welcome-container {
-    background: inherit;
-    color: inherit;
-    font: var(--spt-font-body-text-12);
-    max-width: 800px;
-    text-align: left;
-    margin: 0 auto;
-    width: 100%;
-    margin: auto;
-    background: var(--spt-color-background);
-    display: flex;
-    justify-content: center;
-    font: var(--spt-font-body-text-12);
-    box-shadow: 3px 3px 7px -3px rgba(0, 0, 0, 0.5), inset 3px 3px 7px -3px #ffffff;
-    border-radius: 6.25px;
-    padding: 1em 3% 2em;
-    display: flex;
-    flex-direction: column;
+  background: inherit;
+  color: inherit;
+  font: var(--spt-font-body-text-12);
+  max-width: 800px;
+  text-align: left;
+  margin: 0 auto;
+  width: 100%;
+  margin: auto;
+  background: var(--spt-color-background);
+  display: flex;
+  justify-content: center;
+  font: var(--spt-font-body-text-12);
+  box-shadow: 3px 3px 7px -3px rgba(0, 0, 0, 0.5),
+    inset 3px 3px 7px -3px #ffffff;
+  border-radius: 6.25px;
+  padding: 1em 3% 2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-text {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
 }
 
 .welcome-container .new-form-button > button {
-    transform: translate(-6.25%, -25%);
+  transform: translate(-6.25%, -25%);
 }
 
- .text-container p, .text-container ol{
-    max-width: 800px;
-     text-align:left;
-     opacity:1;
+.text-container p,
+.text-container ol {
+  max-width: 800px;
+  text-align: left;
+  opacity: 1;
 }
 
 .text-container ol {
-    max-width: 800px;
+  max-width: 800px;
 }
 
 .instructions-container {
-    background: inherit;
-    color: inherit;
-    font: var(--spt-font-body-text-12);
+  background: inherit;
+  color: inherit;
+  font: var(--spt-font-body-text-12);
 }

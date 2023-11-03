@@ -60,7 +60,7 @@ const StudyPlanItem = (props) => {
   const addInputData = (e) => {
     e.preventDefault();
     const parentMasterID = e.target.getAttribute("data-parentmasterid");
-    const parentKey = e.target.getAttribute("parentkey");
+    const parentKey = e.target.getAttribute("data-parentkey");
     const parentsParentKey = e.target.getAttribute("parentsParentKey");
     let title = e.target.getAttribute("title");
     let outputValue = e.target.value;
@@ -304,11 +304,11 @@ const StudyPlanItem = (props) => {
               }
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
-              category={studyPlanItemsObj[key]}
+              data-category={studyPlanItemsObj[key]}
               placeholder={""}
               title={key}
-              parentkey={parentKey}
-              parentsparentkey={parentsParentKey ? parentsParentKey : ""}
+              data-parentkey={parentKey}
+              data-parentsparentkey={parentsParentKey ? parentsParentKey : ""}
               data-parentmasterid={parentMasterID}
               onChange={addInputData}
               defaultValue={studyPlanItemsObj[key]}
@@ -410,11 +410,11 @@ const StudyPlanItem = (props) => {
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
               defaultValue={studyPlanItemsObj[key]}
-              category={key}
+              data-category={key}
               placeholder={"Valid URL only..."}
               title={key}
-              parentkey={parentKey}
-              parentsparentkey={
+              data-parentkey={parentKey}
+              data-parentsparentkey={
                 parentsParentKey ? parentsParentKey.toString() : ""
               }
               data-parentmasterid={parentMasterID}
@@ -484,11 +484,11 @@ const StudyPlanItem = (props) => {
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
               defaultValue={studyPlanItemsObj[key]}
-              category={key}
+              data-category={key}
               placeholder={"Numbers only..."}
               title={key}
-              parentkey={parentKey}
-              parentsparentkey={
+              data-parentkey={parentKey}
+              data-parentsparentkey={
                 parentsParentKey ? parentsParentKey.toString() : ""
               }
               data-parentmasterid={parentMasterID}
@@ -560,11 +560,11 @@ const StudyPlanItem = (props) => {
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
               defaultValue={studyPlanItemsObj[key]}
-              category={key}
+              data-category={key}
               placeholder={key}
               title={key}
-              parentkey={parentKey}
-              parentsparentkey={
+              data-parentkey={parentKey}
+              data-parentsparentkey={
                 parentsParentKey ? parentsParentKey.toString() : ""
               }
               data-parentmasterid={parentMasterID}
@@ -608,7 +608,7 @@ const StudyPlanItem = (props) => {
                 key +
                 "label"
               }
-              htmlFor={parentKey + "-" + key}
+              htmlFor={parentKey + "-" + key + "datalist"}
               className={
                 styles[
                   "protectedHidden-" +
@@ -632,11 +632,11 @@ const StudyPlanItem = (props) => {
               key={parentKey + "-" + key + "datalist"}
               name={parentKey + "-" + key + "datalist"}
               defaultValue={studyPlanItemsObj[key]}
-              category={key}
+              data-category={key}
               placeholder={key}
               title={key}
-              parentkey={parentKey}
-              parentsparentkey={
+              data-parentkey={parentKey}
+              data-parentsparentkey={
                 parentsParentKey ? parentsParentKey.toString() : ""
               }
               data-parentmasterid={parentMasterID}
@@ -663,20 +663,20 @@ const StudyPlanItem = (props) => {
                     <option key={option} value={option}></option>
                   ))}
             </datalist>
+            {/*name={parentKey + "-" + key}*/}
             <input
               type="text"
               list={parentKey + "-" + key + "datalist"}
               id={parentKey + "-" + key}
-              name={parentKey + "-" + key}
               size="50"
               autoComplete="off"
-              category={key}
+              data-category={key}
               placeholder={""}
               title={key}
               name={parentKey + "-" + key + "datalist"}
               defaultValue={studyPlanItemsObj[key]}
-              parentkey={parentKey}
-              parentsparentkey={
+              data-parentkey={parentKey}
+              data-parentsparentkey={
                 parentsParentKey ? parentsParentKey.toString() : ""
               }
               data-parentmasterid={parentMasterID}
@@ -712,7 +712,7 @@ const StudyPlanItem = (props) => {
                 key +
                 "label"
               }
-              htmlFor={parentKey + "-" + key}
+              htmlFor={parentKey + "-" + key + "datalist"}
               className={
                 styles[
                   "protectedHidden-" +
@@ -731,20 +731,20 @@ const StudyPlanItem = (props) => {
             >
               {key}:
             </label>{" "}
+            {/*name={parentKey + "-" + key}*/}
             <input
               type="text"
               list={parentKey + "-" + key + "datalist"}
               id={parentKey + "-" + key}
-              name={parentKey + "-" + key}
               size="50"
               autoComplete="off"
-              category={key}
+              data-category={key}
               placeholder={""}
               title={key}
               name={parentKey + "-" + key + "datalist"}
               defaultValue={studyPlanItemsObj[key]}
-              parentkey={parentKey}
-              parentsparentkey={
+              data-parentkey={parentKey}
+              data-parentsparentkey={
                 parentsParentKey ? parentsParentKey.toString() : ""
               }
               data-parentmasterid={parentMasterID}
@@ -770,11 +770,11 @@ const StudyPlanItem = (props) => {
               key={parentKey + "-" + key + "datalist"}
               name={parentKey + "-" + key + "datalist"}
               defaultValue={studyPlanItemsObj[key]}
-              category={key}
+              data-category={key}
               placeholder={key}
               title={key}
-              parentkey={parentKey}
-              parentsparentkey={
+              data-parentkey={parentKey}
+              data-parentsparentkey={
                 parentsParentKey ? parentsParentKey.toString() : ""
               }
               data-parentmasterid={parentMasterID}
@@ -858,11 +858,11 @@ const StudyPlanItem = (props) => {
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
               defaultValue={studyPlanItemsObj[key]}
-              category={key}
+              data-category={key}
               placeholder={key}
               title
-              parentkey={parentKey}
-              parentsparentkey={
+              data-parentkey={parentKey}
+              data-parentsparentkey={
                 parentsParentKey ? parentsParentKey.toString() : ""
               }
               data-parentmasterid={parentMasterID}
@@ -938,11 +938,11 @@ const StudyPlanItem = (props) => {
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
               defaultValue={studyPlanItemsObj[key]}
-              category={key}
+              data-category={key}
               placeholder={key}
               title={key}
-              parentkey={parentKey}
-              parentsparentkey={
+              data-parentkey={parentKey}
+              data-parentsparentkey={
                 parentsParentKey ? parentsParentKey.toString() : ""
               }
               data-parentmasterid={parentMasterID}
@@ -1039,11 +1039,11 @@ const StudyPlanItem = (props) => {
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
               defaultValue={studyPlanItemsObj[key]}
-              category={key}
+              data-category={key}
               placeholder={key}
               title={key}
-              parentkey={parentKey}
-              parentsparentkey={
+              data-parentkey={parentKey}
+              data-parentsparentkey={
                 parentsParentKey ? parentsParentKey.toString() : ""
               }
               data-parentmasterid={parentMasterID}
@@ -1122,8 +1122,8 @@ const StudyPlanItem = (props) => {
               type="datetime-local"
               placeholder={studyPlanItemsObj[key]}
               title={key}
-              parentkey={parentKey}
-              parentsparentkey={
+              data-parentkey={parentKey}
+              data-parentsparentkey={
                 parentsParentKey ? parentsParentKey.toString() : ""
               }
               data-parentmasterid={parentMasterID}
@@ -1137,7 +1137,7 @@ const StudyPlanItem = (props) => {
                     )
                       .toISOString()
                       .slice(0, 19)
-                  : new Date()
+                  : new Date("yyyy-MM-ddThh:mm")
               }
               className={
                 styles[

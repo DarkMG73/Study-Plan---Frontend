@@ -22,7 +22,7 @@ const useInitStudyPlanItems = () => {
       const output = [];
 
       for (const value of Object.values(masterListObj)) {
-        if (Object.hasOwn(value,"msup") && value.msup === objectIdentifier)
+        if (Object.hasOwn(value, "msup") && value.msup === objectIdentifier)
           output.push(value.identifier);
       }
       return output;
@@ -32,7 +32,7 @@ const useInitStudyPlanItems = () => {
     // if (id === "content") {
     //   schema = getSchemaForContentItem;
     // }
-
+    if (!schema) return false;
     const processDataWithSchema = (schema) => {
       // const groomedSchema = {}
       // // Organize Schema
@@ -56,7 +56,7 @@ const useInitStudyPlanItems = () => {
       )
         ? sortMethod
         : "priority";
-        
+
       const sortedGroomedOutput = sortList({
         sortMethod: sortBy,
         objectToBeSorted: groomedOutput,

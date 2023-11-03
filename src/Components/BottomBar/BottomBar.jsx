@@ -1,15 +1,16 @@
 import styles from "./BottomBar.module.scss";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import StatusUpdate from "../../Components/StatusUpdate/StatusUpdate";
 import TextZoomControls from "../../Components/TextZoomControls/TextZoomControls";
 import LoginStatus from "../../Components/User/LoginStatus/LoginStatus";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
-import SubscribeCTA from "../SubscribeCTA/SubscribeCTA";
+// import SubscribeCTA from "../SubscribeCTA/SubscribeCTA";
 
 const BottomBar = (props) => {
-  const user = false;
+  const user = useSelector((state) => state.auth.user);
   const [toggleLoginModal, setToggleLoginModal] = useState(false);
-let {showLogin} = props;
+  let { showLogin } = props;
   const toggleLoginModalButtonHandler = () => {
     setToggleLoginModal(!toggleLoginModal);
   };
@@ -20,19 +21,18 @@ let {showLogin} = props;
 
   return (
     <div className={styles["bottom-bar"]}>
-      <div className={styles["subscribe-cta-wrap"]}>
-        <SubscribeCTA />
-      </div>
       {false && <StatusUpdate />}
       {showLogin && user && (
         <p>
-          Login Status: {user.userName ? user.userName : user.email} is
-          currently logged in. &nbsp;&nbsp;
+          <span className={styles["user-info-container"]}>
+            <span>{user.userName ? user.userName : user.email}</span>
+          </span>{" "}
+          is currently logged in. &nbsp;&nbsp;
           <button
             onClick={toggleLoginModalButtonHandler}
             className={styles["login-bar-button"]}
           >
-            LOGOUT
+            Logout
             <span className={styles["right-arrow"]}>&#x2192;</span>
           </button>
         </p>
@@ -46,7 +46,7 @@ let {showLogin} = props;
               className={styles["login-bar-button"]}
             >
               {" "}
-              LOGIN or REGISTER HERE
+              Login or Register Here
               <span className={styles["right-arrow"]}>&#x2192;</span>
             </button>
           </span>

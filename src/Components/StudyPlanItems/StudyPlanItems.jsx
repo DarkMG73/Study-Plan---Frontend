@@ -228,7 +228,7 @@ const StudyPlanItems = (props) => {
       </Fragment>
     );
   return (
-    <Fragment key={"Welcome"}>
+    <Fragment key={"Welcomeandgoals"}>
       {!user && outputName.includes("Goal") && <Welcome />}
       {user &&
         outputName.includes("Goal") &&
@@ -257,6 +257,10 @@ const StudyPlanItems = (props) => {
               styles[id]
             }
           >
+            <a
+              name={"section-" + typeName}
+              className={styles["section-anchor"]}
+            ></a>
             <h2 className={styles["group-title"] + " " + styles[id]}>
               {outputName}
             </h2>

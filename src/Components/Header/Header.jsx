@@ -8,6 +8,7 @@ import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
 import useViewport from "../../Hooks/useViewport";
 import PushButton from "../../UI/Buttons/PushButton/PushButton";
 import LoginStatus from "../User/LoginStatus/LoginStatus";
+import Navbar from "../Navbar/Navbar";
 
 function Header(props) {
   const [logoToHeaderBar, setLogoToHeaderBar] = useState(false);
@@ -22,9 +23,8 @@ function Header(props) {
   const [scrolledUp, setScrolledUp] = useState(false);
   const scrollPositionToAtivateLoginStatus = 270;
   const [logoTitleSize, setLogoTitleSize] = useState(100);
-  const [initialWelcomePositionTop, setInitialWelcomePositionTop] = useState(
-    false
-  );
+  const [initialWelcomePositionTop, setInitialWelcomePositionTop] =
+    useState(false);
   let xChange = logoTitleSize - 100;
   let yChange = logoTitleSize - 79;
   let logoTitleTransform = {
@@ -42,7 +42,7 @@ function Header(props) {
   if (content) {
     for (const value of Object.values(content)) {
       if (
-        Object.hasOwn(value,"active") &&
+        Object.hasOwn(value, "active") &&
         value.active &&
         value.active.replace(" ", "") !== ""
       ) {
@@ -192,89 +192,37 @@ function Header(props) {
           )}
         </div>
         <div className={styles["nav-container"]}>
-          {navLinks &&
-            navLinks.map((item) => (
-              <a
-                key={item._id + item.type}
-                href={`#${item.type}`}
-                alt=""
-                className={styles["small-header-nav"]}
-              >
-                {item.titleOnNavMenu ? item.titleOnNavMenu : item.title}
-              </a>
-            ))}
-          {props.aboutIsActive && (
-            <a href="#about" alt="" className={styles["small-header-nav"]}>
-              About
-            </a>
-          )}
-
-          {props.goalsIsActive && (
-            <a href="#goals" alt="" className={styles["small-header-nav"]}>
-              Goals
-            </a>
-          )}
-          {props.stepsIsActive && (
-            <a href="#steps" alt="" className={styles["small-header-nav"]}>
-              Steps
-            </a>
-          )}
-          <button
-            className={styles["mobile-menu-button"]}
-            onClick={mobileMenuButtonHandler}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-          <SocialConnectMenu />
+          <Navbar
+            navLinks={props.navLinks}
+            aboutIsActive={props.aboutIsActive}
+            goalsIsActive={props.goalsIsActive}
+            stepsIsActive={props.stepsIsActive}
+            holdsIsActive={props.holdsIsActive}
+            controlsIsActive={props.controlsIsActive}
+            socialIsActive={props.socialIsActive}
+          />
         </div>
+        <button
+          className={styles["mobile-menu-button"]}
+          onClick={mobileMenuButtonHandler}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
       <div className={styles["menu-modal"]} style={menuModalToggleStyles}>
         <CardPrimary styles={{ maxHeight: "100vh", maxWidth: "100vw" }}>
-          <div className={styles["nav-container"]}>
-            {navLinks &&
-              navLinks.map((item) => (
-                <a
-                  key={item._id + item.type}
-                  href={`#${item.type}`}
-                  alt=""
-                  onClick={mobileMenuButtonHandler}
-                >
-                  {item.titleOnNavMenu ? item.titleOnNavMenu : item.title}
-                </a>
-              ))}
-            {props.aboutIsActive && (
-              <a href="#about" alt="" onClick={mobileMenuButtonHandler}>
-                About
-              </a>
-            )}
-            {props.goalsIsActive && (
-              <a
-                href="#music-studyPlan"
-                alt=""
-                onClick={mobileMenuButtonHandler}
-              >
-                Intentions
-              </a>
-            )}
-
-            {props.stepsIsActive && (
-              <a href="#steps" alt="" onClick={mobileMenuButtonHandler}>
-                Steps
-              </a>
-            )}
-            <SocialConnectMenu
-              socialContainerStyles={{
-                flexDirection: "column",
-                maxWidth: "100%",
-              }}
-              linksContainerStyles={{
-                flexDirection: "column",
-                maxWidth: "100%",
-              }}
-              linksStyles={{ margin: "0.25em auto" }}
-              disableModal={true}
+          <div className={styles["modal-nav-container"]}>
+            <Navbar
+              navLinks={props.navLinks}
+              aboutIsActive={props.aboutIsActive}
+              goalsIsActive={props.goalsIsActive}
+              stepsIsActive={props.stepsIsActive}
+              holdsIsActive={props.holdsIsActive}
+              controlsIsActive={props.controlsIsActive}
+              socialIsActive={props.socialIsActive}
+              linkOnClick={mobileMenuButtonHandler}
             />
           </div>
           <button onClick={mobileMenuButtonHandler}>Close</button>

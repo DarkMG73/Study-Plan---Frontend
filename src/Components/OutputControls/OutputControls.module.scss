@@ -1,5 +1,10 @@
 .outerwrap {
   max-width: 100%;
+  > .section-anchor {
+    position: absolute;
+    top: calc(0px - var(--spt-navbar-height));
+    display: block;
+  }
 }
 
 .outerwrap h2 {
@@ -135,8 +140,6 @@ body .loader-wrap > * {
 .uploaded-json-container .uploaded-json-message {
   background: var(--spt-color-background-warm);
   color: var(--spt-color-background-contrast);
-  border-radius: 50px;
-  /* overflow: hidden; */
   box-shadow: inset 0px -13px 7px -14px #aeaeae,
     inset 0px 14px 7px -14px rgba(0, 0, 0, 0.5294117647);
   padding: 1em;

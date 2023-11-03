@@ -11,6 +11,21 @@
   border-radius: 50px 50px 50px 0;
   margin: 1em 1em 0.1em;
   overflow: hidden;
+
+  > button span {
+    /* font: var(--spt-font-body-text-12); */
+    font-size: 1rem;
+    display: flex;
+    visibility: hidden;
+    width: 4em;
+    overflow: hidden;
+    height: 1em;
+  }
+
+  > button span:before {
+    content: "\25be More \25be";
+    visibility: visible;
+  }
 }
 
 .master-parent-group > button:hover {
@@ -532,7 +547,7 @@ ul[class*="edited-list"] li[class*="type"] label {
   font-weight: 500;
 }
 
-ul[type="hold"]:after {
+ul ul[type="hold"]:after {
   content: "On Hold";
   position: absolute;
   top: 0;
@@ -547,4 +562,24 @@ ul[type="hold"]:after {
   padding: 0 0.5em;
   border-radius: 25px;
   font-weight: 500;
+}
+
+@media screen and (max-width: 900px) {
+  .master-parent-group > div > li {
+    min-width: 0;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .master-parent-group {
+    border-radius: 12.5px;
+    margin: 2vh auto;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .master-parent-group > div > li {
+    padding: 0 0.25em;
+  }
 }

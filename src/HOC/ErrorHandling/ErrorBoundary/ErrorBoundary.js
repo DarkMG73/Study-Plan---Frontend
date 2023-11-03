@@ -53,7 +53,7 @@ export class ErrorBoundary extends Component {
               email.
               <a
                 href={`mailto:general@glassinteractive.com.com?body=${encodeURIComponent(
-                  "Hello! An error has occurred on the Ignite Revolution Music website: " +
+                  "Hello! An error has occurred on the Study Plan website: " +
                     this.state.error.toString() +
                     " ||| " +
                     this.state.errorInfo.componentStack

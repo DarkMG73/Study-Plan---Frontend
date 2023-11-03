@@ -20,7 +20,7 @@ const FormItemEmpty = (props) => {
   const addInputData = (e) => {
     e.preventDefault();
     const parentMasterID = e.target.getAttribute("data-parentmasterid");
-    const parentKey = e.target.getAttribute("parentkey");
+    const parentKey = e.target.getAttribute("data-parentkey");
     let title = e.target.getAttribute("title");
     let outputValue = e.target.value;
 
@@ -59,7 +59,7 @@ const FormItemEmpty = (props) => {
         styles[
           "protectedHidden-" +
             (displayConditions &&
-              Object.hasOwn(displayConditions,"protectedHidden") &&
+              Object.hasOwn(displayConditions, "protectedHidden") &&
               displayConditions.protectedHidden.includes(key) &&
               !showProtectedHidden.includes(parentMasterID))
         ] +
@@ -78,7 +78,7 @@ const FormItemEmpty = (props) => {
       )}
       {key !== "_id" &&
         displayConditions &&
-        Object.hasOwn(displayConditions,"isBoolean") &&
+        Object.hasOwn(displayConditions, "isBoolean") &&
         !displayConditions.isBoolean.includes(key) &&
         !displayConditions.isDate.includes(key) &&
         !displayConditions.isURL.includes(key) && (
@@ -119,11 +119,11 @@ const FormItemEmpty = (props) => {
               }
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
-              category={studyPlanItemsObj[key]}
+              data-category={studyPlanItemsObj[key]}
               placeholder={key}
               title={key}
-              parentkey={parentKey}
-              parentsparentkey={parentsParentKey}
+              data-parentkey={parentKey}
+              data-parentsparentkey={parentsParentKey}
               data-parentmasterid={parentMasterID}
               onChange={addInputData}
               className={
@@ -133,7 +133,7 @@ const FormItemEmpty = (props) => {
                       "PROTECT-ALL"
                     ) && !unlockProtectedVisible.includes(parentMasterID)) ||
                     (displayConditions &&
-                      Object.hasOwn(displayConditions,"protectedVisible") &&
+                      Object.hasOwn(displayConditions, "protectedVisible") &&
                       displayConditions.protectedVisible.includes(key) &&
                       !unlockProtectedVisible.includes(parentMasterID))
                 ]
@@ -144,7 +144,7 @@ const FormItemEmpty = (props) => {
           </Fragment>
         )}
       {displayConditions &&
-        Object.hasOwn(displayConditions,"isBoolean") &&
+        Object.hasOwn(displayConditions, "isBoolean") &&
         displayConditions.isBoolean.includes(key) && (
           <Fragment>
             <label
@@ -190,11 +190,11 @@ const FormItemEmpty = (props) => {
               }
               key={parentKey + "-" + key}
               name={parentKey + "-" + key}
-              category={studyPlanItemsObj[key]}
+              data-category={studyPlanItemsObj[key]}
               placeholder={key}
               title={key}
-              parentkey={parentKey}
-              parentsparentkey={parentsParentKey}
+              data-parentkey={parentKey}
+              data-parentsparentkey={parentsParentKey}
               data-parentmasterid={parentMasterID}
               onChange={addInputData}
               className={
@@ -220,7 +220,7 @@ const FormItemEmpty = (props) => {
           </Fragment>
         )}
       {displayConditions &&
-        Object.hasOwn(displayConditions,"isDate") &&
+        Object.hasOwn(displayConditions, "isDate") &&
         displayConditions.isDate.includes(key) && (
           <Fragment>
             <label
@@ -269,8 +269,8 @@ const FormItemEmpty = (props) => {
               type="datetime-local"
               placeholder={studyPlanItemsObj[key]}
               title={key}
-              parentkey={parentKey}
-              parentsparentkey={parentsParentKey}
+              data-parentkey={parentKey}
+              data-parentsparentkey={parentsParentKey}
               data-parentmasterid={parentMasterID}
               onChange={addInputData}
               defaultValue={

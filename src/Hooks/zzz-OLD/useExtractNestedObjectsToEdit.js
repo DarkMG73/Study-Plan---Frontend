@@ -40,7 +40,7 @@ const useExtractNestedObjectsToEdit = (props) => {
                   styles.title
                 }
               >
-                {obj[key] && Object.hasOwn(obj[key],"title") ? (
+                {obj[key] && Object.hasOwn(obj[key], "title") ? (
                   <Fragment>
                     <div>{obj[key].title}</div>
                     <div>{key}</div>
@@ -72,7 +72,7 @@ const useExtractNestedObjectsToEdit = (props) => {
           );
         return (
           <li
-          key={parentKey + "-" + key}
+            key={parentKey + "-" + key}
             className={
               styles[
                 "protectedHidden-" +
@@ -109,11 +109,11 @@ const useExtractNestedObjectsToEdit = (props) => {
                   <textarea
                     key={parentKey + "-" + key}
                     name={parentKey + "-" + key}
-                    category={obj[key]}
+                    data-category={obj[key]}
                     placeholder={key}
                     title={key}
-                    parentkey={parentKey}
-                    parentsparentkey={parentsParentKey}
+                    data-parentkey={parentKey}
+                    data-parentsparentkey={parentsParentKey}
                     data-parentmasterid={parentMasterID}
                     onChange={addInputData}
                     className={
@@ -150,11 +150,11 @@ const useExtractNestedObjectsToEdit = (props) => {
                 <select
                   key={parentKey + "-" + key}
                   name={parentKey + "-" + key}
-                  category={obj[key]}
+                  data-category={obj[key]}
                   placeholder={key}
                   title={key}
-                  parentkey={parentKey}
-                  parentsparentkey={parentsParentKey}
+                  data-parentkey={parentKey}
+                  data-parentsparentkey={parentsParentKey}
                   data-parentmasterid={parentMasterID}
                   onChange={addInputData}
                   className={
@@ -201,8 +201,8 @@ const useExtractNestedObjectsToEdit = (props) => {
                   type="datetime-local"
                   placeholder={obj[key]}
                   title={key}
-                  parentkey={parentKey}
-                  parentsparentkey={parentsParentKey}
+                  data-parentkey={parentKey}
+                  data-parentsparentkey={parentsParentKey}
                   data-parentmasterid={parentMasterID}
                   onChange={addInputData}
                   defaultValue={new Date(
