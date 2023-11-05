@@ -100,8 +100,6 @@ function OutputControls(props) {
 
   useEffect(() => {
     if (!uploadedForms) {
-      console.log("RESET! dataObj: ", uploadedJSONData);
-
       setUploadedJSONJSX(false);
     }
   }, [uploadedForms]);
@@ -364,7 +362,7 @@ function OutputControls(props) {
           <CardSecondary>
             <div className={styles["uploaded-json-container"]}>
               <CollapsibleElm
-                id={"uploaded-json-collapsible-elm"}
+                elmId={"uploaded-json-collapsible-elm"}
                 styles={{
                   position: "relative",
                 }}
@@ -393,6 +391,7 @@ function OutputControls(props) {
                 buttonTextOpened={"Close Uploaded Items"}
                 buttonTextClosed={"Open Uploaded Items"}
                 open={false}
+                showBottomGradient={false}
               >
                 <div className={styles["uploaded-json-message"]}>
                   <h4>New Items for Upload</h4>

@@ -290,7 +290,7 @@ function SessionResultsRow(props) {
           <Fragment>
             {!inEditMode && (
               <CollapsibleElm
-                id={key + "-" + itemKey + "-see-more-btn"}
+                elmId={key + "-" + itemKey + "-see-more-btn"}
                 maxHeight="7em"
                 inputOrButton="button"
                 buttonStyles={{
@@ -307,6 +307,7 @@ function SessionResultsRow(props) {
                 data=""
                 size="small"
                 open={props.open}
+                showBottomGradient={false}
               >
                 <pre>
                   <code contentEditable={inEditMode}>{value}</code>
@@ -444,7 +445,7 @@ ${styles["grid-item-child"]}`}
     >
       <Card>
         <CollapsibleElm
-          id={key + "-collapsible-elm"}
+          elmId={key + "-collapsible-elm"}
           styles={{
             position: "relative",
           }}
@@ -468,6 +469,7 @@ ${styles["grid-item-child"]}`}
           size="small"
           open={shouldBeOpen}
           onClickCallback={onClickCallbackHandler}
+          showBottomGradient={false}
         >
           {AssembleInnerRow(questionHistory, k, key)}
           <div className={styles["button-container"]}>

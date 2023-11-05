@@ -319,7 +319,7 @@ const StudyPlanItemsList = (props) => {
             }
           >
             <CollapsibleElm
-              id={key + "-collapsible-elm"}
+              elmId={key + "-collapsible-elm"}
               styles={{
                 position: "relative",
                 maxWidth: "100%",
@@ -357,6 +357,7 @@ const StudyPlanItemsList = (props) => {
               data=""
               size="small"
               open={false}
+              showBottomGradient={false}
             >
               <h2
                 key={parentKey}
@@ -632,7 +633,7 @@ const StudyPlanItemsList = (props) => {
             }
           >
             <CollapsibleElm
-              id={key + "-collapsible-elm"}
+              elmId={key + "-collapsible-elm"}
               styles={{
                 position: "relative",
                 maxWidth: "100%",
@@ -670,6 +671,7 @@ const StudyPlanItemsList = (props) => {
               data=""
               size="small"
               open={false}
+              showBottomGradient={false}
             >
               <h2
                 className={

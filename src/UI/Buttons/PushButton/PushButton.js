@@ -52,6 +52,7 @@ function PushButton(props) {
         <label htmlFor={name}>{label}</label>
         <input
           key={name}
+          id={identifier}
           className={
             syles["button"] +
             " " +
@@ -69,6 +70,7 @@ function PushButton(props) {
           value={value}
           data-data={data}
           onClick={onClick}
+          {...otherProps}
         />
       </Fragment>
     );

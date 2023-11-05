@@ -34,7 +34,7 @@ function WorkArea(props) {
       <h2 className="section-title">Answer Workspace</h2>
       <div className={styles["description-text"]}>
         <CollapsibleElm
-          id={"column-collapsible-elm"}
+          elmId={"column-collapsible-elm"}
           styles={{
             position: "relative",
           }}
@@ -54,6 +54,7 @@ function WorkArea(props) {
           size="small"
           buttonTextClosed="Click for Workspace Instructions"
           buttonTextOpened="Hide Workspace Instructions"
+          showBottomGradient={false}
         >
           <p>
             <b>

@@ -226,7 +226,7 @@ function Score() {
         )}
         <CollapsibleElm
           key={"colapse-elm" + questionHistory.stats.usedIds.length}
-          id="backupHistory"
+          elmId="backupHistory"
           inputOrButton="button"
           maxHeight="7.1em"
           styles={{ maxWidth: "100%" }}
@@ -250,6 +250,7 @@ function Score() {
           colorType="primary"
           data=""
           size="small"
+          showBottomGradient={false}
         >
           <ul key={"list"} className={styles["history-list"]}>
             {outputJSX ? (

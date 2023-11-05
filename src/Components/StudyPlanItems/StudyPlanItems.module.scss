@@ -540,15 +540,25 @@ v {
   max-width: 100%;
 }
 
-.studyPlan-history-list-container div {
-  max-width: 100%;
-}
-
-.studyPlan-history-list-container button {
-  position: relative !important;
-  width: 100% !important;
-  left: 0 !important;
-  transform: none;
+.studyPlan-history-list-container {
+  div {
+    max-width: 100%;
+  }
+  > div > {
+    button span {
+      text-align: center;
+    }
+    button:hover {
+      background: var(--spt-color-accent);
+      color: var(--spt-color-background);
+    }
+    button:hover span {
+      color: var(--spt-color-background);
+    }
+    button:active {
+      background: var(--spt-color-accent);
+    }
+  }
 }
 
 .list-button-container button {
@@ -657,5 +667,27 @@ v {
   p,
   ol {
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .studyPlan-history-list-container > div > button {
+    position: relative !important;
+    width: 100% !important;
+    left: 0 !important;
+    transform: none;
+  }
+
+  .studyPlan-history-list-container > div {
+    > button {
+      height: 3em !important;
+    }
+    > button:hover {
+      position: relative !important;
+      width: 100% !important;
+      left: 0 !important;
+      transform: none;
+      background: var(--spt-color-accent-light);
+    }
   }
 }

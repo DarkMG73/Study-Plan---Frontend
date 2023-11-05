@@ -8,7 +8,7 @@ const useInitStudyPlanItems = () => {
   );
   const sortList = useSortList();
   const assembleStudyPlanList = useAssembleStudyPlanList();
-  const outputFunction = (props) => {
+  const outputFunction = async (props) => {
     const {
       typeArray,
       sortMethod,
@@ -61,11 +61,11 @@ const useInitStudyPlanItems = () => {
         sortMethod: sortBy,
         objectToBeSorted: groomedOutput,
       });
-      setAllStudyPlanItems(groomedAllItemOutput);
-      setFormInputData(sortedGroomedOutput);
+
+      return { groomedAllItemOutput, sortedGroomedOutput };
     };
 
-    processDataWithSchema(schema);
+    return processDataWithSchema(schema);
   };
   return outputFunction;
 };

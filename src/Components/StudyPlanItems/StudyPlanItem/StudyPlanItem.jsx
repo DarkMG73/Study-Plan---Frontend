@@ -35,19 +35,14 @@ const StudyPlanItem = (props) => {
   const slideButtonHandler = (e) => {
     e.preventDefault();
     const itemWithNewEdits = { ...studyPlanItemsObj };
+
     const _id = itemWithNewEdits._id;
+
     itemWithNewEdits[key] = !studyPlanItemsObj[key];
 
     if (user) {
       setChecked(!checked);
 
-      dispatch(
-        studyPlanDataActions.updateOneStudyPlanItem({
-          _id: _id,
-          item: itemWithNewEdits,
-        })
-      );
-      console.log("_id: ", _id);
       dispatch(
         studyPlanDataActions.updateStudyPlanDB({ itemWithNewEdits, user })
       );

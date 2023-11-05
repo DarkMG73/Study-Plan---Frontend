@@ -99,6 +99,14 @@ const StudyPlanItems = (props) => {
       allStudyPlanItems,
       setAllStudyPlanItems,
       setFormInputData,
+    }).then((spData) => {
+      if (spData) {
+        const { groomedAllItemOutput, sortedGroomedOutput } = spData;
+
+        setAllStudyPlanItems(groomedAllItemOutput);
+
+        setFormInputData(sortedGroomedOutput);
+      }
     });
   }, [dataObjForEdit, user]);
 
@@ -147,6 +155,11 @@ const StudyPlanItems = (props) => {
       studyPlanDataActions,
     });
   }, [updateStudyPlan]);
+
+  // Clear new forms after processing.
+  useEffect(() => {
+    if (!allFormInputData.allNewForms) setNewFormJSX(false);
+  }, [allFormInputData.allNewForms]);
 
   ////////////////////////////////////////////////////////////////////////
   /// HANDLERS
@@ -334,7 +347,7 @@ const StudyPlanItems = (props) => {
                   >
                     <CollapsibleElm
                       key={id + "-collapsible-elm"}
-                      id={id + "-collapsible-elm"}
+                      elmId={id + "-collapsible-elm"}
                       styles={{
                         position: "relative",
                         maxWidth: "100%",
@@ -364,6 +377,7 @@ const StudyPlanItems = (props) => {
                       buttonTextOpened={"Close Completed Items"}
                       buttonTextClosed={"Open Completed Items"}
                       open={false}
+                      showBottomGradient={true}
                     >
                       <FilteredStudyPlanItems
                         key={id + "Filtered Items"}
@@ -386,7 +400,7 @@ const StudyPlanItems = (props) => {
                   >
                     <CollapsibleElm
                       key={id + "-collapsible-elm"}
-                      id={id + "-collapsible-elm"}
+                      elmId={id + "-collapsible-elm"}
                       styles={{
                         position: "relative",
                         maxWidth: "100%",
@@ -416,6 +430,7 @@ const StudyPlanItems = (props) => {
                       buttonTextOpened={"Close Items Needing Review"}
                       buttonTextClosed={"Open Items Needing Review"}
                       open={false}
+                      showBottomGradient={true}
                     >
                       <FilteredStudyPlanItems
                         key={id + "Filtered Items"}
@@ -454,7 +469,7 @@ const StudyPlanItems = (props) => {
             )}
             <CollapsibleElm
               key={id + "-collapsible-elm"}
-              id={id + "-collapsible-elm"}
+              elmId={id + "-collapsible-elm"}
               styles={{
                 position: "relative",
                 maxWidth: "100%",
@@ -486,6 +501,7 @@ const StudyPlanItems = (props) => {
               buttonTextOpened={"- Close All " + toTitleCase(outputName) + " -"}
               buttonTextClosed={"- Open All " + toTitleCase(outputName) + " -"}
               open={false}
+              showBottomGradient={id === "studyPlan" && true}
             >
               {Object.keys(formInputData).length > 0 && (
                 <div

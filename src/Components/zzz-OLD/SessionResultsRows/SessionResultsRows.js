@@ -48,7 +48,7 @@ function SessionResultsRows(props) {
       const output = (
         <CollapsibleElm
           key={cat + Object.keys(questionHistory[cat]).length}
-          id={"session-results-see-more-btn"}
+          elmId={"session-results-see-more-btn"}
           maxHeight={props.hideCollapsibleElm ? "none" : "26em"}
           inputOrButton="button"
           styles={{ maxWidth: "100%" }}
@@ -75,6 +75,7 @@ function SessionResultsRows(props) {
           size="large"
           buttonTextClosed={`See more ${cat} questions`}
           buttonTextOpened={`See fewer ${cat} questions`}
+          showBottomGradient={false}
         >
           <div
             key={"session-results-" + i}

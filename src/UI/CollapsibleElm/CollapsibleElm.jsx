@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
-import styles from "./CollapsibleElm.module.css";
-import PushButton from "../../UI/Buttons/PushButton/PushButton";
+import styles from "./CollapsibleElm.module.scss";
+import PushButton from "../Buttons/PushButton/PushButton";
 
 function CollapsibleElm(props) {
   const [elmOpen, setElmOpen] = useState(props.open);
@@ -85,9 +85,17 @@ function CollapsibleElm(props) {
   output = (
     <Fragment key={props.elmId}>
       <div
+        id={props.elmId}
         ref={textRef}
-        className={styles["collapsible-elm"]}
+        className={
+          styles["collapsible-elm"] +
+          " " +
+          styles[elmOpen ? "elm-open" : "elm-closed"] +
+          " " +
+          styles[props.showBottomGradient && "show-bottom-gradient"]
+        }
         style={elmOpenStyles}
+        data-container-type="collapsibleElm"
       >
         {childrenWithProps}
       </div>
@@ -95,7 +103,7 @@ function CollapsibleElm(props) {
         <PushButton
           inputOrButton={props.inputOrButton}
           styles={props.buttonStyles}
-          id={props.elmId + "-see-more-btn"}
+          identifier={props.elmId + "-see-more-btn"}
           colorType={props.colorType}
           value={seeMoreButtonText}
           data={props.data}

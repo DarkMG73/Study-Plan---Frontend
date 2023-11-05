@@ -9,6 +9,7 @@ const useCreateNewForm = () => {
   const studyPlanItemSchema = useSelector(
     (state) => state.studyPlanData.schema
   );
+
   const [formType, setFormType] = useState("all");
 
   const outputFunction = (props) => {

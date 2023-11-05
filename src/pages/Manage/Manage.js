@@ -41,7 +41,8 @@ const Manage = (props) => {
     const updateScrollPosition = () => {
       if (!angledRectangleRef.current) return;
 
-      const welcomeScrollPosition = angledRectangleRef.current.getBoundingClientRect();
+      const welcomeScrollPosition =
+        angledRectangleRef.current.getBoundingClientRect();
 
       dispatch(
         scrollPositionActions.updateWelcomeScrollPosition(
@@ -73,7 +74,7 @@ const Manage = (props) => {
           const sortedDataObject = {};
           for (const i in dataObjForEdit[key]) {
             const type = dataObjForEdit[key][i].type;
-            if (!Object.hasOwn(sortedDataObject,type))
+            if (!Object.hasOwn(sortedDataObject, type))
               sortedDataObject[type] = {};
             sortedDataObject[type][i] = dataObjForEdit[key][i];
           }
@@ -126,7 +127,7 @@ const Manage = (props) => {
                 </h3>
                 <CollapsibleElm
                   key={key + "-collapsible-elm"}
-                  id={key + "-collapsible-elm"}
+                  elmId={key + "-collapsible-elm"}
                   styles={{
                     position: "relative",
                   }}
@@ -156,6 +157,7 @@ const Manage = (props) => {
                   buttonTextOpened={"- Close " + toTitleCase(key) + " -"}
                   buttonTextClosed={"- Open " + toTitleCase(key) + " -"}
                   open={false}
+                  showBottomGradient={false}
                 >
                   <StudyPlanItemsList
                     key={key + "catItemList"}
@@ -195,7 +197,7 @@ const Manage = (props) => {
           const sortedDataObject = {};
           for (const i in dataObjForEdit[key]) {
             const type = dataObjForEdit[key][i].type;
-            if (!Object.hasOwn(sortedDataObject,type))
+            if (!Object.hasOwn(sortedDataObject, type))
               sortedDataObject[type] = {};
             sortedDataObject[type][i] = dataObjForEdit[key][i];
           }
@@ -248,7 +250,7 @@ const Manage = (props) => {
                 </h3>
                 <CollapsibleElm
                   key={key + "collapseElm"}
-                  id={key + "-collapsible-elm"}
+                  elmId={key + "-collapsible-elm"}
                   styles={{
                     position: "relative",
                   }}
@@ -278,6 +280,7 @@ const Manage = (props) => {
                   buttonTextOpened={"- Close " + toTitleCase(key) + " -"}
                   buttonTextClosed={"- Open " + toTitleCase(key) + " -"}
                   open={false}
+                  showBottomGradient={false}
                 >
                   <StudyPlanItemsList
                     key={key + "catList"}

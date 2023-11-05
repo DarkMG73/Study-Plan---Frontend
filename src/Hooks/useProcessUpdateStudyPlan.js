@@ -16,14 +16,21 @@ const useProcessUpdateStudyPlan = () => {
       parentSection === "content" ? updateAContentItem : updateAStudyPlanItem;
 
     /* eslint eqeqeq: 0 */
-    if (user && user.isAdmin == true) {
+    if (user) {
       updateAnItem(itemWithNewEdits, user)
         .then((res) => {
           const status = res.status ? res.status : res.response.status;
           if (status >= 400) {
             alert("There was an error: " + res.response.data.message);
           } else if (status >= 200) {
+            dispatch(
+              studyPlanDataActions.updateOneStudyPlanItem({
+                _id: itemWithNewEdits._id,
+                item: itemWithNewEdits,
+              })
+            );
             alert("Success! The item has been updated.");
+
             // setInEditMode(false);
           } else {
             alert("there was an error: " + res.message);

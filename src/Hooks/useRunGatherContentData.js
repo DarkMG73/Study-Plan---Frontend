@@ -70,7 +70,7 @@ export const useRunGatherContentData = (props) => {
             rateLimitRemaining: currentStatus.rateLimitRemaining,
           })
         );
-        if (Object.hasOwn(err,"status") && err.status >= 500) {
+        if (Object.hasOwn(err, "status") && err.status >= 500) {
           setLocalError({
             active: true,
             message:
@@ -78,7 +78,7 @@ export const useRunGatherContentData = (props) => {
               err.statusText +
               `***\n\nIt looks like we can not make a connection. Please refresh the browser plus make sure there is an internet connection and  nothing like a firewall of some sort blocking this request.\n\nIt is also possible that the server's security software detected abnormally high traffic between this IP address and the server.  This is nothing anyone did wrong, just a rare occurrence with a highly-secured server. This will clear itself sometime within the next thirty minutes or so.\n\nPlease contact us if you find you are online and this error does not clear within an hour.\n\nSorry for the trouble. 😢`,
           });
-        } else if (Object.hasOwn(err,"status")) {
+        } else if (Object.hasOwn(err, "status")) {
           console.log(
             "%cGatherToolData: err:",
             "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
@@ -100,10 +100,10 @@ export const useRunGatherContentData = (props) => {
             "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
             err
           );
-          if (Object.hasOwn(err,"status")) {
+          if (Object.hasOwn(err, "status")) {
             const responseURL =
-              Object.hasOwn(err,"request") &&
-              Object.hasOwn(err.request,"responseURL")
+              Object.hasOwn(err, "request") &&
+              Object.hasOwn(err.request, "responseURL")
                 ? err.request.responseURL
                 : "";
             setLocalError({

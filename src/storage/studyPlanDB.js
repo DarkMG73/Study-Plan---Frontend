@@ -186,7 +186,7 @@ export async function deleteAllStudyTopics(user) {
 
 /// GET STUDY PLAN ITEM SCHEMA //////////////
 export async function getSchemaForStudyPlanItem() {
-  alert("Calling for Schema");
+  // alert("Calling for Schema");
   const axiosConfig = {
     headers: {
       "Content-Type": "application/json",

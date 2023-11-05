@@ -108,6 +108,8 @@ const Home = (props) => {
         dispatch(studyPlanDataActions.reGatherStudyPlan(true));
         if (allFormInputData.uploadedForms)
           dispatch(formInputDataActions.resetSubmitUploadedForm());
+        if (allFormInputData.allNewForms)
+          dispatch(formInputDataActions.resetSubmitAllNewForms());
       } else {
         if (!Object.hasOwn(res, "response")) {
           alert(
@@ -182,6 +184,7 @@ const Home = (props) => {
       }
     });
   }, [allFormInputData.allNewForms, allFormInputData.uploadedForms]);
+
   ////////////////////////////////////////
   /// Functionality
   ////////////////////////////////////////
