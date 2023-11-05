@@ -141,7 +141,10 @@ const StudyPlanItemsList = (props) => {
         (key === "markforreview" &&
           existingFormEdits[parentMasterID][key].constructor !== Boolean)
       ) {
-        if (existingFormEdits[parentMasterID][key] === "false")
+        if (
+          existingFormEdits[parentMasterID][key] === "false" ||
+          existingFormEdits[parentMasterID][key] === ""
+        )
           rawItemWithNewEdits[key] = false;
         else {
           rawItemWithNewEdits[key] = true;

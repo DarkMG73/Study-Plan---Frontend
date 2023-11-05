@@ -12,28 +12,49 @@ const useProcessUpdateStudyPlan = () => {
 
     const { itemWithNewEdits, user, parentSection } = updateStudyPlan;
 
+    // Ensure expected Boolean values are correct
+    const outputItemWithNewEdits = { ...itemWithNewEdits };
+    for (const key in outputItemWithNewEdits) {
+      if (
+        key === "markcomplete" ||
+        (key === "markforreview" &&
+          outputItemWithNewEdits[key].constructor !== Boolean)
+      ) {
+        if (
+          outputItemWithNewEdits[key] === "false" ||
+          outputItemWithNewEdits[key] === ""
+        )
+          outputItemWithNewEdits[key] = false;
+        else {
+          outputItemWithNewEdits[key] = true;
+        }
+      }
+    }
+    ///////////////////////////////////////////
+
     const updateAnItem =
       parentSection === "content" ? updateAContentItem : updateAStudyPlanItem;
 
     /* eslint eqeqeq: 0 */
     if (user) {
-      updateAnItem(itemWithNewEdits, user)
+      updateAnItem(outputItemWithNewEdits, user)
         .then((res) => {
           const status = res.status ? res.status : res.response.status;
+
           if (status >= 400) {
             alert("There was an error: " + res.response.data.message);
           } else if (status >= 200) {
             dispatch(
               studyPlanDataActions.updateOneStudyPlanItem({
-                _id: itemWithNewEdits._id,
-                item: itemWithNewEdits,
+                _id: outputItemWithNewEdits._id,
+                item: outputItemWithNewEdits,
               })
             );
             alert("Success! The item has been updated.");
 
             // setInEditMode(false);
           } else {
-            alert("there was an error: " + res.message);
+            alert("There was an error: " + res.message);
           }
         })
         .catch((err) => {

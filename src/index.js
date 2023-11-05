@@ -26,8 +26,8 @@ console.log(
 );
 
 if (inDevelopment) {
-  axios.defaults.baseURL = "https://studyplan.glassinteractive.com/";
-  // axios.defaults.baseURL = "http://localhost:8000";
+  // axios.defaults.baseURL = "https://studyplan.glassinteractive.com/";
+  axios.defaults.baseURL = "http://localhost:8000";
   console.log(
     "%cRunning in DEV MODE with the base URL:",
     "color:#fff;background:#287094;padding:5px;border-radius:0 25px 25px 0",
@@ -50,7 +50,6 @@ axios.defaults.headers.post["Content-Type"] = "application/json";
 
 axios.interceptors.request.use(
   (request) => {
-    // alert("In REQ");
     if (inDevelopment)
       console.log(
         "%cRequest:",
@@ -62,7 +61,6 @@ axios.interceptors.request.use(
     return request;
   },
   (error) => {
-    // alert("In REQ Error");
     if (inDevelopment)
       console.log(
         "%cERROR:",
