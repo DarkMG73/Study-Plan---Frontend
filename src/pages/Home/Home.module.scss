@@ -224,6 +224,9 @@
   .main-music-player {
     margin: calc(9em - 5vw) 2.5% auto auto;
   }
+  .page-wrap > [data-elmtype="card"] {
+    padding: 0.5vw;
+  }
 }
 
 @media only screen and (max-width: 650px) {

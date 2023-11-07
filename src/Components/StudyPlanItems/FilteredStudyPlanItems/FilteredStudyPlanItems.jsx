@@ -26,9 +26,15 @@ const CompletedStudyPlanItems = (props) => {
 
   return (
     <div
-      key="filtered-items-container"
+      key={
+        "filtered-items-container-" +
+        studyPlanMetadata.markcomplete.toString() +
+        studyPlanMetadata.markforreview.toString()
+      }
       className={Styles["filtered-items-container"]}
     >
+      {studyPlanMetadata.markcomplete.toString() +
+        studyPlanMetadata.markforreview.toString()}
       <h3 className={"subtitle " + Styles["filtered-items-title"]}>
         {props.sectionTitle}
       </h3>
@@ -37,7 +43,11 @@ const CompletedStudyPlanItems = (props) => {
       </p>
       {Object.keys(filteredItems).length > 0 && (
         <StudyPlanItemsList
-          key={props.section}
+          key={
+            props.section +
+            studyPlanMetadata.markcomplete.toString() +
+            studyPlanMetadata.markforreview.toString()
+          }
           studyPlanItemsObj={filteredItems}
           allStudyPlanItems={studyPlanSet}
           parentKey={false}

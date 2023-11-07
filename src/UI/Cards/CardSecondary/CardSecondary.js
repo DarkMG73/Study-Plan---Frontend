@@ -9,6 +9,9 @@ const CardSecondary = (props) => {
         styles.header + " " + styles["card-secondary"] + " " + cardStyles.card
       }
       style={props.styles}
+      data-elmtype="card"
+      data-cardtype="card-secondary"
+      data-identifier={props.identifier}
     >
       {props.children}
     </div>

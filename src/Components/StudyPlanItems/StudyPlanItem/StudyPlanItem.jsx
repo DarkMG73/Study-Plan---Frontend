@@ -1226,7 +1226,7 @@ const StudyPlanItem = (props) => {
           rel="noreferrer"
           target="_blank"
           className={
-            styles["featured-url-arrow"] +
+            styles["featured-url-arrow-wrap"] +
             " " +
             styles[
               "protectedHidden-" +
@@ -1242,7 +1242,28 @@ const StudyPlanItem = (props) => {
             ]
           }
         >
-          <a>Go &rarr;</a>
+          <a
+            className={
+              styles["button"] +
+              " " +
+              styles["featured-url-arrow"] +
+              " " +
+              styles[
+                "protectedHidden-" +
+                  displayConditions.protectedHidden.includes(key)
+              ] +
+              " " +
+              styles[
+                "protectedVisible-" +
+                  (displayConditions.protectedVisible.includes("PROTECT-ALL") &&
+                    !unlockProtectedVisible.includes(parentMasterID)) ||
+                  (displayConditions.protectedVisible.includes(key) &&
+                    !unlockProtectedVisible.includes(parentMasterID))
+              ]
+            }
+          >
+            Go &rarr;
+          </a>
         </li>
       )}{" "}
     </Fragment>

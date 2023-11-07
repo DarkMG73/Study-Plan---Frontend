@@ -22,8 +22,25 @@
     top: calc(0px - var(--spt-navbar-height));
     display: block;
   }
+
+  select,
+  input,
+  textarea,
+  a:not([class*="featured-url-arrow"]) {
+    max-width: fit-content;
+    margin-left: 1em;
+    text-align: left;
+  }
 }
 
+select {
+  margin-left: -1em;
+}
+
+input[type="url"] {
+  max-width: 95%;
+  text-overflow: ellipsis;
+}
 .group-studyPlan-goals ul,
 .group-studyPlan ul {
   color: white;
@@ -71,7 +88,7 @@ ul[data-section="studyPlan"][data-hiddeitems="true"]
 .goal {
   border: 10px solid red !important;
 }
-.group-studyPlan-goals ul > div {
+.group-studyPlan-goals ul > div[data-container-type="collapsibleElm"] {
   display: grid;
   grid-gap: 0;
   grid-template-columns: repeat(6, 1fr);
@@ -435,7 +452,7 @@ ul[data-section="studyPlan"][data-hiddeitems="true"]
   form li[class*="demonstratedskilssls"],
   form li[class*="_id"],
   form li[class*="createdAt"],
-  form li[class*="featured-url-arrow"] {
+  form li[class*="featured-url-arrow-wrap"] {
     display: none;
   }
 
@@ -671,6 +688,70 @@ v {
 }
 
 @media screen and (max-width: 650px) {
+  .group-studyPlan-goals ul > div[data-container-type="collapsibleElm"] {
+    padding: 1vh 2vw;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas:
+      "title name  name  name name url-arrow"
+      "slug slug slug slug slug slug"
+      "msup msup   msup msup msup msup"
+      "asup asup   asup asup asup asup"
+      "des   des  des   des des des"
+      "url   url  url   url url url"
+      "type   type  type  type type type"
+      "author   author  author  author author author"
+      "platform   platform  platform  platform platform platform"
+      "lectureTime lectureTime lectureTime labTime    labTime    labTime"
+      "start start    start start    start  start "
+      "acomp acomp    acomp    acomp  acomp acomp"
+      "status status    status    status  status status"
+      "demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc"
+      "demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl"
+      "itemnotes itemnotes itemnotes itemnotes itemnotes itemnotes"
+      "tags tags tags tags tags tags"
+      "markforreview  markforreview markforreview markcomplete  markcomplete markcomplete"
+      "createdAt createdAt createdAt updatedAt updatedAt updatedAt"
+      "_id _id _id _id _id _id" "id id id id id id" "identifier identifier identifier identifier identifier identifier" "masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID"
+      "buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer"
+      "dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container";
+
+    select {
+      max-width: fit-content;
+    }
+  }
+
+  .group-studyPlan ul > div,
+  .group-hold ul > div {
+    display: grid;
+    grid-gap: 0;
+    grid-template-columns: repeat(6, 1fr) 4em;
+    grid-template-areas:
+      "title  progressbar  name  name name name url-arrow"
+      "method   method  method method priority priority priority"
+      "slug   slug   slug slug slug slug slug"
+      "msup   msup   msup msup msup msup msup"
+      "asup   asup   asup asup asup asup asup"
+      "des    des   des   des des des des"
+      "url    url   url   url url url url"
+      "type   type type type type type type"
+      "author author author  author  author author author"
+      "platform platform platform platform platform platform platform"
+      "lectureTime  lectureTime lectureTime labTime    labTime labTime labTime"
+      "start   start acomp  acomp acomp status status"
+      "demonstratedskillsdesc   demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc"
+      "demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl"
+      "itemnotes itemnotes itemnotes itemnotes itemnotes itemnotes itemnotes"
+      "tags tags tags tags tags tags tags"
+      "markforreview  markforreview markforreview markcomplete  markcomplete markcomplete markcomplete"
+      "createdAt createdAt createdAt updatedAt updatedAt updatedAt updatedAt"
+      "_id _id _id _id _id _id _id"
+      "id id id id id id id"
+      "identifier identifier identifier identifier identifier identifier identifier "
+      "masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID"
+      "buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer"
+      "dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container";
+  }
+
   .studyPlan-history-list-container > div > button {
     position: relative !important;
     width: 100% !important;

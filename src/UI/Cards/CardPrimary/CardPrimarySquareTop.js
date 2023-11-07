@@ -13,6 +13,9 @@ const CardPrimarySquareTop = (props) => {
         stylesSquareTop["card-primary-square-top"]
       }
       style={props.styles}
+      data-elmtype="card"
+      data-cardtype="card-primary-square-top"
+      data-identifier={props.identifier}
     >
       {props.children}
     </div>

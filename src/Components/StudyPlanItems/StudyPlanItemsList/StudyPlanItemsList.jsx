@@ -504,9 +504,8 @@ const StudyPlanItemsList = (props) => {
                     >
                       {!unlockProtectedVisible.includes(key) && (
                         <Fragment>
-                          {" "}
-                          Edit
-                          <span className={styles["edit-buttton-target-name"]}>
+                          <span>Edit </span>
+                          <span className={styles["edit-button-target-name"]}>
                             {studyPlanItemsObj[key].name}
                           </span>
                         </Fragment>
@@ -514,7 +513,7 @@ const StudyPlanItemsList = (props) => {
                       {unlockProtectedVisible.includes(key) && (
                         <Fragment>
                           Cancel Editing{" "}
-                          <span className={styles["edit-buttton-target-name"]}>
+                          <span className={styles["edit-button-target-name"]}>
                             {studyPlanItemsObj[key].name}
                           </span>
                           <span
@@ -743,7 +742,7 @@ const StudyPlanItemsList = (props) => {
                         <Fragment>
                           {" "}
                           <span className={styles["edit-button-title"]}>
-                            Edit{" "}
+                            <span>Edit </span>
                           </span>
                           <span className={styles["edit-button-target-name"]}>
                             {studyPlanItemsObj[key].name}

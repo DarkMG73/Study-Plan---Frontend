@@ -9,6 +9,10 @@ const CardPrimary = (props) => {
         styles.header + " " + cardStyles.card + " " + styles["card-primary"]
       }
       style={props.styles}
+      id={"-card" + props.elmID}
+      data-elmtype="card"
+      data-cardtype="card-primary"
+      data-identifier={props.identifier}
     >
       {props.children}
     </div>
