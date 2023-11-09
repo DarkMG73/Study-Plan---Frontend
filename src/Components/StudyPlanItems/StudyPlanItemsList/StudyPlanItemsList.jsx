@@ -361,6 +361,9 @@ const StudyPlanItemsList = (props) => {
               size="small"
               open={false}
               showBottomGradient={false}
+              buttonTextOpened={<Fragment>&uarr;Less</Fragment>}
+              buttonTextClosed={<Fragment>&darr;More</Fragment>}
+              hideButtonArrows={true}
             >
               <h2
                 key={parentKey}
@@ -506,7 +509,7 @@ const StudyPlanItemsList = (props) => {
                         <Fragment>
                           <span>Edit </span>
                           <span className={styles["edit-button-target-name"]}>
-                            {studyPlanItemsObj[key].name}
+                            "{studyPlanItemsObj[key].name}"
                           </span>
                         </Fragment>
                       )}
@@ -674,6 +677,9 @@ const StudyPlanItemsList = (props) => {
               size="small"
               open={false}
               showBottomGradient={false}
+              buttonTextOpened={<Fragment>&uarr;Less</Fragment>}
+              buttonTextClosed={<Fragment>&darr;More</Fragment>}
+              hideButtonArrows={true}
             >
               <h2
                 className={
@@ -745,7 +751,7 @@ const StudyPlanItemsList = (props) => {
                             <span>Edit </span>
                           </span>
                           <span className={styles["edit-button-target-name"]}>
-                            {studyPlanItemsObj[key].name}
+                            "{studyPlanItemsObj[key].name}"
                           </span>
                         </Fragment>
                       )}
@@ -815,7 +821,9 @@ const StudyPlanItemsList = (props) => {
           parentKey={parentKey}
           parentsParentKey={parentsParentKey}
           parentMasterID={parentMasterID}
-          parentMasterType={parentMasterType}
+          parentMasterType={
+            parentMasterType ? parentMasterType : studyPlanItemsObj[key].type
+          }
           displayConditions={displayConditions}
           unlockProtectedVisible={
             props.unlockProtectedVisible

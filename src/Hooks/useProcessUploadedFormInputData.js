@@ -167,7 +167,6 @@ const useProcessUploadedFormInputData = () => {
         return outputDataArray;
       };
 
-      alert("process with existing schema");
       const data = processWithSchema(schema);
       return data;
     }

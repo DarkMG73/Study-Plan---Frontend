@@ -47,6 +47,7 @@ export const studyPlanDataSlice = createSlice({
           ? action.payload.parentSection
           : false,
       };
+
       state.updateStudyPlan = output;
     },
     resetUpdateStudyPlan: (state, action) => {

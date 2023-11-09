@@ -209,14 +209,15 @@ select {
   width: 100%;
   transform: translate(0, -25%);
 }
+
 .progressbar > div {
   width: 100%;
   height: 1em;
-  box-shadow: 2px 2px 4px -3px inset black, -2px -2px 4px -3px inset white,
-    1px 1px 4px -3px white, -1px -1px 4px -3px black;
+  /* box-shadow: 2px 2px 4px -3px inset black, -2px -2px 4px -3px inset white, 1px 1px 4px -3px white, -1px -1px 4px -3px black; */
   border-radius: 50px;
-  background: hsl(0deg 0% 0% / 5%);
+  /* background: hsla(0, 0%, 0%, 0.05);*/
 }
+
 .progressbar label {
   display: none;
 }
@@ -225,11 +226,16 @@ select {
 }
 body .name {
   grid-area: name;
-  padding-top: 0.25em;
+  padding-top: 0.5em;
+  textarea {
+    font-variant: small-caps;
+  }
 }
-.method {
-  grid-area: method;
-  font: var(--spt-font-body-text-12);
+body .method {
+  grid-area: method; // font: var(--spt-font-body-text-12);
+  input {
+    font-variant: small-caps;
+  }
 }
 .method label {
   display: none;
@@ -317,7 +323,7 @@ body .name {
   position: absolute;
   background: var(--spt-color-accent);
   border-radius: 50px;
-  padding: 0 0.5em;
+  padding: 0.125em 0.5em;
   right: 1.5em;
   top: 1.125em;
   font-weight: 700;
@@ -346,7 +352,7 @@ body .featured-url-arrow-wrap {
   a {
     display: inline-block;
     background: transparent;
-    transform: scale(0.75, 1.25) translate(0, -50%);
+    transform: scale(0.75, 1.25) translate(-25%, -36.25%);
     color: inherit;
     pointer-events: all;
   }

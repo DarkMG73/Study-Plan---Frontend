@@ -66,7 +66,9 @@ const exportAllStudyPlanItemsJSON = function (studyPlanItemSet) {
   const newStudyPlanItemsObj = {
     ...studyPlanItemSet,
   };
-  const fileName = prompt("What would you like to name the file?");
+  const fileName = prompt(
+    'What would you like to name the file?\n\nNote: Clicking "CANCEL" will save the file as the default name'
+  );
   let dataStr = JSON.stringify(newStudyPlanItemsObj);
   let dataUri =
     "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);

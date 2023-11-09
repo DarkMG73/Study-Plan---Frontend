@@ -16,25 +16,25 @@
     /* font: var(--spt-font-body-text-12); */
     font-size: 1rem;
     display: flex;
-    visibility: hidden;
+    // visibility: hidden;
     width: 4em;
     overflow: hidden;
     height: 1em;
   }
 
-  > button span:before {
-    content: "\25be More \25be";
-    visibility: visible;
-  }
+  // > button span:before {
+  //   content: "\25be More \25be";
+  //   visibility: visible;
+  // }
+
   datalist {
     display: none;
   }
 }
 
 .master-parent-group > button:hover {
-  transform: scale(1.25, 1);
+  transform: scale(1.125, 1);
 }
-
 .master-parent-group > div {
   display: flex;
   flex-wrap: wrap;
@@ -57,21 +57,22 @@
 }
 
 .master-parent-group > div > .group-title {
-  display: flex;
+  display: none;
+  // display: flex;
   /* flex-direction: column; */
-  -webkit-background-clip: unset;
-  -webkit-text-fill-color: unset;
-  background: inherit;
-  color: inherit;
-  /* padding: 0.5em 1em; */
-  min-width: 100%;
-  border-radius: 50px 50px 0 0;
-  text-align: center;
-  margin: 0;
-  opacity: 0;
-  max-width: 7.5em;
-  min-width: 7.5em;
-  height: 3em;
+  // -webkit-background-clip: unset;
+  // -webkit-text-fill-color: unset;
+  // background: inherit;
+  // color: inherit;
+  // /* padding: 0.5em 1em; */
+  // min-width: 100%;
+  // border-radius: 50px 50px 0 0;
+  // text-align: center;
+  // margin: 0;
+  // opacity: 0;
+  // max-width: 7.5em;
+  // min-width: 7.5em;
+  // height: 3em;
 }
 
 .master-parent-group > div > .group-title > span {
@@ -290,6 +291,7 @@ body .dependencies-container [data-parentmastertype="step"] {
   pointer-events: none;
   background: transparent;
   color: inherit;
+  font-variant: small-caps;
 }
 
 .show-hidden-form-button {
@@ -405,7 +407,7 @@ body .dependencies-container [data-parentmastertype="step"] {
 }
 .edit-button-target-name {
   color: inherit;
-  font-style: italics;
+  font-style: italic;
 }
 .submit-form-button span {
   text-transform: capitalize;
@@ -455,6 +457,8 @@ ul[class*="edited-list"] select {
 
 :not([class*="edited-list"]) li[class*="method"] {
   max-height: 2em;
+  height: 100%;
+  transform: translateY(-10%);
 }
 
 ul[class*="edited-list"] [class*="method"]:before {
@@ -518,10 +522,10 @@ ul[class*="edited-list"] li[class*="type"] label {
   content: "Completed";
   position: absolute;
   top: 0;
-  left: 80%;
+  left: 50%;
   transform: translate(-50%, 0);
   width: fit-content;
-  min-width: 10em;
+  min-width: 11em;
   text-align: center;
   font-size: 1rem;
   background: white;
@@ -540,14 +544,14 @@ ul[class*="edited-list"] li[class*="type"] label {
   content: "Review Needed";
   position: absolute;
   top: 0;
-  left: 80%;
+  left: 50%;
   transform: translate(-50%, 0);
   width: fit-content;
-  min-width: 10em;
+  min-width: 11em;
   text-align: center;
   font-size: 1rem;
-  background: yellow;
-  color: black;
+  background: var(--spt-color-accent-3);
+  color: var(--spt-color-background-warm);
   padding: 0 0.5em;
   border-radius: 25px;
   font-weight: 500;
@@ -557,10 +561,10 @@ ul ul[type="hold"]:after {
   content: "On Hold";
   position: absolute;
   top: 0;
-  left: 80%;
+  left: 50%;
   transform: translate(-50%, 0);
   width: fit-content;
-  min-width: 10em;
+  min-width: 11em;
   text-align: center;
   font-size: 1rem;
   background: var(--spt-color-accent);
@@ -571,8 +575,15 @@ ul ul[type="hold"]:after {
 }
 
 @media screen and (max-width: 900px) {
-  .master-parent-group > div > li {
-    min-width: 0;
+  .master-parent-group > {
+    div > {
+      li {
+        min-width: 0;
+      }
+      li[id*="progressbar-item"] {
+        min-width: fit-content;
+      }
+    }
   }
 }
 
@@ -581,11 +592,26 @@ ul ul[type="hold"]:after {
     border-radius: 12.5px;
     margin: 2vh auto;
     width: 100%;
+
+    > button {
+      max-height: 3em !important;
+    }
+  }
+  ul {
+    ul[data-markedcomplete="true"]:after,
+    ul[data-forreview="true"]:after,
+    ul[type="hold"]:after {
+      font-size: calc(0.2rem + 1vmin);
+    }
   }
 }
 
 @media screen and (max-width: 550px) {
-  .master-parent-group > div > li {
-    padding: 0 0.25em;
-  }
+  // ul[type="step"],
+  // ul[type="hold"] > div > {
+  //   li[id*="name"],
+  //   li[id*="progressbar"] {
+  //     padding: 0.75em 0;
+  //   }
+  // }
 }

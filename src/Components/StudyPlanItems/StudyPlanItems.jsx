@@ -128,7 +128,7 @@ const StudyPlanItems = (props) => {
   useEffect(() => {
     if (changeListArray) {
       const keysToUseArray = studyPlanMetadata
-        ? Object.keys(studyPlanMetadata)
+        ? [...Object.keys(studyPlanMetadata), "progressbar"]
         : [];
 
       const { groomedOutput } = assembleStudyPlanList({
@@ -226,7 +226,7 @@ const StudyPlanItems = (props) => {
           size="medium"
           onClick={addFormButtonHandler}
         >
-          Add to <span>{toTitleCase(id, true)}</span>
+          Add to Your <span>{toTitleCase(id, true)}</span>
         </PushButton>{" "}
         {newFormJSX && (
           <div
@@ -339,12 +339,24 @@ const StudyPlanItems = (props) => {
                     styles[id]
                   }
                 >
-                  <div
-                    key={id}
-                    style={{
-                      margin: "0.5em 1em 0",
-                    }}
-                  >
+                  {!props.hideShowAllButton && (
+                    <div className={styles["new-form-button-wrap"]}>
+                      <PushButton
+                        inputOrButton="button"
+                        id={"create-entry-btn" + id}
+                        colorType="primary"
+                        styles={{}}
+                        value={id}
+                        parentmasterid={id}
+                        data=""
+                        size="medium"
+                        onClick={addFormButtonHandler}
+                      >
+                        Add to Your <span>{toTitleCase(id, true)}</span>
+                      </PushButton>
+                    </div>
+                  )}
+                  <div key={id} className={styles["history-list-inner-wrap"]}>
                     <CollapsibleElm
                       key={id + "-collapsible-elm"}
                       elmId={id + "-collapsible-elm"}
@@ -355,25 +367,10 @@ const StudyPlanItems = (props) => {
                       maxHeight={"0"}
                       s
                       inputOrButton="button"
-                      buttonStyles={{
-                        margin: "auto",
-                        width: "21em",
-                        maxWidth: "100%",
-                        display: "flex",
-                        alignItems: "center",
-                        position: "absolute",
-                        top: "0",
-                        left: "0",
-                        flexGrow: "1",
-                        minWidth: "min-content",
-                        height: "100%",
-                        maxHeight: "3em",
-                        textAlign: "left",
-                        transformOrigin: "left",
-                      }}
+                      buttonStyles={{}}
                       colorType="secondary"
                       data=""
-                      size="small"
+                      size="medium"
                       buttonTextOpened={"Close Completed Items"}
                       buttonTextClosed={"Open Completed Items"}
                       open={false}
@@ -390,14 +387,10 @@ const StudyPlanItems = (props) => {
                         allStudyPlanItems={allStudyPlanItems}
                         displayConditions={displayConditions}
                         user={props.user}
-                      />{" "}
-                    </CollapsibleElm>{" "}
+                      />
+                    </CollapsibleElm>
                   </div>
-                  <div
-                    style={{
-                      margin: "0.25em 1em 0",
-                    }}
-                  >
+                  <div className={styles["history-list-inner-wrap"]}>
                     <CollapsibleElm
                       key={id + "-collapsible-elm"}
                       elmId={id + "-collapsible-elm"}
@@ -408,25 +401,10 @@ const StudyPlanItems = (props) => {
                       maxHeight={"0"}
                       s
                       inputOrButton="button"
-                      buttonStyles={{
-                        margin: "auto",
-                        width: "21em",
-                        maxWidth: "100%",
-                        display: "flex",
-                        alignItems: "center",
-                        position: "absolute",
-                        top: "0",
-                        left: "24em",
-                        flexGrow: "1",
-                        minWidth: "min-content",
-                        height: "100%",
-                        maxHeight: "3em",
-                        textAlign: "left",
-                        transformOrigin: "left",
-                      }}
+                      buttonStyles={{}}
                       colorType="secondary"
                       data=""
-                      size="small"
+                      size="medium"
                       buttonTextOpened={"Close Items Needing Review"}
                       buttonTextClosed={"Open Items Needing Review"}
                       open={false}
@@ -450,23 +428,7 @@ const StudyPlanItems = (props) => {
                   </div>
                 </div>
               )}
-            {!props.hideShowAllButton && (
-              <div className={styles["new-form-button-wrap"]}>
-                <PushButton
-                  inputOrButton="button"
-                  id={"create-entry-btn" + id}
-                  colorType="primary"
-                  styles={{}}
-                  value={id}
-                  parentmasterid={id}
-                  data=""
-                  size="medium"
-                  onClick={addFormButtonHandler}
-                >
-                  Add to <span>{toTitleCase(id, true)}</span>
-                </PushButton>
-              </div>
-            )}
+
             <CollapsibleElm
               key={id + "-collapsible-elm"}
               elmId={id + "-collapsible-elm"}
@@ -639,7 +601,6 @@ const StudyPlanItems = (props) => {
                     </p>
                   </div>
                 )}
-
               {Object.keys(formInputData).length <= 0 &&
                 Object.hasOwn(studyPlanMetadata, "_id") &&
                 studyPlanMetadata._id.length > 0 &&
@@ -658,6 +619,7 @@ const StudyPlanItems = (props) => {
                     <Welcome onlyInstructions={true} />
                   </div>
                 )}
+
               {formInputData &&
                 refresh &&
                 Object.keys(formInputData).length > 0 && (

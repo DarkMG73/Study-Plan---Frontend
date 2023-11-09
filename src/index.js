@@ -73,7 +73,6 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   (response) => {
-    // alert("In Res");
     if (inDevelopment)
       console.log(
         "%cResponse:",

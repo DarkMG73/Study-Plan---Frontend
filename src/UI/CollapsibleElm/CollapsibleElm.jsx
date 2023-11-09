@@ -53,16 +53,18 @@ function CollapsibleElm(props) {
     elmOpenStyles = { maxHeight: "100000px", ...props.styles };
     seeMoreButtonText = (
       <span>
-        &uarr; {props.buttonTextOpened ? props.buttonTextOpened : "See Less"}{" "}
-        &uarr;
+        {!props.hideButtonArrows && <Fragment>&uarr;</Fragment>}
+        {props.buttonTextOpened ? props.buttonTextOpened : "See Less"}
+        {!props.hideButtonArrows && <Fragment>&uarr;</Fragment>}
       </span>
     );
   } else {
     elmOpenStyles = { maxHeight: maxHeight, ...props.styles };
     seeMoreButtonText = (
       <span>
-        &darr; {props.buttonTextClosed ? props.buttonTextClosed : "See More"}{" "}
-        &darr;
+        {!props.hideButtonArrows && <Fragment>&darr;</Fragment>}{" "}
+        {props.buttonTextClosed ? props.buttonTextClosed : "See More"}{" "}
+        {!props.hideButtonArrows && <Fragment>&darr;</Fragment>}
       </span>
     );
   }
@@ -92,7 +94,9 @@ function CollapsibleElm(props) {
           " " +
           styles[elmOpen ? "elm-open" : "elm-closed"] +
           " " +
-          styles[props.showBottomGradient && "show-bottom-gradient"]
+          styles[
+            props.showBottomGradient && overflowActive && "show-bottom-gradient"
+          ]
         }
         style={elmOpenStyles}
         data-container-type="collapsibleElm"

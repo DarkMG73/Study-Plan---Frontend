@@ -27,7 +27,6 @@
   input,
   textarea,
   a:not([class*="featured-url-arrow"]) {
-    max-width: fit-content;
     margin-left: 1em;
     text-align: left;
   }
@@ -35,8 +34,12 @@
 
 select {
   margin-left: -1em;
+  max-width: fit-content;
 }
 
+select[data-category="priority"] {
+  margin: auto;
+}
 input[type="url"] {
   max-width: 95%;
   text-overflow: ellipsis;
@@ -88,18 +91,18 @@ ul[data-section="studyPlan"][data-hiddeitems="true"]
 .goal {
   border: 10px solid red !important;
 }
-.group-studyPlan-goals ul > div[data-container-type="collapsibleElm"] {
+
+ul[data-parentmastertype="goal"] div[data-container-type="collapsibleElm"] {
   display: grid;
+  width: 100%;
   grid-gap: 0;
   grid-template-columns: repeat(6, 1fr);
   grid-template-areas:
-    "title name  name  name name url-arrow"
+    "name name  name  name name name"
     "slug slug slug slug slug slug"
     "msup msup   msup asup asup asup"
     "des   des  des   des des des"
-    "url   url  url   url url url"
-    "type   author  author  author platform platform"
-    "lectureTime labTime    start    acomp  status status"
+    "type   type  start  start acomp acomp"
     "demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc"
     "demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl"
     "itemnotes itemnotes itemnotes itemnotes itemnotes itemnotes"
@@ -113,18 +116,63 @@ ul[data-section="studyPlan"][data-hiddeitems="true"]
   grid-auto-flow: row dense;
   max-width: 100%;
 }
+
+ul[type="goal"] > div[data-container-type="collapsibleElm"] > {
+  .list-button-container,
+  li[id*="url-item"],
+  li[id*="priority-item"],
+  li[id*="method-item"],
+  li[id*="lectureTime-item"],
+  li[id*="labTime-item"],
+  li[id*="author-item"],
+  li[id*="status-item"],
+  li[id*="platform-item"],
+  li[id*="method-item"],
+  li[class*="featured-url-arrow-wrap"] {
+    display: none;
+  }
+}
+
+ul[type="goal"],
+ul[type="step"],
+ul[type="hold"] {
+  > hs.title {
+    display: none;
+  }
+}
+
+ul[type="goal"],
+ul[type="step"],
+ul[type="hold"] {
+  > div[data-container-type="collapsibleElm"] > li[id*="name-item"] {
+    padding-left: 100px;
+  }
+}
+
+ul[type="step"],
+ul[type="hold"] {
+  li[id*="progressbar-item"] {
+    padding-left: 100px;
+    margin-bottom: -0.625em;
+    height: 1em;
+    padding-top: 0;
+  }
+}
+
 .group-studyPlan-goals > button {
   background: var(--spt-color-accent-2-gradient);
   border: none;
 }
 
-.group-studyPlan ul > div,
-.group-hold ul > div {
+ul[data-parentmastertype="step"] div[data-container-type="collapsibleElm"],
+ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
   display: grid;
+  width: 100%;
   grid-gap: 0;
   grid-template-columns: repeat(6, 1fr) 4em;
   grid-template-areas:
-    "title  progressbar  name  name method   priority url-arrow"
+    "progressbar progressbar progressbar progressbar progressbar progressbar progressbar"
+    "name  name name  name method   priority url-arrow"
     "slug   slug  slug slug slug slug slug"
     "msup   msup   msup asup asup asup asup"
     "des    des   des   des des des des"
@@ -145,6 +193,20 @@ ul[data-section="studyPlan"][data-hiddeitems="true"]
     "dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container";
   grid-auto-flow: row dense;
   max-width: 100%;
+}
+
+.studyPlan-items-group[type="hold"] {
+  padding: 2em;
+  box-shadow: inset 3px 3px 7px -4px #000000, inset -3px -3px 7px -4px white;
+  border-radius: 25px;
+  background: var(--spt-color-accent);
+  color: var(--spt-color-background-contrast-dark);
+}
+
+.studyPlan-items-group[type="hold"] subtext {
+  box-shadow: inset 1px 1px 4px -3px #000000, inset -1px -1px 4px -3px white;
+  padding: 1.5em 2em;
+  border-radius: inherit;
 }
 
 .group-title {
@@ -320,8 +382,8 @@ ul[data-section="studyPlan"][data-hiddeitems="true"]
 }
 .new-form-modal ul > div {
   margin: 0;
-  padding: 0 1em;
-  box-shadow: inset -1px -1px 3px -2px white, inset 1px 1px 3px -2px black;
+  padding: 0 1em 4em;
+  box-shadow: -1px -1px 3px -2px white, 1px 1px 3px -2px black;
   background: transparent;
 }
 
@@ -414,9 +476,14 @@ ul[data-section="studyPlan"][data-hiddeitems="true"]
   form label,
   form li:before {
     opacity: 1;
+    font-feature-settings: "smcp", "c2sc";
     font-variant: all-small-caps;
     transition: 0.2s all ease;
     font-size: 1em;
+    background: inherit;
+    color: inherit;
+    height: 2em;
+    flex-grow: 1;
   }
 
   form [for*="type"],
@@ -431,6 +498,7 @@ ul[data-section="studyPlan"][data-hiddeitems="true"]
   form li[class*="type"] {
     border: 3px solid var(--spt-color-accent-dark);
     background: var(--spt-color-accent-dark);
+    color: var(--spt-color-background-warm) !important;
   }
 
   form li[class*="name"]:before,
@@ -439,8 +507,11 @@ ul[data-section="studyPlan"][data-hiddeitems="true"]
     position: absolute;
     top: 0;
     left: 0;
-    transform: translate(0, -30%);
+    transform: translate(51%, -50%);
     font-size: 2em;
+    padding: 0;
+    background: transparent;
+    color: inherit;
   }
 
   form li[class*="markcomplete"],
@@ -519,6 +590,8 @@ ul[data-section="studyPlan"][data-hiddeitems="true"]
     height: 2.5em;
     font: var(--spt-font-body-text);
     font-size: 1em;
+    width: 100%;
+    max-width: 97%;
   }
 
   form li[class*="method"] {
@@ -532,45 +605,55 @@ ul[data-section="studyPlan"][data-hiddeitems="true"]
 }
 
 ////////////////////////////////////////////////////////////////
-[type="goal"] .list-button-container,
-v {
-  display: none;
-}
-
-.studyPlan-items-group[type="hold"] {
-  padding: 2em;
-  box-shadow: inset 3px 3px 7px -4px #000000, inset -3px -3px 7px -4px white;
-  border-radius: 25px;
-  background: var(--spt-color-accent);
-  color: var(--spt-color-background-contrast-dark);
-}
-
-.studyPlan-items-group[type="hold"] subtext {
-  box-shadow: inset 1px 1px 4px -3px #000000, inset -1px -1px 4px -3px white;
-  padding: 1.5em 2em;
-  border-radius: inherit;
-}
 
 .studyPlan-history-list-container {
   position: relative;
   padding-top: 2em;
   max-width: 100%;
+  ul[type="step"][data-parentmastertype="step"] {
+    margin: 0;
+  }
 }
 
 .studyPlan-history-list-container {
   div {
     max-width: 100%;
   }
-  > div > {
+  > .history-list-inner-wrap {
+    position: relative;
+    margin: 2em auto;
+    display: flex;
+    justify-content: center;
+    margin: 1em auto 0.25em;
+    padding: 1em 0;
+    > button {
+      margin: 0 auto;
+      width: 80%;
+      max-width: 100%;
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 0px;
+      flex-grow: 1;
+      min-width: min-content;
+      min-width: min-content;
+      height: 2em;
+      max-height: 2em;
+      background: var(--spt-color-background);
+      color: var(--spt-color-accent-dark);
+      box-shadow: 3px 3px 7px -5px hsl(0deg 0% 56% / 50%) inset,
+        -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
+    }
     button span {
       text-align: center;
     }
+
     button:hover {
-      background: var(--spt-color-accent);
-      color: var(--spt-color-background);
+      background: var(--spt-color-accent-light);
+      color: var(--spt-color-accent-dark);
     }
     button:hover span {
-      color: var(--spt-color-background);
+      color: var(--spt-color-accent-dark);
     }
     button:active {
       background: var(--spt-color-accent);
@@ -578,8 +661,17 @@ v {
   }
 }
 
-.list-button-container button {
-  margin: 0 auto;
+body .list-button-container {
+  button {
+    margin: 0 auto;
+    width: 100%;
+    background: var(--spt-color-background);
+    color: var(--spt-color-accent-dark) !important;
+  }
+  button:hover {
+    background: var(--spt-color-accent-light);
+    color: var(--spt-color-accent-dark) !important;
+  }
 }
 
 .sort-button-container {
@@ -590,6 +682,7 @@ v {
 
 .sort-button-container > * {
   margin: 0 1em 0 0;
+  flex-basis: fit-content;
 }
 .sort-button-container[type="goal"] {
   display: none;
@@ -598,11 +691,16 @@ v {
 .sort-button-wrap {
   display: flex;
   align-items: center;
+  width: 100%;
+  white-space: nowrap;
+  flex-grow: 1;
 }
 
 .sort-button-wrap select {
   text-align-last: left;
   box-shadow: inset 1px 1px 4px -3px black, inset -1px -1px 3px -2px #b8b8b8;
+  width: 100%;
+  max-width: 100%;
 }
 
 // .sort-button-wrap option { direction: rtl; }
@@ -621,8 +719,8 @@ v {
 }
 
 .sort-button-wrap select:hover {
-  background: var(--spt-color-accent-dark);
-  color: var(--spt-color-background);
+  background: var(--spt-color-accent-light);
+  color: var(--spt-color-accent-dark);
   font-weight: 700;
   transition: 0.3s all ease;
 }
@@ -684,15 +782,16 @@ v {
   p,
   ol {
     opacity: 1;
+    margin: 1em;
   }
 }
 
 @media screen and (max-width: 650px) {
-  .group-studyPlan-goals ul > div[data-container-type="collapsibleElm"] {
-    padding: 1vh 2vw;
+  ul[data-parentmastertype="goal"] div[data-container-type="collapsibleElm"] {
+    padding: 0.75em 2vw;
     grid-template-columns: repeat(6, 1fr);
     grid-template-areas:
-      "title name  name  name name url-arrow"
+      "name name  name  name name url-arrow"
       "slug slug slug slug slug slug"
       "msup msup   msup msup msup msup"
       "asup asup   asup asup asup asup"
@@ -714,19 +813,22 @@ v {
       "_id _id _id _id _id _id" "id id id id id id" "identifier identifier identifier identifier identifier identifier" "masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID"
       "buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer"
       "dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container";
-
+    > li {
+      padding: 0 0.25em;
+    }
     select {
       max-width: fit-content;
     }
   }
 
-  .group-studyPlan ul > div,
-  .group-hold ul > div {
+  ul[data-parentmastertype="step"] div[data-container-type="collapsibleElm"],
+  ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
     display: grid;
     grid-gap: 0;
     grid-template-columns: repeat(6, 1fr) 4em;
     grid-template-areas:
-      "title  progressbar  name  name name name url-arrow"
+      "progressbar progressbar progressbar progressbar progressbar progressbar progressbar"
+      "name  name  name  name name name url-arrow"
       "method   method  method method priority priority priority"
       "slug   slug   slug slug slug slug slug"
       "msup   msup   msup msup msup msup msup"
@@ -750,25 +852,41 @@ v {
       "masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID masterLibraryID"
       "buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer"
       "dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container";
-  }
 
-  .studyPlan-history-list-container > div > button {
-    position: relative !important;
-    width: 100% !important;
-    left: 0 !important;
-    transform: none;
-  }
-
-  .studyPlan-history-list-container > div {
-    > button {
-      height: 3em !important;
+    > li {
+      padding-left: 0.25em;
+      padding-right: 0.25em;
     }
-    > button:hover {
-      position: relative !important;
-      width: 100% !important;
-      left: 0 !important;
+    li[class*="method"] {
+      text-align: center;
       transform: none;
-      background: var(--spt-color-accent-light);
+      min-height: 100%;
+      max-height: 100%;
+      label {
+        display: none;
+      }
+      input {
+        text-align: center;
+      }
+    }
+    li[class*="method"]:before {
+      content: "Method";
+      text-align: center;
+      margin: 0;
+    }
+    li[id*="progressbar-item"] {
+      padding-left: 100px !important;
+    }
+    li[class*="priority"] {
+      transform: none;
+    }
+
+    li[class*="priority"]:before {
+      font: inherit;
+      font-variant: all-small-caps;
+      padding: 0.25vh 1vw;
+      margin: 0;
+      transform: none;
     }
   }
 }

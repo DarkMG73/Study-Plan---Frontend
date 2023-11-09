@@ -115,8 +115,8 @@ const StudyPlanItem = (props) => {
 
     let output = "textarea";
 
-    // ID & Progress Bar
     if (itemKey === "_id" || itemKey === "progressbar") {
+      // ID & Progress Bar
       output = itemKey;
     } else {
       // Date
@@ -169,6 +169,11 @@ const StudyPlanItem = (props) => {
           "-" +
           "item"
         }
+        data-parentmastertype={parentMasterType}
+        data-category={studyPlanItemsObj[key]}
+        data-parentkey={parentKey}
+        data-parentsparentkey={parentsParentKey ? parentsParentKey : ""}
+        data-parentmasterid={parentMasterID}
         className={
           styles.item +
           " " +
@@ -244,7 +249,8 @@ const StudyPlanItem = (props) => {
 
             <ProgressBar
               key={parentKey + "-" + key}
-              completed={studyPlanItemsObj["status"]}
+              completed={+studyPlanItemsObj["status"]}
+              maxCompleted="100"
               className="wrapper"
               baseBgColor="transparent"
               bgColor="var(--spt-color-accent-light)"
@@ -340,6 +346,16 @@ const StudyPlanItem = (props) => {
               href={studyPlanItemsObj[key]}
               rel="noreferrer"
               target="_blank"
+              name={parentKey + "-" + key}
+              defaultValue={studyPlanItemsObj[key]}
+              data-category={key}
+              placeholder={"Valid URL only..."}
+              title={key}
+              data-parentkey={parentKey}
+              data-parentsparentkey={
+                parentsParentKey ? parentsParentKey.toString() : ""
+              }
+              data-parentmasterid={parentMasterID}
               className={
                 styles["url-arrow"] +
                 " " +
@@ -978,7 +994,10 @@ const StudyPlanItem = (props) => {
                     let targetIdentifier = Object.values(studyPlan).filter(
                       (item) => item.name === option
                     );
-                    targetIdentifier = targetIdentifier[0][keyToSave];
+
+                    targetIdentifier =
+                      targetIdentifier.length > 0 &&
+                      targetIdentifier[0][keyToSave];
                     return (
                       <option key={targetIdentifier} value={targetIdentifier}>
                         {option}
@@ -1222,9 +1241,6 @@ const StudyPlanItem = (props) => {
             "url"
           }
           key={"arrow" + parentKey + "-" + key}
-          href={studyPlanItemsObj[key]}
-          rel="noreferrer"
-          target="_blank"
           className={
             styles["featured-url-arrow-wrap"] +
             " " +
@@ -1243,6 +1259,20 @@ const StudyPlanItem = (props) => {
           }
         >
           <a
+            href={studyPlanItemsObj[key]}
+            rel="noreferrer"
+            target="_blank"
+            key={parentKey + "-" + key}
+            name={parentKey + "-" + key}
+            defaultValue={studyPlanItemsObj[key]}
+            data-category={key}
+            placeholder={"Valid URL only..."}
+            title={key}
+            data-parentkey={parentKey}
+            data-parentsparentkey={
+              parentsParentKey ? parentsParentKey.toString() : ""
+            }
+            data-parentmasterid={parentMasterID}
             className={
               styles["button"] +
               " " +

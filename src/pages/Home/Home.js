@@ -159,9 +159,9 @@ const Home = (props) => {
             formInputDataActions.setNewFormInputDataObj(filteredAllNewFormsObj)
           );
           alert(
-            "It looks like you might have tried to add a field that must be unique and already exists." +
+            "It looks like you might have tried to add a field that must be unique and already exists. " +
               message +
-              "\n\nThe following items already exist. please change each item before submitting the form." +
+              "\n\nThe following items already exist. please change each item before submitting the form. " +
               writeErrors.map(
                 (errObj) =>
                   "\n   " + errObj.errmsg.split("{")[1].replace("}", "")

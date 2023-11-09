@@ -9,32 +9,24 @@ const CompletedStudyPlanItems = (props) => {
   );
   const studyPlanSet = props.studyPlanSet ? props.studyPlanSet : {};
   const filterKey = props.filterKey;
+
   const filteredItems = {};
 
-  if (Object.hasOwn(studyPlanMetadata, filterKey)) {
-    studyPlanMetadata[filterKey].forEach((id) => {
-      if (Object.hasOwn(studyPlanSet, id)) {
-        if (
-          Object.hasOwn(studyPlanSet[id], filterKey) &&
-          studyPlanSet[id][filterKey] &&
-          studyPlanSet[id][filterKey] !== "false"
-        )
-          filteredItems[id] = { ...studyPlanSet[id] };
-      }
-    });
-  }
+  Object.values(studyPlanSet).forEach((value) => {
+    if (
+      Object.hasOwn(value, filterKey) &&
+      value[filterKey] &&
+      value[filterKey] !== "false"
+    )
+      filteredItems[value._id] = { ...value };
+  });
 
   return (
     <div
-      key={
-        "filtered-items-container-" +
-        studyPlanMetadata.markcomplete.toString() +
-        studyPlanMetadata.markforreview.toString()
-      }
+      key={"filtered-items-container-" + Object.keys(filteredItems).toString()}
+      id={"filtered-items-container-" + Object.keys(filteredItems).toString()}
       className={Styles["filtered-items-container"]}
     >
-      {studyPlanMetadata.markcomplete.toString() +
-        studyPlanMetadata.markforreview.toString()}
       <h3 className={"subtitle " + Styles["filtered-items-title"]}>
         {props.sectionTitle}
       </h3>
@@ -43,11 +35,7 @@ const CompletedStudyPlanItems = (props) => {
       </p>
       {Object.keys(filteredItems).length > 0 && (
         <StudyPlanItemsList
-          key={
-            props.section +
-            studyPlanMetadata.markcomplete.toString() +
-            studyPlanMetadata.markforreview.toString()
-          }
+          key={props.section + Object.keys(filteredItems).toString()}
           studyPlanItemsObj={filteredItems}
           allStudyPlanItems={studyPlanSet}
           parentKey={false}

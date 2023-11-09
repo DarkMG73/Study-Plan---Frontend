@@ -16,9 +16,8 @@ const useProcessUpdateStudyPlan = () => {
     const outputItemWithNewEdits = { ...itemWithNewEdits };
     for (const key in outputItemWithNewEdits) {
       if (
-        key === "markcomplete" ||
-        (key === "markforreview" &&
-          outputItemWithNewEdits[key].constructor !== Boolean)
+        (key === "markcomplete" || key === "markforreview") &&
+        typeof outputItemWithNewEdits[key] !== "boolean"
       ) {
         if (
           outputItemWithNewEdits[key] === "false" ||
