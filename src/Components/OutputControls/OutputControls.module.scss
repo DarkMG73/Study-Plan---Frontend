@@ -213,7 +213,6 @@ body .loader-wrap > * {
     transform: none;
     height: 100%;
     max-height: none !important;
-    justify-content: center;
 
     span {
       width: 100%;
@@ -221,15 +220,19 @@ body .loader-wrap > * {
       height: 59%;
     }
   }
-  [class*="name"]::before {
-    content: "Name";
+
+  [class*="priority"] span {
+    text-align: center;
   }
-  [class*="slug"]::before {
-    content: "Slug";
-  }
-  [class*="type"]::before {
-    content: "Type";
-  }
+  // [class*="name"]::before {
+  //   content: "Name";
+  // }
+  // [class*="slug"]::before {
+  //   content: "Slug";
+  // }
+  // [class*="type"]::before {
+  //   content: "Type";
+  // }
   [class*="tags"]::before {
     content: "Tags";
   }
@@ -239,9 +242,9 @@ body .loader-wrap > * {
   [class*="masterLibraryID"]::before {
     content: "Master Library ID";
   }
-  [class*="method"]::before {
-    content: "Method (corse, book, etc...)";
-  }
+  // [class*="method"]::before {
+  //   content: "Method (corse, book, etc...)";
+  // }
 
   [class*="progressbar"],
   [class*="url-arrow"],

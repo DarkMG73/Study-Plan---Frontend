@@ -29,6 +29,7 @@ const StudyPlanItem = (props) => {
   const [checked, setChecked] = useState(studyPlanItemsObj[key] != false);
   const elementTypeNeeded = findElementType(key);
   const setFormType = props.setFormType;
+
   ////////////////////////////////
   /// Handlers
   ////////////////////////////////
@@ -148,6 +149,35 @@ const StudyPlanItem = (props) => {
     }
 
     return output;
+  }
+
+  let defaultDateValue = new Date("yyyy-MM-ddThh:mm");
+  if (elementTypeNeeded === "isDate") {
+    try {
+      defaultDateValue =
+        studyPlanItemsObj[key] &&
+        new Date(
+          new Date(studyPlanItemsObj[key]).getTime() -
+            new Date().getTimezoneOffset() * 60000
+        )
+          .toISOString()
+          .slice(0, 19);
+    } catch (err) {
+      console.log(
+        "%c⚪️►►►► %cline:168%cerr",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
+        err
+      );
+      console.log(
+        "%c⚪️►►►► %cline:159%cstudyPlanItemsObj[key]",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
+        studyPlanItemsObj[key]
+      );
+    }
   }
 
   ////////////////////////////////
@@ -1120,6 +1150,13 @@ const StudyPlanItem = (props) => {
             >
               {key}:
             </label>
+            {console.log(
+              "%c⚪️►►►► %cline:1146%c studyPlanItemsObj[key]",
+              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+              "color:#fff;background:rgb(161, 23, 21);padding:3px;border-radius:2px",
+              studyPlanItemsObj[key]
+            )}
             <input
               id={
                 parentMasterID +
@@ -1142,17 +1179,7 @@ const StudyPlanItem = (props) => {
               }
               data-parentmasterid={parentMasterID}
               onChange={addInputData}
-              defaultValue={
-                studyPlanItemsObj[key]
-                  ? studyPlanItemsObj[key] &&
-                    new Date(
-                      new Date(studyPlanItemsObj[key]).getTime() -
-                        new Date().getTimezoneOffset() * 60000
-                    )
-                      .toISOString()
-                      .slice(0, 19)
-                  : new Date("yyyy-MM-ddThh:mm")
-              }
+              defaultValue={defaultDateValue}
               className={
                 styles[
                   "protectedHidden-" +
