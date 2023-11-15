@@ -11,7 +11,6 @@ const useProcessUpdateStudyPlan = () => {
   }) => {
     if (!updateStudyPlan) return;
     dispatch(loadingRequestsActions.addToLoadRequest());
-
     const { itemWithNewEdits, user, parentSection } = updateStudyPlan;
 
     // Ensure expected Boolean values are correct
@@ -90,6 +89,7 @@ const useProcessUpdateStudyPlan = () => {
         );
       }
       dispatch(studyPlanDataActions.resetUpdateStudyPlan(false));
+
       dispatch(loadingRequestsActions.removeFromLoadRequest());
     }
   };

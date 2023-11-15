@@ -27,6 +27,25 @@
   line-height: normal !important;
 }
 
+[class*="master-parent-group"] [class*="dependencies-container"] li {
+  textarea,
+  input,
+  select {
+    position: relative;
+    display: block;
+    background: inherit;
+    color: inherit;
+    border: none;
+    /* text-overflow: ellipsis;
+  white-space: nowrap; */
+    resize: none;
+    max-width: 100%;
+    pointer-events: none;
+    line-height: normal !important;
+    box-shadow: none;
+    padding: 0;
+  }
+}
 .name {
 }
 
@@ -553,7 +572,7 @@ li[class*="__v"] {
 /* ********** */
 
 /* Goal Section Grid Adjustments */
-ul[type="goal"] {
+ul[type="goal"] > [data-container-type="collapsibleElm"] > {
   .priority,
   .method,
   .labTime,

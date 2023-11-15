@@ -90,7 +90,7 @@ const StudyPlanItemsList = (props) => {
   ////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     dispatch(loadingRequestsActions.removeFromLoadRequest());
-  });
+  }, []);
 
   useEffect(() => {
     existingFormInputValuesObjRef.current = existingFormInputValuesObj;
@@ -144,17 +144,13 @@ const StudyPlanItemsList = (props) => {
       const existingFormEdits = { ...formInputData.existingFormInputDataObj };
 
       for (const key in existingFormEdits[parentMasterID]) {
-        if (
-          key === "markcomplete" ||
-          (key === "markforreview" &&
-            existingFormEdits[parentMasterID][key].constructor !== Boolean)
-        ) {
+        if (key === "markcomplete" || key === "markforreview") {
           if (
             existingFormEdits[parentMasterID][key] === "false" ||
             existingFormEdits[parentMasterID][key] === ""
-          )
+          ) {
             rawItemWithNewEdits[key] = false;
-          else {
+          } else {
             rawItemWithNewEdits[key] = true;
           }
           rawItemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
@@ -192,7 +188,8 @@ const StudyPlanItemsList = (props) => {
         ) {
           if (
             existingFormEdits[parentMasterID] &&
-            ["", "false"].includes(existingFormEdits[parentMasterID][key])
+            (!existingFormEdits[parentMasterID][key] ||
+              ["", "false"].includes(existingFormEdits[parentMasterID][key]))
           ) {
             itemWithNewEdits[key] = false;
           } else {
@@ -271,6 +268,9 @@ const StudyPlanItemsList = (props) => {
     }
   };
 
+  ////////////////////////////////////////////////////////////////////////
+  /// OUTPUT
+  ////////////////////////////////////////////////////////////////////////
   if (studyPlanItemsObj)
     return Object.keys(studyPlanItemsObj).map((key) => {
       if (

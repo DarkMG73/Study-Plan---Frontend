@@ -164,6 +164,50 @@ const StudyPlanItem = (props) => {
     }
   }
 
+  const optionsList = [];
+  if (elementTypeNeeded === "isOtherKeyFixedCompiledList") {
+    // Create array of objects without parent
+    const fullOptionsArray = Object.values(studyPlan).filter((value) => {
+      // Get rid of parent item from list
+      if (studyPlanItemsObj.name === value.name) return false;
+      return true;
+    });
+
+    // Determine data needed
+    const keyToDisplay =
+      displayConditions.isOtherKeyFixedCompiledList[key].keyToDisplay;
+    const keyForOptionValue =
+      displayConditions.isOtherKeyFixedCompiledList[key].keyToSave;
+
+    // Alpha sort ascending then by type descending (Goals first)
+    const sortedFullOptionsArray = fullOptionsArray
+      .sort((a, b) => {
+        if (!Object.hasOwn(a, "name") || !Object.hasOwn(b, "name")) return 0;
+        if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+        if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+        return 0;
+      })
+      .sort((a, b) => {
+        if (!Object.hasOwn(a, "type") || !Object.hasOwn(b, "type")) return 0;
+        if (a.type.toLowerCase() > b.type.toLowerCase()) return 1;
+        if (a.type.toLowerCase() < b.type.toLowerCase()) return -1;
+        return 0;
+      });
+
+    // Create the JSX
+    sortedFullOptionsArray.forEach((optionObj) => {
+      if (!Object.hasOwn(optionObj, "type")) return false;
+      optionsList.push(
+        <option
+          key={optionObj[keyForOptionValue]}
+          value={optionObj[keyForOptionValue]}
+        >
+          {optionObj.type.toUpperCase()}: {optionObj[keyToDisplay]}
+        </option>
+      );
+    });
+  }
+
   function groomAndAddInputData(target, parentMasterID, outputValue) {
     const parentKey = target.getAttribute("data-parentkey");
     const parentsParentKey = target.getAttribute("parentsParentKey");
@@ -1053,33 +1097,8 @@ const StudyPlanItem = (props) => {
               <option key="-Select One-" value="">
                 -Select One-
               </option>
-              {Object.hasOwn(
-                studyPlanMetadata,
-                displayConditions.isOtherKeyFixedCompiledList[key].keyToDisplay
-              ) &&
-                studyPlanMetadata[
-                  displayConditions.isOtherKeyFixedCompiledList[key]
-                    .keyToDisplay
-                ]
-                  .slice(1)
-                  .map((option) => {
-                    if (studyPlanItemsObj.name === option) return false;
-                    const keyToSave =
-                      displayConditions.isOtherKeyFixedCompiledList[key]
-                        .keyToSave;
-                    let targetIdentifier = Object.values(studyPlan).filter(
-                      (item) => item.name === option
-                    );
 
-                    targetIdentifier =
-                      targetIdentifier.length > 0 &&
-                      targetIdentifier[0][keyToSave];
-                    return (
-                      <option key={targetIdentifier} value={targetIdentifier}>
-                        {option}
-                      </option>
-                    );
-                  })}
+              {optionsList.map((option) => option)}
             </select>
           </Fragment>
         )}

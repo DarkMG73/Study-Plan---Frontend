@@ -404,8 +404,8 @@ const StudyPlanItems = (props) => {
                       colorType="secondary"
                       data=""
                       size="medium"
-                      buttonTextOpened={"Close Completed Items"}
-                      buttonTextClosed={"Open Completed Items"}
+                      buttonTextOpened={"Close Completed Steps"}
+                      buttonTextClosed={"Open Completed Steps"}
                       open={false}
                       showBottomGradient={true}
                     >
@@ -438,8 +438,8 @@ const StudyPlanItems = (props) => {
                       colorType="secondary"
                       data=""
                       size="medium"
-                      buttonTextOpened={"Close Items Needing Review"}
-                      buttonTextClosed={"Open Items Needing Review"}
+                      buttonTextOpened={"Close Steps Needing Review"}
+                      buttonTextClosed={"Open Steps Needing Review"}
                       open={false}
                       showBottomGradient={true}
                     >

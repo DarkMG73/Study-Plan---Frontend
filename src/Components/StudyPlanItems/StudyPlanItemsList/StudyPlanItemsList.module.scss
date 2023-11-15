@@ -56,7 +56,7 @@
   font-variant: all-small-caps;
 }
 
-.master-parent-group > div > .group-title {
+[data-container-type="collapsibleElm"] > .group-title {
   display: none;
   // display: flex;
   /* flex-direction: column; */
@@ -75,7 +75,10 @@
   // height: 3em;
 }
 
-.master-parent-group > div > .group-title > span {
+.master-parent-group
+  > [data-container-type="collapsibleElm"]
+  > .group-title
+  > span {
   width: 100%;
   /* -webkit-background-clip: unset; */
   -webkit-text-fill-color: unset;
@@ -389,7 +392,10 @@ body .dependencies-container [data-parentmastertype="step"] {
   -moz-appearance: none;
 }
 
-.master-parent-group.edited-list select {
+.master-parent-group.edited-list
+  > [data-container-type="collapsibleElm"]
+  > li
+  select {
   -webkit-appearance: auto;
   -moz-appearance: auto;
 }
@@ -424,9 +430,29 @@ body .dependencies-container [data-parentmastertype="step"] {
   background: var(--spt-color-accent-gradient);
   color: var(--spt-color-background);
   margin: 1em auto 0;
+  .dependencies-container {
+    position: relative;
+    pointer-events: none;
+  }
+  .dependencies-container:after {
+    content: "Dependencies are locked when the parent is in edit mode";
+    background: #ffffffdb;
+    color: black;
+    padding: 3em;
+    display: block;
+    text-align: center;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 2rem;
+  }
 }
 
-ul[class*="edited-list"] li {
+ul[class*="edited-list"] > [data-container-type="collapsibleElm"] > li {
   flex-basis: 100%;
   width: 100%;
   max-width: 100%;
@@ -434,45 +460,52 @@ ul[class*="edited-list"] li {
   max-height: none !important;
 }
 
-ul[class*="edited-list"] textarea,
-ul[class*="edited-list"] input,
-ul[class*="edited-list"] select {
-  min-height: 2em;
-  font: inherit;
-  padding: 0.125em 1em;
-  line-height: normal;
-  border-radius: 10px;
-  box-shadow: inset 2px 2px 3px -2px black, inset -2px 2px 3px -2px lightgrey;
-  border: none;
-  width: 100%;
-  min-width: 100%;
-  margin: auto;
+ul[class*="edited-list"] > [data-container-type="collapsibleElm"] > li > {
+  textarea,
+  input,
+  select {
+    min-height: 2em;
+    font: inherit;
+    padding: 0.125em 1em;
+    line-height: normal;
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 3px -2px black, inset -2px 2px 3px -2px lightgrey;
+    border: none;
+    width: 100%;
+    min-width: 100%;
+    margin: auto;
+  }
 }
-
 // ul[class*="edited-list"] label {
 //   opacity: 1;
 
 // }
 
-:not([class*="edited-list"]) li[class*="method"] {
+:not([class*="edited-list"])
+  > [data-container-type="collapsibleElm"]
+  > li[class*="method"] {
   max-height: 2em;
   height: 100%;
   transform: translateY(-10%);
 }
 
-ul[class*="edited-list"] [class*="method"]:before {
+ul[class*="edited-list"]
+  > [data-container-type="collapsibleElm"]
+  > [class*="method"]:before {
   text-overflow: ellipsis;
   overflow: hidden;
   content: "method";
 }
 
-ul[class*="edited-list"] li[class*="progressbar"] {
+ul[class*="edited-list"]
+  > [data-container-type="collapsibleElm"]
+  > li[class*="progressbar"] {
   display: none;
 }
 
-ul[class*="edited-list"] li[class*="name"] {
-  grid-column-start: 2;
-}
+// ul[class*="edited-list"] li[class*="name"] {
+//   grid-column-start: 2;
+// }
 
 // ul[class*="edited-list"] li:before {
 // position: relative;
@@ -485,7 +518,10 @@ ul[class*="edited-list"] li[class*="name"] {
 // opacity: 1;
 // }
 
-ul[class*="edited-list"] li[class*="type"] label {
+ul[class*="edited-list"]
+  > [data-container-type="collapsibleElm"]
+  > li[class*="type"]
+  label {
   display: initial;
 }
 

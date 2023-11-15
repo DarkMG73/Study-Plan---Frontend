@@ -25,7 +25,7 @@ function CollapsibleElm(props) {
   useEffect(() => {
     setTimeout(() => {
       if (!isOverflowActive(textRef.current)) {
-        setMaxHeight("10000px");
+        setMaxHeight("max-content");
         return;
       } else {
         setMaxHeight(props.maxHeight);
@@ -50,7 +50,7 @@ function CollapsibleElm(props) {
   let seeMoreButtonText;
 
   if (elmOpen) {
-    elmOpenStyles = { maxHeight: "100000px", ...props.styles };
+    elmOpenStyles = { maxHeight: "max-content", ...props.styles };
     seeMoreButtonText = (
       <span>
         {!props.hideButtonArrows && <Fragment>&uarr;</Fragment>}

@@ -18,16 +18,6 @@ const useInitStudyPlanItems = () => {
       setFormInputData,
     } = props;
 
-    const findDependencies = (objectIdentifier, masterListObj) => {
-      const output = [];
-
-      for (const value of Object.values(masterListObj)) {
-        if (Object.hasOwn(value, "msup") && value.msup === objectIdentifier)
-          output.push(value.identifier);
-      }
-      return output;
-    };
-
     let schema = studyPlanItemSchema;
     // if (id === "content") {
     //   schema = getSchemaForContentItem;

@@ -91,7 +91,9 @@ const Login = (props) => {
   };
 
   const removeLoadingRequest = function () {
-    dispatch(loadingRequestsActions.removeFromLoadRequest());
+    setTimeout(() => {
+      dispatch(loadingRequestsActions.removeFromLoadRequest());
+    }, 2000);
   };
 
   const completeSignInProcedures = (res) => {

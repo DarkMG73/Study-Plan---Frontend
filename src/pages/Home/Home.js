@@ -285,7 +285,7 @@ const Home = (props) => {
                 user={props.user}
                 type={"goal"}
                 maxCollapsableElmHeight={"none"}
-                noEditButton={true}
+                noEditButton={false}
               />
             )}
           </ErrorBoundary>
