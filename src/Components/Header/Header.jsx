@@ -2,6 +2,7 @@ import styles from "./Header.module.scss";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ReactComponent as SptLogo } from "../../assets/media/spt-ring.svg";
+import SPLogo from "../SPLogo/SPLogo";
 // import SubscribeCTA from "../SubscribeCTA/SubscribeCTA";
 import SocialConnectMenu from "../SocialConnectMenu/SocialConnectMenu";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
@@ -133,7 +134,12 @@ function Header(props) {
   }, []);
 
   return (
-    <div id="spt-header" className={styles.outerwrap}>
+    <div
+      id="spt-header"
+      className={
+        styles.outerwrap + " " + styles["logo-to-outerwrap-" + logoToHeaderBar]
+      }
+    >
       <div
         className={
           styles["logo-title-outerwrap"] +
@@ -145,7 +151,7 @@ function Header(props) {
         <div className={styles["header-title-container"]}>
           <a href="/" alt="">
             <div className={styles["logo-wrap"]}>
-              <SptLogo />
+              <SPLogo />
             </div>
             <div className={styles["title-wrap"]}>
               <h1 className={styles["spt-title"] + " " + styles["first-word"]}>

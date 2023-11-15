@@ -2,8 +2,8 @@
   position: relative;
   width: 100%;
   min-width: 700px;
-  min-height: 110vh;
-  max-height: 700px;
+  min-height: 100%;
+  max-height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;

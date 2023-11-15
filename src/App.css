@@ -135,7 +135,7 @@
   justify-content: center;
   align-items: center;
   font-size: calc(1rem + 1vmin);
-  z-index: 10000;
+  z-index: 10000000;
 }
 
 .bar-loader-wrap > div {

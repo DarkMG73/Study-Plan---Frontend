@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Styles from "./Welcome.module.scss";
 import StudyPlanItems from "../StudyPlanItems/StudyPlanItems";
+import { loadingRequestsActions } from "../../store/loadingRequestsSlice";
 
 const Welcome = (props) => {
   let userName = false;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadingRequestsActions.removeFromLoadRequest());
+  });
 
   if (props.user) {
     if (

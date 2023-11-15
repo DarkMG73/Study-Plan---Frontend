@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./StudyPlanItem.module.scss";
 import { formInputDataActions } from "../../../store/formInputDataSlice";
@@ -29,12 +29,26 @@ const StudyPlanItem = (props) => {
   const [checked, setChecked] = useState(studyPlanItemsObj[key] != false);
   const elementTypeNeeded = findElementType(key);
   const setFormType = props.setFormType;
+  // Delays functions until after typing
+  let typingTimer = null;
+
+  // Clears delay of functions until after typing
+
+  ////////////////////////////////
+  /// Effects
+  ////////////////////////////////
+  useEffect(() => {
+    return () => {
+      clearTimeout(typingTimer);
+    };
+  }, []);
 
   ////////////////////////////////
   /// Handlers
   ////////////////////////////////
   const slideButtonHandler = (e) => {
     e.preventDefault();
+
     const itemWithNewEdits = { ...studyPlanItemsObj };
 
     const _id = itemWithNewEdits._id;
@@ -55,45 +69,24 @@ const StudyPlanItem = (props) => {
 
   const addInputData = (e) => {
     e.preventDefault();
-    const parentMasterID = e.target.getAttribute("data-parentmasterid");
-    const parentKey = e.target.getAttribute("data-parentkey");
-    const parentsParentKey = e.target.getAttribute("parentsParentKey");
-    let title = e.target.getAttribute("title");
-    let outputValue = e.target.value;
+    const target = e.target;
+    const outputValue = target.value;
+    // Allows the form show only inputs needed by each type
+    const parentMasterID = target.getAttribute("data-parentmasterid");
+    let title = target.getAttribute("title");
 
     if (title === "type")
       document
         .getElementById(parentMasterID)
         .setAttribute("newFormType", outputValue);
 
-    if (parentMasterID !== parentKey) {
-      if (parentMasterID === parentsParentKey) {
-        outputValue = { [parentKey]: outputValue };
-        title = parentKey;
-      } else {
-        outputValue = { [title]: outputValue };
-        title = parentKey;
+    clearTimeout(typingTimer);
+
+    typingTimer = setTimeout(() => {
+      if (outputValue) {
+        groomAndAddInputData(target, parentMasterID, outputValue);
       }
-    }
-
-    if (emptyForm)
-      dispatch(
-        formInputDataActions.addToNewFormInputDataObj({
-          parentMasterID,
-          title,
-          outputValue,
-        })
-      );
-
-    if (!emptyForm)
-      dispatch(
-        formInputDataActions.addToExistingFormInputDataObj({
-          parentMasterID,
-          title,
-          outputValue,
-        })
-      );
-    setEditedField(true);
+    }, 2000);
   };
 
   ////////////////////////////////
@@ -164,29 +157,68 @@ const StudyPlanItem = (props) => {
           .slice(0, 19);
     } catch (err) {
       console.log(
-        "%c⚪️►►►► %cline:168%cerr",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
+        "%cERROR:",
+        "color:#f0f0ef;background:#ff0000;padding:10px;border-radius:0 25px 25px 0",
         err
-      );
-      console.log(
-        "%c⚪️►►►► %cline:159%cstudyPlanItemsObj[key]",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
-        studyPlanItemsObj[key]
       );
     }
   }
 
+  function groomAndAddInputData(target, parentMasterID, outputValue) {
+    const parentKey = target.getAttribute("data-parentkey");
+    const parentsParentKey = target.getAttribute("parentsParentKey");
+    let title = target.getAttribute("title");
+
+    if (parentMasterID !== parentKey) {
+      if (parentMasterID === parentsParentKey) {
+        outputValue = { [parentKey]: outputValue };
+        title = parentKey;
+      } else {
+        outputValue = { [title]: outputValue };
+        title = parentKey;
+      }
+    }
+
+    setTimeout(() => {
+      if (emptyForm)
+        dispatch(
+          formInputDataActions.addToNewFormInputDataObj({
+            parentMasterID,
+            title,
+            outputValue,
+          })
+        );
+
+      if (!emptyForm)
+        dispatch(
+          formInputDataActions.addToExistingFormInputDataObj({
+            parentMasterID,
+            title,
+            outputValue,
+          })
+        );
+    }, 500);
+
+    if (!editedField) setEditedField(true);
+  }
   ////////////////////////////////
   /// Output
   ////////////////////////////////
   const output = (
     <Fragment>
       <li
-        key={key}
+        key={
+          key +
+          parentMasterID +
+          "-" +
+          parentsParentKey +
+          "-" +
+          parentKey +
+          "-" +
+          key +
+          "-" +
+          "item"
+        }
         data-marker="CATALOG-ITEM"
         id={
           parentMasterID +
@@ -627,10 +659,10 @@ const StudyPlanItem = (props) => {
               }
             >
               {" "}
-              <option key={"false"} value={false}>
+              <option key={"false-set"} value={false}>
                 False
               </option>
-              <option key={"true"} value={true}>
+              <option key={"true-set"} value={true}>
                 True
               </option>
             </select>
@@ -926,7 +958,21 @@ const StudyPlanItem = (props) => {
             >
               {Object.hasOwn(studyPlanMetadata, key) &&
                 studyPlanMetadata[key].slice(1).map((option) => (
-                  <option key={option} value={option}>
+                  <option
+                    key={
+                      option +
+                      parentMasterID +
+                      "-" +
+                      parentsParentKey +
+                      "-" +
+                      parentKey +
+                      "-" +
+                      key +
+                      "-" +
+                      "option"
+                    }
+                    value={option}
+                  >
                     {option}
                   </option>
                 ))}
@@ -1110,7 +1156,21 @@ const StudyPlanItem = (props) => {
             >
               {Object.values(displayConditions["isLimitedList"][key]).map(
                 (option) => (
-                  <option key={option} value={option}>
+                  <option
+                    key={
+                      option +
+                      parentMasterID +
+                      "-" +
+                      parentsParentKey +
+                      "-" +
+                      parentKey +
+                      "-" +
+                      key +
+                      "-" +
+                      "option"
+                    }
+                    value={option}
+                  >
                     {option}
                   </option>
                 )
@@ -1150,13 +1210,7 @@ const StudyPlanItem = (props) => {
             >
               {key}:
             </label>
-            {console.log(
-              "%c⚪️►►►► %cline:1146%c studyPlanItemsObj[key]",
-              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-              "color:#fff;background:rgb(161, 23, 21);padding:3px;border-radius:2px",
-              studyPlanItemsObj[key]
-            )}
+
             <input
               id={
                 parentMasterID +

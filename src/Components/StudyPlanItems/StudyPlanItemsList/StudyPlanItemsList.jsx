@@ -14,6 +14,7 @@ import {
 } from "../../../storage/contentDB";
 import CollapsibleElm from "../../../UI/CollapsibleElm/CollapsibleElm";
 import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
+import { loadingRequestsActions } from "../../../store/loadingRequestsSlice";
 
 const StudyPlanItemsList = (props) => {
   const [refresh, setRefresh] = useState(1);
@@ -88,6 +89,10 @@ const StudyPlanItemsList = (props) => {
   /// Effects
   ////////////////////////////////////////////////////////////////////////
   useEffect(() => {
+    dispatch(loadingRequestsActions.removeFromLoadRequest());
+  });
+
+  useEffect(() => {
     existingFormInputValuesObjRef.current = existingFormInputValuesObj;
   }, [existingFormInputValuesObj]);
 
@@ -128,87 +133,92 @@ const StudyPlanItemsList = (props) => {
 
   const submitFormButtonHandler = (e) => {
     e.preventDefault();
+    dispatch(loadingRequestsActions.addToLoadRequest());
 
-    const parentMasterID = e.target.getAttribute("data-parentmasterid");
-    // const parentSection = e.target.getAttribute("data-section");
-    const rawItemWithNewEdits = { ...studyPlanItemsObj[parentMasterID] };
-    const _id = rawItemWithNewEdits._id;
-    const existingFormEdits = { ...formInputData.existingFormInputDataObj };
+    // Allow a pause to ensure input data is fully updated to existing form state
+    setTimeout(() => {
+      const parentMasterID = e.target.getAttribute("data-parentmasterid");
+      // const parentSection = e.target.getAttribute("data-section");
+      const rawItemWithNewEdits = { ...studyPlanItemsObj[parentMasterID] };
+      const _id = rawItemWithNewEdits._id;
+      const existingFormEdits = { ...formInputData.existingFormInputDataObj };
 
-    for (const key in existingFormEdits[parentMasterID]) {
-      if (
-        key === "markcomplete" ||
-        (key === "markforreview" &&
-          existingFormEdits[parentMasterID][key].constructor !== Boolean)
-      ) {
+      for (const key in existingFormEdits[parentMasterID]) {
         if (
-          existingFormEdits[parentMasterID][key] === "false" ||
-          existingFormEdits[parentMasterID][key] === ""
-        )
-          rawItemWithNewEdits[key] = false;
-        else {
-          rawItemWithNewEdits[key] = true;
-        }
-        rawItemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
-      }
-      if (
-        existingFormEdits[parentMasterID][key] &&
-        existingFormEdits[parentMasterID][key].constructor === Object
-      ) {
-        const newInnerItemWithNewEdits = {};
-
-        for (const innerKey in existingFormEdits[parentMasterID][key]) {
-          newInnerItemWithNewEdits[innerKey] =
-            existingFormEdits[parentMasterID][key][innerKey];
-        }
-
-        if (key == 0) {
-          const newKey = Object.keys(newInnerItemWithNewEdits)[0];
-          rawItemWithNewEdits[newKey] = newInnerItemWithNewEdits[newKey];
-        } else {
-          rawItemWithNewEdits[key] = { ...newInnerItemWithNewEdits };
-        }
-      } else {
-        rawItemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
-      }
-    }
-
-    // Clean itemWithNewEdits
-    const itemWithNewEdits = {};
-    for (const [key, value] of Object.entries(rawItemWithNewEdits)) {
-      if (key === "_id") {
-        delete itemWithNewEdits[key];
-      } else if (
-        (key === "markcomplete" || key === "markforreview") &&
-        rawItemWithNewEdits[key].constructor !== Boolean
-      ) {
-        if (
-          existingFormEdits[parentMasterID] &&
-          ["", "false"].includes(existingFormEdits[parentMasterID][key])
+          key === "markcomplete" ||
+          (key === "markforreview" &&
+            existingFormEdits[parentMasterID][key].constructor !== Boolean)
         ) {
-          itemWithNewEdits[key] = false;
-        } else {
-          itemWithNewEdits[key] = true;
+          if (
+            existingFormEdits[parentMasterID][key] === "false" ||
+            existingFormEdits[parentMasterID][key] === ""
+          )
+            rawItemWithNewEdits[key] = false;
+          else {
+            rawItemWithNewEdits[key] = true;
+          }
+          rawItemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
         }
-      } else {
-        itemWithNewEdits[key] = value;
-      }
-    }
-    if (user) {
-      dispatch(
-        studyPlanDataActions.updateOneStudyPlanItem({
-          _id: _id,
-          item: itemWithNewEdits,
-        })
-      );
+        if (
+          existingFormEdits[parentMasterID][key] &&
+          existingFormEdits[parentMasterID][key].constructor === Object
+        ) {
+          const newInnerItemWithNewEdits = {};
 
-      dispatch(
-        studyPlanDataActions.updateStudyPlanDB({ itemWithNewEdits, user })
-      );
-      // updateAStudyPlanItem(dataObj, user);
-    } else {
-      alert("You must be logged in to be able to make changes.");
-    }
+          for (const innerKey in existingFormEdits[parentMasterID][key]) {
+            newInnerItemWithNewEdits[innerKey] =
+              existingFormEdits[parentMasterID][key][innerKey];
+          }
+
+          if (key == 0) {
+            const newKey = Object.keys(newInnerItemWithNewEdits)[0];
+            rawItemWithNewEdits[newKey] = newInnerItemWithNewEdits[newKey];
+          } else {
+            rawItemWithNewEdits[key] = { ...newInnerItemWithNewEdits };
+          }
+        } else {
+          rawItemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
+        }
+      }
+
+      // Clean itemWithNewEdits
+      const itemWithNewEdits = {};
+      for (const [key, value] of Object.entries(rawItemWithNewEdits)) {
+        if (key === "_id") {
+          delete itemWithNewEdits[key];
+        } else if (
+          (key === "markcomplete" || key === "markforreview") &&
+          rawItemWithNewEdits[key].constructor !== Boolean
+        ) {
+          if (
+            existingFormEdits[parentMasterID] &&
+            ["", "false"].includes(existingFormEdits[parentMasterID][key])
+          ) {
+            itemWithNewEdits[key] = false;
+          } else {
+            itemWithNewEdits[key] = true;
+          }
+        } else {
+          itemWithNewEdits[key] = value;
+        }
+      }
+      if (user) {
+        dispatch(
+          studyPlanDataActions.updateOneStudyPlanItem({
+            _id: _id,
+            item: itemWithNewEdits,
+          })
+        );
+
+        dispatch(
+          studyPlanDataActions.updateStudyPlanDB({ itemWithNewEdits, user })
+        );
+        // updateAStudyPlanItem(dataObj, user);
+      } else {
+        alert("You must be logged in to be able to make changes.");
+      }
+      dispatch(loadingRequestsActions.removeFromLoadRequest());
+    }, 2000);
   };
 
   const deleteFormButtonHandler = (e) => {

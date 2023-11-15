@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import StudyPlanItemsList from "../Components/StudyPlanItems/StudyPlanItemsList/StudyPlanItemsList";
 import displayConditions from "../data/displayConditionsObj.js";
 import { formInputDataActions } from "../store/formInputDataSlice";
+import { loadingRequestsActions } from "../store/loadingRequestsSlice";
 
 const useCreateNewForm = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,13 @@ const useCreateNewForm = () => {
     ////////////////////////////////////////////////////////////////
     const submitNewFormButtonHandler = (e) => {
       e.preventDefault();
-      dispatch(formInputDataActions.submitAllNewForms());
+      dispatch(loadingRequestsActions.addToLoadRequest());
+
+      // Allow a pause to ensure input data is fully updated to existing form state
+      setTimeout(() => {
+        dispatch(formInputDataActions.submitAllNewForms());
+        dispatch(loadingRequestsActions.removeFromLoadRequest());
+      }, 2000);
     };
 
     const cancelFormButtonHandler = (e) => {

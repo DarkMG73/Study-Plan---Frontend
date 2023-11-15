@@ -11,7 +11,7 @@ const Stats = (props) => {
     studyPlanMetadata.labTime[1];
   const totalLectureTime =
     studyPlanMetadata &&
-    Object.hasOwn(studyPlanMetadata,"lectureTime") &&
+    Object.hasOwn(studyPlanMetadata, "lectureTime") &&
     studyPlanMetadata.lectureTime[1];
   const totalHours = totalLectureTime + totalLabTime;
   const reviewHoursTotal = findAndAddTime("markforreview", studyPlanMetadata);
@@ -30,7 +30,7 @@ const Stats = (props) => {
     let outputTotalHours = 0;
     if (
       studyPlanMetadata &&
-      Object.hasOwn(studyPlanMetadata,fieldName) &&
+      Object.hasOwn(studyPlanMetadata, fieldName) &&
       studyPlanMetadata[fieldName] &&
       studyPlanMetadata[fieldName] !== "false"
     ) {
@@ -49,7 +49,7 @@ const Stats = (props) => {
       });
     }
 
-    return outputTotalHours;
+    return Math.round((outputTotalHours + Number.EPSILON) * 100) / 100;
   }
 
   return (

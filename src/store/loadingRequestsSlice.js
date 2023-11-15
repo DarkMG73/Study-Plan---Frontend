@@ -14,7 +14,8 @@ export const loadingRequestsSlice = createSlice({
     },
     removeFromLoadRequest: (state) => {
       const currentValue = state.pendingLoadRequests;
-      state.pendingLoadRequests = currentValue - 1;
+      if (state.pendingLoadRequests > 0)
+        state.pendingLoadRequests = currentValue - 1;
     },
   },
 });

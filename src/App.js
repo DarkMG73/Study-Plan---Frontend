@@ -1,4 +1,5 @@
 import "./App.css";
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect, Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
@@ -22,6 +23,7 @@ function App() {
   const loadingStatus = useSelector(
     (state) => state.loadingRequests.pendingLoadRequests
   );
+
   const dispatch = useDispatch();
   // const studyPlanData = GatherStudyPlanData();
   const studyPlan = useSelector((state) => state.studyPlanData);
@@ -82,52 +84,52 @@ function App() {
   //   }
   // );
 
-  // axios.interceptors.response.use(
-  //   (response) => {
-  //     const serverRateLimitRemaining = response.headers["ratelimit-remaining"];
-  //     if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
-  //       console.log(
-  //         "%cRate Limit Remaining: ",
-  //         "color:#fff;background:#ccd62d;padding:5px;border-radius:0 25px 25px 0",
-  //         serverRateLimitRemaining
-  //       );
-  //     }
-  //     dispatch(loadingRequestsActions.removeFromLoadRequest());
-  //     dispatch(
-  //       statusUpdateActions.updateStatus({
-  //         status: response.status,
-  //         statusText: response.statusText,
-  //         rateLimitRemaining: serverRateLimitRemaining,
-  //       })
-  //     );
-  //     setTimeout(() => {
-  //       dispatch(authActions.resetRecentLogout());
-  //       dispatch(authActions.resetRecentLogin());
-  //     }, 3000);
+  axios.interceptors.response.use(
+    (response) => {
+      const serverRateLimitRemaining = response.headers["ratelimit-remaining"];
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+        console.log(
+          "%cRate Limit Remaining: ",
+          "color:#fff;background:#ccd62d;padding:5px;border-radius:0 25px 25px 0",
+          serverRateLimitRemaining
+        );
+      }
+      // dispatch(loadingRequestsActions.removeFromLoadRequest());
+      // dispatch(
+      //   statusUpdateActions.updateStatus({
+      //     status: response.status,
+      //     statusText: response.statusText,
+      //     rateLimitRemaining: serverRateLimitRemaining,
+      //   })
+      // );
+      setTimeout(() => {
+        // dispatch(authActions.resetRecentLogout());
+        // dispatch(authActions.resetRecentLogin());
+      }, 3000);
 
-  //     return response;
-  //   },
-  //   (error) => {
-  //     console.log(
-  //       "%cERROR:",
-  //       "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-  //       error
-  //     );
-  //     dispatch(
-  //       statusUpdateActions.updateStatus({
-  //         status:
-  //           error.hasOwnProperty("response") && error.response.status
-  //             ? error.response.status
-  //             : 500,
-  //         statusText:
-  //           error.hasOwnProperty("response") && error.response.statusText
-  //             ? error.response.statusText
-  //             : error.message,
-  //       })
-  //     );
-  //     return Promise.reject(error);
-  //   }
-  // );
+      return response;
+    },
+    (error) => {
+      console.log(
+        "%cERROR:",
+        "color:#f0f0ef;background:#ff0000;padding:10px;border-radius:0 25px 25px 0",
+        error
+      );
+      dispatch(
+        statusUpdateActions.updateStatus({
+          status:
+            Object.hasOwn(error, "response") && error.response.status
+              ? error.response.status
+              : 500,
+          statusText:
+            Object.hasOwn(error, "response") && error.response.statusText
+              ? error.response.statusText
+              : error.message,
+        })
+      );
+      return Promise.reject(error);
+    }
+  );
 
   ////////////////////////////////////////
   /// FUNCTIONALITY
@@ -232,6 +234,7 @@ function App() {
             </div>
           </div>
         )}
+
         <Routes>
           <Fragment>
             {loadingStatus && <Route path="/*" element={<BarLoader />} />}

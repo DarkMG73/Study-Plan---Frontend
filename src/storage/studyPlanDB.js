@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useDispatch } from "react-redux";
 
 /// GET THE STUDY PLAN ITEMS /////////////////////////////
 export const studyPlanData = async (user) => {

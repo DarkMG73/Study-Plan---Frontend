@@ -1,0 +1,83 @@
+.sp-logo-container {
+  border: 1px solid;
+  border-radius: 50%;
+  max-width: min-content;
+  background: var(--spt-color-background);
+  padding: 0 0.25em;
+  overflow: visible;
+  a {
+    text-decoration: none;
+    display: flex;
+    background: transparent;
+    width: 100%;
+    overflow: visible !important;
+    min-width: 100%;
+    transform: scale(1, 1.25) translateX(0.35em);
+  }
+}
+
+.spt-title {
+  margin: 0 auto;
+  font: var(--spt--font-heading);
+  position: relative;
+  background: radial-gradient(50% 50% at 50% 50%, #ff4024 0%, #bb2b95 100%);
+  background: var(--spt-color-accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-family: Covered By Your Grace;
+  font-size: 96px;
+  font-size: calc(3em + 3vw);
+  font-size: 4em;
+  font-weight: 700;
+  letter-spacing: 0em;
+  display: inline-block;
+}
+
+.spt-title.first-word {
+}
+
+.spt-title.second-word {
+  padding: 0 0.125em 0 0;
+  background: var(--spt-color-accent-2-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: scale(0.9) translate(-20%, 9%);
+}
+
+.sp-logo-wrap {
+  display: flex;
+
+  left: 0;
+}
+
+.sp-logo-wrap svg {
+  position: relative !important;
+  height: 100% !important;
+  align-items: center;
+  width: 100% !important;
+  top: auto !important;
+  left: auto !important;
+  /* max-height: 2.75em !important; */
+}
+
+.sp-logo-wrap path,
+.sp-logo-wrap circle {
+  fill: ivory !important;
+  fill: var(--spt-color-accent) !important;
+  fill: url(#radial-gradient) !important;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+@media screen and (max-width: 1024px) {
+}
+
+@media screen and (max-width: 900px) {
+}
+
+@media only screen and (max-width: 650px) {
+}
+
+@media only screen and (max-width: 550px) {
+}

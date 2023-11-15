@@ -29,14 +29,19 @@ import {
 import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 import useSortList from "../../Hooks/useSortList";
 import useAssembleStudyPlanList from "../../Hooks/useAssembleStudyPlanList";
+import { loadingRequestsActions } from "../../store/loadingRequestsSlice";
+import BarLoader from "../../UI/Loaders/BarLoader/BarLoader";
 
 const StudyPlanItems = (props) => {
   const user = useSelector((state) => state.auth.user);
-  const { studyPlan, studyPlanMetadata } = useSelector(
+  const { studyPlan, studyPlanMetadata, schema } = useSelector(
     (state) => state.studyPlanData
   );
   const updateStudyPlan = useSelector(
     (state) => state.studyPlanData.updateStudyPlan
+  );
+  const loadingStatus = useSelector(
+    (state) => state.loadingRequests.pendingLoadRequests
   );
   let saveManyItems = saveManyStudyPlanItems;
   const [sortMethod, setSortMethod] = useState("priority");
@@ -68,6 +73,7 @@ const StudyPlanItems = (props) => {
   const sortList = useSortList();
   const [formType, setFormType] = useState("all");
   const assembleStudyPlanList = useAssembleStudyPlanList();
+  const [delayRender, setDelayRender] = useState(true);
   let outputName =
     dataObjForEdit &&
     dataObjForEdit[id] &&
@@ -89,7 +95,30 @@ const StudyPlanItems = (props) => {
   ////////////////////////////////////////////////////////////////////////
   /// EFFECTS
   ////////////////////////////////////////////////////////////////////////
+
+  // dispatch(loadingRequestsActions.addToLoadRequest());
+  // useEffect(() => {
+  //   console.log(
+  //     "%c⚪️►►►► %cline:99%cloadingStatus",
+  //     "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+  //     "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+  //     "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
+  //     loadingStatus
+  //   );
+  //   if (loadingStatus) dispatch(loadingRequestsActions.removeFromLoadRequest());
+  // });
+
   useEffect(() => {
+    setTimeout(setDelayRender(false), 2000);
+  }, []);
+
+  useEffect(() => {
+    setTimeout(setDelayRender(false), 2000);
+  }, [formInputData]);
+
+  useEffect(() => {
+    setDelayRender(true);
+
     initStudyPlanItems({
       id,
       sortMethod: sortMethod,
@@ -107,28 +136,31 @@ const StudyPlanItems = (props) => {
 
         setFormInputData(sortedGroomedOutput);
       }
+      setTimeout(setDelayRender(false), 2000);
     });
   }, [dataObjForEdit, user]);
 
   useEffect(() => {
-    const enumerableFormInputData = {};
-    for (const [key, value] of Object.entries(formInputData)) {
-      enumerableFormInputData[key] = value;
+    if (formInputData) {
+      const enumerableFormInputData = {};
+      for (const [key, value] of Object.entries(formInputData)) {
+        enumerableFormInputData[key] = value;
+      }
+
+      const sortedGroomedOutput = sortList({
+        sortMethod: sortMethod,
+        objectToBeSorted: { ...enumerableFormInputData },
+      });
+
+      setFormInputData(sortedGroomedOutput);
+      setRefresh(refresh + 1);
     }
-
-    const sortedGroomedOutput = sortList({
-      sortMethod: sortMethod,
-      objectToBeSorted: { ...enumerableFormInputData },
-    });
-
-    setFormInputData(sortedGroomedOutput);
-    setRefresh(refresh + 1);
   }, [sortMethod]);
 
   useEffect(() => {
     if (changeListArray) {
-      const keysToUseArray = studyPlanMetadata
-        ? [...Object.keys(studyPlanMetadata), "progressbar"]
+      const keysToUseArray = getSchemaForContentItem
+        ? [...Object.keys(schema), "progressbar"]
         : [];
 
       const { groomedOutput } = assembleStudyPlanList({
@@ -270,6 +302,7 @@ const StudyPlanItems = (props) => {
               styles[id]
             }
           >
+            {delayRender && <BarLoader />}
             <a
               name={"section-" + typeName}
               className={styles["section-anchor"]}
@@ -549,75 +582,91 @@ const StudyPlanItems = (props) => {
                   </label>
                 </div>
               )}
-              {Object.keys(formInputData).length <= 0 &&
+
+              {!delayRender &&
+                Object.keys(formInputData).length <= 0 &&
                 outputName.includes("Goal") && (
-                  <div className={styles["instructions-container"]}>
-                    <p>
-                      It appears you are missing your main goal. :( It is very
-                      important to start with one main large goal. Everything
-                      should lead to this main goal, so there should only be one
-                      goal (and no more) in this "Goals and Curriculum" section.
-                      Opening that goal, should reveal all of the sub-goals and
-                      steps supporting this goal.
-                    </p>
-                    <h4>To do this: </h4>
-                    <ol>
-                      <li key="studyPlan">
-                        Open the new entry form with:{" "}
-                        {
-                          <StudyPlanItems
-                            key="studyPlan"
-                            id="studyPlan"
-                            onlyAddToButton={true}
-                          />
-                        }
-                      </li>
-                      <li key={2}>
-                        Mark it as "Goal" in the "Type" section of the form.
-                      </li>
-                      <li key={3}>Save the main goal</li>
-                      <li key={4}>
-                        Then, make sure every single goal and step added after
-                        that is connected either to this main goal or to another
-                        goal or step (which would be in support of the main
-                        goal). This is set in the "Goal or Step this Directly
-                        Works Towards" setting. It will be empty when making
-                        your original main goal, but with each subsequent goal
-                        or step all previous goals or steps will be available to
-                        select.{" "}
-                      </li>
-                    </ol>
-                    <p key={5}>
-                      <b>IMPORTANT NOTE</b>:{" "}
-                      <i>
-                        If you find yourself adding something that does not
-                        actually support an existing goal or step, either do not
-                        add it (because it is not actually helping you) or mark
-                        the "Type" setting as "Hold" until you figure where it
-                        fits into this journey to the one main goal. When it is
-                        time to add it to the flow, just change the Type to a
-                        Step or Goal.
-                      </i>
-                    </p>
-                  </div>
+                  <Fragment>
+                    <div className={styles["fade-away-5"]}>
+                      <BarLoader />
+                    </div>
+
+                    <div className={styles["instructions-container"]}>
+                      <p>
+                        It appears you are missing your main goal. :( It is very
+                        important to start with one main large goal. Everything
+                        should lead to this main goal, so there should only be
+                        one goal (and no more) in this "Goals and Curriculum"
+                        section. Opening that goal, should reveal all of the
+                        sub-goals and steps supporting this goal.
+                      </p>
+                      <h4>To do this: </h4>
+                      <ol>
+                        <li key="studyPlan">
+                          Open the new entry form with:{" "}
+                          {
+                            <StudyPlanItems
+                              key="studyPlan"
+                              id="studyPlan"
+                              onlyAddToButton={true}
+                            />
+                          }
+                        </li>
+                        <li key={2}>
+                          Mark it as "Goal" in the "Type" section of the form.
+                        </li>
+                        <li key={3}>Save the main goal</li>
+                        <li key={4}>
+                          Then, make sure every single goal and step added after
+                          that is connected either to this main goal or to
+                          another goal or step (which would be in support of the
+                          main goal). This is set in the "Goal or Step this
+                          Directly Works Towards" setting. It will be empty when
+                          making your original main goal, but with each
+                          subsequent goal or step all previous goals or steps
+                          will be available to select.{" "}
+                        </li>
+                      </ol>
+                      <p key={5}>
+                        <b>IMPORTANT NOTE</b>:{" "}
+                        <i>
+                          If you find yourself adding something that does not
+                          actually support an existing goal or step, either do
+                          not add it (because it is not actually helping you) or
+                          mark the "Type" setting as "Hold" until you figure
+                          where it fits into this journey to the one main goal.
+                          When it is time to add it to the flow, just change the
+                          Type to a Step or Goal.
+                        </i>
+                      </p>
+                    </div>
+                  </Fragment>
                 )}
-              {Object.keys(formInputData).length <= 0 &&
+              {!delayRender &&
+                Object.keys(formInputData).length <= 0 &&
                 Object.hasOwn(studyPlanMetadata, "_id") &&
                 studyPlanMetadata._id.length > 0 &&
                 !outputName.includes("Goal") &&
                 !outputName.includes("Holding") && (
-                  <div
-                    key={typeName + "sno-items-text"}
-                    id="no-items-text"
-                    className={styles["no-items-text"]}
-                    type={typeName}
-                  >
-                    <h3>
-                      Hmmmm...unfortunately, there are no steps yet. See below
-                      for how to add steps towards your main goal.
-                    </h3>
-                    <Welcome onlyInstructions={true} />
-                  </div>
+                  <Fragment>
+                    <div className={styles["fade-away-5"]}>
+                      {" "}
+                      <BarLoader />
+                    </div>
+
+                    <div
+                      key={typeName + "sno-items-text"}
+                      id="no-items-text"
+                      className={styles["no-items-text"]}
+                      type={typeName}
+                    >
+                      <h3>
+                        Hmmmm...unfortunately, there are no steps yet. See below
+                        for how to add steps towards your main goal.
+                      </h3>
+                      <Welcome onlyInstructions={true} />
+                    </div>
+                  </Fragment>
                 )}
 
               {formInputData &&

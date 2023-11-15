@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { loadingRequestsActions } from "../store/loadingRequestsSlice";
 
 const useProcessUpdateStudyPlan = () => {
   const dispatch = useDispatch();
@@ -9,6 +10,7 @@ const useProcessUpdateStudyPlan = () => {
     studyPlanDataActions,
   }) => {
     if (!updateStudyPlan) return;
+    dispatch(loadingRequestsActions.addToLoadRequest());
 
     const { itemWithNewEdits, user, parentSection } = updateStudyPlan;
 
@@ -38,6 +40,14 @@ const useProcessUpdateStudyPlan = () => {
     if (user) {
       updateAnItem(outputItemWithNewEdits, user)
         .then((res) => {
+          dispatch(loadingRequestsActions.removeFromLoadRequest());
+          if (Object.hasOwn(res, "code") && res.code === "ERR_NETWORK") {
+            alert(
+              "There was an problem sending the data to the server: " +
+                res.message
+            );
+            return;
+          }
           const status = res.status ? res.status : res.response.status;
 
           if (status >= 400) {
@@ -58,6 +68,7 @@ const useProcessUpdateStudyPlan = () => {
         })
         .catch((err) => {
           alert(err);
+          dispatch(loadingRequestsActions.removeFromLoadRequest());
         });
       dispatch(studyPlanDataActions.resetUpdateStudyPlan(false));
     } else {
@@ -79,6 +90,7 @@ const useProcessUpdateStudyPlan = () => {
         );
       }
       dispatch(studyPlanDataActions.resetUpdateStudyPlan(false));
+      dispatch(loadingRequestsActions.removeFromLoadRequest());
     }
   };
 

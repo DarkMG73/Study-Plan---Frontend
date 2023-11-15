@@ -40,9 +40,6 @@ export default async function GatherStudyPlanData(studyPlanItemSchema, user) {
         }
       });
 
-
-    
-
       const flattenedArrays = new Set(itmOutput.map((value) => value.trim()));
       const flattenedArraysOutput = Array.from(flattenedArrays);
 
@@ -55,20 +52,22 @@ export default async function GatherStudyPlanData(studyPlanItemSchema, user) {
   }
 
   // alphabetic sort while building output for organized list displays
-  studyPlanData.studyPlanMetadata = {}
- for(const [key, value] of Object.entries( groomedStudyPlanMetadata)) {
-  studyPlanData.studyPlanMetadata[key] = [value[0] , ...value.splice(1).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))]
- }
-
-
- 
+  studyPlanData.studyPlanMetadata = {};
+  for (const [key, value] of Object.entries(groomedStudyPlanMetadata)) {
+    studyPlanData.studyPlanMetadata[key] = [
+      value[0],
+      ...value
+        .splice(1)
+        .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase())),
+    ];
+  }
 
   for (const studyPlanValue of Object.values(studyPlanData.studyPlan)) {
     if (
-      Object.hasOwn(studyPlanValue,"type") &&
+      Object.hasOwn(studyPlanValue, "type") &&
       studyPlanValue.type === "service" &&
-      Object.hasOwn(studyPlanValue,"slug") &&
-      Object.hasOwn(studyPlanValue,"iframeCustomAttributes")
+      Object.hasOwn(studyPlanValue, "slug") &&
+      Object.hasOwn(studyPlanValue, "iframeCustomAttributes")
     ) {
       studyPlanData.serviceEmbedJSXObj[studyPlanValue.slug] =
         studyPlanValue.iframeCustomAttributes;
@@ -145,14 +144,14 @@ function objectExtractAllValuesPerKey(
         // Handle items that need to be added together
         if (addTogether.includes(key)) {
           if (objectToLoop[i].type.toLowerCase() === "goal") continue;
-          if (!Object.hasOwn(outputObject,key)) outputObject[key] = [0];
+          if (!Object.hasOwn(outputObject, key)) outputObject[key] = [0];
           if (objectToLoop[i][key]) {
             outputObject[key][0] += objectToLoop[i][key] * 1;
           }
         }
         // Handle some items by only gathering the _id
         else if (onlyCollectID.includes(key)) {
-          if (!Object.hasOwn(outputObject,key)) outputObject[key] = new Set();
+          if (!Object.hasOwn(outputObject, key)) outputObject[key] = new Set();
           if (objectToLoop[i][key] && objectToLoop[i][key] != false) {
             outputObject[key].add(objectToLoop[i]._id);
           }
@@ -171,7 +170,7 @@ function objectExtractAllValuesPerKey(
             const value = term.trim().toString();
 
             // Add to Set. If key Set does not exist, create it.
-            if (Object.hasOwn(outputObject,key)) {
+            if (Object.hasOwn(outputObject, key)) {
               outputObject[key].add(value);
             } else {
               outputObject[key] = new Set();
@@ -185,7 +184,7 @@ function objectExtractAllValuesPerKey(
         ) {
           if (objectToLoop[i][key].constructor === Object) {
             Object.values(objectToLoop[i][key]).forEach((val) => {
-              if (Object.hasOwn(outputObject,key)) {
+              if (Object.hasOwn(outputObject, key)) {
                 outputObject[key].add(val);
               } else {
                 outputObject[key] = new Set();
@@ -194,7 +193,7 @@ function objectExtractAllValuesPerKey(
             });
           } else if (objectToLoop[i][key].constructor === Boolean) {
             const value = i.toString().trim();
-            if (Object.hasOwn(outputObject,key)) {
+            if (Object.hasOwn(outputObject, key)) {
               outputObject[key].add(value);
             } else {
               outputObject[key] = new Set();
@@ -202,7 +201,7 @@ function objectExtractAllValuesPerKey(
             }
           } else {
             const value = objectToLoop[i][key].toString().trim();
-            if (Object.hasOwn(outputObject,key)) {
+            if (Object.hasOwn(outputObject, key)) {
               outputObject[key].add(value);
             } else {
               outputObject[key] = new Set();
@@ -225,7 +224,7 @@ function objectExtractAllValuesPerKey(
 
               // Check if the value is valid
               if (!valuesToExclude.includes(value)) {
-                if (Object.hasOwn(outputObject,key)) {
+                if (Object.hasOwn(outputObject, key)) {
                   outputObject[key].add(value);
                 } else {
                   outputObject[key] = new Set();
@@ -235,7 +234,7 @@ function objectExtractAllValuesPerKey(
             });
           } else {
             // If the above does not app;y, return a Set() if it si not already there.
-            if (!Object.hasOwn(outputObject,key))
+            if (!Object.hasOwn(outputObject, key))
               outputObject[key] = new Set();
           }
         }
