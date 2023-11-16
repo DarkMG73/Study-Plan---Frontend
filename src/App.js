@@ -23,13 +23,6 @@ function App() {
   const loadingStatus = useSelector(
     (state) => state.loadingRequests.pendingLoadRequests
   );
-  console.log(
-    "%c⚪️►►►► %cline:23%cloadingStatus",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px",
-    loadingStatus
-  );
   const dispatch = useDispatch();
   // const studyPlanData = GatherStudyPlanData();
   const studyPlan = useSelector((state) => state.studyPlanData);
