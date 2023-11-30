@@ -7,7 +7,6 @@ import {
   updateAStudyPlanItem,
   deleteDocFromDb,
 } from "../../../storage/studyPlanDB";
-
 import {
   updateAContentItem,
   deleteContentDocFromDb,

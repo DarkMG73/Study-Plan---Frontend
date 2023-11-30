@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
+
 import "@fontsource/kodchasan"; // Defaults to weight 400.
 import "@fontsource/covered-by-your-grace"; // Defaults to weight 400
 import "@fontsource/covered-by-your-grace/400.css"; // Specify weight

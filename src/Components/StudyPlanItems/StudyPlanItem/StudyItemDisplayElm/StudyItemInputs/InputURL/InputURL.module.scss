@@ -1,0 +1,12 @@
+.url-arrow {
+  text-decoration: none;
+  position: absolute;
+  background: var(--spt-color-accent);
+  color: var(--spt-color-background-warm);
+  border-radius: 50px;
+  padding: 0.125em 0.5em;
+  right: 1.5em;
+  top: 1.125em;
+  font-weight: 700;
+  pointer-events: all;
+}

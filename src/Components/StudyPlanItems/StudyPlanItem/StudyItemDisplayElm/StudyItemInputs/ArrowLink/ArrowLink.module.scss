@@ -1,0 +1,43 @@
+.url-arrow {
+  text-decoration: none;
+  position: absolute;
+  background: var(--spt-color-accent);
+  border-radius: 50px;
+  padding: 0.125em 0.5em;
+  right: 1.5em;
+  top: 1.125em;
+  font-weight: 700;
+  pointer-events: all;
+}
+
+body ul[class*="edited-list"],
+body [id*="new-form"] {
+  .url-arrow,
+  .featured-url-arrow-wrap {
+    display: none;
+  }
+}
+
+body .featured-url-arrow-wrap {
+  padding: 0;
+  height: 100%;
+  grid-area: url-arrow;
+  display: flex;
+  align-items: center;
+  /* background: var(--spt-color-accent-gradient); */
+  justify-content: center;
+  text-decoration: none;
+  transition: 0.3s all ease;
+  pointer-events: none;
+  cursor: pointer;
+  a {
+    display: inline-block;
+    background: transparent;
+    transform: scale(0.75, 1.25) translate(-25%, -36.25%);
+    color: inherit;
+    pointer-events: all;
+  }
+  .featured-url-arrow:hover {
+    background: var(--spt-color-accent-gradient);
+  }
+}

@@ -40,10 +40,12 @@ select {
 select[data-category="priority"] {
   margin: auto;
 }
+
 input[type="url"] {
   max-width: 95%;
   text-overflow: ellipsis;
 }
+
 .group-studyPlan-goals ul,
 .group-studyPlan ul {
   color: white;
