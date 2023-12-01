@@ -1,7 +1,5 @@
 .button {
   margin: 0 0.5em;
-  /* box-shadow: inset 1px 1px 1px rgb(255 255 255 / 25%),
-    inset 1px -1px 1px rgb(0 0 0 / 15%), 1px 1px 5px -3px black; */
   box-shadow: 3px 3px 7px -5px white inset,
     -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
   border: none;

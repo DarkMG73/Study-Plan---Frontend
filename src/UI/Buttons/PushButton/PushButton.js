@@ -1,5 +1,5 @@
-import syles from "./PushButton.module.css";
-import React, { Fragment } from "react";
+import Styles from "./PushButton.module.css";
+import { Fragment } from "react";
 
 function PushButton(props) {
   const {
@@ -25,15 +25,15 @@ function PushButton(props) {
       <Fragment>
         <button
           className={
-            syles["button"] +
+            Styles["button"] +
             " " +
-            syles[colorType] +
+            Styles[colorType] +
             " " +
-            syles[size] +
+            Styles[size] +
             " " +
-            syles[active] +
+            Styles[active] +
             " " +
-            syles[selected]
+            Styles[selected]
           }
           style={styles}
           id={identifier}
@@ -54,15 +54,15 @@ function PushButton(props) {
           key={name}
           id={identifier}
           className={
-            syles["button"] +
+            Styles["button"] +
             " " +
-            syles[colorType] +
+            Styles[colorType] +
             " " +
-            syles[size] +
+            Styles[size] +
             " " +
-            syles[active] +
+            Styles[active] +
             " " +
-            syles[selected]
+            Styles[selected]
           }
           style={styles}
           type={type}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./LoginStatus.module.scss";
 import { authActions } from "../../../store/authSlice";
@@ -18,7 +18,7 @@ function LoginStatus(props) {
   // const [loginPassword, setLoginPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
   const horizontalDisplay = props.horizontalDisplay ? "horizontal-display" : "";
-const uniqueID = props.uniqueID
+  const uniqueID = props.uniqueID;
   const toggleSignupLoginButtonHandler = () => {
     setShowLoginForm(!showLoginForm);
     setShowSignupForm(!showSignupForm);
@@ -49,15 +49,25 @@ const uniqueID = props.uniqueID
       id={"db-login-container-" + uniqueID}
       className={`${styles["inner-wrap "]}  ${styles["db-login-container"]} ${styles[horizontalDisplay]}`}
     >
-      <p id={"db-login-status-container-" + uniqueID} className={styles["db-login-status-container"]}>
-        <span id={"db-login-status-" + uniqueID} className={styles["db-login-status"]}>
+      <p
+        id={"db-login-status-container-" + uniqueID}
+        className={styles["db-login-status-container"]}
+      >
+        <span
+          id={"db-login-status-" + uniqueID}
+          className={styles["db-login-status"]}
+        >
           {user ? (
-            <span  id={"login-text-" + uniqueID}  className={styles["login-text"]}>
+            <span
+              id={"login-text-" + uniqueID}
+              className={styles["login-text"]}
+            >
               {" "}
               {user.email} is Logged In{" "}
             </span>
           ) : (
-            <span  id={"login-text-" + uniqueID}
+            <span
+              id={"login-text-" + uniqueID}
               className={
                 styles["login-text"] + " " + styles["not-logged-in-text"]
               }
@@ -68,12 +78,18 @@ const uniqueID = props.uniqueID
           )}
         </span>
       </p>
-      <div id={"button-container-" + uniqueID} className={styles["button-container"]+ uniqueID}> 
+      <div
+        id={"button-container-" + uniqueID}
+        className={styles["button-container"] + uniqueID}
+      >
         {!user && (
           <>
-            <div id={"form-container-" + uniqueID} className={styles["form-container"]}>
+            <div
+              id={"form-container-" + uniqueID}
+              className={styles["form-container"]}
+            >
               {showLoginForm && (
-                <Login 
+                <Login
                   toggleSignupLoginButtonHandler={
                     toggleSignupLoginButtonHandler
                   }

@@ -1,6 +1,5 @@
 import styles from "./CardPrimary.module.css";
 import stylesSquareTop from "./CardPrimarySquareTop.module.css";
-import React from "react";
 
 const CardPrimarySquareTop = (props) => {
   return (

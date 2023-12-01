@@ -1,18 +1,12 @@
 .card-secondary {
   display: flex;
   flex-direction: column;
-  /* border: 3px solid red; */
   color: var(--spt-color-background);
   background: var(--spt-color-accent-gradient);
   padding: 2rem;
-  /* border-radius: 50px; */
-  box-shadow: inset -1px -1px 14px -7px rgb(255 255 255),
-    inset 1px 1px 14px -7px rgb(0 0 0 / 50%);
   box-shadow: inset 4px 4px 14px -7px rgb(255 255 255),
     inset -4px -4px 14px -7px rgb(0 0 0 / 50%), 3px 3px 10px -8px black;
-  /* background-image: url(https://www.transparenttextures.com/patterns/buried.png); */
   background-blend-mode: overlay;
-  /* background-image: url("https://www.transparenttextures.com/patterns/subtle-stripes.png"); */
   background-size: cover;
   box-shadow: inset 0px -13px 7px -14px black,
     inset 0px 14px 7px -14px rgba(0, 0, 0, 0.5294117647);

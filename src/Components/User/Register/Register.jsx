@@ -1,5 +1,5 @@
 import styles from "./Register.module.scss";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { registerAUser, sign_inAUser } from "../../../storage/userDB";
 import { authActions } from "../../../store/authSlice";

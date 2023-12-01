@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import Styles from "./InputURL.module.scss";
 import useAddInputData from "../../../../../../Hooks/useAddInputData";
 

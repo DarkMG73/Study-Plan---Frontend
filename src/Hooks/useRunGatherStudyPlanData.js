@@ -4,7 +4,7 @@ import { studyPlanDataActions } from "../store/studyPlanDataSlice";
 import { loadingRequestsActions } from "../store/loadingRequestsSlice";
 import { statusUpdateActions } from "../store/statusUpdateSlice";
 
-export const useRunGatherStudyPlanData = (props) => {
+export const useRunGatherStudyPlanData = () => {
   const makeLoadingRequest = function () {
     return dispatch(loadingRequestsActions.addToLoadRequest());
   };

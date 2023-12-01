@@ -1,5 +1,4 @@
-import React, { Fragment } from "react";
-import Styles from "./ProgressBar.module.scss";
+import { Fragment } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 
 const Progressbar = (props) => {

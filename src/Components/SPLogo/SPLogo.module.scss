@@ -35,13 +35,11 @@
   display: inline-block;
 }
 
-.spt-title.first-word {
-}
-
 .spt-title.second-word {
   padding: 0 0.125em 0 0;
   background: var(--spt-color-accent-2-gradient);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   transform: scale(0.9) translate(-20%, 9%);
 }

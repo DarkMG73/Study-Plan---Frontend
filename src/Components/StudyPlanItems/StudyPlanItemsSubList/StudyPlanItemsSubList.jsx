@@ -1,5 +1,3 @@
-import React from "react";
-// import styles from "./StudyPlanItemsSubList.module.scss";
 import StudyPlanItemsList from "../StudyPlanItemsList/StudyPlanItemsList";
 
 const StudyPlanItemsSubList = (props) => {

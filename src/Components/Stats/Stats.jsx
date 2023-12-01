@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import styles from "./Stats.module.scss";
 
-const Stats = (props) => {
+const Stats = () => {
   const { studyPlan, studyPlanMetadata } = useSelector(
     (state) => state.studyPlanData
   );
@@ -18,14 +18,14 @@ const Stats = (props) => {
   const completedHoursTotal = findAndAddTime("markcomplete", studyPlanMetadata);
   const simulatedCollegeCreditHours = (completedHoursTotal / 45).toFixed(2);
 
-  function addTime(fieldName, studyPlanMetadata) {
-    let outputTime = 0;
-    if (studyPlanMetadata && Object.hasOwn(studyPlanMetadata, fieldName))
-      studyPlanMetadata[fieldName].forEach((time) => {
-        outputTime += time * 1;
-      });
-    return outputTime;
-  }
+  // function addTime(fieldName, studyPlanMetadata) {
+  //   let outputTime = 0;
+  //   if (studyPlanMetadata && Object.hasOwn(studyPlanMetadata, fieldName))
+  //     studyPlanMetadata[fieldName].forEach((time) => {
+  //       outputTime += time * 1;
+  //     });
+  //   return outputTime;
+  // }
   function findAndAddTime(fieldName, studyPlanMetadata) {
     let outputTotalHours = 0;
     if (

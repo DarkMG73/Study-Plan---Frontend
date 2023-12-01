@@ -1,5 +1,5 @@
 import styles from "./StatusUpdate.module.scss";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
 
 const StatusUpdate = () => {

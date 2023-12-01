@@ -1,5 +1,4 @@
-import React, { Fragment } from "react";
-import Styles from "./InputDate.module.scss";
+import { Fragment } from "react";
 import useAddInputData from "../../../../../../Hooks/useAddInputData";
 
 const InputDate = (props) => {
@@ -10,8 +9,6 @@ const InputDate = (props) => {
     parentMasterID,
     parentsParentKey,
     parentKey,
-    displayConditions,
-    unlockProtectedVisible,
     emptyForm,
     editedField,
     setEditedField,

@@ -4,7 +4,7 @@ export const passwordRequirements =
   'The password must be at between 7 and 14 characters and include at least one of each of the following: uppercase letter, lowercase letter and a number. It can not contain any spaces and can not be an unsafe password like "password123".';
 
 // Add properties to it
-const usePasswordValidator = (passwordToCheck, returnList) => {
+const usePasswordValidator = () => {
   const outputFunction = (passwordToCheck, returnList) => {
     // Create a schema
     const schema = new passwordValidator();

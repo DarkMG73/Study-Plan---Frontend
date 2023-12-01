@@ -11,12 +11,11 @@ export const authSlice = createSlice({
   initialState: initState,
   reducers: {
     logIn: (state, action) => {
-      // state.recentLogin = true;
       state.user = { ...action.payload };
-      if (action.payload && Object.hasOwn(action.payload,"token"))
+      if (action.payload && Object.hasOwn(action.payload, "token"))
         state.authToken = action.payload.token;
     },
-    logOut: (state) => {
+    logOut: () => {
       const recentLogoutState = { ...initState };
       // recentLogoutState.recentLogout = true;
       return recentLogoutState;

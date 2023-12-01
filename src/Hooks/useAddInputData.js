@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { formInputDataActions } from "../store/formInputDataSlice";
 
-const useAddInputData = (props) => {
+const useAddInputData = () => {
   const dispatch = useDispatch();
 
   const outputFunction = (e, props) => {

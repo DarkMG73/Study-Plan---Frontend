@@ -31,12 +31,6 @@
   letter-spacing: inherit;
 }
 
-/* li { */
-/* width: 100%; */
-/* flex-grow: 1;
-  padding: 0.25em 0.5em;
-} */
-
 ._id textarea {
   background: inherit;
   color: inherit;
@@ -115,33 +109,6 @@ select {
   width: 100%;
 }
 
-.isDefaultPlaylist,
-.isFeaturedPlaylist,
-.isDefaultPlaylist select,
-.isFeaturedPlaylist select {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  min-width: 10em;
-  max-width: min-content;
-}
-
-.isDefaultPlaylist select,
-.isFeaturedPlaylist select {
-  flex-grow: 1;
-  align-items: center;
-  /* vertical-alignment: middle; */
-}
-
-.isDefaultPlaylist,
-.isFeaturedPlaylist {
-  margin: 0;
-  flex-grow: 1;
-  padding: 0.25em 0.5em;
-  max-width: ;
-}
-
-.releaseDate,
 .type {
   max-width: 10em;
   min-width: fit-content;

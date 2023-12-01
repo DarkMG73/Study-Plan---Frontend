@@ -1,5 +1,5 @@
 import styles from "./SocialConnectMenu.module.scss";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import * as icons from "react-icons/fa";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
@@ -32,7 +32,7 @@ function SocialConnectMenu(props) {
       outputArray.push(
         <a
           key={iconObj[name]}
-          href={Object.hasOwn(value,"link") ? value.link : "#"}
+          href={Object.hasOwn(value, "link") ? value.link : "#"}
           alt=""
           target="_blank"
           rel="noopener noreferrer"

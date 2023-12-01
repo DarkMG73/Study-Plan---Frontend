@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import styles from "./ErrorBoundary.module.css";
 import CardPrimary from "../../../UI/Cards/CardPrimary/CardPrimary";
 

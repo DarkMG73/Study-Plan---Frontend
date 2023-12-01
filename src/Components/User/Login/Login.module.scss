@@ -23,6 +23,7 @@
   background-image: var(--spt-color-accent-gradient);
   color: var(--spt-color-background);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -30,6 +31,7 @@
   background: var(--spt-color-accent-gradient);
   color: var(--spt-color-background);
   -webkit-background-clip: inherit;
+  background-clip: text;
   -webkit-text-fill-color: inherit;
 }
 

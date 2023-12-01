@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import { useState, Fragment } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./FormItemEmpty.module.scss";
 import { formInputDataActions } from "../../../store/formInputDataSlice";
@@ -8,9 +8,7 @@ const FormItemEmpty = (props) => {
   const showProtectedHidden = props.showProtectedHidden;
   const unlockProtectedVisible = props.unlockProtectedVisible;
   const displayConditions = props.displayConditions;
-  // const key = studyPlanItemsObj._id;
   const key = props.passedKey;
-  // const setExistingFormInputValuesObj = props.setExistingFormInputValuesObj;
   const parentKey = props.parentKey;
   const parentsParentKey = props.parentsParentKey;
   const parentMasterID = props.parentMasterID;
@@ -95,7 +93,7 @@ const FormItemEmpty = (props) => {
                 key +
                 "label"
               }
-              for={parentKey + "-" + key}
+              htmlFor={parentKey + "-" + key}
               className={
                 styles[
                   "protectedVisible-" +
@@ -158,7 +156,7 @@ const FormItemEmpty = (props) => {
                 key +
                 "label"
               }
-              for={parentKey + "-" + key}
+              htmlFor={parentKey + "-" + key}
               className={
                 styles[
                   "protectedHidden-" +
@@ -234,7 +232,7 @@ const FormItemEmpty = (props) => {
                 key +
                 "label"
               }
-              for={parentKey + "-" + key}
+              htmlFor={parentKey + "-" + key}
               className={
                 styles[
                   "protectedHidden-" +

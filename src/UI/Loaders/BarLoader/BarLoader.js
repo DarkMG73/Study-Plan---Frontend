@@ -1,5 +1,4 @@
 import styles from "./BarLoader.module.css";
-import React from "react";
 
 function BarLoader() {
   return (

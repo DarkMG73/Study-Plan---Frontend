@@ -53,7 +53,7 @@ Blues: rgb(67, 144, 233) hsl(212 79% 97% / 1)
   --spt-color-background: #ffffff;
   --spt-color-background-warm: hsl(19 96% 97% / 1);
   --spt-color-background-cool: hsl(212 79% 97% / 1);
-  --spt-image-background-texture: url("https://www.transparenttextures.com/patterns/brushed-alum.png");
+  --spt-image-background-texture: url(./assets/media/backgrounds/brushed-alum.png);
 
   /* 
   Background Contrast: text and anything needing maximum readability
@@ -103,10 +103,15 @@ Blues: rgb(67, 144, 233) hsl(212 79% 97% / 1)
 html {
   font-size: 10px;
   overscroll-behavior: none;
-}
-* {
   box-sizing: border-box;
 }
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 :focus {
   border: 7px solid var(--spt-color-accent);
   outline: none;

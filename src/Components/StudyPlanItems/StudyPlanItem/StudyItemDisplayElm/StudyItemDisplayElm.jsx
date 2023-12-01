@@ -1,4 +1,3 @@
-import React, { Fragment } from "react";
 import Styles from "./StudyItemDisplayElm.module.scss";
 import ProgressBar from "./StudyItemInputs/ProgressBar/ProgressBar";
 import Textarea from "./StudyItemInputs/Textarea/Textarea";
@@ -11,7 +10,6 @@ import InputNumber from "./StudyItemInputs/InputNumber/InputNumber";
 import InputFixedCompiledList from "./StudyItemInputs/InputFixedCompiledList/InputFixedCompiledList";
 import OtherKeyFixedCompiledList from "./StudyItemInputs/InputOtherKeyFixedCompiledList/InputOtherKeyFixedCompiledList";
 import InputLimitedList from "./StudyItemInputs/InputLimitedList/InputLimitedList";
-import TextareaAutosize from "react-textarea-autosize";
 import InputSlideButton from "./StudyItemInputs/InputSlideButton/InputSlideButton";
 
 const StudyItemDisplayElm = (props) => {
@@ -19,7 +17,6 @@ const StudyItemDisplayElm = (props) => {
     passedKey,
     elementTypeNeeded,
     studyPlanItemsObj,
-    onlyList,
     parentKey,
     parentsParentKey,
     parentMasterID,

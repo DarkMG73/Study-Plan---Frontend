@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, Fragment, useRef } from "react";
+import { useEffect, useLayoutEffect, Fragment, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./Home.module.scss";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
@@ -13,7 +13,6 @@ import NoticeOne from "../../Components/NoticeOne/NoticeOne";
 import NoticeTwo from "../../Components/NoticeTwo/NoticeTwo";
 import NoticeThree from "../../Components/NoticeThree/NoticeThree";
 import BottomBar from "../../Components/BottomBar/BottomBar";
-import { ReactComponent as BackgroundVideo } from "../../assets/media/backgrounds/pulsing-colors.svg";
 import { ErrorBoundary } from "../../HOC/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import { scrollPositionActions } from "../../store/scrollPositionSlice";
 import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
@@ -33,9 +32,6 @@ const Home = (props) => {
   const { studyPlan } = useSelector((state) => state.studyPlanData);
   const { content } = useSelector((state) => state.contentData);
   const user = useSelector((state) => state.auth.user);
-  // const [scrollToElm, setScrollToElm] = useState(false);
-  // const [scrollToSessionResults, setScrollToSessionResults] = useState(false);
-  // const [scrollToAnswer, setScrollToAnswer] = useState(false);
   const angledRectangleRef = useRef();
   const dispatch = useDispatch();
   const hideStudyPlan = false;
@@ -263,9 +259,6 @@ const Home = (props) => {
           )}
         </Fragment>
       </div>
-      <h1>v 46 only text area</h1>
-      <p>What does not work: textarea, span, p, em, div,h4, </p>
-      <p>What does work: h1, h2,input-text</p>
       {checkIfContentSectionActive("noticeOne", content) && (
         <CardPrimary
           styles={{
@@ -390,10 +383,3 @@ const Home = (props) => {
 };
 
 export default Home;
-
-// soundCloud:
-// https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/522243030&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true
-// appleMusic:
-// https://embed.music.apple.com/us/album/prism/1365013619
-// spotify:
-// https://open.spotify.com/embed/album/19kAnpqFKi7AvGNDll1GVX?utm_source=generator

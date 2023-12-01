@@ -1,5 +1,4 @@
 import styles from "./Slide-Button.module.css";
-import { useEffect } from "react";
 
 const SlideButton = (props) => {
   return (

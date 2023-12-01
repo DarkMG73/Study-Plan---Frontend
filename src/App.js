@@ -1,11 +1,9 @@
 import "./App.css";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import React, { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
-import { authActions } from "./store/authSlice";
 import { studyPlanDataActions } from "./store/studyPlanDataSlice";
-import { loadingRequestsActions } from "./store/loadingRequestsSlice";
 import { statusUpdateActions } from "./store/statusUpdateSlice";
 import { useUserDataInit } from "./Hooks/useUserDataInit";
 import { useRunGatherStudyPlanData } from "./Hooks/useRunGatherStudyPlanData";
@@ -17,7 +15,6 @@ import Header from "./Components/Header/Header";
 import BarLoader from "./UI/Loaders/BarLoader/BarLoader";
 import { ErrorBoundary } from "./HOC/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import LocalErrorDisplay from "./HOC/ErrorHandling/LocalErrorDisplay/LocalErrorDisplay";
-import * as icons from "react-icons/fa";
 
 function App() {
   const loadingStatus = useSelector(
@@ -44,7 +41,7 @@ function App() {
       contentData
     );
   }
-  const [schemaInitComplete, setSchemaInitComplete] = useState(false);
+
   const [userInitComplete, setUserInitComplete] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const [localError, setLocalError] = useState({

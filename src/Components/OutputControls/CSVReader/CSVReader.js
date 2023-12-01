@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 import styles from "./CSVReader.module.css";
 import { useCSVReader } from "react-papaparse";
 // import GetPluginFormInputsWithOptions from "../../../Hooks/GetPluginFormInputsWithOptions";
@@ -7,7 +6,7 @@ import { useCSVReader } from "react-papaparse";
 export default function CSVReader(props) {
   // const toolsSchema = useSelector((state) => state.toolsData.toolsSchema);
   const { CSVReader } = useCSVReader();
-  const [formInputData, setFormInputData] = useState(false);
+  const [formInputData] = useState(false);
 
   ////////////////////////////////////////
   /// EFFECTS
@@ -45,7 +44,7 @@ export default function CSVReader(props) {
       const rowGroup = [];
       let assembledRow = {};
 
-      formInputData.forEach((inputData, i) => {
+      formInputData.forEach((inputData) => {
         assembledRow = { ...inputData };
         if (inputData.name === "notes") {
           let rowData = row[inputData.name];
@@ -122,8 +121,7 @@ export default function CSVReader(props) {
                 ] = "User Added" + " ~ " + optionToRemove;
               }
             } else {
-              let [optionGroup, optionName] = optionToRemove.split("~");
-              optionGroup = optionGroup.trim();
+              let [optionName] = optionToRemove.split("~");
               optionName = optionName.trim();
 
               if (duplicateFunctionOptions.includes(optionName)) {
@@ -157,8 +155,7 @@ export default function CSVReader(props) {
             if (optionOneGroup === "User Added") {
               let foundCount = 0;
               assembledRow.options.forEach((rowOption) => {
-                let [rowOptionGroup, rowOptionName] = rowOption.split("~");
-                rowOptionGroup = rowOptionGroup.trim();
+                let [rowOptionName] = rowOption.split("~");
                 rowOptionName = rowOptionName.trim();
 
                 if (optionOneName === rowOptionName) {

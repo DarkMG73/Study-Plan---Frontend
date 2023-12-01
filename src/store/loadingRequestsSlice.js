@@ -8,7 +8,7 @@ export const loadingRequestsSlice = createSlice({
   name: "loadingRequests",
   initialState: initState,
   reducers: {
-    addToLoadRequest: (state, action) => {
+    addToLoadRequest: (state) => {
       const currentValue = state.pendingLoadRequests;
       state.pendingLoadRequests = currentValue + 1;
     },

@@ -9,14 +9,7 @@ const useInitStudyPlanItems = () => {
   const sortList = useSortList();
   const assembleStudyPlanList = useAssembleStudyPlanList();
   const outputFunction = async (props) => {
-    const {
-      typeArray,
-      sortMethod,
-      dataObjForEdit,
-      allStudyPlanItems,
-      setAllStudyPlanItems,
-      setFormInputData,
-    } = props;
+    const { typeArray, sortMethod, dataObjForEdit, allStudyPlanItems } = props;
 
     let schema = studyPlanItemSchema;
     // if (id === "content") {

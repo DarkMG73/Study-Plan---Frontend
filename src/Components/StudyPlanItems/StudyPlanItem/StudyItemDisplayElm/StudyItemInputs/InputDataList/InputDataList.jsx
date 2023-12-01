@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import Styles from "./InputDataList.module.scss";
 import useAddInputData from "../../../../../../Hooks/useAddInputData";
@@ -15,7 +15,6 @@ const InputDataList = (props) => {
     parentsParentKey,
     parentKey,
     displayConditions,
-    unlockProtectedVisible,
     emptyForm,
     editedField,
     setEditedField,

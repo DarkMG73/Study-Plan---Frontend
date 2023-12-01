@@ -1,10 +1,8 @@
 import styles from "./Header.module.scss";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { ReactComponent as SptLogo } from "../../assets/media/spt-ring.svg";
 import SPLogo from "../SPLogo/SPLogo";
 // import SubscribeCTA from "../SubscribeCTA/SubscribeCTA";
-import SocialConnectMenu from "../SocialConnectMenu/SocialConnectMenu";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
 import useViewport from "../../Hooks/useViewport";
 import PushButton from "../../UI/Buttons/PushButton/PushButton";

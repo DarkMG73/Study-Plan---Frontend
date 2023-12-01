@@ -1,5 +1,5 @@
 import styles from "./Login.module.scss";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { statusUpdateActions } from "../../../store/statusUpdateSlice";
 import { sign_inAUser, setUserCookie } from "../../../storage/userDB";
@@ -133,7 +133,7 @@ const Login = (props) => {
     );
 
     fetch(myRequest)
-      .then(function (response) {
+      .then(function () {
         setServerActiveError(false);
       })
       .catch(function (error) {

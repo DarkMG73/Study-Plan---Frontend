@@ -1,24 +1,17 @@
-import React, { useState, useEffect, Fragment, useRef } from "react";
+import { useState, useEffect, Fragment, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./StudyPlanItemsList.module.scss";
 import StudyPlanItemsSubList from "../StudyPlanItemsSubList/StudyPlanItemsSubList";
 import StudyPlanItem from "../StudyPlanItem/StudyPlanItem";
-import {
-  updateAStudyPlanItem,
-  deleteDocFromDb,
-} from "../../../storage/studyPlanDB";
-import {
-  updateAContentItem,
-  deleteContentDocFromDb,
-} from "../../../storage/contentDB";
+import { deleteDocFromDb } from "../../../storage/studyPlanDB";
+import { deleteContentDocFromDb } from "../../../storage/contentDB";
 import CollapsibleElm from "../../../UI/CollapsibleElm/CollapsibleElm";
 import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 import { loadingRequestsActions } from "../../../store/loadingRequestsSlice";
 
 const StudyPlanItemsList = (props) => {
-  const [refresh, setRefresh] = useState(1);
+  const [refresh] = useState(1);
   const studyPlanItemsObj = props.studyPlanItemsObj;
-  const { studyPlanMetadata } = studyPlanItemsObj;
   const user = useSelector((state) => state.auth.user);
   const parentKey = props.parentKey;
   const parentsParentKey = props.parentsParentKey;

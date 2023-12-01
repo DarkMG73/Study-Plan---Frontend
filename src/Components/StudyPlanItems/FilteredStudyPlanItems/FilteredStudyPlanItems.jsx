@@ -1,12 +1,7 @@
-import React from "react";
-import { useSelector } from "react-redux";
 import StudyPlanItemsList from "../StudyPlanItemsList/StudyPlanItemsList";
 import Styles from "./FilteredStudyPlanItems.module.scss";
 
 const CompletedStudyPlanItems = (props) => {
-  const studyPlanMetadata = useSelector(
-    (state) => state.studyPlanData.studyPlanMetadata
-  );
   const studyPlanSet = props.studyPlanSet ? props.studyPlanSet : {};
   const filterKey = props.filterKey;
 

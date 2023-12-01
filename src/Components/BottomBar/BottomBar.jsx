@@ -1,5 +1,5 @@
 import styles from "./BottomBar.module.scss";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import StatusUpdate from "../../Components/StatusUpdate/StatusUpdate";
 import TextZoomControls from "../../Components/TextZoomControls/TextZoomControls";

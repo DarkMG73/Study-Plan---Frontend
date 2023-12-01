@@ -1,5 +1,4 @@
-import React, { Fragment } from "react";
-import Styles from "./InputBoolean.module.scss";
+import { Fragment } from "react";
 import useAddInputData from "../../../../../../Hooks/useAddInputData";
 const InputBoolean = (props) => {
   const addInputData = useAddInputData();
@@ -12,8 +11,6 @@ const InputBoolean = (props) => {
     emptyForm,
     editedField,
     setEditedField,
-    displayConditions,
-    unlockProtectedVisible,
   } = props;
 
   const key = passedKey;

@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useLayoutEffect,
-  Fragment,
-  useRef,
-} from "react";
+import { useState, useEffect, useLayoutEffect, Fragment, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./Manage.module.scss";
 import CardTransparent from "../../UI/Cards/CardTransparent/CardTransparent";

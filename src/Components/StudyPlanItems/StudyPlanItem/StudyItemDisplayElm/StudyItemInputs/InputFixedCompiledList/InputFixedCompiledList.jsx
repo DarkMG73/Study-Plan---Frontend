@@ -1,6 +1,5 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { useSelector } from "react-redux";
-import Styles from "./InputFixedCompiledList.module.scss";
 import useAddInputData from "../../../../../../Hooks/useAddInputData";
 
 const InputFixedCompiledList = (props) => {
@@ -14,8 +13,6 @@ const InputFixedCompiledList = (props) => {
     parentMasterID,
     parentsParentKey,
     parentKey,
-    displayConditions,
-    unlockProtectedVisible,
     emptyForm,
     editedField,
     setEditedField,

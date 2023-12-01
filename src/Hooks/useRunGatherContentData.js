@@ -4,7 +4,7 @@ import { loadingRequestsActions } from "../store/loadingRequestsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { statusUpdateActions } from "../store/statusUpdateSlice";
 
-export const useRunGatherContentData = (props) => {
+export const useRunGatherContentData = () => {
   const makeLoadingRequest = function () {
     return dispatch(loadingRequestsActions.addToLoadRequest());
   };

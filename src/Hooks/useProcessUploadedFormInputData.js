@@ -1,22 +1,12 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { sha256 } from "js-sha256";
-import { formInputDataActions as allFormInputDataActions } from "../store/formInputDataSlice";
-import { studyPlanDataActions } from "../store/studyPlanDataSlice";
 
 const useProcessUploadedFormInputData = () => {
-  const dispatch = useDispatch();
   const studyPlanItemSchema = useSelector(
     (state) => state.studyPlanData.schema
   );
   const outputFunction = (props) => {
-    const {
-      user,
-
-      dataForSendingToDB,
-      saveManyStudyPlanItems,
-      getSchemaForContentItem,
-      saveManyContentItems,
-    } = props;
+    const { user, dataForSendingToDB } = props;
     const unusedFieldsForGoals = [
       "url",
       "priority",
@@ -33,7 +23,6 @@ const useProcessUploadedFormInputData = () => {
 
     if (dataForSendingToDB && user) {
       let schema = studyPlanItemSchema;
-      let saveManyItems = saveManyStudyPlanItems;
       // Object.keys(dataForSendingToDB).forEach((formName) => {
       //   for (const categoryName in dataForSendingToDB[formName]) {
       //     if (categoryName === "content") {

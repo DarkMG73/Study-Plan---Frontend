@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { getUserCookie, getUserUserByToken } from "../storage/userDB";
 import { authActions } from "../store/authSlice";
 
-export const useUserDataInit = (props) => {
+export const useUserDataInit = () => {
   const dispatch = useDispatch();
   const userDataInit = (props) => {
     const setLocalError = props.setLocalError;

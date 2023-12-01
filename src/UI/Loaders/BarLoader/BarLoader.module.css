@@ -26,7 +26,7 @@
   height: 100%;
   opacity: 0.5;
   background-color: var(--spt-color-background-warm);
-  background-image: url(https://www.transparenttextures.com/patterns/real-carbon-fibre.png);
+  background-image: url(../../../assets/media/backgrounds/real-carbon-fibre.png);
 }
 
 .loader {

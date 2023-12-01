@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Styles from "./Welcome.module.scss";
 import StudyPlanItems from "../StudyPlanItems/StudyPlanItems";

@@ -69,11 +69,6 @@ function CollapsibleElm(props) {
     );
   }
 
-  const theChildren = { ...props.children };
-  // theChildren((item) => {
-  //   console.log("item", item);
-  // });
-
   // In case props need to be passed in the future.
   const childrenWithProps = React.Children.map(props.children, (child) => {
     // Checking isValidElement is the safe way and avoids a

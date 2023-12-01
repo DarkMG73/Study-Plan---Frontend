@@ -1,5 +1,4 @@
 import styles from "./NotFound.module.scss";
-import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const NotFound = () => {

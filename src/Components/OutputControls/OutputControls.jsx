@@ -1,13 +1,11 @@
 import styles from "./OutputControls.module.scss";
 import { useState, useEffect, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import PushButton from "../../UI/Buttons/PushButton/PushButton";
-import useExportData, { formatAnObject } from "../../Hooks/useExportData";
+import useExportData from "../../Hooks/useExportData";
 import BarLoader from "../../UI/Loaders/BarLoader/BarLoader";
 import { deleteAllStudyTopics } from "../../storage/studyPlanDB";
 // import CSVReader from "./CSVReader/CSVReader";
-import useCreateNewForm from "../../Hooks/useCreateNewForm";
 import StudyPlanItemsList from "../StudyPlanItems/StudyPlanItemsList/StudyPlanItemsList";
 import displayConditions from "../../data/displayConditionsObj.js";
 import CardSecondary from "../../UI/Cards/CardSecondary/CardSecondary";
@@ -16,24 +14,19 @@ import { formInputDataActions } from "../../store/formInputDataSlice";
 
 function OutputControls(props) {
   const dispatch = useDispatch();
-  let navigate = useNavigate();
   const exportData = useExportData({ type: "" });
-  const [showAllStudyPlanItemPageLoader, setAllStudyPlanItemPageLoader] =
-    useState(false);
-  const { studyPlan, studyPlanMetadata } = useSelector(
-    (state) => state.studyPlanData
-  );
+  const [showAllStudyPlanItemPageLoader] = useState(false);
+  const { studyPlan } = useSelector((state) => state.studyPlanData);
   const studyPlanItemSchema = useSelector(
     (state) => state.studyPlanData.schema
   );
   const { uploadedForms } = useSelector((state) => state.formInputData);
   const user = useSelector((state) => state.auth.user);
-  const [fileUploadArray, setFileUploadArray] = useState(false);
   const [uploadedJSONData, setUploadedJSONData] = useState(false);
   const [uploadedJSONJSX, setUploadedJSONJSX] = useState(false);
   const [showUploadInputData, setShowUploadInputData] = useState(false);
   const [errorData, setErrorData] = useState(false);
-  const createNewForm = useCreateNewForm();
+
   const cvsItemOrder = [
     "name",
     "type",
@@ -139,15 +132,15 @@ function OutputControls(props) {
   //////////////////////
   /// HANDLERS
   /////////////////////
-  function exportCSVButtonHandler() {
-    if (Object.keys(!studyPlan).length <= 0) {
-      alert(
-        "There does not appear to be a study plan to export. Either log in with a user account that has a study plan, or sign up to get started."
-      );
-    } else {
-      exportData({ type: "cvs" });
-    }
-  }
+  // function exportCSVButtonHandler() {
+  //   if (Object.keys(!studyPlan).length <= 0) {
+  //     alert(
+  //       "There does not appear to be a study plan to export. Either log in with a user account that has a study plan, or sign up to get started."
+  //     );
+  //   } else {
+  //     exportData({ type: "cvs" });
+  //   }
+  // }
 
   function exportAllToCSVButtonHandler() {
     processExportCVS({
@@ -175,13 +168,15 @@ function OutputControls(props) {
   function exportAllToJSONButtonHandler() {
     exportData({ type: "json", exportAll: true });
   }
+
   // function exportAllToJSONButtonHandler() {
   //   exportData({ type: "json", exportAll: true });
   // }
-  function listOfAllStudyPlanItemsButtonHandler() {
-    setAllStudyPlanItemPageLoader(true);
-    setTimeout(() => navigate("../study_plan_list", { replace: false }), 200);
-  }
+
+  // function listOfAllStudyPlanItemsButtonHandler() {
+  //   setAllStudyPlanItemPageLoader(true);
+  //   setTimeout(() => navigate("../study_plan_list", { replace: false }), 200);
+  // }
 
   function uploadJsonButtonHandler(e) {
     readFileOnUpload(e.target.files[0]);
@@ -243,7 +238,7 @@ function OutputControls(props) {
     const _id = newUploadedJSONData._id;
 
     const groomedUploadedData = {};
-    for (const [key, value] of Object.entries(newUploadedJSONData)) {
+    for (const [key] of Object.entries(newUploadedJSONData)) {
       groomedUploadedData[key] = {};
 
       for (const catName in studyPlanItemSchema) {

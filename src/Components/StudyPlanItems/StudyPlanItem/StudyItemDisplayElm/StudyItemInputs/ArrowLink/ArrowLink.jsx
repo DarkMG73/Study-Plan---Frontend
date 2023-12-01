@@ -1,4 +1,3 @@
-import React from "react";
 import Styles from "./ArrowLink.module.scss";
 
 const ArrowLink = (props) => {
@@ -9,10 +8,6 @@ const ArrowLink = (props) => {
     parentsParentKey,
     parentKey,
     displayConditions,
-    unlockProtectedVisible,
-    emptyForm,
-    editedField,
-    setEditedField,
   } = props;
 
   const key = passedKey;

@@ -1,5 +1,5 @@
 import styles from "./FormInput.module.css";
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { toTitleCase } from "../../../Hooks/utility";
 
 const FormInput = (props) => {
@@ -32,7 +32,7 @@ const FormInput = (props) => {
 
   useEffect(() => {
     if (
-      Object.hasOwn(setInputValue,"constructor") &&
+      Object.hasOwn(setInputValue, "constructor") &&
       inputValue.constructor === String
     ) {
       setInputValue(inputValue.replaceAll('"', ""));
@@ -57,7 +57,7 @@ const FormInput = (props) => {
     setCheckboxTextInputValue(e.target.value);
   };
 
-  const checkboxInputOnChangeHandler = (e) => {
+  const checkboxInputOnChangeHandler = () => {
     // setInputValue(e.target.value);
   };
 
@@ -65,7 +65,7 @@ const FormInput = (props) => {
   /// FUNCTIONALITY
   ////////////////////////////////////////
   let groomedOptions;
-  if (Object.hasOwn(input,"options"))
+  if (Object.hasOwn(input, "options"))
     groomedOptions = input.options.map((option) => option.trim());
 
   if (input.type === "textarea") {

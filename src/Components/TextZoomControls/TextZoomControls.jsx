@@ -1,6 +1,6 @@
 import styles from "./TextZoomControls.module.scss";
-import React from "react";
-const TextZoomControls = (props) => {
+
+const TextZoomControls = () => {
   const upClickButtonHandler = () => {
     const htmlElm = document.getElementsByTagName("html")[0];
     const currentFontSize =

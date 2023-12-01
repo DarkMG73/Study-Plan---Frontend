@@ -1,5 +1,4 @@
-import React, { Fragment } from "react";
-import Styles from "./InputNumber.module.scss";
+import { Fragment } from "react";
 import useAddInputData from "../../../../../../Hooks/useAddInputData";
 
 const InputNumber = (props) => {

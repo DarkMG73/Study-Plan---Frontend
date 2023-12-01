@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, Fragment } from "react";
-import { shallowEqual, useSelector, useDispatch } from "react-redux";
+import { useState, useEffect, useRef, Fragment } from "react";
+import { shallowEqual, useSelector } from "react-redux";
 import styles from "./StudyPlanItems.module.scss";
 import StudyPlanItemsList from "./StudyPlanItemsList/StudyPlanItemsList";
 import Welcome from "../Welcome/Welcome";
@@ -7,29 +7,17 @@ import FilteredStudyPlanItems from "./FilteredStudyPlanItems/FilteredStudyPlanIt
 import displayConditions from "../../data/displayConditionsObj.js";
 import studyItemSortOptions from "../../data/studyItemSortOptions.json";
 import useCreateNewForm from "../../Hooks/useCreateNewForm";
-import useProcessAllFormInputData from "../../Hooks/useProcessAllFormInputData";
 import useInitStudyPlanItems from "../../Hooks/useInitStudyPlanItems";
 import useProcessUpdateStudyPlan from "../../Hooks/useProcessUpdateStudyPlan";
 import PushButton from "../../UI/Buttons/PushButton/PushButton";
 import { toTitleCase } from "../../Hooks/utility";
-import { saveManyStudyPlanItems } from "../../storage/studyPlanDB";
-import {
-  saveManyContentItems,
-  getSchemaForContentItem,
-} from "../../storage/contentDB";
+import { getSchemaForContentItem } from "../../storage/contentDB";
 import CollapsibleElm from "../../UI/CollapsibleElm/CollapsibleElm";
-import {
-  updateAStudyPlanItem,
-  deleteDocFromDb,
-} from "../../storage/studyPlanDB";
-import {
-  updateAContentItem,
-  deleteContentDocFromDb,
-} from "../../storage/contentDB";
+import { updateAStudyPlanItem } from "../../storage/studyPlanDB";
+import { updateAContentItem } from "../../storage/contentDB";
 import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 import useSortList from "../../Hooks/useSortList";
 import useAssembleStudyPlanList from "../../Hooks/useAssembleStudyPlanList";
-import { loadingRequestsActions } from "../../store/loadingRequestsSlice";
 import BarLoader from "../../UI/Loaders/BarLoader/BarLoader";
 
 const StudyPlanItems = (props) => {
@@ -40,10 +28,6 @@ const StudyPlanItems = (props) => {
   const updateStudyPlan = useSelector(
     (state) => state.studyPlanData.updateStudyPlan
   );
-  const loadingStatus = useSelector(
-    (state) => state.loadingRequests.pendingLoadRequests
-  );
-  let saveManyItems = saveManyStudyPlanItems;
   const [sortMethod, setSortMethod] = useState("priority");
   const [refresh, setRefresh] = useState(0);
   const [changeListArray, setChangeListArray] = useState(false);
@@ -51,9 +35,7 @@ const StudyPlanItems = (props) => {
   const [showListResetButton, setShowListResetButton] = useState(false);
   const id = props.id;
   const typeName = props.type;
-  const section = props.section;
   const dataObjForEdit = props.dataObjForEdit;
-  const processAllFormInputData = useProcessAllFormInputData();
   const initStudyPlanItems = useInitStudyPlanItems();
   const processUpdateStudyPlan = useProcessUpdateStudyPlan();
   const [allStudyPlanItems, setAllStudyPlanItems] = useState(
@@ -69,7 +51,7 @@ const StudyPlanItems = (props) => {
     (state) => state.formInputData,
     shallowEqual
   );
-  const dispatch = useDispatch();
+
   const sortList = useSortList();
   const [formType, setFormType] = useState("all");
   const assembleStudyPlanList = useAssembleStudyPlanList();
@@ -220,7 +202,7 @@ const StudyPlanItems = (props) => {
     setSortMethod(e.target.value);
   };
 
-  const showAllItemsButtonHandler = (e) => {
+  const showAllItemsButtonHandler = () => {
     if (studyPlanMetadata && Object.hasOwn(studyPlanMetadata, "type")) {
       setShowListResetButton(true);
       setChangeListArray([...studyPlanMetadata.type]);
@@ -228,13 +210,13 @@ const StudyPlanItems = (props) => {
     }
   };
 
-  const showDefaultItemsButtonHandler = (e) => {
+  const showDefaultItemsButtonHandler = () => {
     setShowListResetButton(false);
     setChangeListArray(["step"]);
     setHideAllSubGoals(true);
   };
 
-  const hideAllSubGoalsButtonHandler = (e) => {
+  const hideAllSubGoalsButtonHandler = () => {
     if (studyPlanMetadata && Object.hasOwn(studyPlanMetadata, "type")) {
       setHideAllSubGoals(!hideAllSubGoals);
     }

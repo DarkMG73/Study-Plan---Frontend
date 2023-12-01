@@ -1,15 +1,12 @@
 import { useSelector } from "react-redux";
 
-const useExportData = (props) => {
+const useExportData = () => {
   const { studyPlan, studyPlanMetadata } = useSelector(
     (state) => state.studyPlanData
   );
   if (!studyPlan || Object.keys(studyPlan).length <= 0) return null;
   const totalStudyPlanItems =
     Object.hasOwn(studyPlanMetadata, "_id") && studyPlanMetadata._id.length;
-  const { labTime, lectureTime } = studyPlanMetadata;
-  const totalLabTime = labTime ? labTime[1] : 0;
-  const totalLectureTime = lectureTime ? lectureTime[1] : "0";
   const totalCompleted = studyPlanMetadata.markcomplete
     ? studyPlanMetadata.markcomplete
     : ["0"];

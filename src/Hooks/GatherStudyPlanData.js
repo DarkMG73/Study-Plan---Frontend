@@ -11,16 +11,8 @@ export default async function GatherStudyPlanData(studyPlanItemSchema, user) {
     ? studyPlanItemSchema
     : await runGetSchemaForStudyPlanItems();
 
-  // if (user && studyPlanFromDB.length <= 0) {
-  //   throw new Error(
-  //     "There appears to be a problem reaching the servers. Please try again or contact the site admin if the problem continues."
-  //   );
-  // }
   studyPlanFromDB.forEach((studyPlanItem) => {
     studyPlanData.studyPlan[studyPlanItem._id] = studyPlanItem;
-    // studyPlanData.studyPlan[studyPlanItem._id].sourceURLObj = JSON.parse(
-    //   studyPlanData.studyPlan[studyPlanItem._id].sourceURLObj
-    // );
   });
 
   const ungroomedStudyPlanMetadata = gatherAllMetadata(studyPlanData.studyPlan);

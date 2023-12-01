@@ -17,12 +17,12 @@ export async function registerAUser(user) {
       );
       const error = err.response;
       if (
-        Object.hasOwn(error,"data") &&
-        Object.hasOwn(error.data,"message")
+        Object.hasOwn(error, "data") &&
+        Object.hasOwn(error.data, "message")
       ) {
         if (error.data.message.constructor === String) return error;
 
-        if (Object.hasOwn(error.data.message,"code")) {
+        if (Object.hasOwn(error.data.message, "code")) {
           // MongoDB error 11000 is a duplicate error
           if (error.data.message.code === 11000) {
             const errorMessage = {
@@ -42,7 +42,7 @@ export async function registerAUser(user) {
         error
       );
 
-      if (Object.hasOwn(error,"data") && Object.hasOwn(error.data,"message"))
+      if (Object.hasOwn(error, "data") && Object.hasOwn(error.data, "message"))
         console.log(
           "%cERROR Message:",
           "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
@@ -54,7 +54,7 @@ export async function registerAUser(user) {
 }
 
 export async function setUserCookie(user) {
-  const output = new Promise((resolve, reject) => {
+  const output = new Promise((resolve) => {
     const cookie = StorageForSession(
       "ADD",
       user,
@@ -74,9 +74,9 @@ export async function setUserCookie(user) {
   return output;
 }
 
-export async function deleteUserCookie(user) {
+export async function deleteUserCookie() {
   // SessionStorage used while hosting API on Heroku
-  const output = new Promise((resolve, reject) => {
+  const output = new Promise((resolve) => {
     const cookie = StorageForSession(
       "DELETE",
       {},
@@ -97,7 +97,7 @@ export async function deleteUserCookie(user) {
 }
 
 export async function getUserCookie() {
-  const output = new Promise((resolve, reject) => {
+  const output = new Promise((resolve) => {
     const cookie = StorageForSession(
       "GET",
       {},
@@ -130,7 +130,7 @@ export async function sign_inAUser(token) {
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
         error
       );
-      if (Object.hasOwn(error,"data") && Object.hasOwn(error.data,"message"))
+      if (Object.hasOwn(error, "data") && Object.hasOwn(error.data, "message"))
         console.log(
           "%cERROR Message:",
           "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",

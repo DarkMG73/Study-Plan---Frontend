@@ -1,10 +1,5 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState, Fragment } from "react";
 import styles from "./StudyPlanItem.module.scss";
-import { formInputDataActions } from "../../../store/formInputDataSlice";
-import ProgressBar from "@ramonak/react-progress-bar";
-import SlideButton from "../../../UI/Buttons/Slide-Button/Slide-Button";
-import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 import StudyItemDisplayElm from "./StudyItemDisplayElm/StudyItemDisplayElm";
 import ArrowLink from "./StudyItemDisplayElm/StudyItemInputs/ArrowLink/ArrowLink";
 
@@ -23,9 +18,8 @@ const StudyPlanItem = (props) => {
   } = props;
 
   const studyPlanItemsObj = props.studyPlanItemsObj.studyPlanItemsObj;
-  const [editedField, setEditedField] = useState(false);
+  const [editedField] = useState(false);
   function findElementType(itemKey) {
-    const parentsParentKey = props.parentsParentKey;
     const checkIfNameInDisplayCond = (name, condition) => {
       if (Object.hasOwn(displayConditions, condition)) {
         if (Array.isArray(displayConditions[condition])) {

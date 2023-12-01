@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import { useState, Fragment } from "react";
 import Styles from "./InputSlideButton.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import SlideButton from "../../../../../../UI/Buttons/Slide-Button/Slide-Button";
@@ -21,8 +21,6 @@ const InputSlideButton = (props) => {
     e.preventDefault();
 
     const itemWithNewEdits = { ...studyPlanItemsObj };
-
-    const _id = itemWithNewEdits._id;
 
     itemWithNewEdits[key] = !studyPlanItemsObj[key];
 
