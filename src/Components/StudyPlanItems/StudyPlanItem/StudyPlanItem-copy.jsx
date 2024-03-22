@@ -9,7 +9,7 @@ const StudyPlanItem = (props) => {
   const studyPlanItemsObj = props.studyPlanItemsObj.studyPlanItemsObj;
   const user = useSelector((state) => state.auth.user);
   const { studyPlan, studyPlanMetadata } = useSelector(
-    (state) => state.studyPlanData
+    (state) => state.studyPlanData,
   );
   const showProtectedHidden = props.showProtectedHidden;
   const unlockProtectedVisible = props.unlockProtectedVisible;
@@ -58,7 +58,7 @@ const StudyPlanItem = (props) => {
       setChecked(!checked);
 
       dispatch(
-        studyPlanDataActions.updateStudyPlanDB({ itemWithNewEdits, user })
+        studyPlanDataActions.updateStudyPlanDB({ itemWithNewEdits, user }),
       );
       // updateAStudyPlanItem(dataObj, user);
     } else {
@@ -150,7 +150,7 @@ const StudyPlanItem = (props) => {
         studyPlanItemsObj[key] &&
         new Date(
           new Date(studyPlanItemsObj[key]).getTime() -
-            new Date().getTimezoneOffset() * 60000
+            new Date().getTimezoneOffset() * 60000,
         )
           .toISOString()
           .slice(0, 19);
@@ -158,7 +158,7 @@ const StudyPlanItem = (props) => {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:10px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
     }
   }
@@ -202,7 +202,7 @@ const StudyPlanItem = (props) => {
           value={optionObj[keyForOptionValue]}
         >
           {optionObj.type.toUpperCase()}: {optionObj[keyToDisplay]}
-        </option>
+        </option>,
       );
     });
   }
@@ -266,7 +266,7 @@ const StudyPlanItem = (props) => {
           (emptyForm && styles["new-form-item"])
         }
       >
-        <StudyPlanDisplayElm />
+        <StudyPlanDisplayElm setEditedField={setEditedField} />
         {onlyList && <span>{studyPlanItemsObj[key]}</span>}
       </li>
       {

@@ -23,6 +23,7 @@ const StudyItemDisplayElm = (props) => {
     showProtectedHidden,
     unlockProtectedVisible,
     displayConditions,
+    editedField,
     setEditedField,
   } = props;
 
@@ -34,6 +35,7 @@ const StudyItemDisplayElm = (props) => {
     parentKey: parentKey,
     displayConditions: displayConditions,
     unlockProtectedVisible: unlockProtectedVisible,
+    editedField,
     setEditedField,
   };
 

@@ -18,7 +18,7 @@ const StudyPlanItem = (props) => {
   } = props;
 
   const studyPlanItemsObj = props.studyPlanItemsObj.studyPlanItemsObj;
-  const [editedField] = useState(false);
+  const [editedField, setEditedField] = useState(false);
   function findElementType(itemKey) {
     const checkIfNameInDisplayCond = (name, condition) => {
       if (Object.hasOwn(displayConditions, condition)) {
@@ -161,6 +161,8 @@ const StudyPlanItem = (props) => {
           showProtectedHidden={showProtectedHidden}
           unlockProtectedVisible={unlockProtectedVisible}
           displayConditions={displayConditions}
+          editedField={editedField}
+          setEditedField={setEditedField}
         />
 
         {onlyList && <span>{studyPlanItemsObj[passedKey]}</span>}
