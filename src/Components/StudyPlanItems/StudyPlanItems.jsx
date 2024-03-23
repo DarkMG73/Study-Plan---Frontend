@@ -23,10 +23,10 @@ import BarLoader from "../../UI/Loaders/BarLoader/BarLoader";
 const StudyPlanItems = (props) => {
   const user = useSelector((state) => state.auth.user);
   const { studyPlan, studyPlanMetadata, schema } = useSelector(
-    (state) => state.studyPlanData
+    (state) => state.studyPlanData,
   );
   const updateStudyPlan = useSelector(
-    (state) => state.studyPlanData.updateStudyPlan
+    (state) => state.studyPlanData.updateStudyPlan,
   );
   const [sortMethod, setSortMethod] = useState("priority");
   const [refresh, setRefresh] = useState(0);
@@ -39,7 +39,7 @@ const StudyPlanItems = (props) => {
   const initStudyPlanItems = useInitStudyPlanItems();
   const processUpdateStudyPlan = useProcessUpdateStudyPlan();
   const [allStudyPlanItems, setAllStudyPlanItems] = useState(
-    props.allStudyPlanItems
+    props.allStudyPlanItems,
   );
   const [formInputData, setFormInputData] = useState({});
   const [newFormJSX, setNewFormJSX] = useState(false);
@@ -49,7 +49,7 @@ const StudyPlanItems = (props) => {
   newFormInputValuesObjRef.current = newFormInputValuesObj;
   const allFormInputData = useSelector(
     (state) => state.formInputData,
-    shallowEqual
+    shallowEqual,
   );
 
   const sortList = useSortList();
@@ -70,7 +70,7 @@ const StudyPlanItems = (props) => {
       id
     );
 
-  if (outputName === "goals") outputName = "Goal & Curriculum";
+  if (outputName === "goals") outputName = "Curriculum";
   if (outputName === "steps") outputName = "Syllabus";
   if (outputName === "holds") outputName = "Holding Area";
 
@@ -193,7 +193,7 @@ const StudyPlanItems = (props) => {
       });
     } else {
       alert(
-        'Please log in to add to your study plan. If you do not yet have a profile, click "Sign Up" at the top of the page to get started.'
+        'Please log in to add to your study plan. If you do not yet have a profile, click "Sign Up" at the top of the page to get started.',
       );
     }
   };
@@ -541,7 +541,7 @@ const StudyPlanItems = (props) => {
                     >
                       {Object.entries(studyItemSortOptions)
                         .sort((a, b) =>
-                          a[1].toLowerCase().localeCompare(b[1].toLowerCase())
+                          a[1].toLowerCase().localeCompare(b[1].toLowerCase()),
                         )
                         .map((entry) => (
                           <Fragment key={"1+r" + entry[0] + entry[1]}>

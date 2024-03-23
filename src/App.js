@@ -10,6 +10,7 @@ import { useRunGatherStudyPlanData } from "./Hooks/useRunGatherStudyPlanData";
 import { useRunGatherContentData } from "./Hooks/useRunGatherContentData";
 import Home from "./pages/Home/Home";
 import Manage from "./pages/Manage/Manage";
+import Demo from "./pages/Demo/Demo";
 import CardTransparent from "./UI/Cards/CardTransparent/CardTransparent";
 import Header from "./Components/Header/Header";
 import BarLoader from "./UI/Loaders/BarLoader/BarLoader";
@@ -18,7 +19,7 @@ import LocalErrorDisplay from "./HOC/ErrorHandling/LocalErrorDisplay/LocalErrorD
 
 function App() {
   const loadingStatus = useSelector(
-    (state) => state.loadingRequests.pendingLoadRequests
+    (state) => state.loadingRequests.pendingLoadRequests,
   );
   const dispatch = useDispatch();
   // const studyPlanData = GatherStudyPlanData();
@@ -33,12 +34,12 @@ function App() {
     console.log(
       "%cStudyPlan Data:",
       "color:#fff;background:#be6502;padding:5px;border-radius:0 25px 25px 0",
-      studyPlan
+      studyPlan,
     );
     console.log(
       "%cContent Data:",
       "color:#fff;background:#007215;padding:5px;border-radius:0 25px 25px 0",
-      contentData
+      contentData,
     );
   }
 
@@ -87,7 +88,7 @@ function App() {
         console.log(
           "%cRate Limit Remaining: ",
           "color:#fff;background:#ccd62d;padding:5px;border-radius:0 25px 25px 0",
-          serverRateLimitRemaining
+          serverRateLimitRemaining,
         );
       }
       // dispatch(loadingRequestsActions.removeFromLoadRequest());
@@ -109,7 +110,7 @@ function App() {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:10px;border-radius:0 25px 25px 0",
-        error
+        error,
       );
       dispatch(
         statusUpdateActions.updateStatus({
@@ -121,10 +122,10 @@ function App() {
             Object.hasOwn(error, "response") && error.response.statusText
               ? error.response.statusText
               : error.message,
-        })
+        }),
       );
       return Promise.reject(error);
-    }
+    },
   );
 
   ////////////////////////////////////////
@@ -175,7 +176,7 @@ function App() {
       console.log(
         "%cUser:",
         "color:#fff;background:#007215;padding:5px;border-radius:0 25px 25px 0",
-        user
+        user,
       );
 
     // if (user && user !== "not logged in")
@@ -189,7 +190,7 @@ function App() {
         statusUpdateActions.updateStatus({
           status: 500,
           statusText: noDBErrors.message,
-        })
+        }),
       );
   }, [noDBErrors.status]);
 
@@ -243,6 +244,12 @@ function App() {
                     noDBErrors={noDBErrors}
                     setNoDBErrors={setNoDBErrors}
                   />
+                }
+              />
+              <Route
+                path="/demo"
+                element={
+                  <Demo noDBErrors={noDBErrors} setNoDBErrors={setNoDBErrors} />
                 }
               />
               <Route
