@@ -233,7 +233,7 @@ const Home = (props) => {
   ////////////////////////////////////////
   return (
     <div className={styles["page-wrap"]}>
-      Demo
+      <h1> Demo</h1>
       <div className={styles["welcome-section-container"]}>
         <ErrorBoundary>
           <div className={styles["login-stats-container"]}>
