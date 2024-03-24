@@ -18,6 +18,7 @@ import { scrollPositionActions } from "../../store/scrollPositionSlice";
 import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 import { formInputDataActions } from "../../store/formInputDataSlice";
 import { loadingRequestsActions } from "../../store/loadingRequestsSlice";
+import { authActions } from "../../store/authSlice";
 import LoginStatus from "../../Components/User/LoginStatus/LoginStatus";
 import Stats from "../../Components/Stats/Stats";
 import { saveManyStudyPlanItems } from "../../storage/studyPlanDB";
@@ -27,11 +28,16 @@ import {
 } from "../../storage/contentDB";
 import useProcessAllFormInputData from "../../Hooks/useProcessAllFormInputData";
 import useProcessUploadedFormInputData from "../../Hooks/useProcessUploadedFormInputData";
+import demoData from "../../data/demoData.json";
 
 const Home = (props) => {
-  const { studyPlan } = useSelector((state) => state.studyPlanData);
+  const studyPlan = demoData;
+  console.log("studyPlan", studyPlan);
   const { content } = useSelector((state) => state.contentData);
-  const user = useSelector((state) => state.auth.user);
+  const user = {
+    name: "Demo User",
+    email: "demouser@glassinteractive.com",
+  };
   const angledRectangleRef = useRef();
   const dispatch = useDispatch();
   const hideStudyPlan = false;
@@ -44,7 +50,8 @@ const Home = (props) => {
   /// Effects
   ////////////////////////////////////////
   useEffect(() => {
-    dispatch(loadingRequestsActions.addToLoadRequest());
+    // dispatch(loadingRequestsActions.addToLoadRequest());
+    dispatch(authActions.logIn(user));
   }, []);
   useLayoutEffect(() => {
     const updateScrollPosition = () => {
@@ -226,6 +233,7 @@ const Home = (props) => {
   ////////////////////////////////////////
   return (
     <div className={styles["page-wrap"]}>
+      Demo
       <div className={styles["welcome-section-container"]}>
         <ErrorBoundary>
           <div className={styles["login-stats-container"]}>
