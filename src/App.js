@@ -89,6 +89,13 @@ function App() {
           "color:#fff;background:#ccd62d;padding:5px;border-radius:0 25px 25px 0",
           serverRateLimitRemaining,
         );
+        console.log(
+          "%c⚪️►►►► %cline:106%cresponse",
+          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+          "color:#fff;background:rgb(222, 125, 44);padding:3px;border-radius:2px",
+          response,
+        );
       }
       // dispatch(loadingRequestsActions.removeFromLoadRequest());
       // dispatch(

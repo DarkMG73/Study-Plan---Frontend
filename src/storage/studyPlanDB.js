@@ -2,6 +2,12 @@ import axios from "axios";
 
 /// GET THE STUDY PLAN ITEMS /////////////////////////////
 export const studyPlanData = async (user) => {
+  console.log(
+    "%c⚪️►►►► %cline:4%cstudyPlanData",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
+  );
   let axiosConfig = null;
 
   if (user) {
@@ -16,12 +22,19 @@ export const studyPlanData = async (user) => {
 
   try {
     const res = await axios.post("/api/studyPlan/", user, axiosConfig);
+    console.log(
+      "%c⚪️►►►► %cline:24%cres",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(178, 190, 126);padding:3px;border-radius:2px",
+      res,
+    );
     return res.data;
   } catch (err) {
     console.log(
-      "%cERROR:",
+      "%cERROR--->:",
       "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-      err
+      err,
     );
     return [];
   }
@@ -44,7 +57,7 @@ export const getQuestionBy_Id = async (user, question_Id) => {
   const res = await axios.post(
     "/api/studyPlan/" + question_Id,
     user,
-    axiosConfig
+    axiosConfig,
   );
   return res.data;
 };
@@ -67,7 +80,7 @@ export async function addDocToDB(userAndDataObject) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
       return err;
     });
@@ -92,7 +105,7 @@ export async function saveManyStudyPlanItems(userAndDataObject) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
       return err;
     });
@@ -103,7 +116,7 @@ export async function saveManyStudyPlanItems(userAndDataObject) {
 export async function updateAStudyPlanItem(dataObj, user) {
   if (!Object.hasOwn(dataObj, "identifier")) {
     throw Error(
-      "This item appears to be incomplete. Contact the site admin and provide this error code: SPDB-MIS-IDENT"
+      "This item appears to be incomplete. Contact the site admin and provide this error code: SPDB-MIS-IDENT",
     );
   }
   const axiosConfig = {
@@ -122,7 +135,7 @@ export async function updateAStudyPlanItem(dataObj, user) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
 
       return err;
@@ -147,7 +160,7 @@ export async function deleteDocFromDb(id, user) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
       return err;
     });
@@ -171,12 +184,12 @@ export async function deleteAllStudyTopics(user) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
       return err;
     });
@@ -202,7 +215,7 @@ export async function getSchemaForStudyPlanItem() {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
 
       if (err.code && err.code === "ERR_NETWORK") {

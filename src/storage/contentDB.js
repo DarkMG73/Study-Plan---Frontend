@@ -21,7 +21,7 @@ export const contentData = async (user) => {
     console.log(
       "%cERROR:",
       "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-      err
+      err,
     );
     return [];
   }
@@ -63,7 +63,7 @@ export async function addDocToDB(userAndDataObject) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
       return err;
     });
@@ -88,7 +88,7 @@ export async function saveManyContentItems(userAndDataObject) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
       return err;
     });
@@ -114,7 +114,7 @@ export async function updateAContentItem(id, dataObj, user) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
 
       return err;
@@ -139,7 +139,7 @@ export async function deleteContentDocFromDb(id, user) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
       return err;
     });
@@ -163,12 +163,12 @@ export async function deleteAllContents(user) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
       return err;
     });
@@ -193,7 +193,7 @@ export async function getSchemaForContentItem() {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
 
       if (err.code && err.code === "ERR_NETWORK") {
