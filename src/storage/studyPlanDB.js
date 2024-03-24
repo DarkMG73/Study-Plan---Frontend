@@ -2,14 +2,8 @@ import axios from "axios";
 
 /// GET THE STUDY PLAN ITEMS /////////////////////////////
 export const studyPlanData = async (user) => {
-  console.log(
-    "%c⚪️►►►► %cline:4%cstudyPlanData",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
-  );
   let axiosConfig = null;
-
+  let currentUser = user;
   if (user) {
     axiosConfig = {
       headers: {
@@ -18,17 +12,13 @@ export const studyPlanData = async (user) => {
       },
       timeout: 60000,
     };
+  } else {
+    currentUser = { user: "false" };
   }
 
   try {
-    const res = await axios.post("/api/studyPlan/", user, axiosConfig);
-    console.log(
-      "%c⚪️►►►► %cline:24%cres",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(178, 190, 126);padding:3px;border-radius:2px",
-      res,
-    );
+    const res = await axios.post("/api/studyPlan/", currentUser, axiosConfig);
+
     return res.data;
   } catch (err) {
     console.log(

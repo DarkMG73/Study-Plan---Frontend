@@ -24,17 +24,17 @@ const StudyPlanItemsList = (props) => {
   const onlyList = props.onlyList;
   const noEditButton = props.noEditButton;
   const [showProtectedHidden, setShowProtectedHidden] = useState(
-    props.showProtectedHidden ? props.showProtectedHidden : []
+    props.showProtectedHidden ? props.showProtectedHidden : [],
   );
   const showProtectedHiddenRef = useRef();
   showProtectedHiddenRef.current = showProtectedHidden;
   const [unlockProtectedVisible, setUnlockProtectedVisible] = useState(
-    props.unlockProtectedVisible ? props.unlockProtectedVisible : []
+    props.unlockProtectedVisible ? props.unlockProtectedVisible : [],
   );
   const unlockProtectedVisibleRef = useRef();
   unlockProtectedVisibleRef.current = unlockProtectedVisible;
   const [existingFormInputValuesObj, setExistingFormInputValuesObj] = useState(
-    {}
+    {},
   );
   const existingFormInputValuesObjRef = useRef();
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const StudyPlanItemsList = (props) => {
     parentMasterID,
     parentKey,
     title,
-    outputValue
+    outputValue,
   ) => {
     existingFormInputValuesObjRef.current = outputValue;
 
@@ -58,7 +58,7 @@ const StudyPlanItemsList = (props) => {
       } else if (
         Object.hasOwn(outputObj[parentMasterID], title) &&
         !["String", "Array", "number", "Boolean"].includes(
-          outputObj[parentMasterID][title].constructor.name
+          outputObj[parentMasterID][title].constructor.name,
         )
       ) {
         outputObj[parentMasterID][title] = {
@@ -196,11 +196,11 @@ const StudyPlanItemsList = (props) => {
           studyPlanDataActions.updateOneStudyPlanItem({
             _id: _id,
             item: itemWithNewEdits,
-          })
+          }),
         );
 
         dispatch(
-          studyPlanDataActions.updateStudyPlanDB({ itemWithNewEdits, user })
+          studyPlanDataActions.updateStudyPlanDB({ itemWithNewEdits, user }),
         );
         // updateAStudyPlanItem(dataObj, user);
       } else {
@@ -223,7 +223,7 @@ const StudyPlanItemsList = (props) => {
         studyPlanItemsObj[parentMasterID].type +
         ' titled "' +
         studyPlanItemsObj[parentMasterID].name +
-        ' "?'
+        ' "?',
     );
     if (confirm && user && user.isAdmin == true) {
       // if (true) {
@@ -241,7 +241,7 @@ const StudyPlanItemsList = (props) => {
       });
     } else if (confirm) {
       const sendEmail = window.confirm(
-        '2222 Thank you for contributing. All contributions must be reviewed before becoming public. Click "OK" to send this via email for review and, if approved, to be included. Click "Cancel" to cancel this and not send an email.'
+        '2222 Thank you for contributing. All contributions must be reviewed before becoming public. Click "OK" to send this via email for review and, if approved, to be included. Click "Cancel" to cancel this and not send an email.',
       );
       if (sendEmail) {
         const questionAdminEmail = "general@glassinteractive.com";
@@ -253,8 +253,8 @@ const StudyPlanItemsList = (props) => {
           ()}`;
         window.open(
           `mailto:${questionAdminEmail}?subject=${subject}l&body=${encodeURIComponent(
-            body
-          )}`
+            body,
+          )}`,
         );
       }
     }
@@ -430,9 +430,9 @@ const StudyPlanItemsList = (props) => {
                   studyPlanItemsObj[key].dependencies.map(
                     (dependencyIdentifier) => {
                       const dependenciesObj = Object.values(
-                        props.allStudyPlanItems
+                        props.allStudyPlanItems,
                       ).filter(
-                        (item) => dependencyIdentifier === item.identifier
+                        (item) => dependencyIdentifier === item.identifier,
                       );
                       if (dependenciesObj.length <= 0) return false;
                       return (
@@ -493,7 +493,7 @@ const StudyPlanItemsList = (props) => {
                           setFormType={props.setFormType}
                         />
                       );
-                    }
+                    },
                   )}
               </ul>
               {!onlyList && !subListLevel && (

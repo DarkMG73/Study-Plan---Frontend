@@ -38,7 +38,7 @@ const Login = (props) => {
       console.log(
         "%cForgot Password URL:",
         "color:#fff;background:#287094;padding:5px;border-radius:0 25px 25px 0",
-        forgotPasswordURL
+        forgotPasswordURL,
       );
   }, []);
 
@@ -47,7 +47,7 @@ const Login = (props) => {
       dispatch(
         statusUpdateActions.updateStatus({
           ...status,
-        })
+        }),
       );
   }, [loginError]);
 
@@ -87,16 +87,35 @@ const Login = (props) => {
     "data:text/html;charset=utf-8,%20%20%20%20%3Cdiv%0A%20%20%20%20%20%20style%3D%22font%3A%20normal%20500%2012px%20Kodchasan%2C%20sans-serif%3B%0A%20%20%20%20background%3A%20%23287094%3B%0A%20%20%20%20color%3A%20hsl%2860deg%206%25%2093%25%29%3B%0A%20%20%20%20display%3A%20flex%3B%0A%20%20%20%20justify-content%3A%20center%3B%0A%20%20%20%20align-items%3A%20center%3B%0A%20%20%20%20min-height%3A%20100%25%3B%0A%20%20%20%20margin%3A%200%3B%0A%20%20%20%20max-height%3A%20100%25%3B%0A%20%20%20%20text-align%3A%20center%3B%0A%20%20%20%20min-width%3A%20100%25%3B%0A%20%20%20%20position%3A%20absolute%3B%0A%20%20%20%20top%3A%200%3B%0A%20%20%20%20left%3A%200%3B%0A%20%20%20%20max-width%3A%20100%25%3B%0A%20%20%20%20max-height%3A%20100%25%3B%22%0A%20%20%20%20%3E%0A%20%20%20%20%20%20%3Ch3%20style%3D%22margin%3A%201%25%205%25%3B%22%3E%0A%20%20%20%20%20%20%20%20It%20looks%20like%20there%20is%20a%20server%20issue.%20Please%20try%20again%20shortly.%20If%20the%0A%20%20%20%20%20%20%20%20problem%20continues%2C%20please%20contact%20the%20site%20administrator.%20%F0%9F%98%A2%0A%20%20%20%20%20%20%3C%2Fh3%3E%0A%20%20%20%20%3C%2Fdiv%3E";
   /* eslint-enable */
   const makeLoadingRequest = function () {
+    console.log(
+      "%c⚪️►►►►►►►►►►►►►►►►►►►►►►►►► %cline:89%cmakeLoadingRequest",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
+    );
+
     return dispatch(loadingRequestsActions.addToLoadRequest());
   };
 
   const removeLoadingRequest = function () {
+    console.log(
+      "%c⚪️►►►►►►►►►►►►►►►►►►►►►►►►►►►►►►►►►►►►►►►► %cline:100%cremoveLoadingRequest",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(153, 80, 84);padding:3px;border-radius:2px",
+    );
     setTimeout(() => {
       dispatch(loadingRequestsActions.removeFromLoadRequest());
     }, 2000);
   };
 
   const completeSignInProcedures = (res) => {
+    console.log(
+      "%c⚪️►►►► %cline:112%ccompleteSignInProcedures",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
+    );
     seLoginError(false);
     makeLoadingRequest();
     // storage("add", res.data);
@@ -106,7 +125,7 @@ const Login = (props) => {
         console.log(
           "%cSetting User Cookie:",
           "color:#287094;background:#f0f0ef;padding:5px;border-radius:0 25px 25px 0",
-          res
+          res,
         );
     });
 
@@ -129,7 +148,7 @@ const Login = (props) => {
   const requestNewPasswordButtonHandler = (e) => {
     e.preventDefault();
     const myRequest = new Request(
-      "http://localhost:8000/api/users/auth/forgot_password"
+      "http://localhost:8000/api/users/auth/forgot_password",
     );
 
     fetch(myRequest)
@@ -140,7 +159,7 @@ const Login = (props) => {
         console.log(
           "%cERROR:",
           "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-          error
+          error,
         );
         setServerActiveError(true);
       });
@@ -150,6 +169,12 @@ const Login = (props) => {
 
   //register function
   const submitLogin = (e) => {
+    console.log(
+      "%c⚪️►►►►►►►►►►►►►►►►► %cline:171%csubmitLogin",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
+    );
     e.preventDefault();
     const { email, password } = user;
 
@@ -167,7 +192,7 @@ const Login = (props) => {
                 "There was a problem finding the user database. Make sure you are connected to the internet. Contact the site admin if the problem continues. Error: " +
                   res.status +
                   " | " +
-                  res.statusText
+                  res.statusText,
               );
               setShowLoginError(true);
             } else if (res.status >= 400) {
@@ -190,13 +215,13 @@ const Login = (props) => {
                 "There was a problem finding the user database. Make sure you are connected to the internet. Contact the site admin if the problem continues. Error: " +
                   res.status +
                   " | " +
-                  res.statusText
+                  res.statusText,
               );
               setShowLoginError(true);
             }
           } else {
             seLoginError(
-              "Unfortunately, something went wrong and we can not figure out what happened.  Please refresh and try again."
+              "Unfortunately, something went wrong and we can not figure out what happened.  Please refresh and try again.",
             );
             setShowLoginError(true);
           }
@@ -208,7 +233,7 @@ const Login = (props) => {
         });
     } else {
       seLoginError(
-        "Either the email or password is not meeting the requirements. Please fix and try again."
+        "Either the email or password is not meeting the requirements. Please fix and try again.",
       );
       setShowLoginError(true);
     }
@@ -218,7 +243,7 @@ const Login = (props) => {
     console.log(
       "%cThere was a Login Error:",
       "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-      loginError
+      loginError,
     );
 
   ////////////////////////////////////////////////////////////////

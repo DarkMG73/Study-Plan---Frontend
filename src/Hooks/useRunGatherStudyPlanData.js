@@ -6,15 +6,27 @@ import { statusUpdateActions } from "../store/statusUpdateSlice";
 
 export const useRunGatherStudyPlanData = () => {
   const makeLoadingRequest = function () {
+    console.log(
+      "%c⚪️►►►► USEGather %cline:8%cmakeLoadingRequest",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(3, 101, 100);padding:3px;border-radius:2px",
+    );
     return dispatch(loadingRequestsActions.addToLoadRequest());
   };
   const removeLoadingRequest = function () {
+    console.log(
+      "%c⚪️►►►► USEGather %cline:12%cremoveLoadingRequest",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(39, 72, 98);padding:3px;border-radius:2px",
+    );
     dispatch(loadingRequestsActions.removeFromLoadRequest());
   };
   const currentStatus = useSelector((state) => state.statusUpdate);
   const dispatch = useDispatch();
   const studyPlanItemSchema = useSelector(
-    (state) => state.studyPlanData.schema
+    (state) => state.studyPlanData.schema,
   );
 
   const runGatherStudyPlanData = (props) => {
@@ -27,7 +39,7 @@ export const useRunGatherStudyPlanData = () => {
           console.log(
             "%c Getting study plan data from DB:",
             "color:#fff;background:#777;padding:5px;border-radius:0 25px 25px 0",
-            data
+            data,
           );
 
         if (data) {
@@ -38,7 +50,7 @@ export const useRunGatherStudyPlanData = () => {
                 status: currentStatus.status ? currentStatus.status : 200,
                 statusText: "OK",
                 rateLimitRemaining: currentStatus.rateLimitRemaining,
-              })
+              }),
             );
           } else {
             if (currentStatus && currentStatus.status)
@@ -47,7 +59,7 @@ export const useRunGatherStudyPlanData = () => {
                   status: 200,
                   statusText: "OK. Saving to Browser Storage.",
                   rateLimitRemaining: currentStatus.rateLimitRemaining,
-                })
+                }),
               );
           }
         } else {
@@ -64,14 +76,14 @@ export const useRunGatherStudyPlanData = () => {
         console.log(
           "%cGatherToolData: err:",
           "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-          err
+          err,
         );
         dispatch(
           statusUpdateActions.updateStatus({
             status: currentStatus.status ? currentStatus.status : 900,
             statusText: "OK",
             rateLimitRemaining: currentStatus.rateLimitRemaining,
-          })
+          }),
         );
         if (Object.hasOwn(err, "status") && err.status >= 500) {
           setLocalError({
@@ -85,7 +97,7 @@ export const useRunGatherStudyPlanData = () => {
           console.log(
             "%cGatherToolData: err:",
             "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-            err
+            err,
           );
           setLocalError({
             active: true,
@@ -101,7 +113,7 @@ export const useRunGatherStudyPlanData = () => {
           console.log(
             "%cGatherToolData: err:",
             "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-            err
+            err,
           );
 
           if (Object.hasOwn(err, "status")) {

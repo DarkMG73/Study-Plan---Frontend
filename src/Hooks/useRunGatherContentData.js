@@ -24,10 +24,17 @@ export const useRunGatherContentData = () => {
           console.log(
             "%c Getting tool data from DB:",
             "color:#fff;background:#777;padding:5px;border-radius:0 25px 25px 0",
-            data
+            data,
           );
 
         if (data) {
+          console.log(
+            "%c⚪️►►►► %cline:30%cdata",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(60, 79, 57);padding:3px;border-radius:2px",
+            data,
+          );
           dispatch(contentDataActions.initState(data));
           if (user) {
             dispatch(
@@ -35,7 +42,7 @@ export const useRunGatherContentData = () => {
                 status: currentStatus.status ? currentStatus.status : 200,
                 statusText: "OK",
                 rateLimitRemaining: currentStatus.rateLimitRemaining,
-              })
+              }),
             );
           } else {
             if (currentStatus && currentStatus.status)
@@ -44,7 +51,7 @@ export const useRunGatherContentData = () => {
                   status: 200,
                   statusText: "OK. Saving to Browser Storage.",
                   rateLimitRemaining: currentStatus.rateLimitRemaining,
-                })
+                }),
               );
           }
         } else {
@@ -61,14 +68,14 @@ export const useRunGatherContentData = () => {
         console.log(
           "%cGatherToolData: err:",
           "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-          err
+          err,
         );
         dispatch(
           statusUpdateActions.updateStatus({
             status: currentStatus.status ? currentStatus.status : 900,
             statusText: "OK",
             rateLimitRemaining: currentStatus.rateLimitRemaining,
-          })
+          }),
         );
         if (Object.hasOwn(err, "status") && err.status >= 500) {
           setLocalError({
@@ -82,7 +89,7 @@ export const useRunGatherContentData = () => {
           console.log(
             "%cGatherToolData: err:",
             "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-            err
+            err,
           );
           setLocalError({
             active: true,
@@ -98,7 +105,7 @@ export const useRunGatherContentData = () => {
           console.log(
             "%cGatherToolData: err:",
             "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-            err
+            err,
           );
           if (Object.hasOwn(err, "status")) {
             const responseURL =
@@ -124,7 +131,12 @@ export const useRunGatherContentData = () => {
           }
         }
       });
-
+    console.log(
+      "%c⚪️►►►►►►►►►►►►►►►►►►►►►►►►►►►► %cline:130%crunGatherContentData",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(229, 187, 129);padding:3px;border-radius:2px",
+    );
     removeLoadingRequest();
   };
   return runGatherContentData;

@@ -10,6 +10,12 @@ const useProcessUpdateStudyPlan = () => {
     studyPlanDataActions,
   }) => {
     if (!updateStudyPlan) return;
+    console.log(
+      "%c⚪️►►►►  ADD-TO %cline:4%cuseProcessUpdateStudyPlan",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px",
+    );
     dispatch(loadingRequestsActions.addToLoadRequest());
     const { itemWithNewEdits, user, parentSection } = updateStudyPlan;
 
@@ -43,7 +49,7 @@ const useProcessUpdateStudyPlan = () => {
           if (Object.hasOwn(res, "code") && res.code === "ERR_NETWORK") {
             alert(
               "There was an problem sending the data to the server: " +
-                res.message
+                res.message,
             );
             return;
           }
@@ -56,7 +62,7 @@ const useProcessUpdateStudyPlan = () => {
               studyPlanDataActions.updateOneStudyPlanItem({
                 _id: outputItemWithNewEdits._id,
                 item: outputItemWithNewEdits,
-              })
+              }),
             );
             alert("Success! The item has been updated.");
 
@@ -72,7 +78,7 @@ const useProcessUpdateStudyPlan = () => {
       dispatch(studyPlanDataActions.resetUpdateStudyPlan(false));
     } else {
       const sendEmail = window.confirm(
-        'Thank you for contributing. All contributions must be reviewed before becoming public. Click "OK" to send this via email for review and, if approved, to be included. Click "Cancel" to cancel this and not send an email.'
+        'Thank you for contributing. All contributions must be reviewed before becoming public. Click "OK" to send this via email for review and, if approved, to be included. Click "Cancel" to cancel this and not send an email.',
       );
       if (sendEmail) {
         const questionAdminEmail = "general@glassinteractive.com";
@@ -84,8 +90,8 @@ const useProcessUpdateStudyPlan = () => {
           ()}`;
         window.open(
           `mailto:${questionAdminEmail}?subject=${subject}l&body=${encodeURIComponent(
-            body
-          )}`
+            body,
+          )}`,
         );
       }
       dispatch(studyPlanDataActions.resetUpdateStudyPlan(false));
