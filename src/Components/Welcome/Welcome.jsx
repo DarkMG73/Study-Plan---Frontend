@@ -9,12 +9,6 @@ const Welcome = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(
-      "%c⚪️►►►► %cline:7%cWelcome",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(251, 178, 23);padding:3px;border-radius:2px",
-    );
     dispatch(loadingRequestsActions.removeFromLoadRequest());
   });
 

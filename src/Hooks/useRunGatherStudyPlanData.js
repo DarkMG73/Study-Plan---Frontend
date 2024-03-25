@@ -6,21 +6,9 @@ import { statusUpdateActions } from "../store/statusUpdateSlice";
 
 export const useRunGatherStudyPlanData = () => {
   const makeLoadingRequest = function () {
-    console.log(
-      "%c⚪️►►►► USEGather %cline:8%cmakeLoadingRequest",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(3, 101, 100);padding:3px;border-radius:2px",
-    );
     return dispatch(loadingRequestsActions.addToLoadRequest());
   };
   const removeLoadingRequest = function () {
-    console.log(
-      "%c⚪️►►►► USEGather %cline:12%cremoveLoadingRequest",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(39, 72, 98);padding:3px;border-radius:2px",
-    );
     dispatch(loadingRequestsActions.removeFromLoadRequest());
   };
   const currentStatus = useSelector((state) => state.statusUpdate);

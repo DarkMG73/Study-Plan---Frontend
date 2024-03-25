@@ -8,7 +8,7 @@ import { loadingRequestsActions } from "../store/loadingRequestsSlice";
 const useCreateNewForm = () => {
   const dispatch = useDispatch();
   const studyPlanItemSchema = useSelector(
-    (state) => state.studyPlanData.schema
+    (state) => state.studyPlanData.schema,
   );
 
   const [formType, setFormType] = useState("all");
@@ -26,6 +26,13 @@ const useCreateNewForm = () => {
     ////////////////////////////////////////////////////////////////
     const submitNewFormButtonHandler = (e) => {
       e.preventDefault();
+      console.log(
+        "%c⚪️►►►► %cline:27%ce",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(222, 125, 44);padding:3px;border-radius:2px",
+        e,
+      );
       dispatch(loadingRequestsActions.addToLoadRequest());
 
       // Allow a pause to ensure input data is fully updated to existing form state
@@ -38,7 +45,7 @@ const useCreateNewForm = () => {
     const cancelFormButtonHandler = (e) => {
       e.preventDefault();
       const confirm = window.confirm(
-        "Are you sure you want to cancel this form without saving? All data entered here will be lost."
+        "Are you sure you want to cancel this form without saving? All data entered here will be lost.",
       );
       if (confirm) {
         const key = e.target.value;
@@ -56,7 +63,7 @@ const useCreateNewForm = () => {
     const cancelAllFormsButtonHandler = (e) => {
       e.preventDefault();
       const confirm = window.confirm(
-        "Are you sure you want to cancel this form without saving? All data entered here will be lost."
+        "Are you sure you want to cancel this form without saving? All data entered here will be lost.",
       );
       if (confirm) setNewFormJSX(false);
     };
@@ -130,7 +137,7 @@ const useCreateNewForm = () => {
                   />
                 )}
               </ul>
-            </div>
+            </div>,
           );
         }
         return output;

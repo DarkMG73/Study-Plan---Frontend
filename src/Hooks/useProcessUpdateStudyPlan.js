@@ -10,12 +10,6 @@ const useProcessUpdateStudyPlan = () => {
     studyPlanDataActions,
   }) => {
     if (!updateStudyPlan) return;
-    console.log(
-      "%c⚪️►►►►  ADD-TO %cline:4%cuseProcessUpdateStudyPlan",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px",
-    );
     dispatch(loadingRequestsActions.addToLoadRequest());
     const { itemWithNewEdits, user, parentSection } = updateStudyPlan;
 

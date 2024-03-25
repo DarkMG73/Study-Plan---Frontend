@@ -28,13 +28,6 @@ export const useRunGatherContentData = () => {
           );
 
         if (data) {
-          console.log(
-            "%c⚪️►►►► %cline:30%cdata",
-            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-            "color:#fff;background:rgb(60, 79, 57);padding:3px;border-radius:2px",
-            data,
-          );
           dispatch(contentDataActions.initState(data));
           if (user) {
             dispatch(
@@ -131,12 +124,6 @@ export const useRunGatherContentData = () => {
           }
         }
       });
-    console.log(
-      "%c⚪️►►►►►►►►►►►►►►►►►►►►►►►►►►►► %cline:130%crunGatherContentData",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(229, 187, 129);padding:3px;border-radius:2px",
-    );
     removeLoadingRequest();
   };
   return runGatherContentData;

@@ -31,7 +31,7 @@ export const formInputDataSlice = createSlice({
       } else if (
         Object.hasOwn(newState[parentMasterID], title) &&
         !["String", "Array", "number", "Boolean"].includes(
-          newState[parentMasterID][title].constructor.name
+          newState[parentMasterID][title].constructor.name,
         )
       ) {
         newState[parentMasterID][title] = {
@@ -61,7 +61,7 @@ export const formInputDataSlice = createSlice({
       } else if (
         Object.hasOwn(newState[parentMasterID], title) &&
         !["String", "Array", "number", "Boolean"].includes(
-          newState[parentMasterID][title].constructor.name
+          newState[parentMasterID][title].constructor.name,
         )
       ) {
         newState[parentMasterID][title] = {
@@ -77,6 +77,13 @@ export const formInputDataSlice = createSlice({
       state.newFormInputDataObj = { ...action.payload };
     },
     submitAllNewForms: (state) => {
+      console.log(
+        "%c⚪️►►►► %cline:80%cstate.newFormInputDataObj",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(3, 38, 58);padding:3px;border-radius:2px",
+        state,
+      );
       state.allNewForms = state.newFormInputDataObj;
     },
     resetSubmitAllNewForms: (state) => {

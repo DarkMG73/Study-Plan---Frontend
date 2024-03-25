@@ -2,13 +2,6 @@ import { studyPlanData as studyPlanDataFunction } from "../storage/studyPlanDB.j
 import runGetSchemaForStudyPlanItems from "./runGetSchemaForStudyPlanItems";
 
 export default async function GatherStudyPlanData(studyPlanItemSchema, user) {
-  console.log(
-    "%c⚪️►►►► %cline:4%cuser",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
-    user,
-  );
   const studyPlanData = {};
   studyPlanData.studyPlan = {};
 

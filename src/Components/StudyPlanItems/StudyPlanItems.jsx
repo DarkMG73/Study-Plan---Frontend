@@ -256,9 +256,12 @@ const StudyPlanItems = (props) => {
     );
   return (
     <Fragment key={"Welcomeandgoals"}>
-      {!user && outputName.includes("Goal") && <Welcome />}
+      {!user &&
+        (outputName.includes("Curriculum") || outputName.includes("Goal")) && (
+          <Welcome />
+        )}
       {user &&
-        outputName.includes("Goal") &&
+        outputName.includes("Curriculum") &&
         (!Object.hasOwn(studyPlanMetadata, "_id") ||
           (Object.hasOwn(studyPlanMetadata, "_id") &&
             studyPlanMetadata._id.length <= 0)) && (
@@ -295,7 +298,7 @@ const StudyPlanItems = (props) => {
             {props.subText && (
               <p className={styles["subtext"]}>{props.subText}</p>
             )}
-            {outputName.toLowerCase().includes("goal") &&
+            {outputName.toLowerCase().includes("Curriculum") &&
               Object.keys(formInputData).length > 0 &&
               !outputName.includes("Syllabus") && (
                 <div
@@ -341,7 +344,8 @@ const StudyPlanItems = (props) => {
               )}
             {outputName.toLowerCase().includes("syllabus") &&
               Object.keys(formInputData).length > 0 &&
-              !outputName.includes("Goal") && (
+              !outputName.includes("Curriculum") &&
+              !outputName.toLowerCase().includes("goal") && (
                 <div
                   key={id}
                   data-section="history-list-data-section"
@@ -567,7 +571,8 @@ const StudyPlanItems = (props) => {
 
               {!delayRender &&
                 Object.keys(formInputData).length <= 0 &&
-                outputName.includes("Goal") && (
+                (outputName.includes("Curriculum") ||
+                  outputName.toLowerCase().includes("goal")) && (
                   <Fragment>
                     <div className={styles["fade-away-5"]}>
                       <BarLoader />
@@ -578,9 +583,9 @@ const StudyPlanItems = (props) => {
                         It appears you are missing your main goal. :( It is very
                         important to start with one main large goal. Everything
                         should lead to this main goal, so there should only be
-                        one goal (and no more) in this "Goals and Curriculum"
-                        section. Opening that goal, should reveal all of the
-                        sub-goals and steps supporting this goal.
+                        one goal (and no more) in this "Curriculum" section.
+                        Opening that goal, should reveal all of the sub-goals
+                        and steps supporting this goal.
                       </p>
                       <h4>To do this: </h4>
                       <ol>
@@ -628,7 +633,8 @@ const StudyPlanItems = (props) => {
                 Object.keys(formInputData).length <= 0 &&
                 Object.hasOwn(studyPlanMetadata, "_id") &&
                 studyPlanMetadata._id.length > 0 &&
-                !outputName.includes("Goal") &&
+                !outputName.includes("Curriculum") &&
+                !outputName.toLowerCase().includes("goal") &&
                 !outputName.includes("Holding") && (
                   <Fragment>
                     <div className={styles["fade-away-5"]}>
@@ -637,7 +643,7 @@ const StudyPlanItems = (props) => {
                     </div>
 
                     <div
-                      key={typeName + "sno-items-text"}
+                      key={typeName + "no-items-text"}
                       id="no-items-text"
                       className={styles["no-items-text"]}
                       type={typeName}

@@ -55,8 +55,8 @@ const Home = (props) => {
 
       dispatch(
         scrollPositionActions.updateWelcomeScrollPosition(
-          JSON.parse(JSON.stringify(welcomeScrollPosition))
-        )
+          JSON.parse(JSON.stringify(welcomeScrollPosition)),
+        ),
       );
     };
     window.addEventListener("scroll", updateScrollPosition);
@@ -65,12 +65,20 @@ const Home = (props) => {
   }, []);
 
   useEffect(() => {
+    console.log(
+      "%c⚪️►►►► %cline:70%callFormInputData",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(254, 67, 101);padding:3px;border-radius:2px",
+      allFormInputData,
+    );
     if (
       !user ||
       !allFormInputData ||
       (!allFormInputData.uploadedForms && !allFormInputData.allNewForms)
     )
       return;
+
     let data = {};
     if (allFormInputData.uploadedForms) {
       data = processUploadedFormInputData({
@@ -94,7 +102,7 @@ const Home = (props) => {
 
     if (!data || Object.keys(data).length <= 0) {
       alert(
-        "There seems to have been a problem trying process items before saving them. We are sorry for the trouble. Please check the data and try again. If the problem continues, let the web admin know you received this error."
+        "There seems to have been a problem trying process items before saving them. We are sorry for the trouble. Please check the data and try again. If the problem continues, let the web admin know you received this error.",
       );
       return;
     }
@@ -119,7 +127,7 @@ const Home = (props) => {
           dispatch(loadingRequestsActions.removeFromLoadRequest());
           if (!Object.hasOwn(res, "response")) {
             alert(
-              "There was an error. Try again or contact the web admin to alert of the issue. "
+              "There was an error. Try again or contact the web admin to alert of the issue. ",
             );
             return;
           }
@@ -144,7 +152,7 @@ const Home = (props) => {
             const filteredAllNewFormsObj = {};
             const namesWithIssuesArray = [];
             writeErrors.forEach((group) =>
-              namesWithIssuesArray.push(group.op.name)
+              namesWithIssuesArray.push(group.op.name),
             );
 
             for (const [key, value] of Object.entries(newAllNewFormsObj)) {
@@ -163,8 +171,8 @@ const Home = (props) => {
 
             dispatch(
               formInputDataActions.setNewFormInputDataObj(
-                filteredAllNewFormsObj
-              )
+                filteredAllNewFormsObj,
+              ),
             );
             alert(
               "It looks like you might have tried to add a field that must be unique and already exists. " +
@@ -172,10 +180,10 @@ const Home = (props) => {
                 "\n\nThe following items already exist. please change each item before submitting the form. " +
                 writeErrors.map(
                   (errObj) =>
-                    "\n   " + errObj.errmsg.split("{")[1].replace("}", "")
+                    "\n   " + errObj.errmsg.split("{")[1].replace("}", ""),
                 ) +
                 "\n\nCode: " +
-                code
+                code,
             );
           } else {
             alert(
@@ -185,7 +193,7 @@ const Home = (props) => {
                 "\nCode: " +
                 code +
                 "\nitem(s) with issues: " +
-                writeErrors.map((errObj) => "\n   Error:" + errObj.errmsg)
+                writeErrors.map((errObj) => "\n   Error:" + errObj.errmsg),
             );
           }
         }
@@ -194,7 +202,7 @@ const Home = (props) => {
         console.log(
           "%cERROR:",
           "color:#f0f0ef;background:#ff0000;padding:10px;border-radius:0 25px 25px 0",
-          err
+          err,
         );
 
         dispatch(loadingRequestsActions.removeFromLoadRequest());
