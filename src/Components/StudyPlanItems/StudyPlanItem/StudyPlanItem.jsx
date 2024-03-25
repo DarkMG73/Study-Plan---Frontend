@@ -16,6 +16,13 @@ const StudyPlanItem = (props) => {
     onlyList,
     unlockProtectedVisible,
   } = props;
+  console.log(
+    "%c⚪️►►►► %cline:15%cemptyForm",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px",
+    emptyForm,
+  );
 
   const studyPlanItemsObj = props.studyPlanItemsObj.studyPlanItemsObj;
   const [editedField, setEditedField] = useState(false);
@@ -163,6 +170,7 @@ const StudyPlanItem = (props) => {
           displayConditions={displayConditions}
           editedField={editedField}
           setEditedField={setEditedField}
+          emptyForm={emptyForm}
         />
 
         {onlyList && <span>{studyPlanItemsObj[passedKey]}</span>}
