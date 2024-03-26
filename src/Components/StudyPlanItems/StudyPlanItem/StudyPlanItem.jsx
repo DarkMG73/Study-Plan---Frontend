@@ -17,17 +17,6 @@ const StudyPlanItem = (props) => {
     unlockProtectedVisible,
   } = props;
 
-  if (emptyForm)
-    console.log(
-      "%c⚪️►►►► %cline:15%cemptyForm",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px",
-      passedKey,
-      " - ",
-      parentKey,
-    );
-
   const studyPlanItemsObj = props.studyPlanItemsObj.studyPlanItemsObj;
   const [editedField, setEditedField] = useState(false);
   function findElementType(itemKey) {

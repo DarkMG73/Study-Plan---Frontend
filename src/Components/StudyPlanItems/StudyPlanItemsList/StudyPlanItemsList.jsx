@@ -10,14 +10,6 @@ import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 import { loadingRequestsActions } from "../../../store/loadingRequestsSlice";
 
 const StudyPlanItemsList = (props) => {
-  if (Object.hasOwn(props, "id") && props.id.includes("newForm-"))
-    console.log(
-      "%c⚪️►►►► %cline:12%cprops",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(251, 178, 23);padding:3px;border-radius:2px",
-      props,
-    );
   const [refresh] = useState(1);
   const studyPlanItemsObj = props.studyPlanItemsObj;
   const user = useSelector((state) => state.auth.user);

@@ -25,6 +25,7 @@ const StudyItemDisplayElm = (props) => {
     displayConditions,
     editedField,
     setEditedField,
+    emptyForm,
   } = props;
 
   const passedProps = {
@@ -37,6 +38,7 @@ const StudyItemDisplayElm = (props) => {
     unlockProtectedVisible: unlockProtectedVisible,
     editedField,
     setEditedField,
+    emptyForm,
   };
 
   let output = <Textarea {...passedProps} />;

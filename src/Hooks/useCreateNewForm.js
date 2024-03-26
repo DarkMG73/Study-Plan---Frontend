@@ -26,13 +26,7 @@ const useCreateNewForm = () => {
     ////////////////////////////////////////////////////////////////
     const submitNewFormButtonHandler = (e) => {
       e.preventDefault();
-      console.log(
-        "%c⚪️►►►► %cline:27%ce",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(222, 125, 44);padding:3px;border-radius:2px",
-        e,
-      );
+
       dispatch(loadingRequestsActions.addToLoadRequest());
 
       // Allow a pause to ensure input data is fully updated to existing form state

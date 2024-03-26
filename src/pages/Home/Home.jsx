@@ -65,13 +65,6 @@ const Home = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(
-      "%c⚪️►►►► %cline:70%callFormInputData",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(254, 67, 101);padding:3px;border-radius:2px",
-      allFormInputData,
-    );
     if (
       !user ||
       !allFormInputData ||
