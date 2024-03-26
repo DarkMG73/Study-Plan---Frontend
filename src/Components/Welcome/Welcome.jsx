@@ -42,9 +42,9 @@ const Welcome = (props) => {
         </li>
         <li key="3">Submit the form using the button at the bottom.</li>
         <li>
-          Make sure there is no more or less than one goal showing in the Goals
-          and Curriculum section. opening this goal will reveal all supporting
-          goals and steps.
+          Make sure there is no more or less than one goal showing in the
+          Curriculum section. opening this goal will reveal all supporting goals
+          and steps.
         </li>
         <li key="4">
           The Syllabus section shows all of the steps in order of the priority
@@ -148,7 +148,7 @@ const Welcome = (props) => {
         </p>
         <p>
           Assuming you use the ""Goal or Step this Directly Works Towards" (and
-          you will need to), you will end up with just one goal in the Goals &
+          you will need to), you will end up with just one goal in the
           Curriculum section that, when opened, will reveals the tree of goals
           and steps to get there.
         </p>

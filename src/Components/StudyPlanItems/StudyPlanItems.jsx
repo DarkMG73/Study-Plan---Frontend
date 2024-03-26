@@ -70,7 +70,7 @@ const StudyPlanItems = (props) => {
       id
     );
 
-  if (outputName === "goals") outputName = "Curriculum";
+  if (outputName === "goals") outputName = "Goal";
   if (outputName === "steps") outputName = "Syllabus";
   if (outputName === "holds") outputName = "Holding Area";
 

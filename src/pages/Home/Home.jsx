@@ -297,6 +297,7 @@ const Home = (props) => {
               <StudyPlanItems
                 key="studyPlan"
                 id="studyPlan"
+                subText="The Syllabus is the list of steps to complete in towards achieving the main goal or one of the sub-goals that support the main goal."
                 dataObjForEdit={studyPlan}
                 user={props.user}
                 type={"step"}
