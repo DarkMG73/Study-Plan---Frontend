@@ -25,6 +25,8 @@ const StudyPlanItems = (props) => {
   const { studyPlan, studyPlanMetadata, schema } = useSelector(
     (state) => state.studyPlanData,
   );
+  console.log;
+  ("-------- START 1----------------");
   console.log(
     "%c⚪️►►►► %cline:25%cstudyPlan",
     "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
@@ -39,6 +41,8 @@ const StudyPlanItems = (props) => {
     "color:#fff;background:rgb(217, 104, 49);padding:3px;border-radius:2px",
     studyPlanMetadata,
   );
+  console.log;
+  ("-------- END 1----------------");
   const updateStudyPlan = useSelector(
     (state) => state.studyPlanData.updateStudyPlan,
   );
@@ -243,6 +247,14 @@ const StudyPlanItems = (props) => {
     }
   };
 
+  console.log(
+    "%c⚪️►►►► %cline:96%coutputName",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
+    outputName,
+  );
+
   ////////////////////////////////////////////////////////////////////////
   /// Output
   ////////////////////////////////////////////////////////////////////////
@@ -277,15 +289,38 @@ const StudyPlanItems = (props) => {
     );
   return (
     <Fragment key={"Welcomeandgoals"}>
+      {console.log("-------- START 2 ----------------")}
+      {console.log(
+        "%c⚪️►►►► %cline:287%coutputName",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
+        outputName,
+      )}
+      {console.log(
+        "%c⚪️►►►► %cline:294%cuser",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
+        user,
+      )}
+      {console.log(
+        "%c⚪️►►►► %cline:304%cstudyPlanMetadata",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
+        studyPlanMetadata,
+      )}
+      {console.log("-------- END 2----------------")}
       {!user && outputName.includes("Goal") && <Welcome />}
       {user &&
         outputName.includes("Goal") &&
         ((studyPlanMetadata && !Object.hasOwn(studyPlanMetadata, "_id")) ||
-          (Object.hasOwn(studyPlanMetadata, "_id") &&
+          (studyPlanMetadata &&
+            Object.hasOwn(studyPlanMetadata, "_id") &&
             studyPlanMetadata._id.length <= 0)) && (
           <Welcome key={"Welcome"} user={user} />
         )}
-
       {user &&
         formInputData &&
         Object.keys(formInputData).length >= 0 &&

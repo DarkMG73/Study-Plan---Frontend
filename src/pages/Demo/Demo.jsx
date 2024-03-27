@@ -25,7 +25,7 @@ import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 const Demo = (props) => {
   const dispatch = useDispatch();
   const [studyPlan, setStudyPlan] = useState(false);
-
+  const { studyPlanMetadata } = useSelector((state) => state.studyPlanData);
   console.log(
     "%c⚪️►►►► %cline:34%cstudyPlan",
     "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
@@ -60,6 +60,17 @@ const Demo = (props) => {
       setStudyPlan(demoData);
     });
   }, []);
+
+  useEffect(() => {
+    console.log(
+      "%c⚪️►►►► %cline:67%cstudyPlanMetadata",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
+      studyPlanMetadata,
+    );
+  }, [studyPlanMetadata]);
+
   useLayoutEffect(() => {
     const updateScrollPosition = () => {
       if (!angledRectangleRef.current) return;
@@ -148,7 +159,7 @@ const Demo = (props) => {
           </ErrorBoundary>
         </CardPrimary>
       )}
-      {!hideStudyPlan && studyPlan && (
+      {!hideStudyPlan && studyPlanMetadata && studyPlan && (
         <CardPrimary>
           <ErrorBoundary>
             <StudyPlanItems
@@ -164,7 +175,7 @@ const Demo = (props) => {
           </ErrorBoundary>
         </CardPrimary>
       )}
-      {!hideStudyPlan && studyPlan && (
+      {!hideStudyPlan && studyPlanMetadata && studyPlan && (
         <CardPrimary>
           <ErrorBoundary>
             {props.userInitComplete && (
@@ -181,7 +192,7 @@ const Demo = (props) => {
           </ErrorBoundary>
         </CardPrimary>
       )}
-      {!hideStudyPlan && studyPlan && (
+      {!hideStudyPlan && studyPlanMetadata && studyPlan && (
         <CardPrimary>
           <ErrorBoundary>
             {props.userInitComplete && (
