@@ -279,6 +279,7 @@ const Home = (props) => {
               <StudyPlanItems
                 key="studyPlan-goals"
                 id="studyPlan-goals"
+                subText="The Goals section should contain only one main goal. There can be any number of sub-goals that directly support the main goal, but only one main goal should appear here. If there are more than one main goals, edit   on every goal to either support the main goal or one of the sub-goals"
                 dataObjForEdit={studyPlan}
                 allStudyPlanItems={studyPlan}
                 user={props.user}
@@ -297,7 +298,7 @@ const Home = (props) => {
               <StudyPlanItems
                 key="studyPlan"
                 id="studyPlan"
-                subText="The Syllabus is the list of steps to complete in towards achieving the main goal or one of the sub-goals that support the main goal."
+                subText='The Steps section is the list of steps to complete that directly lead to achieving the main goal or one of the sub-goals. Make sure the the "Goal or Step this Directly Works Towards" setting is point pointing at the main goal or a sub-goal for every single steps. Steps that you want to save, but are not sure where they fit yet, can go in the Holding area.'
                 dataObjForEdit={studyPlan}
                 user={props.user}
                 type={"step"}

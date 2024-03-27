@@ -70,8 +70,8 @@ const StudyPlanItems = (props) => {
       id
     );
 
-  if (outputName === "goals") outputName = "Goal";
-  if (outputName === "steps") outputName = "Syllabus";
+  if (outputName === "goals") outputName = "Goals";
+  if (outputName === "steps") outputName = "Steps";
   if (outputName === "holds") outputName = "Holding Area";
 
   ////////////////////////////////////////////////////////////////////////
@@ -256,12 +256,9 @@ const StudyPlanItems = (props) => {
     );
   return (
     <Fragment key={"Welcomeandgoals"}>
-      {!user &&
-        (outputName.includes("Curriculum") || outputName.includes("Goal")) && (
-          <Welcome />
-        )}
+      {!user && outputName.includes("Goal") && <Welcome />}
       {user &&
-        outputName.includes("Curriculum") &&
+        outputName.includes("Goal") &&
         (!Object.hasOwn(studyPlanMetadata, "_id") ||
           (Object.hasOwn(studyPlanMetadata, "_id") &&
             studyPlanMetadata._id.length <= 0)) && (
@@ -295,12 +292,56 @@ const StudyPlanItems = (props) => {
             <h2 className={styles["group-title"] + " " + styles[id]}>
               {outputName}
             </h2>
+
             {props.subText && (
-              <p className={styles["subtext"]}>{props.subText}</p>
+              <div className={styles["section-subtext-wrap"]}>
+                <CollapsibleElm
+                  key={id + "sub-text-collapsible-elm"}
+                  elmId={id + "collapsible-elm"}
+                  styles={{
+                    position: "relative",
+                    maxWidth: "100%",
+                  }}
+                  maxHeight="0em"
+                  inputOrButton="button"
+                  buttonStyles={{
+                    margin: "0",
+                    padding: "0.5em 2em",
+                    letterSpacing: "0.25em",
+                    fontVariant: "small-caps",
+                    transform: "translateY(0%)",
+                    transition: "0.7s all ease",
+                    minWidth: "40%",
+                    maxWidth: "80%",
+                    textAlign: "left",
+                    display: "flex",
+                    alignItems: "center",
+                    borderRadius: "50px",
+                    fontFamily: "Good Times RG",
+                  }}
+                  colorType="secondary"
+                  data=""
+                  size="small"
+                  buttonTextOpened={
+                    "Close the detail on the " +
+                    toTitleCase(outputName) +
+                    " section"
+                  }
+                  buttonTextClosed={
+                    "More detail on the " +
+                    toTitleCase(outputName) +
+                    " section here"
+                  }
+                  open={false}
+                  showBottomGradient={id === "studyPlan" && true}
+                >
+                  <p className={styles["subtext"]}>{props.subText}</p>
+                </CollapsibleElm>
+              </div>
             )}
-            {outputName.toLowerCase().includes("Curriculum") &&
+            {outputName.toLowerCase().includes("Goal") &&
               Object.keys(formInputData).length > 0 &&
-              !outputName.includes("Syllabus") && (
+              !outputName.includes("Steps") && (
                 <div
                   key={id}
                   id="list-button-container"
@@ -342,9 +383,8 @@ const StudyPlanItems = (props) => {
                   )}
                 </div>
               )}
-            {outputName.toLowerCase().includes("syllabus") &&
+            {outputName.toLowerCase().includes("Steps") &&
               Object.keys(formInputData).length > 0 &&
-              !outputName.includes("Curriculum") &&
               !outputName.toLowerCase().includes("goal") && (
                 <div
                   key={id}
@@ -571,8 +611,7 @@ const StudyPlanItems = (props) => {
 
               {!delayRender &&
                 Object.keys(formInputData).length <= 0 &&
-                (outputName.includes("Curriculum") ||
-                  outputName.toLowerCase().includes("goal")) && (
+                outputName.toLowerCase().includes("goal") && (
                   <Fragment>
                     <div className={styles["fade-away-5"]}>
                       <BarLoader />
@@ -583,9 +622,9 @@ const StudyPlanItems = (props) => {
                         It appears you are missing your main goal. :( It is very
                         important to start with one main large goal. Everything
                         should lead to this main goal, so there should only be
-                        one goal (and no more) in this "Curriculum" section.
-                        Opening that goal, should reveal all of the sub-goals
-                        and steps supporting this goal.
+                        one goal (and no more) in this "Goals" section. Opening
+                        that goal, should reveal all of the sub-goals and steps
+                        supporting this goal.
                       </p>
                       <h4>To do this: </h4>
                       <ol>
@@ -633,7 +672,6 @@ const StudyPlanItems = (props) => {
                 Object.keys(formInputData).length <= 0 &&
                 Object.hasOwn(studyPlanMetadata, "_id") &&
                 studyPlanMetadata._id.length > 0 &&
-                !outputName.includes("Curriculum") &&
                 !outputName.toLowerCase().includes("goal") &&
                 !outputName.includes("Holding") && (
                   <Fragment>
