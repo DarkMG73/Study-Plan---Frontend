@@ -249,7 +249,14 @@ function App() {
               <Route
                 path="/demo"
                 element={
-                  <Demo noDBErrors={noDBErrors} setNoDBErrors={setNoDBErrors} />
+                  <Demo
+                    noDBErrors={noDBErrors}
+                    setNoDBErrors={setNoDBErrors}
+                    aboutIsActive={aboutIsActive}
+                    musicIsActive={true}
+                    userInitComplete={userInitComplete}
+                    user={user}
+                  />
                 }
               />
               <Route
