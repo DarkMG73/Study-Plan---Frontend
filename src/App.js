@@ -10,6 +10,7 @@ import { useRunGatherStudyPlanData } from "./Hooks/useRunGatherStudyPlanData";
 // import { useRunGatherContentData } from "./Hooks/useRunGatherContentData";
 import Home from "./pages/Home/Home";
 import Manage from "./pages/Manage/Manage";
+import Demo from "./pages/Demo/Demo";
 import CardTransparent from "./UI/Cards/CardTransparent/CardTransparent";
 import Header from "./Components/Header/Header";
 import BarLoader from "./UI/Loaders/BarLoader/BarLoader";
@@ -243,6 +244,12 @@ function App() {
                     noDBErrors={noDBErrors}
                     setNoDBErrors={setNoDBErrors}
                   />
+                }
+              />
+              <Route
+                path="/demo"
+                element={
+                  <Demo noDBErrors={noDBErrors} setNoDBErrors={setNoDBErrors} />
                 }
               />
               <Route

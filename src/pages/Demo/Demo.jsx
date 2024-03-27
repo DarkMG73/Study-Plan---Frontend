@@ -15,24 +15,20 @@ import NoticeThree from "../../Components/NoticeThree/NoticeThree";
 import BottomBar from "../../Components/BottomBar/BottomBar";
 import { ErrorBoundary } from "../../HOC/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import { scrollPositionActions } from "../../store/scrollPositionSlice";
-import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
-import { formInputDataActions } from "../../store/formInputDataSlice";
-import { loadingRequestsActions } from "../../store/loadingRequestsSlice";
 import { authActions } from "../../store/authSlice";
 import LoginStatus from "../../Components/User/LoginStatus/LoginStatus";
 import Stats from "../../Components/Stats/Stats";
-import { saveManyStudyPlanItems } from "../../storage/studyPlanDB";
-import {
-  saveManyContentItems,
-  getSchemaForContentItem,
-} from "../../storage/contentDB";
-import useProcessAllFormInputData from "../../Hooks/useProcessAllFormInputData";
-import useProcessUploadedFormInputData from "../../Hooks/useProcessUploadedFormInputData";
 import demoData from "../../data/demoData.json";
 
-const Home = (props) => {
+const Demo = (props) => {
   const studyPlan = demoData;
-  console.log("studyPlan", studyPlan);
+  console.log(
+    "%c⚪️►►►► %cline:34%cstudyPlan",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
+    studyPlan,
+  );
   const { content } = useSelector((state) => state.contentData);
   const user = {
     name: "Demo User",
@@ -41,10 +37,6 @@ const Home = (props) => {
   const angledRectangleRef = useRef();
   const dispatch = useDispatch();
   const hideStudyPlan = false;
-  const allFormInputData = useSelector((state) => state.formInputData);
-  const processAllFormInputData = useProcessAllFormInputData();
-  const processUploadedFormInputData = useProcessUploadedFormInputData();
-  let saveManyItems = saveManyStudyPlanItems;
 
   ////////////////////////////////////////
   /// Effects
@@ -70,144 +62,6 @@ const Home = (props) => {
     updateScrollPosition();
     return () => window.removeEventListener("scroll", updateScrollPosition);
   }, []);
-
-  useEffect(() => {
-    if (
-      !user ||
-      !allFormInputData ||
-      (!allFormInputData.uploadedForms && !allFormInputData.allNewForms)
-    )
-      return;
-    let data = {};
-    if (allFormInputData.uploadedForms) {
-      data = processUploadedFormInputData({
-        user,
-        dispatch,
-        dataForSendingToDB: allFormInputData.uploadedForms,
-        saveManyStudyPlanItems,
-        getSchemaForContentItem,
-        saveManyContentItems,
-      });
-    } else if (allFormInputData.allNewForms) {
-      data = processAllFormInputData({
-        user,
-        dispatch,
-        allFormInputData,
-        saveManyStudyPlanItems,
-        getSchemaForContentItem,
-        saveManyContentItems,
-      });
-    }
-
-    if (!data || Object.keys(data).length <= 0) {
-      alert(
-        "There seems to have been a problem trying process items before saving them. We are sorry for the trouble. Please check the data and try again. If the problem continues, let the web admin know you received this error.",
-      );
-      return;
-    }
-    dispatch(loadingRequestsActions.addToLoadRequest());
-
-    saveManyItems({ user, outputDataArray: data })
-      .then((res) => {
-        dispatch(loadingRequestsActions.removeFromLoadRequest());
-
-        if (res.status >= 400) {
-          alert("There was an error: " + res.response.data.message);
-
-          // updateAStudyPlanItem(dataObj, user);
-        } else if (res.status >= 200) {
-          alert("Success! You have added to your study plan!");
-          dispatch(studyPlanDataActions.reGatherStudyPlan(true));
-          if (allFormInputData.uploadedForms)
-            dispatch(formInputDataActions.resetSubmitUploadedForm());
-          if (allFormInputData.allNewForms)
-            dispatch(formInputDataActions.resetSubmitAllNewForms());
-        } else {
-          dispatch(loadingRequestsActions.removeFromLoadRequest());
-          if (!Object.hasOwn(res, "response")) {
-            alert(
-              "There was an error. Try again or contact the web admin to alert of the issue. ",
-            );
-            return;
-          }
-
-          const data =
-            Object.hasOwn(res.response, "data") &&
-            Object.hasOwn(res.response.data, "err")
-              ? res.response.data
-              : false;
-          const err = data && Object.hasOwn(data, "err") ? data.err : false;
-          const message = Object.hasOwn(data, "message") ? data.message : "";
-
-          const code = err && Object.hasOwn(err, "code") ? err.code : 0;
-          const writeErrors =
-            err && Object.hasOwn(err, "writeErrors")
-              ? err.writeErrors
-              : [{ code: err, errmsg: "" }];
-
-          // Handle duplicate entries specifically
-          if (code === 11000) {
-            const newAllNewFormsObj = { ...allFormInputData.allNewForms };
-            const filteredAllNewFormsObj = {};
-            const namesWithIssuesArray = [];
-            writeErrors.forEach((group) =>
-              namesWithIssuesArray.push(group.op.name),
-            );
-
-            for (const [key, value] of Object.entries(newAllNewFormsObj)) {
-              // new-form
-              filteredAllNewFormsObj[key] = {};
-
-              // StudyPlan
-              for (const l1Key in value) {
-                // The base form
-
-                if (namesWithIssuesArray.includes(value[l1Key].name)) {
-                  filteredAllNewFormsObj[key][l1Key] = value[l1Key];
-                }
-              }
-            }
-
-            dispatch(
-              formInputDataActions.setNewFormInputDataObj(
-                filteredAllNewFormsObj,
-              ),
-            );
-            alert(
-              "It looks like you might have tried to add a field that must be unique and already exists. " +
-                message +
-                "\n\nThe following items already exist. please change each item before submitting the form. " +
-                writeErrors.map(
-                  (errObj) =>
-                    "\n   " + errObj.errmsg.split("{")[1].replace("}", ""),
-                ) +
-                "\n\nCode: " +
-                code,
-            );
-          } else {
-            alert(
-              "There was an error: " +
-                message +
-                "\nError Detail " +
-                "\nCode: " +
-                code +
-                "\nitem(s) with issues: " +
-                writeErrors.map((errObj) => "\n   Error:" + errObj.errmsg),
-            );
-          }
-        }
-      })
-      .catch((err) => {
-        console.log(
-          "%cERROR:",
-          "color:#f0f0ef;background:#ff0000;padding:10px;border-radius:0 25px 25px 0",
-          err,
-        );
-
-        dispatch(loadingRequestsActions.removeFromLoadRequest());
-        alert("There was an error. Please try your request again alter", err);
-      });
-  }, [allFormInputData.allNewForms, allFormInputData.uploadedForms]);
 
   ////////////////////////////////////////
   /// Functionality
@@ -390,4 +244,4 @@ const Home = (props) => {
   );
 };
 
-export default Home;
+export default Demo;

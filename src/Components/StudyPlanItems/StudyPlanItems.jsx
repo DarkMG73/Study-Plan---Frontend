@@ -36,6 +36,13 @@ const StudyPlanItems = (props) => {
   const id = props.id;
   const typeName = props.type;
   const dataObjForEdit = props.dataObjForEdit;
+  console.log(
+    "%c⚪️►►►► %cline:38%cdataObjForEdit",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
+    dataObjForEdit,
+  );
   const initStudyPlanItems = useInitStudyPlanItems();
   const processUpdateStudyPlan = useProcessUpdateStudyPlan();
   const [allStudyPlanItems, setAllStudyPlanItems] = useState(
