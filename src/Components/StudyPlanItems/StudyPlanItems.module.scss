@@ -198,14 +198,18 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
 
 .studyPlan-items-group[type="hold"] {
   padding: 2em;
-  box-shadow: inset 3px 3px 7px -4px #000000, inset -3px -3px 7px -4px white;
+  box-shadow:
+    inset 3px 3px 7px -4px #000000,
+    inset -3px -3px 7px -4px white;
   border-radius: 25px;
   background: var(--spt-color-accent);
   color: var(--spt-color-background-contrast-dark);
 }
 
 .studyPlan-items-group[type="hold"] subtext {
-  box-shadow: inset 1px 1px 4px -3px #000000, inset -1px -1px 4px -3px white;
+  box-shadow:
+    inset 1px 1px 4px -3px #000000,
+    inset -1px -1px 4px -3px white;
   padding: 1.5em 2em;
   border-radius: inherit;
 }
@@ -234,10 +238,18 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
   margin-left: 1em;
 }
 
-.subtext {
-  background: inherit;
-  color: inherit;
+.section-subtext-wrap {
+  opacity: 0.7;
+  margin-top: 1em;
+}
+
+.section-subtext-wrap .subtext {
+  background: var(--spt-color-background);
+  color: var(--spt-color-background-contrast-dark);
+  padding: 1em;
+  margin: 0 1em;
   font: var(--spt-font-body-text-12);
+  border-radius: 12.5px;
 }
 
 .button-container {
@@ -401,7 +413,9 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
 .new-form-modal ul > div {
   margin: 0;
   padding: 0 1em 4em;
-  box-shadow: -1px -1px 3px -2px white, 1px 1px 3px -2px black;
+  box-shadow:
+    -1px -1px 3px -2px white,
+    1px 1px 3px -2px black;
   background: transparent;
 }
 
@@ -472,7 +486,9 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
   input,
   textarea,
   select {
-    box-shadow: inset -1px -1px 3px -2px white, inset 1px 1px 3px -2px black;
+    box-shadow:
+      inset -1px -1px 3px -2px white,
+      inset 1px 1px 3px -2px black;
   }
 
   .new-form li select {
@@ -555,7 +571,8 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
     z-index: 10;
     margin: 0 0.5em;
     /* box-shadow: inset 1px 1px 1px rgb(255 255 255 / 25%), inset 1px -1px 1px rgb(0 0 0 / 15%), 1px 1px 5px -3px black; */
-    box-shadow: 3px 3px 7px -5px white inset,
+    box-shadow:
+      3px 3px 7px -5px white inset,
       -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
     border: none;
     background: var(--spt-color-background);
@@ -659,7 +676,8 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
       max-height: 2em;
       background: var(--spt-color-background);
       color: var(--spt-color-accent-dark);
-      box-shadow: 3px 3px 7px -5px hsl(0deg 0% 56% / 50%) inset,
+      box-shadow:
+        3px 3px 7px -5px hsl(0deg 0% 56% / 50%) inset,
         -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
     }
     button span {
@@ -716,7 +734,9 @@ body .list-button-container {
 
 .sort-button-wrap select {
   text-align-last: left;
-  box-shadow: inset 1px 1px 4px -3px black, inset -1px -1px 3px -2px #b8b8b8;
+  box-shadow:
+    inset 1px 1px 4px -3px black,
+    inset -1px -1px 3px -2px #b8b8b8;
   width: 100%;
   max-width: 100%;
 }
@@ -729,7 +749,9 @@ body .list-button-container {
   text-overflow: ellipsis;
   border-radius: 6.25px;
   border: none;
-  box-shadow: inset -1px -1px 3px -2px white, inset 1px 1px 3px -2px black;
+  box-shadow:
+    inset -1px -1px 3px -2px white,
+    inset 1px 1px 3px -2px black;
   transition: 0.7s all ease;
   background: var(--spt-color-background);
   color: var(--spt-color-background-contrast);
@@ -788,7 +810,8 @@ body .list-button-container {
   display: flex;
   justify-content: center;
   font: var(--spt-font-body-text-12);
-  box-shadow: 3px 3px 7px -3px rgba(0, 0, 0, 0.5),
+  box-shadow:
+    3px 3px 7px -3px rgba(0, 0, 0, 0.5),
     inset 3px 3px 7px -3px #ffffff;
   border-radius: 6.25px;
   padding: 1em 3% 2em;
