@@ -1,12 +1,18 @@
 import { studyPlanData as studyPlanDataFunction } from "../storage/studyPlanDB.js";
 import runGetSchemaForStudyPlanItems from "./runGetSchemaForStudyPlanItems";
 
-export default async function GatherStudyPlanData(studyPlanItemSchema, user) {
+export default async function GatherStudyPlanData(
+  studyPlanItemSchema,
+  user,
+  passedStudyPlan,
+) {
   const studyPlanData = {};
   studyPlanData.studyPlan = {};
 
   let studyPlanFromDB = [];
-  studyPlanFromDB = await studyPlanDataFunction(user);
+  studyPlanFromDB = passedStudyPlan
+    ? passedStudyPlan
+    : await studyPlanDataFunction(user);
   studyPlanData.schema = studyPlanItemSchema
     ? studyPlanItemSchema
     : await runGetSchemaForStudyPlanItems();

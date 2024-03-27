@@ -25,6 +25,20 @@ const StudyPlanItems = (props) => {
   const { studyPlan, studyPlanMetadata, schema } = useSelector(
     (state) => state.studyPlanData,
   );
+  console.log(
+    "%c⚪️►►►► %cline:25%cstudyPlan",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(227, 160, 93);padding:3px;border-radius:2px",
+    studyPlan,
+  );
+  console.log(
+    "%c⚪️►►►► %cline:25%cstudyPlanMetadata",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(217, 104, 49);padding:3px;border-radius:2px",
+    studyPlanMetadata,
+  );
   const updateStudyPlan = useSelector(
     (state) => state.studyPlanData.updateStudyPlan,
   );
@@ -266,13 +280,14 @@ const StudyPlanItems = (props) => {
       {!user && outputName.includes("Goal") && <Welcome />}
       {user &&
         outputName.includes("Goal") &&
-        (!Object.hasOwn(studyPlanMetadata, "_id") ||
+        ((studyPlanMetadata && !Object.hasOwn(studyPlanMetadata, "_id")) ||
           (Object.hasOwn(studyPlanMetadata, "_id") &&
             studyPlanMetadata._id.length <= 0)) && (
           <Welcome key={"Welcome"} user={user} />
         )}
 
       {user &&
+        formInputData &&
         Object.keys(formInputData).length >= 0 &&
         Object.hasOwn(studyPlanMetadata, "_id") &&
         studyPlanMetadata._id.length > 0 && (

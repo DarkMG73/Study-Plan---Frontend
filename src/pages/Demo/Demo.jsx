@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, Fragment, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, Fragment, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./Demo.module.scss";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
@@ -19,9 +19,13 @@ import { authActions } from "../../store/authSlice";
 import LoginStatus from "../../Components/User/LoginStatus/LoginStatus";
 import Stats from "../../Components/Stats/Stats";
 import demoData from "../../data/demoData.json";
+import GatherContentData from "../../Hooks/GatherContentData";
+import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 
 const Demo = (props) => {
-  const studyPlan = demoData;
+  const dispatch = useDispatch();
+  const [studyPlan, setStudyPlan] = useState(false);
+
   console.log(
     "%c⚪️►►►► %cline:34%cstudyPlan",
     "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
@@ -35,7 +39,7 @@ const Demo = (props) => {
     email: "demouser@glassinteractive.com",
   };
   const angledRectangleRef = useRef();
-  const dispatch = useDispatch();
+
   const hideStudyPlan = false;
 
   ////////////////////////////////////////
@@ -44,6 +48,17 @@ const Demo = (props) => {
   useEffect(() => {
     // dispatch(loadingRequestsActions.addToLoadRequest());
     dispatch(authActions.logIn(user));
+    GatherContentData(user, studyPlan).then((data) => {
+      console.log(
+        "%c⚪️►►►► %cline:51%cdata",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
+        data,
+      );
+      dispatch(studyPlanDataActions.initState(data));
+      setStudyPlan(demoData);
+    });
   }, []);
   useLayoutEffect(() => {
     const updateScrollPosition = () => {
@@ -136,18 +151,16 @@ const Demo = (props) => {
       {!hideStudyPlan && studyPlan && (
         <CardPrimary>
           <ErrorBoundary>
-            {props.userInitComplete && (
-              <StudyPlanItems
-                key="studyPlan-goals"
-                id="studyPlan-goals"
-                dataObjForEdit={studyPlan}
-                allStudyPlanItems={studyPlan}
-                user={props.user}
-                type={"goal"}
-                maxCollapsableElmHeight={"none"}
-                noEditButton={false}
-              />
-            )}
+            <StudyPlanItems
+              key="studyPlan-goals"
+              id="studyPlan-goals"
+              dataObjForEdit={studyPlan}
+              allStudyPlanItems={studyPlan}
+              user={props.user}
+              type={"goal"}
+              maxCollapsableElmHeight={"none"}
+              noEditButton={false}
+            />
           </ErrorBoundary>
         </CardPrimary>
       )}
