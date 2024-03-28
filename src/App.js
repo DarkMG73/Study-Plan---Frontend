@@ -61,7 +61,20 @@ function App() {
 
   const [userInitComplete, setUserInitComplete] = useState(false);
   const { user } = useSelector((state) => state.auth);
-  const demoUser = {};
+  const demoUser = {
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBvc3RtYW4tYWRtaW5AdGVzdC5jb20iLCJfaWQiOiI2NTBkMGI4NmM0OWYxN2I2MDU1YTRmMTUiLCJpYXQiOjE3MTE2NTAzMDQsImV4cCI6MTcxMTczNjcwNH0.flv0WBkX7hWPk2S3P39jcpV4gFjPL5AVj4TW5NmjA9g",
+    _id: "650d0b86c49f17b6055a4f15",
+    userName: "Postman Admin",
+    email: "postman-admin@test.com",
+    isAdmin: true,
+    created: "2023-09-22T03:35:34.306Z",
+    hash_password:
+      "$2b$10$XOBZ5Rz4KR5AikZGnoAnW.gobda.5VrC1v4CVsdOpRcfEsIT3md6W",
+    createdAt: "2023-09-22T03:35:34.367Z",
+    updatedAt: "2023-09-22T03:35:34.367Z",
+    __v: 0,
+  };
   const [forceUser, setForceUser] = useState(false);
   const [localError, setLocalError] = useState({
     title: null,

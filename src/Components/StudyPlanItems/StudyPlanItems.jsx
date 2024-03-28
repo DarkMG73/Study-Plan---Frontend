@@ -25,24 +25,6 @@ const StudyPlanItems = (props) => {
   const { studyPlan, studyPlanMetadata, schema } = useSelector(
     (state) => state.studyPlanData,
   );
-  console.log;
-  ("-------- START 1----------------");
-  console.log(
-    "%c⚪️►►►► %cline:25%cstudyPlan",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(227, 160, 93);padding:3px;border-radius:2px",
-    studyPlan,
-  );
-  console.log(
-    "%c⚪️►►►► %cline:25%cstudyPlanMetadata",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(217, 104, 49);padding:3px;border-radius:2px",
-    studyPlanMetadata,
-  );
-  console.log;
-  ("-------- END 1----------------");
   const updateStudyPlan = useSelector(
     (state) => state.studyPlanData.updateStudyPlan,
   );
@@ -54,13 +36,6 @@ const StudyPlanItems = (props) => {
   const id = props.id;
   const typeName = props.type;
   const dataObjForEdit = props.dataObjForEdit;
-  console.log(
-    "%c⚪️►►►► %cline:38%cdataObjForEdit",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
-    dataObjForEdit,
-  );
   const initStudyPlanItems = useInitStudyPlanItems();
   const processUpdateStudyPlan = useProcessUpdateStudyPlan();
   const [allStudyPlanItems, setAllStudyPlanItems] = useState(
@@ -247,14 +222,6 @@ const StudyPlanItems = (props) => {
     }
   };
 
-  console.log(
-    "%c⚪️►►►► %cline:96%coutputName",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
-    outputName,
-  );
-
   ////////////////////////////////////////////////////////////////////////
   /// Output
   ////////////////////////////////////////////////////////////////////////
@@ -289,29 +256,6 @@ const StudyPlanItems = (props) => {
     );
   return (
     <Fragment key={"Welcomeandgoals"}>
-      {console.log("-------- START 2 ----------------")}
-      {console.log(
-        "%c⚪️►►►► %cline:287%coutputName",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
-        outputName,
-      )}
-      {console.log(
-        "%c⚪️►►►► %cline:294%cuser",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
-        user,
-      )}
-      {console.log(
-        "%c⚪️►►►► %cline:304%cstudyPlanMetadata",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
-        studyPlanMetadata,
-      )}
-      {console.log("-------- END 2----------------")}
       {!user && outputName.includes("Goal") && <Welcome />}
       {user &&
         outputName.includes("Goal") &&

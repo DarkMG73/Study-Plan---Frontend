@@ -31,9 +31,7 @@ import useProcessUploadedFormInputData from "../../Hooks/useProcessUploadedFormI
 const Home = (props) => {
   const { studyPlan } = useSelector((state) => state.studyPlanData);
   const { content } = useSelector((state) => state.contentData);
-  const user = props.user
-    ? props.user
-    : useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
   const angledRectangleRef = useRef();
   const dispatch = useDispatch();
   const hideStudyPlan = false;
@@ -233,7 +231,7 @@ const Home = (props) => {
         <ErrorBoundary>
           <div className={styles["login-stats-container"]}>
             <div className={styles["login-outer-wrap"]}>
-              <LoginStatus hideTitles={true} />
+              <LoginStatus hideTitles={true} forcedUser={props.user} />
             </div>
             <div className={styles["stats-outer-wrap"]}>
               <Stats />
