@@ -231,7 +231,11 @@ const Home = (props) => {
         <ErrorBoundary>
           <div className={styles["login-stats-container"]}>
             <div className={styles["login-outer-wrap"]}>
-              <LoginStatus hideTitles={true} forcedUser={props.user} />
+              <LoginStatus
+                hideTitles={true}
+                forcedUser={props.user}
+                isDemo={props.isDemo}
+              />
             </div>
             <div className={styles["stats-outer-wrap"]}>
               <Stats />

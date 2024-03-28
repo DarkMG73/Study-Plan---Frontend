@@ -1,5 +1,6 @@
 import styles from "./Login.module.scss";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { statusUpdateActions } from "../../../store/statusUpdateSlice";
 import { sign_inAUser, setUserCookie } from "../../../storage/userDB";
@@ -14,7 +15,14 @@ const Login = (props) => {
     email: "",
     password: "",
   });
-
+  const inDemoMode = useSelector((state) => state.auth.inDemoMode);
+  console.log(
+    "%c⚪️►►►► %cline:18%cinDemoMode",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(161, 23, 21);padding:3px;border-radius:2px",
+    inDemoMode,
+  );
   const [loginError, seLoginError] = useState(false);
   const [showLoginError, setShowLoginError] = useState(true);
   const [showChangePasswordHTML, setShowChangePasswordHTML] = useState(false);
@@ -101,16 +109,21 @@ const Login = (props) => {
     makeLoadingRequest();
     // storage("add", res.data);
 
-    setUserCookie(res.data).then((res) => {
-      if (process.env.NODE_ENV === "development")
-        console.log(
-          "%cSetting User Cookie:",
-          "color:#287094;background:#f0f0ef;padding:5px;border-radius:0 25px 25px 0",
-          res,
-        );
-    });
+    if (!inDemoMode)
+      setUserCookie(res.data).then((res) => {
+        if (process.env.NODE_ENV === "development")
+          console.log(
+            "%cSetting User Cookie:",
+            "color:#287094;background:#f0f0ef;padding:5px;border-radius:0 25px 25px 0",
+            res,
+          );
+      });
 
     dispatch(authActions.logIn(res.data));
+    if (!props.isDemo && inDemoMode) {
+      dispatch(authActions.demoMode(false));
+    }
+
     removeLoadingRequest();
   };
 

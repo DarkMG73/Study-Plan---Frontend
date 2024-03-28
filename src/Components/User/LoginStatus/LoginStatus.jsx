@@ -92,6 +92,7 @@ function LoginStatus(props) {
                   signUpButtonStyles={props.signUpButtonStyles}
                   hideTitles={props.hideTitles}
                   forcedUser={props.forcedUser}
+                  isDemo={props.isDemo}
                 />
               )}
               {showSignupForm && (

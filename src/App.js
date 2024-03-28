@@ -15,7 +15,7 @@ import Header from "./Components/Header/Header";
 import BarLoader from "./UI/Loaders/BarLoader/BarLoader";
 import { ErrorBoundary } from "./HOC/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import LocalErrorDisplay from "./HOC/ErrorHandling/LocalErrorDisplay/LocalErrorDisplay";
-
+import { authActions } from "./store/authSlice";
 function App() {
   const loadingStatus = useSelector(
     (state) => state.loadingRequests.pendingLoadRequests,
@@ -161,6 +161,7 @@ function App() {
   useEffect(() => {
     if (isDemo) {
       setForceUser(demoUser);
+      dispatch(authActions.demoMode(true));
     }
   }, [isDemo]);
   ///////
@@ -280,6 +281,7 @@ function App() {
                     musicIsActive={true}
                     userInitComplete={userInitComplete}
                     user={forceUser}
+                    isDemo={isDemo}
                   />
                 }
               />

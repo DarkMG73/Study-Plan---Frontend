@@ -3,7 +3,8 @@ import { StorageForSession } from "../storage/storage";
 
 axios.defaults.withCredentials = true;
 
-export async function registerAUser(user) {
+export async function registerAUser(user, inDemoMode) {
+  if (inDemoMode) return;
   const output = await axios
     .post(`/api/users/auth/register/`, user)
     .then((res) => {
@@ -13,7 +14,7 @@ export async function registerAUser(user) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
       const error = err.response;
       if (
@@ -39,26 +40,27 @@ export async function registerAUser(user) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        error
+        error,
       );
 
       if (Object.hasOwn(error, "data") && Object.hasOwn(error.data, "message"))
         console.log(
           "%cERROR Message:",
           "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-          error.data.message
+          error.data.message,
         );
     });
 
   return output;
 }
 
-export async function setUserCookie(user) {
+export async function setUserCookie(user, inDemoMode) {
+  if (inDemoMode) return;
   const output = new Promise((resolve) => {
     const cookie = StorageForSession(
       "ADD",
       user,
-      "gi-interview-questions-Tool-user"
+      "gi-interview-questions-Tool-user",
     );
     let status = 400;
     if (cookie) status = 202;
@@ -74,13 +76,14 @@ export async function setUserCookie(user) {
   return output;
 }
 
-export async function deleteUserCookie() {
+export async function deleteUserCookie(inDemoMode) {
+  if (inDemoMode) return;
   // SessionStorage used while hosting API on Heroku
   const output = new Promise((resolve) => {
     const cookie = StorageForSession(
       "DELETE",
       {},
-      "gi-interview-questions-Tool-user"
+      "gi-interview-questions-Tool-user",
     );
     let status = 400;
     if (cookie) status = 202;
@@ -96,12 +99,13 @@ export async function deleteUserCookie() {
   return output;
 }
 
-export async function getUserCookie() {
+export async function getUserCookie(inDemoMode) {
+  if (inDemoMode) return;
   const output = new Promise((resolve) => {
     const cookie = StorageForSession(
       "GET",
       {},
-      "gi-interview-questions-Tool-user"
+      "gi-interview-questions-Tool-user",
     );
 
     let status = 400;
@@ -128,13 +132,13 @@ export async function sign_inAUser(token) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        error
+        error,
       );
       if (Object.hasOwn(error, "data") && Object.hasOwn(error.data, "message"))
         console.log(
           "%cERROR Message:",
           "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-          error.response.data.message
+          error.response.data.message,
         );
 
       return error.response;
@@ -158,7 +162,7 @@ export async function getUserUserByToken(token) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
       return err.response;
     });
@@ -179,7 +183,7 @@ export async function updateUserHistory(userAndDataObject) {
     .post(
       `/api/users/auth/updateUserHistory`,
       { dataObj: dataObj },
-      axiosConfig
+      axiosConfig,
     )
     .then((res) => {
       return res;
@@ -188,7 +192,7 @@ export async function updateUserHistory(userAndDataObject) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
       return err;
     });
@@ -208,7 +212,7 @@ export async function updateUserCurrentFilters(userAndDataObject) {
     .post(
       `/api/users/auth/updateUserCurrentFilters`,
       { dataObj: dataObj },
-      axiosConfig
+      axiosConfig,
     )
     .then((res) => {
       return res;
@@ -217,7 +221,7 @@ export async function updateUserCurrentFilters(userAndDataObject) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
       return err;
     });
@@ -242,7 +246,7 @@ export async function updateStudyNotes(userAndDataObject) {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
       return err;
     });
