@@ -2,6 +2,12 @@ import styles from "./NotFound.module.scss";
 import { useNavigate } from "react-router-dom";
 
 const NotFound = () => {
+  console.log(
+    "%c⚪️►►►► %cline:4%cNotFound",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(3, 38, 58);padding:3px;border-radius:2px",
+  );
   let navigate = useNavigate();
 
   const modalButtonHandler = () => {

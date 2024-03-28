@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initState = {
   user: false,
+  demoMode: false,
   authToken: false,
   recentLogout: false,
 };
@@ -19,6 +20,10 @@ export const authSlice = createSlice({
       const recentLogoutState = { ...initState };
       // recentLogoutState.recentLogout = true;
       return recentLogoutState;
+    },
+    demoMode: (state, action) => {
+      state.demoMode = { ...action.payload };
+      state.demoMode = action.payload;
     },
     // resetRecentLogout: (state) => {
     //   state.recentLogout = false;

@@ -2,7 +2,7 @@ import "./App.css";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect, Fragment } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { studyPlanDataActions } from "./store/studyPlanDataSlice";
 import { statusUpdateActions } from "./store/statusUpdateSlice";
 import { useUserDataInit } from "./Hooks/useUserDataInit";
@@ -10,7 +10,6 @@ import { useRunGatherStudyPlanData } from "./Hooks/useRunGatherStudyPlanData";
 // import { useRunGatherContentData } from "./Hooks/useRunGatherContentData";
 import Home from "./pages/Home/Home";
 import Manage from "./pages/Manage/Manage";
-import Demo from "./pages/Demo/Demo";
 import CardTransparent from "./UI/Cards/CardTransparent/CardTransparent";
 import Header from "./Components/Header/Header";
 import BarLoader from "./UI/Loaders/BarLoader/BarLoader";
@@ -26,6 +25,23 @@ function App() {
   const studyPlan = useSelector((state) => state.studyPlanData);
   const { reGatherStudyPlan } = studyPlan;
   const contentData = useSelector((state) => state.contentData);
+  const location = useLocation();
+  console.log(
+    "%c⚪️►►►► %cline:28%clocation",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
+    location,
+  );
+  const isDemo = location.pathname.split("/")[1] === "demo";
+  console.log(
+    "%c⚪️►►►► %cline:29%cisDemo",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
+    isDemo,
+  );
+
   if (
     (!process.env.NODE_ENV || process.env.NODE_ENV === "development") &&
     Object.hasOwn(studyPlan, "studyPlan") &&
@@ -235,7 +251,6 @@ function App() {
         <Routes>
           <Fragment>
             {loadingStatus && <Route path="/*" element={<BarLoader />} />}
-
             <Fragment>
               <Route
                 path="/manage"
@@ -243,19 +258,6 @@ function App() {
                   <Manage
                     noDBErrors={noDBErrors}
                     setNoDBErrors={setNoDBErrors}
-                  />
-                }
-              />
-              <Route
-                path="/demo"
-                element={
-                  <Demo
-                    noDBErrors={noDBErrors}
-                    setNoDBErrors={setNoDBErrors}
-                    aboutIsActive={aboutIsActive}
-                    musicIsActive={true}
-                    userInitComplete={userInitComplete}
-                    user={user}
                   />
                 }
               />
