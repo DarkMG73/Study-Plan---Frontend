@@ -61,6 +61,8 @@ function App() {
 
   const [userInitComplete, setUserInitComplete] = useState(false);
   const { user } = useSelector((state) => state.auth);
+  const demoUser = {};
+  const [forceUser, setForceUser] = useState(false);
   const [localError, setLocalError] = useState({
     title: null,
     active: false,
@@ -153,7 +155,11 @@ function App() {
   ////////////////////////////////////////
   /// EFFECTS
   ////////////////////////////////////////
-
+  useEffect(() => {
+    if (isDemo) {
+      setForceUser(demoUser);
+    }
+  }, [isDemo]);
   ///////
   // Login user at startup if active user cookie.
   useEffect(() => {
@@ -262,6 +268,19 @@ function App() {
                 }
               />
               <Route
+                path="/demo"
+                element={
+                  <Home
+                    noDBErrors={noDBErrors}
+                    setNoDBErrors={setNoDBErrors}
+                    aboutIsActive={aboutIsActive}
+                    musicIsActive={true}
+                    userInitComplete={userInitComplete}
+                    user={forceUser}
+                  />
+                }
+              />
+              <Route
                 path="/"
                 element={
                   <Home
@@ -270,7 +289,7 @@ function App() {
                     aboutIsActive={aboutIsActive}
                     musicIsActive={true}
                     userInitComplete={userInitComplete}
-                    user={user}
+                    user={forceUser}
                   />
                 }
               />
@@ -284,7 +303,7 @@ function App() {
                     aboutIsActive={aboutIsActive}
                     musicIsActive={true}
                     userInitComplete={userInitComplete}
-                    user={user}
+                    user={forceUser}
                   />
                 }
               />
