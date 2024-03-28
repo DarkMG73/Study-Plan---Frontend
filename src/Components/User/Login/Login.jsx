@@ -185,7 +185,7 @@ const Login = (props) => {
     if (email && password) {
       makeLoadingRequest();
       // axios("http://localhost:8000/api/users/auth/register", user)
-      sign_inAUser(user)
+      sign_inAUser(userInfo)
         .then((res) => {
           removeLoadingRequest();
           if (res && Object.hasOwn(res, "status")) {
