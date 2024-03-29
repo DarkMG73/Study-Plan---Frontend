@@ -122,9 +122,9 @@ export async function getUserCookie(inDemoMode) {
   return output;
 }
 
-export async function sign_inAUser(token) {
+export async function sign_inAUser(userInfo) {
   const output = await axios
-    .post(`/api/users/auth/sign_in/`, token)
+    .post(`/api/users/auth/sign_in/`, userInfo)
     .then((res) => {
       return res;
     })
@@ -214,31 +214,6 @@ export async function updateUserCurrentFilters(userAndDataObject) {
       { dataObj: dataObj },
       axiosConfig,
     )
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      console.log(
-        "%cERROR:",
-        "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        err,
-      );
-      return err;
-    });
-  return response;
-}
-
-/// Update Study Notes /////////////////////////////////////
-export async function updateStudyNotes(userAndDataObject) {
-  const axiosConfig = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "JWT " + userAndDataObject.user.token,
-    },
-  };
-  const { dataObj } = userAndDataObject;
-  const response = await axios
-    .post(`/api/users/auth/updateStudyNotes`, { dataObj: dataObj }, axiosConfig)
     .then((res) => {
       return res;
     })

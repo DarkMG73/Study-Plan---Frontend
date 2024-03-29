@@ -167,8 +167,8 @@ function App() {
   ///////
   // Login user at startup if active user cookie.
   useEffect(() => {
-    userDataInit({ setLocalError, setUserInitComplete });
-  }, []);
+    userDataInit({ setLocalError, setUserInitComplete, isDemo, demoUser });
+  }, [isDemo]);
 
   useEffect(() => {
     if (userInitComplete) {
