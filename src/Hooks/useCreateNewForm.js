@@ -4,9 +4,12 @@ import StudyPlanItemsList from "../Components/StudyPlanItems/StudyPlanItemsList/
 import displayConditions from "../data/displayConditionsObj.js";
 import { formInputDataActions } from "../store/formInputDataSlice";
 import { loadingRequestsActions } from "../store/loadingRequestsSlice";
+import useDemoCheck from "../Hooks/useDemoCheck";
 
 const useCreateNewForm = () => {
   const dispatch = useDispatch();
+  const demoCheck = useDemoCheck();
+  const isDemo = demoCheck();
   const studyPlanItemSchema = useSelector(
     (state) => state.studyPlanData.schema,
   );
@@ -26,7 +29,10 @@ const useCreateNewForm = () => {
     ////////////////////////////////////////////////////////////////
     const submitNewFormButtonHandler = (e) => {
       e.preventDefault();
-
+      if (isDemo) {
+        alert(isDemo);
+        return;
+      }
       dispatch(loadingRequestsActions.addToLoadRequest());
 
       // Allow a pause to ensure input data is fully updated to existing form state

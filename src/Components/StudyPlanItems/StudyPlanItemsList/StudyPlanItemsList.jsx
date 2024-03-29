@@ -8,6 +8,7 @@ import { deleteContentDocFromDb } from "../../../storage/contentDB";
 import CollapsibleElm from "../../../UI/CollapsibleElm/CollapsibleElm";
 import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 import { loadingRequestsActions } from "../../../store/loadingRequestsSlice";
+import useDemoCheck from "../../../Hooks/useDemoCheck";
 
 const StudyPlanItemsList = (props) => {
   const [refresh] = useState(1);
@@ -23,6 +24,8 @@ const StudyPlanItemsList = (props) => {
   const displayConditions = props.displayConditions;
   const onlyList = props.onlyList;
   const noEditButton = props.noEditButton;
+  const demoCheck = useDemoCheck();
+  const isDemo = demoCheck();
   const [showProtectedHidden, setShowProtectedHidden] = useState(
     props.showProtectedHidden ? props.showProtectedHidden : [],
   );
@@ -125,6 +128,12 @@ const StudyPlanItemsList = (props) => {
 
   const submitFormButtonHandler = (e) => {
     e.preventDefault();
+
+    if (isDemo) {
+      alert(isDemo);
+      return;
+    }
+
     dispatch(loadingRequestsActions.addToLoadRequest());
 
     // Allow a pause to ensure input data is fully updated to existing form state
@@ -212,7 +221,10 @@ const StudyPlanItemsList = (props) => {
 
   const deleteFormButtonHandler = (e) => {
     e.preventDefault();
-
+    if (isDemo) {
+      alert(isDemo);
+      return;
+    }
     const parentMasterID = e.target.getAttribute("data-parentmasterid");
     const parentSection = e.target.getAttribute("data-section");
     const itemIdentifier = studyPlanItemsObj[parentMasterID].identifier;

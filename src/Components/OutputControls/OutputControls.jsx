@@ -11,6 +11,7 @@ import displayConditions from "../../data/displayConditionsObj.js";
 import CardSecondary from "../../UI/Cards/CardSecondary/CardSecondary";
 import CollapsibleElm from "../../UI/CollapsibleElm/CollapsibleElm";
 import { formInputDataActions } from "../../store/formInputDataSlice";
+import useDemoCheck from "../../Hooks/useDemoCheck";
 
 function OutputControls(props) {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function OutputControls(props) {
   const [showAllStudyPlanItemPageLoader] = useState(false);
   const { studyPlan } = useSelector((state) => state.studyPlanData);
   const studyPlanItemSchema = useSelector(
-    (state) => state.studyPlanData.schema
+    (state) => state.studyPlanData.schema,
   );
   const { uploadedForms } = useSelector((state) => state.formInputData);
   const user = useSelector((state) => state.auth.user);
@@ -26,7 +27,8 @@ function OutputControls(props) {
   const [uploadedJSONJSX, setUploadedJSONJSX] = useState(false);
   const [showUploadInputData, setShowUploadInputData] = useState(false);
   const [errorData, setErrorData] = useState(false);
-
+  const demoCheck = useDemoCheck();
+  const isDemo = demoCheck();
   const cvsItemOrder = [
     "name",
     "type",
@@ -85,7 +87,7 @@ function OutputControls(props) {
         setUploadedJSONJSX(outputJSX);
       } else {
         alert(
-          'Please log in to add to your study plan. If you do not yet have a profile, click "Sign Up" at the top of the page to get started.'
+          'Please log in to add to your study plan. If you do not yet have a profile, click "Sign Up" at the top of the page to get started.',
         );
       }
     }
@@ -179,14 +181,23 @@ function OutputControls(props) {
   // }
 
   function uploadJsonButtonHandler(e) {
+    if (isDemo) {
+      alert(isDemo);
+      return;
+    }
+
     readFileOnUpload(e.target.files[0]);
     setShowUploadInputData(true);
   }
 
   function resetDatabaseButtonHandler() {
+    if (isDemo) {
+      alert(isDemo);
+      return;
+    }
     const confirmation = window.confirm(
       "Are you sure you want to erase all of the items from your study plan? This can not be undone. It might be a good idea to backup your data using the JSON export button (above). This will enable you to add everything back easily, if you need.",
-      'Should we continue permanent erasing all items from your study plan? Clicking "Confirm" erases the study plan and clicking "Cancel" will not erase the study plan.'
+      'Should we continue permanent erasing all items from your study plan? Clicking "Confirm" erases the study plan and clicking "Cancel" will not erase the study plan.',
     );
     if (confirmation) {
       const msg =
@@ -204,12 +215,12 @@ function OutputControls(props) {
             } else {
               console.log(
                 "%c --> %cline:29%cThere was an error when trying reset the database. Please try again later. If the problem continues, please contact the website administrator. Here is the message from the server: ",
-                res.response.data
+                res.response.data,
               );
 
               alert(
                 "There was an error when trying reset the database. Please try again later. If the problem continues, please contact the website administrator. Here is the message from the server: " +
-                  res.response.data.message
+                  res.response.data.message,
               );
             }
           })
@@ -219,13 +230,13 @@ function OutputControls(props) {
               "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
               "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
               "color:#fff;background:rgb(217, 104, 49);padding:3px;border-radius:2px",
-              err
+              err,
             );
             alert(
               "There was an error when trying reset the database. Please try again later. If the problem continues, please contact the website administrator. Here is the message from the server: " +
                 err.response.status +
                 " | " +
-                err.response.data
+                err.response.data,
             );
           });
     }
@@ -233,6 +244,11 @@ function OutputControls(props) {
 
   const submitFormButtonHandler = (e) => {
     e.preventDefault();
+
+    if (isDemo) {
+      alert(isDemo);
+      return;
+    }
 
     const newUploadedJSONData = { ...uploadedJSONData };
     const _id = newUploadedJSONData._id;
@@ -245,7 +261,7 @@ function OutputControls(props) {
         if (["_id", "createdAt"].includes(catName)) continue;
         groomedUploadedData[key][catName] = Object.hasOwn(
           newUploadedJSONData[key],
-          catName
+          catName,
         )
           ? newUploadedJSONData[key][catName]
           : "";
@@ -256,7 +272,7 @@ function OutputControls(props) {
         formInputDataActions.submitUploadedForm({
           _id: _id,
           item: newUploadedJSONData,
-        })
+        }),
       );
     } else {
       alert("You must be logged in to be able to make changes.");
@@ -457,10 +473,10 @@ function processExportCVS(props) {
   const { user, studyPlan, filter, cvsItemOrder, exportData } = props;
   const userName = user ? user.userName : "No one is logged in";
   const numberOfGoals = Object.values(studyPlan).filter(
-    (value) => value.type === "goal"
+    (value) => value.type === "goal",
   ).length;
   const numberOfSteps = Object.values(studyPlan).filter(
-    (value) => value.type === "step"
+    (value) => value.type === "step",
   ).length;
   const headers = {
     number: userName,
