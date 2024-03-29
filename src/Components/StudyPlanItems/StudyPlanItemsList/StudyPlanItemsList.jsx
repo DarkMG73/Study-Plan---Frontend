@@ -225,7 +225,7 @@ const StudyPlanItemsList = (props) => {
         studyPlanItemsObj[parentMasterID].name +
         ' "?',
     );
-    if (confirm && user && user.isAdmin == true) {
+    if (confirm && user) {
       // if (true) {
 
       deleteItemFromDB(itemIdentifier, user).then((res) => {
@@ -241,7 +241,7 @@ const StudyPlanItemsList = (props) => {
       });
     } else if (confirm) {
       const sendEmail = window.confirm(
-        '2222 Thank you for contributing. All contributions must be reviewed before becoming public. Click "OK" to send this via email for review and, if approved, to be included. Click "Cancel" to cancel this and not send an email.',
+        'Thank you for contributing. All contributions must be reviewed before becoming public. Click "OK" to send this via email for review and, if approved, to be included. Click "Cancel" to cancel this and not send an email.',
       );
       if (sendEmail) {
         const questionAdminEmail = "general@glassinteractive.com";
