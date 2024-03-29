@@ -26,21 +26,7 @@ function App() {
   const { reGatherStudyPlan } = studyPlan;
   const contentData = useSelector((state) => state.contentData);
   const location = useLocation();
-  console.log(
-    "%c⚪️►►►► %cline:28%clocation",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
-    location,
-  );
   const isDemo = location.pathname.split("/")[1] === "demo";
-  console.log(
-    "%c⚪️►►►► %cline:29%cisDemo",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
-    isDemo,
-  );
 
   if (
     (!process.env.NODE_ENV || process.env.NODE_ENV === "development") &&

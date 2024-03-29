@@ -164,36 +164,8 @@ const Login = (props) => {
   //register function
   const submitLogin = (e, forcedUser) => {
     e.preventDefault();
-    console.log(
-      "%c⚪️►►►► %cline:159%cuser",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
-      user,
-      console.log(
-        "%c⚪️►►►► %cline:152%cforcedUser",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
-        forcedUser,
-      ),
-    );
     const userInfo = forcedUser ? forcedUser : user;
-    console.log(
-      "%c⚪️►►►► %cline:169%cuserInfo",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(251, 178, 23);padding:3px;border-radius:2px",
-      userInfo,
-    );
     const { email, password } = userInfo;
-    console.log(
-      "%c⚪️►►►► %cline:176%cemail",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(3, 101, 100);padding:3px;border-radius:2px",
-      email,
-    );
 
     if (email && password) {
       makeLoadingRequest();
@@ -264,17 +236,10 @@ const Login = (props) => {
     );
 
   if (props.forcedUser && (!user || user.email !== props.forcedUser.email)) {
-    console.log(
-      "%c⚪️►►►► %cline:224%cprops.forcedUser",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(178, 190, 126);padding:3px;border-radius:2px",
-      props.forcedUser,
-    );
     setUser(props.forcedUser);
-
     submitLogin({ preventDefault: () => {} }, props.forcedUser);
   }
+
   ////////////////////////////////////////////////////////////////
   /// Output
   ////////////////////////////////////////////////////////////////
