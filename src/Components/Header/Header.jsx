@@ -1,6 +1,7 @@
 import styles from "./Header.module.scss";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import SPLogo from "../SPLogo/SPLogo";
 // import SubscribeCTA from "../SubscribeCTA/SubscribeCTA";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
@@ -14,12 +15,13 @@ function Header(props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const { content } = useSelector((state) => state.contentData);
-  const { user } = useSelector((state) => state.auth);
+  const { user, inDemoMode } = useSelector((state) => state.auth);
   const [width] = useViewport();
   const { welcomeScrollPosition } = useSelector(
-    (state) => state.scrollPosition
+    (state) => state.scrollPosition,
   );
   const [scrolledUp, setScrolledUp] = useState(false);
+  const navigate = useNavigate();
   const scrollPositionToAtivateLoginStatus = 270;
   const [logoTitleSize, setLogoTitleSize] = useState(100);
   const [initialWelcomePositionTop, setInitialWelcomePositionTop] =
@@ -37,6 +39,9 @@ function Header(props) {
       "%)",
   };
   const navLinks = [];
+  const demoCtaButtonHandler = () => {
+    navigate("/");
+  };
 
   if (content) {
     for (const value of Object.values(content)) {
@@ -248,6 +253,16 @@ function Header(props) {
           </button>
         </CardPrimary>
       </div>
+      {inDemoMode && (
+        <button
+          onClick={demoCtaButtonHandler}
+          className={styles["demo-cta-wrap"]}
+        >
+          <CardPrimary>
+            This is a Demo. Click to start your plan! &rarr;
+          </CardPrimary>
+        </button>
+      )}
     </div>
   );
 }
