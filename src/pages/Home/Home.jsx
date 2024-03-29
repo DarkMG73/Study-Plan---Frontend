@@ -13,13 +13,13 @@ import NoticeOne from "../../Components/NoticeOne/NoticeOne";
 import NoticeTwo from "../../Components/NoticeTwo/NoticeTwo";
 import NoticeThree from "../../Components/NoticeThree/NoticeThree";
 import BottomBar from "../../Components/BottomBar/BottomBar";
+import LoginStatus from "../../Components/User/LoginStatus/LoginStatus";
+import Stats from "../../Components/Stats/Stats";
 import { ErrorBoundary } from "../../HOC/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import { scrollPositionActions } from "../../store/scrollPositionSlice";
 import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
 import { formInputDataActions } from "../../store/formInputDataSlice";
 import { loadingRequestsActions } from "../../store/loadingRequestsSlice";
-import LoginStatus from "../../Components/User/LoginStatus/LoginStatus";
-import Stats from "../../Components/Stats/Stats";
 import { saveManyStudyPlanItems } from "../../storage/studyPlanDB";
 import {
   saveManyContentItems,
