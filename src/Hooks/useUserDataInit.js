@@ -35,13 +35,6 @@ export const useUserDataInit = () => {
           if (!props.isDemo)
             getUserUserByToken(res.data.cookie) // data from API.
               .then((userProfile) => {
-                console.log(
-                  "%c⚪️►►►► %cline:37%cuserProfile",
-                  "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-                  "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-                  "color:#fff;background:rgb(248, 214, 110);padding:3px;border-radius:2px",
-                  userProfile,
-                );
                 // User does not exist or has timed out.
                 if (userProfile.status >= 400) {
                   // setUser("not logged in");
@@ -62,13 +55,6 @@ export const useUserDataInit = () => {
           if (props.isDemo)
             sign_inAUser(props.demoUser) // data from API.
               .then((dbRes) => {
-                console.log(
-                  "%c⚪️►►►► %cline:57%cuserProfile",
-                  "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-                  "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-                  "color:#fff;background:rgb(3, 38, 58);padding:3px;border-radius:2px",
-                  dbRes.data,
-                );
                 // User does not exist or has timed out.
                 if (dbRes.status >= 400) {
                   // setUser("not logged in");

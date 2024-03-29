@@ -19,13 +19,6 @@ export const useRunGatherStudyPlanData = () => {
 
   const runGatherStudyPlanData = (props) => {
     const user = props.user;
-    console.log(
-      "%c⚪️►►►► %cline:21%cuser",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(130, 57, 53);padding:3px;border-radius:2px",
-      user,
-    );
     const setLocalError = props.setLocalError;
     makeLoadingRequest();
     GatherStudyPlanData(studyPlanItemSchema, user)

@@ -16,13 +16,6 @@ const Login = (props) => {
     password: "",
   });
   const inDemoMode = useSelector((state) => state.auth.inDemoMode);
-  console.log(
-    "%c⚪️►►►► %cline:18%cinDemoMode",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(161, 23, 21);padding:3px;border-radius:2px",
-    inDemoMode,
-  );
   const [loginError, seLoginError] = useState(false);
   const [showLoginError, setShowLoginError] = useState(true);
   const [showChangePasswordHTML, setShowChangePasswordHTML] = useState(false);
