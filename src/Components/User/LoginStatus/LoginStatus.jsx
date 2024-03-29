@@ -6,10 +6,19 @@ import { deleteUserCookie } from "../../../storage/userDB";
 import PushButton from "../../../UI/Buttons/PushButton/PushButton";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
+import CardPrimary from "../../../UI/Cards/CardPrimary/CardPrimary";
 
 function LoginStatus(props) {
   const userData = useSelector((state) => state.auth);
   const user = userData.user;
+  const inDemoMode = userData.inDemoMode;
+  console.log(
+    "%c⚪️►►►► %cline:12%cuser",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(248, 214, 110);padding:3px;border-radius:2px",
+    user,
+  );
   const dispatch = useDispatch();
   const [showLoginForm, setShowLoginForm] = useState(true);
   const [showSignupForm, setShowSignupForm] = useState(false);
@@ -107,7 +116,7 @@ function LoginStatus(props) {
           </>
         )}
 
-        {user && (
+        {user && !inDemoMode && (
           <PushButton
             inputOrButton="button"
             id="logout-from-db"
@@ -120,6 +129,13 @@ function LoginStatus(props) {
           >
             Log Out
           </PushButton>
+        )}
+        {inDemoMode && (
+          <a href={window.location.origin} className={styles["demo-cta-wrap"]}>
+            <CardPrimary>
+              This is a Demo. Click to start your plan! &rarr;
+            </CardPrimary>
+          </a>
         )}
         {loginError && <p>{loginError}</p>}
       </div>

@@ -486,19 +486,31 @@
 .demo-cta-wrap {
   position: absolute;
   bottom: 0;
-  transform: translateY(100%);
+  transform: scale(1, 0) translateY(100%);
   padding: 0.25em 1.25em;
   font-size: 1.6rem;
   background: var(--spt-color-accent-dark);
   color: var(--spt-color-background);
   border-radius: 0 0 50px 50px;
+  overflow: hidden;
+  transition: 0.3s all ease;
+  text-decoration: none;
+  border: none;
 }
 
+.demo-cta-wrap:hover {
+  background: var(--spt-color-accent-light);
+  color: var(--spt-color-accent-dark);
+}
 .demo-cta-wrap > div {
   padding: 0;
   font-size: 1.6rem;
   background: inherit;
   color: inherit;
+}
+
+.logo-to-outerwrap-header a.demo-cta-wrap {
+  transform: scale(1) translateY(100%);
 }
 
 /* RESPONSIVE BREAKPOINTS */
