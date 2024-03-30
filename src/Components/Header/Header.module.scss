@@ -499,8 +499,7 @@
 }
 
 .demo-cta-wrap:hover {
-  background: var(--spt-color-accent-light);
-  color: var(--spt-color-accent-dark);
+  box-shadow: 0 0 10px 0 yellow;
 }
 .demo-cta-wrap > div {
   padding: 0;

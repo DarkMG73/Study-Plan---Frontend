@@ -258,6 +258,10 @@ body .form-container input[type="password"] {
   border: none;
 }
 
+.demo-cta-wrap:hover {
+  box-shadow: 0 0 10px 0 yellow;
+}
+
 .demo-cta-wrap > div {
   padding: 0;
   font-size: 1.6rem;
