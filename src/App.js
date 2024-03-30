@@ -16,6 +16,7 @@ import BarLoader from "./UI/Loaders/BarLoader/BarLoader";
 import { ErrorBoundary } from "./HOC/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import LocalErrorDisplay from "./HOC/ErrorHandling/LocalErrorDisplay/LocalErrorDisplay";
 import { authActions } from "./store/authSlice";
+
 function App() {
   const loadingStatus = useSelector(
     (state) => state.loadingRequests.pendingLoadRequests,
@@ -236,7 +237,7 @@ function App() {
             </div>
           </div>
         )}
-        {loadingStatus && (
+        {loadingStatus > 0 && (
           <div className="bar-loader-container">
             <div className="bar-loader-wrap">
               <BarLoader />
