@@ -483,14 +483,23 @@
   }
 }
 
-.demo-cta-wrap {
-  position: absolute;
-  bottom: 0;
-  transform: scale(1, 0) translateY(100%);
+.demo-cta-wrap,
+.start-demo-button {
   padding: 0.25em 1.25em;
   font-size: 1.6rem;
   background: var(--spt-color-accent-dark);
   color: var(--spt-color-background);
+  border-radius: 50px;
+  overflow: hidden;
+  transition: 0.3s all ease;
+  text-decoration: none;
+  border: none;
+}
+
+.demo-cta-wrap {
+  position: absolute;
+  bottom: 0;
+  transform: scale(1, 0) translateY(100%);
   border-radius: 0 0 50px 50px;
   overflow: hidden;
   transition: 0.3s all ease;
@@ -500,6 +509,9 @@
 
 .demo-cta-wrap:hover {
   box-shadow: 0 0 10px 0 yellow;
+}
+.start-demo-button:hover {
+  transform: scale(1.0625);
 }
 .demo-cta-wrap > div {
   padding: 0;

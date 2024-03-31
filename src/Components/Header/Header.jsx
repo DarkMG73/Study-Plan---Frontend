@@ -1,6 +1,7 @@
 import styles from "./Header.module.scss";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import SPLogo from "../SPLogo/SPLogo";
 // import SubscribeCTA from "../SubscribeCTA/SubscribeCTA";
 import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
@@ -10,6 +11,7 @@ import LoginStatus from "../User/LoginStatus/LoginStatus";
 import Navbar from "../Navbar/Navbar";
 
 function Header(props) {
+  const navigate = useNavigate();
   const [logoToHeaderBar, setLogoToHeaderBar] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
@@ -59,6 +61,9 @@ function Header(props) {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const startDemoButtonHandler = () => {
+    navigate("/demo");
+  };
   const loginModalButtonHandler = () => {
     setLoginModalOpen(!loginModalOpen);
   };
@@ -195,6 +200,14 @@ function Header(props) {
             </PushButton>
           )}
         </div>
+        {!user && (
+          <button
+            className={styles["start-demo-button"]}
+            onClick={startDemoButtonHandler}
+          >
+            Click to Start a Demo
+          </button>
+        )}
         <div className={styles["nav-container"]}>
           <Navbar
             navLinks={props.navLinks}
