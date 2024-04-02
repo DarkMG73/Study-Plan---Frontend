@@ -4,32 +4,41 @@ const useAssembleStudyPlanList = () => {
       props;
 
     const findDependencies = (objectIdentifier, masterListObj) => {
-      console.log(
-        "%c⚪️►►►► %cline:6%cobjectIdentifier",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(237, 222, 139);padding:3px;border-radius:2px",
-        objectIdentifier,
-      );
+      if (1 <= 0)
+        console.log(
+          "%c⚪️►►►► %cline:6%cobjectIdentifier",
+          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+          "color:#fff;background:rgb(252, 157, 154);padding:3px;border-radius:2px",
+          objectIdentifier,
+        );
+      return masterListObj;
+      // console.log(
+      //   "%c⚪️►►►► %cline:6%cobjectIdentifier",
+      //   "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      //   "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      //   "color:#fff;background:rgb(237, 222, 139);padding:3px;border-radius:2px",
+      //   objectIdentifier,
+      // );
 
-      const output = [];
-      for (const value of Object.values(masterListObj)) {
-        if (Object.hasOwn(value, "msup") && value.msup === objectIdentifier) {
-          if (value.type === "goal") {
-            console.log(
-              "%c⚪️►►►► %cline:8%cvalue",
-              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-              "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
-              value,
-            );
-          }
-        }
+      // const output = [];
+      // for (const value of Object.values(masterListObj)) {
+      //   if (Object.hasOwn(value, "msup") && value.msup === objectIdentifier) {
+      //     if (value.type === "goal") {
+      //       console.log(
+      //         "%c⚪️►►►► %cline:8%cvalue",
+      //         "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      //         "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      //         "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
+      //         value,
+      //       );
+      //     }
+      //   }
 
-        if (Object.hasOwn(value, "msup") && value.msup === objectIdentifier)
-          output.push(value.identifier);
-      }
-      return output;
+      //   if (Object.hasOwn(value, "msup") && value.msup === objectIdentifier)
+      //     output.push(value.identifier);
+      // }
+      // return output;
     };
 
     if (dataObjForEdit) {
