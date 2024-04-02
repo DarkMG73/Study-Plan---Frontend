@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const useInitStudyPlanItems = () => {
   const studyPlanItemSchema = useSelector(
-    (state) => state.studyPlanData.schema
+    (state) => state.studyPlanData.schema,
   );
   const sortList = useSortList();
   const assembleStudyPlanList = useAssembleStudyPlanList();
@@ -30,12 +30,18 @@ const useInitStudyPlanItems = () => {
         dataObjForEdit,
         allStudyPlanItems,
       });
-
+      console.log(
+        "%c⚪️►►►► %cline:27%cgroomedOutput",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(248, 214, 110);padding:3px;border-radius:2px",
+        groomedOutput,
+      );
       ////////////////////////////////////////////////////////////////////////
       /// Sort groomedOutput
       ////////////////////////////////////////////////////////////////////////
       const sortBy = Object.keys(schema).includes(
-        sortMethod.replace("-reverse", "")
+        sortMethod.replace("-reverse", ""),
       )
         ? sortMethod
         : "priority";
@@ -44,7 +50,13 @@ const useInitStudyPlanItems = () => {
         sortMethod: sortBy,
         objectToBeSorted: groomedOutput,
       });
-
+      console.log(
+        "%c⚪️►►►► %cline:49%csortedGroomedOutput",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
+        sortedGroomedOutput,
+      );
       return { groomedAllItemOutput, sortedGroomedOutput };
     };
 
