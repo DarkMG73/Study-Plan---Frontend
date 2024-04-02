@@ -12,13 +12,6 @@ function LoginStatus(props) {
   const userData = useSelector((state) => state.auth);
   const user = userData.user;
   const inDemoMode = userData.inDemoMode;
-  console.log(
-    "%c⚪️►►►► %cline:12%cuser",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(248, 214, 110);padding:3px;border-radius:2px",
-    user,
-  );
   const dispatch = useDispatch();
   const [showLoginForm, setShowLoginForm] = useState(true);
   const [showSignupForm, setShowSignupForm] = useState(false);

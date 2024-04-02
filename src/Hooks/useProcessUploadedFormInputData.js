@@ -3,7 +3,7 @@ import { sha256 } from "js-sha256";
 
 const useProcessUploadedFormInputData = () => {
   const studyPlanItemSchema = useSelector(
-    (state) => state.studyPlanData.schema
+    (state) => state.studyPlanData.schema,
   );
   const outputFunction = (props) => {
     const { user, dataForSendingToDB } = props;
@@ -47,7 +47,7 @@ const useProcessUploadedFormInputData = () => {
           }
           const missingRequiredFields = measureArray.filter(
             (requiredFiledName) =>
-              !Object.keys(filteredTestObj).includes(requiredFiledName)
+              !Object.keys(filteredTestObj).includes(requiredFiledName),
           );
           return missingRequiredFields;
         };
@@ -89,7 +89,7 @@ const useProcessUploadedFormInputData = () => {
         const missingRequiredFields = [];
         flatInputDataArray.forEach((form) => {
           missingRequiredFields.push(
-            lookForMissingRequirements(requiredFields, form)
+            lookForMissingRequirements(requiredFields, form),
           );
         });
 
