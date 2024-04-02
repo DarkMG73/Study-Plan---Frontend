@@ -8,20 +8,6 @@ const useAssembleStudyPlanList = () => {
       for (const value of Object.values(masterListObj)) {
         if (Object.hasOwn(value, "msup") && value.msup === objectIdentifier)
           output.push(value.identifier);
-        console.log(
-          "%c⚪️►►►► %cline:9%cobjectIdentifier",
-          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-          "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
-          objectIdentifier,
-        );
-        console.log(
-          "%c⚪️►►►► %cline:9%cvalue.msup",
-          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-          "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
-          value.msup,
-        );
       }
       return output;
     };

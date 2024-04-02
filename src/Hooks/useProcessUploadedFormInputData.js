@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { sha256 } from "js-sha256";
+// import { sha256 } from "js-sha256";
 
 const useProcessUploadedFormInputData = () => {
   const studyPlanItemSchema = useSelector(
@@ -117,13 +117,13 @@ const useProcessUploadedFormInputData = () => {
 
             // Handle special identifier
             const date = new Date();
-            let year = date.getFullYear();
+            // let year = date.getFullYear();
 
-            if (key === "identifier") {
-              const hashID = sha256(JSON.stringify(formData["name"]));
+            // if (key === "identifier") {
+            //   const hashID = sha256(JSON.stringify(formData["name"]));
 
-              value = year + "-" + hashID;
-            }
+            //   value = year + "-" + hashID;
+            // }
 
             // Special dates
             if (key === "createdAt" || key === "updatedAt") {

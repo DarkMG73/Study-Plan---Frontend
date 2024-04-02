@@ -1,13 +1,6 @@
 import StudyPlanItemsList from "../StudyPlanItemsList/StudyPlanItemsList";
 
 const StudyPlanItemsSubList = (props) => {
-  console.log(
-    "%c⚪️►►►► %cline:6%cstudyPlanItemsObj",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
-    props.studyPlanItemsObj,
-  );
   return (
     <StudyPlanItemsList
       studyPlanItemsObj={props.studyPlanItemsObj}
