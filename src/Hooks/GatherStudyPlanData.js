@@ -20,6 +20,17 @@ export default async function GatherStudyPlanData(
 
   studyPlanFromDB.forEach((studyPlanItem) => {
     studyPlanData.studyPlan[studyPlanItem._id] = studyPlanItem;
+
+    const dependencies = findDependencies(studyPlanItem, studyPlanFromDB);
+    console.log(
+      "%c⚪️►►►► %cline:24%cdependencies",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
+      dependencies,
+    );
+
+    studyPlanData.studyPlan[studyPlanItem._id].dependencies = dependencies;
   });
 
   const ungroomedStudyPlanMetadata = gatherAllMetadata(studyPlanData.studyPlan);
@@ -119,6 +130,36 @@ function gatherAllMetadata(dataObject) {
   );
 
   return outputSet;
+}
+
+function findDependencies(subjectObj, allObjects) {
+  console.log(
+    "%c⚪️►►►► %cline:6%cobjectIdentifier",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(237, 222, 139);padding:3px;border-radius:2px",
+    subjectObj,
+  );
+
+  const output = [];
+  for (const value of Object.values(allObjects)) {
+    if (
+      Object.hasOwn(value, "identifier") &&
+      subjectObj.msup.includes(value.identifier)
+    ) {
+      // if (value.type === "goal") {
+      //   console.log(
+      //     "%c⚪️►►►► %cline:8%cvalue",
+      //     "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      //     "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      //     "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
+      //     value,
+      //   );
+      // }
+      output.push(value.identifier);
+    }
+  }
+  return output;
 }
 
 function objectExtractAllValuesPerKey(
