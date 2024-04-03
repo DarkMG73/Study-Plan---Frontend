@@ -1,12 +1,11 @@
 import Styles from "./NewStudyPlanForm.module.scss";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import StudyPlanItemsList from "../Components/StudyPlanItems/StudyPlanItemsList/StudyPlanItemsList";
-import displayConditions from "../data/displayConditionsObj.js";
-import { formInputDataActions } from "../store/formInputDataSlice";
-import { loadingRequestsActions } from "../store/loadingRequestsSlice";
-import useDemoCheck from "../Hooks/useDemoCheck";
-import StudyPlanItemsList from "./StudyPlanItemsList/StudyPlanItemsList";
+import StudyPlanItemsList from "../StudyPlanItems/StudyPlanItemsList/StudyPlanItemsList";
+import displayConditions from "../../data/displayConditionsObj.js";
+import { formInputDataActions } from "../../store/formInputDataSlice";
+import { loadingRequestsActions } from "../../store/loadingRequestsSlice";
+import useDemoCheck from "../../Hooks/useDemoCheck";
 
 const NewStudyPlanForm = (props) => {
   const dispatch = useDispatch();
@@ -17,10 +16,14 @@ const NewStudyPlanForm = (props) => {
     (state) => state.studyPlanData.schema,
   );
   const [formType, setFormType] = useState("all");
-  const passedE = props.e;
-  const setNewFormInputValuesObj = props.setNewFormInputValuesObj;
-  const id = props.id;
-  const user = props.user;
+  const { e: passedE, id, user, setNewFormInputValuesObj } = props.data;
+  console.log(
+    "%c⚪️►►►► %cline:19%ce",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
+    e,
+  );
 
   ////////////////////////////////////////////////////////////////
   /// Handlers
@@ -71,9 +74,23 @@ const NewStudyPlanForm = (props) => {
   ////////////////////////////////////////////////////////////////
   const parentMasterID = passedE.target.getAttribute("data-parentmasterid");
   const amountToAdd = prompt("How many would you like to add?");
+  console.log(
+    "%c⚪️►►►► %cline:69%camountToAdd",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
+    amountToAdd,
+  );
   if (amountToAdd <= 0) return false;
   const processNewFormWithSchema = (schema) => {
     const targetFormDataObj = schema;
+    console.log(
+      "%c⚪️►►►► %cline:79%ctargetFormDataObj",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
+      targetFormDataObj,
+    );
     // const itemsToRemove = ['$timestamps', ]
     const cleansedFormData = {};
     Object.keys(targetFormDataObj).forEach((key) => {
@@ -181,6 +198,14 @@ const NewStudyPlanForm = (props) => {
         </button>
       </ul>
     );
+
+    console.log(
+      "%c⚪️►►►► %cline:194%cgroomedNewFormElement",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
+      groomedNewFormElement,
+    );
     setNewFormJSX(groomedNewFormElement);
   };
 
@@ -188,22 +213,14 @@ const NewStudyPlanForm = (props) => {
 
   return (
     <div>
-      {Object.keys(formInputData).length > 0 && (
-        <StudyPlanItemsList
-          key={"spi-list" + id}
-          studyPlanItemsObj={formInputData}
-          allStudyPlanItems={allStudyPlanItems}
-          parentKey={false}
-          parentsParentKey={false}
-          parentMasterID={false}
-          displayConditions={displayConditions.formWithPreFilledData}
-          user={props.user}
-          section={id}
-          onlyList={props.onlyList}
-          noEditButton={props.noEditButton}
-          refresh={refresh}
-        />
-      )}
+      <div
+        key={props.typeName + "new-form-modal"}
+        id="new-form-modal"
+        className={Styles["new-form-modal"]}
+        type={props.typeName}
+      >
+        <form>{newFormJSX}</form>
+      </div>
     </div>
   );
 };
