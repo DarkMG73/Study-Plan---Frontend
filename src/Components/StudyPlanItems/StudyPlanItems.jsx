@@ -3,10 +3,10 @@ import { shallowEqual, useSelector } from "react-redux";
 import styles from "./StudyPlanItems.module.scss";
 import StudyPlanItemsList from "./StudyPlanItemsList/StudyPlanItemsList";
 import Welcome from "../Welcome/Welcome";
+import AddToPlanButton from "../AddToPlanButton/AddToPlanButton";
 import FilteredStudyPlanItems from "./FilteredStudyPlanItems/FilteredStudyPlanItems";
 import displayConditions from "../../data/displayConditionsObj.js";
 import studyItemSortOptions from "../../data/studyItemSortOptions.json";
-import useCreateNewForm from "../../Hooks/useCreateNewForm";
 import useInitStudyPlanItems from "../../Hooks/useInitStudyPlanItems";
 import useProcessUpdateStudyPlan from "../../Hooks/useProcessUpdateStudyPlan";
 import PushButton from "../../UI/Buttons/PushButton/PushButton";
@@ -43,7 +43,7 @@ const StudyPlanItems = (props) => {
   );
   const [formInputData, setFormInputData] = useState({});
   const [newFormJSX, setNewFormJSX] = useState(false);
-  const createNewForm = useCreateNewForm();
+
   const [newFormInputValuesObj, setNewFormInputValuesObj] = useState({});
   const newFormInputValuesObjRef = useRef();
   newFormInputValuesObjRef.current = newFormInputValuesObj;
@@ -165,25 +165,6 @@ const StudyPlanItems = (props) => {
   ////////////////////////////////////////////////////////////////////////
   /// HANDLERS
   ////////////////////////////////////////////////////////////////////////
-  const addFormButtonHandler = (e) => {
-    e.preventDefault();
-    if (user) {
-      createNewForm({
-        e,
-        styles,
-        setNewFormJSX,
-        id,
-        user,
-        setNewFormInputValuesObj,
-        currentNewFormInputValuesObjRef: newFormInputValuesObjRef.current,
-        formTypeGroup: { formType, setFormType },
-      });
-    } else {
-      alert(
-        'Please log in to add to your study plan. If you do not yet have a profile, click "Sign Up" at the top of the page to get started.',
-      );
-    }
-  };
 
   const sortMethodButtonHandler = (e) => {
     setSortMethod(e.target.value);
@@ -212,37 +193,18 @@ const StudyPlanItems = (props) => {
   ////////////////////////////////////////////////////////////////////////
   /// Output
   ////////////////////////////////////////////////////////////////////////
-  if (props.onlyAddToButton)
-    return (
-      <Fragment key={id}>
-        <PushButton
-          key={id}
-          inputOrButton="button"
-          id={"create-entry-btn" + id}
-          colorType="primary"
-          styles={{}}
-          value={id}
-          parentmasterid={id}
-          data=""
-          size="medium"
-          onClick={addFormButtonHandler}
-        >
-          Add to Your <span>{toTitleCase(id, true)}</span>
-        </PushButton>{" "}
-        {newFormJSX && (
-          <div
-            key={id + typeName}
-            id="new-form-modal"
-            className={styles["new-form-modal"]}
-            type={typeName}
-          >
-            <form key={id}>{newFormJSX}</form>
-          </div>
-        )}
-      </Fragment>
-    );
   return (
     <Fragment key={"Welcomeandgoals"}>
+      {newFormJSX && (
+        <div
+          key={id + typeName}
+          id="new-form-modal"
+          className={styles["new-form-modal"]}
+          type={typeName}
+        >
+          <form key={id}>{newFormJSX}</form>
+        </div>
+      )}
       {!user && outputName.toLowerCase().includes("goal") && <Welcome />}
       {user &&
         outputName.toLowerCase().includes("goal") &&
@@ -280,7 +242,18 @@ const StudyPlanItems = (props) => {
             <h2 className={styles["group-title"] + " " + styles[id]}>
               {outputName}
             </h2>
-
+            <AddToPlanButton
+              data={{
+                styles,
+                setNewFormJSX,
+                id,
+                user,
+                setNewFormInputValuesObj,
+                currentNewFormInputValuesObjRef:
+                  newFormInputValuesObjRef.current,
+                formTypeGroup: { formType, setFormType },
+              }}
+            />
             {props.subText && (
               <div className={styles["section-subtext-wrap"]}>
                 <CollapsibleElm
@@ -386,23 +359,6 @@ const StudyPlanItems = (props) => {
                     styles[id]
                   }
                 >
-                  {!props.hideAddToButton && (
-                    <div className={styles["new-form-button-wrap"]}>
-                      <PushButton
-                        inputOrButton="button"
-                        id={"create-entry-btn" + id}
-                        colorType="primary"
-                        styles={{}}
-                        value={id}
-                        parentmasterid={id}
-                        data=""
-                        size="medium"
-                        onClick={addFormButtonHandler}
-                      >
-                        Add to Your <span>{toTitleCase(id, true)}</span>
-                      </PushButton>
-                    </div>
-                  )}
                   <div key={id} className={styles["history-list-inner-wrap"]}>
                     <CollapsibleElm
                       key={id + "-collapsible-elm"}
@@ -622,7 +578,7 @@ const StudyPlanItems = (props) => {
                             <StudyPlanItems
                               key="studyPlan"
                               id="studyPlan"
-                              onlyAddToButton={true}
+                              onlyAddToPlanButton={true}
                             />
                           }
                         </li>

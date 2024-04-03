@@ -17,7 +17,7 @@ const useCreateNewForm = () => {
   const [formType, setFormType] = useState("all");
 
   const outputFunction = (props) => {
-    const e = props.e;
+    const passedE = props.e;
     const styles = props.styles;
     const setNewFormJSX = props.setNewFormJSX;
     const setNewFormInputValuesObj = props.setNewFormInputValuesObj;
@@ -71,7 +71,7 @@ const useCreateNewForm = () => {
     ////////////////////////////////////////////////////////////////
     /// Functionality
     ////////////////////////////////////////////////////////////////
-    const parentMasterID = e.target.getAttribute("data-parentmasterid");
+    const parentMasterID = passedE.target.getAttribute("data-parentmasterid");
     const amountToAdd = prompt("How many would you like to add?");
     if (amountToAdd <= 0) return false;
     const processNewFormWithSchema = (schema) => {
