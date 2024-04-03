@@ -118,6 +118,9 @@ ul[data-parentmastertype="goal"] div[data-container-type="collapsibleElm"] {
   max-width: 100%;
 }
 
+.goal-button-container {
+  padding: 0 1em;
+}
 ul[type="goal"] > div[data-container-type="collapsibleElm"] > {
   .list-button-container,
   li[id*="url-item"],

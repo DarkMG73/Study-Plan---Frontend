@@ -129,17 +129,8 @@ function findDependencies(subjectObj, allObjects) {
   for (const value of Object.values(allObjects)) {
     if (
       Object.hasOwn(value, "identifier") &&
-      subjectObj.msup.includes(value.identifier)
+      value.msup.includes(subjectObj.identifier)
     ) {
-      // if (value.type === "goal") {
-      //   console.log(
-      //     "%c⚪️►►►► %cline:8%cvalue",
-      //     "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      //     "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      //     "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
-      //     value,
-      //   );
-      // }
       output.push(value.identifier);
     }
   }

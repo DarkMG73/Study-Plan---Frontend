@@ -77,19 +77,6 @@ const StudyPlanItems = (props) => {
   ////////////////////////////////////////////////////////////////////////
   /// EFFECTS
   ////////////////////////////////////////////////////////////////////////
-
-  // dispatch(loadingRequestsActions.addToLoadRequest());
-  // useEffect(() => {
-  //   console.log(
-  //     "%c⚪️►►►► %cline:99%cloadingStatus",
-  //     "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-  //     "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-  //     "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
-  //     loadingStatus
-  //   );
-  //   if (loadingStatus) dispatch(loadingRequestsActions.removeFromLoadRequest());
-  // });
-
   useEffect(() => {
     setTimeout(setDelayRender(false), 2000);
   }, []);
@@ -113,20 +100,6 @@ const StudyPlanItems = (props) => {
     }).then((spData) => {
       if (spData) {
         const { groomedAllItemOutput, sortedGroomedOutput } = spData;
-        console.log(
-          "%c⚪️►►►► %cline:115%csortedGroomedOutput",
-          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-          "color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px",
-          sortedGroomedOutput,
-        );
-        console.log(
-          "%c⚪️►►►► %cline:115%cgroomedAllItemOutput",
-          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-          "color:#fff;background:rgb(252, 157, 154);padding:3px;border-radius:2px",
-          groomedAllItemOutput,
-        );
 
         setAllStudyPlanItems(groomedAllItemOutput);
 
@@ -270,9 +243,9 @@ const StudyPlanItems = (props) => {
     );
   return (
     <Fragment key={"Welcomeandgoals"}>
-      {!user && outputName.includes("Goal") && <Welcome />}
+      {!user && outputName.toLowerCase().includes("goal") && <Welcome />}
       {user &&
-        outputName.includes("Goal") &&
+        outputName.toLowerCase().includes("goal") &&
         ((studyPlanMetadata && !Object.hasOwn(studyPlanMetadata, "_id")) ||
           (studyPlanMetadata &&
             Object.hasOwn(studyPlanMetadata, "_id") &&
@@ -354,9 +327,9 @@ const StudyPlanItems = (props) => {
                 </CollapsibleElm>
               </div>
             )}
-            {outputName.toLowerCase().includes("Goal") &&
+            {outputName.toLowerCase().includes("goal") &&
               Object.keys(formInputData).length > 0 &&
-              !outputName.includes("Steps") && (
+              !outputName.toLowerCase().includes("steps") && (
                 <div
                   key={id}
                   id="list-button-container"
@@ -398,7 +371,7 @@ const StudyPlanItems = (props) => {
                   )}
                 </div>
               )}
-            {outputName.toLowerCase().includes("Steps") &&
+            {outputName.toLowerCase().includes("steps") &&
               Object.keys(formInputData).length > 0 &&
               !outputName.toLowerCase().includes("goal") && (
                 <div
@@ -413,7 +386,7 @@ const StudyPlanItems = (props) => {
                     styles[id]
                   }
                 >
-                  {!props.hideShowAllButton && (
+                  {!props.hideAddToButton && (
                     <div className={styles["new-form-button-wrap"]}>
                       <PushButton
                         inputOrButton="button"
@@ -688,7 +661,7 @@ const StudyPlanItems = (props) => {
                 Object.hasOwn(studyPlanMetadata, "_id") &&
                 studyPlanMetadata._id.length > 0 &&
                 !outputName.toLowerCase().includes("goal") &&
-                !outputName.includes("Holding") && (
+                !outputName.toLowerCase().includes("holding") && (
                   <Fragment>
                     <div className={styles["fade-away-5"]}>
                       {" "}
