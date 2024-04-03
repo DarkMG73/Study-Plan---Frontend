@@ -22,14 +22,6 @@ export default async function GatherStudyPlanData(
     studyPlanData.studyPlan[studyPlanItem._id] = studyPlanItem;
 
     const dependencies = findDependencies(studyPlanItem, studyPlanFromDB);
-    console.log(
-      "%c⚪️►►►► %cline:24%cdependencies",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
-      dependencies,
-    );
-
     studyPlanData.studyPlan[studyPlanItem._id].dependencies = dependencies;
   });
 
