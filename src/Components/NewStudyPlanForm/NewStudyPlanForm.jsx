@@ -1,5 +1,5 @@
 import Styles from "./NewStudyPlanForm.module.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import StudyPlanItemsList from "../StudyPlanItems/StudyPlanItemsList/StudyPlanItemsList";
 import displayConditions from "../../data/displayConditionsObj.js";
@@ -22,7 +22,7 @@ const NewStudyPlanForm = (props) => {
     "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
     "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
     "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
-    e,
+    passedE,
   );
 
   ////////////////////////////////////////////////////////////////
@@ -73,154 +73,160 @@ const NewStudyPlanForm = (props) => {
   /// Functionality
   ////////////////////////////////////////////////////////////////
   const parentMasterID = passedE.target.getAttribute("data-parentmasterid");
-  const amountToAdd = prompt("How many would you like to add?");
-  console.log(
-    "%c⚪️►►►► %cline:69%camountToAdd",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
-    amountToAdd,
-  );
-  if (amountToAdd <= 0) return false;
-  const processNewFormWithSchema = (schema) => {
-    const targetFormDataObj = schema;
+
+  useEffect(() => {
+    const amountToAdd = prompt("How many would you like to add?");
     console.log(
-      "%c⚪️►►►► %cline:79%ctargetFormDataObj",
+      "%c⚪️►►►► %cline:69%camountToAdd",
       "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
       "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
-      targetFormDataObj,
+      "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
+      amountToAdd,
     );
-    // const itemsToRemove = ['$timestamps', ]
-    const cleansedFormData = {};
-    Object.keys(targetFormDataObj).forEach((key) => {
-      cleansedFormData[key] = "";
-    });
+    if (amountToAdd <= 0) return false;
+    const processNewFormWithSchema = (schema) => {
+      const targetFormDataObj = schema;
+      console.log(
+        "%c⚪️►►►► %cline:79%ctargetFormDataObj",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
+        targetFormDataObj,
+      );
+      // const itemsToRemove = ['$timestamps', ]
+      const cleansedFormData = {};
+      Object.keys(targetFormDataObj).forEach((key) => {
+        cleansedFormData[key] = "";
+      });
 
-    const additionalFormElm = function () {
-      const output = [];
+      const additionalFormElm = function () {
+        const output = [];
 
-      for (let i = 0; i < amountToAdd; i++) {
-        output.push(
-          <div
-            key={parentMasterID + "newForm-" + i}
-            id={"newForm-" + i}
-            data-parentmasterid={"newForm-" + i}
-            className={Styles["new-form-" + i] + " " + Styles["new-form"]}
-            data-formtype={"type-" + formType}
-          >
-            <button
-              key={parentMasterID + "newForm-" + i + "button"}
-              className={
-                Styles["new-form-button"] +
-                " " +
-                Styles["cancel-single-form-button"]
-              }
-              value={"newForm-" + i}
-              onClick={cancelFormButtonHandler}
-            >
-              X
-            </button>
-            <h2
-              id={parentMasterID}
-              className={Styles["group-title"] + " " + Styles[parentMasterID]}
-            >
-              &nbsp; Entry {i + 1}
-            </h2>
-            <ul
+        for (let i = 0; i < amountToAdd; i++) {
+          output.push(
+            <div
               key={parentMasterID + "newForm-" + i}
-              id={"newForm-" + i + "-wrap"}
+              id={"newForm-" + i}
               data-parentmasterid={"newForm-" + i}
-              className={
-                Styles["new-form-" + i + "-wrap"] +
-                " " +
-                Styles["new-form-inner-wrap"]
-              }
+              className={Styles["new-form-" + i] + " " + Styles["new-form"]}
+              data-formtype={"type-" + formType}
             >
-              {cleansedFormData && (
-                <StudyPlanItemsList
-                  key={parentMasterID + "newForm-" + i}
-                  studyPlanItemsObj={cleansedFormData}
-                  id={"newForm-" + i}
-                  parentKey={id}
-                  displayConditions={displayConditions.emptyForm}
-                  parentMasterID={"newForm-" + i}
-                  user={user}
-                  emptyForm={true}
-                  inModal={true}
-                  setFormType={setFormType}
-                />
-              )}
-            </ul>
-          </div>,
-        );
-      }
-      return output;
-    };
-
-    const groomedNewFormElement = (
-      <ul
-        key={parentMasterID}
-        className={
-          Styles.subgroup +
-          " " +
-          Styles["subgroup-" + parentMasterID] +
-          " " +
-          Styles[parentMasterID] +
-          " " +
-          Styles["in-modal"] +
-          " " +
-          Styles["new-form"]
+              <button
+                key={parentMasterID + "newForm-" + i + "button"}
+                className={
+                  Styles["new-form-button"] +
+                  " " +
+                  Styles["cancel-single-form-button"]
+                }
+                value={"newForm-" + i}
+                onClick={cancelFormButtonHandler}
+              >
+                X
+              </button>
+              <h2
+                id={parentMasterID}
+                className={Styles["group-title"] + " " + Styles[parentMasterID]}
+              >
+                &nbsp; Entry {i + 1}
+              </h2>
+              <ul
+                key={parentMasterID + "newForm-" + i}
+                id={"newForm-" + i + "-wrap"}
+                data-parentmasterid={"newForm-" + i}
+                className={
+                  Styles["new-form-" + i + "-wrap"] +
+                  " " +
+                  Styles["new-form-inner-wrap"]
+                }
+              >
+                {cleansedFormData && (
+                  <StudyPlanItemsList
+                    key={parentMasterID + "newForm-" + i}
+                    studyPlanItemsObj={cleansedFormData}
+                    id={"newForm-" + i}
+                    parentKey={id}
+                    displayConditions={displayConditions.emptyForm}
+                    parentMasterID={"newForm-" + i}
+                    user={user}
+                    emptyForm={true}
+                    inModal={true}
+                    setFormType={setFormType}
+                  />
+                )}
+              </ul>
+            </div>,
+          );
         }
-      >
-        {" "}
-        <h2
-          id={parentMasterID}
-          className={Styles["group-title"] + " " + Styles[parentMasterID]}
-        >
-          &nbsp;{parentMasterID && parentMasterID.toUpperCase()}
-        </h2>{" "}
-        <button
+        return output;
+      };
+
+      const groomedNewFormElement = (
+        <ul
+          key={parentMasterID}
           className={
-            Styles["new-form-button"] + " " + Styles["cancel-all-forms-button"]
+            Styles.subgroup +
+            " " +
+            Styles["subgroup-" + parentMasterID] +
+            " " +
+            Styles[parentMasterID] +
+            " " +
+            Styles["in-modal"] +
+            " " +
+            Styles["new-form"]
           }
-          onClick={cancelAllFormsButtonHandler}
         >
-          Cancel All Forms
-        </button>
-        {additionalFormElm()}
-        <button
-          className={Styles["new-form-button"]}
-          value={parentMasterID}
-          onClick={submitNewFormButtonHandler}
-        >
-          Submit to <span>{parentMasterID}</span> &rarr;
-        </button>
-      </ul>
-    );
+          {" "}
+          <h2
+            id={parentMasterID}
+            className={Styles["group-title"] + " " + Styles[parentMasterID]}
+          >
+            &nbsp;{parentMasterID && parentMasterID.toUpperCase()}
+          </h2>{" "}
+          <button
+            className={
+              Styles["new-form-button"] +
+              " " +
+              Styles["cancel-all-forms-button"]
+            }
+            onClick={cancelAllFormsButtonHandler}
+          >
+            Cancel All Forms
+          </button>
+          {additionalFormElm()}
+          <button
+            className={Styles["new-form-button"]}
+            value={parentMasterID}
+            onClick={submitNewFormButtonHandler}
+          >
+            Submit to <span>{parentMasterID}</span> &rarr;
+          </button>
+        </ul>
+      );
 
-    console.log(
-      "%c⚪️►►►► %cline:194%cgroomedNewFormElement",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
-      groomedNewFormElement,
-    );
-    setNewFormJSX(groomedNewFormElement);
-  };
-
-  processNewFormWithSchema(studyPlanItemSchema);
+      console.log(
+        "%c⚪️►►►► %cline:194%cgroomedNewFormElement",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
+        groomedNewFormElement,
+      );
+      setNewFormJSX(groomedNewFormElement);
+    };
+    processNewFormWithSchema(studyPlanItemSchema);
+  }, []);
 
   return (
     <div>
-      <div
-        key={props.typeName + "new-form-modal"}
-        id="new-form-modal"
-        className={Styles["new-form-modal"]}
-        type={props.typeName}
-      >
-        <form>{newFormJSX}</form>
-      </div>
+      {newFormJSX && (
+        <div
+          key={props.typeName + "new-form-modal"}
+          id="new-form-modal"
+          className={Styles["new-form-modal"]}
+          type={props.typeName}
+        >
+          <form>{newFormJSX}</form>
+        </div>
+      )}
     </div>
   );
 };
