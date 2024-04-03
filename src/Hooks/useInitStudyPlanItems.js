@@ -26,17 +26,11 @@ const useInitStudyPlanItems = () => {
       // Gather items to list based on typeArray.
       const { groomedOutput, groomedAllItemOutput } = assembleStudyPlanList({
         typeArray,
-        keysToUseArray: Object.keys(schema),
+        keysToUseArray: [...Object.keys(schema), "dependencies"],
         dataObjForEdit,
         allStudyPlanItems,
       });
-      console.log(
-        "%c⚪️►►►► %cline:27%cgroomedOutput",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(248, 214, 110);padding:3px;border-radius:2px",
-        groomedOutput,
-      );
+
       ////////////////////////////////////////////////////////////////////////
       /// Sort groomedOutput
       ////////////////////////////////////////////////////////////////////////
@@ -50,13 +44,7 @@ const useInitStudyPlanItems = () => {
         sortMethod: sortBy,
         objectToBeSorted: groomedOutput,
       });
-      console.log(
-        "%c⚪️►►►► %cline:49%csortedGroomedOutput",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
-        sortedGroomedOutput,
-      );
+
       return { groomedAllItemOutput, sortedGroomedOutput };
     };
 

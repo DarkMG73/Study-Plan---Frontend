@@ -13,6 +13,14 @@ import useDemoCheck from "../../../Hooks/useDemoCheck";
 const StudyPlanItemsList = (props) => {
   const [refresh] = useState(1);
   const studyPlanItemsObj = props.studyPlanItemsObj;
+  if (Object.hasOwn(studyPlanItemsObj, "dependencies"))
+    console.log(
+      "%c⚪️►►►► %cline:15%cstudyPlanItemsObj",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px",
+      studyPlanItemsObj,
+    );
   const user = useSelector((state) => state.auth.user);
   const parentKey = props.parentKey;
   const parentsParentKey = props.parentsParentKey;

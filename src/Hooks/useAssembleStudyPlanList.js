@@ -116,24 +116,7 @@ const useAssembleStudyPlanList = () => {
         //   );
         // }
       }
-      for (const value of Object.values(groomedOutput)) {
-        if (value.type === "goal") {
-          console.log(
-            "%c⚪️►►►► %cline:112%cgroomedOutput",
-            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-            "color:#fff;background:rgb(95, 92, 51);padding:3px;border-radius:2px",
-            groomedOutput,
-          );
-          console.log(
-            "%c⚪️►►►► %cline:113%cvalue",
-            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-            "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
-            value,
-          );
-        }
-      }
+
       return { groomedOutput, groomedAllItemOutput };
     } else {
       return false;

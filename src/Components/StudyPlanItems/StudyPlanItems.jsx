@@ -117,15 +117,22 @@ const StudyPlanItems = (props) => {
           "%c⚪️►►►► %cline:115%csortedGroomedOutput",
           "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
           "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-          "color:#fff;background:rgb(161, 23, 21);padding:3px;border-radius:2px",
+          "color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px",
           sortedGroomedOutput,
+        );
+        console.log(
+          "%c⚪️►►►► %cline:115%cgroomedAllItemOutput",
+          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+          "color:#fff;background:rgb(252, 157, 154);padding:3px;border-radius:2px",
+          groomedAllItemOutput,
         );
 
         setAllStudyPlanItems(groomedAllItemOutput);
 
         setFormInputData(sortedGroomedOutput);
       }
-      setTimeout(setDelayRender(false), 1000);
+      setTimeout(setDelayRender(false), 2000);
     });
   }, [dataObjForEdit, user]);
 

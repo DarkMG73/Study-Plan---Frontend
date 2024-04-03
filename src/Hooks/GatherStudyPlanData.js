@@ -125,14 +125,6 @@ function gatherAllMetadata(dataObject) {
 }
 
 function findDependencies(subjectObj, allObjects) {
-  console.log(
-    "%c⚪️►►►► %cline:6%cobjectIdentifier",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(237, 222, 139);padding:3px;border-radius:2px",
-    subjectObj,
-  );
-
   const output = [];
   for (const value of Object.values(allObjects)) {
     if (
