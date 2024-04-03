@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, Fragment } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import styles from "./StudyPlanItems.module.scss";
 import StudyPlanItemsList from "./StudyPlanItemsList/StudyPlanItemsList";
@@ -43,10 +43,6 @@ const StudyPlanItems = (props) => {
   );
   const [formInputData, setFormInputData] = useState({});
   const [newFormJSX, setNewFormJSX] = useState(false);
-
-  const [newFormInputValuesObj, setNewFormInputValuesObj] = useState({});
-  const newFormInputValuesObjRef = useRef();
-  newFormInputValuesObjRef.current = newFormInputValuesObj;
   const allFormInputData = useSelector(
     (state) => state.formInputData,
     shallowEqual,
@@ -248,9 +244,6 @@ const StudyPlanItems = (props) => {
                 setNewFormJSX,
                 id,
                 user,
-                setNewFormInputValuesObj,
-                currentNewFormInputValuesObjRef:
-                  newFormInputValuesObjRef.current,
                 formTypeGroup: { formType, setFormType },
               }}
             />
@@ -657,16 +650,6 @@ const StudyPlanItems = (props) => {
                     refresh={refresh}
                   />
                 )}
-              {newFormJSX && (
-                <div
-                  key={typeName + "new-form-modal"}
-                  id="new-form-modal"
-                  className={styles["new-form-modal"]}
-                  type={typeName}
-                >
-                  <form>{newFormJSX}</form>
-                </div>
-              )}
             </CollapsibleElm>
           </ul>
         )}

@@ -26,17 +26,30 @@ const AddToPlanButton = (props) => {
   const addFormButtonHandler = (e) => {
     e.preventDefault();
     if (user) {
+      const parentMasterID = e.target.getAttribute("data-parentmasterid");
+
+      const amountToAdd = prompt("How many would you like to add?");
+      console.log(
+        "%c⚪️►►►► %cline:69%camountToAdd",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
+        amountToAdd,
+      );
+      if (amountToAdd <= 0) return false;
       setOutputFormJSX(
         <NewStudyPlanForm
           data={{
-            e,
-            styles,
-            setNewFormJSX,
             id,
             user,
+            amountToAdd,
+            parentMasterID,
+            styles,
+            setNewFormJSX,
             setNewFormInputValuesObj,
             currentNewFormInputValuesObjRef: newFormInputValuesObjRef,
             formTypeGroup: { formType, setFormType },
+            formActive: setOutputFormJSX,
           }}
         />,
       );
