@@ -1,5 +1,5 @@
 import Styles from "./NewStudyPlanForm.module.scss";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import StudyPlanItemsList from "../StudyPlanItems/StudyPlanItemsList/StudyPlanItemsList";
 import displayConditions from "../../data/displayConditionsObj.js";
@@ -16,12 +16,14 @@ const NewStudyPlanForm = (props) => {
     (state) => state.studyPlanData.schema,
   );
   const [formType, setFormType] = useState("all");
-  const [newFormInputValuesObj, setNewFormInputValuesObj] = useState({});
-  const newFormInputValuesObjRef = useRef();
-  newFormInputValuesObjRef.current = newFormInputValuesObj;
-
-  const currentNewFormInputValuesObjRef = newFormInputValuesObjRef.current;
-  const { id, user, amountToAdd, parentMasterID, formActive } = props.data;
+  const { id, user, amountToAdd, formActive } = props.data;
+  console.log(
+    "%c⚪️►►►► %cline:19%cid",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
+    id,
+  );
 
   ////////////////////////////////////////////////////////////////
   /// Handlers
@@ -50,7 +52,7 @@ const NewStudyPlanForm = (props) => {
       const key = e.target.value;
       const targetElm = document.getElementById(key);
       targetElm.style.display = "none";
-      setNewFormInputValuesObj((prevState) => {
+      setNewFormJSX((prevState) => {
         const outputObj = { ...prevState };
 
         delete outputObj[key];
@@ -94,14 +96,14 @@ const NewStudyPlanForm = (props) => {
       for (let i = 0; i < amountToAdd; i++) {
         output.push(
           <div
-            key={parentMasterID + "newForm-" + i}
+            key={id + "newForm-" + i}
             id={"newForm-" + i}
             data-parentmasterid={"newForm-" + i}
             className={Styles["new-form-" + i] + " " + Styles["new-form"]}
             data-formtype={"type-" + formType}
           >
             <button
-              key={parentMasterID + "newForm-" + i + "button"}
+              key={id + "newForm-" + i + "button"}
               className={
                 Styles["new-form-button"] +
                 " " +
@@ -112,14 +114,11 @@ const NewStudyPlanForm = (props) => {
             >
               X
             </button>
-            <h2
-              id={parentMasterID}
-              className={Styles["group-title"] + " " + Styles[parentMasterID]}
-            >
+            <h2 id={id} className={Styles["group-title"] + " " + Styles[id]}>
               &nbsp; Entry {i + 1}
             </h2>
             <ul
-              key={parentMasterID + "newForm-" + i}
+              key={id + "newForm-" + i}
               id={"newForm-" + i + "-wrap"}
               data-parentmasterid={"newForm-" + i}
               className={
@@ -130,7 +129,7 @@ const NewStudyPlanForm = (props) => {
             >
               {cleansedFormData && (
                 <StudyPlanItemsList
-                  key={parentMasterID + "newForm-" + i}
+                  key={id + "newForm-" + i}
                   studyPlanItemsObj={cleansedFormData}
                   id={"newForm-" + i}
                   parentKey={id}
@@ -151,13 +150,13 @@ const NewStudyPlanForm = (props) => {
 
     const groomedNewFormElement = (
       <ul
-        key={parentMasterID}
+        key={id}
         className={
           Styles.subgroup +
           " " +
-          Styles["subgroup-" + parentMasterID] +
+          Styles["subgroup-" + id] +
           " " +
-          Styles[parentMasterID] +
+          Styles[id] +
           " " +
           Styles["in-modal"] +
           " " +
@@ -165,11 +164,8 @@ const NewStudyPlanForm = (props) => {
         }
       >
         {" "}
-        <h2
-          id={parentMasterID}
-          className={Styles["group-title"] + " " + Styles[parentMasterID]}
-        >
-          &nbsp;{parentMasterID && parentMasterID.toUpperCase()}
+        <h2 id={id} className={Styles["group-title"] + " " + Styles[id]}>
+          &nbsp;{id && id.toUpperCase()}
         </h2>{" "}
         <button
           className={
@@ -182,10 +178,10 @@ const NewStudyPlanForm = (props) => {
         {additionalFormElm()}
         <button
           className={Styles["new-form-button"]}
-          value={parentMasterID}
+          value={id}
           onClick={submitNewFormButtonHandler}
         >
-          Submit to <span>{parentMasterID}</span> &rarr;
+          Submit to <span>{id}</span> &rarr;
         </button>
       </ul>
     );

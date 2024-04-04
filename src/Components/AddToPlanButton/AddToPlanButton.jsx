@@ -3,18 +3,10 @@ import { Fragment, useState } from "react";
 import PushButton from "../../UI/Buttons/PushButton/PushButton";
 import { toTitleCase } from "../../Hooks/utility";
 import NewStudyPlanForm from "../NewStudyPlanForm/NewStudyPlanForm";
+import { FaPlus } from "react-icons/fa6";
 
 const AddToPlanButton = (props) => {
-  const {
-    styles,
-    setNewFormJSX,
-    id,
-    user,
-    setNewFormInputValuesObj,
-    newFormInputValuesObjRef,
-    formType,
-    setFormType,
-  } = props.data;
+  const { id, title, user, formType, setFormType } = props.data;
   console.log(
     "%c⚪️►►►► %cline:17%cprops",
     "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
@@ -26,8 +18,6 @@ const AddToPlanButton = (props) => {
   const addFormButtonHandler = (e) => {
     e.preventDefault();
     if (user) {
-      const parentMasterID = e.target.getAttribute("data-parentmasterid");
-
       const amountToAdd = prompt("How many would you like to add?");
       console.log(
         "%c⚪️►►►► %cline:69%camountToAdd",
@@ -43,11 +33,6 @@ const AddToPlanButton = (props) => {
             id,
             user,
             amountToAdd,
-            parentMasterID,
-            styles,
-            setNewFormJSX,
-            setNewFormInputValuesObj,
-            currentNewFormInputValuesObjRef: newFormInputValuesObjRef,
             formTypeGroup: { formType, setFormType },
             formActive: setOutputFormJSX,
           }}
@@ -66,14 +51,19 @@ const AddToPlanButton = (props) => {
         inputOrButton="button"
         id={"create-entry-btn" + id}
         colorType="primary"
-        styles={{}}
+        styles={{ margin: "auto" }}
         value={id}
         parentmasterid={id}
         data=""
         size="medium"
         onClick={addFormButtonHandler}
       >
-        Add to Your <span>{toTitleCase(id, true)}</span>
+        {title && <span>{toTitleCase(title, true)}</span>}
+        {!title && (
+          <span>
+            <FaPlus />
+          </span>
+        )}
       </PushButton>
       {outputFormJSX && outputFormJSX}
     </Fragment>

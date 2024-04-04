@@ -9,6 +9,7 @@ import useViewport from "../../Hooks/useViewport";
 import PushButton from "../../UI/Buttons/PushButton/PushButton";
 import LoginStatus from "../User/LoginStatus/LoginStatus";
 import Navbar from "../Navbar/Navbar";
+import AddToPlanButton from "../AddToPlanButton/AddToPlanButton";
 
 function Header(props) {
   const navigate = useNavigate();
@@ -210,6 +211,17 @@ function Header(props) {
           </button>
         )}
         <div className={styles["nav-container"]}>
+          {user && (
+            <div className={styles["add-more-button-wrap"]}>
+              <AddToPlanButton
+                data={{
+                  id: "Study Plan",
+                  title: false,
+                  user,
+                }}
+              />
+            </div>
+          )}
           <Navbar
             navLinks={props.navLinks}
             aboutIsActive={props.aboutIsActive}
@@ -231,6 +243,11 @@ function Header(props) {
       </div>
       <div className={styles["menu-modal"]} style={menuModalToggleStyles}>
         <CardPrimary styles={{ maxHeight: "100vh", maxWidth: "100vw" }}>
+          <AddToPlanButton
+            data={{
+              user,
+            }}
+          />
           <div className={styles["modal-nav-container"]}>
             <Navbar
               navLinks={props.navLinks}

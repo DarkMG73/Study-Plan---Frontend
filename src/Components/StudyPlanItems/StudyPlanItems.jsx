@@ -3,7 +3,6 @@ import { shallowEqual, useSelector } from "react-redux";
 import styles from "./StudyPlanItems.module.scss";
 import StudyPlanItemsList from "./StudyPlanItemsList/StudyPlanItemsList";
 import Welcome from "../Welcome/Welcome";
-import AddToPlanButton from "../AddToPlanButton/AddToPlanButton";
 import FilteredStudyPlanItems from "./FilteredStudyPlanItems/FilteredStudyPlanItems";
 import displayConditions from "../../data/displayConditionsObj.js";
 import studyItemSortOptions from "../../data/studyItemSortOptions.json";
@@ -49,7 +48,6 @@ const StudyPlanItems = (props) => {
   );
 
   const sortList = useSortList();
-  const [formType, setFormType] = useState("all");
   const assembleStudyPlanList = useAssembleStudyPlanList();
   const [delayRender, setDelayRender] = useState(true);
   let outputName =
@@ -238,15 +236,6 @@ const StudyPlanItems = (props) => {
             <h2 className={styles["group-title"] + " " + styles[id]}>
               {outputName}
             </h2>
-            <AddToPlanButton
-              data={{
-                styles,
-                setNewFormJSX,
-                id,
-                user,
-                formTypeGroup: { formType, setFormType },
-              }}
-            />
             {props.subText && (
               <div className={styles["section-subtext-wrap"]}>
                 <CollapsibleElm
