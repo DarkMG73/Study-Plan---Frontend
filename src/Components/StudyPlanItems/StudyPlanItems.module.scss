@@ -241,6 +241,37 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
   margin-left: 1em;
 }
 
+.studyPlan-items-group .title-button-container {
+  position: relative;
+  .group-title {
+    display: inline-flex;
+    opacity: 1;
+    span {
+      display: flex;
+      > * {
+        flex-basis: fit-content;
+      }
+    }
+  }
+  button {
+    font-size: 1rem;
+  }
+  button:after {
+    content: "+";
+    font-size: 2em;
+    line-height: 0;
+    font-weight: 700;
+  }
+}
+
+.studyPlan-items-group .title-button-container[class*="goal"] button {
+  background: var(--spt-color-accent-2);
+}
+
+.goals {
+  position: relative;
+}
+
 .section-subtext-wrap {
   opacity: 0.7;
   margin-top: 1em;
