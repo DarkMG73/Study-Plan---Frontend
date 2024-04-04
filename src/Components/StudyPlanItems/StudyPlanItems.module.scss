@@ -248,6 +248,7 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
     opacity: 1;
     span {
       display: flex;
+      padding: 0 0.25em;
       > * {
         flex-basis: fit-content;
       }

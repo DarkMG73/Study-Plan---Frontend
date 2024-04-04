@@ -243,62 +243,62 @@ const StudyPlanItems = (props) => {
             >
               <h2 className={styles["group-title"] + " " + styles[id]}>
                 {outputName}{" "}
-                <span className={styles["add-more-button-wrap"]}>
-                  <AddToPlanButton
-                    data={{
-                      id: "Study Plan",
-                      title: "Add an item ",
-                      user,
-                    }}
-                  />
-                  {props.subText && (
-                    <div className={styles["section-subtext-wrap"]}>
-                      <CollapsibleElm
-                        key={id + "sub-text-collapsible-elm"}
-                        elmId={id + "collapsible-elm"}
-                        styles={{
-                          position: "relative",
-                          maxWidth: "100%",
-                        }}
-                        maxHeight="0em"
-                        inputOrButton="button"
-                        buttonStyles={{
-                          margin: "0 1em 0 2em",
-                          padding: "0.5em 2em",
-                          letterSpacing: "0.25em",
-                          fontVariant: "small-caps",
-                          transform: "translateY(0%)",
-                          transition: "0.7s all ease",
-                          minWidth: "40%",
-                          maxWidth: "80%",
-                          textAlign: "left",
-                          display: "flex",
-                          alignItems: "center",
-                          borderRadius: "50px",
-                          fontFamily: "Good Times RG",
-                        }}
-                        colorType="secondary"
-                        data=""
-                        size="small"
-                        buttonTextOpened={
-                          "Close the detail on the " +
-                          toTitleCase(outputName) +
-                          " section"
-                        }
-                        buttonTextClosed={
-                          "More detail on the " +
-                          toTitleCase(outputName) +
-                          " section here"
-                        }
-                        open={false}
-                        showBottomGradient={id === "studyPlan" && true}
-                      >
-                        <p className={styles["subtext"]}>{props.subText}</p>
-                      </CollapsibleElm>
-                    </div>
-                  )}
-                </span>
               </h2>
+              <span className={styles["add-more-button-wrap"]}>
+                <AddToPlanButton
+                  data={{
+                    id: "Study Plan",
+                    title: "Add an item ",
+                    user,
+                  }}
+                />
+                {props.subText && (
+                  <div className={styles["section-subtext-wrap"]}>
+                    <CollapsibleElm
+                      key={id + "sub-text-collapsible-elm"}
+                      elmId={id + "collapsible-elm"}
+                      styles={{
+                        position: "relative",
+                        maxWidth: "100%",
+                      }}
+                      maxHeight="0em"
+                      inputOrButton="button"
+                      buttonStyles={{
+                        margin: "0 1em 0 2em",
+                        padding: "0.5em 2em",
+                        letterSpacing: "0.25em",
+                        fontVariant: "small-caps",
+                        transform: "translateY(0%)",
+                        transition: "0.7s all ease",
+                        minWidth: "40%",
+                        maxWidth: "80%",
+                        textAlign: "left",
+                        display: "flex",
+                        alignItems: "center",
+                        borderRadius: "50px",
+                        fontFamily: "Good Times RG",
+                      }}
+                      colorType="secondary"
+                      data=""
+                      size="small"
+                      buttonTextOpened={
+                        "Close the detail on the " +
+                        toTitleCase(outputName) +
+                        " section"
+                      }
+                      buttonTextClosed={
+                        "More detail on the " +
+                        toTitleCase(outputName) +
+                        " section here"
+                      }
+                      open={false}
+                      showBottomGradient={id === "studyPlan" && true}
+                    >
+                      <p className={styles["subtext"]}>{props.subText}</p>
+                    </CollapsibleElm>
+                  </div>
+                )}
+              </span>
             </div>
 
             {outputName.toLowerCase().includes("goal") &&
