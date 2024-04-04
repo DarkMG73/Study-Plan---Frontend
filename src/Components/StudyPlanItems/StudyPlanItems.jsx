@@ -67,7 +67,7 @@ const StudyPlanItems = (props) => {
 
   if (outputName === "goals") outputName = "Goals";
   if (outputName === "steps") outputName = "Steps";
-  if (outputName === "holds") outputName = "Holding Area";
+  if (outputName === "holds") outputName = "Holds";
 
   ////////////////////////////////////////////////////////////////////////
   /// EFFECTS
@@ -374,7 +374,7 @@ const StudyPlanItems = (props) => {
                       buttonStyles={{}}
                       colorType="secondary"
                       data=""
-                      size="medium"
+                      size="small"
                       buttonTextOpened={"Close Completed Steps"}
                       buttonTextClosed={"Open Completed Steps"}
                       open={false}
@@ -408,7 +408,7 @@ const StudyPlanItems = (props) => {
                       buttonStyles={{}}
                       colorType="secondary"
                       data=""
-                      size="medium"
+                      size="small"
                       buttonTextOpened={"Close Steps Needing Review"}
                       buttonTextClosed={"Open Steps Needing Review"}
                       open={false}
@@ -618,7 +618,7 @@ const StudyPlanItems = (props) => {
                 Object.hasOwn(studyPlanMetadata, "_id") &&
                 studyPlanMetadata._id.length > 0 &&
                 !outputName.toLowerCase().includes("goal") &&
-                !outputName.toLowerCase().includes("holding") && (
+                !outputName.toLowerCase().includes("hold") && (
                   <Fragment>
                     <div className={styles["fade-away-5"]}>
                       {" "}

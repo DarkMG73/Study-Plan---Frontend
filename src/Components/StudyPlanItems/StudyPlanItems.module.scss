@@ -118,9 +118,22 @@ ul[data-parentmastertype="goal"] div[data-container-type="collapsibleElm"] {
   max-width: 100%;
 }
 
-.goal-button-container {
+.studyPlan-items-group .goal-button-container {
   padding: 0 1em;
+  display: flex;
+  > button {
+    flex-grow: 1;
+    color: var(--spt-color-accent-2);
+    margin: auto;
+  }
+  > button:hover {
+    transform: scale(1, 1.05);
+    background: var(--spt-color-accent-2);
+    color: var(--spt-color-background);
+    transition: 0.3s all ease;
+  }
 }
+
 ul[type="goal"] > div[data-container-type="collapsibleElm"] > {
   .list-button-container,
   li[id*="url-item"],
@@ -243,15 +256,21 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
 
 .studyPlan-items-group .title-button-container {
   position: relative;
+  display: flex;
+  background: var(--spt-color-background);
+  border-radius: 15px;
+  overflow: hidden;
   .group-title {
-    display: inline-flex;
     opacity: 1;
-    span {
-      display: flex;
-      padding: 0 0.25em;
-      > * {
-        flex-basis: fit-content;
-      }
+    width: auto;
+    min-width: min-content;
+    margin: auto;
+  }
+  span {
+    display: flex;
+    padding: 0 0.25em;
+    > * {
+      flex-basis: fit-content;
     }
   }
   button {
@@ -340,8 +359,8 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
 
 .studyPlan-history-list-container {
   position: relative;
-  padding-top: 2em;
   max-width: 100%;
+  padding: 0 1em;
   ul[type="step"][data-parentmastertype="step"] {
     margin: 0;
   }
@@ -356,11 +375,11 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
     margin: 2em auto;
     display: flex;
     justify-content: center;
-    margin: 1em auto 0.25em;
+    margin: auto;
     padding: 1em 0;
     > button {
       margin: 0 auto;
-      width: 80%;
+      width: 100%;
       max-width: 100%;
       display: flex;
       align-items: center;
@@ -382,11 +401,13 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
     }
 
     button:hover {
-      background: var(--spt-color-accent-light);
-      color: var(--spt-color-accent-dark);
+      transform: scale(1, 1.05);
+      background: var(--spt-color-accent);
+      color: var(--spt-color-background);
+      transition: 0.3s all ease;
     }
     button:hover span {
-      color: var(--spt-color-accent-dark);
+      color: var(--spt-color-background);
     }
     button:active {
       background: var(--spt-color-accent);
