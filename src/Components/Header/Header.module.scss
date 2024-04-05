@@ -526,8 +526,17 @@
 
 .add-more-button-wrap {
   position: relative;
-  transform: translateY(-25%);
+  display: flex;
+  min-width: 3em;
+  max-width: 10em;
+  width: auto;
   margin: auto;
+  font-size: 0.75em;
+  flex-grow: 1;
+  button {
+    width: 100%;
+    padding: 0.125em;
+  }
 }
 
 /* RESPONSIVE BREAKPOINTS */
