@@ -47,7 +47,7 @@
 .new-form-modal form ul[id*="newForm"] {
   display: grid;
   grid-gap: 0;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 25%);
   grid-template-areas:
     "name name  name name"
     "type type   priority priority"
@@ -224,15 +224,15 @@
 }
 
 .new-form-modal {
-  [data-parentmasterid="newForm-0"] {
-    h2 {
-      margin: 0.5em auto;
-      background: inherit;
-      color: inherit;
-    }
-    > button {
-      margin: auto;
-    }
+  h2 {
+    margin: 0.5em auto;
+    font-weight: 700;
+    letter-spacing: 0.5em;
+    background: inherit;
+    color: inherit;
+  }
+  > button {
+    margin: auto;
   }
 
   .new-form li {
