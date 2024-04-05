@@ -111,7 +111,9 @@ const NewStudyPlanForm = (props) => {
               }
               value={"newForm-" + i}
               onClick={cancelFormButtonHandler}
-            ></button>
+            >
+              Cancel Entry {i + 1}
+            </button>
             <h2 id={id} className={Styles["group-title"] + " " + Styles[id]}>
               &nbsp; Entry {i + 1}
             </h2>

@@ -65,6 +65,25 @@
   max-width: 100%;
 }
 
+.new-form-modal form [newformtype="hold"] ul[id*="newForm"] {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "name name  name name"
+    "type type   type type"
+    "method method method method"
+    "msup msup msup msup"
+    "asup asup asup asup"
+    "des des des des"
+    "url url url url"
+    "author author platform platform"
+    "lectureTime lectureTime labTime labTime"
+    "start status acomp acomp"
+    "itemnotes itemnotes itemnotes itemnotes"
+    "tags tags tags tags";
+  grid-auto-flow: row dense;
+  max-width: 100%;
+}
+
 .new-form-modal form [newformtype="goal"] ul[id*="newForm"] {
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
@@ -83,29 +102,59 @@
 
 /* New Entry Form Goal Adjustments */
 .new-form-modal form [newformtype="goal"] {
-  background: var(--spt-color-background-warm);
-  color: var(--spt-color-background-contrast);
-  border: 3px outset var(--spt-color-background);
-  li[id*="studyPlan-url"],
-  li[id*="studyPlan-priority"],
-  li[id*="studyPlan-method"],
-  li[id*="studyPlan-lectureTime"],
-  li[id*="studyPlan-labTime"],
-  li[id*="studyPlan-author"],
-  li[id*="studyPlan-status"],
-  li[id*="studyPlan-platform"],
-  li[id*="studyPlan-method"],
-  li[id*="studyPlan-acomp"] {
+  background: var(--spt-color-accent-2-dark);
+  color: var(--spt-color-background);
+  border: 3px outset var(--spt-color-accent-2-dark);
+  li[id*="-url-item"],
+  li[id*="-priority-item"],
+  li[id*="-method"],
+  li[id*="-lectureTime-item"],
+  li[id*="-labTime-item"],
+  li[id*="-author-item"],
+  li[id*="-status-item"],
+  li[id*="-platform-item"],
+  li[id*="-method-item"],
+  li[id*="-acomp-item"] {
     // border: 7px solid red;
     background: gray;
     opacity: 0.5;
     pointer-events: none;
     display: none;
   }
+  ul {
+    li {
+      &:not([id*="-name-item"], [id*="-type-item"]) {
+        label,
+        &:before {
+          color: var(--spt-color-background);
+        }
+      }
+    }
+  }
+
+  .cancel-single-form-button {
+    background: var(--spt-color-accent-2-gradient) !important;
+    font-size: 14px;
+  }
+  .cancel-single-form-button:after {
+    content: "";
+  }
 } /* ********** */
+
 .new-form-modal form [newformtype="step"] {
-  background: var(--spt-color-accent);
-  border: 3px outset var(--spt-color-accent-dark);
+  background: var(--spt-color-background-warm);
+  border: 3px outset var(--spt-color-accent);
+  color: var(--spt-color-background-contrast-dark);
+  ul {
+    li {
+      &:not([id*="-name-item"], [id*="-type-item"]) {
+        label,
+        &:before {
+          color: var(--spt-color-background-contrast);
+        }
+      }
+    }
+  }
 }
 
 .new-form-modal form [newformtype="hold"] {
@@ -114,21 +163,6 @@
   border: 3px outset var(--spt-color-background-contrast-dark);
 }
 
-.new-form-modal form {
-  [newformtype="hold"],
-  [newformtype="step"],
-  [newformtype="goal"] {
-    ul,
-    li,
-    button {
-      background: inherit;
-      color: inherit !important;
-    }
-    .cancel-single-form-button:after {
-      content: "X";
-    }
-  }
-}
 .new-form-modal ul > div {
   margin: 0;
   padding: 0 1em 4em;
@@ -193,6 +227,8 @@
   [data-parentmasterid="newForm-0"] {
     h2 {
       margin: 0.5em auto;
+      background: inherit;
+      color: inherit;
     }
     > button {
       margin: auto;
@@ -206,11 +242,10 @@
     text-align: center;
     margin: 0.25em;
     width: auto;
-  }
-
-  form label,
-  form li:before {
-    color: var(--spt-color-background);
+    label,
+    &:before {
+      color: var(--spt-color-background);
+    }
   }
 
   li,
@@ -244,159 +279,158 @@
     transform: scale(1, 1.25);
   }
 
-  form label,
-  form li:before {
-    opacity: 1;
-    font-feature-settings: "smcp", "c2sc";
-    font-variant: all-small-caps;
-    transition: 0.2s all ease;
-    font-size: 1em;
-    background: inherit;
-    color: inherit;
-    height: 2em;
-    flex-grow: 1;
-  }
+  form {
+    label,
+    li:before {
+      opacity: 1;
+      font-feature-settings: "smcp", "c2sc";
+      font-variant: all-small-caps;
+      transition: 0.2s all ease;
+      font-size: 1em;
+      background: inherit;
+      color: inherit;
+      height: 2em;
+      flex-grow: 1;
+    }
 
-  form [for*="type"],
-  form [for*="name"],
-  form [for*="method"],
-  form [class*="priority"] {
-    display: initial;
-    transform: none;
-  }
+    [for*="type"],
+    [for*="name"],
+    [for*="method"],
+    [class*="priority"] {
+      display: initial;
+      transform: none;
+    }
+    li[class*="name"],
+    li[class*="type"] {
+      border: 3px solid var(--spt-color-accent-dark);
+      background: var(--spt-color-accent-dark);
+      color: var(--spt-color-background-warm) !important;
+    }
 
-  form li[class*="name"],
-  form li[class*="type"] {
-    border: 3px solid var(--spt-color-accent-dark);
-    background: var(--spt-color-accent-dark);
-    color: var(--spt-color-background-warm) !important;
-  }
+    li[class*="name"]:before,
+    li[class*="type"]:before {
+      content: "*";
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(51%, -50%);
+      font-size: 2em;
+      padding: 0;
+      background: transparent;
+      color: inherit;
+    }
 
-  form li[class*="name"]:before,
-  form li[class*="type"]:before {
-    content: "*";
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(51%, -50%);
-    font-size: 2em;
-    padding: 0;
-    background: transparent;
-    color: inherit;
-  }
-
-  form li[class*="markcomplete"],
-  form li[class*="markforreview"],
-  form li[class*="masterLibraryID"],
-  form li[class*="slug"],
-  form li[class*="progressbar"],
-  form li[class*="demonstratedskill"],
-  form li[class*="demonstratedskilssls"],
-  form li[class*="_id"],
-  form li[class*="createdAt"],
-  form li[class*="featured-url-arrow-wrap"] {
-    display: none;
-  }
-
-  .new-form-button {
-    position: relative;
-    width: fit-content;
-    font: var(--spt-font-subheading);
-    letter-spacing: var(--spt-spacing-subheading);
-    font-family: Arial;
-    font-size: 1.2rem;
-    z-index: 10;
-    margin: 0 0.5em;
-    /* box-shadow: inset 1px 1px 1px rgb(255 255 255 / 25%), inset 1px -1px 1px rgb(0 0 0 / 15%), 1px 1px 5px -3px black; */
-    box-shadow:
-      3px 3px 7px -5px white inset,
-      -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
-    border: none;
-    background: var(--spt-color-background);
-    color: var(--spt-color-accent);
-    border-radius: 50px;
-    padding: 0.5em 1em;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.2s all ease;
-    font-feature-settings: "smcp";
-    font-variant: small-caps;
-  }
-
-  .new-form-button {
-    background: var(--spt-color-accent-gradient);
-    color: var(--spt-color-background);
-    width: 100%;
-    margin: auto;
-    padding: 0.5em;
-    font-size: 1em;
-    transition: 0.2s all ease;
-  }
-
-  .new-form-button:last-child {
-    font-size: 1.8em;
-    margin-top: 0;
-  }
-  .new-form-button:hover {
-    position: relative;
-    background: var(--spt-color-accent-dark);
-    color: var(--spt-color-background);
-    transition: 0.3s all ease;
-    transform: scale(1, 1.125);
-  }
-
-  .new-form-button span {
-    text-transform: capitalize;
-    text-transform: capitalize;
-    -webkit-background-clip: unset;
-    color: inherit;
-    background: transparent;
-    -webkit-text-fill-color: unset;
-    pointer-events: none;
-    flex-grow: 0;
-    margin: 0;
-  }
-
-  form li input,
-  form li select,
-  form li textarea {
-    min-height: 2em;
-    height: 2.5em;
-    font: var(--spt-font-body-text);
-    font-size: 1em;
-    width: 100%;
-    max-width: 97%;
-    margin: auto;
-    text-align: center;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    line-height: 2.5em;
-  }
-
-  form li[class*="method"] {
-    max-height: 100%;
-  }
-  [newFormType="goal"] {
-    [class*="url"],
-    [class*="acomp"],
-    [class*="status"],
-    [class*="priority"],
-    [class*="platform"],
-    [class*="labTime"],
-    [class*="lectureTime"],
-    [class*="author"] {
+    li[class*="markcomplete"],
+    li[class*="markforreview"],
+    li[class*="masterLibraryID"],
+    li[class*="slug"],
+    li[class*="progressbar"],
+    li[class*="demonstratedskill"],
+    li[class*="demonstratedskilssls"],
+    li[class*="_id"],
+    li[class*="createdAt"],
+    li[class*="featured-url-arrow-wrap"] {
       display: none;
+    }
+
+    .new-form-button {
+      position: relative;
+      width: fit-content;
+      font: var(--spt-font-subheading);
+      letter-spacing: var(--spt-spacing-subheading);
+      font-family: Arial;
+      font-size: 1.2rem;
+      z-index: 10;
+      margin: 0 0.5em;
+      /* box-shadow: inset 1px 1px 1px rgb(255 255 255 / 25%), inset 1px -1px 1px rgb(0 0 0 / 15%), 1px 1px 5px -3px black; */
+      box-shadow:
+        3px 3px 7px -5px white inset,
+        -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
+      border: none;
+      background: var(--spt-color-background);
+      color: var(--spt-color-accent);
+      border-radius: 50px;
+      padding: 0.5em 1em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s all ease;
+      font-feature-settings: "smcp";
+      font-variant: small-caps;
+    }
+
+    .new-form-button {
+      background: var(--spt-color-accent-gradient);
+      color: var(--spt-color-background);
+      width: 100%;
+      margin: auto;
+      padding: 0.5em;
+      font-size: 1em;
+      transition: 0.2s all ease;
+    }
+
+    .new-form-button:last-child {
+      font-size: 1.8em;
+      margin-top: 0;
+    }
+    .new-form-button:hover {
+      position: relative;
+      background: var(--spt-color-accent-dark);
+      color: var(--spt-color-background);
+      transition: 0.3s all ease;
+      transform: scale(1, 1.125);
+    }
+
+    .new-form-button span {
+      text-transform: capitalize;
+      text-transform: capitalize;
+      -webkit-background-clip: unset;
+      color: inherit;
+      background: transparent;
+      -webkit-text-fill-color: unset;
+      pointer-events: none;
+      flex-grow: 0;
+      margin: 0;
+    }
+
+    ul[class*="in-modal"] div[id*="newForm-"] {
+      .cancel-single-form-button {
+        background: var(--spt-color-accent-gradient);
+        font-size: 14px;
+      }
+      .cancel-single-form-button:after {
+        content: "";
+      }
+    }
+
+    li input,
+    li select,
+    li textarea {
+      min-height: 2em;
+      height: 2.5em;
+      font: var(--spt-font-body-text);
+      font-size: 1em;
+      width: 100%;
+      max-width: 97%;
+      margin: auto;
+      text-align: center;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 2.5em;
+    }
+
+    li[class*="method"] {
+      max-height: 100%;
     }
   }
 }
 
 /* New Entry Form Hold Adjustments */
 [newformtype="hold"] {
-  li[id*="studyPlan-priority"],
-  li[id*="studyPlan-status"],
-  li[id*="studyPlan-acomp"],
-  li[id*="studyPlan-start"] {
+  li[id*="-priority"],
+  li[id*="-status"],
+  li[id*="-acomp"],
+  li[id*="-start"] {
     // border: 7px solid red;
     background: gray;
     opacity: 0.5;
