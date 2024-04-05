@@ -653,4 +653,14 @@ body .list-button-container {
       transform: none;
     }
   }
+
+  body .section-subtext-wrap > button {
+    font: var(--spt-font-body-text);
+    font-size: 1em;
+    /* font-size: calc(0.5em + 0.2vw); */
+    font-feature-settings: "smcp", "c2sc";
+    font-variant: all-small-caps;
+    letter-spacing: 0.125em;
+    font-weight: 700;
+  }
 }
