@@ -12,6 +12,7 @@ const NewStudyPlanForm = (props) => {
   const demoCheck = useDemoCheck();
   const isDemo = demoCheck();
   const [newFormJSX, setNewFormJSX] = useState(false);
+  const [activeForms, setActiveForms] = useState(0);
   const studyPlanItemSchema = useSelector(
     (state) => state.studyPlanData.schema,
   );
@@ -58,6 +59,18 @@ const NewStudyPlanForm = (props) => {
         delete outputObj[key];
         return outputObj;
       });
+      setActiveForms((prevState) => {
+        const amount = prevState;
+        console.log(
+          "%c⚪️►►►► %cline:63%camount",
+          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+          "color:#fff;background:rgb(20, 68, 106);padding:3px;border-radius:2px",
+          amount,
+        );
+
+        return amount - 1;
+      });
     }
   };
 
@@ -94,6 +107,14 @@ const NewStudyPlanForm = (props) => {
       const output = [];
 
       for (let i = 0; i < amountToAdd; i++) {
+        console.log(
+          "%c⚪️►►►► %cline:109%ci",
+          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+          "color:#fff;background:rgb(161, 23, 21);padding:3px;border-radius:2px",
+          i + 1,
+        );
+        setActiveForms(i + 1);
         output.push(
           <div
             key={id + "newForm-" + i}
@@ -201,18 +222,21 @@ const NewStudyPlanForm = (props) => {
   ////////////////////////////////////////////////////////////////
   useEffect(() => {
     processNewFormWithSchema(studyPlanItemSchema);
-  }, []);
+  }, [amountToAdd]);
 
   return (
     <div>
-      <div
-        key={props.typeName + "new-form-modal"}
-        id="new-form-modal"
-        className={Styles["new-form-modal"]}
-        type={props.typeName}
-      >
-        <form>{newFormJSX}</form>
-      </div>
+      {console.log("***&&&&&&&&&--->", activeForms)}
+      {activeForms > 0 && (
+        <div
+          key={props.typeName + "new-form-modal"}
+          id="new-form-modal"
+          className={Styles["new-form-modal"]}
+          type={props.typeName}
+        >
+          <form>{newFormJSX}</form>
+        </div>
+      )}
     </div>
   );
 };
