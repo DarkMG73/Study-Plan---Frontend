@@ -124,6 +124,9 @@
       background: inherit;
       color: inherit !important;
     }
+    .cancel-single-form-button:after {
+      content: "X";
+    }
   }
 }
 .new-form-modal ul > div {
@@ -158,10 +161,11 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  margin: 0 auto 2em;
+  margin: 1em auto;
   flex-basis: 33.33%;
   min-width: 400px;
   max-width: 800px;
+  padding: 1em;
 }
 
 .new-form .new-form > ul {
@@ -183,6 +187,11 @@
   [class*="url-arrow"] {
     display: none;
   }
+}
+
+form label,
+form li:before {
+  color: var(--spt-color-background);
 }
 
 .new-form-modal {
@@ -318,7 +327,7 @@
     background: var(--spt-color-accent-gradient);
     color: var(--spt-color-background);
     width: 100%;
-    margin: 1em;
+    margin: auto;
     padding: 0.5em;
     font-size: 1em;
     transition: 0.2s all ease;
@@ -344,6 +353,8 @@
     background: transparent;
     -webkit-text-fill-color: unset;
     pointer-events: none;
+    flex-grow: 0;
+    margin: 0;
   }
 
   form li input,
