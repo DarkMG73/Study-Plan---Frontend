@@ -281,15 +281,12 @@ const StudyPlanItems = (props) => {
                       colorType="secondary"
                       data=""
                       size="small"
+                      hideButtonArrows={true}
                       buttonTextOpened={
-                        "Close the detail on the " +
-                        toTitleCase(outputName) +
-                        " section"
+                        "Close " + toTitleCase(outputName) + " Section Detail"
                       }
                       buttonTextClosed={
-                        "More detail on the " +
-                        toTitleCase(outputName) +
-                        " section here"
+                        "Expand " + toTitleCase(outputName) + " Section Detail"
                       }
                       open={false}
                       showBottomGradient={id === "studyPlan" && true}

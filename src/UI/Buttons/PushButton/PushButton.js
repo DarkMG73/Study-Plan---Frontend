@@ -19,7 +19,9 @@ function PushButton(props) {
     onClick,
     ...otherProps
   } = props;
+
   let output;
+
   if (inputOrButton === "button") {
     output = (
       <Fragment>
