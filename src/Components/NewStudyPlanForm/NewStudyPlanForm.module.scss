@@ -14,7 +14,7 @@
   height: 100%;
   // background: var(--spt-color-accent-gradient);
   // background: linear-gradient( 180deg, transparent 0, var(--spt-color-accent) 25%, var(--spt-color-accent-dark) 75% ,transparent 100% );
-  background: var(--spt-color-accent-2-gradient);
+  background: var(--spt-color-background-contrast);
   color: var(--spt-color-background);
   overflow: scroll;
   z-index: 10000;
@@ -35,6 +35,7 @@
 .new-form-modal form ul {
   display: flex;
   background: var(--spt-color-accent-2-dark);
+  background: transparent;
   padding: 0;
   margin: auto;
   border-radius: 50px;
@@ -185,6 +186,15 @@
 }
 
 .new-form-modal {
+  [data-parentmasterid="newForm-0"] {
+    h2 {
+      margin: 0.5em auto;
+    }
+    > button {
+      margin: auto;
+    }
+  }
+
   .new-form li {
     display: flex;
     flex-direction: column;
@@ -345,6 +355,12 @@
     font-size: 1em;
     width: 100%;
     max-width: 97%;
+    margin: auto;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 2.5em;
   }
 
   form li[class*="method"] {
