@@ -24,6 +24,8 @@
   text-align: center;
   font-variant: small-caps;
   font-size: 1.5em;
+  background: inherit;
+  color: inherit;
 }
 
 .new-form-modal div {
@@ -177,6 +179,9 @@
   background: none;
   border-radius: 0;
   overflow: auto;
+  [class*="url-arrow"] {
+    display: none;
+  }
 }
 
 .new-form-modal {
@@ -345,4 +350,52 @@
   form li[class*="method"] {
     max-height: 100%;
   }
+  [newFormType="goal"] {
+    [class*="url"],
+    [class*="acomp"],
+    [class*="status"],
+    [class*="priority"],
+    [class*="platform"],
+    [class*="labTime"],
+    [class*="lectureTime"],
+    [class*="author"] {
+      display: none;
+    }
+  }
+}
+
+/* New Entry Form Hold Adjustments */
+[newformtype="hold"] {
+  li[id*="studyPlan-priority"],
+  li[id*="studyPlan-status"],
+  li[id*="studyPlan-acomp"],
+  li[id*="studyPlan-start"] {
+    // border: 7px solid red;
+    background: gray;
+    opacity: 0.5;
+    pointer-events: none;
+    display: none;
+  }
+}
+/* ********** */
+
+.new-form-item {
+  width: 100%;
+  margin: 0.25em 0;
+  padding: 0;
+  flex-grow: 1;
+}
+
+.new-form-item label {
+  opacity: 1;
+  font: var(--spt-text-subheading);
+}
+
+.new-form-item textarea {
+  opacity: 1;
+  font: var(--spt-text-subheading);
+  padding: 0.5em 1em 0em;
+  line-height: 1em;
+  vertical-align: middle;
+  height: auto;
 }
