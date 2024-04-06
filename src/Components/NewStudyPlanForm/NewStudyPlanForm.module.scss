@@ -186,7 +186,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   margin: 1em auto;
-  justify-content: center;
 }
 
 .new-form .new-form {
@@ -209,7 +208,6 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
   width: 100%;
   justify-content: flex-start;
   position: relative;
@@ -368,7 +366,7 @@
       background: var(--spt-color-accent-gradient);
       color: var(--spt-color-background);
       width: 100%;
-      margin: auto;
+      margin: 0 auto;
       padding: 0.5em;
       font-size: 1em;
       transition: 0.2s all ease;
