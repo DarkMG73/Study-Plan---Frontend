@@ -309,15 +309,21 @@
 
     li[class*="name"]:before,
     li[class*="type"]:before {
-      content: "*";
+      content: "* Required *";
       position: absolute;
       top: 0;
       left: 0;
-      transform: translate(51%, -50%);
-      font-size: 2em;
+      transform: translate(5%, -50%);
+      font-size: 10px;
       padding: 0;
       background: transparent;
       color: inherit;
+      opacity: 0.76;
+    }
+
+    li[class*="name"]:hover:before,
+    li[class*="type"]:hover:before {
+      opacity: 1;
     }
 
     li[class*="markcomplete"],
