@@ -17,24 +17,38 @@ export async function registerAUser(user, inDemoMode) {
         err,
       );
       const error = err.response;
-      if (
-        Object.hasOwn(error, "data") &&
-        Object.hasOwn(error.data, "message")
-      ) {
-        if (error.data.message.constructor === String) return error;
-
-        if (Object.hasOwn(error.data.message, "code")) {
+      const errorOutput = {};
+      if (Object.hasOwn(error, "data")) {
+        if (
+          Object.hasOwn(error.data, "message") &&
+          error.data.message.constructor === String
+        ) {
+          errorOutput.message = error.data.message;
+          errorOutput.status = 400;
+        } else if (Object.hasOwn(error.data, "code")) {
           // MongoDB error 11000 is a duplicate error
-          if (error.data.message.code === 11000) {
-            const errorMessage = {
-              status: 400,
-              message: `${error.data.message.keyValue.email} is already being used in the database. Please use a different email address or login with this email address and the password originally set.`,
-            };
-            return errorMessage;
+          if (error.data.code === 11000) {
+            let duplicateData = "";
+            for (const value of Object.values(error.data.keyValue)) {
+              duplicateData =
+                duplicateData.length > 0
+                  ? duplicateData + " and " + value
+                  : value;
+            }
+
+            errorOutput.message = `${duplicateData} is already being used in the database. Please use a different email address or login with this email address and the password originally set.`;
+            errorOutput.status = 422;
           } else {
-            return error.message.code;
+            errorOutput.message = `There was a problem talking to the server, but we can not tell exactly what is causing this. Please try again. If the problem continues, please let us know. The error received from the server: ${error.status} | ${error.statusText}`;
+            errorOutput.status = 422;
           }
+        } else {
+          errorOutput.message = `There was a problem talking to the server, but we can not tell exactly what is causing this. Please try again. If the problem continues, please let us know. The error received from the server: ${error.status} | ${error.statusText}`;
+          errorOutput.status = 422;
         }
+      } else {
+        errorOutput.message = `There was a problem talking to the server, but we can not tell exactly what is causing this. Please try again. If the problem continues, please let us know. The error received from the server: ${error.status} | ${error.statusText}`;
+        errorOutput.status = 422;
       }
 
       console.log(
@@ -49,6 +63,8 @@ export async function registerAUser(user, inDemoMode) {
           "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
           error.data.message,
         );
+
+      return errorOutput;
     });
 
   return output;

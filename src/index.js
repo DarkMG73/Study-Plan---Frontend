@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
@@ -22,7 +22,7 @@ axios.defaults.baseURL = "https://studyplan.glassinteractive.com/";
 console.log(
   "%cAxios Default Base URL:",
   "color:#fff;background:#287094;padding:5px;border-radius:0 25px 25px 0",
-  axios.defaults.baseURL
+  axios.defaults.baseURL,
 );
 
 if (inDevelopment) {
@@ -31,17 +31,17 @@ if (inDevelopment) {
   console.log(
     "%cRunning in DEV MODE with the base URL:",
     "color:#fff;background:#287094;padding:5px;border-radius:0 25px 25px 0",
-    axios.defaults.baseURL
+    axios.defaults.baseURL,
   );
   console.log(
     "%cprocess.env.NODE_ENV:",
     "color:#287094;background:#f0f0ef;padding:5px;border-radius:0 25px 25px 0",
-    process.env.NODE_ENV
+    process.env.NODE_ENV,
   );
   console.log(
     "%cinDevelopment:",
     "color:#287094;background:#f0f0ef;padding:5px;border-radius:0 25px 25px 0",
-    inDevelopment
+    inDevelopment,
   );
 }
 
@@ -54,7 +54,7 @@ axios.interceptors.request.use(
       console.log(
         "%cRequest:",
         "color:#94283a;background:#f0f0ef;padding:5px;border-radius:0 25px 25px 0",
-        request
+        request,
       );
 
     // Edit request config
@@ -65,10 +65,10 @@ axios.interceptors.request.use(
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        error
+        error,
       );
     return Promise.reject(error);
-  }
+  },
 );
 
 axios.interceptors.response.use(
@@ -77,7 +77,7 @@ axios.interceptors.response.use(
       console.log(
         "%cResponse:",
         "color:#f0f0ef;background:#94283a;padding:5px;border-radius:0 25px 25px 0",
-        response
+        response,
       );
 
     return response;
@@ -88,23 +88,21 @@ axios.interceptors.response.use(
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
-        error
+        error,
       );
     return Promise.reject(error);
-  }
+  },
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router basename={process.env.PUBLIC_URL}>
-    <React.StrictMode>
-      <Provider store={store}>
-        <ErrorBoundary>
-          <App />
-        </ErrorBoundary>
-      </Provider>
-    </React.StrictMode>
-  </Router>
+    <Provider store={store}>
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
+    </Provider>
+  </Router>,
 );
 
 // If you want to start measuring performance in your app, pass a function
