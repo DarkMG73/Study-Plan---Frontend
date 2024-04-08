@@ -1,7 +1,11 @@
 import axios from "axios";
 
 /// GET THE STUDY PLAN ITEMS /////////////////////////////
-export const studyPlanData = async (user) => {
+export const studyPlanData = async (
+  user,
+  addLoadRequestFunction,
+  removeLoadRequestFunction,
+) => {
   let axiosConfig = null;
   let currentUser = user;
   if (user) {
@@ -17,8 +21,9 @@ export const studyPlanData = async (user) => {
   }
 
   try {
+    if (addLoadRequestFunction) addLoadRequestFunction();
     const res = await axios.post("/api/studyPlan/", currentUser, axiosConfig);
-
+    if (removeLoadRequestFunction) removeLoadRequestFunction();
     return res.data;
   } catch (err) {
     console.log(
@@ -26,12 +31,18 @@ export const studyPlanData = async (user) => {
       "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
       err,
     );
+    if (removeLoadRequestFunction) removeLoadRequestFunction();
     return [];
   }
 };
 
 /// GET ONE STUDY PLAN ITEM /////////////////////////////
-export const getQuestionBy_Id = async (user, question_Id) => {
+export const getQuestionBy_Id = async (
+  user,
+  question_Id,
+  addLoadRequestFunction,
+  removeLoadRequestFunction,
+) => {
   let axiosConfig = null;
 
   if (user) {
@@ -43,30 +54,37 @@ export const getQuestionBy_Id = async (user, question_Id) => {
       timeout: 60000,
     };
   }
-
+  if (addLoadRequestFunction) addLoadRequestFunction();
   const res = await axios.post(
     "/api/studyPlan/" + question_Id,
     user,
     axiosConfig,
   );
+  if (removeLoadRequestFunction) removeLoadRequestFunction();
   return res.data;
 };
 
 /// SAVE ONE /////////////////////////////////////
-export async function addDocToDB(userAndDataObject) {
+export async function addDocToDB(
+  userAndDataObject,
+  addLoadRequestFunction,
+  removeLoadRequestFunction,
+) {
   const axiosConfig = {
     headers: {
       "Content-Type": "application/json",
       Authorization: "JWT " + userAndDataObject.user.token,
     },
   };
-
+  if (addLoadRequestFunction) addLoadRequestFunction();
   const response = await axios
     .post(`/api/studyPlan/add/`, userAndDataObject, axiosConfig)
     .then((res) => {
+      if (removeLoadRequestFunction) removeLoadRequestFunction();
       return res;
     })
     .catch((err) => {
+      if (removeLoadRequestFunction) removeLoadRequestFunction();
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
