@@ -230,7 +230,8 @@
   max-width: 100%;
   max-height: 100%;
   border-radius: 50px;
-  box-shadow: inset 10px 10px 30px -20px #ffffff82,
+  box-shadow:
+    inset 10px 10px 30px -20px #ffffff82,
     inset -0px -0px 20px 0px var(--spt-color-accent);
   pointer-events: none;
 }
@@ -290,6 +291,7 @@
   transform: translate3d(0, 0, 0);
   background: var(--spt-color-accent-2-gradient);
 }
+
 .background-video ::after {
   content: " ";
   display: block;
@@ -320,35 +322,78 @@
   filter: blur(4vh);
   // the following line fixes IOS Safari buf with filter
   transform: translate3d(0, 0, 0);
-  animation: updown linear 17s infinite, leftright ease-in-out 13s infinite,
-    vastag linear 29s infinite, forog linear 31s infinite;
+  animation:
+    updown linear 17s infinite,
+    leftright ease-in-out 13s infinite,
+    vastag linear 29s infinite,
+    forog linear 31s infinite;
 }
 .bubble:nth-child(2) {
   transform: rotate(-45deg);
-  animation: updown ease-in 21s infinite, leftright ease-in-out 27s infinite,
-    vastag linear 23s infinite, forog linear 29s infinite;
+  animation:
+    updown ease-in 21s infinite,
+    leftright ease-in-out 27s infinite,
+    vastag linear 23s infinite,
+    forog linear 29s infinite;
 }
 .bubble:nth-child(3) {
   transform: rotate(45deg);
-  animation: updown ease-out 23s infinite, leftright ease-in-out 33s infinite,
-    vastag linear 29s infinite, forog linear 31s infinite;
+  animation:
+    updown ease-out 23s infinite,
+    leftright ease-in-out 33s infinite,
+    vastag linear 29s infinite,
+    forog linear 31s infinite;
 }
 .bubble:nth-child(4) {
   transform: rotate(-70deg);
-  animation: updown ease-in-out 27s infinite, leftright ease-in-out 39s infinite,
-    vastag linear 31s infinite, forog linear 41s infinite;
+  animation:
+    updown ease-in-out 27s infinite,
+    leftright ease-in-out 39s infinite,
+    vastag linear 31s infinite,
+    forog linear 41s infinite;
 }
 .bubble:nth-child(5) {
   transform: rotate(77deg);
-  animation: updown ease-in-out 19s infinite, leftright ease-in-out 11s infinite,
-    vastag linear 37s infinite, forog linear 47s infinite;
+  animation:
+    updown ease-in-out 19s infinite,
+    leftright ease-in-out 11s infinite,
+    vastag linear 37s infinite,
+    forog linear 47s infinite;
 }
 .bubble:last-child {
   transform: rotate(180deg);
-  animation: updown linear 53s infinite, leftright ease-in-out 29s infinite,
-    vastag linear 19s infinite, forog linear 37s infinite;
+  animation:
+    updown linear 53s infinite,
+    leftright ease-in-out 29s infinite,
+    vastag linear 19s infinite,
+    forog linear 37s infinite;
 }
 
+.demo-error-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    356deg,
+    transparent,
+    hsl(0deg 0% 100% / 90%),
+    hsl(0deg 0% 100% / 90%),
+    transparent
+  );
+  color: #5c5b5b;
+  z-index: 10000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1em;
+}
+
+/********************************
+*** Responsive Breakpoints
+********************************/
 @media only screen and (min-width: 1025px) {
   .bottom-bar-wrap {
     display: none;

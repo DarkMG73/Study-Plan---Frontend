@@ -81,7 +81,7 @@ function LoginStatus(props) {
         id={"button-container-" + uniqueID}
         className={styles["button-container"] + uniqueID}
       >
-        {!inDemoMode && !user && (
+        {!user && (
           <>
             <div
               id={"form-container-" + uniqueID}
