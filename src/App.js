@@ -147,29 +147,20 @@ function App() {
   /// EFFECTS
   ////////////////////////////////////////
   useEffect(() => {
+    // Login user at startup if active user cookie or if starting Demo Mode.
+    userDataInit({ setLocalError, setUserInitComplete, isDemo, demoUser });
+
+    // Setup Demo Mode
     if (isDemo) {
       dispatch(loadingRequestsActions.addToLoadRequest());
-      alert("started");
       setForceUser(demoUser);
       dispatch(authActions.demoMode(true));
       setTimeout(() => {
         dispatch(loadingRequestsActions.removeFromLoadRequest());
-        alert("Stopped");
       }, 3000);
     }
   }, [isDemo]);
   ///////
-  // Login user at startup if active user cookie.
-  useEffect(() => {
-    dispatch(loadingRequestsActions.addToLoadRequest());
-    alert("started");
-    userDataInit({ setLocalError, setUserInitComplete, isDemo, demoUser });
-
-    setTimeout(() => {
-      dispatch(loadingRequestsActions.removeFromLoadRequest());
-      alert("Stopped");
-    }, 10000);
-  }, [isDemo]);
 
   useEffect(() => {
     if (userInitComplete) {
@@ -177,6 +168,16 @@ function App() {
       // runGatherContentData({ user: user, setLocalError });
     }
   }, [user, userInitComplete]);
+
+  useEffect(() => {
+    console.log(
+      "%c⚪️►►►► %cline:183%cloadingStatus",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px",
+      loadingStatus,
+    );
+  }, [loadingStatus]);
 
   useEffect(() => {
     if (reGatherStudyPlan) {

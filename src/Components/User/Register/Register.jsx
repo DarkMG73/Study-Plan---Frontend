@@ -15,6 +15,7 @@ import ReactCaptcha from "modern-react-captcha";
 import reloadIcon from "../../../assets/media/reloadIcon.svg";
 import PushButton from "../../../UI/Buttons/PushButton/PushButton";
 import FormInput from "../../../UI/Form/FormInput/FormInput";
+import { loadingRequestsActions } from "../../../store/loadingRequestsSlice";
 
 const Register = (props) => {
   const dispatch = useDispatch();
@@ -26,6 +27,16 @@ const Register = (props) => {
   });
   const [loginError, setLoginError] = useState(false);
   const [showLoginError, setShowLoginError] = useState(true);
+
+  const makeLoadingRequest = function () {
+    return dispatch(loadingRequestsActions.addToLoadRequest());
+  };
+
+  const removeLoadingRequest = function () {
+    setTimeout(() => {
+      dispatch(loadingRequestsActions.removeFromLoadRequest());
+    }, 2000);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -131,9 +142,9 @@ const Register = (props) => {
     dispatch(authActions.logIn(res.data));
   };
 
-  const egister = (e) => {
+  const beginRegistration = (e) => {
     e.preventDefault();
-
+    makeLoadingRequest();
     const { userName, email, password } = user;
 
     if (captchaVerified) {
@@ -192,6 +203,7 @@ const Register = (props) => {
         'The CAPTCHA test has failed. Please fix the wrong items and then resubmit. Keep in mind that "I" and "1" and "l" can look really similar in that test. "0", "O" and "o" can also be mistaken.',
       );
     }
+    removeLoadingRequest();
   };
 
   /////////////////////////////////////////
@@ -304,7 +316,7 @@ const Register = (props) => {
               value="login"
               data=""
               size="large"
-              onClick={egister}
+              onClick={beginRegistration}
               styles={{
                 borderRadius: "10px",
                 height: "2em",

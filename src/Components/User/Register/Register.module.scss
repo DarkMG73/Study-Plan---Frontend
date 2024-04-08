@@ -20,7 +20,9 @@
 .form input[type="email"] {
   font-size: 1em;
   padding: 0 0.5em;
-  box-shadow: inset 4px 4px 4px -3px black, inset -4px -4px 4px -3px lightgrey;
+  box-shadow:
+    inset 4px 4px 4px -3px black,
+    inset -4px -4px 4px -3px lightgrey;
 }
 
 .form label {
@@ -73,7 +75,9 @@
   position: relative;
   max-width: fit-content;
   border: 2px solid #28709452;
-  box-shadow: 3px 3px 10px -7px inset black, -3px -3px 10px -7px inset white;
+  box-shadow:
+    3px 3px 10px -7px inset black,
+    -3px -3px 10px -7px inset white;
   border-radius: 10px;
   margin: 0 auto;
   padding: 1em 4em 0em;
@@ -95,6 +99,11 @@
   color: inherit;
   border: none;
   box-shadow: none;
+  p {
+    background: var(--spt-color-accent-dark);
+    color: var(--spt-color-background);
+    padding: 0.5em 1em;
+  }
 }
 
 .horizontal-display .form-input-error .form-input-error-close-button {

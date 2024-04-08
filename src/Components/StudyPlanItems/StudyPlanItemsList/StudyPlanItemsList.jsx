@@ -91,9 +91,9 @@ const StudyPlanItemsList = (props) => {
   ////////////////////////////////////////////////////////////////////////
   /// Effects
   ////////////////////////////////////////////////////////////////////////
-  useEffect(() => {
-    dispatch(loadingRequestsActions.removeFromLoadRequest());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(loadingRequestsActions.removeFromLoadRequest());
+  // }, []);
 
   useEffect(() => {
     existingFormInputValuesObjRef.current = existingFormInputValuesObj;
