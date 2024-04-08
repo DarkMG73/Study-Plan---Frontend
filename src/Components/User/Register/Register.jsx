@@ -1,7 +1,11 @@
 import styles from "./Register.module.scss";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { registerAUser, sign_inAUser } from "../../../storage/userDB";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  registerAUser,
+  sign_inAUser,
+  setUserCookie,
+} from "../../../storage/userDB";
 import { authActions } from "../../../store/authSlice";
 import { toTitleCase } from "../../../Hooks/utility";
 import usePasswordValidator, {
@@ -14,6 +18,7 @@ import FormInput from "../../../UI/Form/FormInput/FormInput";
 
 const Register = (props) => {
   const dispatch = useDispatch();
+  const inDemoMode = useSelector((state) => state.auth.inDemoMode);
   const [user, setUser] = useState({
     userName: "",
     email: "",
@@ -113,16 +118,15 @@ const Register = (props) => {
   const completeSignInProcedures = (res) => {
     setLoginError(false);
 
-    // For Dev use
-    // setUserCookie(res.data).then((res) => {
-    //   console.log(
-    //     "%c --> %cline:55%cres",
-    //     "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    //     "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    //     "color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px",
-    //     res
-    //   );
-    // });
+    if (!inDemoMode)
+      setUserCookie(res.data).then((res) => {
+        if (process.env.NODE_ENV === "development")
+          console.log(
+            "%cSetting User Cookie:",
+            "color:#287094;background:#f0f0ef;padding:5px;border-radius:0 25px 25px 0",
+            res,
+          );
+      });
 
     dispatch(authActions.logIn(res.data));
   };

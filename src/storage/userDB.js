@@ -16,7 +16,7 @@ export async function registerAUser(user, inDemoMode) {
         "color:#f0f0ef;background:#ff0000;padding:32px;border-radius:0 25px 25px 0",
         err,
       );
-      const error = err.response;
+      const error = err.response ? err.response : err;
       const errorOutput = {};
       if (Object.hasOwn(error, "data")) {
         if (

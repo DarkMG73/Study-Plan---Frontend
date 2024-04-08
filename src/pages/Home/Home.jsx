@@ -46,6 +46,7 @@ const Home = (props) => {
   useEffect(() => {
     dispatch(loadingRequestsActions.addToLoadRequest());
   }, []);
+
   useLayoutEffect(() => {
     const updateScrollPosition = () => {
       if (!angledRectangleRef.current) return;

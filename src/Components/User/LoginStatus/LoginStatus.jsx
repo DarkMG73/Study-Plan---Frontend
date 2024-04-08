@@ -62,7 +62,7 @@ function LoginStatus(props) {
               {" "}
               {user.email} is Logged In{" "}
             </span>
-          ) : (
+          ) : !inDemoMode ? (
             <span
               id={"login-text-" + uniqueID}
               className={
@@ -72,6 +72,8 @@ function LoginStatus(props) {
               {" "}
               Login to access your study plan or sign up to get started!
             </span>
+          ) : (
+            ""
           )}
         </span>
       </p>
@@ -79,7 +81,7 @@ function LoginStatus(props) {
         id={"button-container-" + uniqueID}
         className={styles["button-container"] + uniqueID}
       >
-        {!user && (
+        {!inDemoMode && !user && (
           <>
             <div
               id={"form-container-" + uniqueID}
