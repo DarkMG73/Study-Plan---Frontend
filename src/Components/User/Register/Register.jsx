@@ -49,7 +49,7 @@ const Register = (props) => {
   const [captchaVerified, setCaptchaVerified] = useState();
   const handleCAPTCHASuccess = () => {
     setCaptchaVerified(true);
-    setLoginError("*** Hooray! The CAPTCHA matches! You are not a robot! ****");
+    setLoginError("Sweet! The CAPTCHA matches! You are not a robot!");
     setShowLoginError(true);
   };
   const handleCAPTCHAFailure = () => {
@@ -144,13 +144,14 @@ const Register = (props) => {
 
   const beginRegistration = (e) => {
     e.preventDefault();
-    makeLoadingRequest();
+
     const { userName, email, password } = user;
 
     if (captchaVerified) {
       const inputsValidCheck = inputsValidate({ userName, email, password });
       if (inputsValidCheck.valid) {
         // axios("http://localhost:8000/api/users/auth/register", user)
+        makeLoadingRequest();
         registerAUser(user).then((res) => {
           if (res && res.status >= 400) {
             alert(
@@ -186,10 +187,12 @@ const Register = (props) => {
                   );
                   setShowLoginError(true);
                 }
+                removeLoadingRequest();
               })
               .catch((err) => {
                 setLoginError(err);
                 setShowLoginError(true);
+                removeLoadingRequest();
               });
           }
         });
@@ -203,7 +206,6 @@ const Register = (props) => {
         'The CAPTCHA test has failed. Please fix the wrong items and then resubmit. Keep in mind that "I" and "1" and "l" can look really similar in that test. "0", "O" and "o" can also be mistaken.',
       );
     }
-    removeLoadingRequest();
   };
 
   /////////////////////////////////////////
