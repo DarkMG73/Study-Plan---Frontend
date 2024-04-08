@@ -390,7 +390,7 @@ const Home = (props) => {
         <BottomBar showLogin={true} />
       </div>
 
-      {props.isDemo && studyPlan && Object.keys(studyPlan).length != 0 && (
+      {props.isDemo && studyPlan && Object.keys(studyPlan).length <= 0 && (
         <div className={styles["demo-error-modal"]}>
           <h2>There seems to be a problem loading the demo data.</h2>
           <p>
