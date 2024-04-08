@@ -386,13 +386,7 @@ const Home = (props) => {
       <div className={styles["bottom-bar-wrap"]}>
         <BottomBar showLogin={true} />
       </div>
-      {console.log(
-        "%c⚪️►►►► %cline:389%cstudyPlan",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(251, 178, 23);padding:3px;border-radius:2px",
-        studyPlan,
-      )}
+
       {props.isDemo && studyPlan && Object.keys(studyPlan).length <= 0 && (
         <div className={styles["demo-error-modal"]}>
           <h2>There seems to be a problem loading the demo data.</h2>

@@ -18,13 +18,6 @@ const NewStudyPlanForm = (props) => {
   );
   const [formType, setFormType] = useState("all");
   const { id, user, amountToAdd, formActive } = props.data;
-  console.log(
-    "%c⚪️►►►► %cline:19%cid",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
-    id,
-  );
 
   ////////////////////////////////////////////////////////////////
   /// Handlers
@@ -61,13 +54,6 @@ const NewStudyPlanForm = (props) => {
       });
       setActiveForms((prevState) => {
         const amount = prevState;
-        console.log(
-          "%c⚪️►►►► %cline:63%camount",
-          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-          "color:#fff;background:rgb(20, 68, 106);padding:3px;border-radius:2px",
-          amount,
-        );
 
         return amount - 1;
       });
@@ -90,13 +76,7 @@ const NewStudyPlanForm = (props) => {
   ////////////////////////////////////////////////////////////////
   const processNewFormWithSchema = (schema) => {
     const targetFormDataObj = schema;
-    console.log(
-      "%c⚪️►►►► %cline:79%ctargetFormDataObj",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
-      targetFormDataObj,
-    );
+
     // const itemsToRemove = ['$timestamps', ]
     const cleansedFormData = {};
     Object.keys(targetFormDataObj).forEach((key) => {
@@ -107,13 +87,6 @@ const NewStudyPlanForm = (props) => {
       const output = [];
 
       for (let i = 0; i < amountToAdd; i++) {
-        console.log(
-          "%c⚪️►►►► %cline:109%ci",
-          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-          "color:#fff;background:rgb(161, 23, 21);padding:3px;border-radius:2px",
-          i + 1,
-        );
         setActiveForms(i + 1);
         output.push(
           <div
@@ -207,13 +180,6 @@ const NewStudyPlanForm = (props) => {
       </ul>
     );
 
-    console.log(
-      "%c⚪️►►►► %cline:194%cgroomedNewFormElement",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
-      groomedNewFormElement,
-    );
     setNewFormJSX(groomedNewFormElement);
   };
 

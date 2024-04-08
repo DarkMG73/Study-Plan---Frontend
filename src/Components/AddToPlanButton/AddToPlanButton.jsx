@@ -7,25 +7,12 @@ import { FaPlus } from "react-icons/fa6";
 
 const AddToPlanButton = (props) => {
   const { id, title, user, formType, setFormType } = props.data;
-  console.log(
-    "%c⚪️►►►► %cline:17%cprops",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(3, 101, 100);padding:3px;border-radius:2px",
-    props,
-  );
   const [outputFormJSX, setOutputFormJSX] = useState(false);
   const addFormButtonHandler = (e) => {
     e.preventDefault();
     if (user) {
       const amountToAdd = prompt("How many would you like to add?");
-      console.log(
-        "%c⚪️►►►► %cline:69%camountToAdd",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(248, 147, 29);padding:3px;border-radius:2px",
-        amountToAdd,
-      );
+
       if (amountToAdd <= 0) return false;
       setOutputFormJSX(
         <NewStudyPlanForm

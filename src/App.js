@@ -5,6 +5,7 @@ import { useState, useEffect, Fragment } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { studyPlanDataActions } from "./store/studyPlanDataSlice";
 import { statusUpdateActions } from "./store/statusUpdateSlice";
+import { loadingRequestsActions } from "./store/loadingRequestsSlice";
 import { useUserDataInit } from "./Hooks/useUserDataInit";
 import { useRunGatherStudyPlanData } from "./Hooks/useRunGatherStudyPlanData";
 // import { useRunGatherContentData } from "./Hooks/useRunGatherContentData";
@@ -147,14 +148,27 @@ function App() {
   ////////////////////////////////////////
   useEffect(() => {
     if (isDemo) {
+      dispatch(loadingRequestsActions.addToLoadRequest());
+      alert("started");
       setForceUser(demoUser);
       dispatch(authActions.demoMode(true));
+      setTimeout(() => {
+        dispatch(loadingRequestsActions.removeFromLoadRequest());
+        alert("Stopped");
+      }, 3000);
     }
   }, [isDemo]);
   ///////
   // Login user at startup if active user cookie.
   useEffect(() => {
+    dispatch(loadingRequestsActions.addToLoadRequest());
+    alert("started");
     userDataInit({ setLocalError, setUserInitComplete, isDemo, demoUser });
+
+    setTimeout(() => {
+      dispatch(loadingRequestsActions.removeFromLoadRequest());
+      alert("Stopped");
+    }, 10000);
   }, [isDemo]);
 
   useEffect(() => {

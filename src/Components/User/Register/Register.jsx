@@ -141,13 +141,6 @@ const Register = (props) => {
       if (inputsValidCheck.valid) {
         // axios("http://localhost:8000/api/users/auth/register", user)
         registerAUser(user).then((res) => {
-          console.log(
-            "%c⚪️►►►► %cline:139%cres",
-            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-            "color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px",
-            res,
-          );
           if (res && res.status >= 400) {
             alert(
               `There was an error trying to complete the registration process. ${res.message}`,
