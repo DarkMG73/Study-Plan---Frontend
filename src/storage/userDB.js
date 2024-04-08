@@ -36,7 +36,7 @@ export async function registerAUser(user, inDemoMode) {
                   : value;
             }
 
-            errorOutput.message = `${duplicateData} is already being used in the database. Please use a different email address or login with this email address and the password originally set.`;
+            errorOutput.message = `${duplicateData} is already being used in the database. Please use different detail to register now. If the instance of ${duplicateData} that is already in the database is your registration, please head back to the Login section and use your previous registration to log in.`;
             errorOutput.status = 422;
           } else {
             errorOutput.message = `There was a problem talking to the server, but we can not tell exactly what is causing this. Please try again. If the problem continues, please let us know. The error received from the server: ${error.status} | ${error.statusText}`;
