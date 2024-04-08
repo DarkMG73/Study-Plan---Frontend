@@ -1,15 +1,16 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadingRequestsActions } from "../store/loadingRequestsSlice";
 
 const useProcessUpdateStudyPlan = () => {
   const dispatch = useDispatch();
+  const { isInDemoMode } = useSelector((state) => state.auth);
   const outputFunction = ({
     updateStudyPlan,
     updateAContentItem,
     updateAStudyPlanItem,
     studyPlanDataActions,
   }) => {
-    if (!updateStudyPlan) return;
+    if (!updateStudyPlan || isInDemoMode) return;
     dispatch(loadingRequestsActions.addToLoadRequest());
     const { itemWithNewEdits, user, parentSection } = updateStudyPlan;
 
