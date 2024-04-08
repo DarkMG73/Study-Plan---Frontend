@@ -59,6 +59,7 @@ export const useRunGatherStudyPlanData = () => {
               `***\n\nIt looks like we can not make a connection. Please refresh the browser plus make sure there is an internet connection and nothing like a firewall of some sort blocking this request.\n\nIt is also possible that the server's security software detected abnormally high traffic between this IP address and the server.  This is nothing anyone did wrong, just a rare occurrence with a highly-secured server. This will clear itself sometime within the next thirty minutes or so.\n\nPlease contact us if you find you are online and this error does not clear within an hour.\n\nSorry for the trouble. 😢`,
           });
         }
+        removeLoadingRequest();
       })
       .catch((err) => {
         console.log(
@@ -127,9 +128,8 @@ export const useRunGatherStudyPlanData = () => {
             });
           }
         }
+        removeLoadingRequest();
       });
-
-    removeLoadingRequest();
   };
   return runGatherStudyPlanData;
 };
