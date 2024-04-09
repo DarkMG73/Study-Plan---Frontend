@@ -565,12 +565,12 @@ ul[class*="edited-list"]
 }
 
 li[class*="name"].edited-field:after {
-  transform: translate(50%, 0%);
+  margin-left: 92px;
+  transform: translate(50%, -17%);
   border-radius: 50px;
 }
 
 ul[class*="edited-list"] li[class*="name"].edited-field:after {
-  padding-left: 100px;
   transform: translate(50%, 0%);
   border-radius: 50px;
 }
