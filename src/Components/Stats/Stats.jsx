@@ -3,7 +3,7 @@ import styles from "./Stats.module.scss";
 
 const Stats = () => {
   const { studyPlan, studyPlanMetadata } = useSelector(
-    (state) => state.studyPlanData
+    (state) => state.studyPlanData,
   );
   const totalLabTime =
     studyPlanMetadata &&
@@ -16,7 +16,7 @@ const Stats = () => {
   const totalHours = totalLectureTime + totalLabTime;
   const reviewHoursTotal = findAndAddTime("markforreview", studyPlanMetadata);
   const completedHoursTotal = findAndAddTime("markcomplete", studyPlanMetadata);
-  const simulatedCollegeCreditHours = (completedHoursTotal / 45).toFixed(2);
+  const simulatedCollegeCreditHours = (completedHoursTotal / 45).toFixed(1);
 
   // function addTime(fieldName, studyPlanMetadata) {
   //   let outputTime = 0;
@@ -71,14 +71,14 @@ const Stats = () => {
           {reviewHoursTotal}
         </div>
         <div className={styles["inner-block"] + " " + styles["labhrstotal"]}>
-          {totalLabTime}
+          {totalLabTime.toFixed(1)}
         </div>
         <div
           className={styles["inner-block"] + " " + styles["lecturehrstotal"]}
         >
           {totalLectureTime}
         </div>
-        <div className={styles["totalhours"]}>{totalHours}</div>
+        <div className={styles["totalhours"]}>{totalHours.toFixed(1)}</div>
       </div>
     </div>
   );
