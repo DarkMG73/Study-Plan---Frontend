@@ -539,12 +539,40 @@ ul[type="goal"] > [data-container-type="collapsibleElm"] > {
   }
 }
 
-.edited-field {
+ul[class*="edited-list"]
+  > [data-container-type="collapsibleElm"]
+  > .edited-field {
   animation: pulseYellow 2s ease infinite;
   padding: 1em !important;
   background: yellow;
   color: black;
   margin: 1em auto 0;
+}
+
+.edited-field:after {
+  content: "Edited";
+  animation: pulseYellow 2s ease infinite;
+  padding: 0.5em !important;
+  background: yellow;
+  color: black;
+  /* margin: 1em auto 0; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 7px;
+  transform: translate(50%, 50%);
+  border-radius: 50px;
+}
+
+li[class*="name"].edited-field:after {
+  transform: translate(50%, 0%);
+  border-radius: 50px;
+}
+
+ul[class*="edited-list"] li[class*="name"].edited-field:after {
+  padding-left: 100px;
+  transform: translate(50%, 0%);
+  border-radius: 50px;
 }
 
 textarea {
