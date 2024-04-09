@@ -246,7 +246,10 @@ const StudyPlanItemsList = (props) => {
         if (status >= 400) {
           alert("There was an error: " + res.response.data.message);
         } else if (status >= 200) {
-          alert("Success! The item has been deleted.");
+          const resetPage = window.confirm(
+            'Success! The item has been deleted.\n\nWould you like to refresh the page and show the changes?\n\nNOTE: If you deleted this accidentally, you can choose "Cancel" below to return to the page with the deleted item still open. To re-add it back to your study plan, just click "Submit" at the bottom of the item. This will submit it as a new item to your study plan.',
+          );
+          if (resetPage) dispatch(studyPlanDataActions.reGatherStudyPlan(true));
           // setInEditMode(false);
         } else {
           alert("there was an error: " + res.message);
