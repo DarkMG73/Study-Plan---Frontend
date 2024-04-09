@@ -19,6 +19,7 @@ import useSortList from "../../Hooks/useSortList";
 import useAssembleStudyPlanList from "../../Hooks/useAssembleStudyPlanList";
 import BarLoader from "../../UI/Loaders/BarLoader/BarLoader";
 import AddToPlanButton from "../AddToPlanButton/AddToPlanButton";
+import useDemoCheck from "../../Hooks/useDemoCheck";
 
 const StudyPlanItems = (props) => {
   const user = useSelector((state) => state.auth.user);
@@ -47,7 +48,8 @@ const StudyPlanItems = (props) => {
     (state) => state.formInputData,
     shallowEqual,
   );
-
+  const demoCheck = useDemoCheck();
+  const isDemo = demoCheck();
   const sortList = useSortList();
   const assembleStudyPlanList = useAssembleStudyPlanList();
   const [delayRender, setDelayRender] = useState(true);
@@ -144,12 +146,14 @@ const StudyPlanItems = (props) => {
   }, [changeListArray]);
 
   useEffect(() => {
-    processUpdateStudyPlan({
-      updateStudyPlan,
-      updateAContentItem,
-      updateAStudyPlanItem,
-      studyPlanDataActions,
-    });
+    alert(updateStudyPlan);
+    if (!isDemo)
+      processUpdateStudyPlan({
+        updateStudyPlan,
+        updateAContentItem,
+        updateAStudyPlanItem,
+        studyPlanDataActions,
+      });
   }, [updateStudyPlan]);
 
   // Clear new forms after processing.
