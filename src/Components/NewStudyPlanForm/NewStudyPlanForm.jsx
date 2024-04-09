@@ -192,7 +192,6 @@ const NewStudyPlanForm = (props) => {
 
   return (
     <div>
-      {console.log("***&&&&&&&&&--->", activeForms)}
       {activeForms > 0 && (
         <div
           key={props.typeName + "new-form-modal"}
