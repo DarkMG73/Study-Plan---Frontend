@@ -170,16 +170,6 @@ function App() {
   }, [user, userInitComplete]);
 
   useEffect(() => {
-    console.log(
-      "%c⚪️►►►► %cline:183%cloadingStatus",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px",
-      loadingStatus,
-    );
-  }, [loadingStatus]);
-
-  useEffect(() => {
     if (reGatherStudyPlan) {
       runGatherStudyPlanData({ user: user, setLocalError });
       dispatch(studyPlanDataActions.reGatherStudyPlan(false));
