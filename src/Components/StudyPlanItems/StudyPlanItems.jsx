@@ -146,14 +146,16 @@ const StudyPlanItems = (props) => {
   }, [changeListArray]);
 
   useEffect(() => {
-    alert(updateStudyPlan);
-    if (!isDemo)
-      processUpdateStudyPlan({
-        updateStudyPlan,
-        updateAContentItem,
-        updateAStudyPlanItem,
-        studyPlanDataActions,
-      });
+    if (isDemo) {
+      alert(isDemo);
+      return;
+    }
+    processUpdateStudyPlan({
+      updateStudyPlan,
+      updateAContentItem,
+      updateAStudyPlanItem,
+      studyPlanDataActions,
+    });
   }, [updateStudyPlan]);
 
   // Clear new forms after processing.
