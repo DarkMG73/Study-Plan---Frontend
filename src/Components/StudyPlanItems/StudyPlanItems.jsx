@@ -146,8 +146,8 @@ const StudyPlanItems = (props) => {
   }, [changeListArray]);
 
   useEffect(() => {
-    if (isDemo) {
-      alert(isDemo);
+    if (updateStudyPlan && isDemo) {
+      alert("SP ITEMS 150" + isDemo);
       return;
     }
     processUpdateStudyPlan({
