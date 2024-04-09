@@ -166,6 +166,12 @@ ul[type="hold"] {
   }
 }
 
+ul[class*="edited-list"]
+  div[data-container-type="collapsibleElm"]
+  > li[id*="name-item"]
+  textarea {
+  border-radius: 11px;
+}
 ul[type="step"],
 ul[type="hold"] {
   li[id*="progressbar-item"] {

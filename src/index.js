@@ -1,4 +1,4 @@
-// import React from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
@@ -97,11 +97,13 @@ axios.interceptors.response.use(
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router basename={process.env.PUBLIC_URL}>
-    <Provider store={store}>
-      <ErrorBoundary>
-        <App />
-      </ErrorBoundary>
-    </Provider>
+    <React.StrictMode>
+      <Provider store={store}>
+        <ErrorBoundary>
+          <App />
+        </ErrorBoundary>
+      </Provider>
+    </React.StrictMode>
   </Router>,
 );
 

@@ -1,6 +1,8 @@
 .master-parent-group {
   position: relative;
-  box-shadow: inset -2px -2px 4px -3px #000000, inset 2px 2px 4px -2px white;
+  box-shadow:
+    inset -2px -2px 4px -3px #000000,
+    inset 2px 2px 4px -2px white;
   flex-grow: 1;
   padding: 0 2em;
   list-style: none;
@@ -218,7 +220,9 @@ body .master-parent-group .dependencies-container {
   max-width: 100%;
   margin: 1em 1%;
   background: var(--spt-color-background-contrast);
-  box-shadow: inset 1px 1px 3px -2px black, inset -1px -1px 3px -2px white;
+  box-shadow:
+    inset 1px 1px 3px -2px black,
+    inset -1px -1px 3px -2px white;
   padding: 0 1%;
   border-radius: 25px 6.25px 50px;
   /* border: 1px solid var(--spt-color-accent) !important; */
@@ -238,13 +242,17 @@ body .dependencies-container > h3 {
   margin: 0 auto;
   width: calc(100% + 1em);
   margin-left: -0.5em;
-  box-shadow: inset 1px 1px 3px -2px black, 0px 4px 8px -4px white;
+  box-shadow:
+    inset 1px 1px 3px -2px black,
+    0px 4px 8px -4px white;
 }
 
 body .master-parent-group .dependencies-container > ul.subgroup {
   border: 1px solid var(--spt-color-accent) !important;
   border-left: 3px solid var(--spt-color-accent) !important;
-  box-shadow: inset 1px 1px 3px -2px black, inset -1px -1px 3px -2px white;
+  box-shadow:
+    inset 1px 1px 3px -2px black,
+    inset -1px -1px 3px -2px white;
   border-radius: inherit;
   overflow: hidden;
   border: none !important;
@@ -280,7 +288,8 @@ body .dependencies-container [data-parentmastertype="step"] {
   border: none;
   border-radius: 0;
   padding: 0.5em 2em;
-  box-shadow: inset 5px 5px 9px -5px var(--spt-color-accent-light),
+  box-shadow:
+    inset 5px 5px 9px -5px var(--spt-color-accent-light),
     inset -5px -5px 9px -5px var(--spt-color-accent-dark);
   transition: 0.3s all ease;
   margin: 0 0.5em;
@@ -370,7 +379,9 @@ body .dependencies-container [data-parentmastertype="step"] {
   border-radius: 50px;
   padding: 1em 2em 0.5em;
   /* background: var(--spt-color-background); */
-  box-shadow: inset 1px 1px 4px -2px white, inset -1px -1px 4px -2px black;
+  box-shadow:
+    inset 1px 1px 4px -2px white,
+    inset -1px -1px 4px -2px black;
   cursor: pointer;
   width: 100%;
   font: var(--spt-font-subheading);
@@ -470,12 +481,14 @@ ul[class*="edited-list"] > [data-container-type="collapsibleElm"] > li > {
     font: inherit;
     padding: 0.125em 1em;
     line-height: normal;
-    border-radius: 10px;
-    box-shadow: inset 2px 2px 3px -2px black, inset -2px 2px 3px -2px lightgrey;
+    border-radius: 0 0 11px 11px;
+    box-shadow:
+      inset 2px 2px 3px -2px black,
+      inset -2px 2px 3px -2px lightgrey;
     border: none;
     width: 100%;
     min-width: 100%;
-    margin: auto;
+    margin: 0 0.25em;
   }
 }
 // ul[class*="edited-list"] label {
@@ -509,15 +522,18 @@ ul[class*="edited-list"] li[class*="name"] {
   grid-column-start: 2;
 }
 
-ul[class*="edited-list"] li:before {
-  position: relative;
-  /* font-size: 1em; */
-  /* transform: translateY(-50%); */
-  text-align: center;
-  /* line-height: 1em; */
-  margin: 0 auto;
-  padding: 0 0;
-  opacity: 1;
+ul[class*="edited-list"] {
+  li:before,
+  label {
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0.25em 0.75em;
+    opacity: 1;
+    border-radius: 11px 11px 0 0;
+    width: 100%;
+    margin: 1em 0.25em 0.25em;
+  }
 }
 
 ul[class*="edited-list"]
