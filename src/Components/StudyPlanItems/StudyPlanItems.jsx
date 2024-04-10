@@ -272,8 +272,8 @@ const StudyPlanItems = (props) => {
                       buttonStyles={{
                         margin: "0 1em 0 2em",
                         padding: "0.5em 2em",
-                        letterSpacing: "0.25em",
-                        fontVariant: "small-caps",
+                        letterSpacing: "0.125em",
+                        fontVariant: "all-small-caps",
                         transform: "translateY(0%)",
                         transition: "0.7s all ease",
                         width: "100%",
@@ -283,7 +283,7 @@ const StudyPlanItems = (props) => {
                         display: "flex",
                         alignItems: "center",
                         borderRadius: "50px",
-                        fontFamily: "Good Times RG",
+                        // fontFamily: "Good Times RG",
                       }}
                       colorType="secondary"
                       data=""

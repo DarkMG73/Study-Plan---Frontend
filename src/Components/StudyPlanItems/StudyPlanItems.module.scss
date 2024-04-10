@@ -171,6 +171,7 @@ ul[class*="edited-list"]
   > li[id*="name-item"]
   textarea {
   border-radius: 11px;
+  margin: 1em auto;
 }
 
 ul[type="step"],
@@ -269,6 +270,7 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
   overflow: hidden;
   margin: 0 auto 1em;
   width: 100%;
+  flex-wrap: wrap;
   .group-title {
     opacity: 1;
     width: auto;
@@ -280,6 +282,8 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
     display: flex;
     padding: 0 0.25em;
     flex-grow: 1;
+    flex-wrap: wrap;
+    justify-content: center;
     > * {
       flex-basis: fit-content;
     }
@@ -381,6 +385,7 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
 .studyPlan-history-list-container {
   div {
     max-width: 100%;
+    width: 100%;
   }
   > .history-list-inner-wrap {
     position: relative;

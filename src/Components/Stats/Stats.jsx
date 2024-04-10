@@ -71,15 +71,15 @@ const Stats = () => {
           {reviewHoursTotal}
         </div>
         <div className={styles["inner-block"] + " " + styles["labhrstotal"]}>
-          {totalLabTime && totalLabTime.toFixed(1)}
+          {totalLabTime ? totalLabTime.toFixed(1) : 0}
         </div>
         <div
           className={styles["inner-block"] + " " + styles["lecturehrstotal"]}
         >
-          {totalLectureTime}
+          {totalLectureTime ? totalLectureTime : 0}
         </div>
         <div className={styles["totalhours"]}>
-          {totalHours && totalHours.toFixed(1)}
+          {totalHours ? totalHours.toFixed(1) : 0}
         </div>
       </div>
     </div>
