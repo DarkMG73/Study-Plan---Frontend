@@ -96,7 +96,7 @@ const Home = (props) => {
         saveManyContentItems,
       });
     }
-
+    if (data === "DATA_INPUT_ERROR") return;
     if (!data || Object.keys(data).length <= 0) {
       alert(
         "There seems to have been a problem trying process items before saving them. We are sorry for the trouble. Please check the data and try again. If the problem continues, let the web admin know you received this error.",

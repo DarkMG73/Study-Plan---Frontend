@@ -129,11 +129,11 @@ const useProcessAllFormInputData = () => {
 
         if (cleanMissingFieldsArray.size > 0) {
           const errorMessage =
-            "Unfortunately, there is missing required data preventing this from submitting. Please fill out the " +
+            ' Unfortunately, there is missing required data preventing this from submitting. Please fill out the "' +
             [...cleanMissingFieldsArray]
               .toString()
               .replace(/,(?=[^,]+$)/, ", and ") +
-            " fields on each form.";
+            '" fields on each form.';
           alert(errorMessage);
           return;
         }

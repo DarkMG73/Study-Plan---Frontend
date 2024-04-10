@@ -79,7 +79,7 @@ export const formInputDataSlice = createSlice({
       state.newFormInputDataObj = { ...action.payload };
     },
     submitAllNewForms: (state) => {
-      state.allNewForms = state.newFormInputDataObj;
+      state.allNewForms = { ...state.newFormInputDataObj };
     },
     resetSubmitAllNewForms: (state) => {
       state.allNewForms = null;
