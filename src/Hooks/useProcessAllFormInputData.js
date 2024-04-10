@@ -38,25 +38,11 @@ const useProcessAllFormInputData = () => {
 
         /////// Functions for later use ///////
         const lookForMissingRequirements = (measureArray, testObj) => {
-          console.log(
-            "%c⚪️►►►► %cline:40%ctestObj",
-            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-            "color:#fff;background:rgb(131, 175, 155);padding:3px;border-radius:2px",
-            testObj,
-          );
           const filteredTestObj = {};
           for (const [key, value] of Object.entries(testObj)) {
             const groomedValue =
               value.constructor === String ? value.replace(/\s/g, "") : value;
-            console.log(
-              "%c⚪️►►►► %cline:46%cgroomedValue",
-              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-              "color:#fff;background:rgb(39, 72, 98);padding:3px;border-radius:2px",
-              groomedValue,
-            );
-            const ignoredValuesArray = ["- Select one -"];
+            const ignoredValuesArray = ["- Select one -", "-Selectone-"];
             if (
               groomedValue !== "" &&
               !ignoredValuesArray.includes(groomedValue)
@@ -106,14 +92,6 @@ const useProcessAllFormInputData = () => {
           2,
         );
 
-        console.log(
-          "%c⚪️►►►► %cline:80%crequiredFields",
-          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-          "color:#fff;background:rgb(38, 157, 128);padding:3px;border-radius:2px",
-          requiredFields,
-        );
-
         // Check requirements
         const missingRequiredFields = [];
         flatInputDataArray.forEach((form) => {
@@ -132,6 +110,7 @@ const useProcessAllFormInputData = () => {
             ' Unfortunately, there is missing required data preventing this from submitting. Please fill out the "' +
             [...cleanMissingFieldsArray]
               .toString()
+              .toUpperCase()
               .replace(/,(?=[^,]+$)/, ", and ") +
             '" fields on each form.';
           alert(errorMessage);
@@ -185,7 +164,8 @@ const useProcessAllFormInputData = () => {
         return outputDataArray;
       };
 
-      const data = processWithSchema(schema);
+      let data = processWithSchema(schema);
+      if (!data || Object.keys(data).length <= 0) return "DATA_INPUT_ERROR";
       return data;
     }
   };

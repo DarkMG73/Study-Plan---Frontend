@@ -73,7 +73,7 @@ export const formInputDataSlice = createSlice({
       } else {
         newState[parentMasterID][title] = outputValue;
       }
-      state.newFormInputDataObj = newState;
+      state.newFormInputDataObj = { ...newState };
     },
     setNewFormInputDataObj: (state, action) => {
       state.newFormInputDataObj = { ...action.payload };

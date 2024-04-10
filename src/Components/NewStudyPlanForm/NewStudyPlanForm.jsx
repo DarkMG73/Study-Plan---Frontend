@@ -17,13 +17,6 @@ const NewStudyPlanForm = (props) => {
     (state) => state.studyPlanData.schema,
   );
   const newFormOpen = useSelector((state) => state.formInputData.newFormOpen);
-  console.log(
-    "%c⚪️►►►► %cline:19%cnewFormOpen",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
-    newFormOpen,
-  );
   const [formType, setFormType] = useState("all");
   const { id, user, amountToAdd, formActive } = props.data;
 

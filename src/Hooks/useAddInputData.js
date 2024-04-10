@@ -23,7 +23,7 @@ const useAddInputData = () => {
     clearTimeout(typingTimer);
 
     typingTimer = setTimeout(() => {
-      if (outputValue) {
+      if (outputValue || outputValue === "") {
         groomAndAddInputData(
           target,
           parentMasterID,

@@ -96,6 +96,7 @@ const Home = (props) => {
         saveManyContentItems,
       });
     }
+
     if (data === "DATA_INPUT_ERROR") return;
     if (!data || Object.keys(data).length <= 0) {
       alert(
