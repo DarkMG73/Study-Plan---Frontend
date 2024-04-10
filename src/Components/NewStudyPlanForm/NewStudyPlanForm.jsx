@@ -189,12 +189,10 @@ const NewStudyPlanForm = (props) => {
   ////////////////////////////////////////////////////////////////
   useEffect(() => {
     dispatch(formInputDataActions.setNewFormOpen(true));
-    alert("start");
   }, []);
 
   useEffect(() => {
     if (!newFormOpen && newFormJSX) {
-      alert("closing");
       setNewFormJSX(false);
       formActive(false);
     }
