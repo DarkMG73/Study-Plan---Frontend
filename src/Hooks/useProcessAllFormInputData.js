@@ -3,7 +3,7 @@ import { sha256 } from "js-sha256";
 
 const useProcessAllFormInputData = () => {
   const studyPlanItemSchema = useSelector(
-    (state) => state.studyPlanData.schema
+    (state) => state.studyPlanData.schema,
   );
   const outputFunction = (props) => {
     const { user, allFormInputData, getSchemaForContentItem } = props;
@@ -38,15 +38,34 @@ const useProcessAllFormInputData = () => {
 
         /////// Functions for later use ///////
         const lookForMissingRequirements = (measureArray, testObj) => {
+          console.log(
+            "%c⚪️►►►► %cline:40%ctestObj",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(131, 175, 155);padding:3px;border-radius:2px",
+            testObj,
+          );
           const filteredTestObj = {};
           for (const [key, value] of Object.entries(testObj)) {
             const groomedValue =
               value.constructor === String ? value.replace(/\s/g, "") : value;
-            if (groomedValue !== "") filteredTestObj[key] = groomedValue;
+            console.log(
+              "%c⚪️►►►► %cline:46%cgroomedValue",
+              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+              "color:#fff;background:rgb(39, 72, 98);padding:3px;border-radius:2px",
+              groomedValue,
+            );
+            const ignoredValuesArray = ["- Select one -"];
+            if (
+              groomedValue !== "" &&
+              !ignoredValuesArray.includes(groomedValue)
+            )
+              filteredTestObj[key] = groomedValue;
           }
           const missingRequiredFields = measureArray.filter(
             (requiredFiledName) =>
-              !Object.keys(filteredTestObj).includes(requiredFiledName)
+              !Object.keys(filteredTestObj).includes(requiredFiledName),
           );
           return missingRequiredFields;
         };
@@ -84,14 +103,22 @@ const useProcessAllFormInputData = () => {
 
         const flatInputDataArray = flattenNestedObjToArr(
           allFormInputData.allNewForms,
-          2
+          2,
+        );
+
+        console.log(
+          "%c⚪️►►►► %cline:80%crequiredFields",
+          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+          "color:#fff;background:rgb(38, 157, 128);padding:3px;border-radius:2px",
+          requiredFields,
         );
 
         // Check requirements
         const missingRequiredFields = [];
         flatInputDataArray.forEach((form) => {
           missingRequiredFields.push(
-            lookForMissingRequirements(requiredFields, form)
+            lookForMissingRequirements(requiredFields, form),
           );
         });
 
