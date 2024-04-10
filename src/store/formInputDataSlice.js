@@ -6,6 +6,7 @@ function InitState() {
   initialState.newFormInputDataObj = null;
   initialState.allNewForms = null;
   initialState.uploadedForms = null;
+  initialState.newFormOpen = null;
   return initialState;
 }
 
@@ -20,6 +21,7 @@ export const formInputDataSlice = createSlice({
       state.newFormInputDataObj = payload.newFormInputDataObj;
       state.allNewForms = payload.allNewForms;
       state.uploadedForms = payload.uploadedForms;
+      state.newFormOpen = payload.newFormOpen;
     },
 
     addToExistingFormInputDataObj: (state, action) => {
@@ -87,6 +89,9 @@ export const formInputDataSlice = createSlice({
     },
     resetSubmitUploadedForm: (state) => {
       state.uploadedForms = null;
+    },
+    setNewFormOpen: (state, action) => {
+      state.newFormOpen = action.payload;
     },
     // const newStudyPlan = { ...state.studyPlan };
 

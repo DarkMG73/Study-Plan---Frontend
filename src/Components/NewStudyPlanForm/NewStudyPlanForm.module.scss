@@ -353,7 +353,7 @@
       border: none;
       background: var(--spt-color-background);
       color: var(--spt-color-accent);
-      border-radius: 50px;
+      // border-radius: 50px;
       padding: 0.5em 1em;
       font-weight: 700;
       cursor: pointer;
@@ -485,6 +485,13 @@
       border-radius: 15px;
       width: 100%;
       padding: 1em;
+    }
+  }
+}
+
+@media screen and (max-width: 300px) {
+  form .new-form {
+    .new-form-button {
       flex-direction: column;
     }
   }

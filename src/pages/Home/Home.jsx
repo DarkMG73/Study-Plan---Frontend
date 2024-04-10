@@ -116,6 +116,7 @@ const Home = (props) => {
         } else if (res.status >= 200) {
           alert("Success! You have added to your study plan!");
           dispatch(studyPlanDataActions.reGatherStudyPlan(true));
+          dispatch(formInputDataActions.setNewFormOpen(false));
           if (allFormInputData.uploadedForms)
             dispatch(formInputDataActions.resetSubmitUploadedForm());
           if (allFormInputData.allNewForms)
