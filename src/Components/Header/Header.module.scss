@@ -525,6 +525,7 @@
 .start-demo-button:hover {
   transform: scale(1.0625);
 }
+
 .demo-cta-wrap > div {
   padding: 0;
   font-size: 1.6rem;
@@ -676,6 +677,21 @@
     font-variant: small-caps;
     font-weight: 700;
     padding: 0.25em 1em;
+  }
+  .demo-cta-wrap {
+    font-size: 12px;
+    letter-spacing: 0;
+    height: 90%;
+    text-align: center;
+  }
+  .logo-to-outerwrap-header a.demo-cta-wrap {
+    transform: translateY(-50%);
+  }
+  .demo-cta-wrap > div {
+    font-size: inherit;
+    text-align: left;
+    white-space: break-spaces;
+    margin: auto;
   }
 }
 

@@ -353,7 +353,7 @@ const StudyPlanItems = (props) => {
               Object.keys(formInputData).length > 0 &&
               !outputName.toLowerCase().includes("goal") && (
                 <div
-                  key={id + outputName}
+                  key={id}
                   data-section="history-list-data-section"
                   id={id}
                   className={
