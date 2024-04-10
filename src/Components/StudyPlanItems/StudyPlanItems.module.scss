@@ -559,7 +559,7 @@ body .list-button-container {
 
 @media screen and (max-width: 650px) {
   ul[data-parentmastertype="goal"] div[data-container-type="collapsibleElm"] {
-    padding: 0.75em 2vw;
+    padding: 0.75em 0;
     grid-template-columns: repeat(6, 1fr);
     grid-template-areas:
       "name name  name  name name url-arrow"

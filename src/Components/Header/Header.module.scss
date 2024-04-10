@@ -638,17 +638,32 @@
     font-size: calc(var(--spt-navbar-height) - 2vmax);
     button {
       width: 100%;
-      padding: 0.125em;
+      padding: 0;
       height: 100%;
       background: var(--spt-color-background);
       color: var(--spt-color-accent);
       box-shadow: none;
+      font-size: 28px;
       span {
         margin: auto;
         display: flex;
         justify-content: flex-end;
       }
     }
+  }
+  .demo-cta-wrap,
+  .start-demo-button {
+    max-width: 36%;
+    right: 3px;
+    display: flex;
+    position: absolute;
+    font-size: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 15px;
+    font-variant: small-caps;
+    font-weight: 700;
+    padding: 0.25em 1em;
   }
 }
 
@@ -676,5 +691,11 @@
   }
   .spt-subtitle {
     transform: scale(0) translate(-27%, -152%);
+  }
+}
+@media only screen and (max-width: 280px) {
+  .demo-cta-wrap,
+  .start-demo-button {
+    font-size: 12px;
   }
 }

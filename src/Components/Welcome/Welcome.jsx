@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import Styles from "./Welcome.module.scss";
 import StudyPlanItems from "../StudyPlanItems/StudyPlanItems";
 import { loadingRequestsActions } from "../../store/loadingRequestsSlice";
+import AddToPlanButton from "../AddToPlanButton/AddToPlanButton";
 
 const Welcome = (props) => {
   let userName = false;
@@ -116,16 +117,19 @@ const Welcome = (props) => {
           {!userName && (
             <p className={Styles["login-text"]}>
               Log in or sign up then &nbsp;
-              <span className={Styles["new-form-button"]}>
-                {<StudyPlanItems id="studyPlan" onlyAddToButton={true} />}
-              </span>
             </p>
           )}
 
           {userName && (
             <div style={{ textAlign: "center" }}>
               <div className={Styles["new-form-button"]}>
-                {<StudyPlanItems id="studyPlan" onlyAddToButton={true} />}
+                <AddToPlanButton
+                  data={{
+                    title:
+                      "Click Here To Add a Goal or Step to Your Study Plan!",
+                    user: props.user,
+                  }}
+                />
               </div>
             </div>
           )}

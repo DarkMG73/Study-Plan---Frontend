@@ -71,14 +71,16 @@ const Stats = () => {
           {reviewHoursTotal}
         </div>
         <div className={styles["inner-block"] + " " + styles["labhrstotal"]}>
-          {totalLabTime.toFixed(1)}
+          {totalLabTime && totalLabTime.toFixed(1)}
         </div>
         <div
           className={styles["inner-block"] + " " + styles["lecturehrstotal"]}
         >
           {totalLectureTime}
         </div>
-        <div className={styles["totalhours"]}>{totalHours.toFixed(1)}</div>
+        <div className={styles["totalhours"]}>
+          {totalHours && totalHours.toFixed(1)}
+        </div>
       </div>
     </div>
   );

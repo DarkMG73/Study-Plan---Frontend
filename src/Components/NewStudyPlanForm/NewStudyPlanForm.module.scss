@@ -196,7 +196,7 @@
   flex-grow: 1;
   margin: 1em auto;
   flex-basis: 33.33%;
-  min-width: 400px;
+  min-width: 300px;
   max-width: 800px;
   padding: 1em;
 }
@@ -463,4 +463,13 @@
   line-height: 1em;
   vertical-align: middle;
   height: auto;
+}
+
+@media screen and (max-width: 650px) {
+  .new-form-button:last-child {
+    padding: 01em 2em;
+    word-wrap: break-word;
+    flex-wrap: wrap;
+    min-width: 100%;
+  }
 }
