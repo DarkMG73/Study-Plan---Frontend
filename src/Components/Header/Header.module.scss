@@ -252,15 +252,18 @@
 
 .login-status-wrap {
   flex-basis: auto;
-  // width: 1000000px;
   width: 10em;
   max-width: fit-content;
-  // max-height: 3em;
-  // overflow: hidden;
   max-height: 21px;
   margin: 0 auto;
   transform: scale(1, 1);
   transition: 0.7s all ease;
+  align-self: center;
+  margin: auto;
+  align-items: center;
+  display: flex;
+  max-height: 1.75em;
+  overflow: hidden;
 }
 
 .scrolled-up-false {
@@ -300,6 +303,9 @@
     transition: 0.7s all ease;
   }
 
+  .user-info-container {
+    max-height: 1.25em;
+  }
   .user-info-container h4 {
     color: var(--spt-color-accent-2);
     color: var(--spt-color-accent-2);
@@ -469,6 +475,9 @@
 .login-modal-wrap {
   .login-wrap {
     max-width: 800px;
+    [class*="login-question"] button {
+      margin: 1em auto !important;
+    }
   }
   .login-modal-close-button {
     background: var(--spt-color-accent-2-dark);
@@ -480,6 +489,9 @@
   [id="db-login-container-header-login"] button {
     background: var(--spt-color-accent-2);
     color: var(--spt-color-background) !important;
+    min-width: min-content;
+    margin: auto;
+    width: 100%;
   }
 }
 
