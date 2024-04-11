@@ -228,9 +228,17 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
   border-radius: 25px;
   background: var(--spt-color-accent-light);
   color: var(--spt-color-background-contrast-dark);
+  .title-button-container {
+    background: inherit;
+    > h2,
+    > span {
+      background: inherit;
+    }
+  }
 }
+
 .studyPlan-items-group[type="hold"] button {
-  background: var(--spt-color-background-contrast-dark);
+  background: var(--spt-color-background-contrast);
   color: var(--spt-color-accent-light);
 }
 
