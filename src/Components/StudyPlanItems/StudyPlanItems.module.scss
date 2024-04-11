@@ -675,4 +675,12 @@ body .list-button-container {
     letter-spacing: 0.125em;
     font-weight: 700;
   }
+
+  ul[type="goal"],
+  ul[type="step"],
+  ul[type="hold"] {
+    > div[data-container-type="collapsibleElm"] > li[id*="name-item"] {
+      padding-left: 80px;
+    }
+  }
 }
