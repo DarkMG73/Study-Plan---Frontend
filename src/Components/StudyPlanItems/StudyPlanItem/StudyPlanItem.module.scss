@@ -222,6 +222,7 @@ body .name {
   padding-top: 0.5em;
   textarea {
     font-variant: small-caps;
+    line-height: 0.9em !important;
   }
 }
 body .method {
@@ -590,4 +591,10 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+@media screen and (max-width: 1024px) {
+  body .name {
+    transform: translateY(-8%);
+  }
 }
