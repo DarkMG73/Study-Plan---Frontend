@@ -223,8 +223,13 @@ body .name {
   textarea {
     font-variant: small-caps;
     line-height: 0.9em !important;
+    max-height: 2em;
+    overflow: hidden;
+    margin-bottom: 1em;
+    max-width: 96%;
   }
 }
+
 body .method {
   grid-area: method; // font: var(--spt-font-body-text-12);
   input {
@@ -595,6 +600,6 @@ input[type="number"] {
 
 @media screen and (max-width: 1024px) {
   body .name {
-    transform: translateY(-8%);
+    transform: translateY(-4%);
   }
 }

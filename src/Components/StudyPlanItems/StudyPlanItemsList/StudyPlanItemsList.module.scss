@@ -626,8 +626,8 @@ ul ul[type="hold"]:after {
   min-width: 11em;
   text-align: center;
   font-size: 1rem;
-  background: var(--spt-color-accent);
-  color: black;
+  background: var(--spt-color-background-contrast);
+  color: var(--spt-color-background);
   padding: 0 0.5em;
   border-radius: 25px;
   font-weight: 500;

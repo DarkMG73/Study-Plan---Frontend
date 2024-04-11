@@ -226,8 +226,12 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
     inset 3px 3px 7px -4px #000000,
     inset -3px -3px 7px -4px white;
   border-radius: 25px;
-  background: var(--spt-color-accent);
+  background: var(--spt-color-accent-light);
   color: var(--spt-color-background-contrast-dark);
+}
+.studyPlan-items-group[type="hold"] button {
+  background: var(--spt-color-background-contrast-dark);
+  color: var(--spt-color-accent-light);
 }
 
 .studyPlan-items-group[type="hold"] subtext {
@@ -680,7 +684,7 @@ body .list-button-container {
   ul[type="step"],
   ul[type="hold"] {
     > div[data-container-type="collapsibleElm"] > li[id*="name-item"] {
-      padding-left: 80px;
+      padding-left: 84px;
     }
   }
 }
