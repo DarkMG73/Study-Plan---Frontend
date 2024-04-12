@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import Styles from "./Textarea.module.scss";
 import useAddInputData from "../../../../../../Hooks/useAddInputData";
+import TextareaAutosize from "react-textarea-autosize";
 
 const Textarea = (props) => {
   const addInputData = useAddInputData();
@@ -43,7 +44,7 @@ const Textarea = (props) => {
       >
         {key}:
       </label>
-      <textarea
+      <TextareaAutosize
         id={
           parentMasterID +
           "-" +
