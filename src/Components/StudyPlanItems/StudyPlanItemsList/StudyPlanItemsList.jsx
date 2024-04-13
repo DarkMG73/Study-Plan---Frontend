@@ -21,6 +21,13 @@ const StudyPlanItemsList = (props) => {
   const parentMasterType = props.parentMasterType;
   const section = props.section;
   const subListLevel = props.subListLevel;
+  console.log(
+    "%c⚪️►►►► %cline:23%csubListLevel",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(130, 57, 53);padding:3px;border-radius:2px",
+    subListLevel,
+  );
   const formInputData = useSelector((state) => state.formInputData);
   const displayConditions = props.displayConditions;
   const onlyList = props.onlyList;
@@ -541,7 +548,7 @@ const StudyPlanItemsList = (props) => {
                     },
                   )}
               </ul>
-              {!onlyList && !subListLevel && (
+              {!onlyList && (
                 <div className={styles["button-container"]}>
                   {!noEditButton && (
                     <button
@@ -583,7 +590,7 @@ const StudyPlanItemsList = (props) => {
                     data-parentmasterid={key}
                     onClick={showProtectedHiddenHandler}
                   >
-                    Show Hidden Fields
+                    1 Show Hidden Fields
                   </button>
                   {!onlyList && unlockProtectedVisible.includes(key) && (
                     <Fragment>
@@ -780,7 +787,7 @@ const StudyPlanItemsList = (props) => {
                 emptyForm={props.emptyForm}
                 setFormType={props.setFormType}
               />{" "}
-              {!onlyList && !subListLevel && (
+              {!onlyList && (
                 <div className={styles["button-container"]}>
                   {!noEditButton && (
                     <button
@@ -822,7 +829,7 @@ const StudyPlanItemsList = (props) => {
                     data-parentmasterid={key}
                     onClick={showProtectedHiddenHandler}
                   >
-                    Show Hidden Fields
+                    2 Show Hidden Fields
                   </button>
                   {!onlyList && unlockProtectedVisible.includes(key) && (
                     <Fragment>
