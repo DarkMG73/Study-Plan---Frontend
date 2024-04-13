@@ -143,6 +143,7 @@ const StudyPlanItemsList = (props) => {
       "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
       e.target,
     );
+
     e.preventDefault();
     if (isDemo) {
       alert(isDemo);
@@ -174,17 +175,20 @@ const StudyPlanItemsList = (props) => {
       const existingFormEdits = { ...formInputData.existingFormInputDataObj };
 
       for (const key in existingFormEdits[parentMasterID]) {
+        // Convert to boolean.
         if (key === "markcomplete" || key === "markforreview") {
-          if (
-            existingFormEdits[parentMasterID][key] === "false" ||
-            existingFormEdits[parentMasterID][key] === ""
-          ) {
-            rawItemWithNewEdits[key] = false;
+          const innerItem = existingFormEdits[parentMasterID][key];
+          if (typeof innerItem === String) {
+            if (["true", "1", " "].includes(innerItem.trim())) {
+              rawItemWithNewEdits[key] = true;
+            } else {
+              rawItemWithNewEdits[key] = false;
+            }
           } else {
-            rawItemWithNewEdits[key] = true;
+            rawItemWithNewEdits[key] = innerItem;
           }
-          rawItemWithNewEdits[key] = existingFormEdits[parentMasterID][key];
         }
+
         if (
           existingFormEdits[parentMasterID][key] &&
           existingFormEdits[parentMasterID][key].constructor === Object
