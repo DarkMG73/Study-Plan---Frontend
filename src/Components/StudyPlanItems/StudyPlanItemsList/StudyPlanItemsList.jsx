@@ -129,7 +129,14 @@ const StudyPlanItemsList = (props) => {
 
   const submitFormButtonHandler = (e) => {
     e.preventDefault();
-
+    console.log(
+      "%c⚪️►►►► %cline:130%ce.target",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
+      e.target,
+    );
+    e.preventDefault();
     if (isDemo) {
       alert(isDemo);
       return;
@@ -140,8 +147,22 @@ const StudyPlanItemsList = (props) => {
     // Allow a pause to ensure input data is fully updated to existing form state
     setTimeout(() => {
       const parentMasterID = e.target.getAttribute("data-parentmasterid");
+      console.log(
+        "%c⚪️►►►► %cline:149%cparentMasterID",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(248, 214, 110);padding:3px;border-radius:2px",
+        parentMasterID,
+      );
       // const parentSection = e.target.getAttribute("data-section");
       const rawItemWithNewEdits = { ...studyPlanItemsObj[parentMasterID] };
+      console.log(
+        "%c⚪️►►►► %cline:152%crawItemWithNewEdits",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(254, 67, 101);padding:3px;border-radius:2px",
+        rawItemWithNewEdits,
+      );
       const _id = rawItemWithNewEdits._id;
       const existingFormEdits = { ...formInputData.existingFormInputDataObj };
 
@@ -201,6 +222,14 @@ const StudyPlanItemsList = (props) => {
           itemWithNewEdits[key] = value;
         }
       }
+
+      console.log(
+        "%c⚪️►►►► %cline:229%citemWithNewEdits",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
+        itemWithNewEdits,
+      );
       if (user) {
         dispatch(
           studyPlanDataActions.updateOneStudyPlanItem({
