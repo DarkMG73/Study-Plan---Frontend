@@ -16,6 +16,13 @@ const StudyPlanItem = (props) => {
     onlyList,
     unlockProtectedVisible,
   } = props;
+  console.log(
+    "%c⚪️►►►► %cline:18%cprops",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(217, 104, 49);padding:3px;border-radius:2px",
+    props,
+  );
 
   const studyPlanItemsObj = props.studyPlanItemsObj.studyPlanItemsObj;
   const [editedField, setEditedField] = useState(false);
@@ -71,6 +78,13 @@ const StudyPlanItem = (props) => {
     return output;
   }
   const elementTypeNeeded = findElementType(passedKey);
+  console.log(
+    "%c⚪️►►►► %cline:74%celementTypeNeeded",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(254, 67, 101);padding:3px;border-radius:2px",
+    elementTypeNeeded,
+  );
 
   // Clears delay of functions until after typing
 
