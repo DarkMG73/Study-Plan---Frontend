@@ -34,10 +34,30 @@ const useProcessUpdateStudyPlan = () => {
       // Convert to boolean.
       if (key === "markcomplete" || key === "markforreview") {
         const innerItem = outputItemWithNewEdits[key];
+        console.log(
+          "%c⚪️►►►► %cline:36%cinnerItem",
+          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+          "color:#fff;background:rgb(20, 68, 106);padding:3px;border-radius:2px",
+          innerItem,
+        );
         if (typeof innerItem === String) {
-          outputItemWithNewEdits[key] = ["true", "1"].includes(innerItem.trim())
-            ? true
-            : false;
+          console.log(
+            "%c⚪️►►►► %cline:38%ctypeof innerItem === String",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px",
+            typeof innerItem === String,
+          );
+          console.log(
+            "%c⚪️►►►► %cline:52%c[true].includes(innerItem.trim()",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(254, 67, 101);padding:3px;border-radius:2px",
+            ["true"].includes(innerItem.trim()),
+          );
+          outputItemWithNewEdits[key] =
+            innerItem.trim().toLowerCase() === "true" ? true : false;
         } else {
           outputItemWithNewEdits[key] = innerItem;
         }

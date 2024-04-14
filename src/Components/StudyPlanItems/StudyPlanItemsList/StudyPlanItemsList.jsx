@@ -207,19 +207,16 @@ const StudyPlanItemsList = (props) => {
             "color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px",
             innerItem,
           );
+          console.log(
+            "%c⚪️►►►► %cline:197%ctypeof innerItem === String",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
+            typeof innerItem === String,
+          );
           if (typeof innerItem === String) {
-            console.log(
-              "%c⚪️►►►► %cline:197%ctypeof innerItem === String",
-              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-              "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
-              typeof innerItem === String,
-            );
-            itemWithNewEdits[key] = ["true", "1", " "].includes(
-              innerItem.trim(),
-            )
-              ? true
-              : false;
+            itemWithNewEdits[key] =
+              innerItem.trim().toLowerCase === "true" ? true : false;
           } else {
             console.log(
               "%c⚪️►►►► %cline:204%celse",
@@ -873,7 +870,12 @@ const StudyPlanItemsList = (props) => {
           parentsParentKey={parentsParentKey}
           parentMasterID={parentMasterID}
           parentMasterType={
-            parentMasterType ? parentMasterType : studyPlanItemsObj[key].type
+            parentMasterType
+              ? parentMasterType
+              : studyPlanItemsObj[key] &&
+                  Object.hasOwn(studyPlanItemsObj[key], "type")
+                ? studyPlanItemsObj[key].type
+                : ""
           }
           displayConditions={displayConditions}
           unlockProtectedVisible={
