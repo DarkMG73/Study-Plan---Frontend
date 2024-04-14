@@ -32,7 +32,7 @@ const AddToPlanButton = (props) => {
     }
   };
   return (
-    <Fragment key={id}>
+    <Fragment key={id + title + "create-entry-btn"}>
       <PushButton
         key={id}
         inputOrButton="button"

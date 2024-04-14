@@ -191,39 +191,13 @@ const StudyPlanItemsList = (props) => {
           (key === "markcomplete" || key === "markforreview") &&
           rawItemWithNewEdits[key].constructor !== Boolean
         ) {
-          console.log(
-            "%c⚪️►►►► %cline:191%ckey",
-            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-            "color:#fff;background:rgb(39, 72, 98);padding:3px;border-radius:2px",
-            key,
-          );
           // Convert to boolean.
           const innerItem = existingFormEdits[parentMasterID][key];
-          console.log(
-            "%c⚪️►►►► %cline:195%cinnerItem",
-            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-            "color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px",
-            innerItem,
-          );
-          console.log(
-            "%c⚪️►►►► %cline:197%ctypeof innerItem === String",
-            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-            "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
-            typeof innerItem === String,
-          );
+
           if (typeof innerItem === String) {
             itemWithNewEdits[key] =
               innerItem.trim().toLowerCase === "true" ? true : false;
           } else {
-            console.log(
-              "%c⚪️►►►► %cline:204%celse",
-              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-              "color:#fff;background:rgb(96, 143, 159);padding:3px;border-radius:2px",
-            );
             itemWithNewEdits[key] = innerItem;
           }
         } else {

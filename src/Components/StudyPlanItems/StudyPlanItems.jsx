@@ -59,7 +59,7 @@ const StudyPlanItems = (props) => {
     Object.hasOwn(dataObjForEdit[id], "title") ? (
       <Fragment key={dataObjForEdit[id].title + id}>
         <div key={dataObjForEdit[id].title}>{dataObjForEdit[id].title}</div>
-        <div key={id}>{id}</div>
+        <div key={id + dataObjForEdit[id].title}>{id}</div>
       </Fragment>
     ) : typeName ? (
       typeName + "s"
@@ -221,7 +221,7 @@ const StudyPlanItems = (props) => {
         Object.hasOwn(studyPlanMetadata, "_id") &&
         studyPlanMetadata._id.length > 0 && (
           <ul
-            key={id}
+            key={id + typeName}
             data-marker="STUDYPLAN-ITEMS"
             data-section={id}
             id={id}
@@ -309,14 +309,14 @@ const StudyPlanItems = (props) => {
               Object.keys(formInputData).length > 0 &&
               !outputName.toLowerCase().includes("steps") && (
                 <div
-                  key={id}
+                  key={id + "show-all-sub-goals"}
                   id="list-button-container"
                   className={styles["goal-button-container"]}
                 >
                   {hideAllSubGoals && (
                     <Fragment key={id}>
                       <PushButton
-                        key={id}
+                        key={id + "sub-goals-as-list"}
                         inputOrButton="button"
                         id={"create-entry-btn" + id}
                         colorType="secondary"
@@ -333,7 +333,7 @@ const StudyPlanItems = (props) => {
                   )}
                   {!hideAllSubGoals && (
                     <PushButton
-                      key={id}
+                      key={id - "sub-goal-tree"}
                       inputOrButton="button"
                       id={"create-entry-btn" + id}
                       colorType="secondary"
@@ -353,7 +353,7 @@ const StudyPlanItems = (props) => {
               Object.keys(formInputData).length > 0 &&
               !outputName.toLowerCase().includes("goal") && (
                 <div
-                  key={id}
+                  key={id + "history-list-data-section"}
                   data-section="history-list-data-section"
                   id={id}
                   className={
@@ -480,14 +480,14 @@ const StudyPlanItems = (props) => {
                 >
                   {!props.hideShowAllButton && (
                     <div
-                      key={id}
+                      key={id + "show-everything"}
                       id="list-button-container"
                       className={styles["list-button-container"]}
                     >
                       {!showListResetButton && (
                         <Fragment>
                           <PushButton
-                            key={id}
+                            key={id + "show-goals-steps-holds"}
                             inputOrButton="button"
                             id={"create-entry-btn" + id}
                             colorType="secondary"
@@ -504,7 +504,7 @@ const StudyPlanItems = (props) => {
                       )}
                       {showListResetButton && (
                         <PushButton
-                          key={id}
+                          key={id + "show-only-steps"}
                           inputOrButton="button"
                           id={"create-entry-btn" + id}
                           colorType="secondary"

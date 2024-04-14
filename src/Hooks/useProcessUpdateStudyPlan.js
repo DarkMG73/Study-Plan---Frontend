@@ -42,20 +42,6 @@ const useProcessUpdateStudyPlan = () => {
           innerItem,
         );
         if (typeof innerItem === String) {
-          console.log(
-            "%c⚪️►►►► %cline:38%ctypeof innerItem === String",
-            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-            "color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px",
-            typeof innerItem === String,
-          );
-          console.log(
-            "%c⚪️►►►► %cline:52%c[true].includes(innerItem.trim()",
-            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-            "color:#fff;background:rgb(254, 67, 101);padding:3px;border-radius:2px",
-            ["true"].includes(innerItem.trim()),
-          );
           outputItemWithNewEdits[key] =
             innerItem.trim().toLowerCase() === "true" ? true : false;
         } else {
@@ -92,7 +78,7 @@ const useProcessUpdateStudyPlan = () => {
               }),
             );
             alert("Success! The item has been updated.");
-
+            window.location.reload();
             // setInEditMode(false);
           } else {
             alert("There was an error: " + res.message);
