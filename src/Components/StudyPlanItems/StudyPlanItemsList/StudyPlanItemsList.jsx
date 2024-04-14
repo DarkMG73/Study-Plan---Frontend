@@ -21,13 +21,6 @@ const StudyPlanItemsList = (props) => {
   const parentMasterType = props.parentMasterType;
   const section = props.section;
   const subListLevel = props.subListLevel;
-  console.log(
-    "%c⚪️►►►► %cline:23%csubListLevel",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(130, 57, 53);padding:3px;border-radius:2px",
-    subListLevel,
-  );
   const formInputData = useSelector((state) => state.formInputData);
   const displayConditions = props.displayConditions;
   const onlyList = props.onlyList;
@@ -136,15 +129,7 @@ const StudyPlanItemsList = (props) => {
 
   const submitFormButtonHandler = (e) => {
     e.preventDefault();
-    console.log(
-      "%c⚪️►►►► %cline:130%ce.target",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
-      e.target,
-    );
 
-    e.preventDefault();
     if (isDemo) {
       alert(isDemo);
       return;
@@ -155,22 +140,8 @@ const StudyPlanItemsList = (props) => {
     // Allow a pause to ensure input data is fully updated to existing form state
     setTimeout(() => {
       const parentMasterID = e.target.getAttribute("data-parentmasterid");
-      console.log(
-        "%c⚪️►►►► %cline:149%cparentMasterID",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(248, 214, 110);padding:3px;border-radius:2px",
-        parentMasterID,
-      );
       // const parentSection = e.target.getAttribute("data-section");
       const rawItemWithNewEdits = { ...studyPlanItemsObj[parentMasterID] };
-      console.log(
-        "%c⚪️►►►► %cline:152%crawItemWithNewEdits",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(254, 67, 101);padding:3px;border-radius:2px",
-        rawItemWithNewEdits,
-      );
       const _id = rawItemWithNewEdits._id;
       const existingFormEdits = { ...formInputData.existingFormInputDataObj };
 
@@ -179,11 +150,11 @@ const StudyPlanItemsList = (props) => {
         if (key === "markcomplete" || key === "markforreview") {
           const innerItem = existingFormEdits[parentMasterID][key];
           if (typeof innerItem === String) {
-            if (["true", "1", " "].includes(innerItem.trim())) {
-              rawItemWithNewEdits[key] = true;
-            } else {
-              rawItemWithNewEdits[key] = false;
-            }
+            rawItemWithNewEdits[key] = ["true", "1", " "].includes(
+              innerItem.trim(),
+            )
+              ? true
+              : false;
           } else {
             rawItemWithNewEdits[key] = innerItem;
           }
@@ -220,27 +191,49 @@ const StudyPlanItemsList = (props) => {
           (key === "markcomplete" || key === "markforreview") &&
           rawItemWithNewEdits[key].constructor !== Boolean
         ) {
-          if (
-            existingFormEdits[parentMasterID] &&
-            (!existingFormEdits[parentMasterID][key] ||
-              ["", "false"].includes(existingFormEdits[parentMasterID][key]))
-          ) {
-            itemWithNewEdits[key] = false;
+          console.log(
+            "%c⚪️►►►► %cline:191%ckey",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(39, 72, 98);padding:3px;border-radius:2px",
+            key,
+          );
+          // Convert to boolean.
+          const innerItem = existingFormEdits[parentMasterID][key];
+          console.log(
+            "%c⚪️►►►► %cline:195%cinnerItem",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px",
+            innerItem,
+          );
+          if (typeof innerItem === String) {
+            console.log(
+              "%c⚪️►►►► %cline:197%ctypeof innerItem === String",
+              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+              "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
+              typeof innerItem === String,
+            );
+            itemWithNewEdits[key] = ["true", "1", " "].includes(
+              innerItem.trim(),
+            )
+              ? true
+              : false;
           } else {
-            itemWithNewEdits[key] = true;
+            console.log(
+              "%c⚪️►►►► %cline:204%celse",
+              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+              "color:#fff;background:rgb(96, 143, 159);padding:3px;border-radius:2px",
+            );
+            itemWithNewEdits[key] = innerItem;
           }
         } else {
           itemWithNewEdits[key] = value;
         }
       }
 
-      console.log(
-        "%c⚪️►►►► %cline:229%citemWithNewEdits",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
-        itemWithNewEdits,
-      );
       if (user) {
         dispatch(
           studyPlanDataActions.updateOneStudyPlanItem({

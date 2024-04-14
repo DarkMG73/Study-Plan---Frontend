@@ -30,6 +30,18 @@ const useProcessUpdateStudyPlan = () => {
           outputItemWithNewEdits[key] = true;
         }
       }
+
+      // Convert to boolean.
+      if (key === "markcomplete" || key === "markforreview") {
+        const innerItem = outputItemWithNewEdits[key];
+        if (typeof innerItem === String) {
+          outputItemWithNewEdits[key] = ["true", "1"].includes(innerItem.trim())
+            ? true
+            : false;
+        } else {
+          outputItemWithNewEdits[key] = innerItem;
+        }
+      }
     }
     ///////////////////////////////////////////
 

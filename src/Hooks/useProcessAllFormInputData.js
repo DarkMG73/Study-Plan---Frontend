@@ -137,9 +137,43 @@ const useProcessAllFormInputData = () => {
             if (key === "createdAt" || key === "updatedAt") {
               value = date;
             }
-
+            // Priority needs a changeable number to force if none selected
             if (key === "priority" && value === "") {
               value = "0";
+            }
+
+            // Convert to boolean.
+            if (key === "markcomplete" || key === "markforreview") {
+              console.log(
+                "%c⚪️►►►► %cline:146%ckey",
+                "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                "color:#fff;background:rgb(229, 187, 129);padding:3px;border-radius:2px",
+                key,
+              );
+              console.log(
+                "%c⚪️►►►► %cline:148%cvalue",
+                "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                "color:#fff;background:rgb(3, 101, 100);padding:3px;border-radius:2px",
+                value,
+              );
+              console.log(
+                "%c⚪️►►►► %cline:155%ctypeof value === String",
+                "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                "color:#fff;background:rgb(237, 222, 139);padding:3px;border-radius:2px",
+                typeof value === String,
+              );
+              if (typeof value === String) {
+                value = ["true", "1", " "].includes(value.trim())
+                  ? true
+                  : false;
+              } else if (typeof value === Boolean) {
+                value = !!value;
+              } else {
+                value = false;
+              }
             }
 
             // Clean Goals unused data (available before selecting type "goal")
@@ -147,6 +181,13 @@ const useProcessAllFormInputData = () => {
               if (unusedFieldsForGoals.includes(key)) {
                 value = "";
               }
+              console.log(
+                "%c⚪️►►►► %cline:178%cvalue",
+                "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                "color:#fff;background:rgb(96, 143, 159);padding:3px;border-radius:2px",
+                value,
+              );
             }
 
             if (Object.hasOwn(formData, "type") && formData.type === "hold") {
