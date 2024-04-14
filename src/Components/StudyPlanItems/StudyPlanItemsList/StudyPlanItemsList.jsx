@@ -587,7 +587,7 @@ const StudyPlanItemsList = (props) => {
                     data-parentmasterid={key}
                     onClick={showProtectedHiddenHandler}
                   >
-                    1 Show Hidden Fields
+                    Show Hidden Fields
                   </button>
                   {!onlyList && unlockProtectedVisible.includes(key) && (
                     <Fragment>
@@ -826,7 +826,7 @@ const StudyPlanItemsList = (props) => {
                     data-parentmasterid={key}
                     onClick={showProtectedHiddenHandler}
                   >
-                    2 Show Hidden Fields
+                    Show Hidden Fields
                   </button>
                   {!onlyList && unlockProtectedVisible.includes(key) && (
                     <Fragment>
