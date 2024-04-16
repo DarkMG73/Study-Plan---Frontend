@@ -308,6 +308,9 @@ body .dependencies-container [data-parentmastertype="step"] {
   flex-grow: 0;
 }
 
+.dependencies-container .show-hidden-form-button {
+  display: none;
+}
 .delete-form-button {
   flex-grow: 0;
   flex-basis: min-content;

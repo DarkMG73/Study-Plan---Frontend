@@ -557,20 +557,17 @@ const StudyPlanItemsList = (props) => {
                         >
                           {!unlockProtectedVisible.includes(key) && (
                             <Fragment>
-                              <span>
-                                Edit 1 | {subListLevel}|{key}
-                              </span>
+                              <span>Edit </span>
                               <span
                                 className={styles["edit-button-target-name"]}
                               >
-                                "{studyPlanItemsObj[key].name}" ---{" "}
-                                {studyPlanItemsObj[key]._id} ---
+                                "{studyPlanItemsObj[key].name}"
                               </span>
                             </Fragment>
                           )}
                           {unlockProtectedVisible.includes(key) && (
                             <Fragment>
-                              Cancel Editing{" "}
+                              Cancel Editing
                               <span
                                 className={styles["edit-button-target-name"]}
                               >
@@ -644,10 +641,9 @@ const StudyPlanItemsList = (props) => {
                           onClick={openItemEditorButtonHandler}
                         >
                           <Fragment>
-                            <span>Open Item Editor</span>
+                            <span>Edit </span>
                             <span className={styles["edit-button-target-name"]}>
-                              "{studyPlanItemsObj[key].name}" ---{" "}
-                              {studyPlanItemsObj[key]._id} ---
+                              "{studyPlanItemsObj[key].name}"
                             </span>
                           </Fragment>
                         </button>
@@ -888,15 +884,12 @@ const StudyPlanItemsList = (props) => {
                             <Fragment>
                               {" "}
                               <span className={styles["edit-button-title"]}>
-                                <span>
-                                  Edit 2 | {subListLevel}| {key}
-                                </span>
+                                <span>Edit </span>
                               </span>
                               <span
                                 className={styles["edit-button-target-name"]}
                               >
-                                "{studyPlanItemsObj[key].name}" ---{" "}
-                                {studyPlanItemsObj[key]._id} ---
+                                "{studyPlanItemsObj[key].name}"
                               </span>
                             </Fragment>
                           )}
@@ -973,10 +966,9 @@ const StudyPlanItemsList = (props) => {
                           onClick={openItemEditorButtonHandler}
                         >
                           <Fragment>
-                            <span>Open Item Editor</span>
+                            <span>Edit </span>
                             <span className={styles["edit-button-target-name"]}>
-                              "{studyPlanItemsObj[key].name}" ---{" "}
-                              {studyPlanItemsObj[key]._id} ---
+                              "{studyPlanItemsObj[key].name}"
                             </span>
                           </Fragment>
                         </button>
