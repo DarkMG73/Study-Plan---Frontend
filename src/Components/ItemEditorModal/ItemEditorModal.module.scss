@@ -1,0 +1,515 @@
+/* New Form Modal*/
+.in-modal {
+  position: relative;
+}
+
+.new-form-modal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  // background: var(--spt-color-accent-gradient);
+  // background: linear-gradient( 180deg, transparent 0, var(--spt-color-accent) 25%, var(--spt-color-accent-dark) 75% ,transparent 100% );
+  background: var(--spt-color-background-contrast);
+  color: var(--spt-color-background);
+  overflow: scroll;
+  z-index: 10000;
+}
+
+.new-form-modal ul > .group-title {
+  width: 100%;
+  text-align: center;
+  font-variant: small-caps;
+  font-size: 1.5em;
+  background: inherit;
+  color: inherit;
+}
+
+.new-form-modal div {
+  max-height: none !important;
+}
+
+.new-form-modal ul[class*="dependencies"] {
+  display: none !important;
+}
+
+.new-form-modal form ul {
+  display: flex;
+  background: var(--spt-color-accent-2-dark);
+  background: transparent;
+  padding: 0;
+  margin: auto;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.new-form-wrap {
+  position: relative;
+}
+
+.new-form-modal form ul[id*="itemEditForm"] {
+  display: grid;
+  grid-gap: 0;
+  grid-template-columns: repeat(4, 25%);
+  grid-template-areas:
+    "name name  name name"
+    "slug slug slug slug"
+    "type type   priority priority"
+    "method method method method"
+    "des des des des"
+    "msup msup msup msup"
+    "asup asup asup asup"
+    "url url url url"
+    "author author platform platform"
+    "lectureTime lectureTime labTime labTime"
+    "start status acomp acomp"
+    "demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc"
+    "demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl"
+    "itemnotes itemnotes itemnotes itemnotes"
+    "tags tags tags tags"
+    "masterLibraryID masterLibraryID masterLibraryID masterLibraryID";
+  grid-auto-flow: row dense;
+  max-width: 100%;
+}
+
+.new-form-modal form [newformtype="hold"] ul[id*="itemEditForm"] {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "name name  name name"
+    "type type   type type"
+    "method method method method"
+    "msup msup msup msup"
+    "asup asup asup asup"
+    "des des des des"
+    "url url url url"
+    "author author platform platform"
+    "lectureTime lectureTime labTime labTime"
+    "start status acomp acomp"
+    "itemnotes itemnotes itemnotes itemnotes"
+    "tags tags tags tags";
+  grid-auto-flow: row dense;
+  max-width: 100%;
+}
+
+.new-form-modal form [newformtype="goal"] ul[id*="itemEditForm"] {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "name name"
+    "type type"
+    "method method"
+    "msup msup"
+    "asup asup"
+    "des des"
+    "start start"
+    "itemnotes itemnotes"
+    "tags tags";
+  grid-auto-flow: row dense;
+  max-width: 100%;
+}
+
+.new-form-modal {
+  [class*="new-form-wrap"] li textarea,
+  [class*="new-form-wrap"] li input,
+  [class*="new-form-wrap"] li select {
+    background: var(--spt-color-background);
+    color: var(--spt-color-background-contrast-dark);
+    pointer-events: all;
+  }
+}
+
+/* New Entry Form Goal Adjustments */
+.new-form-modal form [newformtype="goal"] {
+  background: var(--spt-color-accent-2-dark);
+  color: var(--spt-color-background);
+  border: 3px outset var(--spt-color-accent-2-dark);
+  li[id*="-url-item"],
+  li[id*="-priority-item"],
+  li[id*="-method"],
+  li[id*="-lectureTime-item"],
+  li[id*="-labTime-item"],
+  li[id*="-author-item"],
+  li[id*="-status-item"],
+  li[id*="-platform-item"],
+  li[id*="-method-item"],
+  li[id*="-acomp-item"] {
+    // border: 7px solid red;
+    background: gray;
+    opacity: 0.5;
+    pointer-events: none;
+    display: none;
+  }
+  ul {
+    li {
+      &:not([id*="-name-item"], [id*="-type-item"]) {
+        label,
+        &:before {
+          color: var(--spt-color-background);
+        }
+      }
+    }
+  }
+
+  .cancel-single-form-button {
+    background: var(--spt-color-accent-2-gradient) !important;
+    font-size: 14px;
+  }
+  .cancel-single-form-button:after {
+    content: "";
+  }
+} /* ********** */
+
+.new-form-modal form [newformtype="step"] {
+  background: var(--spt-color-background-warm);
+  border: 3px outset var(--spt-color-accent);
+  color: var(--spt-color-background-contrast-dark);
+  ul {
+    li {
+      &:not([id*="-name-item"], [id*="-type-item"]) {
+        label,
+        &:before {
+          color: var(--spt-color-background-contrast);
+        }
+      }
+    }
+  }
+}
+
+.new-form-modal form [newformtype="hold"] {
+  background: var(--spt-color-background-contrast-dark);
+  color: var(--spt-color-background-warm);
+  border: 3px outset var(--spt-color-background-contrast-dark);
+}
+
+.new-form-modal ul > div {
+  margin: 0;
+  padding: 0 1em 4em;
+  box-shadow:
+    -1px -1px 3px -2px white,
+    1px 1px 3px -2px black;
+  background: transparent;
+}
+
+.new-form-modal form {
+  color: inherit;
+  background: inherit;
+  padding: 3em;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+}
+
+.new-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 1em auto;
+}
+
+.new-form .new-form {
+  position: relative;
+  flex-basis: fit-content;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 1em auto;
+  flex-basis: 33.33%;
+  min-width: 400px;
+  max-width: 800px;
+  padding: 1em;
+}
+
+.new-form .new-form > ul {
+  list-style: none;
+  /* border: 3px solid; */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: flex-start;
+  position: relative;
+  /* box-shadow: 0px 24px 33px 0px var(--spt-color-accent); */
+  max-width: 100%;
+  background: none;
+  border-radius: 0;
+  overflow: auto;
+  [class*="url-arrow"] {
+    display: none;
+  }
+}
+
+.new-form-modal {
+  h2 {
+    margin: 0.5em auto;
+    font-weight: 700;
+    letter-spacing: 0.5em;
+    background: inherit;
+    color: inherit;
+  }
+  > button {
+    margin: auto;
+  }
+
+  .new-form li {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    margin: 0.25em;
+    width: auto;
+    label,
+    &:before {
+      color: var(--spt-color-background);
+    }
+  }
+
+  li,
+  input,
+  textarea,
+  select {
+    border-radius: 6.25px;
+    border: none;
+  }
+  input,
+  textarea,
+  select {
+    box-shadow:
+      inset -1px -1px 3px -2px white,
+      inset 1px 1px 3px -2px black;
+  }
+
+  .new-form li select {
+    width: 100%;
+  }
+
+  .new-form-button-wrap {
+    display: flex;
+    justify-content: center;
+  }
+
+  .new-form-button-wrap > button {
+    min-width: 100%;
+  }
+  .new-form-button-wrap > button:hover {
+    transform: scale(1, 1.25);
+  }
+
+  form {
+    label,
+    li:before {
+      opacity: 1;
+      font-feature-settings: "smcp", "c2sc";
+      font-variant: all-small-caps;
+      transition: 0.2s all ease;
+      font-size: 1em;
+      background: inherit;
+      color: inherit;
+      height: 2em;
+      flex-grow: 1;
+    }
+
+    [for*="type"],
+    [for*="name"],
+    [for*="method"],
+    [class*="priority"] {
+      display: initial;
+      transform: none;
+    }
+    li[class*="name"],
+    li[class*="type"] {
+      border: 3px solid var(--spt-color-accent-dark);
+      background: var(--spt-color-accent-dark);
+      color: var(--spt-color-background-warm) !important;
+      max-height: 10em;
+    }
+
+    li[class*="name"]:before,
+    li[class*="type"]:before {
+      content: "* Required *";
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(5%, -50%);
+      font-size: 10px;
+      padding: 0;
+      background: transparent;
+      color: inherit;
+      opacity: 0.76;
+    }
+
+    li[class*="name"]:hover:before,
+    li[class*="type"]:hover:before {
+      opacity: 1;
+    }
+
+    li[class*="markcomplete"],
+    li[class*="markforreview"],
+    li[class*="progressbar"],
+    li[class*="_id"],
+    li[class*="createdAt"],
+    li[class*="featured-url-arrow-wrap"] {
+      display: none;
+    }
+
+    .new-form-button {
+      position: relative;
+      width: fit-content;
+      font: var(--spt-font-subheading);
+      letter-spacing: var(--spt-spacing-subheading);
+      font-family: Arial;
+      font-size: 1.2rem;
+      z-index: 10;
+      margin: 0 0.5em;
+      /* box-shadow: inset 1px 1px 1px rgb(255 255 255 / 25%), inset 1px -1px 1px rgb(0 0 0 / 15%), 1px 1px 5px -3px black; */
+      box-shadow:
+        3px 3px 7px -5px white inset,
+        -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
+      border: none;
+      background: var(--spt-color-background);
+      color: var(--spt-color-accent);
+      // border-radius: 50px;
+      padding: 0.5em 1em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s all ease;
+      font-feature-settings: "smcp";
+      font-variant: small-caps;
+    }
+
+    .new-form-button {
+      background: var(--spt-color-accent-gradient);
+      color: var(--spt-color-background);
+      width: 100%;
+      margin: 0 auto;
+      padding: 0.5em;
+      font-size: 1em;
+      transition: 0.2s all ease;
+    }
+
+    .new-form-button:last-child {
+      font-size: 1.8em;
+      margin-top: 0;
+    }
+    .new-form-button:hover {
+      position: relative;
+      background: var(--spt-color-accent-dark);
+      color: var(--spt-color-background);
+      transition: 0.3s all ease;
+      transform: scale(1, 1.125);
+    }
+
+    .new-form-button span {
+      text-transform: capitalize;
+      text-transform: capitalize;
+      -webkit-background-clip: unset;
+      color: inherit;
+      background: transparent;
+      -webkit-text-fill-color: unset;
+      pointer-events: none;
+      flex-grow: 0;
+      margin: 0;
+    }
+
+    ul[class*="in-modal"] div[id*="itemEditForm-"] {
+      .cancel-single-form-button {
+        background: var(--spt-color-accent-gradient);
+        font-size: 14px;
+      }
+      .cancel-single-form-button:after {
+        content: "";
+      }
+    }
+
+    li input,
+    li select,
+    li textarea {
+      min-height: 2em;
+      height: 2.5em;
+      font: var(--spt-font-body-text);
+      font-size: 1em;
+      width: 100%;
+      max-width: 97%;
+      margin: auto;
+      text-align: center;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 2.5em;
+    }
+
+    li[class*="method"] {
+      max-height: 100%;
+    }
+  }
+}
+
+/* New Entry Form Hold Adjustments */
+[newformtype="hold"] {
+  li[id*="-priority"],
+  li[id*="-status"],
+  li[id*="-acomp"],
+  li[id*="-start"] {
+    // border: 7px solid red;
+    background: gray;
+    opacity: 0.5;
+    pointer-events: none;
+    display: none;
+  }
+}
+/* ********** */
+
+.new-form-item {
+  width: 100%;
+  margin: 0.25em 0;
+  padding: 0;
+  flex-grow: 1;
+}
+
+.new-form-item label {
+  opacity: 1;
+  font: var(--spt-text-subheading);
+}
+
+.new-form-item textarea {
+  opacity: 1;
+  font: var(--spt-text-subheading);
+  padding: 0.5em 1em 0em;
+  line-height: 1em;
+  vertical-align: middle;
+  height: auto;
+}
+
+@media screen and (max-width: 650px) {
+  .new-form-button:last-child {
+    padding: 01em 2em;
+    word-wrap: break-word;
+    flex-wrap: wrap;
+    min-width: 100%;
+  }
+  .new-form-modal form {
+    padding: 3em 1em;
+  }
+  form .new-form {
+    .new-form {
+      padding: 1em 0;
+      width: 100%;
+      min-width: 200px;
+    }
+    .new-form-button {
+      border-radius: 15px;
+      width: 100%;
+      padding: 1em;
+    }
+  }
+}
+
+@media screen and (max-width: 300px) {
+  form .new-form {
+    .new-form-button {
+      flex-direction: column;
+    }
+  }
+}

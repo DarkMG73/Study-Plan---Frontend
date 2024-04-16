@@ -34,13 +34,7 @@ const useProcessUpdateStudyPlan = () => {
       // Convert to boolean.
       if (key === "markcomplete" || key === "markforreview") {
         const innerItem = outputItemWithNewEdits[key];
-        console.log(
-          "%c⚪️►►►► %cline:36%cinnerItem",
-          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-          "color:#fff;background:rgb(20, 68, 106);padding:3px;border-radius:2px",
-          innerItem,
-        );
+
         if (typeof innerItem === String) {
           outputItemWithNewEdits[key] =
             innerItem.trim().toLowerCase() === "true" ? true : false;
@@ -77,9 +71,10 @@ const useProcessUpdateStudyPlan = () => {
                 item: outputItemWithNewEdits,
               }),
             );
-            alert("Success! The item has been updated.");
-            window.location.reload();
-            // setInEditMode(false);
+            const resetPage = window.confirm(
+              'Success! The item has been deleted.\n\nClick "OK" to refresh the page and show the changes.\n\nClicking "Cancel" will return to the page. If you "Cancel" here, you will need to refresh manually later to populate the changes throughout the app.',
+            );
+            if (resetPage) window.location.reload();
           } else {
             alert("There was an error: " + res.message);
           }
@@ -95,8 +90,7 @@ const useProcessUpdateStudyPlan = () => {
       );
       if (sendEmail) {
         const questionAdminEmail = "general@glassinteractive.com";
-        const subject =
-          "A Question Edit Request for the Interview Questions Tool";
+        const subject = "An Edit Request for the Study Plan Tool";
         const body = `A question edit is being recommended: ${JSON
           .stringify
           // editedQuestions.current.edits
