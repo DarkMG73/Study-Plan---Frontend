@@ -153,7 +153,7 @@ const StudyPlanItemsList = (props) => {
       const parentMasterID = e.target.getAttribute("data-parentmasterid");
       // const parentSection = e.target.getAttribute("data-section");
       const rawItemWithNewEdits = { ...studyPlanItemsObj[parentMasterID] };
-      const _id = rawItemWithNewEdits._id;
+      // const _id = rawItemWithNewEdits._id;
       const existingFormEdits = { ...formInputData.existingFormInputDataObj };
 
       for (const key in existingFormEdits[parentMasterID]) {
@@ -217,12 +217,12 @@ const StudyPlanItemsList = (props) => {
       }
 
       if (user) {
-        dispatch(
-          studyPlanDataActions.updateOneStudyPlanItem({
-            _id: _id,
-            item: itemWithNewEdits,
-          }),
-        );
+        // dispatch(
+        //   studyPlanDataActions.updateOneStudyPlanItem({
+        //     _id: _id,
+        //     item: itemWithNewEdits,
+        //   }),
+        // );
 
         dispatch(
           studyPlanDataActions.updateStudyPlanDB({ itemWithNewEdits, user }),
@@ -540,7 +540,7 @@ const StudyPlanItemsList = (props) => {
                         },
                       )}
                   </ul>
-                  {!onlyList && (!subListLevel || subListLevel === "0") && (
+                  {!onlyList && (!subListLevel || subListLevel !== "0") && (
                     <div className={styles["button-container"]}>
                       {!noEditButton && (
                         <button
@@ -869,7 +869,7 @@ const StudyPlanItemsList = (props) => {
                     emptyForm={props.emptyForm}
                     setFormType={props.setFormType}
                   />{" "}
-                  {!onlyList && subListLevel && (
+                  {!onlyList && !subListLevel && (
                     <div className={styles["button-container"]}>
                       {!noEditButton && (
                         <button
