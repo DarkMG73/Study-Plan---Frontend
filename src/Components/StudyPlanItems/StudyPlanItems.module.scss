@@ -30,8 +30,14 @@
     margin-left: 1em;
     text-align: left;
   }
+  li {
+    padding: 0.5em 0.25em 0.75em;
+  }
 }
 
+textarea {
+  padding-right: 2em;
+}
 select {
   margin-left: -1em;
   max-width: fit-content;
@@ -44,6 +50,10 @@ select[data-category="priority"] {
 input[type="url"] {
   max-width: 95%;
   text-overflow: ellipsis;
+}
+
+input[type*="datetime"] {
+  font-size: 12px;
 }
 
 .group-studyPlan-goals ul,
@@ -181,6 +191,13 @@ ul[type="hold"] {
     margin-bottom: -0.625em;
     height: 1em;
     padding-top: 0;
+    box-shadow: none;
+  }
+}
+
+ul[type="hold"] {
+  li[id*="progressbar-item"] {
+    opacity: 0;
   }
 }
 
@@ -203,7 +220,8 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
     "des    des   des   des des des des"
     "url    url   url   url url url url"
     "type   author  author  author platform platform platform"
-    "lectureTime  labTime    start    acomp  status status status"
+    "lectureTime  lectureTime  lectureTime labTime  labTime  labTime labTime"
+    "start  start    acomp  acomp status  status  status"
     "demonstratedskillsdesc   demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc"
     "demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl"
     "itemnotes itemnotes itemnotes itemnotes itemnotes itemnotes itemnotes"
@@ -240,14 +258,26 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
 .studyPlan-items-group[type="hold"] button {
   background: var(--spt-color-background-contrast);
   color: var(--spt-color-accent-light);
+  box-shadow:
+    inset 5px 5px 9px -5px rgb(255 255 255 / 50%),
+    inset -5px -5px 9px -5px hsl(0deg 0% 0% / 50%);
 }
 
-.studyPlan-items-group[type="hold"] subtext {
-  box-shadow:
-    inset 1px 1px 4px -3px #000000,
-    inset -1px -1px 4px -3px white;
-  padding: 1.5em 2em;
-  border-radius: inherit;
+.studyPlan-items-group[type="hold"] {
+  subtext {
+    box-shadow:
+      inset 1px 1px 4px -3px #000000,
+      inset -1px -1px 4px -3px white;
+    padding: 1.5em 2em;
+    border-radius: inherit;
+  }
+
+  label,
+  :before {
+    color: var(--spt-color-background);
+    background: var(--spt-color-background-contrast);
+    opacity: 1;
+  }
 }
 
 .group-title {
@@ -339,7 +369,8 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
   background: var(--spt-color-background);
   color: var(--spt-color-background-contrast-dark);
   padding: 1em;
-  margin: 0 1em;
+  margin: auto;
+  min-width: calc(100% - 4em);
   font: var(--spt-font-body-text-12);
   border-radius: 12.5px;
 }
@@ -461,6 +492,19 @@ body .list-button-container {
   display: flex;
   align-items: center;
   margin: 1em;
+  label {
+    padding-left: 1em;
+    border-radius: 7px 0 0 7px;
+  }
+}
+
+.studyPlan-items-group[type="hold"] .sort-button-container {
+  background: inherit;
+  color: inherit;
+  label {
+    background: inherit;
+    color: inherit;
+  }
 }
 
 .sort-button-container > * {
@@ -575,6 +619,11 @@ body .list-button-container {
 }
 
 @media screen and (max-width: 650px) {
+  ul[type="goal"] {
+    li[id*="progressbar-item"] {
+      display: none;
+    }
+  }
   ul[data-parentmastertype="goal"] div[data-container-type="collapsibleElm"] {
     padding: 0.75em 0;
     grid-template-columns: repeat(6, 1fr);
@@ -602,7 +651,9 @@ body .list-button-container {
       "buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer buttonContainer"
       "dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container";
     > li {
-      padding: 0 0.25em;
+      // padding: 0 0.25em;
+      padding: 0em 0.25em 0.75em;
+      text-align: center;
     }
     select {
       max-width: fit-content;
@@ -627,7 +678,9 @@ body .list-button-container {
       "author author author  author  author author author"
       "platform platform platform platform platform platform platform"
       "lectureTime  lectureTime lectureTime labTime    labTime labTime labTime"
-      "start   start acomp  acomp acomp status status"
+      "start   start start  start start start start"
+      "acomp   acomp acomp  acomp acomp acomp acomp"
+      "status   status status  status status status status"
       "demonstratedskillsdesc   demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc demonstratedskillsdesc"
       "demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl demonstratedskillurl"
       "itemnotes itemnotes itemnotes itemnotes itemnotes itemnotes itemnotes"
@@ -642,8 +695,7 @@ body .list-button-container {
       "dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container dependencies-container";
 
     > li {
-      padding-left: 0.25em;
-      padding-right: 0.25em;
+      text-align: center;
     }
     li[class*="method"] {
       text-align: center;
@@ -657,6 +709,30 @@ body .list-button-container {
         text-align: center;
       }
     }
+    select,
+    input {
+      max-width: fit-content;
+      width: 100%;
+      text-align: center;
+      min-width: min-content;
+      margin: auto;
+    }
+
+    ::-webkit-input-placeholder,
+    ::input-placeholder {
+      max-width: fit-content;
+      width: 100%;
+      text-align: center;
+      min-width: min-content;
+      margin: auto;
+    }
+
+    ul[data-parentmastertype="goal"]
+      div[data-container-type="collapsibleElm"]
+      li[id*="progressbar-item"] {
+      padding: 0em 0.25em 0.75em !important;
+    }
+
     li[class*="method"]:before {
       content: "Method";
       text-align: center;
@@ -678,6 +754,24 @@ body .list-button-container {
     }
   }
 
+  ul[data-parentmastertype="goal"] div[data-container-type="collapsibleElm"] {
+    li,
+    ul[data-parentmastertype="step"] li {
+      padding: 0em 0 0.75em 0;
+    }
+    ul[type="step"]
+      > div[data-container-type="collapsibleElm"]
+      > li[id*="name-item"] {
+      padding-left: 87px;
+    }
+  }
+  ::-webkit-input-placeholder {
+    text-align: center;
+  }
+
+  :-moz-placeholder {
+    text-align: center;
+  }
   body .section-subtext-wrap > button {
     font: var(--spt-font-body-text);
     font-size: 1em;
@@ -692,7 +786,7 @@ body .list-button-container {
   ul[type="step"],
   ul[type="hold"] {
     > div[data-container-type="collapsibleElm"] > li[id*="name-item"] {
-      padding-left: 84px;
+      padding-left: 90px;
     }
   }
 }

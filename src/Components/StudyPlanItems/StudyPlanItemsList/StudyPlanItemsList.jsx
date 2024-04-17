@@ -203,7 +203,12 @@ const StudyPlanItemsList = (props) => {
           rawItemWithNewEdits[key].constructor !== Boolean
         ) {
           // Convert to boolean.
-          const innerItem = existingFormEdits[parentMasterID][key];
+          const innerItem = Object.hasOwn(
+            existingFormEdits[parentMasterID],
+            key,
+          )
+            ? existingFormEdits[parentMasterID][key]
+            : false;
 
           if (typeof innerItem === String) {
             itemWithNewEdits[key] =
@@ -465,7 +470,6 @@ const StudyPlanItemsList = (props) => {
                     data-section={section}
                   >
                     <h3>The Path to {studyPlanItemsObj[key].name}</h3>
-
                     {props.allStudyPlanItems &&
                       studyPlanItemsObj[key].dependencies.map(
                         (dependencyIdentifier) => {

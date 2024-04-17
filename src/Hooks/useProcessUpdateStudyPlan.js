@@ -72,7 +72,7 @@ const useProcessUpdateStudyPlan = () => {
               }),
             );
             const resetPage = window.confirm(
-              'Success! The item has been deleted.\n\nClick "OK" to refresh the page and show the changes.\n\nClicking "Cancel" will return to the page. If you "Cancel" here, you will need to refresh manually later to populate the changes throughout the app.',
+              'Success! The item has been updated.\n\nClick "OK" to refresh the page and show the changes.\n\nClicking "Cancel" will return to the page. If you "Cancel" here, you will need to refresh manually later to populate the changes throughout the app.',
             );
             if (resetPage) window.location.reload();
           } else {

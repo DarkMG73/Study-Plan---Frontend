@@ -116,15 +116,26 @@
   padding: 0.25vh 1vw;
   border-radius: 12.5px;
   margin-top: 1em;
+  color: var(--spt-color-accent-2-dark);
+  background: inherit;
+  color: inherit;
+  opacity: 0.75;
 }
 
 ul[type="goal"] {
   .item label,
   .item:before {
-    color: var(--spt-color-accent-2-dark);
+    // color: var(--spt-color-accent-2-dark);
   }
 }
 
+select {
+  text-align-last: left;
+}
+
+option {
+  direction: rtl;
+}
 // .item:hover label,
 // .item:hover:before {
 //   opacity: 1;
@@ -210,6 +221,10 @@ select {
   /* background: hsla(0, 0%, 0%, 0.05);*/
 }
 
+.progressbar > div span {
+  transform: scale(2, 1.25) translateY(7%);
+}
+
 .progressbar label {
   display: none;
 }
@@ -219,6 +234,7 @@ select {
 body .name {
   grid-area: name;
   padding-top: 0.5em;
+  box-shadow: none;
   textarea {
     font-variant: small-caps;
     line-height: 0.9em !important;
@@ -300,6 +316,25 @@ body .method {
 .des label {
   display: none;
 }
+body [class*="master-parent-group"] .des,
+body [class*="master-parent-group"] .demonstratedskillsdesc,
+body [class*="master-parent-group"] .itemnotes {
+  textarea {
+    background: var(--spt-color-background);
+    color: var(--spt-color-background-contrast);
+    max-width: calc(100% - 2em);
+    padding: 0.75em 1em;
+    box-shadow:
+      1px 1px 3px -2px black inset,
+      1px 1px 7px -4px rgba(0, 0, 0, 0.45) inset,
+      4px 4px 5px -4px white;
+    border-radius: 0 0 10px 10px;
+    font-weight: 500;
+    text-shadow: none;
+    font-size: 14px;
+  }
+}
+
 .des:before,
 .goal-des:before {
   content: "Description:  ";
@@ -598,7 +633,13 @@ input[type="number"] {
 }
 
 @media screen and (max-width: 1024px) {
-  body .name {
-    transform: translateY(-4%);
+  body .name,
+  body [class*="featured-url-arrow-wrap"] {
+    transform: translateY(-12%);
+  }
+
+  body [class*="featured-url-arrow-wrap"] {
+    width: 5.5em !important;
+    border-radius: 0 0 39px;
   }
 }

@@ -282,7 +282,8 @@ const Home = (props) => {
           </ErrorBoundary>
         </CardPrimary>
       )}
-      {!hideStudyPlan && studyPlan && (
+
+      {!hideStudyPlan && studyPlan && Object.keys(studyPlan).length > 0 && (
         <CardPrimary>
           <ErrorBoundary>
             {props.userInitComplete && (
@@ -330,7 +331,7 @@ const Home = (props) => {
                 dataObjForEdit={studyPlan}
                 user={props.user}
                 type={"hold"}
-                maxCollapsableElmHeight={"0"}
+                maxCollapsableElmHeight={"7em"}
                 noEditButton={false}
                 hideAddToButton={true}
                 hideShowAllButton={true}
@@ -391,7 +392,6 @@ const Home = (props) => {
       <div className={styles["bottom-bar-wrap"]}>
         <BottomBar showLogin={true} />
       </div>
-
       {props.isDemo && studyPlan && Object.keys(studyPlan).length <= 0 && (
         <div className={styles["demo-error-modal"]}>
           <h2>There seems to be a problem loading the demo data.</h2>

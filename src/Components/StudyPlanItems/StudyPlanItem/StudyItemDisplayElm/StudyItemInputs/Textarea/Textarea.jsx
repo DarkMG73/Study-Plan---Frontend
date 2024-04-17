@@ -66,7 +66,7 @@ const Textarea = (props) => {
         onChange={(e) => {
           addInputData(e, { emptyForm, editedField, setEditedField });
         }}
-        defaultValue={studyPlanItemsObj[key]}
+        defaultValue={studyPlanItemsObj[key] ? studyPlanItemsObj[key] : ""}
       />
     </Fragment>
   );

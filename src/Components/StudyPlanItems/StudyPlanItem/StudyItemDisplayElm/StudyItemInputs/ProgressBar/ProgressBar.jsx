@@ -30,25 +30,27 @@ const Progressbar = (props) => {
         {key}:
       </label>
 
-      <ProgressBar
-        key={parentKey + "-" + key}
-        completed={+studyPlanItemsObj["status"]}
-        maxCompleted={100}
-        className="wrapper"
-        baseBgColor="transparent"
-        bgColor="var(--spt-color-accent-light)"
-        height="100%"
-        width="100%"
-        padding="0 1em 0 0"
-        borderRadius="50px"
-        labelAlignment="center"
-        labelColor="var(--spt-color-accent"
-        labelSize="0.5em"
-        animateOnRender={true}
-        dir="auto"
-        transitionDuration="3s"
-        customLabelStyles={{ background: "transparent" }}
-      />
+      {+studyPlanItemsObj["status"] > 0 && (
+        <ProgressBar
+          key={parentKey + "-" + key}
+          completed={+studyPlanItemsObj["status"]}
+          maxCompleted={100}
+          className="wrapper"
+          baseBgColor="transparent"
+          bgColor="var(--spt-color-accent-light)"
+          height="100%"
+          width="100%"
+          padding="0 1em 0 0"
+          borderRadius="50px"
+          labelAlignment="center"
+          labelColor="var(--spt-color-accent-dark)"
+          labelSize="0.5em"
+          animateOnRender={true}
+          dir="auto"
+          transitionDuration="3s"
+          customLabelStyles={{ background: "transparent" }}
+        />
+      )}
     </Fragment>
   );
 };

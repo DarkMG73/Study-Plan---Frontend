@@ -270,7 +270,7 @@ const StudyPlanItems = (props) => {
                       maxHeight="0em"
                       inputOrButton="button"
                       buttonStyles={{
-                        margin: "0 1em 0 2em",
+                        margin: "0 1em auto 2em",
                         padding: "0.5em 2em",
                         letterSpacing: "0.125em",
                         fontVariant: "all-small-caps",

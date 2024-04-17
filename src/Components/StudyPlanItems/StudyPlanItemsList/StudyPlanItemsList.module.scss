@@ -37,10 +37,12 @@
 .master-parent-group > button:hover {
   transform: scale(1.125, 1);
 }
+
 .master-parent-group > div {
   display: flex;
   flex-wrap: wrap;
 }
+
 .master-parent-group li {
   display: flex;
   flex-direction: column;
@@ -48,6 +50,10 @@
   width: 100%;
   padding: 0 1em;
   min-width: 0;
+  box-shadow:
+    1px 1px 3px -2px white inset,
+    -1px -1px 3px -2px hsl(0deg 0% 0% / 33%) inset;
+  border-radius: 39px;
   span {
     background: inherit;
     color: inherit;
@@ -491,6 +497,9 @@ ul[class*="edited-list"] > [data-container-type="collapsibleElm"] > li > {
     width: 100%;
     min-width: 100%;
     margin: 0 auto;
+    background: var(--spt-color-background);
+    color: var(--spt-color-background-contrast-dark);
+    font-weight: 500;
   }
 }
 // ul[class*="edited-list"] label {
