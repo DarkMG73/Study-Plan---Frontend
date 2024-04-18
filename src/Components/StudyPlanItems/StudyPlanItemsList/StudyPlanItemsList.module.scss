@@ -59,6 +59,9 @@
     color: inherit;
   }
 }
+li[class*="featured-url-arrow-wrap"] {
+  box-shadow: none;
+}
 
 .master-parent-group ::placeholder {
   color: inherit;
@@ -507,12 +510,26 @@ ul[class*="edited-list"] > [data-container-type="collapsibleElm"] > li > {
 
 // }
 
+:not([class*="edited-list"]) > [data-container-type="collapsibleElm"] {
+  > li[class*="method"] {
+    max-height: 2em;
+    height: 100%;
+    transform: translateY(-10%);
+  }
+  > li[class*="method"],
+  > li[class*="method"] {
+    box-shadow: none;
+  }
+}
+
+:not([class*="edited-list"])
+  > [data-container-type="collapsibleElm"]
+  > li[class*="priority"],
 :not([class*="edited-list"])
   > [data-container-type="collapsibleElm"]
   > li[class*="method"] {
-  max-height: 2em;
-  height: 100%;
-  transform: translateY(-10%);
+  box-shadow: none;
+  padding: 0;
 }
 
 ul[class*="edited-list"]
@@ -579,9 +596,18 @@ ul[class*="edited-list"]
 }
 
 [data-markedcomplete="true"] {
-  filter: grayscale(1);
-  // the following line fixes IOS Safari buf with filter
-  transform: translate3d(0, 0, 0);
+  position: relative;
+}
+
+[data-markedcomplete="true"]:before {
+  content: "";
+  background-color: rgb(0 0 0 / 59%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  pointer-events: none;
 }
 
 // [data-markedcomplete="true"]:after {
@@ -602,10 +628,18 @@ ul[class*="edited-list"]
 // }
 
 [data-forreview="true"] {
-  filter: grayscale(0.5);
-  // the following line fixes IOS Safari buf with filter
-  transform: translate3d(0, 0, 0);
-  // border: 3px solid yellow;
+  position: relative;
+}
+
+[data-forreview="true"]:before {
+  content: "";
+  background-color: rgb(85 85 85 / 68%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  pointer-events: none;
 }
 
 [data-forreview="true"]:after {
@@ -620,7 +654,7 @@ ul[class*="edited-list"]
   font-size: 1rem;
   background: var(--spt-color-accent-3);
   color: var(--spt-color-background-warm);
-  padding: 0 0.5em;
+  padding: 0 2em;
   border-radius: 25px;
   font-weight: 500;
 }

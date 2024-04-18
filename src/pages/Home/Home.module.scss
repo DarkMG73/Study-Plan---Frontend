@@ -279,39 +279,38 @@
   }
 }
 
-.background-video {
-  background: radial-gradient(#500, #000);
-  margin: 0;
-  overflow: hidden;
+// .background-video {
+//   background: radial-gradient(#500, #000);
+//   margin: 0;
+//   overflow: hidden;
+//   position: relative;
+//   top: -4vh;
+//   filter: contrast(22);
+//   // the following line fixes IOS Safari buf with filter
+//   transform: translate3d(0, 0, 0);
+//   background: var(--spt-color-accent-2-gradient);
+// }
 
-  position: relative;
-  top: -4vh;
-  filter: contrast(22);
-  // the following line fixes IOS Safari buf with filter
-  transform: translate3d(0, 0, 0);
-  background: var(--spt-color-accent-2-gradient);
-}
-
-.background-video ::after {
-  content: " ";
-  display: block;
-  position: absolute;
-  background: linear-gradient(
-    rgba(255, 255, 255, 0.6),
-    rgba(128, 128, 255, 0.3)
-  );
-  width: 4vh;
-  height: 70vh;
-  margin-left: -17vh;
-  left: 50%;
-  bottom: 20vh;
-  z-index: 2;
-  border-radius: 1vh 1vh 2vh 2vh;
-  filter: blur(0.5vh);
-  // the following line fixes IOS Safari buf with filter
-  transform: translate3d(0, 0, 0);
-  transform: skewX(-2deg);
-}
+// .background-video ::after {
+//   content: " ";
+//   display: block;
+//   position: absolute;
+//   background: linear-gradient(
+//     rgba(255, 255, 255, 0.6),
+//     rgba(128, 128, 255, 0.3)
+//   );
+//   width: 4vh;
+//   height: 70vh;
+//   margin-left: -17vh;
+//   left: 50%;
+//   bottom: 20vh;
+//   z-index: 2;
+//   border-radius: 1vh 1vh 2vh 2vh;
+//   filter: blur(0.5vh);
+//   // the following line fixes IOS Safari buf with filter
+//   transform: translate3d(0, 0, 0);
+//   transform: skewX(-2deg);
+// }
 
 .bubble {
   height: 9vh;
@@ -323,50 +322,50 @@
   // the following line fixes IOS Safari buf with filter
   transform: translate3d(0, 0, 0);
   animation:
-    updown linear 17s infinite,
-    leftright ease-in-out 13s infinite,
-    vastag linear 29s infinite,
-    forog linear 31s infinite;
+    updown linear 14s infinite,
+    leftright ease-in-out 10s infinite,
+    vastag linear 26s infinite,
+    forog linear 28s infinite;
 }
 .bubble:nth-child(2) {
   transform: rotate(-45deg);
   animation:
-    updown ease-in 21s infinite,
-    leftright ease-in-out 27s infinite,
-    vastag linear 23s infinite,
-    forog linear 29s infinite;
+    updown ease-in 18s infinite,
+    leftright ease-in-out 24s infinite,
+    vastag linear 20s infinite,
+    forog linear 26s infinite;
 }
 .bubble:nth-child(3) {
   transform: rotate(45deg);
   animation:
-    updown ease-out 23s infinite,
-    leftright ease-in-out 33s infinite,
-    vastag linear 29s infinite,
-    forog linear 31s infinite;
+    updown ease-out 20s infinite,
+    leftright ease-in-out 30s infinite,
+    vastag linear 26s infinite,
+    forog linear 28s infinite;
 }
 .bubble:nth-child(4) {
   transform: rotate(-70deg);
   animation:
-    updown ease-in-out 27s infinite,
-    leftright ease-in-out 39s infinite,
-    vastag linear 31s infinite,
-    forog linear 41s infinite;
+    updown ease-in-out 24s infinite,
+    leftright ease-in-out 36s infinite,
+    vastag linear 28s infinite,
+    forog linear 38s infinite;
 }
 .bubble:nth-child(5) {
   transform: rotate(77deg);
   animation:
-    updown ease-in-out 19s infinite,
-    leftright ease-in-out 11s infinite,
-    vastag linear 37s infinite,
-    forog linear 47s infinite;
+    updown ease-in-out 16s infinite,
+    leftright ease-in-out 8s infinite,
+    vastag linear 34s infinite,
+    forog linear 44s infinite;
 }
 .bubble:last-child {
   transform: rotate(180deg);
   animation:
-    updown linear 53s infinite,
-    leftright ease-in-out 29s infinite,
-    vastag linear 19s infinite,
-    forog linear 37s infinite;
+    updown linear 50s infinite,
+    leftright ease-in-out 26s infinite,
+    vastag linear 16s infinite,
+    forog linear 34s infinite;
 }
 
 .demo-error-modal {

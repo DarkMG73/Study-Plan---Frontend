@@ -131,11 +131,9 @@ ul[type="goal"] {
 
 select {
   text-align-last: left;
+  padding: 0.25em;
 }
 
-option {
-  direction: rtl;
-}
 // .item:hover label,
 // .item:hover:before {
 //   opacity: 1;
@@ -181,14 +179,6 @@ option {
   font: var(--font-body-text);
   font-size: 1.6rem;
   margin: 0;
-}
-
-select {
-  text-align-last: center;
-  display: flex;
-  justify-content: center;
-  padding: 0.25em;
-  text-align: center;
 }
 
 .subgroup-tags textarea,
@@ -397,7 +387,7 @@ body [class*="master-parent-group"] .itemnotes {
 }
 .status:before,
 .goal-status:before {
-  content: "Status:  ";
+  content: "% Done(1-100):  ";
 }
 .status label {
   display: none;
@@ -632,6 +622,11 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+@media screen and (max-width: 650px) {
+  select {
+    text-align-last: center;
+  }
+}
 @media screen and (max-width: 1024px) {
   body .name,
   body [class*="featured-url-arrow-wrap"] {

@@ -274,8 +274,10 @@ ul[data-parentmastertype="hold"] div[data-container-type="collapsibleElm"] {
 
   label,
   :before {
-    color: var(--spt-color-background);
-    background: var(--spt-color-background-contrast);
+    // color: var(--spt-color-background);
+    // background: var(--spt-color-background-contrast);
+    color: inherit;
+    background: inherit;
     opacity: 1;
   }
 }
