@@ -237,7 +237,7 @@ const StudyPlanItemsList = (props) => {
         alert("You must be logged in to be able to make changes.");
       }
       dispatch(loadingRequestsActions.removeFromLoadRequest());
-    }, 2000);
+    }, 1000);
   };
 
   const deleteFormButtonHandler = (e) => {
