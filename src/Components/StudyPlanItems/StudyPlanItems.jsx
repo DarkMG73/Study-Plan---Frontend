@@ -147,15 +147,44 @@ const StudyPlanItems = (props) => {
 
   useEffect(() => {
     if (updateStudyPlan && isDemo) {
-      alert("SP ITEMS 150" + isDemo);
       return;
     }
-    processUpdateStudyPlan({
-      updateStudyPlan,
-      updateAContentItem,
-      updateAStudyPlanItem,
-      studyPlanDataActions,
-    });
+    if (updateStudyPlan) {
+      console.log(
+        "%c⚪️►►►► %cline:152%cupdateStudyPlan",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(254, 67, 101);padding:3px;border-radius:2px",
+        updateStudyPlan,
+      );
+      console.log(
+        "%c⚪️►►►► %cline:163%cupdateAContentItem",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(178, 190, 126);padding:3px;border-radius:2px",
+        updateAContentItem,
+      );
+      console.log(
+        "%c⚪️►►►► %cline:170%cupdateAStudyPlanItem",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
+        updateAStudyPlanItem,
+      );
+      console.log(
+        "%c⚪️►►►► %cline:178%cstudyPlanDataActions",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
+        studyPlanDataActions,
+      );
+      processUpdateStudyPlan({
+        updateStudyPlan,
+        updateAContentItem,
+        updateAStudyPlanItem,
+        studyPlanDataActions,
+      });
+    }
   }, [updateStudyPlan]);
 
   // Clear new forms after processing.

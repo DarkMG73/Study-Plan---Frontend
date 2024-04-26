@@ -228,7 +228,7 @@ const StudyPlanItemsList = (props) => {
         //     item: itemWithNewEdits,
         //   }),
         // );
-
+        alert("Calling");
         dispatch(
           studyPlanDataActions.updateStudyPlanDB({ itemWithNewEdits, user }),
         );
