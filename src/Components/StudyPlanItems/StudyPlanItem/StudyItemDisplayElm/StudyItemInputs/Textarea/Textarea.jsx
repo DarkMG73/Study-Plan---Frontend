@@ -1,9 +1,17 @@
-import { Fragment } from "react";
+import { useState, useEffect, Fragment } from "react";
 import Styles from "./Textarea.module.scss";
 import useAddInputData from "../../../../../../Hooks/useAddInputData";
 import TextareaAutosize from "react-textarea-autosize";
 
 const Textarea = (props) => {
+  const [notes, setNotes] = useState("");
+
+  const onChangeNotes =
+    () =>
+    ({ target: { value } }) => {
+      setNotes(value);
+    };
+
   const addInputData = useAddInputData();
   const {
     passedKey,
@@ -19,6 +27,10 @@ const Textarea = (props) => {
   } = props;
 
   const key = passedKey;
+
+  useEffect(() => {
+    setNotes(studyPlanItemsObj[key]);
+  }, [studyPlanItemsObj[key]]);
 
   return (
     <Fragment>
@@ -63,10 +75,11 @@ const Textarea = (props) => {
         data-parentkey={parentKey}
         data-parentsparentkey={parentsParentKey ? parentsParentKey : ""}
         data-parentmasterid={parentMasterID}
-        onChange={(e) => {
+        onChange={onChangeNotes}
+        onBlur={(e) => {
           addInputData(e, { emptyForm, editedField, setEditedField });
         }}
-        defaultValue={studyPlanItemsObj[key] ? studyPlanItemsObj[key] : ""}
+        defaultValue={notes}
       />
     </Fragment>
   );

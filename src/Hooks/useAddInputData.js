@@ -9,9 +9,16 @@ const useAddInputData = () => {
     let typingTimer = null;
     const target = e.target;
     const outputValue = target.value;
+    console.log(
+      "%c⚪️►►►► %cline:11%coutputValue",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(178, 190, 126);padding:3px;border-radius:2px",
+      outputValue,
+    );
     const { emptyForm, editedField, setEditedField } = props;
 
-    // Allows the form show only inputs needed by each type
+    // Allows the form to show only inputs needed by each type
     const parentMasterID = target.getAttribute("data-parentmasterid");
     let title = target.getAttribute("title");
 
@@ -76,7 +83,7 @@ const useAddInputData = () => {
             outputValue,
           }),
         );
-    }, 500);
+    }, 0);
 
     if (!editedField) setEditedField(true);
   }
