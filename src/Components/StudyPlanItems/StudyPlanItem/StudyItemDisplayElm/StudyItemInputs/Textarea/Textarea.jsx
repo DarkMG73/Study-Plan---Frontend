@@ -4,15 +4,6 @@ import useAddInputData from "../../../../../../Hooks/useAddInputData";
 import TextareaAutosize from "react-textarea-autosize";
 
 const Textarea = (props) => {
-  const [notes, setNotes] = useState("");
-
-  const onChangeNotes =
-    () =>
-    ({ target: { value } }) => {
-      setNotes(value);
-    };
-
-  const addInputData = useAddInputData();
   const {
     passedKey,
     studyPlanItemsObj,
@@ -27,6 +18,18 @@ const Textarea = (props) => {
   } = props;
 
   const key = passedKey;
+  const [notes, setNotes] = useState("");
+  const addInputData = useAddInputData();
+
+  const onChangeNotes =
+    () =>
+    ({ target: { value } }) => {
+      setNotes(value);
+    };
+
+  const onBlurHandler = (e) => {
+    addInputData(e, { emptyForm, editedField, setEditedField });
+  };
 
   useEffect(() => {
     setNotes(studyPlanItemsObj[key]);
@@ -75,10 +78,8 @@ const Textarea = (props) => {
         data-parentkey={parentKey}
         data-parentsparentkey={parentsParentKey ? parentsParentKey : ""}
         data-parentmasterid={parentMasterID}
-        onChange={onChangeNotes}
-        onBlur={(e) => {
-          addInputData(e, { emptyForm, editedField, setEditedField });
-        }}
+        onChange={onChangeNotes()}
+        onBlur={onBlurHandler}
         defaultValue={notes}
       />
     </Fragment>

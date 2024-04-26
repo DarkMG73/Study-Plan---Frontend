@@ -8,12 +8,19 @@ const useAddInputData = () => {
     e.preventDefault();
     let typingTimer = null;
     const target = e.target;
+    console.log(
+      "%c⚪️►►►► %cline:10%ctarget",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(130, 57, 53);padding:3px;border-radius:2px",
+      target,
+    );
     const outputValue = target.value;
     console.log(
       "%c⚪️►►►► %cline:11%coutputValue",
       "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
       "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(178, 190, 126);padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(217, 104, 49);padding:3px;border-radius:2px",
       outputValue,
     );
     const { emptyForm, editedField, setEditedField } = props;
