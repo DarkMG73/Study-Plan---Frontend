@@ -1024,6 +1024,22 @@ const StudyPlanItemsList = (props) => {
                 </CollapsibleElm>
               </ul>
             );
+          {
+            console.log(
+              "%c⚪️►►►► %cline:1028%cObject.keys(studyPlanItemsObj",
+              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+              "color:#fff;background:rgb(3, 101, 100);padding:3px;border-radius:2px",
+              Object.keys(studyPlanItemsObj),
+            );
+          }
+          if (Object.keys(studyPlanItemsObj) > 2)
+            return (
+              <div>
+                <h2>key</h2>
+                <p>studyPlanItemsObj[key].type</p>
+              </div>
+            );
           return (
             <StudyPlanItem
               key={parentMasterID + parentsParentKey + parentKey + key}
