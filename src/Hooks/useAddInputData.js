@@ -6,7 +6,7 @@ const useAddInputData = () => {
 
   const outputFunction = (e, props) => {
     e.preventDefault();
-    let typingTimer = null;
+    // let typingTimer = null;
     const target = e.target;
     console.log(
       "%c⚪️►►►► %cline:10%ctarget",
@@ -34,20 +34,16 @@ const useAddInputData = () => {
         .getElementById(parentMasterID)
         .setAttribute("newFormType", outputValue);
 
-    clearTimeout(typingTimer);
-
-    typingTimer = setTimeout(() => {
-      if (outputValue || outputValue === "") {
-        groomAndAddInputData(
-          target,
-          parentMasterID,
-          outputValue,
-          emptyForm,
-          editedField,
-          setEditedField,
-        );
-      }
-    }, 2000);
+    if (outputValue || outputValue === "") {
+      groomAndAddInputData(
+        target,
+        parentMasterID,
+        outputValue,
+        emptyForm,
+        editedField,
+        setEditedField,
+      );
+    }
   };
 
   function groomAndAddInputData(
@@ -72,25 +68,23 @@ const useAddInputData = () => {
       }
     }
 
-    setTimeout(() => {
-      if (emptyForm)
-        dispatch(
-          formInputDataActions.addToNewFormInputDataObj({
-            parentMasterID,
-            title,
-            outputValue,
-          }),
-        );
+    if (emptyForm)
+      dispatch(
+        formInputDataActions.addToNewFormInputDataObj({
+          parentMasterID,
+          title,
+          outputValue,
+        }),
+      );
 
-      if (!emptyForm)
-        dispatch(
-          formInputDataActions.addToExistingFormInputDataObj({
-            parentMasterID,
-            title,
-            outputValue,
-          }),
-        );
-    }, 0);
+    if (!emptyForm)
+      dispatch(
+        formInputDataActions.addToExistingFormInputDataObj({
+          parentMasterID,
+          title,
+          outputValue,
+        }),
+      );
 
     if (!editedField) setEditedField(true);
   }

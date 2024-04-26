@@ -228,6 +228,7 @@ const StudyPlanItemsList = (props) => {
         //     item: itemWithNewEdits,
         //   }),
         // );
+
         dispatch(
           studyPlanDataActions.updateStudyPlanDB({ itemWithNewEdits, user }),
         );
@@ -236,7 +237,7 @@ const StudyPlanItemsList = (props) => {
         alert("You must be logged in to be able to make changes.");
       }
       dispatch(loadingRequestsActions.removeFromLoadRequest());
-    }, 7000);
+    }, 2000);
   };
 
   const deleteFormButtonHandler = (e) => {
