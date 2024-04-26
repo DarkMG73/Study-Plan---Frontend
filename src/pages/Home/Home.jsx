@@ -27,6 +27,10 @@ import {
 } from "../../storage/contentDB";
 import useProcessAllFormInputData from "../../Hooks/useProcessAllFormInputData";
 import useProcessUploadedFormInputData from "../../Hooks/useProcessUploadedFormInputData";
+import { updateAStudyPlanItem } from "../../storage/studyPlanDB";
+import { updateAContentItem } from "../../storage/contentDB";
+import useDemoCheck from "../../Hooks/useDemoCheck";
+import useProcessUpdateStudyPlan from "../../Hooks/useProcessUpdateStudyPlan";
 
 const Home = (props) => {
   const { studyPlan } = useSelector((state) => state.studyPlanData);
@@ -39,6 +43,12 @@ const Home = (props) => {
   const processAllFormInputData = useProcessAllFormInputData();
   const processUploadedFormInputData = useProcessUploadedFormInputData();
   let saveManyItems = saveManyStudyPlanItems;
+  const demoCheck = useDemoCheck();
+  const isDemo = demoCheck();
+  const updateStudyPlan = useSelector(
+    (state) => state.studyPlanData.updateStudyPlan,
+  );
+  const processUpdateStudyPlan = useProcessUpdateStudyPlan();
 
   ////////////////////////////////////////
   /// Effects
@@ -208,6 +218,19 @@ const Home = (props) => {
         alert("There was an error. Please try your request again alter", err);
       });
   }, [allFormInputData.allNewForms, allFormInputData.uploadedForms]);
+
+  useEffect(() => {
+    if (updateStudyPlan && isDemo) {
+      return;
+    }
+    if (updateStudyPlan)
+      processUpdateStudyPlan({
+        updateStudyPlan,
+        updateAContentItem,
+        updateAStudyPlanItem,
+        studyPlanDataActions,
+      });
+  }, [updateStudyPlan]);
 
   ////////////////////////////////////////
   /// Functionality

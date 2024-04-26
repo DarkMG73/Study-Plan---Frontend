@@ -7,27 +7,20 @@ import FilteredStudyPlanItems from "./FilteredStudyPlanItems/FilteredStudyPlanIt
 import displayConditions from "../../data/displayConditionsObj.js";
 import studyItemSortOptions from "../../data/studyItemSortOptions.json";
 import useInitStudyPlanItems from "../../Hooks/useInitStudyPlanItems";
-import useProcessUpdateStudyPlan from "../../Hooks/useProcessUpdateStudyPlan";
 import PushButton from "../../UI/Buttons/PushButton/PushButton";
 import { toTitleCase } from "../../Hooks/utility";
 import { getSchemaForContentItem } from "../../storage/contentDB";
 import CollapsibleElm from "../../UI/CollapsibleElm/CollapsibleElm";
-import { updateAStudyPlanItem } from "../../storage/studyPlanDB";
-import { updateAContentItem } from "../../storage/contentDB";
-import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
+
 import useSortList from "../../Hooks/useSortList";
 import useAssembleStudyPlanList from "../../Hooks/useAssembleStudyPlanList";
 import BarLoader from "../../UI/Loaders/BarLoader/BarLoader";
 import AddToPlanButton from "../AddToPlanButton/AddToPlanButton";
-import useDemoCheck from "../../Hooks/useDemoCheck";
 
 const StudyPlanItems = (props) => {
   const user = useSelector((state) => state.auth.user);
   const { studyPlan, studyPlanMetadata, schema } = useSelector(
     (state) => state.studyPlanData,
-  );
-  const updateStudyPlan = useSelector(
-    (state) => state.studyPlanData.updateStudyPlan,
   );
   const [sortMethod, setSortMethod] = useState("priority");
   const [refresh, setRefresh] = useState(0);
@@ -38,7 +31,6 @@ const StudyPlanItems = (props) => {
   const typeName = props.type;
   const dataObjForEdit = props.dataObjForEdit;
   const initStudyPlanItems = useInitStudyPlanItems();
-  const processUpdateStudyPlan = useProcessUpdateStudyPlan();
   const [allStudyPlanItems, setAllStudyPlanItems] = useState(
     props.allStudyPlanItems,
   );
@@ -48,8 +40,6 @@ const StudyPlanItems = (props) => {
     (state) => state.formInputData,
     shallowEqual,
   );
-  const demoCheck = useDemoCheck();
-  const isDemo = demoCheck();
   const sortList = useSortList();
   const assembleStudyPlanList = useAssembleStudyPlanList();
   const [delayRender, setDelayRender] = useState(true);
@@ -144,48 +134,6 @@ const StudyPlanItems = (props) => {
       setFormInputData(sortedGroomedOutput);
     }
   }, [changeListArray]);
-
-  useEffect(() => {
-    if (updateStudyPlan && isDemo) {
-      return;
-    }
-    if (updateStudyPlan) {
-      console.log(
-        "%c⚪️►►►► %cline:152%cupdateStudyPlan",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(254, 67, 101);padding:3px;border-radius:2px",
-        updateStudyPlan,
-      );
-      console.log(
-        "%c⚪️►►►► %cline:163%cupdateAContentItem",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(178, 190, 126);padding:3px;border-radius:2px",
-        updateAContentItem,
-      );
-      console.log(
-        "%c⚪️►►►► %cline:170%cupdateAStudyPlanItem",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
-        updateAStudyPlanItem,
-      );
-      console.log(
-        "%c⚪️►►►► %cline:178%cstudyPlanDataActions",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
-        studyPlanDataActions,
-      );
-      processUpdateStudyPlan({
-        updateStudyPlan,
-        updateAContentItem,
-        updateAStudyPlanItem,
-        studyPlanDataActions,
-      });
-    }
-  }, [updateStudyPlan]);
 
   // Clear new forms after processing.
   useEffect(() => {
