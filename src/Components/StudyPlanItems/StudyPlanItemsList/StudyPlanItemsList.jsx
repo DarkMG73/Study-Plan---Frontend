@@ -1057,44 +1057,39 @@ const StudyPlanItemsList = (props) => {
             );
 
           return (
-            <Fragment key={key}>
-              <h1>TEST + {key} </h1>
-              {key === 2 && (
-                <StudyPlanItem
-                  key={parentMasterID + parentsParentKey + parentKey + key}
-                  studyPlanItemsObj={props}
-                  passedKey={key}
-                  parentKey={parentKey}
-                  parentsParentKey={parentsParentKey}
-                  parentMasterID={parentMasterID}
-                  parentMasterType={
-                    parentMasterType
-                      ? parentMasterType
-                      : studyPlanItemsObj[key] &&
-                          Object.hasOwn(studyPlanItemsObj[key], "type")
-                        ? studyPlanItemsObj[key].type
-                        : ""
-                  }
-                  displayConditions={displayConditions}
-                  unlockProtectedVisible={
-                    props.unlockProtectedVisible
-                      ? props.unlockProtectedVisible
-                      : unlockProtectedVisible
-                  }
-                  showProtectedHidden={
-                    props.showProtectedHidden
-                      ? props.showProtectedHidden
-                      : showProtectedHidden
-                  }
-                  refresh={refresh}
-                  setExistingFormInputValuesObj={updateExistingFormState}
-                  emptyForm={props.emptyForm}
-                  onlyList={onlyList}
-                  setFormType={props.setFormType}
-                  formType={props.formType}
-                />
-              )}
-            </Fragment>
+            <StudyPlanItem
+              key={parentMasterID + parentsParentKey + parentKey + key}
+              studyPlanItemsObj={props}
+              passedKey={key}
+              parentKey={parentKey}
+              parentsParentKey={parentsParentKey}
+              parentMasterID={parentMasterID}
+              parentMasterType={
+                parentMasterType
+                  ? parentMasterType
+                  : studyPlanItemsObj[key] &&
+                      Object.hasOwn(studyPlanItemsObj[key], "type")
+                    ? studyPlanItemsObj[key].type
+                    : ""
+              }
+              displayConditions={displayConditions}
+              unlockProtectedVisible={
+                props.unlockProtectedVisible
+                  ? props.unlockProtectedVisible
+                  : unlockProtectedVisible
+              }
+              showProtectedHidden={
+                props.showProtectedHidden
+                  ? props.showProtectedHidden
+                  : showProtectedHidden
+              }
+              refresh={refresh}
+              setExistingFormInputValuesObj={updateExistingFormState}
+              emptyForm={props.emptyForm}
+              onlyList={onlyList}
+              setFormType={props.setFormType}
+              formType={props.formType}
+            />
           );
         })}
       </Fragment>
