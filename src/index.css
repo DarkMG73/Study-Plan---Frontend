@@ -6,7 +6,8 @@
 /* Covered By Your Grace font loaded via npm install @fontsource/covered-by-your-grace */
 @font-face {
   font-family: "Good Times RG";
-  src: local("Good Times RG"),
+  src:
+    local("Good Times RG"),
     url("./assets/fonts/good_times/good_times_rg.ttf") format("truetype");
   font-weight: bold;
 }
@@ -124,7 +125,9 @@ body {
   color: hsl(33 100% 96% / 1);
   color: #bb2b95;
   color: var(--spt-color-accent);
-  font: normal 500 1.6rem "Kodchasan", sans-serif;
+  font:
+    normal 500 1.6rem "Kodchasan",
+    sans-serif;
   font: var(--spt-font-body-text);
   margin: 0;
   -webkit-font-smoothing: antialiased;

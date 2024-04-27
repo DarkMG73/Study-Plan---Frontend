@@ -778,7 +778,7 @@ const StudyPlanItemsList = (props) => {
                   (props.inModal && styles["in-modal"])
                 }
               >
-                {studyPlanMetadata["_id"].length > 2 && !expandItem && (
+                {studyPlanMetadata["_id"].length > 200 && !expandItem && (
                   <Fragment key={key}>
                     <button onClick={expandItemButtonHandler}>See More</button>
                     {console.log(
@@ -795,7 +795,7 @@ const StudyPlanItemsList = (props) => {
                     <h1>TEST</h1>
                   </Fragment>
                 )}
-                {studyPlanMetadata["_id"].length < 2 && expandItem && (
+                {studyPlanMetadata["_id"].length < 200 && !expandItem && (
                   <CollapsibleElm
                     elmId={key + "-collapsible-elm"}
                     styles={{
@@ -849,6 +849,7 @@ const StudyPlanItemsList = (props) => {
                         styles.title
                       }
                     >
+                      ITEM -2 ----
                       {studyPlanItemsObj[key] &&
                       Object.hasOwn(studyPlanItemsObj[key], "name") ? (
                         <Fragment>
@@ -1056,39 +1057,44 @@ const StudyPlanItemsList = (props) => {
             );
 
           return (
-            <StudyPlanItem
-              key={parentMasterID + parentsParentKey + parentKey + key}
-              studyPlanItemsObj={props}
-              passedKey={key}
-              parentKey={parentKey}
-              parentsParentKey={parentsParentKey}
-              parentMasterID={parentMasterID}
-              parentMasterType={
-                parentMasterType
-                  ? parentMasterType
-                  : studyPlanItemsObj[key] &&
-                      Object.hasOwn(studyPlanItemsObj[key], "type")
-                    ? studyPlanItemsObj[key].type
-                    : ""
-              }
-              displayConditions={displayConditions}
-              unlockProtectedVisible={
-                props.unlockProtectedVisible
-                  ? props.unlockProtectedVisible
-                  : unlockProtectedVisible
-              }
-              showProtectedHidden={
-                props.showProtectedHidden
-                  ? props.showProtectedHidden
-                  : showProtectedHidden
-              }
-              refresh={refresh}
-              setExistingFormInputValuesObj={updateExistingFormState}
-              emptyForm={props.emptyForm}
-              onlyList={onlyList}
-              setFormType={props.setFormType}
-              formType={props.formType}
-            />
+            <Fragment key={key}>
+              <h1>TEST + {key} </h1>
+              {key === 2 && (
+                <StudyPlanItem
+                  key={parentMasterID + parentsParentKey + parentKey + key}
+                  studyPlanItemsObj={props}
+                  passedKey={key}
+                  parentKey={parentKey}
+                  parentsParentKey={parentsParentKey}
+                  parentMasterID={parentMasterID}
+                  parentMasterType={
+                    parentMasterType
+                      ? parentMasterType
+                      : studyPlanItemsObj[key] &&
+                          Object.hasOwn(studyPlanItemsObj[key], "type")
+                        ? studyPlanItemsObj[key].type
+                        : ""
+                  }
+                  displayConditions={displayConditions}
+                  unlockProtectedVisible={
+                    props.unlockProtectedVisible
+                      ? props.unlockProtectedVisible
+                      : unlockProtectedVisible
+                  }
+                  showProtectedHidden={
+                    props.showProtectedHidden
+                      ? props.showProtectedHidden
+                      : showProtectedHidden
+                  }
+                  refresh={refresh}
+                  setExistingFormInputValuesObj={updateExistingFormState}
+                  emptyForm={props.emptyForm}
+                  onlyList={onlyList}
+                  setFormType={props.setFormType}
+                  formType={props.formType}
+                />
+              )}
+            </Fragment>
           );
         })}
       </Fragment>
