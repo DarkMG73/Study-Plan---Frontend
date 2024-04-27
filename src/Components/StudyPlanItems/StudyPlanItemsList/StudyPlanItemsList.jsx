@@ -14,6 +14,7 @@ import useDemoCheck from "../../../Hooks/useDemoCheck";
 const StudyPlanItemsList = (props) => {
   const [refresh] = useState(1);
   const studyPlanItemsObj = props.studyPlanItemsObj;
+  const { studyPlanMetadata } = useSelector((state) => state.studyPlanData);
   // if (Object.hasOwn(studyPlanItemsObj, "dependencies"))
   const user = useSelector((state) => state.auth.user);
   const parentKey = props.parentKey;
@@ -835,40 +836,59 @@ const StudyPlanItemsList = (props) => {
                       key
                     )}
                   </h2>
-                  <StudyPlanItemsSubList
-                    key={studyPlanItemsObj[key]}
-                    studyPlanItemsObj={studyPlanItemsObj[key]}
-                    allStudyPlanItems={props.allStudyPlanItems}
-                    parentKey={key}
-                    parentsParentKey={parentKey}
-                    parentMasterID={
-                      parentMasterID
-                        ? parentMasterID
-                        : studyPlanItemsObj[key]._id
-                    }
-                    parentMasterType={
-                      parentMasterType
-                        ? parentMasterType
-                        : studyPlanItemsObj[key].type
-                    }
-                    section={section}
-                    displayConditions={displayConditions}
-                    subListLevel={subListLevel}
-                    unlockProtectedVisible={
-                      props.unlockProtectedVisible
-                        ? props.unlockProtectedVisible
-                        : unlockProtectedVisible
-                    }
-                    showProtectedHidden={
-                      props.showProtectedHidden
-                        ? props.showProtectedHidden
-                        : showProtectedHidden
-                    }
-                    refresh={refresh}
-                    onlyList={onlyList}
-                    emptyForm={props.emptyForm}
-                    setFormType={props.setFormType}
-                  />{" "}
+                  <Fragment key={key}>
+                    {" "}
+                    {console.log(
+                      "%c⚪️►►►► %cline:1028%cObject.keys(studyPlanItemsObj",
+                      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                      "color:#fff;background:rgb(3, 101, 100);padding:3px;border-radius:2px",
+                      Object.keys(studyPlanItemsObj),
+                    )}
+                    {studyPlanMetadata["_id"].length > 2 && (
+                      <div>
+                        <h2>{key}</h2>
+                        <p>{studyPlanItemsObj[key].type}</p>
+                      </div>
+                    )}
+                    <h1>TEST</h1>{" "}
+                  </Fragment>
+                  {studyPlanMetadata["_id"].length < 2 && (
+                    <StudyPlanItemsSubList
+                      key={studyPlanItemsObj[key]}
+                      studyPlanItemsObj={studyPlanItemsObj[key]}
+                      allStudyPlanItems={props.allStudyPlanItems}
+                      parentKey={key}
+                      parentsParentKey={parentKey}
+                      parentMasterID={
+                        parentMasterID
+                          ? parentMasterID
+                          : studyPlanItemsObj[key]._id
+                      }
+                      parentMasterType={
+                        parentMasterType
+                          ? parentMasterType
+                          : studyPlanItemsObj[key].type
+                      }
+                      section={section}
+                      displayConditions={displayConditions}
+                      subListLevel={subListLevel}
+                      unlockProtectedVisible={
+                        props.unlockProtectedVisible
+                          ? props.unlockProtectedVisible
+                          : unlockProtectedVisible
+                      }
+                      showProtectedHidden={
+                        props.showProtectedHidden
+                          ? props.showProtectedHidden
+                          : showProtectedHidden
+                      }
+                      refresh={refresh}
+                      onlyList={onlyList}
+                      emptyForm={props.emptyForm}
+                      setFormType={props.setFormType}
+                    />
+                  )}{" "}
                   {!onlyList && !subListLevel && (
                     <div className={styles["button-container"]}>
                       {!noEditButton && (
@@ -1024,22 +1044,7 @@ const StudyPlanItemsList = (props) => {
                 </CollapsibleElm>
               </ul>
             );
-          {
-            console.log(
-              "%c⚪️►►►► %cline:1028%cObject.keys(studyPlanItemsObj",
-              "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-              "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-              "color:#fff;background:rgb(3, 101, 100);padding:3px;border-radius:2px",
-              Object.keys(studyPlanItemsObj),
-            );
-          }
-          if (Object.keys(studyPlanItemsObj) > 2)
-            return (
-              <div>
-                <h2>key</h2>
-                <p>studyPlanItemsObj[key].type</p>
-              </div>
-            );
+
           return (
             <StudyPlanItem
               key={parentMasterID + parentsParentKey + parentKey + key}
