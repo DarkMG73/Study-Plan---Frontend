@@ -155,13 +155,12 @@ select {
   /* word-break: break-all; */
   /* box-shadow: inset 0px -3px 3px -3px; */
   font-size: 1em;
-
   min-height: 1.25em;
   font: var(--spt-font-body-text);
   font-weight: 700;
   text-shadow:
-    -1px -1px 1px #00000026,
-    1px 1px 1px #80808017;
+    -1px -1px 1px rgba(0, 0, 0, 0.149),
+    1px 1px 1px rgba(128, 128, 128, 0.09);
 }
 
 .item textarea,
@@ -634,6 +633,12 @@ input[type="number"] {
 }
 
 @media screen and (max-width: 650px) {
+  .item textarea,
+  .item [class*="sizable-textarea"],
+  .item input {
+    text-shadow: none;
+  }
+
   select {
     text-align-last: center;
   }
