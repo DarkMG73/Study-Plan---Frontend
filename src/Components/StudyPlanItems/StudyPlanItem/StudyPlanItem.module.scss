@@ -236,7 +236,8 @@ body .name {
   [class*="sizable-textarea"] {
     font-variant: small-caps;
     line-height: 0.9em !important;
-    max-height: 2em;
+    max-height: 1.7em;
+    margin-top: 0.45em;
     overflow: hidden;
     margin-bottom: 1em;
     max-width: 96%;
