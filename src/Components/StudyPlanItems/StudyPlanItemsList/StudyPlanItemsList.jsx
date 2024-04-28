@@ -30,7 +30,7 @@ const StudyPlanItemsList = (props) => {
   const demoCheck = useDemoCheck();
   const isDemo = demoCheck();
   const [itemEditorModalJSX, setItemEditorModalJSX] = useState(false);
-  const [expandItem, setExpandItem] = useState(false);
+  const [expandItem, setExpandItem] = useState([]);
   const [showProtectedHidden, setShowProtectedHidden] = useState(
     props.showProtectedHidden ? props.showProtectedHidden : [],
   );
@@ -127,7 +127,14 @@ const StudyPlanItemsList = (props) => {
 
   const expandItemButtonHandler = (e) => {
     e.preventDefault();
-    setExpandItem(true);
+    console.log(
+      "%c⚪️►►►► %cline:130%ce.target.value",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(153, 80, 84);padding:3px;border-radius:2px",
+      e.target.value,
+    );
+    setExpandItem(e.target.value);
   };
 
   const showProtectedHiddenHandler = (e) => {
@@ -778,23 +785,26 @@ const StudyPlanItemsList = (props) => {
                   (props.inModal && styles["in-modal"])
                 }
               >
-                {studyPlanMetadata["_id"].length > 2 && !expandItem && (
-                  <Fragment key={key}>
-                    <button onClick={expandItemButtonHandler}>See More</button>
-                    {console.log(
-                      "%c⚪️►►►► %cline:1028%cObject.keys(studyPlanItemsObj",
-                      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-                      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-                      "color:#fff;background:rgb(3, 101, 100);padding:3px;border-radius:2px",
-                      Object.keys(studyPlanItemsObj),
-                    )}
-                    <div>
-                      <h2>{key}</h2>
-                      <p>{studyPlanItemsObj[key].type}</p>
-                    </div>
-                    <h1>TEST</h1>
-                  </Fragment>
-                )}
+                {studyPlanMetadata["_id"].length > 2 &&
+                  !expandItem.includes(key) && (
+                    <Fragment key={key}>
+                      <button value={key} onClick={expandItemButtonHandler}>
+                        See More
+                      </button>
+                      {console.log(
+                        "%c⚪️►►►► %cline:1028%cObject.keys(studyPlanItemsObj",
+                        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                        "color:#fff;background:rgb(3, 101, 100);padding:3px;border-radius:2px",
+                        Object.keys(studyPlanItemsObj),
+                      )}
+                      <div>
+                        <h2>{key}</h2>
+                        <p>{studyPlanItemsObj[key].type}</p>
+                      </div>
+                      <h1>TEST</h1>
+                    </Fragment>
+                  )}
 
                 <CollapsibleElm
                   elmId={key + "-collapsible-elm"}
@@ -1053,39 +1063,45 @@ const StudyPlanItemsList = (props) => {
             );
 
           return (
-            <StudyPlanItem
-              key={parentMasterID + parentsParentKey + parentKey + key}
-              studyPlanItemsObj={props}
-              passedKey={key}
-              parentKey={parentKey}
-              parentsParentKey={parentsParentKey}
-              parentMasterID={parentMasterID}
-              parentMasterType={
-                parentMasterType
-                  ? parentMasterType
-                  : studyPlanItemsObj[key] &&
-                      Object.hasOwn(studyPlanItemsObj[key], "type")
-                    ? studyPlanItemsObj[key].type
-                    : ""
+            <Fragment key={key}>
+              {
+                // console.log("Props--->", props)
               }
-              displayConditions={displayConditions}
-              unlockProtectedVisible={
-                props.unlockProtectedVisible
-                  ? props.unlockProtectedVisible
-                  : unlockProtectedVisible
-              }
-              showProtectedHidden={
-                props.showProtectedHidden
-                  ? props.showProtectedHidden
-                  : showProtectedHidden
-              }
-              refresh={refresh}
-              setExistingFormInputValuesObj={updateExistingFormState}
-              emptyForm={props.emptyForm}
-              onlyList={onlyList}
-              setFormType={props.setFormType}
-              formType={props.formType}
-            />
+              <StudyPlanItem
+                key={parentMasterID + parentsParentKey + parentKey + key}
+                studyPlanItemsObj={props}
+                expandItem={expandItem}
+                passedKey={key}
+                parentKey={parentKey}
+                parentsParentKey={parentsParentKey}
+                parentMasterID={parentMasterID}
+                parentMasterType={
+                  parentMasterType
+                    ? parentMasterType
+                    : studyPlanItemsObj[key] &&
+                        Object.hasOwn(studyPlanItemsObj[key], "type")
+                      ? studyPlanItemsObj[key].type
+                      : ""
+                }
+                displayConditions={displayConditions}
+                unlockProtectedVisible={
+                  props.unlockProtectedVisible
+                    ? props.unlockProtectedVisible
+                    : unlockProtectedVisible
+                }
+                showProtectedHidden={
+                  props.showProtectedHidden
+                    ? props.showProtectedHidden
+                    : showProtectedHidden
+                }
+                refresh={refresh}
+                setExistingFormInputValuesObj={updateExistingFormState}
+                emptyForm={props.emptyForm}
+                onlyList={onlyList}
+                setFormType={props.setFormType}
+                formType={props.formType}
+              />
+            </Fragment>
           );
         })}
       </Fragment>

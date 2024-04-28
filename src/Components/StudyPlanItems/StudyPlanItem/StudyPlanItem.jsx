@@ -6,6 +6,7 @@ import ArrowLink from "./StudyItemDisplayElm/StudyItemInputs/ArrowLink/ArrowLink
 const StudyPlanItem = (props) => {
   const {
     displayConditions,
+    expandItem,
     passedKey,
     parentKey,
     parentsParentKey,
@@ -76,69 +77,8 @@ const StudyPlanItem = (props) => {
 
   const output = (
     <Fragment>
-      <li
-        key={
-          passedKey +
-          parentMasterID +
-          "-" +
-          parentsParentKey +
-          "-" +
-          parentKey +
-          "-" +
-          passedKey +
-          "-" +
-          "item"
-        }
-        data-marker="CATALOG-ITEM"
-        id={
-          parentMasterID +
-          "-" +
-          parentsParentKey +
-          "-" +
-          parentKey +
-          "-" +
-          passedKey +
-          "-" +
-          "item"
-        }
-        data-parentmastertype={parentMasterType}
-        data-category={studyPlanItemsObj[passedKey]}
-        data-parentkey={parentKey}
-        data-parentsparentkey={parentsParentKey ? parentsParentKey : ""}
-        data-parentmasterid={parentMasterID}
-        className={
-          styles.item +
-          " " +
-          styles[
-            "protectedHidden-" +
-              (displayConditions &&
-                Object.hasOwn(displayConditions, "protectedHidden") &&
-                displayConditions.protectedHidden.includes(passedKey) &&
-                !showProtectedHidden.includes(parentMasterID))
-          ] +
-          " " +
-          styles[
-            "protectedVisible-" +
-              (displayConditions.protectedVisible.includes("PROTECT-ALL") &&
-                !unlockProtectedVisible.includes(parentMasterID)) ||
-              (displayConditions.protectedVisible.includes(passedKey) &&
-                !unlockProtectedVisible.includes(parentMasterID))
-          ] +
-          " " +
-          styles[parentKey] +
-          " " +
-          styles[parentMasterType] +
-          " " +
-          styles[parentKey + "-" + passedKey] +
-          " " +
-          styles[passedKey] +
-          " " +
-          (editedField && !emptyForm && styles["edited-field"]) +
-          " " +
-          (emptyForm && styles["new-form-item"])
-        }
-      >
-        <StudyItemDisplayElm
+      {expandItem && (
+        <li
           key={
             passedKey +
             parentMasterID +
@@ -149,25 +89,88 @@ const StudyPlanItem = (props) => {
             "-" +
             passedKey +
             "-" +
-            "studyItemElm"
+            "item"
           }
-          passedKey={passedKey}
-          elementTypeNeeded={elementTypeNeeded}
-          studyPlanItemsObj={studyPlanItemsObj}
-          onlyList={onlyList}
-          parentKey={parentKey}
-          parentsParentKey={parentsParentKey}
-          parentMasterID={parentMasterID}
-          showProtectedHidden={showProtectedHidden}
-          unlockProtectedVisible={unlockProtectedVisible}
-          displayConditions={displayConditions}
-          editedField={editedField}
-          setEditedField={setEditedField}
-          emptyForm={emptyForm}
-        />
+          data-marker="CATALOG-ITEM"
+          id={
+            parentMasterID +
+            "-" +
+            parentsParentKey +
+            "-" +
+            parentKey +
+            "-" +
+            passedKey +
+            "-" +
+            "item"
+          }
+          data-parentmastertype={parentMasterType}
+          data-category={studyPlanItemsObj[passedKey]}
+          data-parentkey={parentKey}
+          data-parentsparentkey={parentsParentKey ? parentsParentKey : ""}
+          data-parentmasterid={parentMasterID}
+          className={
+            styles.item +
+            " " +
+            styles[
+              "protectedHidden-" +
+                (displayConditions &&
+                  Object.hasOwn(displayConditions, "protectedHidden") &&
+                  displayConditions.protectedHidden.includes(passedKey) &&
+                  !showProtectedHidden.includes(parentMasterID))
+            ] +
+            " " +
+            styles[
+              "protectedVisible-" +
+                (displayConditions.protectedVisible.includes("PROTECT-ALL") &&
+                  !unlockProtectedVisible.includes(parentMasterID)) ||
+                (displayConditions.protectedVisible.includes(passedKey) &&
+                  !unlockProtectedVisible.includes(parentMasterID))
+            ] +
+            " " +
+            styles[parentKey] +
+            " " +
+            styles[parentMasterType] +
+            " " +
+            styles[parentKey + "-" + passedKey] +
+            " " +
+            styles[passedKey] +
+            " " +
+            (editedField && !emptyForm && styles["edited-field"]) +
+            " " +
+            (emptyForm && styles["new-form-item"])
+          }
+        >
+          <StudyItemDisplayElm
+            key={
+              passedKey +
+              parentMasterID +
+              "-" +
+              parentsParentKey +
+              "-" +
+              parentKey +
+              "-" +
+              passedKey +
+              "-" +
+              "studyItemElm"
+            }
+            passedKey={passedKey}
+            elementTypeNeeded={elementTypeNeeded}
+            studyPlanItemsObj={studyPlanItemsObj}
+            onlyList={onlyList}
+            parentKey={parentKey}
+            parentsParentKey={parentsParentKey}
+            parentMasterID={parentMasterID}
+            showProtectedHidden={showProtectedHidden}
+            unlockProtectedVisible={unlockProtectedVisible}
+            displayConditions={displayConditions}
+            editedField={editedField}
+            setEditedField={setEditedField}
+            emptyForm={emptyForm}
+          />
 
-        {onlyList && <span>{studyPlanItemsObj[passedKey]}</span>}
-      </li>
+          {onlyList && <span>{studyPlanItemsObj[passedKey]}</span>}
+        </li>
+      )}
       {elementTypeNeeded === "isURL" && passedKey === "url" && (
         <ArrowLink
           passedKey={passedKey}
