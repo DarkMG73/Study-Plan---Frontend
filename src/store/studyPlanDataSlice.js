@@ -7,6 +7,7 @@ function InitState() {
   initialState.updateStudyPlan = null;
   initialState.schema = null;
   initialState.reGatherStudyPlan = null;
+  initialState.expandedItems = null;
   return initialState;
 }
 
@@ -22,6 +23,7 @@ export const studyPlanDataSlice = createSlice({
       state.updateStudyPlan = payload.updateStudyPlan;
       state.schema = payload.schema;
       state.reGatherStudyPlan = payload.reGatherStudyPlan;
+      state.expandedItems = [];
     },
 
     updateOneStudyPlanItem: (state, action) => {
@@ -37,7 +39,7 @@ export const studyPlanDataSlice = createSlice({
     updateStudyPlanDB: (state, action) => {
       if (action.payload && !Object.hasOwn(action.payload, "itemWithNewEdits"))
         alert(
-          "There is a problem with missing data. Please alert the website admin."
+          "There is a problem with missing data. Please alert the website admin.",
         );
 
       const output = {
@@ -58,6 +60,24 @@ export const studyPlanDataSlice = createSlice({
     },
     reGatherStudyPlan: (state, action) => {
       state.reGatherStudyPlan = action.payload;
+    },
+    addToExpandedItems: (state, action) => {
+      const newState = [...state.expandedItems, action.payload];
+      console.log(
+        "%c⚪️►►►► %cline:65%caction.payload",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
+        action.payload,
+      );
+      console.log(
+        "%c⚪️►►►► %cline:65%cnewState",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(248, 214, 110);padding:3px;border-radius:2px",
+        newState,
+      );
+      state.expandedItems = newState;
     },
   },
 });

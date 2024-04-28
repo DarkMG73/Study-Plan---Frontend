@@ -33,6 +33,14 @@ function CollapsibleElm(props) {
     }, 2000);
   }, [props.maxHeight]);
 
+  useEffect(() => {
+    if (props.recheckHeight && isOverflowActive(textRef.current)) {
+      setOverflowActive(true);
+      return;
+    }
+    setOverflowActive(false);
+  }, [props.recheckHeight]);
+
   const seeMoreButtonHandler = (e) => {
     e.preventDefault();
     setElmOpen(!elmOpen);

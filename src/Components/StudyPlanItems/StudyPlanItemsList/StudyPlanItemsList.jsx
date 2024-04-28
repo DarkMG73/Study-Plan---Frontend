@@ -30,7 +30,7 @@ const StudyPlanItemsList = (props) => {
   const demoCheck = useDemoCheck();
   const isDemo = demoCheck();
   const [itemEditorModalJSX, setItemEditorModalJSX] = useState(false);
-  const [expandItem, setExpandItem] = useState([]);
+  const { expandedItems } = useSelector((state) => state.studyPlanData);
   const [showProtectedHidden, setShowProtectedHidden] = useState(
     props.showProtectedHidden ? props.showProtectedHidden : [],
   );
@@ -125,7 +125,7 @@ const StudyPlanItemsList = (props) => {
     setItemEditorModalJSX(<ItemEditorModal id={buttonMasterID} user={user} />);
   };
 
-  const expandItemButtonHandler = (e) => {
+  const expandedItemsButtonHandler = (e) => {
     e.preventDefault();
     console.log(
       "%c⚪️►►►► %cline:130%ce.target.value",
@@ -134,7 +134,8 @@ const StudyPlanItemsList = (props) => {
       "color:#fff;background:rgb(153, 80, 84);padding:3px;border-radius:2px",
       e.target.value,
     );
-    setExpandItem(e.target.value);
+
+    dispatch(studyPlanDataActions.addToExpandedItems(e.target.value));
   };
 
   const showProtectedHiddenHandler = (e) => {
@@ -786,23 +787,23 @@ const StudyPlanItemsList = (props) => {
                 }
               >
                 {studyPlanMetadata["_id"].length > 2 &&
-                  !expandItem.includes(key) && (
+                  !expandedItems.includes(key) && (
                     <Fragment key={key}>
-                      <button value={key} onClick={expandItemButtonHandler}>
+                      <button
+                        value={
+                          parentMasterID
+                            ? parentMasterID
+                            : studyPlanItemsObj[key]._id
+                        }
+                        onClick={expandedItemsButtonHandler}
+                      >
                         See More
                       </button>
-                      {console.log(
-                        "%c⚪️►►►► %cline:1028%cObject.keys(studyPlanItemsObj",
-                        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-                        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-                        "color:#fff;background:rgb(3, 101, 100);padding:3px;border-radius:2px",
-                        Object.keys(studyPlanItemsObj),
-                      )}
                       <div>
                         <h2>{key}</h2>
                         <p>{studyPlanItemsObj[key].type}</p>
                       </div>
-                      <h1>TEST</h1>
+                      <h1>parenMasterID - {parentMasterID}</h1>
                     </Fragment>
                   )}
 
@@ -1070,7 +1071,7 @@ const StudyPlanItemsList = (props) => {
               <StudyPlanItem
                 key={parentMasterID + parentsParentKey + parentKey + key}
                 studyPlanItemsObj={props}
-                expandItem={expandItem}
+                expandedItems={expandedItems}
                 passedKey={key}
                 parentKey={parentKey}
                 parentsParentKey={parentsParentKey}

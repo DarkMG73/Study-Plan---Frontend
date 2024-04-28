@@ -1,4 +1,5 @@
 import { useState, Fragment } from "react";
+import { useSelector } from "react-redux";
 import styles from "./StudyPlanItem.module.scss";
 import StudyItemDisplayElm from "./StudyItemDisplayElm/StudyItemDisplayElm";
 import ArrowLink from "./StudyItemDisplayElm/StudyItemInputs/ArrowLink/ArrowLink";
@@ -6,7 +7,6 @@ import ArrowLink from "./StudyItemDisplayElm/StudyItemInputs/ArrowLink/ArrowLink
 const StudyPlanItem = (props) => {
   const {
     displayConditions,
-    expandItem,
     passedKey,
     parentKey,
     parentsParentKey,
@@ -17,6 +17,22 @@ const StudyPlanItem = (props) => {
     onlyList,
     unlockProtectedVisible,
   } = props;
+  const { expandedItems } = useSelector((state) => state.studyPlanData);
+  console.log(
+    "%c⚪️►►►► %cline:13%cparentMasterID",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(96, 143, 159);padding:3px;border-radius:2px",
+    parentMasterID,
+  );
+
+  console.log(
+    "%c⚪️►►►► %cline:9%cexpandedItems",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(229, 187, 129);padding:3px;border-radius:2px",
+    expandedItems,
+  );
 
   const studyPlanItemsObj = props.studyPlanItemsObj.studyPlanItemsObj;
   const [editedField, setEditedField] = useState(false);
@@ -77,7 +93,16 @@ const StudyPlanItem = (props) => {
 
   const output = (
     <Fragment>
-      {expandItem && (
+      {console.log("expandedItems", expandedItems)}
+      {console.log("parentMasterID", parentMasterID)}
+      {console.log(
+        "%c⚪️►►►► %cline:98%cexpandedItems.includes[parentMasterID]",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(96, 143, 159);padding:3px;border-radius:2px",
+        expandedItems.includes[parentMasterID],
+      )}
+      {expandedItems.includes(parentMasterID) && (
         <li
           key={
             passedKey +
