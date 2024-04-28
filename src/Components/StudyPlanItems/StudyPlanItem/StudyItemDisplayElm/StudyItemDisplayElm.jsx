@@ -41,7 +41,7 @@ const StudyItemDisplayElm = (props) => {
     emptyForm,
   };
 
-  let output = <div {...passedProps} />;
+  let output = <Textarea {...passedProps} />;
 
   switch (elementTypeNeeded) {
     case "_id":

@@ -1,7 +1,7 @@
 import { useState, useEffect, Fragment } from "react";
 import Styles from "./Textarea.module.scss";
 import useAddInputData from "../../../../../../Hooks/useAddInputData";
-import TextareaAutosize from "react-textarea-autosize";
+// import TextareaAutosize from "react-textarea-autosize";
 
 const Textarea = (props) => {
   const {
@@ -59,7 +59,7 @@ const Textarea = (props) => {
       >
         {key}:
       </label>
-      <TextareaAutosize
+      <div
         id={
           parentMasterID +
           "-" +
@@ -81,7 +81,10 @@ const Textarea = (props) => {
         onChange={onChangeNotes()}
         onBlur={onBlurHandler}
         defaultValue={notes}
-      />
+        contentEditable="true"
+      >
+        {notes}
+      </div>
     </Fragment>
   );
 };
