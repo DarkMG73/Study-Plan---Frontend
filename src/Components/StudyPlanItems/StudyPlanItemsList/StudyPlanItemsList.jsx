@@ -424,6 +424,7 @@ const StudyPlanItemsList = (props) => {
                   buttonTextOpened={<Fragment>&uarr;Less</Fragment>}
                   buttonTextClosed={<Fragment>&darr;More</Fragment>}
                   hideButtonArrows={true}
+                  recheckHeight={expandedItems.length}
                 >
                   <h2
                     key={parentKey}
@@ -850,6 +851,7 @@ const StudyPlanItemsList = (props) => {
                   buttonTextOpened={<Fragment>&uarr;Less</Fragment>}
                   buttonTextClosed={<Fragment>&darr;More</Fragment>}
                   hideButtonArrows={true}
+                  recheckHeight={expandedItems.length}
                 >
                   <h2
                     className={
