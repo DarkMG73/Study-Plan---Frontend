@@ -16,6 +16,7 @@
 
 .protectedVisible-true {
   textarea,
+  [class*="sizable-textarea"],
   input,
   select {
     position: relative;
@@ -34,6 +35,7 @@
 
 [class*="master-parent-group"] [class*="dependencies-container"] li {
   textarea,
+  [class*="sizable-textarea"],
   input,
   select {
     position: relative;
@@ -68,7 +70,8 @@
   min-width: 100%;
   margin: 0;
 }
-._id textarea {
+._id textarea,
+._id [class*="sizable-textarea"] {
   background: inherit;
   color: inherit;
   border: none;
@@ -84,13 +87,15 @@
 }
 
 .iframeCustomAttributes,
-.iframeCustomAttributes textarea {
+.iframeCustomAttributes textarea,
+.iframeCustomAttributes [class*="sizable-textarea"] {
   flex-grow: 1;
   min-height: max-content !important;
   max-height: none !important;
 }
 
 .identifier textarea,
+.identifier [class*="sizable-textarea"],
 .createdAt input,
 .updatedAt input {
   pointer-events: none;
@@ -140,6 +145,7 @@ select {
 // }
 
 .item textarea,
+.item [class*="sizable-textarea"],
 .item input {
   width: 100%;
   /* height: 2em; */
@@ -159,6 +165,7 @@ select {
 }
 
 .item textarea,
+.item [class*="sizable-textarea"],
 .item input {
   overflow: hidden;
 }
@@ -182,6 +189,7 @@ select {
 }
 
 .subgroup-tags textarea,
+.subgroup-tags [class*="sizable-textarea"],
 .subgroup .notes,
 .subgroup .description {
   width: 100%;
@@ -225,7 +233,8 @@ body .name {
   grid-area: name;
   padding-top: 0.5em;
   box-shadow: none;
-  textarea {
+  textarea,
+  [class*="sizable-textarea"] {
     font-variant: small-caps;
     line-height: 0.9em !important;
     max-height: 2em;
@@ -309,7 +318,8 @@ body .method {
 body [class*="master-parent-group"] .des,
 body [class*="master-parent-group"] .demonstratedskillsdesc,
 body [class*="master-parent-group"] .itemnotes {
-  textarea {
+  textarea,
+  [class*="sizable-textarea"] {
     background: var(--spt-color-background);
     color: var(--spt-color-background-contrast);
     max-width: calc(100% - 2em);
@@ -606,7 +616,8 @@ ul[class*="edited-list"] li[class*="name"].edited-field:after {
   border-radius: 50px;
 }
 
-textarea {
+textarea,
+[class*="sizable-textarea"] {
   max-width: 100%;
 }
 

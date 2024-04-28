@@ -31,7 +31,8 @@
   letter-spacing: inherit;
 }
 
-._id textarea {
+._id textarea,
+._id t[class*="sizable-textarea"] {
   background: inherit;
   color: inherit;
   border: none;
@@ -64,6 +65,7 @@
 }
 
 .item textarea,
+.item [class*="sizable-textarea"],
 .item input {
   width: 100%;
   /* height: 2em; */
@@ -104,6 +106,7 @@
 }
 
 .subgroup-tags textarea,
+.subgroup-tags [class*="sizable-textarea"],
 .subgroup .notes,
 .subgroup .description {
   width: 100%;

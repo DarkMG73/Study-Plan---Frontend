@@ -26,6 +26,7 @@
   select,
   input,
   textarea,
+  [class*="sizable-textarea"],
   a:not([class*="featured-url-arrow"]) {
     margin-left: 1em;
     text-align: left;
@@ -35,7 +36,7 @@
   }
 }
 
-textarea {
+textarea [class*="sizable-textarea"] {
   padding-right: 2em;
 }
 select {
@@ -179,7 +180,11 @@ ul[type="hold"] {
 ul[class*="edited-list"]
   div[data-container-type="collapsibleElm"]
   > li[id*="name-item"]
-  textarea {
+  textarea,
+ul[class*="edited-list"]
+  div[data-container-type="collapsibleElm"]
+  > li[id*="name-item"]
+  [class*="sizable-textarea"] {
   border-radius: 11px;
   margin: 1em auto;
 }

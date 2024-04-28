@@ -28,7 +28,38 @@ const Textarea = (props) => {
     };
 
   const onBlurHandler = (e) => {
-    addInputData(e, { emptyForm, editedField, setEditedField });
+    console.log(
+      "%c⚪️►►►► %cline:30%ce",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
+      e.nativeEvent.target,
+    );
+    console.log(
+      "%c⚪️►►►► %cline:30%ce",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
+      e.nativeEvent.target.innerHTML,
+    );
+    // Groom for standard input event
+    const newE = e.nativeEvent;
+    newE.target.value = e.nativeEvent.target.innerHTML;
+    console.log(
+      "%c⚪️►►►► %cline:47%cnewE",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(20, 68, 106);padding:3px;border-radius:2px",
+      newE.target,
+    );
+    console.log(
+      "%c⚪️►►►► %cline:47%cnewE",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(20, 68, 106);padding:3px;border-radius:2px",
+      newE.target.value,
+    );
+    addInputData(newE, { emptyForm, editedField, setEditedField });
   };
 
   useEffect(() => {
@@ -81,7 +112,9 @@ const Textarea = (props) => {
         onChange={onChangeNotes()}
         onBlur={onBlurHandler}
         defaultValue={notes}
-        contentEditable="true"
+        contentEditable={unlockProtectedVisible.includes(parentMasterID)}
+        suppressContentEditableWarning={true}
+        className="sizable-textarea"
       >
         {notes}
       </div>

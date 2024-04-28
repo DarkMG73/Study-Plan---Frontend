@@ -112,6 +112,7 @@
 
 .new-form-modal {
   [class*="new-form-wrap"] li textarea,
+  [class*="new-form-wrap"] li [class*="sizable-textarea"],
   [class*="new-form-wrap"] li input,
   [class*="new-form-wrap"] li select {
     background: var(--spt-color-background);
@@ -269,12 +270,15 @@
   li,
   input,
   textarea,
+  [class*="sizable-textarea"],
   select {
     border-radius: 6.25px;
     border: none;
   }
+
   input,
   textarea,
+  [class*="sizable-textarea"],
   select {
     box-shadow:
       inset -1px -1px 3px -2px white,
@@ -425,7 +429,8 @@
 
     li input,
     li select,
-    li textarea {
+    li textarea,
+    li [class*="sizable-textarea"] {
       min-height: 2em;
       height: 2.5em;
       font: var(--spt-font-body-text);
@@ -473,7 +478,8 @@
   font: var(--spt-text-subheading);
 }
 
-.new-form-item textarea {
+.new-form-item textarea,
+.new-form-item [class*="sizable-textarea"] {
   opacity: 1;
   font: var(--spt-text-subheading);
   padding: 0.5em 1em 0em;

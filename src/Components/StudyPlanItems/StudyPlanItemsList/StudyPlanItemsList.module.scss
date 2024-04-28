@@ -486,6 +486,7 @@ ul[class*="edited-list"] > [data-container-type="collapsibleElm"] > li {
 
 ul[class*="edited-list"] > [data-container-type="collapsibleElm"] > li > {
   textarea,
+  [class*="sizable-textarea"],
   input,
   select {
     min-height: 2em;
