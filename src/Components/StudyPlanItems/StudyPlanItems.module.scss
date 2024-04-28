@@ -57,36 +57,6 @@ input[type*="datetime"] {
   font-size: 12px;
 }
 
-input[type*="datetime"]::after {
-  color: #ff0000;
-  content: attr(placeholder);
-}
-
-input[type*="datetime"] {
-  color: transparent;
-  display: block;
-  margin: 10px;
-  padding: 10px;
-}
-input[type*="datetime"]:invalid:before {
-  color: #808080;
-  content: attr(placeholder);
-  padding-left: 10px;
-  pointer-events: none;
-  position: absolute;
-  left: 20px;
-}
-input[type*="datetime"]:valid,
-input[type*="datetime"]:focus,
-input[type*="datetime"]:active {
-  color: #ffffff;
-}
-input[type*="datetime"]:valid:before,
-input[type*="datetime"]:focus:before,
-input[type*="datetime"]:active:before {
-  display: none;
-}
-
 .group-studyPlan-goals ul,
 .group-studyPlan ul {
   color: white;
