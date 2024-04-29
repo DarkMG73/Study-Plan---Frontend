@@ -798,11 +798,7 @@ const StudyPlanItemsList = (props) => {
                     >
                       {!expandedItems.includes(key) && (
                         <Fragment>
-                          <Fragment> See More</Fragment>{" "}
-                          <span>
-                            <h2>{studyPlanItemsObj[key].name}</h2>
-                            <p>{studyPlanItemsObj[key].type}</p>
-                          </span>
+                          <Fragment> See More</Fragment>
                         </Fragment>
                       )}
                       {expandedItems.includes(key) && (
@@ -811,7 +807,12 @@ const StudyPlanItemsList = (props) => {
                     </button>
                   </Fragment>
                 )}
-
+                {!expandedItems.includes(key) && (
+                  <Fragment>
+                    <h2>{studyPlanItemsObj[key].name}</h2>
+                    <p>{studyPlanItemsObj[key].type}</p>
+                  </Fragment>
+                )}
                 {/* <CollapsibleElm
                   elmId={key + "-collapsible-elm"}
                   styles={{
@@ -856,14 +857,15 @@ const StudyPlanItemsList = (props) => {
                   buttonTextClosed={<Fragment>&darr;More</Fragment>}
                   hideButtonArrows={true}
                 > */}
-                <div>
-                  elmId={key + "-collapsible-elm"}
-                  style=
-                  {{
+                <div
+                  key={key + "-collapsible-elm"}
+                  id={key + "-collapsible-elm"}
+                  style={{
                     position: "relative",
                     maxWidth: "100%",
                   }}
                   data-container-type="collapsibleElm"
+                >
                   <h2
                     className={
                       styles["group-title"] +
@@ -884,6 +886,7 @@ const StudyPlanItemsList = (props) => {
                       key
                     )}
                   </h2>
+
                   <StudyPlanItemsSubList
                     key={studyPlanItemsObj[key]}
                     studyPlanItemsObj={studyPlanItemsObj[key]}
@@ -918,6 +921,7 @@ const StudyPlanItemsList = (props) => {
                     emptyForm={props.emptyForm}
                     setFormType={props.setFormType}
                   />
+
                   {!onlyList && !subListLevel && (
                     <div className={styles["button-container"]}>
                       {!noEditButton && (
