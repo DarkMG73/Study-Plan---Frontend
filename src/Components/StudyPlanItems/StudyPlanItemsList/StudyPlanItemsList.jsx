@@ -135,7 +135,7 @@ const StudyPlanItemsList = (props) => {
       e.target.value,
     );
 
-    dispatch(studyPlanDataActions.addToExpandedItems(e.target.value));
+    dispatch(studyPlanDataActions.toggleExpandedItems(e.target.value));
   };
 
   const showProtectedHiddenHandler = (e) => {
@@ -424,7 +424,6 @@ const StudyPlanItemsList = (props) => {
                   buttonTextOpened={<Fragment>&uarr;Less</Fragment>}
                   buttonTextClosed={<Fragment>&darr;More</Fragment>}
                   hideButtonArrows={true}
-                  recheckHeight={expandedItems.length}
                 >
                   <h2
                     key={parentKey}
@@ -787,28 +786,33 @@ const StudyPlanItemsList = (props) => {
                   (props.inModal && styles["in-modal"])
                 }
               >
-                {studyPlanMetadata["_id"].length > 2 &&
-                  !expandedItems.includes(key) && (
-                    <Fragment key={key}>
-                      <button
-                        value={
-                          parentMasterID
-                            ? parentMasterID
-                            : studyPlanItemsObj[key]._id
-                        }
-                        onClick={expandedItemsButtonHandler}
-                      >
-                        See More
-                      </button>
-                      <div>
-                        <h2>{key}</h2>
-                        <p>{studyPlanItemsObj[key].type}</p>
-                      </div>
-                      <h1>parenMasterID - {parentMasterID}</h1>
-                    </Fragment>
-                  )}
+                {studyPlanMetadata["_id"].length > 2 && (
+                  <Fragment key={key}>
+                    <button
+                      value={
+                        parentMasterID
+                          ? parentMasterID
+                          : studyPlanItemsObj[key]._id
+                      }
+                      onClick={expandedItemsButtonHandler}
+                    >
+                      {!expandedItems.includes(key) && (
+                        <Fragment>
+                          <Fragment> See More</Fragment>{" "}
+                          <span>
+                            <h2>{studyPlanItemsObj[key].name}</h2>
+                            <p>{studyPlanItemsObj[key].type}</p>
+                          </span>
+                        </Fragment>
+                      )}
+                      {expandedItems.includes(key) && (
+                        <Fragment> See Less</Fragment>
+                      )}
+                    </button>
+                  </Fragment>
+                )}
 
-                <CollapsibleElm
+                {/* <CollapsibleElm
                   elmId={key + "-collapsible-elm"}
                   styles={{
                     position: "relative",
@@ -851,8 +855,15 @@ const StudyPlanItemsList = (props) => {
                   buttonTextOpened={<Fragment>&uarr;Less</Fragment>}
                   buttonTextClosed={<Fragment>&darr;More</Fragment>}
                   hideButtonArrows={true}
-                  recheckHeight={expandedItems.length}
-                >
+                > */}
+                <div>
+                  elmId={key + "-collapsible-elm"}
+                  style=
+                  {{
+                    position: "relative",
+                    maxWidth: "100%",
+                  }}
+                  data-container-type="collapsibleElm"
                   <h2
                     className={
                       styles["group-title"] +
@@ -873,7 +884,6 @@ const StudyPlanItemsList = (props) => {
                       key
                     )}
                   </h2>
-
                   <StudyPlanItemsSubList
                     key={studyPlanItemsObj[key]}
                     studyPlanItemsObj={studyPlanItemsObj[key]}
@@ -908,7 +918,6 @@ const StudyPlanItemsList = (props) => {
                     emptyForm={props.emptyForm}
                     setFormType={props.setFormType}
                   />
-
                   {!onlyList && !subListLevel && (
                     <div className={styles["button-container"]}>
                       {!noEditButton && (
@@ -1061,7 +1070,8 @@ const StudyPlanItemsList = (props) => {
                       )}
                     </div>
                   )}
-                </CollapsibleElm>
+                </div>
+                {/* </CollapsibleElm> */}
               </ul>
             );
 

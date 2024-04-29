@@ -19,7 +19,7 @@ import AddToPlanButton from "../AddToPlanButton/AddToPlanButton";
 
 const StudyPlanItems = (props) => {
   const user = useSelector((state) => state.auth.user);
-  const { studyPlan, studyPlanMetadata, schema } = useSelector(
+  const { studyPlan, studyPlanMetadata, schema, expandedItems } = useSelector(
     (state) => state.studyPlanData,
   );
   const [sortMethod, setSortMethod] = useState("priority");
@@ -409,7 +409,7 @@ const StudyPlanItems = (props) => {
                         displayConditions={displayConditions}
                         user={props.user}
                       />
-                    </CollapsibleElm>{" "}
+                    </CollapsibleElm>
                   </div>
                 </div>
               )}
@@ -449,6 +449,7 @@ const StudyPlanItems = (props) => {
               buttonTextClosed={"- Open All " + toTitleCase(outputName) + " -"}
               open={false}
               showBottomGradient={id === "studyPlan" && true}
+              recheckHeight={expandedItems.length}
             >
               {Object.keys(formInputData).length > 0 && (
                 <div

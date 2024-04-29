@@ -61,8 +61,15 @@ export const studyPlanDataSlice = createSlice({
     reGatherStudyPlan: (state, action) => {
       state.reGatherStudyPlan = action.payload;
     },
-    addToExpandedItems: (state, action) => {
-      const newState = [...state.expandedItems, action.payload];
+    toggleExpandedItems: (state, action) => {
+      const newState = [...state.expandedItems];
+      console.log(
+        "%c⚪️►►►► %cline:65%cnewState",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px",
+        newState,
+      );
       console.log(
         "%c⚪️►►►► %cline:65%caction.payload",
         "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
@@ -71,13 +78,25 @@ export const studyPlanDataSlice = createSlice({
         action.payload,
       );
       console.log(
-        "%c⚪️►►►► %cline:65%cnewState",
+        "%c⚪️►►►► %cline:80%cnewState.includes(action.payload)",
         "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
         "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(248, 214, 110);padding:3px;border-radius:2px",
-        newState,
+        "color:#fff;background:rgb(96, 143, 159);padding:3px;border-radius:2px",
+        newState.includes(action.payload),
       );
-      state.expandedItems = newState;
+      if (newState.includes(action.payload)) {
+        newState.splice(newState.indexOf(action.payload), 1);
+        console.log(
+          "%c⚪️►►►► %cline:68%creducedNewState",
+          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+          "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
+          newState,
+        );
+        state.expandedItems = newState;
+      } else {
+        state.expandedItems = [...newState, action.payload];
+      }
     },
   },
 });
