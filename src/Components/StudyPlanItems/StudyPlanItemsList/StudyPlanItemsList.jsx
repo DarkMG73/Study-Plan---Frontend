@@ -827,17 +827,13 @@ const StudyPlanItemsList = (props) => {
                         key === "0" &&
                         Object.hasOwn(studyPlanItemsObj[key], "_id")
                           ? studyPlanItemsObj[key]["_id"]
-                          : { key }
+                          : key
                       }
                       parentmasterid={key}
                       data=""
                       size="small"
                       onClick={expandedItemsButtonHandler}
                     >
-                      {key === "0" &&
-                      Object.hasOwn(studyPlanItemsObj[key], "_id")
-                        ? studyPlanItemsObj[key]["_id"]
-                        : { key }}
                       {!expandedItems.includes(key) && (
                         <Fragment>
                           <Fragment>&darr; More &darr;</Fragment>

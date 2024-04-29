@@ -20,14 +20,7 @@ const StudyPlanItem = (props) => {
   const { expandedItems } = useSelector((state) => state.studyPlanData);
   const studyPlanItemsObj = props.studyPlanItemsObj.studyPlanItemsObj;
   const [editedField, setEditedField] = useState(false);
-  console.log(
-    "%c⚪️►►►► %cline:10%cpassedKey",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
-    passedKey,
-  );
-  // const displayedWhenNotExpanded = ["name", "method", "priority"];
+  const displayedWhenNotExpanded = ["name", "method", "priority", "_id"];
   function findElementType(itemKey) {
     const checkIfNameInDisplayCond = (name, condition) => {
       if (Object.hasOwn(displayConditions, condition)) {
@@ -85,7 +78,8 @@ const StudyPlanItem = (props) => {
 
   const output = (
     <Fragment>
-      {expandedItems.includes(parentMasterID) && (
+      {(displayedWhenNotExpanded.includes(passedKey) ||
+        expandedItems.includes(parentMasterID)) && (
         <li
           key={
             passedKey +
