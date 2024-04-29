@@ -27,7 +27,7 @@ const StudyPlanItem = (props) => {
     "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
     passedKey,
   );
-  const displayedWhenNotExpanded = ["name", "method", "priority"];
+  // const displayedWhenNotExpanded = ["name", "method", "priority"];
   function findElementType(itemKey) {
     const checkIfNameInDisplayCond = (name, condition) => {
       if (Object.hasOwn(displayConditions, condition)) {
@@ -85,8 +85,7 @@ const StudyPlanItem = (props) => {
 
   const output = (
     <Fragment>
-      {(displayedWhenNotExpanded.includes(passedKey) ||
-        expandedItems.includes(parentMasterID)) && (
+      {expandedItems.includes(parentMasterID) && (
         <li
           key={
             passedKey +
