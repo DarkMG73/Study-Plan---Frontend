@@ -707,6 +707,13 @@ ul ul[type="hold"]:after {
       font-size: calc(0.2rem + 1vmin);
     }
   }
+
+  div[class*="pseudo-collapsible-elm"] {
+    li[class*="method"],
+    li[class*="priority"] {
+      display: none;
+    }
+  }
 }
 
 @media screen and (max-width: 550px) {

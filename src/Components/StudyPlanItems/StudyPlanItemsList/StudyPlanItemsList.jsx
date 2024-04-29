@@ -796,7 +796,33 @@ const StudyPlanItemsList = (props) => {
                       inputOrButton="button"
                       id={"create-entry-btn" + key}
                       colorType="primary"
-                      styles={{}}
+                      styles={{
+                        margin: "0 auto",
+                        padding: "0.5em 2em",
+                        transition: "0.7s all ease",
+                        maxWidth: "80%",
+                        textAlign: "center",
+                        display: "flex",
+                        alignItems: "center",
+                        borderRadius: "0 0 50px 0",
+                        fontFamily: "Arial",
+                        border: "none",
+                        position: "absolute",
+                        top: "0",
+                        left: "0",
+                        flexGrow: "1",
+                        minWidth: "4.5em",
+                        boxShadow:
+                          "inset 3px 3px 5px 0px #ffffffe0, inset -3px -3px 5px 0px #00000038",
+                        fontSize: "1.2rem",
+                        fontVariant: "all-small-caps",
+                        letterSpacing: "0.2em",
+                        cursor: "pointer",
+                        height: "100%",
+                        maxHeight: "4em",
+                        transformOrigin: "left",
+                        zIndex: "1",
+                      }}
                       value={key}
                       parentmasterid={key}
                       data=""
@@ -805,11 +831,11 @@ const StudyPlanItemsList = (props) => {
                     >
                       {!expandedItems.includes(key) && (
                         <Fragment>
-                          <Fragment> See More</Fragment>
+                          <Fragment>&darr; More &darr;</Fragment>
                         </Fragment>
                       )}
                       {expandedItems.includes(key) && (
-                        <Fragment> See Less</Fragment>
+                        <Fragment>&darr; Less &darr;</Fragment>
                       )}
                     </PushButton>
                   </Fragment>
@@ -866,6 +892,7 @@ const StudyPlanItemsList = (props) => {
                     position: "relative",
                     maxWidth: "100%",
                   }}
+                  className="pseudo-collapsible-elm"
                   data-container-type="collapsibleElm"
                 >
                   <h2
