@@ -527,11 +527,6 @@ const StudyPlanItemsList = (props) => {
                         ? parentMasterID
                         : studyPlanItemsObj[key]._id
                     }
-                    parentMasterType={
-                      parentMasterType
-                        ? parentMasterType
-                        : studyPlanItemsObj[key].type
-                    }
                     section={section}
                     displayConditions={displayConditions}
                     subListLevel={subListLevel}
@@ -601,11 +596,6 @@ const StudyPlanItemsList = (props) => {
                                 parentMasterID
                                   ? parentMasterID
                                   : studyPlanItemsObj[key]._id
-                              }
-                              parentMasterType={
-                                parentMasterType
-                                  ? parentMasterType
-                                  : studyPlanItemsObj[key].type
                               }
                               section={section}
                               displayConditions={displayConditions}
@@ -1000,11 +990,6 @@ const StudyPlanItemsList = (props) => {
                         ? parentMasterID
                         : studyPlanItemsObj[key]._id
                     }
-                    parentMasterType={
-                      parentMasterType
-                        ? parentMasterType
-                        : studyPlanItemsObj[key].type
-                    }
                     section={section}
                     displayConditions={displayConditions}
                     subListLevel={subListLevel}
@@ -1115,73 +1100,82 @@ const StudyPlanItemsList = (props) => {
                         )}
                       </div>
                     )}
-                  {subListLevel && (
-                    <div className={styles["button-container"]}>
-                      {!noEditButton && (
+                  {subListLevel &&
+                    (studyPlanMetadata["_id"].length <
+                      largeStudyPlanBreakPoint ||
+                      (studyPlanMetadata["_id"].length >
+                        largeStudyPlanBreakPoint &&
+                        expandedItems.includes(
+                          key != 0 ? key : studyPlanItemsObj[key]._id,
+                        ))) && (
+                      <div className={styles["button-container"]}>
+                        {!noEditButton && (
+                          <button
+                            className={
+                              styles["form-button"] +
+                              " " +
+                              styles["edit-form-button"]
+                            }
+                            value={key != 0 ? key : studyPlanItemsObj[key]._id}
+                            data-parentmasterid={
+                              key != 0 ? key : studyPlanItemsObj[key]._id
+                            }
+                            onClick={openItemEditorButtonHandler}
+                          >
+                            <Fragment>
+                              <span>Edit </span>
+                              <span
+                                className={styles["edit-button-target-name"]}
+                              >
+                                "{studyPlanItemsObj[key].name}"
+                              </span>
+                            </Fragment>
+                          </button>
+                        )}
                         <button
                           className={
                             styles["form-button"] +
                             " " +
-                            styles["edit-form-button"]
+                            styles["show-hidden-form-button"]
                           }
-                          value={key != 0 ? key : studyPlanItemsObj[key]._id}
-                          data-parentmasterid={
-                            key != 0 ? key : studyPlanItemsObj[key]._id
-                          }
-                          onClick={openItemEditorButtonHandler}
+                          value={key}
+                          data-parentmasterid={key}
+                          onClick={showProtectedHiddenHandler}
                         >
-                          <Fragment>
-                            <span>Edit </span>
-                            <span className={styles["edit-button-target-name"]}>
-                              "{studyPlanItemsObj[key].name}"
-                            </span>
-                          </Fragment>
+                          Show Hidden Fields
                         </button>
-                      )}
-                      <button
-                        className={
-                          styles["form-button"] +
-                          " " +
-                          styles["show-hidden-form-button"]
-                        }
-                        value={key}
-                        data-parentmasterid={key}
-                        onClick={showProtectedHiddenHandler}
-                      >
-                        Show Hidden Fields
-                      </button>
-                      {!onlyList && unlockProtectedVisible.includes(key) && (
-                        <Fragment>
-                          <button
-                            className={
-                              styles["form-button"] +
-                              " " +
-                              styles["submit-form-button"]
-                            }
-                            value={key}
-                            data-parentmasterid={key}
-                            data-section={section}
-                            onClick={submitFormButtonHandler}
-                          >
-                            Submit Changes
-                          </button>{" "}
-                          <button
-                            className={
-                              styles["form-button"] +
-                              " " +
-                              styles["delete-form-button"]
-                            }
-                            value={key}
-                            data-parentmasterid={key}
-                            data-section={section}
-                            onClick={deleteFormButtonHandler}
-                          >
-                            Delete
-                          </button>
-                        </Fragment>
-                      )}
-                    </div>
-                  )}
+                        {!onlyList && unlockProtectedVisible.includes(key) && (
+                          <Fragment>
+                            <button
+                              className={
+                                styles["form-button"] +
+                                " " +
+                                styles["submit-form-button"]
+                              }
+                              value={key}
+                              data-parentmasterid={key}
+                              data-section={section}
+                              onClick={submitFormButtonHandler}
+                            >
+                              Submit Changes
+                            </button>{" "}
+                            <button
+                              className={
+                                styles["form-button"] +
+                                " " +
+                                styles["delete-form-button"]
+                              }
+                              value={key}
+                              data-parentmasterid={key}
+                              data-section={section}
+                              onClick={deleteFormButtonHandler}
+                            >
+                              Delete
+                            </button>
+                          </Fragment>
+                        )}
+                      </div>
+                    )}
                 </div>
                 {/* </CollapsibleElm> */}
               </ul>
@@ -1193,6 +1187,7 @@ const StudyPlanItemsList = (props) => {
                 key={parentMasterID + parentsParentKey + parentKey + key}
                 studyPlanItemsObj={props}
                 expandedItems={expandedItems}
+                section={section}
                 passedKey={key}
                 parentKey={parentKey}
                 parentsParentKey={parentsParentKey}

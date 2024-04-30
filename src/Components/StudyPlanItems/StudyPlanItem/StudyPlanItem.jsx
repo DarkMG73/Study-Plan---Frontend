@@ -12,6 +12,7 @@ const StudyPlanItem = (props) => {
     parentsParentKey,
     parentMasterID,
     parentMasterType,
+    section,
     showProtectedHidden,
     emptyForm,
     onlyList,
@@ -25,7 +26,13 @@ const StudyPlanItem = (props) => {
     "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
     passedKey,
   );
-
+  console.log(
+    "%c⚪️►►►► %cline:15%csection",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
+    section,
+  );
   console.log(
     "%c⚪️►►►► %cline:12%cparentKey",
     "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
@@ -125,10 +132,14 @@ const StudyPlanItem = (props) => {
 
   // Clears delay of functions until after typing
 
+  const keyToCheck = section.includes("goal")
+    ? studyPlanItemsObj._id
+    : parentMasterID;
+
   const output = (
     <Fragment>
       {(displayedWhenNotExpanded.includes(passedKey) ||
-        expandedItems.includes(parentMasterID)) && (
+        expandedItems.includes(keyToCheck)) && (
         <li
           key={
             passedKey +
