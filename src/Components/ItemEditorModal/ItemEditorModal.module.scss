@@ -50,7 +50,7 @@
   position: relative;
 }
 
-.new-form-modal form ul[id*="itemEditForm"] {
+.new-form-modal form ul[id*="itemEditForm"] .new-form {
   display: grid;
   grid-gap: 0;
   grid-template-columns: repeat(4, 25%);
@@ -75,7 +75,7 @@
   max-width: 100%;
 }
 
-.new-form-modal form [newformtype="hold"] ul[id*="itemEditForm"] {
+.new-form-modal form [newformtype="hold"] {
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
     "name name  name name"
@@ -91,10 +91,9 @@
     "itemnotes itemnotes itemnotes itemnotes"
     "tags tags tags tags";
   grid-auto-flow: row dense;
-  max-width: 100%;
 }
 
-.new-form-modal form [newformtype="goal"] ul[id*="itemEditForm"] {
+.new-form-modal form ul [newformtype="goal"] {
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
     "name name"
@@ -107,7 +106,6 @@
     "itemnotes itemnotes"
     "tags tags";
   grid-auto-flow: row dense;
-  max-width: 100%;
 }
 
 .new-form-modal {

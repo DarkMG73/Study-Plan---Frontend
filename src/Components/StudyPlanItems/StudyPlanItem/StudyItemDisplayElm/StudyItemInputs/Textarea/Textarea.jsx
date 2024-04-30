@@ -28,6 +28,13 @@ const Textarea = (props) => {
     "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
     unlockProtectedVisible,
   );
+  console.log(
+    "%c⚪️►►►► %cline:10%csection",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(130, 57, 53);padding:3px;border-radius:2px",
+    section,
+  );
   const onChangeNotes =
     () =>
     ({ target: { value } }) => {
@@ -64,10 +71,11 @@ const Textarea = (props) => {
           ]
         }
       >
-        {key}:
+        {key}: {"" + section.includes("editor-in-modal")}
       </label>
       {(unlockProtectedVisible.includes(parentMasterID) ||
-        section === "editor-in-modal") && (
+        section.includes("editor-in-modal") ||
+        parentMasterID.includes("newForm")) && (
         <TextareaAutosize
           id={
             parentMasterID +
@@ -96,7 +104,8 @@ const Textarea = (props) => {
         />
       )}
       {!unlockProtectedVisible.includes(parentMasterID) &&
-        section !== "editor-in-modal" && (
+        section !== "editor-in-modal" &&
+        !parentMasterID.includes("newForm") && (
           <div
             id={
               parentMasterID +

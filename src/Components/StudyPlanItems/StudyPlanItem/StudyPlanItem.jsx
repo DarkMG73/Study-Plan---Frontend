@@ -146,7 +146,8 @@ const StudyPlanItem = (props) => {
 
   const output = (
     <Fragment>
-      {(displayedWhenNotExpanded.includes(passedKey) ||
+      {(parentMasterID.includes("newForm") ||
+        displayedWhenNotExpanded.includes(passedKey) ||
         expandedItems.includes(keyToCheck)) && (
         <li
           key={
