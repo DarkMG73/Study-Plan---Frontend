@@ -15,10 +15,11 @@ const useAddInputData = () => {
     const parentMasterID = target.getAttribute("data-parentmasterid");
     let title = target.getAttribute("title");
 
-    if (title === "type")
+    if (title === "type") {
       document
-        .getElementById(parentMasterID)
-        .setAttribute("newFormType", outputValue);
+        .querySelectorAll(`id *= ${parentMasterID}`)
+        .forEach((item) => item.setAttribute("newFormType", outputValue));
+    }
 
     if (outputValue || outputValue === "") {
       groomAndAddInputData(
