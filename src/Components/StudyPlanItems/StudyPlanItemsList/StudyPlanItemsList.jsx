@@ -7,7 +7,7 @@ import PushButton from "../../../UI/Buttons/PushButton/PushButton";
 import ItemEditorModal from "../../ItemEditorModal/ItemEditorModal";
 import { deleteDocFromDb } from "../../../storage/studyPlanDB";
 import { deleteContentDocFromDb } from "../../../storage/contentDB";
-import CollapsibleElm from "../../../UI/CollapsibleElm/CollapsibleElm";
+// import CollapsibleElm from "../../../UI/CollapsibleElm/CollapsibleElm";
 import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 import { loadingRequestsActions } from "../../../store/loadingRequestsSlice";
 import useDemoCheck from "../../../Hooks/useDemoCheck";
@@ -384,7 +384,7 @@ const StudyPlanItemsList = (props) => {
                   (props.inModal && styles["in-modal"])
                 }
               >
-                <CollapsibleElm
+                {/* <CollapsibleElm
                   elmId={key + "-collapsible-elm"}
                   styles={{
                     position: "relative",
@@ -427,7 +427,74 @@ const StudyPlanItemsList = (props) => {
                   buttonTextOpened={<Fragment>&uarr;Less</Fragment>}
                   buttonTextClosed={<Fragment>&darr;More</Fragment>}
                   hideButtonArrows={true}
+                > */}
+                <div
+                  key={key + "-collapsible-elm"}
+                  id={key + "-collapsible-elm"}
+                  style={{
+                    position: "relative",
+                    maxWidth: "100%",
+                  }}
+                  className="pseudo-collapsible-elm"
+                  data-container-type="collapsibleElm"
                 >
+                  {studyPlanMetadata["_id"].length >
+                    largeStudyPlanBreakPoint && (
+                    <Fragment key={key}>
+                      <PushButton
+                        key={key + "sub-goals-as-list"}
+                        inputOrButton="button"
+                        id={"create-entry-btn" + key}
+                        colorType="primary"
+                        styles={{
+                          margin: "0 auto",
+                          padding: "0.5em 2em",
+                          transition: "0.7s all ease",
+                          maxWidth: "80%",
+                          textAlign: "center",
+                          display: "flex",
+                          alignItems: "center",
+                          borderRadius: "0 0 50px 0",
+                          fontFamily: "Arial",
+                          border: "none",
+                          position: "absolute",
+                          top: "0",
+                          left: "0",
+                          flexGrow: "1",
+                          minWidth: "4.5em",
+                          boxShadow:
+                            "inset 3px 3px 5px 0px #ffffffe0, inset -3px -3px 5px 0px #00000038",
+                          fontSize: "1.2rem",
+                          fontVariant: "all-small-caps",
+                          letterSpacing: "0.2em",
+                          cursor: "pointer",
+                          height: "100%",
+                          maxHeight: "4em",
+                          transformOrigin: "left",
+                          zIndex: "1",
+                        }}
+                        value={
+                          key === "0" &&
+                          Object.hasOwn(studyPlanItemsObj[key], "_id")
+                            ? studyPlanItemsObj[key]["_id"]
+                            : key
+                        }
+                        parentmasterid={key}
+                        data=""
+                        size="small"
+                        onClick={expandedItemsButtonHandler}
+                      >
+                        {!expandedItems.includes(key) && (
+                          <Fragment>
+                            <Fragment>&darr; More &darr;</Fragment>
+                          </Fragment>
+                        )}
+                        {expandedItems.includes(key) && (
+                          <Fragment>&darr; Less &darr;</Fragment>
+                        )}
+                      </PushButton>
+                    </Fragment>
+                  )}
                   <h2
                     key={parentKey}
                     className={
@@ -714,7 +781,8 @@ const StudyPlanItemsList = (props) => {
                       )}
                     </div>
                   )}
-                </CollapsibleElm>
+                </div>
+                {/* </CollapsibleElm> */}
               </ul>
             );
           if (
