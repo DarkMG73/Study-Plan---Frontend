@@ -17,7 +17,56 @@ const StudyPlanItem = (props) => {
     onlyList,
     unlockProtectedVisible,
   } = props;
+  console.log("-------- START -----------");
+  console.log(
+    "%c⚪️►►►► %cline:10%cpassedKey",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
+    passedKey,
+  );
+
+  console.log(
+    "%c⚪️►►►► %cline:12%cparentKey",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(3, 38, 58);padding:3px;border-radius:2px",
+    parentKey,
+  );
+
+  console.log(
+    "%c⚪️►►►► %cline:14%cparentsParentKey",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(3, 38, 58);padding:3px;border-radius:2px",
+    parentsParentKey,
+  );
+
+  console.log(
+    "%c⚪️►►►► %cline:16%cparentMasterID",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
+    parentMasterID,
+  );
+
+  console.log(
+    "%c⚪️►►►► %cline:18%cparentMasterType",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
+    parentMasterType,
+  );
+
   const { expandedItems } = useSelector((state) => state.studyPlanData);
+  console.log(
+    "%c⚪️►►►► %cline:20%cexpandedItems",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(38, 157, 128);padding:3px;border-radius:2px",
+    expandedItems,
+  );
+  console.log("-------------------");
   const studyPlanItemsObj = props.studyPlanItemsObj.studyPlanItemsObj;
   const [editedField, setEditedField] = useState(false);
   const displayedWhenNotExpanded = ["name", "method", "priority", "_id"];

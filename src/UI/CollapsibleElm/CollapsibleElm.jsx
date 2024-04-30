@@ -34,20 +34,6 @@ function CollapsibleElm(props) {
   }, [props.maxHeight]);
 
   useEffect(() => {
-    console.log(
-      "%c⚪️►►►► %cline:42%cprops.recheckHeight",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(178, 190, 126);padding:3px;border-radius:2px",
-      props.recheckHeight,
-    );
-    console.log(
-      "%c⚪️►►►► %cline:45%ctextRef.current.offsetHeight",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(96, 143, 159);padding:3px;border-radius:2px",
-      textRef.current.offsetHeight,
-    );
     if (props.recheckHeight && isOverflowActive(textRef.current)) {
       setOverflowActive(true);
       return;

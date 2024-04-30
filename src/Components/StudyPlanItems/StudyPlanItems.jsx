@@ -638,6 +638,7 @@ const StudyPlanItems = (props) => {
                     onlyList={props.onlyList}
                     noEditButton={props.noEditButton}
                     refresh={refresh}
+                    parentMasterType={props.parentMasterType}
                   />
                 )}
             </CollapsibleElm>
