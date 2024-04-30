@@ -7,6 +7,7 @@ const Textarea = (props) => {
   const {
     passedKey,
     studyPlanItemsObj,
+    section,
     parentMasterID,
     parentsParentKey,
     parentKey,
@@ -20,7 +21,13 @@ const Textarea = (props) => {
   const key = passedKey;
   const [notes, setNotes] = useState("");
   const addInputData = useAddInputData();
-
+  console.log(
+    "%c⚪️►►►► %cline:62%cunlockProtectedVisible",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
+    unlockProtectedVisible,
+  );
   const onChangeNotes =
     () =>
     ({ target: { value } }) => {
@@ -59,7 +66,8 @@ const Textarea = (props) => {
       >
         {key}:
       </label>
-      {unlockProtectedVisible.includes(parentMasterID) && (
+      {(unlockProtectedVisible.includes(parentMasterID) ||
+        section === "editor-in-modal") && (
         <TextareaAutosize
           id={
             parentMasterID +
@@ -87,31 +95,32 @@ const Textarea = (props) => {
           className="sizable-textarea"
         />
       )}
-      {!unlockProtectedVisible.includes(parentMasterID) && (
-        <div
-          id={
-            parentMasterID +
-            "-" +
-            parentsParentKey +
-            "-" +
-            parentKey +
-            "-" +
-            key +
-            "textarea"
-          }
-          key={parentKey + "-" + key}
-          name={parentKey + "-" + key}
-          data-category={studyPlanItemsObj[key]}
-          placeholder={""}
-          title={key}
-          data-parentkey={parentKey}
-          data-parentsparentkey={parentsParentKey ? parentsParentKey : ""}
-          data-parentmasterid={parentMasterID}
-          className="sizable-textarea"
-        >
-          {notes}
-        </div>
-      )}
+      {!unlockProtectedVisible.includes(parentMasterID) &&
+        section !== "editor-in-modal" && (
+          <div
+            id={
+              parentMasterID +
+              "-" +
+              parentsParentKey +
+              "-" +
+              parentKey +
+              "-" +
+              key +
+              "textarea"
+            }
+            key={parentKey + "-" + key}
+            name={parentKey + "-" + key}
+            data-category={studyPlanItemsObj[key]}
+            placeholder={""}
+            title={key}
+            data-parentkey={parentKey}
+            data-parentsparentkey={parentsParentKey ? parentsParentKey : ""}
+            data-parentmasterid={parentMasterID}
+            className="sizable-textarea"
+          >
+            {notes}
+          </div>
+        )}
     </Fragment>
   );
 };

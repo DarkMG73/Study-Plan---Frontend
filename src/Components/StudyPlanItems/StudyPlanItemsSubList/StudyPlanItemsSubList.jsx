@@ -6,7 +6,7 @@ const StudyPlanItemsSubList = (props) => {
     "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
     "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
     "color:#fff;background:rgb(131, 175, 155);padding:3px;border-radius:2px",
-    props.section,
+    props.unlockProtectedVisible,
   );
   return (
     <StudyPlanItemsList

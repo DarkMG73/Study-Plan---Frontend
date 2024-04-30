@@ -130,14 +130,6 @@ const StudyPlanItemsList = (props) => {
 
   const expandedItemsButtonHandler = (e) => {
     e.preventDefault();
-    console.log(
-      "%c⚪️►►►► %cline:130%ce.target.value",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(153, 80, 84);padding:3px;border-radius:2px",
-      e.target.value,
-    );
-
     dispatch(studyPlanDataActions.toggleExpandedItems(e.target.value));
   };
 
@@ -619,90 +611,96 @@ const StudyPlanItemsList = (props) => {
                         },
                       )}
                   </ul>
-                  {!onlyList && (!subListLevel || subListLevel !== "0") && (
-                    <div className={styles["button-container"]}>
-                      {!noEditButton && (
+                  {!onlyList &&
+                    (!subListLevel || subListLevel !== "0") &&
+                    (studyPlanMetadata["_id"].length <
+                      largeStudyPlanBreakPoint ||
+                      (studyPlanMetadata["_id"].length >
+                        largeStudyPlanBreakPoint &&
+                        expandedItems.includes(key))) && (
+                      <div className={styles["button-container"]}>
+                        {!noEditButton && (
+                          <button
+                            className={
+                              styles["form-button"] +
+                              " " +
+                              styles["edit-form-button"]
+                            }
+                            value={key != 0 ? key : studyPlanItemsObj[key]._id}
+                            data-parentmasterid={
+                              key != 0 ? key : studyPlanItemsObj[key]._id
+                            }
+                            onClick={unlockProtectedVisibleHandler}
+                          >
+                            {!unlockProtectedVisible.includes(key) && (
+                              <Fragment>
+                                <span>Edit </span>
+                                <span
+                                  className={styles["edit-button-target-name"]}
+                                >
+                                  "{studyPlanItemsObj[key].name}"
+                                </span>
+                              </Fragment>
+                            )}
+                            {unlockProtectedVisible.includes(key) && (
+                              <Fragment>
+                                Cancel Editing
+                                <span
+                                  className={styles["edit-button-target-name"]}
+                                >
+                                  {studyPlanItemsObj[key].name}
+                                </span>
+                                <span
+                                  className={styles["edit-button-cancel-title"]}
+                                ></span>
+                              </Fragment>
+                            )}
+                          </button>
+                        )}
                         <button
                           className={
                             styles["form-button"] +
                             " " +
-                            styles["edit-form-button"]
+                            styles["show-hidden-form-button"]
                           }
-                          value={key != 0 ? key : studyPlanItemsObj[key]._id}
-                          data-parentmasterid={
-                            key != 0 ? key : studyPlanItemsObj[key]._id
-                          }
-                          onClick={unlockProtectedVisibleHandler}
+                          value={key}
+                          data-parentmasterid={key}
+                          onClick={showProtectedHiddenHandler}
                         >
-                          {!unlockProtectedVisible.includes(key) && (
-                            <Fragment>
-                              <span>Edit </span>
-                              <span
-                                className={styles["edit-button-target-name"]}
-                              >
-                                "{studyPlanItemsObj[key].name}"
-                              </span>
-                            </Fragment>
-                          )}
-                          {unlockProtectedVisible.includes(key) && (
-                            <Fragment>
-                              Cancel Editing
-                              <span
-                                className={styles["edit-button-target-name"]}
-                              >
-                                {studyPlanItemsObj[key].name}
-                              </span>
-                              <span
-                                className={styles["edit-button-cancel-title"]}
-                              ></span>
-                            </Fragment>
-                          )}
+                          Show Hidden Fields
                         </button>
-                      )}
-                      <button
-                        className={
-                          styles["form-button"] +
-                          " " +
-                          styles["show-hidden-form-button"]
-                        }
-                        value={key}
-                        data-parentmasterid={key}
-                        onClick={showProtectedHiddenHandler}
-                      >
-                        Show Hidden Fields
-                      </button>
-                      {!onlyList && unlockProtectedVisible.includes(key) && (
-                        <Fragment>
-                          <button
-                            className={
-                              styles["form-button"] +
-                              " " +
-                              styles["submit-form-button"]
-                            }
-                            value={key}
-                            data-parentmasterid={key}
-                            data-section={section}
-                            onClick={submitFormButtonHandler}
-                          >
-                            Submit Changes
-                          </button>{" "}
-                          <button
-                            className={
-                              styles["form-button"] +
-                              " " +
-                              styles["delete-form-button"]
-                            }
-                            value={key}
-                            data-parentmasterid={key}
-                            data-section={section}
-                            onClick={deleteFormButtonHandler}
-                          >
-                            Delete
-                          </button>
-                        </Fragment>
-                      )}
-                    </div>
-                  )}
+                        {!onlyList && unlockProtectedVisible.includes(key) && (
+                          <Fragment>
+                            <button
+                              className={
+                                styles["form-button"] +
+                                " " +
+                                styles["submit-form-button"]
+                              }
+                              value={key}
+                              data-parentmasterid={key}
+                              data-section={section}
+                              onClick={submitFormButtonHandler}
+                            >
+                              Submit Changes
+                            </button>{" "}
+                            <button
+                              className={
+                                styles["form-button"] +
+                                " " +
+                                styles["delete-form-button"]
+                              }
+                              value={key}
+                              data-parentmasterid={key}
+                              data-section={section}
+                              onClick={deleteFormButtonHandler}
+                            >
+                              Delete
+                            </button>
+                          </Fragment>
+                        )}
+                      </div>
+                    )}
 
                   {subListLevel && (
                     <div className={styles["button-container"]}>

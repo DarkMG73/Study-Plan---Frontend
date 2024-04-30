@@ -188,6 +188,7 @@ const ItemEditorModal = (props) => {
                 key={id + "itemEditForm-"}
                 studyPlanItemsObj={itemData}
                 id={"itemEditForm-"}
+                section="editor-in-modal"
                 parentKey={id}
                 displayConditions={displayConditions.formWithPreFilledData}
                 parentMasterID={id}

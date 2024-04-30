@@ -17,6 +17,7 @@ const StudyItemDisplayElm = (props) => {
     passedKey,
     elementTypeNeeded,
     studyPlanItemsObj,
+    section,
     parentKey,
     parentsParentKey,
     parentMasterID,
@@ -31,6 +32,7 @@ const StudyItemDisplayElm = (props) => {
   const passedProps = {
     passedKey: passedKey,
     studyPlanItemsObj: studyPlanItemsObj,
+    section,
     parentMasterID: parentMasterID,
     parentsParentKey: parentsParentKey,
     parentKey: parentKey,

@@ -20,6 +20,13 @@ const StudyPlanItem = (props) => {
   } = props;
   console.log("-------- START -----------");
   console.log(
+    "%c⚪️►►►► %cline:19%cunlockProtectedVisible",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(217, 104, 49);padding:3px;border-radius:2px",
+    unlockProtectedVisible,
+  );
+  console.log(
     "%c⚪️►►►► %cline:10%cpassedKey",
     "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
     "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
@@ -132,9 +139,10 @@ const StudyPlanItem = (props) => {
 
   // Clears delay of functions until after typing
 
-  const keyToCheck = section.includes("goal")
-    ? studyPlanItemsObj._id
-    : parentMasterID;
+  const keyToCheck =
+    section && section.includes("goal")
+      ? studyPlanItemsObj._id
+      : parentMasterID;
 
   const output = (
     <Fragment>
@@ -219,6 +227,7 @@ const StudyPlanItem = (props) => {
             elementTypeNeeded={elementTypeNeeded}
             studyPlanItemsObj={studyPlanItemsObj}
             onlyList={onlyList}
+            section={section}
             parentKey={parentKey}
             parentsParentKey={parentsParentKey}
             parentMasterID={parentMasterID}

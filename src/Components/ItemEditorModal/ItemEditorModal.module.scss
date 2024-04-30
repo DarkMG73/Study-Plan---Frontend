@@ -118,6 +118,7 @@
     background: var(--spt-color-background);
     color: var(--spt-color-background-contrast-dark);
     pointer-events: all;
+    max-height: none;
   }
 }
 
@@ -327,7 +328,7 @@
       border: 3px solid var(--spt-color-accent-dark);
       background: var(--spt-color-accent-dark);
       color: var(--spt-color-background-warm) !important;
-      max-height: 10em;
+      // max-height: 10em;
     }
 
     li[class*="name"]:before,
