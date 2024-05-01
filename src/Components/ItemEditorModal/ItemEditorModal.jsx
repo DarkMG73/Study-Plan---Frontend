@@ -19,13 +19,6 @@ const ItemEditorModal = (props) => {
   );
   const refresh = props.refresh;
   const formInputData = useSelector((state) => state.formInputData);
-  console.log(
-    "%c⚪️►►►► %cline:21%cformInputData",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(3, 38, 58);padding:3px;border-radius:2px",
-    formInputData,
-  );
   const formDataRef = useRef();
   const [formType, setFormType] = useState("all");
   const { id, user, _id } = props;
@@ -149,14 +142,6 @@ const ItemEditorModal = (props) => {
   ////////////////////////////////////////////////////////////////
   const processNewFormWithSchema = (schema) => {
     const targetFormDataObj = schema;
-    console.log(
-      "%c⚪️►►►► %cline:151%ctargetFormDataObj",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px",
-      targetFormDataObj,
-    );
-
     // const itemsToRemove = ['$timestamps', ]
     const cleansedFormData = {};
     Object.keys(targetFormDataObj).forEach((key) => {
@@ -214,13 +199,6 @@ const ItemEditorModal = (props) => {
             )}
           </ul>
         </div>,
-      );
-      console.log(
-        "%c⚪️►►►► %cline:219%coutput",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(96, 143, 159);padding:3px;border-radius:2px",
-        output,
       );
       return output;
     };

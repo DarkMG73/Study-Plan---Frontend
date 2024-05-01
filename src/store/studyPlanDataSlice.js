@@ -64,28 +64,6 @@ export const studyPlanDataSlice = createSlice({
     toggleExpandedItems: (state, action) => {
       const newState = { ...state.expandedItems };
       const { section, id } = action.payload;
-      console.log(
-        "%c⚪️►►►► %cline:65%cnewState",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px",
-        newState,
-      );
-      console.log(
-        "%c⚪️►►►► %cline:65%caction.payload",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px",
-        action.payload,
-      );
-      console.log(
-        "%c⚪️►►►► %cline:80%cnewState.includes(action.payload)",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(96, 143, 159);padding:3px;border-radius:2px",
-        Object.hasOwn(newState, section) &&
-          newState[section].includes(action.payload),
-      );
 
       if (Object.keys(newState).includes(section)) {
         if (newState[section].includes(id)) {
@@ -98,13 +76,7 @@ export const studyPlanDataSlice = createSlice({
       } else {
         newState[section] = [id];
       }
-      console.log(
-        "%c⚪️►►►► %cline:68%creducedNewState",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
-        newState,
-      );
+
       state.expandedItems = { ...newState };
     },
   },

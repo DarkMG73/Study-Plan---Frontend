@@ -21,20 +21,6 @@ const Textarea = (props) => {
   const key = passedKey;
   const [notes, setNotes] = useState("");
   const addInputData = useAddInputData();
-  console.log(
-    "%c⚪️►►►► %cline:62%cunlockProtectedVisible",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(1, 77, 103);padding:3px;border-radius:2px",
-    unlockProtectedVisible,
-  );
-  console.log(
-    "%c⚪️►►►► %cline:10%csection",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(130, 57, 53);padding:3px;border-radius:2px",
-    section,
-  );
   const onChangeNotes =
     () =>
     ({ target: { value } }) => {
