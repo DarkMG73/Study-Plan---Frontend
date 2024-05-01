@@ -221,7 +221,7 @@ const ItemEditorModal = (props) => {
         }
       >
         <h2 id={id} className={Styles["group-title"] + " " + Styles[id]}>
-          &nbsp;{id && id.toUpperCase()}
+          &nbsp;{Object.hasOwn(itemData, "name") && itemData.name.toUpperCase()}
         </h2>
         {additionalFormElm()}
         <button
@@ -229,7 +229,8 @@ const ItemEditorModal = (props) => {
           value={id}
           onClick={submitFormButtonHandler}
         >
-          Submit to <span>{id}</span> &rarr;
+          Submit <span>{Object.hasOwn(itemData, "name") && itemData.name}</span>{" "}
+          &rarr;
         </button>
       </ul>
     );

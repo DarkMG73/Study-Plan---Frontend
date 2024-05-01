@@ -71,10 +71,10 @@ const Textarea = (props) => {
           ]
         }
       >
-        {key}: {"" + section.includes("editor-in-modal")}
+        {key}: {"" + (section && section.includes("editor-in-modal"))}
       </label>
       {(unlockProtectedVisible.includes(parentMasterID) ||
-        section.includes("editor-in-modal") ||
+        (section && section.includes("editor-in-modal")) ||
         parentMasterID.includes("newForm")) && (
         <TextareaAutosize
           id={

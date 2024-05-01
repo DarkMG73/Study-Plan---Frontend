@@ -439,7 +439,8 @@ const StudyPlanItemsList = (props) => {
                   className={
                     styles["pseudo-collapsible-elm"] +
                     " " +
-                    (expandedItems.includes(key) &&
+                    (Object.hasOwn(expandedItems, section) &&
+                      expandedItems[section].includes(key) &&
                       styles["collapsible-elm-open"])
                   }
                   data-container-type="collapsibleElm"
@@ -490,14 +491,16 @@ const StudyPlanItemsList = (props) => {
                         size="small"
                         onClick={expandedItemsButtonHandler}
                       >
-                        {!expandedItems.includes(key) && (
+                        {(!Object.hasOwn(expandedItems, section) ||
+                          !expandedItems[section].includes(key)) && (
                           <Fragment>
                             <Fragment>&darr; More &darr;</Fragment>
                           </Fragment>
                         )}
-                        {expandedItems.includes(key) && (
-                          <Fragment>&darr; Less &darr;</Fragment>
-                        )}
+                        {Object.hasOwn(expandedItems, section) &&
+                          expandedItems[section].includes(key) && (
+                            <Fragment>&darr; Less &darr;</Fragment>
+                          )}
                       </PushButton>
                     </Fragment>
                   )}
@@ -631,7 +634,8 @@ const StudyPlanItemsList = (props) => {
                       largeStudyPlanBreakPoint ||
                       (studyPlanMetadata["_id"].length >
                         largeStudyPlanBreakPoint &&
-                        expandedItems.includes(key))) && (
+                        Object.hasOwn(expandedItems, section) &&
+                        expandedItems[section].includes(key))) && (
                       <div className={styles["button-container"]}>
                         {!noEditButton && (
                           <button
@@ -904,14 +908,16 @@ const StudyPlanItemsList = (props) => {
                       size="small"
                       onClick={expandedItemsButtonHandler}
                     >
-                      {!expandedItems.includes(key) && (
+                      {(!Object.hasOwn(expandedItems, section) ||
+                        !expandedItems[section].includes(key)) && (
                         <Fragment>
                           <Fragment>&darr; More &darr;</Fragment>
                         </Fragment>
                       )}
-                      {expandedItems.includes(key) && (
-                        <Fragment>&darr; Less &darr;</Fragment>
-                      )}
+                      {Object.hasOwn(expandedItems, section) &&
+                        expandedItems[section].includes(key) && (
+                          <Fragment>&darr; Less &darr;</Fragment>
+                        )}
                     </PushButton>
                   </Fragment>
                 )}
@@ -970,12 +976,14 @@ const StudyPlanItemsList = (props) => {
                   className={
                     styles["pseudo-collapsible-elm"] +
                     " " +
-                    (expandedItems.includes(
-                      key === "0" &&
-                        Object.hasOwn(studyPlanItemsObj[key], "_id")
-                        ? studyPlanItemsObj[key]["_id"]
-                        : key,
-                    ) && styles["collapsible-elm-open"])
+                    (Object.hasOwn(expandedItems, section) &&
+                      expandedItems[section].includes(
+                        key === "0" &&
+                          Object.hasOwn(studyPlanItemsObj[key], "_id")
+                          ? studyPlanItemsObj[key]["_id"]
+                          : key,
+                      ) &&
+                      styles["collapsible-elm-open"])
                   }
                   data-container-type="collapsibleElm"
                 >
@@ -1034,7 +1042,8 @@ const StudyPlanItemsList = (props) => {
                       largeStudyPlanBreakPoint ||
                       (studyPlanMetadata["_id"].length >
                         largeStudyPlanBreakPoint &&
-                        expandedItems.includes(key))) && (
+                        Object.hasOwn(expandedItems, section) &&
+                        expandedItems[section].includes(key))) && (
                       <div className={styles["button-container"]}>
                         {!noEditButton && (
                           <button
@@ -1124,7 +1133,8 @@ const StudyPlanItemsList = (props) => {
                       largeStudyPlanBreakPoint ||
                       (studyPlanMetadata["_id"].length >
                         largeStudyPlanBreakPoint &&
-                        expandedItems.includes(
+                        Object.hasOwn(expandedItems, section) &&
+                        expandedItems[section].includes(
                           key != 0 ? key : studyPlanItemsObj[key]._id,
                         ))) && (
                       <div className={styles["button-container"]}>

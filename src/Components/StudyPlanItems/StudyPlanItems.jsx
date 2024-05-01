@@ -449,7 +449,11 @@ const StudyPlanItems = (props) => {
               buttonTextClosed={"- Open All " + toTitleCase(outputName) + " -"}
               open={false}
               showBottomGradient={id === "studyPlan" && true}
-              recheckHeight={expandedItems.length}
+              recheckHeight={
+                typeName && Object.hasOwn(expandedItems, typeName)
+                  ? expandedItems[typeName].length
+                  : Object.keys(expandedItems).length
+              }
             >
               {Object.keys(formInputData).length > 0 && (
                 <div
