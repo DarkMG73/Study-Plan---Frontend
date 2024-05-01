@@ -1,6 +1,7 @@
 .button {
   margin: 0 0.5em;
-  box-shadow: 3px 3px 7px -5px white inset,
+  box-shadow:
+    3px 3px 7px -5px white inset,
     -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
   border: none;
   background: inherit;
@@ -12,12 +13,6 @@
   cursor: pointer;
   transition: 0.3s all ease;
   font-variant: small-caps;
-}
-
-.button:hover {
-  text-shadow: 0 0 1px;
-  transform: scale(1.1);
-  transition: 0.1s all ease;
 }
 
 .button span {
@@ -35,8 +30,11 @@
 }
 
 .button.primary.selected {
-  box-shadow: inset 1px 1px 1px rgb(255 255 255 / 25%),
-    inset 1px -1px 1px rgb(0 0 0 / 15%), 1px 1px 5px -3px black, 0 0 10px white,
+  box-shadow:
+    inset 1px 1px 1px rgb(255 255 255 / 25%),
+    inset 1px -1px 1px rgb(0 0 0 / 15%),
+    1px 1px 5px -3px black,
+    0 0 10px white,
     inset 0 0 10px white;
 }
 
@@ -45,13 +43,12 @@
   color: var(--spt-color-background-contrast-light);
 }
 
-.button.secondary:hover {
-  color: var(--spt-color-background-contrast);
-}
-
 .button.secondary.selected {
-  box-shadow: inset 1px 1px 1px rgb(255 255 255 / 25%),
-    inset 1px -1px 1px rgb(0 0 0 / 15%), 1px 1px 5px -3px black, 0 0 10px white,
+  box-shadow:
+    inset 1px 1px 1px rgb(255 255 255 / 25%),
+    inset 1px -1px 1px rgb(0 0 0 / 15%),
+    1px 1px 5px -3px black,
+    0 0 10px white,
     inset 0 0 10px white;
 }
 
@@ -99,4 +96,17 @@
   font-size: 1.5em;
   font-size: calc(1em + 0.5vw);
   font-weight: 700;
+}
+
+/* Eliminates hover effects on mobile */
+@media (hover: hover) {
+  .button:hover {
+    text-shadow: 0 0 1px;
+    transform: scale(1.1);
+    transition: 0.1s all ease;
+  }
+
+  .button.secondary:hover {
+    color: var(--spt-color-background-contrast);
+  }
 }

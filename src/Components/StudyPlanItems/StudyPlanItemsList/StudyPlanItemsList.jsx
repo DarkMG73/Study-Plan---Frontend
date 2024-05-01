@@ -438,6 +438,7 @@ const StudyPlanItemsList = (props) => {
                   buttonTextClosed={<Fragment>&darr;More</Fragment>}
                   hideButtonArrows={true}
                 > */}
+                {/* This flow covers nested items */}
                 <div
                   key={key + "-collapsible-elm"}
                   id={key + "-collapsible-elm"}
@@ -449,7 +450,11 @@ const StudyPlanItemsList = (props) => {
                     styles["pseudo-collapsible-elm"] +
                     " " +
                     (Object.hasOwn(expandedItems, section) &&
-                      expandedItems[section].includes(key) &&
+                      expandedItems[section].includes(
+                        Object.hasOwn(studyPlanItemsObj[key], "_id")
+                          ? studyPlanItemsObj[key]["_id"]
+                          : { key },
+                      ) &&
                       styles["collapsible-elm-open"])
                   }
                   data-container-type="collapsibleElm"
