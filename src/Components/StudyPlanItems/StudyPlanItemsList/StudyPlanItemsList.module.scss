@@ -490,6 +490,17 @@ ul[class*="edited-list"] > [data-container-type="collapsibleElm"] > li {
   }
 }
 
+ul[class*="edited-list"]
+  > [data-container-type="collapsibleElm"]
+  > li[class*="priority"] {
+  transform: none !important;
+
+  &:before {
+    font-size: inherit;
+    padding: inherit;
+  }
+}
+
 ul[class*="edited-list"] > [data-container-type="collapsibleElm"] > li > {
   textarea,
   [class*="sizable-textarea"],

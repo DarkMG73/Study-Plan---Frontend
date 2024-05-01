@@ -124,8 +124,17 @@ const StudyPlanItemsList = (props) => {
   const openItemEditorButtonHandler = (e) => {
     e.preventDefault();
     const buttonMasterID = e.target.value;
+    console.log(
+      "%c⚪️►►►► %cline:126%cbuttonMasterID",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(248, 214, 110);padding:3px;border-radius:2px",
+      buttonMasterID,
+    );
 
-    setItemEditorModalJSX(<ItemEditorModal id={buttonMasterID} user={user} />);
+    setItemEditorModalJSX(
+      <ItemEditorModal id={buttonMasterID} user={user} refresh={new Date()} />,
+    );
   };
 
   const expandedItemsButtonHandler = (e) => {
