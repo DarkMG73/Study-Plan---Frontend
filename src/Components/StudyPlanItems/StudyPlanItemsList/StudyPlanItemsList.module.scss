@@ -34,6 +34,12 @@
   }
 }
 
+.pseudo-collapsible-elm {
+  max-height: 3em;
+}
+.collapsible-elm-open {
+  max-height: none;
+}
 .master-parent-group > button:hover {
   transform: scale(1.125, 1);
 }

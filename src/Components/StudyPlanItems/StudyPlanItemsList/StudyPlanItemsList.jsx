@@ -130,7 +130,16 @@ const StudyPlanItemsList = (props) => {
 
   const expandedItemsButtonHandler = (e) => {
     e.preventDefault();
-    dispatch(studyPlanDataActions.toggleExpandedItems(e.target.value));
+    console.log(
+      "%c⚪️►►►► %cline:133%csection",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(237, 222, 139);padding:3px;border-radius:2px",
+      section,
+    );
+    dispatch(
+      studyPlanDataActions.toggleExpandedItems({ section, id: e.target.value }),
+    );
   };
 
   const showProtectedHiddenHandler = (e) => {
@@ -427,7 +436,12 @@ const StudyPlanItemsList = (props) => {
                     position: "relative",
                     maxWidth: "100%",
                   }}
-                  className="pseudo-collapsible-elm"
+                  className={
+                    styles["pseudo-collapsible-elm"] +
+                    " " +
+                    (expandedItems.includes(key) &&
+                      styles["collapsible-elm-open"])
+                  }
                   data-container-type="collapsibleElm"
                 >
                   {studyPlanMetadata["_id"].length >
@@ -953,7 +967,16 @@ const StudyPlanItemsList = (props) => {
                     position: "relative",
                     maxWidth: "100%",
                   }}
-                  className="pseudo-collapsible-elm"
+                  className={
+                    styles["pseudo-collapsible-elm"] +
+                    " " +
+                    (expandedItems.includes(
+                      key === "0" &&
+                        Object.hasOwn(studyPlanItemsObj[key], "_id")
+                        ? studyPlanItemsObj[key]["_id"]
+                        : key,
+                    ) && styles["collapsible-elm-open"])
+                  }
                   data-container-type="collapsibleElm"
                 >
                   <h2
@@ -976,7 +999,6 @@ const StudyPlanItemsList = (props) => {
                       key
                     )}
                   </h2>
-
                   <StudyPlanItemsSubList
                     key={studyPlanItemsObj[key]}
                     studyPlanItemsObj={studyPlanItemsObj[key]}
@@ -1006,7 +1028,6 @@ const StudyPlanItemsList = (props) => {
                     emptyForm={props.emptyForm}
                     setFormType={props.setFormType}
                   />
-
                   {!onlyList &&
                     !subListLevel &&
                     (studyPlanMetadata["_id"].length <

@@ -23,7 +23,7 @@ export const studyPlanDataSlice = createSlice({
       state.updateStudyPlan = payload.updateStudyPlan;
       state.schema = payload.schema;
       state.reGatherStudyPlan = payload.reGatherStudyPlan;
-      state.expandedItems = [];
+      state.expandedItems = {};
     },
 
     updateOneStudyPlanItem: (state, action) => {
@@ -84,19 +84,26 @@ export const studyPlanDataSlice = createSlice({
         "color:#fff;background:rgb(96, 143, 159);padding:3px;border-radius:2px",
         newState.includes(action.payload),
       );
-      if (newState.includes(action.payload)) {
-        newState.splice(newState.indexOf(action.payload), 1);
-        console.log(
-          "%c⚪️►►►► %cline:68%creducedNewState",
-          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-          "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
-          newState,
-        );
-        state.expandedItems = newState;
+
+      const { section, id } = action.payload;
+      if (newState.includes(section)) {
+        if (newState.section.includes(id)) {
+          newState.section.splice(newState.indexOf(id), 1);
+          console.log(
+            "%c⚪️►►►► %cline:68%creducedNewState",
+            "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+            "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+            "color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px",
+            newState,
+          );
+          state.expandedItems = newState;
+        } else {
+          newState.section.push(id);
+        }
       } else {
-        state.expandedItems = [...newState, action.payload];
+        newState.section = [id];
       }
+      state.expandedItems = { ...newState };
     },
   },
 });
