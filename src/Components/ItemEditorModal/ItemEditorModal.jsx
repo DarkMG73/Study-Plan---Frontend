@@ -153,7 +153,7 @@ const ItemEditorModal = (props) => {
 
       output.push(
         <div
-          key={id + "itemEditForm-"}
+          key={id + "-itemEditForm-"}
           id={"itemEditForm-" + id}
           data-parentmasterid={id}
           className={Styles["new-form-"] + " " + Styles["new-form"]}
@@ -176,7 +176,7 @@ const ItemEditorModal = (props) => {
           </h2>
           <ul
             key={id + "itemEditForm-"}
-            id={"itemEditForm-wrap"}
+            id="itemEditForm-wrap"
             data-parentmasterid={"itemEditForm-"}
             className={
               Styles["new-form-wrap"] + " " + Styles["new-form-inner-wrap"]
@@ -215,8 +215,11 @@ const ItemEditorModal = (props) => {
           " " +
           Styles["in-modal"] +
           " " +
-          Styles["new-form"]
+          Styles["new-form"] +
+          " " +
+          Styles["edited-list"]
         }
+        data-newformtype={itemData.type}
       >
         <h2 id={id} className={Styles["group-title"] + " " + Styles[id]}>
           &nbsp;{Object.hasOwn(itemData, "name") && itemData.name.toUpperCase()}

@@ -50,7 +50,7 @@
   position: relative;
 }
 
-.new-form-modal form ul[id*="itemEditForm"] .new-form {
+.new-form-modal form ul[id*="itemEditForm-wrap"] .new-form {
   display: grid;
   grid-gap: 0;
   grid-template-columns: repeat(4, 25%);
@@ -75,7 +75,7 @@
   max-width: 100%;
 }
 
-.new-form-modal form [newformtype="hold"] {
+.new-form-modal form [data-newformtype="hold"] {
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
     "name name  name name"
@@ -93,7 +93,7 @@
   grid-auto-flow: row dense;
 }
 
-.new-form-modal form ul [newformtype="goal"] {
+.new-form-modal form ul [data-newformtype="goal"] {
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
     "name name"
@@ -103,6 +103,7 @@
     "asup asup"
     "des des"
     "start start"
+    "acomp acomp"
     "itemnotes itemnotes"
     "tags tags";
   grid-auto-flow: row dense;
@@ -121,7 +122,7 @@
 }
 
 /* New Entry Form Goal Adjustments */
-.new-form-modal form [newformtype="goal"] {
+.new-form-modal form [data-newformtype="goal"] {
   background: var(--spt-color-accent-2-dark);
   color: var(--spt-color-background);
   border: 3px outset var(--spt-color-accent-2-dark);
@@ -133,8 +134,7 @@
   li[id*="-author-item"],
   li[id*="-status-item"],
   li[id*="-platform-item"],
-  li[id*="-method-item"],
-  li[id*="-acomp-item"] {
+  li[id*="-method-item"] {
     // border: 7px solid red;
     background: gray;
     opacity: 0.5;
@@ -161,7 +161,7 @@
   }
 } /* ********** */
 
-.new-form-modal form [newformtype="step"] {
+.new-form-modal form [data-newformtype="step"] {
   background: var(--spt-color-background-warm);
   border: 3px outset var(--spt-color-accent);
   color: var(--spt-color-background-contrast-dark);
@@ -177,7 +177,7 @@
   }
 }
 
-.new-form-modal form [newformtype="hold"] {
+.new-form-modal form [data-newformtype="hold"] {
   background: var(--spt-color-background-contrast-dark);
   color: var(--spt-color-background-warm);
   border: 3px outset var(--spt-color-background-contrast-dark);
@@ -426,22 +426,28 @@
       }
     }
 
-    li input,
-    li select,
-    li textarea,
-    li [class*="sizable-textarea"] {
-      min-height: 2em;
-      height: 2.5em;
-      font: var(--spt-font-body-text);
-      font-size: 1em;
-      width: 100%;
-      max-width: 97%;
-      margin: auto;
-      text-align: center;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      line-height: 2.5em;
+    li {
+      input,
+      select,
+      textarea,
+      [class*="sizable-textarea"] {
+        min-height: 2em;
+        height: 2.5em;
+        font: var(--spt-font-body-text);
+        font-size: 1em;
+        width: 100%;
+        max-width: 97%;
+        margin: auto;
+        text-align: center;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 2.5em;
+      }
+      input[type="url"] {
+        padding-right: 2em;
+        max-width: 100%;
+      }
     }
 
     li[class*="method"] {
@@ -451,7 +457,7 @@
 }
 
 /* New Entry Form Hold Adjustments */
-[newformtype="hold"] {
+[data-newformtype="hold"] {
   li[id*="-priority"],
   li[id*="-status"],
   li[id*="-acomp"],
@@ -459,7 +465,6 @@
     // border: 7px solid red;
     background: gray;
     opacity: 0.5;
-    pointer-events: none;
     display: none;
   }
 }

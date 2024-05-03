@@ -18,7 +18,7 @@ const useAddInputData = () => {
     if (title === "type") {
       document
         .querySelectorAll(`[id *= "${parentMasterID}"]`)
-        .forEach((item) => item.setAttribute("newFormType", outputValue));
+        .forEach((item) => item.setAttribute("data-newFormType", outputValue));
     }
 
     if (outputValue || outputValue === "") {
