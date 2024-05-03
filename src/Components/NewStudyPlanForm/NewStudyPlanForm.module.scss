@@ -67,7 +67,7 @@
 }
 
 .new-form-modal form [data-newformtype="hold"] ul[id*="newForm"] {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 25);
   grid-template-areas:
     "name name  name name"
     "type type   type type"
@@ -105,7 +105,6 @@
 .new-form-modal form [data-newformtype="goal"] {
   background: var(--spt-color-accent-2-dark);
   color: var(--spt-color-background);
-  border: 3px outset var(--spt-color-accent-2-dark);
   li[id*="-url-item"],
   li[id*="-priority-item"],
   li[id*="-method"],
@@ -116,7 +115,6 @@
   li[id*="-platform-item"],
   li[id*="-method-item"],
   li[id*="-acomp-item"] {
-    // border: 7px solid red;
     background: gray;
     opacity: 0.5;
     pointer-events: none;
@@ -144,7 +142,6 @@
 
 .new-form-modal form [data-newformtype="step"] {
   background: var(--spt-color-background-warm);
-  border: 3px outset var(--spt-color-accent);
   color: var(--spt-color-background-contrast-dark);
   ul {
     li {
@@ -161,7 +158,6 @@
 .new-form-modal form [data-newformtype="hold"] {
   background: var(--spt-color-background-contrast-dark);
   color: var(--spt-color-background-warm);
-  border: 3px outset var(--spt-color-background-contrast-dark);
 }
 
 .new-form-modal ul > div {
@@ -204,7 +200,6 @@
 
 .new-form .new-form > ul {
   list-style: none;
-  /* border: 3px solid; */
   padding: 0;
   margin: 0;
   display: flex;
@@ -426,8 +421,8 @@
       align-items: center;
       line-height: 2.5em;
       max-height: none;
-      background: var(--spt-color-background);
-      color: var(--spt-color-background-contrast-dark);
+      background: var(--spt-color-background) !important;
+      color: var(--spt-color-background-contrast-dark) !important;
     }
 
     li[class*="method"] {
@@ -442,7 +437,6 @@
   li[id*="-status"],
   li[id*="-acomp"],
   li[id*="-start"] {
-    // border: 7px solid red;
     background: gray;
     opacity: 0.5;
     pointer-events: none;
