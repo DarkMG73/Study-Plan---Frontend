@@ -640,6 +640,11 @@ input[type="number"] {
     text-shadow: none;
   }
 
+  body .name [class*="sizable-textarea"] {
+    margin-left: 2em;
+    padding: 0 1.25em 0 0;
+  }
+
   select {
     text-align-last: center;
   }
