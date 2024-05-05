@@ -22,7 +22,13 @@ const StudyPlanItem = (props) => {
   const { expandedItems } = useSelector((state) => state.studyPlanData);
   const studyPlanItemsObj = props.studyPlanItemsObj.studyPlanItemsObj;
   const [editedField, setEditedField] = useState(false);
-  const displayedWhenNotExpanded = ["name", "method", "priority", "_id"];
+  const displayedWhenNotExpanded = [
+    "name",
+    "method",
+    "priority",
+    "_id",
+    "progressbar",
+  ];
   function findElementType(itemKey) {
     const checkIfNameInDisplayCond = (name, condition) => {
       if (Object.hasOwn(displayConditions, condition)) {

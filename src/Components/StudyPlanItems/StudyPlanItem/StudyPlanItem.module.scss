@@ -53,6 +53,10 @@
     padding: 0;
     white-space: break-spaces;
   }
+  [class*="sizable-textarea"] {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 .name {
 }
@@ -228,9 +232,9 @@ select {
 .name label {
   display: none;
 }
-body .name {
+body ul .name {
   grid-area: name;
-  padding-top: 0.5em;
+  padding-top: 0.05em;
   box-shadow: none;
   textarea,
   [class*="sizable-textarea"] {

@@ -216,8 +216,7 @@ const ItemEditorModal = (props) => {
           Styles["in-modal"] +
           " " +
           Styles["new-form"] +
-          " " +
-          Styles["edited-list"]
+          " edited-list "
         }
         data-newformtype={itemData.type}
       >

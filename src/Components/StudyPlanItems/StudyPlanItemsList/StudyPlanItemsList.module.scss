@@ -226,6 +226,7 @@ li[class*="featured-url-arrow-wrap"] {
 [data-section="studyPlan-goals"] .dependencies-container {
   display: initial;
 }
+
 body .master-parent-group .dependencies-container {
   grid-area: dependencies-container;
   overflow: hidden;
@@ -415,17 +416,24 @@ body .dependencies-container [data-parentmastertype="step"] {
   transition: 0.2s all ease;
 }
 
-.master-parent-group select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.master-parent-group {
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  input[type*="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+  }
 }
 
-.master-parent-group.edited-list
-  > [data-container-type="collapsibleElm"]
-  > li
+[class*="edited-list"] li {
   select {
-  -webkit-appearance: auto;
-  -moz-appearance: auto;
+    -webkit-appearance: auto;
+    -moz-appearance: auto;
+  }
+  input[type*="date"]::-webkit-calendar-picker-indicator {
+    display: initial;
+  }
 }
 
 .edited-list .form-button:hover {
@@ -662,34 +670,38 @@ ul[class*="edited-list"]
 
 [data-forreview="true"]:after {
   content: "Review Needed";
+  background: var(--spt-color-accent-3);
+  color: var(--spt-color-background-warm);
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, -5%);
+  width: -moz-fit-content;
   width: fit-content;
   min-width: 11em;
   text-align: center;
-  font-size: 1rem;
-  background: var(--spt-color-accent-3);
-  color: var(--spt-color-background-warm);
+  font-size: 0.9rem;
   padding: 0 2em;
+  letter-spacing: 0.5em;
   border-radius: 25px;
   font-weight: 500;
 }
 
 ul ul[type="hold"]:after {
   content: "On Hold";
+  background: var(--spt-color-background-contrast);
+  color: var(--spt-color-background);
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, -5%);
+  width: -moz-fit-content;
   width: fit-content;
   min-width: 11em;
   text-align: center;
-  font-size: 1rem;
-  background: var(--spt-color-background-contrast);
-  color: var(--spt-color-background);
-  padding: 0 0.5em;
+  font-size: 0.9rem;
+  padding: 0 2em;
+  letter-spacing: 0.5em;
   border-radius: 25px;
   font-weight: 500;
 }
