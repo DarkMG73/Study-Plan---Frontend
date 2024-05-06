@@ -191,6 +191,7 @@ const ItemEditorModal = (props) => {
                 parentKey={id}
                 displayConditions={displayConditions.formWithPreFilledData}
                 parentMasterID={id}
+                showProtectedHidden={[]}
                 user={user}
                 emptyForm={false}
                 inModal={true}
