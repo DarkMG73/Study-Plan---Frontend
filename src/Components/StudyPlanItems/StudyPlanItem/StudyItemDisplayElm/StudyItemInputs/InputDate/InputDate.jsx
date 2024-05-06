@@ -24,7 +24,7 @@ const InputDate = (props) => {
         studyPlanItemsObj[key] &&
         new Date(
           new Date(studyPlanItemsObj[key]).getTime() -
-            new Date().getTimezoneOffset() * 60000
+            new Date().getTimezoneOffset() * 60000,
         )
           .toISOString()
           .slice(0, 19);
@@ -32,7 +32,7 @@ const InputDate = (props) => {
       console.log(
         "%cERROR:",
         "color:#f0f0ef;background:#ff0000;padding:10px;border-radius:0 25px 25px 0",
-        err
+        err,
       );
     }
   }
@@ -52,7 +52,7 @@ const InputDate = (props) => {
         }
         htmlFor={parentKey + "-" + key}
       >
-        {key}:
+        {key}
       </label>
 
       <input

@@ -4,7 +4,7 @@ import useAddInputData from "../../../../../../Hooks/useAddInputData";
 
 const InputFixedCompiledList = (props) => {
   const studyPlanMetadata = useSelector(
-    (state) => state.studyPlanData.studyPlanMetadata
+    (state) => state.studyPlanData.studyPlanMetadata,
   );
   const addInputData = useAddInputData();
   const {
@@ -35,7 +35,7 @@ const InputFixedCompiledList = (props) => {
         }
         htmlFor={parentKey + "-" + key}
       >
-        {key}:
+        {key}
       </label>
       <select
         id={

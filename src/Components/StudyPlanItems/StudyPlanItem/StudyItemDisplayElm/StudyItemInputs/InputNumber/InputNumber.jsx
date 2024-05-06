@@ -32,7 +32,7 @@ const InputNumber = (props) => {
         }
         htmlFor={parentKey + "-" + key}
       >
-        {key}:
+        {key}
       </label>
       <input
         type="number"

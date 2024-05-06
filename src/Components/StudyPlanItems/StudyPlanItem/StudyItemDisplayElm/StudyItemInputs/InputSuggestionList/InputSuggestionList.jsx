@@ -4,7 +4,7 @@ import useAddInputData from "../../../../../../Hooks/useAddInputData";
 
 const InputSuggestionList = (props) => {
   const studyPlanMetadata = useSelector(
-    (state) => state.studyPlanData.studyPlanMetadata
+    (state) => state.studyPlanData.studyPlanMetadata,
   );
   const addInputData = useAddInputData();
   const {
@@ -36,7 +36,7 @@ const InputSuggestionList = (props) => {
         }
         htmlFor={parentKey + "-" + key + "datalist"}
       >
-        {key}:
+        {key}
       </label>{" "}
       {/*name={parentKey + "-" + key}*/}
       <input
@@ -76,7 +76,7 @@ const InputSuggestionList = (props) => {
         {Object.values(displayConditions["isSuggestionsList"][key]).map(
           (option) => (
             <option key={option} value={option}></option>
-          )
+          ),
         )}
 
         {Object.hasOwn(studyPlanMetadata, key) &&

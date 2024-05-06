@@ -27,7 +27,7 @@ const Progressbar = (props) => {
         }
         htmlFor={parentKey + "-" + key}
       >
-        {key}:
+        {key}
       </label>
 
       {+studyPlanItemsObj["status"] > 0 && (

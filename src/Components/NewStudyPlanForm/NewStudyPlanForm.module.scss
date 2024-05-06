@@ -424,6 +424,11 @@
       background: var(--spt-color-background) !important;
       color: var(--spt-color-background-contrast-dark) !important;
     }
+    li textarea,
+    li [class*="sizable-textarea"] {
+      padding-left: 1em;
+      text-align: left;
+    }
 
     li[class*="method"] {
       max-height: 100%;

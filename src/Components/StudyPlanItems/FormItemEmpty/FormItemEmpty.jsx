@@ -31,7 +31,7 @@ const FormItemEmpty = (props) => {
         parentMasterID,
         title,
         outputValue,
-      })
+      }),
     );
 
     setEditedField(true);
@@ -102,7 +102,7 @@ const FormItemEmpty = (props) => {
                 ]
               }
             >
-              {key}:
+              {key}
             </label>
             <textarea
               id={
@@ -128,7 +128,7 @@ const FormItemEmpty = (props) => {
                 styles[
                   "protectedVisible-" +
                     (displayConditions.protectedVisible.includes(
-                      "PROTECT-ALL"
+                      "PROTECT-ALL",
                     ) && !unlockProtectedVisible.includes(parentMasterID)) ||
                     (displayConditions &&
                       Object.hasOwn(displayConditions, "protectedVisible") &&
@@ -166,14 +166,14 @@ const FormItemEmpty = (props) => {
                 styles[
                   "protectedVisible-" +
                     (displayConditions.protectedVisible.includes(
-                      "PROTECT-ALL"
+                      "PROTECT-ALL",
                     ) && !unlockProtectedVisible.includes(parentMasterID)) ||
                     (displayConditions.protectedVisible.includes(key) &&
                       !unlockProtectedVisible.includes(parentMasterID))
                 ]
               }
             >
-              {key}:
+              {key}
             </label>
             <select
               id={
@@ -204,7 +204,7 @@ const FormItemEmpty = (props) => {
                 styles[
                   "protectedVisible-" +
                     (displayConditions.protectedVisible.includes(
-                      "PROTECT-ALL"
+                      "PROTECT-ALL",
                     ) && !unlockProtectedVisible.includes(parentMasterID)) ||
                     (displayConditions.protectedVisible.includes(key) &&
                       !unlockProtectedVisible.includes(parentMasterID))
@@ -242,14 +242,14 @@ const FormItemEmpty = (props) => {
                 styles[
                   "protectedVisible-" +
                     (displayConditions.protectedVisible.includes(
-                      "PROTECT-ALL"
+                      "PROTECT-ALL",
                     ) && !unlockProtectedVisible.includes(parentMasterID)) ||
                     (displayConditions.protectedVisible.includes(key) &&
                       !unlockProtectedVisible.includes(parentMasterID))
                 ]
               }
             >
-              {key}:
+              {key}
             </label>
             <input
               id={
@@ -276,7 +276,7 @@ const FormItemEmpty = (props) => {
                   ? studyPlanItemsObj[key] &&
                     new Date(
                       new Date(studyPlanItemsObj[key]).getTime() -
-                        new Date().getTimezoneOffset() * 60000
+                        new Date().getTimezoneOffset() * 60000,
                     )
                       .toISOString()
                       .slice(0, 19)
@@ -291,7 +291,7 @@ const FormItemEmpty = (props) => {
                 styles[
                   "protectedVisible-" +
                     (displayConditions.protectedVisible.includes(
-                      "PROTECT-ALL"
+                      "PROTECT-ALL",
                     ) && !unlockProtectedVisible.includes(parentMasterID)) ||
                     (displayConditions.protectedVisible.includes(key) &&
                       !unlockProtectedVisible.includes(parentMasterID))

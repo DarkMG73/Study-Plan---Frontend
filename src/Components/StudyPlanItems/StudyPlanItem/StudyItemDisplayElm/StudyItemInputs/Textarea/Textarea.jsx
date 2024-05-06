@@ -57,7 +57,7 @@ const Textarea = (props) => {
           ]
         }
       >
-        {key}: {"" + (section && section.includes("editor-in-modal"))}
+        {key}
       </label>
       {(unlockProtectedVisible.includes(parentMasterID) ||
         (section && section.includes("editor-in-modal")) ||

@@ -32,7 +32,7 @@ const InputLimitedList = (props) => {
         }
         htmlFor={parentKey + "-" + key}
       >
-        {key}:
+        {key}
       </label>
       <select
         id={
@@ -79,7 +79,7 @@ const InputLimitedList = (props) => {
             >
               {option}
             </option>
-          )
+          ),
         )}
       </select>
     </Fragment>

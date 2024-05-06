@@ -229,7 +229,7 @@ const ItemEditorModal = (props) => {
           value={id}
           onClick={submitFormButtonHandler}
         >
-          Submit <span>{Object.hasOwn(itemData, "name") && itemData.name}</span>{" "}
+          Submit <span>{Object.hasOwn(itemData, "name") && itemData.name}</span>
           &rarr;
         </button>
       </ul>

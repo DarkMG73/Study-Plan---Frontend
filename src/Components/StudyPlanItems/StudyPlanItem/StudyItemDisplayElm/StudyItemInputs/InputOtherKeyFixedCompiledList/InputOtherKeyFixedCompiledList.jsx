@@ -58,7 +58,7 @@ const InputOtherKeyFixedCompiledList = (props) => {
         value={optionObj[keyForOptionValue]}
       >
         {optionObj.type.toUpperCase()}: {optionObj[keyToDisplay]}
-      </option>
+      </option>,
     );
   });
 
@@ -77,7 +77,7 @@ const InputOtherKeyFixedCompiledList = (props) => {
         }
         htmlFor={parentKey + "-" + key}
       >
-        {key}:
+        {key}
       </label>
       <select
         id={

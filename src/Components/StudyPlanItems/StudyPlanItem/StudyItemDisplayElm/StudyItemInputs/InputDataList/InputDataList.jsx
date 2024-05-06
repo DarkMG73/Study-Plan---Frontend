@@ -5,7 +5,7 @@ import useAddInputData from "../../../../../../Hooks/useAddInputData";
 
 const InputDataList = (props) => {
   const studyPlanMetadata = useSelector(
-    (state) => state.studyPlanData.studyPlanMetadata
+    (state) => state.studyPlanData.studyPlanMetadata,
   );
   const addInputData = useAddInputData();
   const {
@@ -43,7 +43,7 @@ const InputDataList = (props) => {
           ]
         }
       >
-        {key}:
+        {key}
       </label>
       <datalist
         id={parentKey + "-" + key + "datalist"}

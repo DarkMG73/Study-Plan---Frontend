@@ -62,7 +62,7 @@ const InputURL = (props) => {
         }
         htmlFor={parentKey + "-" + key}
       >
-        {key}:
+        {key}
       </label>
       <input
         type="url"

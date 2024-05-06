@@ -30,7 +30,7 @@ const InputBoolean = (props) => {
         }
         htmlFor={parentKey + "-" + key}
       >
-        {key}:
+        {key}
       </label>
 
       <select
