@@ -63,6 +63,13 @@ const useProcessUpdateStudyPlan = () => {
           const status = res.status ? res.status : res.response.status;
 
           if (status >= 400) {
+            if (status === 403) {
+              alert(
+                "It looks like the login has expired. Please log in again to continue this session.",
+              );
+              throw Error("Please log in again.");
+            }
+
             alert("There was an error: " + res.response.data.message);
           } else if (status >= 200) {
             // dispatch(
