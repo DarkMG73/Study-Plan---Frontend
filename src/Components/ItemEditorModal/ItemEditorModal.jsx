@@ -157,6 +157,7 @@ const ItemEditorModal = (props) => {
           id={"itemEditForm-" + id}
           data-parentmasterid={id}
           className={Styles["new-form-inner-container"]}
+          data-newformtype={itemData.type}
           data-formtype={"type-" + formType}
         >
           <button
@@ -219,7 +220,6 @@ const ItemEditorModal = (props) => {
           Styles["new-form-container"] +
           " edited-list "
         }
-        data-newformtype={itemData.type}
       >
         <h2 id={id} className={Styles["group-title"] + " " + Styles[id]}>
           &nbsp;{Object.hasOwn(itemData, "name") && itemData.name.toUpperCase()}

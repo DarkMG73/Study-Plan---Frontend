@@ -78,8 +78,8 @@
     max-width: 100%;
   }
 
-  form ul[data-newformtype="hold"] .new-form-wrap {
-    grid-template-columns: repeat(2, 1fr);
+  form div[data-newformtype="hold"] .new-form-wrap {
+    grid-template-columns: repeat(2, 25%);
     grid-template-areas:
       "name name  name name"
       "type type   type type"
@@ -96,8 +96,8 @@
     grid-auto-flow: row dense;
   }
 
-  form ul[data-newformtype="goal"] .new-form-wrap {
-    grid-template-columns: repeat(2, 1fr);
+  form div[data-newformtype="goal"] .new-form-wrap {
+    grid-template-columns: repeat(2, 50%);
     grid-template-areas:
       "name name"
       "type type"
@@ -113,7 +113,7 @@
   }
 
   /* New Entry Form Goal Adjustments */
-  form ul[data-newformtype="goal"] {
+  form div[data-newformtype="goal"] {
     background: var(--spt-color-accent-2-dark);
     color: var(--spt-color-background);
     li[id*="-url-item"],
@@ -247,7 +247,7 @@
   select {
     box-shadow:
       inset -1px -1px 3px -2px white,
-      inset 1px 1px 3px -2px black;
+      inset 1px 1px 3px -2px black !important;
   }
 
   .new-form-wrap li select {
@@ -426,7 +426,9 @@
     li[id*="-priority"],
     li[id*="-status"],
     li[id*="-acomp"],
-    li[id*="-start"] {
+    li[id*="-start"],
+    li[id*="-demonstratedskillurl"],
+    li[id*="-demonstratedskillsdesc"] {
       background: gray;
       opacity: 0.5;
       display: none;

@@ -297,7 +297,9 @@
       transform: none;
     }
     li[class*="name"],
-    li[class*="type"] {
+    li[class*="type"],
+    li[class*="name"] label,
+    li[class*="type"] label {
       border: 3px solid var(--spt-color-accent-dark);
       background: var(--spt-color-accent-dark);
       color: var(--spt-color-background-warm) !important;
