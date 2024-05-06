@@ -73,11 +73,7 @@ export async function registerAUser(user, inDemoMode) {
 export async function setUserCookie(user, inDemoMode) {
   if (inDemoMode) return;
   const output = new Promise((resolve) => {
-    const cookie = StorageForSession(
-      "ADD",
-      user,
-      "gi-interview-questions-Tool-user",
-    );
+    const cookie = StorageForSession("ADD", user, "gi-study-plan-tool-user");
     let status = 400;
     if (cookie) status = 202;
 
@@ -96,11 +92,7 @@ export async function deleteUserCookie(inDemoMode) {
   if (inDemoMode) return;
   // SessionStorage used while hosting API on Heroku
   const output = new Promise((resolve) => {
-    const cookie = StorageForSession(
-      "DELETE",
-      {},
-      "gi-interview-questions-Tool-user",
-    );
+    const cookie = StorageForSession("DELETE", {}, "gi-study-plan-tool-user");
     let status = 400;
     if (cookie) status = 202;
 
@@ -118,11 +110,7 @@ export async function deleteUserCookie(inDemoMode) {
 export async function getUserCookie(inDemoMode) {
   if (inDemoMode) return;
   const output = new Promise((resolve) => {
-    const cookie = StorageForSession(
-      "GET",
-      {},
-      "gi-interview-questions-Tool-user",
-    );
+    const cookie = StorageForSession("GET", {}, "gi-study-plan-tool-user");
 
     let status = 400;
     if (cookie) status = 202;

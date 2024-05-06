@@ -1,5 +1,5 @@
 import Cookies from "universal-cookie";
-const appCookieName = "gi-interview-questions-tool-local";
+const appCookieName = "gi-study-plan-tool-local";
 
 function storage(action, data, name) {
   data = JSON.stringify(data);
@@ -13,7 +13,9 @@ function storage(action, data, name) {
     output = localStorage.getItem(storageFileName);
     try {
       output = JSON.parse(output);
-    } catch (err) {console.Console.log(err)}
+    } catch (err) {
+      console.Console.log(err);
+    }
   }
 
   if (action === "DELETE") {
@@ -24,7 +26,7 @@ function storage(action, data, name) {
 }
 
 export function StorageForSession(action, data, name) {
-  if (data && Object.keys(data).length > 0 && Object.hasOwn(data,"token"))
+  if (data && Object.keys(data).length > 0 && Object.hasOwn(data, "token"))
     data = JSON.stringify(data.token);
 
   const storageFileName = name ? name : appCookieName;
@@ -43,7 +45,7 @@ export function StorageForSession(action, data, name) {
 
   if (action === "GET") {
     output = cookies.get(storageFileName);
-    if (output && Object.hasOwn(output,"token")) output = output.token;
+    if (output && Object.hasOwn(output, "token")) output = output.token;
   }
 
   if (action === "DELETE") {
