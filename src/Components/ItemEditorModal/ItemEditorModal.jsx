@@ -156,7 +156,7 @@ const ItemEditorModal = (props) => {
           key={id + "-itemEditForm-"}
           id={"itemEditForm-" + id}
           data-parentmasterid={id}
-          className={Styles["new-form-"] + " " + Styles["new-form"]}
+          className={Styles["new-form-inner-container"]}
           data-formtype={"type-" + formType}
         >
           <button
@@ -216,7 +216,7 @@ const ItemEditorModal = (props) => {
           " " +
           Styles["in-modal"] +
           " " +
-          Styles["new-form"] +
+          Styles["new-form-container"] +
           " edited-list "
         }
         data-newformtype={itemData.type}

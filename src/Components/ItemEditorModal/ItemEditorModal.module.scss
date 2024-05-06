@@ -47,17 +47,10 @@
     display: none !important;
   }
 
-  form ul {
-    display: flex;
-    background: var(--spt-color-accent-2-dark);
-    background: transparent;
+  form .new-form-wrap {
+    position: relative;
     padding: 0;
     margin: auto;
-    border-radius: 50px;
-    overflow: hidden;
-  }
-  .new-form-wrap {
-    position: relative;
   }
 
   form ul[id*="itemEditForm-wrap"] {
@@ -85,7 +78,7 @@
     max-width: 100%;
   }
 
-  form [data-newformtype="hold"] {
+  form ul[data-newformtype="hold"] .new-form-wrap {
     grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
       "name name  name name"
@@ -103,7 +96,7 @@
     grid-auto-flow: row dense;
   }
 
-  form ul [data-newformtype="goal"] {
+  form ul[data-newformtype="goal"] .new-form-wrap {
     grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
       "name name"
@@ -120,7 +113,7 @@
   }
 
   /* New Entry Form Goal Adjustments */
-  form [data-newformtype="goal"] {
+  form ul[data-newformtype="goal"] {
     background: var(--spt-color-accent-2-dark);
     color: var(--spt-color-background);
     li[id*="-url-item"],
@@ -131,7 +124,9 @@
     li[id*="-author-item"],
     li[id*="-status-item"],
     li[id*="-platform-item"],
-    li[id*="-method-item"] {
+    li[id*="-method-item"],
+    li[id*="-demonstratedskillurl"],
+    li[id*="-demonstratedskillsdesc"] {
       background: gray;
       opacity: 0.5;
       pointer-events: none;
@@ -195,43 +190,22 @@
     overflow: auto;
   }
 
-  .new-form {
+  .new-form-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     margin: 1em auto;
   }
 
-  .new-form .new-form {
+  .new-form-container .new-form-inner-container {
     position: relative;
     flex-basis: fit-content;
-    display: flex;
-    flex-direction: column;
     flex-grow: 1;
     margin: 1em auto;
     flex-basis: 33.33%;
     min-width: 400px;
     max-width: 800px;
     padding: 1em;
-  }
-
-  .new-form .new-form > ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-content: flex-start;
-    position: relative;
-    /* box-shadow: 0px 24px 33px 0px var(--spt-color-accent); */
-    max-width: 100%;
-    background: none;
-    border-radius: 0;
-    overflow: auto;
-    [class*="url-arrow"] {
-      display: none;
-    }
   }
 
   h2 {
@@ -245,13 +219,13 @@
     margin: auto;
   }
 
-  .new-form li {
+  .new-form-wrap li {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     text-align: center;
     margin: 0.25em;
-    width: auto;
+    width: 100%;
     label,
     &:before {
       color: var(--spt-color-background);
@@ -276,7 +250,7 @@
       inset 1px 1px 3px -2px black;
   }
 
-  .new-form li select {
+  .new-form-wrap li select {
     width: 100%;
   }
 
