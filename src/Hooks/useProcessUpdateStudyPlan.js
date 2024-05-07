@@ -65,14 +65,10 @@ const useProcessUpdateStudyPlan = () => {
 
           if (status >= 400) {
             if (status === 403) {
-              alert(
-                "It looks like the login has expired. Please log in again to continue this session.",
-              );
-
               dispatch(authActions.reLogin(true));
+            } else {
+              alert("There was an error: " + res.response.data.message);
             }
-
-            alert("There was an error: " + res.response.data.message);
           } else if (status >= 200) {
             // dispatch(
             //   studyPlanDataActions.updateOneStudyPlanItem({

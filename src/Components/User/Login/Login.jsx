@@ -11,6 +11,16 @@ import PushButton from "../../../UI/Buttons/PushButton/PushButton";
 import Iframe from "react-iframe";
 
 const Login = (props) => {
+  const {
+    hideRegister,
+    horizontalDisplay,
+    hideTitles,
+    isDemo,
+    forcedUser,
+    signUpButtonStyles,
+    toggleSignupLoginButtonHandler,
+    afterLoginCallback,
+  } = props;
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -20,7 +30,7 @@ const Login = (props) => {
   const [showLoginError, setShowLoginError] = useState(true);
   const [showChangePasswordHTML, setShowChangePasswordHTML] = useState(false);
   const dispatch = useDispatch();
-  const horizontalDisplay = props.horizontalDisplay ? "horizontal-display" : "";
+  const horizontalDisplayStyles = horizontalDisplay ? "horizontal-display" : "";
   const [serverActiveError, setServerActiveError] = useState(false);
   // const status = useSelector((state) => state.statusUpdate.status);
   const status = false;
@@ -113,9 +123,11 @@ const Login = (props) => {
       });
 
     dispatch(authActions.logIn(res.data));
-    if (!props.isDemo && inDemoMode) {
+    if (!isDemo && inDemoMode) {
       dispatch(authActions.demoMode(false));
     }
+
+    if (afterLoginCallback) afterLoginCallback();
 
     removeLoadingRequest();
   };
@@ -228,9 +240,9 @@ const Login = (props) => {
       loginError,
     );
 
-  if (props.forcedUser && (!user || user.email !== props.forcedUser.email)) {
-    setUser(props.forcedUser);
-    submitLogin({ preventDefault: () => {} }, props.forcedUser);
+  if (forcedUser && (!user || user.email !== forcedUser.email)) {
+    setUser(forcedUser);
+    submitLogin({ preventDefault: () => {} }, forcedUser);
   }
 
   ////////////////////////////////////////////////////////////////
@@ -238,34 +250,38 @@ const Login = (props) => {
   ////////////////////////////////////////////////////////////////
   return (
     <div
-      className={styles["login-container"] + " " + styles[horizontalDisplay]}
+      className={
+        styles["login-container"] + " " + styles[horizontalDisplayStyles]
+      }
     >
-      {!props.hideTitles && (
+      {!hideTitles && (
         <div className={styles["login-title-wrap"]}>
           <h3 className={styles["login-title"]}>Login</h3>
         </div>
       )}
-      <span className={styles["login-question"]}>
-        Need to register?
-        <PushButton
-          inputOrButton="button"
-          colorType="secondary"
-          styles={{
-            ...props.signUpButtonStyles,
-            margin: "1em",
-            boxShadow:
-              "3px 3px 7px -5px white inset, -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset, 0 0 25px -2px",
-            border: "2px solid var(--spt-color-accent-2)",
-            fontWeight: "700",
-          }}
-          value="Add a Question"
-          data=""
-          size="small"
-          onClick={props.toggleSignupLoginButtonHandler}
-        >
-          Sign Up &#10140;
-        </PushButton>
-      </span>
+      {!hideRegister && (
+        <span className={styles["login-question"]}>
+          Need to register?
+          <PushButton
+            inputOrButton="button"
+            colorType="secondary"
+            styles={{
+              ...signUpButtonStyles,
+              margin: "1em",
+              boxShadow:
+                "3px 3px 7px -5px white inset, -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset, 0 0 25px -2px",
+              border: "2px solid var(--spt-color-accent-2)",
+              fontWeight: "700",
+            }}
+            value="Add a Question"
+            data=""
+            size="small"
+            onClick={toggleSignupLoginButtonHandler}
+          >
+            Sign Up &#10140;
+          </PushButton>
+        </span>
+      )}
       <div className={styles["login-form-wrap"]}>
         <form className={styles["form"]} action="#">
           <div className={styles["form-input-container"]}>

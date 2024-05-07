@@ -246,9 +246,10 @@ function App() {
         {reLogin && (
           <div className="re-login-container">
             <Login
-              title={localError.title}
-              message={localError.message}
-              reLogin={reLogin}
+              hideRegister={true}
+              afterLoginCallback={() => {
+                dispatch(authActions.reLogin(false));
+              }}
             />
           </div>
         )}
