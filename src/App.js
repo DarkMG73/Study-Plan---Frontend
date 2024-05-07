@@ -13,6 +13,7 @@ import Home from "./pages/Home/Home";
 import Manage from "./pages/Manage/Manage";
 import CardTransparent from "./UI/Cards/CardTransparent/CardTransparent";
 import Header from "./Components/Header/Header";
+import Login from "./Components/User/Login/Login";
 import BarLoader from "./UI/Loaders/BarLoader/BarLoader";
 import { ErrorBoundary } from "./HOC/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import LocalErrorDisplay from "./HOC/ErrorHandling/LocalErrorDisplay/LocalErrorDisplay";
@@ -48,7 +49,7 @@ function App() {
   }
 
   const [userInitComplete, setUserInitComplete] = useState(false);
-  const { user } = useSelector((state) => state.auth);
+  const { user, reLogin } = useSelector((state) => state.auth);
   const demoUser = {
     email: "demouser@glassinteractive.com",
     password: "Demouser#1",
@@ -163,6 +164,16 @@ function App() {
   ///////
 
   useEffect(() => {
+    console.log(
+      "%c⚪️►►►► %cline:171%creLogin",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(217, 104, 49);padding:3px;border-radius:2px",
+      reLogin,
+    );
+  }, [reLogin]);
+
+  useEffect(() => {
     if (userInitComplete) {
       runGatherStudyPlanData({ user: user, setLocalError });
       // runGatherContentData({ user: user, setLocalError });
@@ -232,6 +243,15 @@ function App() {
         </header>
       </ErrorBoundary>
       <ErrorBoundary>
+        {reLogin && (
+          <div className="re-login-container">
+            <Login
+              title={localError.title}
+              message={localError.message}
+              reLogin={reLogin}
+            />
+          </div>
+        )}
         {localError.active && (
           <div className="local-error-container">
             <div className="local-error-inner-wrap">

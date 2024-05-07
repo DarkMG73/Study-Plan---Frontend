@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { loadingRequestsActions } from "../store/loadingRequestsSlice";
+import { authActions } from "../store/authSlice";
 
 const useProcessUpdateStudyPlan = () => {
   const dispatch = useDispatch();
@@ -67,7 +68,8 @@ const useProcessUpdateStudyPlan = () => {
               alert(
                 "It looks like the login has expired. Please log in again to continue this session.",
               );
-              throw Error("Please log in again.");
+
+              dispatch(authActions.reLogin(true));
             }
 
             alert("There was an error: " + res.response.data.message);

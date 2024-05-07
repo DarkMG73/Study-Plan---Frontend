@@ -5,6 +5,7 @@ const initState = {
   inDemoMode: false,
   authToken: false,
   recentLogout: false,
+  reLogin: false,
 };
 
 export const authSlice = createSlice({
@@ -24,6 +25,9 @@ export const authSlice = createSlice({
     demoMode: (state, action) => {
       state.inDemoMode = { ...action.payload };
       state.inDemoMode = action.payload;
+    },
+    reLogin: (state, action) => {
+      state.reLogin = action.payload;
     },
     // resetRecentLogout: (state) => {
     //   state.recentLogout = false;
