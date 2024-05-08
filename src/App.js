@@ -244,13 +244,23 @@ function App() {
       </ErrorBoundary>
       <ErrorBoundary>
         {reLogin && (
-          <div className="re-login-container">
-            <Login
-              hideRegister={true}
-              afterLoginCallback={() => {
-                dispatch(authActions.reLogin(false));
-              }}
-            />
+          <div className="re-login-wrap">
+            <div className="re-login-container">
+              <h2>It Looks Like the Login Expired</h2>
+              <p>
+                Sorry about this. All logins are time-limited for security. Just
+                log in again and you will be sent back to the page you were on.
+                If you were making edits or additions, do not worry! 😀 They are
+                still there. You just need to go back to them and click "Submit"
+                again. after re-logging in.{" "}
+              </p>
+              <Login
+                hideRegister={true}
+                afterLoginCallback={() => {
+                  dispatch(authActions.reLogin(false));
+                }}
+              />
+            </div>
           </div>
         )}
         {localError.active && (
