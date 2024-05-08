@@ -18,6 +18,7 @@ import Stats from "../../Components/Stats/Stats";
 import { ErrorBoundary } from "../../HOC/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import { scrollPositionActions } from "../../store/scrollPositionSlice";
 import { studyPlanDataActions } from "../../store/studyPlanDataSlice";
+import { authActions } from "../../store/authSlice";
 import { formInputDataActions } from "../../store/formInputDataSlice";
 import { loadingRequestsActions } from "../../store/loadingRequestsSlice";
 import { saveManyStudyPlanItems } from "../../storage/studyPlanDB";
@@ -121,7 +122,11 @@ const Home = (props) => {
         dispatch(loadingRequestsActions.removeFromLoadRequest());
 
         if (res.status >= 400) {
-          alert("There was an error: " + res.response.data.message);
+          if (res.status === 403) {
+            dispatch(authActions.reLogin(true));
+          } else {
+            alert("There was an error: " + res.response.data.message);
+          }
 
           // updateAStudyPlanItem(dataObj, user);
         } else if (res.status >= 200) {

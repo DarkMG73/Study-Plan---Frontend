@@ -11,8 +11,10 @@ import { deleteContentDocFromDb } from "../../../storage/contentDB";
 import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 import { loadingRequestsActions } from "../../../store/loadingRequestsSlice";
 import useDemoCheck from "../../../Hooks/useDemoCheck";
+import { authActions } from "../../../store/authSlice";
 
 const StudyPlanItemsList = (props) => {
+  const dispatch = useDispatch();
   // Number of Study Plan items to switch to resource-saving mode
   const largeStudyPlanBreakPoint = 2;
   const [refresh] = useState(1);
@@ -48,7 +50,6 @@ const StudyPlanItemsList = (props) => {
     {},
   );
   const existingFormInputValuesObjRef = useRef();
-  const dispatch = useDispatch();
 
   ////////////////////////////////////////////////////////////////
   /// Functionality
@@ -256,6 +257,8 @@ const StudyPlanItemsList = (props) => {
 
   const deleteFormButtonHandler = (e) => {
     e.preventDefault();
+    dispatch(loadingRequestsActions.addToLoadRequest());
+
     if (isDemo) {
       alert(isDemo);
       return;
@@ -273,23 +276,34 @@ const StudyPlanItemsList = (props) => {
         ' "?',
     );
     if (confirm && user) {
-      // if (true) {
-
-      deleteItemFromDB(itemIdentifier, user).then((res) => {
-        const status = res.status ? res.status : res.response.status;
-        if (status >= 400) {
-          alert("There was an error: " + res.response.data.message);
-        } else if (status >= 200) {
-          const resetPage = window.confirm(
-            'Success! The item has been deleted.\n\nWould you like to refresh the page and show the changes?\n\nNOTE: If you deleted this accidentally, you can choose "Cancel" below to return to the page with the deleted item still open. To re-add it back to your study plan, just click "Submit" at the bottom of the item. This will submit it as a new item to your study plan.',
-          );
-          if (resetPage) dispatch(studyPlanDataActions.reGatherStudyPlan(true));
-          // setInEditMode(false);
-        } else {
-          alert("there was an error: " + res.message);
-        }
-      });
+      deleteItemFromDB(itemIdentifier, user)
+        .then((res) => {
+          dispatch(loadingRequestsActions.removeFromLoadRequest());
+          const status = res.status ? res.status : res.response.status;
+          if (status >= 400) {
+            if (status === 403) {
+              dispatch(authActions.reLogin(true));
+            } else {
+              alert("There was an error: " + res.response.data.message);
+            }
+          } else if (status >= 200) {
+            const resetPage = window.confirm(
+              'Success! The item has been deleted.\n\nWould you like to refresh the page and show the changes?\n\nNOTE: If you deleted this accidentally, you can choose "Cancel" below to return to the page with the deleted item still open. To re-add it back to your study plan, just click "Submit" at the bottom of the item. This will submit it as a new item to your study plan.',
+            );
+            if (resetPage)
+              dispatch(studyPlanDataActions.reGatherStudyPlan(true));
+            // setInEditMode(false);
+          } else {
+            dispatch(loadingRequestsActions.removeFromLoadRequest());
+            alert("there was an error: " + res.message);
+          }
+        })
+        .catch((err) => {
+          dispatch(loadingRequestsActions.removeFromLoadRequest());
+          alert("It appears we encountered a problem: " + err);
+        });
     } else if (confirm) {
+      dispatch(loadingRequestsActions.removeFromLoadRequest());
       const sendEmail = window.confirm(
         'Thank you for contributing. All contributions must be reviewed before becoming public. Click "OK" to send this via email for review and, if approved, to be included. Click "Cancel" to cancel this and not send an email.',
       );
