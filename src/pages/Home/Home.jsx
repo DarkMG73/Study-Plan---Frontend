@@ -119,17 +119,29 @@ const Home = (props) => {
 
     saveManyItems({ user, outputDataArray: data })
       .then((res) => {
+        let status = 500;
+        let message =
+          "There was an unknown error. Please refresh and try again. Please contact the site admin if this continues.";
+
+        if (Object.hasOwn(res, "status")) {
+          status = res.status;
+          message = res.data.message;
+        } else if (Object.hasOwn(res, "response")) {
+          status = res.response.status;
+          message = res.response.data.message;
+        }
+
         dispatch(loadingRequestsActions.removeFromLoadRequest());
 
-        if (res.status >= 400) {
-          if (res.status === 403) {
+        if (status >= 400) {
+          if (status === 403) {
             dispatch(authActions.reLogin(true));
           } else {
-            alert("There was an error: " + res.response.data.message);
+            alert("There was an error: " + message);
           }
 
           // updateAStudyPlanItem(dataObj, user);
-        } else if (res.status >= 200) {
+        } else if (status >= 200) {
           alert("Success! You have added to your study plan!");
           dispatch(studyPlanDataActions.reGatherStudyPlan(true));
           dispatch(formInputDataActions.setNewFormOpen(false));
