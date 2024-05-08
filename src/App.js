@@ -164,16 +164,6 @@ function App() {
   ///////
 
   useEffect(() => {
-    console.log(
-      "%c⚪️►►►► %cline:171%creLogin",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(217, 104, 49);padding:3px;border-radius:2px",
-      reLogin,
-    );
-  }, [reLogin]);
-
-  useEffect(() => {
     if (userInitComplete) {
       runGatherStudyPlanData({ user: user, setLocalError });
       // runGatherContentData({ user: user, setLocalError });
