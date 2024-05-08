@@ -4,6 +4,7 @@ const StudyPlanItemsSubList = (props) => {
   return (
     <StudyPlanItemsList
       studyPlanItemsObj={props.studyPlanItemsObj}
+      studyPlanMetadata={props.studyPlanMetadata}
       allStudyPlanItems={props.allStudyPlanItems}
       key={props.parentMasterID + "in-sub--1"}
       section={props.section}

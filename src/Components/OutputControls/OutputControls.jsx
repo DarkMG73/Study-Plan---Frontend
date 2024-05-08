@@ -82,7 +82,7 @@ function OutputControls(props) {
             type={false}
             onlyList={true}
             noEditButton={props.noEditButton}
-            forceFullList={true}
+            studyPlanMetadata={{ _id: [] }}
           />
         );
         setUploadedJSONJSX(outputJSX);
