@@ -82,6 +82,7 @@ function OutputControls(props) {
             type={false}
             onlyList={true}
             noEditButton={props.noEditButton}
+            forceFullList={true}
           />
         );
         setUploadedJSONJSX(outputJSX);
