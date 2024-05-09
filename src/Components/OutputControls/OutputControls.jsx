@@ -65,14 +65,6 @@ function OutputControls(props) {
 
   useEffect(() => {
     if (uploadedJSONData) {
-      console.log(
-        "%c⚪️►►►► %cline:82%cObject.keys(uploadedJSONData)",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
-        Object.keys(uploadedJSONData),
-      );
-
       if (user) {
         console.log("SUCCESS! dataObj: ", uploadedJSONData);
         const idArray = [];

@@ -27,26 +27,13 @@ function CollapsibleElm(props) {
     const heightCheckTimerInterval = setInterval(() => {
       timerTripCount++;
       if (timerTripCount > 5) clearInterval(heightCheckTimerInterval);
-      console.log(
-        "%c⚪️►►►► %cline:28%ctimerTripCount",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(237, 222, 139);padding:3px;border-radius:2px",
-        timerTripCount,
-      );
+
       if (!isOverflowActive(textRef.current)) {
         setMaxHeight("max-content");
         return;
       } else {
         setMaxHeight(props.maxHeight);
       }
-      console.log(
-        "%c⚪️►►►► %cline:36%ctextRef.current",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(38, 157, 128);padding:3px;border-radius:2px",
-        textRef.current,
-      );
     }, 1000);
     if (timerTripCount > 5) clearInterval(heightCheckTimerInterval);
   }, [props.maxHeight]);

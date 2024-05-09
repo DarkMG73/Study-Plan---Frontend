@@ -126,13 +126,6 @@ const StudyPlanItemsList = (props) => {
   }, [existingFormInputValuesObj]);
 
   useEffect(() => {
-    console.log(
-      "%c⚪️►►►► %cline:128%cunlockProtectedVisible",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(38, 157, 128);padding:3px;border-radius:2px",
-      unlockProtectedVisible,
-    );
     setElmPropertiesVariables({
       section,
       studyPlanItemsObj,
@@ -935,13 +928,7 @@ const StudyPlanItemsList = (props) => {
                       // Show/Hide, Delete and Submit Buttons.
                       /////////////////////////////////////////
                     }
-                    {console.log(
-                      "%c⚪️►►►► %cline:902%csubListLevel",
-                      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-                      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-                      "color:#fff;background:rgb(130, 57, 53);padding:3px;border-radius:2px",
-                      subListLevel,
-                    )}
+
                     {subListLevel &&
                       Object.hasOwn(expandedItems, section) &&
                       expandedItems[section].includes(

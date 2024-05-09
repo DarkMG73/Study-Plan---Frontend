@@ -93,7 +93,7 @@ const displayConditions = {
         groupByField: "type",
       },
     }, // Select with options to display and save different keys & values.
-    protectedHidden: [],
+    protectedHidden: ["msup", "asup", "id", "identifier", "createdAt"],
     protectedVisible: [],
   },
 };

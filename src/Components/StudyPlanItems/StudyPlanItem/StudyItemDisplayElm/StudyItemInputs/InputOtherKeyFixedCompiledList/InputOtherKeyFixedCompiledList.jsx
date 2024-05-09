@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import useAddInputData from "../../../../../../Hooks/useAddInputData";
+import Textarea from "../../StudyItemInputs/Textarea/Textarea";
 
 const InputOtherKeyFixedCompiledList = (props) => {
   const studyPlan = useSelector((state) => state.studyPlanData.studyPlan);
@@ -20,6 +21,28 @@ const InputOtherKeyFixedCompiledList = (props) => {
   const key = passedKey;
 
   if (!studyPlan) return;
+  if (Object.keys(studyPlan).length <= 0)
+    return (
+      <Fragment>
+        <label
+          id={
+            parentMasterID +
+            "-" +
+            parentsParentKey +
+            "-" +
+            parentKey +
+            "-" +
+            key +
+            "label"
+          }
+          htmlFor={parentKey + "-" + key}
+        >
+          {key}
+        </label>
+        <Textarea {...props} />;
+      </Fragment>
+    );
+
   const optionsList = [];
   // Create array of objects without parent
   const fullOptionsArray = Object.values(studyPlan).filter((value) => {
