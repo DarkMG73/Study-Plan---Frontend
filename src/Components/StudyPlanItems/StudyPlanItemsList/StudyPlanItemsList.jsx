@@ -37,6 +37,9 @@ const StudyPlanItemsList = (props) => {
   const displayConditions = props.displayConditions;
   const onlyList = props.onlyList;
   const noEditButton = props.noEditButton;
+  const allStudyPlanItems = props.allStudyPlanItems;
+  const emptyForm = props.emptyForm;
+  const setFormType = props.setFormType;
   const demoCheck = useDemoCheck();
   const isDemo = demoCheck();
   const [itemEditorModalJSX, setItemEditorModalJSX] = useState(false);
@@ -69,6 +72,13 @@ const StudyPlanItemsList = (props) => {
     parentMasterID,
     unlockProtectedVisible,
     onlyList,
+    displayConditions,
+    showProtectedHidden,
+    refresh,
+    studyPlanMetadata,
+    allStudyPlanItems,
+    emptyForm,
+    setFormType,
   };
   ////
 
@@ -448,44 +458,19 @@ const StudyPlanItemsList = (props) => {
                     </h2>
                     <StudyPlanItemsSubList
                       key={key + studyPlanItemsObj[key]}
-                      studyPlanItemsObj={studyPlanItemsObj[key]}
-                      studyPlanMetadata={props.studyPlanMetadata}
-                      allStudyPlanItems={props.allStudyPlanItems}
-                      parentKey={key}
-                      parentsParentKey={parentKey}
-                      parentMasterID={
-                        parentMasterID
-                          ? parentMasterID
-                          : studyPlanItemsObj[key]._id
-                      }
-                      section={section}
-                      displayConditions={displayConditions}
-                      subListLevel={subListLevel}
-                      unlockProtectedVisible={
-                        props.unlockProtectedVisible
-                          ? props.unlockProtectedVisible
-                          : unlockProtectedVisible
-                      }
-                      showProtectedHidden={
-                        props.showProtectedHidden
-                          ? props.showProtectedHidden
-                          : showProtectedHidden
-                      }
-                      refresh={refresh}
-                      onlyList={onlyList}
-                      emptyForm={props.emptyForm}
-                      setFormType={props.setFormType}
+                      {...elmProperties({ ...elmPropertiesVariables, key })
+                        .studyPlanItemsSubList}
                     />
                     <ul
                       className={styles["dependencies-container"]}
                       data-section={section}
                     >
                       <h3>The Path to {studyPlanItemsObj[key].name}</h3>
-                      {props.allStudyPlanItems &&
+                      {allStudyPlanItems &&
                         studyPlanItemsObj[key].dependencies.map(
                           (dependencyIdentifier) => {
                             const dependenciesObj = Object.values(
-                              props.allStudyPlanItems,
+                              allStudyPlanItems,
                             ).filter(
                               (item) =>
                                 dependencyIdentifier === item.identifier,
@@ -496,57 +481,19 @@ const StudyPlanItemsList = (props) => {
                               <StudyPlanItemsSubList
                                 key={
                                   key +
-                                  "-" +
                                   section +
-                                  "-" +
-                                  parentKey +
-                                  "-" +
-                                  (parentMasterID
-                                    ? parentMasterID
-                                    : studyPlanItemsObj[key]._id) +
-                                  "-" +
                                   subListLevel +
-                                  "-" +
-                                  (props.type
-                                    ? props.type
-                                    : studyPlanItemsObj[key].type +
-                                      "-" +
-                                      (dependenciesObj &&
-                                        dependenciesObj.length > 0 &&
-                                        Object.hasOwn(
-                                          dependenciesObj[0],
-                                          "_id",
-                                        ) &&
-                                        dependenciesObj[0]._id) +
-                                      "-sub--2")
+                                  (dependenciesObj &&
+                                    dependenciesObj.length > 0 &&
+                                    Object.hasOwn(dependenciesObj[0], "_id") &&
+                                    dependenciesObj[0]._id) +
+                                  "-sub--2"
                                 }
-                                studyPlanItemsObj={dependenciesObj}
-                                studyPlanMetadata={props.studyPlanMetadata}
-                                allStudyPlanItems={props.allStudyPlanItems}
-                                parentKey={key}
-                                parentsParentKey={parentKey}
-                                parentMasterID={
-                                  parentMasterID
-                                    ? parentMasterID
-                                    : studyPlanItemsObj[key]._id
-                                }
-                                section={section}
-                                displayConditions={displayConditions}
-                                subListLevel={subListLevel}
-                                unlockProtectedVisible={
-                                  props.unlockProtectedVisible
-                                    ? props.unlockProtectedVisible
-                                    : unlockProtectedVisible
-                                }
-                                showProtectedHidden={
-                                  props.showProtectedHidden
-                                    ? props.showProtectedHidden
-                                    : showProtectedHidden
-                                }
-                                refresh={refresh}
-                                onlyList={onlyList}
-                                emptyForm={props.emptyForm}
-                                setFormType={props.setFormType}
+                                {...elmProperties({
+                                  ...elmPropertiesVariables,
+                                  key,
+                                  dependenciesObj,
+                                }).studyPlanItemsSubList2}
                               />
                             );
                           },
@@ -746,31 +693,10 @@ const StudyPlanItemsList = (props) => {
                       id={"create-entry-btn" + key}
                       colorType="primary"
                       styles={{
-                        margin: "0 auto",
-                        padding: "0.5em 2em",
-                        transition: "0.7s all ease",
-                        maxWidth: "80%",
-                        textAlign: "center",
-                        display: "flex",
-                        alignItems: "center",
-                        borderRadius: "0 0 50px 0",
-                        fontFamily: "Arial",
-                        border: "none",
-                        position: "absolute",
-                        top: "0",
-                        left: "0",
-                        flexGrow: "1",
-                        minWidth: "4.5em",
-                        boxShadow:
-                          "inset 3px 3px 5px 0px #ffffffe0, inset -3px -3px 5px 0px #00000038",
-                        fontSize: "1.2rem",
-                        fontVariant: "all-small-caps",
-                        letterSpacing: "0.2em",
-                        cursor: "pointer",
-                        height: "100%",
-                        maxHeight: "4em",
-                        transformOrigin: "left",
-                        zIndex: "1",
+                        ...elmProperties({
+                          ...elmPropertiesVariables,
+                          key,
+                        }).pushButton2,
                       }}
                       value={
                         key === "0" &&
@@ -850,7 +776,7 @@ const StudyPlanItemsList = (props) => {
                       key={studyPlanItemsObj[key]}
                       studyPlanItemsObj={studyPlanItemsObj[key]}
                       studyPlanMetadata={props.studyPlanMetadata}
-                      allStudyPlanItems={props.allStudyPlanItems}
+                      allStudyPlanItems={allStudyPlanItems}
                       parentKey={key}
                       parentsParentKey={parentKey}
                       parentMasterID={
@@ -873,8 +799,8 @@ const StudyPlanItemsList = (props) => {
                       }
                       refresh={refresh}
                       onlyList={onlyList}
-                      emptyForm={props.emptyForm}
-                      setFormType={props.setFormType}
+                      emptyForm={emptyForm}
+                      setFormType={setFormType}
                     />
                     {!onlyList &&
                       !subListLevel &&
@@ -1092,9 +1018,9 @@ const StudyPlanItemsList = (props) => {
                 }
                 refresh={refresh}
                 setExistingFormInputValuesObj={updateExistingFormState}
-                emptyForm={props.emptyForm}
+                emptyForm={emptyForm}
                 onlyList={onlyList}
-                setFormType={props.setFormType}
+                setFormType={setFormType}
                 formType={props.formType}
               />
             </Fragment>
