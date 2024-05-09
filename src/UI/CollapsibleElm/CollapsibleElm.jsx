@@ -10,13 +10,6 @@ function CollapsibleElm(props) {
 
   // See if div is overflowing and See More button is needed
   function isOverflowActive(e) {
-    console.log(
-      "%c⚪️►►►► %cline:14%ce.offsetHeight",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(153, 80, 84);padding:3px;border-radius:2px",
-      e.offsetHeight,
-    );
     if (e)
       return e.offsetHeight < e.scrollHeight || e.offsetWidth < e.scrollWidth;
   }

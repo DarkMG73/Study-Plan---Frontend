@@ -16,14 +16,8 @@ import useStudyPlanListElmProperties from "../../../Hooks/useStudyPlanListElmPro
 
 const StudyPlanItemsList = (props) => {
   const dispatch = useDispatch();
-  // Number of Study Plan items to switch to resource-saving mode
-  const largeStudyPlanBreakPoint = 2;
   const [refresh] = useState(1);
   const studyPlanItemsObj = props.studyPlanItemsObj;
-  // const { studyPlanMetadata } = useSelector((state) => state.studyPlanData);
-  const studyPlanMetadata = props.studyPlanMetadata
-    ? props.studyPlanMetadata
-    : useSelector((state) => state.studyPlanData.studyPlanMetadata);
 
   // if (Object.hasOwn(studyPlanItemsObj, "dependencies"))
   const user = useSelector((state) => state.auth.user);
@@ -112,7 +106,6 @@ const StudyPlanItemsList = (props) => {
     displayConditions,
     showProtectedHidden,
     refresh,
-    studyPlanMetadata,
     allStudyPlanItems,
     emptyForm,
     setFormType,
@@ -354,13 +347,7 @@ const StudyPlanItemsList = (props) => {
       }
     }
   };
-  console.log(
-    "%c⚪️►►►► %cline:403%cstudyPlanMetadata[_id]",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px",
-    studyPlanMetadata["_id"].length,
-  );
+
   ////////////////////////////////////////////////////////////////////////
   /// OUTPUT
   ////////////////////////////////////////////////////////////////////////
@@ -406,44 +393,40 @@ const StudyPlanItemsList = (props) => {
                     }
                     data-container-type="collapsibleElm"
                   >
-                    {studyPlanMetadata["_id"].length >
-                      largeStudyPlanBreakPoint && (
-                      <Fragment
-                        key={key + section + largeStudyPlanBreakPoint + key}
+                    <Fragment key={key + section + key}>
+                      <PushButton
+                        key={key + "sub-goals-as-list"}
+                        inputOrButton="button"
+                        id={"create-entry-btn" + key}
+                        colorType="primary"
+                        styles={{
+                          ...elmProperties({ ...elmPropertiesVariables, key })
+                            .pushButton1,
+                        }}
+                        value={
+                          key === "0" &&
+                          Object.hasOwn(studyPlanItemsObj[key], "_id")
+                            ? studyPlanItemsObj[key]["_id"]
+                            : key
+                        }
+                        parentmasterid={key}
+                        data=""
+                        size="small"
+                        onClick={expandedItemsButtonHandler}
                       >
-                        <PushButton
-                          key={key + "sub-goals-as-list"}
-                          inputOrButton="button"
-                          id={"create-entry-btn" + key}
-                          colorType="primary"
-                          styles={{
-                            ...elmProperties({ ...elmPropertiesVariables, key })
-                              .pushButton1,
-                          }}
-                          value={
-                            key === "0" &&
-                            Object.hasOwn(studyPlanItemsObj[key], "_id")
-                              ? studyPlanItemsObj[key]["_id"]
-                              : key
-                          }
-                          parentmasterid={key}
-                          data=""
-                          size="small"
-                          onClick={expandedItemsButtonHandler}
-                        >
-                          {(!Object.hasOwn(expandedItems, section) ||
-                            !expandedItems[section].includes(key)) && (
-                            <Fragment>
-                              <Fragment>&darr; More &darr;</Fragment>
-                            </Fragment>
+                        {(!Object.hasOwn(expandedItems, section) ||
+                          !expandedItems[section].includes(key)) && (
+                          <Fragment>
+                            <Fragment>&darr; More &darr;</Fragment>
+                          </Fragment>
+                        )}
+                        {Object.hasOwn(expandedItems, section) &&
+                          expandedItems[section].includes(key) && (
+                            <Fragment>&darr; Less &darr;</Fragment>
                           )}
-                          {Object.hasOwn(expandedItems, section) &&
-                            expandedItems[section].includes(key) && (
-                              <Fragment>&darr; Less &darr;</Fragment>
-                            )}
-                        </PushButton>
-                      </Fragment>
-                    )}
+                      </PushButton>
+                    </Fragment>
+
                     <h2
                       key={parentKey + key}
                       className={
@@ -510,12 +493,8 @@ const StudyPlanItemsList = (props) => {
                     </ul>
                     {!onlyList &&
                       (!subListLevel || subListLevel !== "0") &&
-                      (studyPlanMetadata["_id"].length <
-                        largeStudyPlanBreakPoint ||
-                        (studyPlanMetadata["_id"].length >
-                          largeStudyPlanBreakPoint &&
-                          Object.hasOwn(expandedItems, section) &&
-                          expandedItems[section].includes(key))) && (
+                      Object.hasOwn(expandedItems, section) &&
+                      expandedItems[section].includes(key) && (
                         <div className={styles["button-container"]}>
                           {!noEditButton && (
                             <button
@@ -698,44 +677,41 @@ const StudyPlanItemsList = (props) => {
                   key,
                 }).ul1}
               >
-                {/* If the Study Plan is large, add the open elm button (due to not being suppplied by <CollapsibleElm>) */}
-                {studyPlanMetadata["_id"].length > largeStudyPlanBreakPoint && (
-                  <Fragment key={key + section}>
-                    <PushButton
-                      key={key + "sub-goals-as-list"}
-                      inputOrButton="button"
-                      id={"create-entry-btn" + key}
-                      colorType="primary"
-                      styles={{
-                        ...elmProperties({
-                          ...elmPropertiesVariables,
-                          key,
-                        }).pushButton2,
-                      }}
-                      value={
-                        key === "0" &&
-                        Object.hasOwn(studyPlanItemsObj[key], "_id")
-                          ? studyPlanItemsObj[key]["_id"]
-                          : key
-                      }
-                      parentmasterid={key}
-                      data=""
-                      size="small"
-                      onClick={expandedItemsButtonHandler}
-                    >
-                      {(!Object.hasOwn(expandedItems, section) ||
-                        !expandedItems[section].includes(key)) && (
-                        <Fragment>
-                          <Fragment>&darr; More &darr;</Fragment>
-                        </Fragment>
+                <Fragment key={key + section}>
+                  <PushButton
+                    key={key + "sub-goals-as-list"}
+                    inputOrButton="button"
+                    id={"create-entry-btn" + key}
+                    colorType="primary"
+                    styles={{
+                      ...elmProperties({
+                        ...elmPropertiesVariables,
+                        key,
+                      }).pushButton2,
+                    }}
+                    value={
+                      key === "0" &&
+                      Object.hasOwn(studyPlanItemsObj[key], "_id")
+                        ? studyPlanItemsObj[key]["_id"]
+                        : key
+                    }
+                    parentmasterid={key}
+                    data=""
+                    size="small"
+                    onClick={expandedItemsButtonHandler}
+                  >
+                    {(!Object.hasOwn(expandedItems, section) ||
+                      !expandedItems[section].includes(key)) && (
+                      <Fragment>
+                        <Fragment>&darr; More &darr;</Fragment>
+                      </Fragment>
+                    )}
+                    {Object.hasOwn(expandedItems, section) &&
+                      expandedItems[section].includes(key) && (
+                        <Fragment>&darr; Less &darr;</Fragment>
                       )}
-                      {Object.hasOwn(expandedItems, section) &&
-                        expandedItems[section].includes(key) && (
-                          <Fragment>&darr; Less &darr;</Fragment>
-                        )}
-                    </PushButton>
-                  </Fragment>
-                )}
+                  </PushButton>
+                </Fragment>
 
                 <Fragment
                   key={
@@ -802,12 +778,8 @@ const StudyPlanItemsList = (props) => {
                     }
                     {!onlyList &&
                       !subListLevel &&
-                      (studyPlanMetadata["_id"].length <
-                        largeStudyPlanBreakPoint ||
-                        (studyPlanMetadata["_id"].length >
-                          largeStudyPlanBreakPoint &&
-                          Object.hasOwn(expandedItems, section) &&
-                          expandedItems[section].includes(key))) && (
+                      Object.hasOwn(expandedItems, section) &&
+                      expandedItems[section].includes(key) && (
                         <div className={styles["button-container"]}>
                           {!noEditButton && (
                             <button
@@ -913,14 +885,10 @@ const StudyPlanItemsList = (props) => {
                       subListLevel,
                     )}
                     {subListLevel &&
-                      (studyPlanMetadata["_id"].length <
-                        largeStudyPlanBreakPoint ||
-                        (studyPlanMetadata["_id"].length >
-                          largeStudyPlanBreakPoint &&
-                          Object.hasOwn(expandedItems, section) &&
-                          expandedItems[section].includes(
-                            key != 0 ? key : studyPlanItemsObj[key]._id,
-                          ))) && (
+                      Object.hasOwn(expandedItems, section) &&
+                      expandedItems[section].includes(
+                        key != 0 ? key : studyPlanItemsObj[key]._id,
+                      ) && (
                         <div className={styles["button-container"]}>
                           {!noEditButton && (
                             <button

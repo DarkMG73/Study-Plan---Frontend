@@ -16,7 +16,6 @@ const useStudyPlanListElmProperties = () => {
       showProtectedHidden,
       refresh,
       dependenciesObj,
-      studyPlanMetadata,
       allStudyPlanItems,
       emptyForm,
       setFormType,
@@ -187,7 +186,6 @@ const useStudyPlanListElmProperties = () => {
       },
       studyPlanItemsSubList: {
         studyPlanItemsObj: studyPlanItemsObj[key],
-        studyPlanMetadata: props.studyPlanMetadata,
         allStudyPlanItems: props.allStudyPlanItems,
         parentKey: key,
         parentsParentKey: parentKey,
@@ -210,7 +208,6 @@ const useStudyPlanListElmProperties = () => {
       },
       studyPlanItemsSubList2: {
         studyPlanItemsObj: dependenciesObj,
-        studyPlanMetadata: studyPlanMetadata,
         allStudyPlanItems: allStudyPlanItems,
         parentKey: key,
         parentsParentKey: parentKey,
@@ -230,7 +227,6 @@ const useStudyPlanListElmProperties = () => {
       },
       studyPlanItemsSubList3: {
         studyPlanItemsObj: studyPlanItemsObj[key],
-        studyPlanMetadata: props.studyPlanMetadata,
         allStudyPlanItems: allStudyPlanItems,
         parentKey: key,
         parentsParentKey: parentKey,

@@ -83,7 +83,6 @@ function OutputControls(props) {
             type={false}
             onlyList={true}
             noEditButton={props.noEditButton}
-            studyPlanMetadata={{ _id: idArray }} // Avoids undefined error
           />
         );
         setUploadedJSONJSX(outputJSX);
