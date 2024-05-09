@@ -1,12 +1,5 @@
 const useStudyPlanListElmProperties = () => {
   const outputFunction = (props) => {
-    console.log(
-      "%c⚪️►►►► %cline:2%cprops",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(153, 80, 84);padding:3px;border-radius:2px",
-      props,
-    );
     const {
       section,
       key,
@@ -27,6 +20,8 @@ const useStudyPlanListElmProperties = () => {
       allStudyPlanItems,
       emptyForm,
       setFormType,
+      expandedItems,
+      updateExistingFormState,
     } = props;
 
     return {
@@ -232,6 +227,57 @@ const useStudyPlanListElmProperties = () => {
         onlyList: onlyList,
         emptyForm: emptyForm,
         setFormType: setFormType,
+      },
+      studyPlanItemsSubList3: {
+        studyPlanItemsObj: studyPlanItemsObj[key],
+        studyPlanMetadata: props.studyPlanMetadata,
+        allStudyPlanItems: allStudyPlanItems,
+        parentKey: key,
+        parentsParentKey: parentKey,
+        parentMasterID: parentMasterID
+          ? parentMasterID
+          : studyPlanItemsObj[key]._id,
+        section: section,
+        displayConditions: displayConditions,
+        subListLevel: subListLevel,
+        unlockProtectedVisible: props.unlockProtectedVisible
+          ? props.unlockProtectedVisible
+          : unlockProtectedVisible,
+        showProtectedHidden: props.showProtectedHidden
+          ? props.showProtectedHidden
+          : showProtectedHidden,
+        refresh: refresh,
+        onlyList: onlyList,
+        emptyForm: emptyForm,
+        setFormType: setFormType,
+      },
+      StudyPlanItem: {
+        studyPlanItemsObj: props,
+        expandedItems: expandedItems,
+        section: section,
+        passedKey: key,
+        parentKey: parentKey,
+        parentsParentKey: parentsParentKey,
+        parentMasterID: parentMasterID,
+        parentMasterType: parentMasterType
+          ? parentMasterType
+          : studyPlanItemsObj[key] &&
+              Object.hasOwn(studyPlanItemsObj[key], "type")
+            ? studyPlanItemsObj[key].type
+            : "",
+        displayConditions: displayConditions,
+        unlockProtectedVisible: props.unlockProtectedVisible
+          ? props.unlockProtectedVisible
+          : unlockProtectedVisible,
+        showProtectedHidden: props.showProtectedHidden
+          ? props.showProtectedHidden
+          : showProtectedHidden,
+        refresh: refresh,
+        setExistingFormInputValuesObj: updateExistingFormState,
+        emptyForm: emptyForm,
+        onlyList: onlyList,
+        setFormType: setFormType,
+        formType: props.formType,
       },
     };
   };

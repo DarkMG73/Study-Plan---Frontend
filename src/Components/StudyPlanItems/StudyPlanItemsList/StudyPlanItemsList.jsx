@@ -58,29 +58,7 @@ const StudyPlanItemsList = (props) => {
     {},
   );
   const existingFormInputValuesObjRef = useRef();
-
-  // Elm properties imported to keep this slim and D.R.Y
-  const elmProperties = useStudyPlanListElmProperties();
-  const elmPropertiesVariables = {
-    section,
-    studyPlanItemsObj,
-    styles,
-    parentMasterType,
-    subListLevel,
-    parentKey,
-    parentsParentKey,
-    parentMasterID,
-    unlockProtectedVisible,
-    onlyList,
-    displayConditions,
-    showProtectedHidden,
-    refresh,
-    studyPlanMetadata,
-    allStudyPlanItems,
-    emptyForm,
-    setFormType,
-  };
-  ////
+  existingFormInputValuesObjRef.current = existingFormInputValuesObj;
 
   ////////////////////////////////////////////////////////////////
   /// Functionality
@@ -118,7 +96,30 @@ const StudyPlanItemsList = (props) => {
     //////
   };
 
-  existingFormInputValuesObjRef.current = existingFormInputValuesObj;
+  // Elm properties imported to keep this slim and D.R.Y
+  const elmProperties = useStudyPlanListElmProperties();
+  const elmPropertiesVariables = {
+    section,
+    studyPlanItemsObj,
+    styles,
+    parentMasterType,
+    subListLevel,
+    parentKey,
+    parentsParentKey,
+    parentMasterID,
+    unlockProtectedVisible,
+    onlyList,
+    displayConditions,
+    showProtectedHidden,
+    refresh,
+    studyPlanMetadata,
+    allStudyPlanItems,
+    emptyForm,
+    setFormType,
+    expandedItems,
+    updateExistingFormState,
+  };
+  ////
 
   ////////////////////////////////////////////////////////////////////////
   /// Effects
@@ -362,6 +363,9 @@ const StudyPlanItemsList = (props) => {
       <Fragment>
         {itemEditorModalJSX && itemEditorModalJSX}
         {Object.keys(studyPlanItemsObj).map((key) => {
+          /////////////////////////////////////////
+          // Create Dependency Sub-Lists (If needed)
+          /////////////////////////////////////////
           if (
             studyPlanItemsObj[key] &&
             Object.hasOwn(studyPlanItemsObj[key], "dependencies") &&
@@ -673,6 +677,10 @@ const StudyPlanItemsList = (props) => {
                 </Fragment>
               </ul>
             );
+
+          /////////////////////////////////////////
+          // Study Plan Items Sub-List (if needed)
+          /////////////////////////////////////////
           if (
             studyPlanItemsObj[key] &&
             typeof studyPlanItemsObj[key] === "object"
@@ -752,6 +760,11 @@ const StudyPlanItemsList = (props) => {
                     }
                     data-container-type="collapsibleElm"
                   >
+                    console.log('%c⚪️►►►► %cline:686%cstudyPlanItemsObj[key]',
+                    'color:#fff;background:#ee6f57;padding:3px;border-radius:2px',
+                    'color:#fff;background:#1f3c88;padding:3px;border-radius:2px',
+                    'color:#fff;background:rgb(252, 157,
+                    154);padding:3px;border-radius:2px', studyPlanItemsObj[key])
                     <h2
                       className={
                         styles["group-title"] +
@@ -774,33 +787,10 @@ const StudyPlanItemsList = (props) => {
                     </h2>
                     <StudyPlanItemsSubList
                       key={studyPlanItemsObj[key]}
-                      studyPlanItemsObj={studyPlanItemsObj[key]}
-                      studyPlanMetadata={props.studyPlanMetadata}
-                      allStudyPlanItems={allStudyPlanItems}
-                      parentKey={key}
-                      parentsParentKey={parentKey}
-                      parentMasterID={
-                        parentMasterID
-                          ? parentMasterID
-                          : studyPlanItemsObj[key]._id
-                      }
-                      section={section}
-                      displayConditions={displayConditions}
-                      subListLevel={subListLevel}
-                      unlockProtectedVisible={
-                        props.unlockProtectedVisible
-                          ? props.unlockProtectedVisible
-                          : unlockProtectedVisible
-                      }
-                      showProtectedHidden={
-                        props.showProtectedHidden
-                          ? props.showProtectedHidden
-                          : showProtectedHidden
-                      }
-                      refresh={refresh}
-                      onlyList={onlyList}
-                      emptyForm={emptyForm}
-                      setFormType={setFormType}
+                      {...elmProperties({
+                        ...elmPropertiesVariables,
+                        key,
+                      }).studyPlanItemsSubList3}
                     />
                     {!onlyList &&
                       !subListLevel &&
@@ -870,7 +860,6 @@ const StudyPlanItemsList = (props) => {
                           {!onlyList &&
                             unlockProtectedVisible.includes(key) && (
                               <Fragment>
-                                {" "}
                                 <button
                                   className={
                                     styles["form-button"] +
@@ -986,42 +975,15 @@ const StudyPlanItemsList = (props) => {
               </ul>
             );
 
+          /////////////////////////////////////////
+          // If No Sub-List is Needed, Create Item
+          /////////////////////////////////////////
           return (
             <Fragment key={key}>
               <StudyPlanItem
                 key={parentMasterID + parentsParentKey + parentKey + key}
-                studyPlanItemsObj={props}
-                expandedItems={expandedItems}
-                section={section}
-                passedKey={key}
-                parentKey={parentKey}
-                parentsParentKey={parentsParentKey}
-                parentMasterID={parentMasterID}
-                parentMasterType={
-                  parentMasterType
-                    ? parentMasterType
-                    : studyPlanItemsObj[key] &&
-                        Object.hasOwn(studyPlanItemsObj[key], "type")
-                      ? studyPlanItemsObj[key].type
-                      : ""
-                }
-                displayConditions={displayConditions}
-                unlockProtectedVisible={
-                  props.unlockProtectedVisible
-                    ? props.unlockProtectedVisible
-                    : unlockProtectedVisible
-                }
-                showProtectedHidden={
-                  props.showProtectedHidden
-                    ? props.showProtectedHidden
-                    : showProtectedHidden
-                }
-                refresh={refresh}
-                setExistingFormInputValuesObj={updateExistingFormState}
-                emptyForm={emptyForm}
-                onlyList={onlyList}
-                setFormType={setFormType}
-                formType={props.formType}
+                {...elmProperties({ ...elmPropertiesVariables, key })
+                  .StudyPlanItem}
               />
             </Fragment>
           );
