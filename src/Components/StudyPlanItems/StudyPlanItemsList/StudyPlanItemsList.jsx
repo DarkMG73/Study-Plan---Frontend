@@ -92,7 +92,7 @@ const StudyPlanItemsList = (props) => {
 
   // Elm properties imported to keep this slim and D.R.Y
   const elmProperties = useStudyPlanListElmProperties();
-  const elmPropertiesVariables = {
+  const [elmPropertiesVariables, setElmPropertiesVariables] = useState({
     section,
     studyPlanItemsObj,
     styles,
@@ -111,7 +111,7 @@ const StudyPlanItemsList = (props) => {
     setFormType,
     expandedItems,
     updateExistingFormState,
-  };
+  });
   ////
 
   ////////////////////////////////////////////////////////////////////////
@@ -125,7 +125,35 @@ const StudyPlanItemsList = (props) => {
     existingFormInputValuesObjRef.current = existingFormInputValuesObj;
   }, [existingFormInputValuesObj]);
 
-  // useEffect(() => {}, [existingFormInputValuesObjRef.current]);
+  useEffect(() => {
+    console.log(
+      "%c⚪️►►►► %cline:128%cunlockProtectedVisible",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(38, 157, 128);padding:3px;border-radius:2px",
+      unlockProtectedVisible,
+    );
+    setElmPropertiesVariables({
+      section,
+      studyPlanItemsObj,
+      styles,
+      parentMasterType,
+      subListLevel,
+      parentKey,
+      parentsParentKey,
+      parentMasterID,
+      unlockProtectedVisible,
+      onlyList,
+      displayConditions,
+      showProtectedHidden,
+      refresh,
+      allStudyPlanItems,
+      emptyForm,
+      setFormType,
+      expandedItems,
+      updateExistingFormState,
+    });
+  }, [unlockProtectedVisible]);
 
   ////////////////////////////////////////////////////////////////////////
   /// HANDLERS
@@ -450,6 +478,16 @@ const StudyPlanItemsList = (props) => {
                     </h2>
                     <StudyPlanItemsSubList
                       key={key + studyPlanItemsObj[key]}
+                      unlockProtectedVisible={
+                        props.unlockProtectedVisible
+                          ? props.unlockProtectedVisible
+                          : unlockProtectedVisible
+                      }
+                      showProtectedHidden={
+                        props.showProtectedHidden
+                          ? props.showProtectedHidden
+                          : showProtectedHidden
+                      }
                       {...elmProperties({ ...elmPropertiesVariables, key })
                         .studyPlanItemsSubList}
                     />
@@ -480,6 +518,16 @@ const StudyPlanItemsList = (props) => {
                                     Object.hasOwn(dependenciesObj[0], "_id") &&
                                     dependenciesObj[0]._id) +
                                   "-sub--2"
+                                }
+                                unlockProtectedVisible={
+                                  props.unlockProtectedVisible
+                                    ? props.unlockProtectedVisible
+                                    : unlockProtectedVisible
+                                }
+                                showProtectedHidden={
+                                  props.showProtectedHidden
+                                    ? props.showProtectedHidden
+                                    : showProtectedHidden
                                 }
                                 {...elmProperties({
                                   ...elmPropertiesVariables,
@@ -764,6 +812,16 @@ const StudyPlanItemsList = (props) => {
                     </h2>
                     <StudyPlanItemsSubList
                       key={studyPlanItemsObj[key]}
+                      unlockProtectedVisible={
+                        props.unlockProtectedVisible
+                          ? props.unlockProtectedVisible
+                          : unlockProtectedVisible
+                      }
+                      showProtectedHidden={
+                        props.showProtectedHidden
+                          ? props.showProtectedHidden
+                          : showProtectedHidden
+                      }
                       {...elmProperties({
                         ...elmPropertiesVariables,
                         key,
@@ -972,6 +1030,16 @@ const StudyPlanItemsList = (props) => {
             <Fragment key={key}>
               <StudyPlanItem
                 key={parentMasterID + parentsParentKey + parentKey + key}
+                unlockProtectedVisible={
+                  props.unlockProtectedVisible
+                    ? props.unlockProtectedVisible
+                    : unlockProtectedVisible
+                }
+                showProtectedHidden={
+                  props.showProtectedHidden
+                    ? props.showProtectedHidden
+                    : showProtectedHidden
+                }
                 {...elmProperties({ ...elmPropertiesVariables, key })
                   .StudyPlanItem}
               />

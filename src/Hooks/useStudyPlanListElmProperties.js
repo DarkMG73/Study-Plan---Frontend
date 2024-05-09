@@ -13,7 +13,6 @@ const useStudyPlanListElmProperties = () => {
       unlockProtectedVisible,
       onlyList,
       displayConditions,
-      showProtectedHidden,
       refresh,
       dependenciesObj,
       allStudyPlanItems,
@@ -22,14 +21,6 @@ const useStudyPlanListElmProperties = () => {
       expandedItems,
       updateExistingFormState,
     } = props;
-
-    console.log(
-      "%c⚪️►►►► %cline:13%cunlockProtectedVisible",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(95, 92, 51);padding:3px;border-radius:2px",
-      unlockProtectedVisible,
-    );
 
     return {
       ul1: {
@@ -203,10 +194,7 @@ const useStudyPlanListElmProperties = () => {
         section: section,
         displayConditions: displayConditions,
         subListLevel: subListLevel,
-        unlockProtectedVisible: unlockProtectedVisible,
-        showProtectedHidden: props.showProtectedHidden
-          ? props.showProtectedHidden
-          : showProtectedHidden,
+
         refresh: refresh,
         onlyList: onlyList,
         emptyForm: props.emptyForm,
@@ -223,8 +211,6 @@ const useStudyPlanListElmProperties = () => {
         section: section,
         displayConditions: displayConditions,
         subListLevel: subListLevel,
-        unlockProtectedVisible: unlockProtectedVisible,
-        showProtectedHidden: showProtectedHidden,
 
         refresh: refresh,
         onlyList: onlyList,
@@ -242,10 +228,7 @@ const useStudyPlanListElmProperties = () => {
         section: section,
         displayConditions: displayConditions,
         subListLevel: subListLevel,
-        unlockProtectedVisible: unlockProtectedVisible,
-        showProtectedHidden: props.showProtectedHidden
-          ? props.showProtectedHidden
-          : showProtectedHidden,
+
         refresh: refresh,
         onlyList: onlyList,
         emptyForm: emptyForm,
@@ -266,10 +249,7 @@ const useStudyPlanListElmProperties = () => {
             ? studyPlanItemsObj[key].type
             : "",
         displayConditions: displayConditions,
-        unlockProtectedVisible: unlockProtectedVisible,
-        showProtectedHidden: props.showProtectedHidden
-          ? props.showProtectedHidden
-          : showProtectedHidden,
+
         refresh: refresh,
         setExistingFormInputValuesObj: updateExistingFormState,
         emptyForm: emptyForm,
