@@ -893,20 +893,19 @@ const StudyPlanItemsList = (props) => {
                         </div>
                       )}
 
-                    {console.log(
-                      "%c⚪️►►►► %cline:743%cstudyPlanItemsObj[key]",
-                      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-                      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-                      "color:#fff;background:rgb(60, 79, 57);padding:3px;border-radius:2px",
-                      studyPlanItemsObj[key],
-                    )}
-
                     {
                       /////////////////////////////////////////
-                      // Sub-List Edit, Show/Hide,
-                      // Delete and Submit Buttons
+                      // Sub-List (Study Plan item) Edit,
+                      // Show/Hide, Delete and Submit Buttons.
                       /////////////////////////////////////////
                     }
+                    {console.log(
+                      "%c⚪️►►►► %cline:902%csubListLevel",
+                      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                      "color:#fff;background:rgb(130, 57, 53);padding:3px;border-radius:2px",
+                      subListLevel,
+                    )}
                     {subListLevel &&
                       (studyPlanMetadata["_id"].length <
                         largeStudyPlanBreakPoint ||
@@ -932,6 +931,13 @@ const StudyPlanItemsList = (props) => {
                               }
                               onClick={openItemEditorButtonHandler}
                             >
+                              {console.log(
+                                "%c⚪️►►►► %cline:909%cstudyPlanItemsObj[key]",
+                                "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                                "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                                "color:#fff;background:rgb(38, 157, 128);padding:3px;border-radius:2px",
+                                studyPlanItemsObj[key],
+                              )}
                               <Fragment>
                                 <span>Edit </span>
                                 <span
