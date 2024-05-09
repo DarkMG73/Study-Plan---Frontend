@@ -20,27 +20,9 @@ const displayConditions = {
       asup: { keyToSave: "identifier", keyToDisplay: "name" },
     }, // Select with options to display and save different keys & values.
     forSlideButton: ["markcomplete", "markforreview"],
-    protectedHidden: [
-      "title",
-      "slug",
-      "identifier",
-      "masterLibraryID",
-      "_id",
-      "iframeCustomAttributes",
-      "id",
-      "createdAt",
-      "updatedAt",
-    ],
+    protectedHidden: [],
 
-    protectedVisible: [
-      "PROTECT-ALL",
-      "title",
-      "createdAt",
-      "updatedAt",
-      "slug",
-      "identifier",
-      "masterLibraryID",
-    ],
+    protectedVisible: ["identifier", "masterLibraryID"],
   },
   emptyForm: {
     isURL: ["url"],
