@@ -23,6 +23,14 @@ const useStudyPlanListElmProperties = () => {
       updateExistingFormState,
     } = props;
 
+    console.log(
+      "%c⚪️►►►► %cline:13%cunlockProtectedVisible",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(95, 92, 51);padding:3px;border-radius:2px",
+      unlockProtectedVisible,
+    );
+
     return {
       ul1: {
         "data-section": section,
@@ -195,9 +203,7 @@ const useStudyPlanListElmProperties = () => {
         section: section,
         displayConditions: displayConditions,
         subListLevel: subListLevel,
-        unlockProtectedVisible: props.unlockProtectedVisible
-          ? props.unlockProtectedVisible
-          : unlockProtectedVisible,
+        unlockProtectedVisible: unlockProtectedVisible,
         showProtectedHidden: props.showProtectedHidden
           ? props.showProtectedHidden
           : showProtectedHidden,
@@ -236,9 +242,7 @@ const useStudyPlanListElmProperties = () => {
         section: section,
         displayConditions: displayConditions,
         subListLevel: subListLevel,
-        unlockProtectedVisible: props.unlockProtectedVisible
-          ? props.unlockProtectedVisible
-          : unlockProtectedVisible,
+        unlockProtectedVisible: unlockProtectedVisible,
         showProtectedHidden: props.showProtectedHidden
           ? props.showProtectedHidden
           : showProtectedHidden,
@@ -262,9 +266,7 @@ const useStudyPlanListElmProperties = () => {
             ? studyPlanItemsObj[key].type
             : "",
         displayConditions: displayConditions,
-        unlockProtectedVisible: props.unlockProtectedVisible
-          ? props.unlockProtectedVisible
-          : unlockProtectedVisible,
+        unlockProtectedVisible: unlockProtectedVisible,
         showProtectedHidden: props.showProtectedHidden
           ? props.showProtectedHidden
           : showProtectedHidden,

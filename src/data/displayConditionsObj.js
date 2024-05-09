@@ -20,9 +20,27 @@ const displayConditions = {
       asup: { keyToSave: "identifier", keyToDisplay: "name" },
     }, // Select with options to display and save different keys & values.
     forSlideButton: ["markcomplete", "markforreview"],
-    protectedHidden: [],
+    protectedHidden: [
+      "title",
+      "slug",
+      "identifier",
+      "masterLibraryID",
+      "_id",
+      "iframeCustomAttributes",
+      "id",
+      "createdAt",
+      "updatedAt",
+    ],
 
-    protectedVisible: ["identifier", "masterLibraryID"],
+    protectedVisible: [
+      "PROTECT-ALL",
+      "title",
+      "createdAt",
+      "updatedAt",
+      "slug",
+      "identifier",
+      "masterLibraryID",
+    ],
   },
   emptyForm: {
     isURL: ["url"],
@@ -64,16 +82,8 @@ const displayConditions = {
     }, // List with no input box and fixed options.
     isFixedCompiledList: [], // List with no input box and compiled options.
     isOtherKeyFixedCompiledList: {
-      msup: {
-        keyToSave: "identifier",
-        keyToDisplay: "name",
-        groupByField: "type",
-      },
-      asup: {
-        keyToSave: "identifier",
-        keyToDisplay: "name",
-        groupByField: "type",
-      },
+      msup: { keyToSave: "identifier", keyToDisplay: "name" },
+      asup: { keyToSave: "identifier", keyToDisplay: "name" },
     }, // Select with options to display and save different keys & values.
     protectedHidden: [],
     protectedVisible: [],

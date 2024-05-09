@@ -88,7 +88,20 @@ const StudyPlanItem = (props) => {
     section && section.includes("goal")
       ? studyPlanItemsObj._id
       : parentMasterID;
-
+  console.log(
+    "%c⚪️►►►► %cline:146%cparentMasterID",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(23, 44, 60);padding:3px;border-radius:2px",
+    parentMasterID,
+  );
+  console.log(
+    "%c⚪️►►►► %cline:146%cunlockProtectedVisible",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(252, 157, 154);padding:3px;border-radius:2px",
+    unlockProtectedVisible,
+  );
   const output = (
     <Fragment>
       {((parentMasterID && parentMasterID.includes("newForm")) ||

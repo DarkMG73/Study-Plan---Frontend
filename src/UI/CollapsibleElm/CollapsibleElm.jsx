@@ -24,8 +24,9 @@ function CollapsibleElm(props) {
 
   useEffect(() => {
     let timerTripCount = 0;
-    const hieghtCheckTimerInterval = setInterval(() => {
+    const heightCheckTimerInterval = setInterval(() => {
       timerTripCount++;
+      if (timerTripCount > 5) clearInterval(heightCheckTimerInterval);
       console.log(
         "%c⚪️►►►► %cline:28%ctimerTripCount",
         "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
@@ -46,8 +47,8 @@ function CollapsibleElm(props) {
         "color:#fff;background:rgb(38, 157, 128);padding:3px;border-radius:2px",
         textRef.current,
       );
-      if (timerTripCount > 5) clearInterval(hieghtCheckTimerInterval);
     }, 1000);
+    if (timerTripCount > 5) clearInterval(heightCheckTimerInterval);
   }, [props.maxHeight]);
 
   useEffect(() => {

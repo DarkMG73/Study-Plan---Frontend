@@ -78,7 +78,7 @@ function OutputControls(props) {
               parentKey={false}
               parentsParentKey={false}
               parentMasterID={false}
-              displayConditions={displayConditions.formWithPreFilledData}
+              displayConditions={displayConditions.jsonUpload}
               user={props.user}
               section={"uploadedJSON"}
               type={false}
