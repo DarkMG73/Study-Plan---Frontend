@@ -70,20 +70,22 @@ function OutputControls(props) {
         const idArray = [];
         idArray.length = 200;
         const outputJSX = (
-          <StudyPlanItemsList
-            key={"uploaded-json-list"}
-            studyPlanItemsObj={uploadedJSONData}
-            allStudyPlanItems={uploadedJSONData}
-            parentKey={false}
-            parentsParentKey={false}
-            parentMasterID={false}
-            displayConditions={displayConditions.jsonUpload}
-            user={props.user}
-            section={"uploadedJSON"}
-            type={false}
-            onlyList={true}
-            noEditButton={props.noEditButton}
-          />
+          <div className={styles["edited-list"]}>
+            <StudyPlanItemsList
+              key={"uploaded-json-list"}
+              studyPlanItemsObj={uploadedJSONData}
+              allStudyPlanItems={uploadedJSONData}
+              parentKey={false}
+              parentsParentKey={false}
+              parentMasterID={false}
+              displayConditions={displayConditions.jsonUpload}
+              user={props.user}
+              section={"uploadedJSON"}
+              type={false}
+              onlyList={true}
+              noEditButton={props.noEditButton}
+            />
+          </div>
         );
         setUploadedJSONJSX(outputJSX);
       } else {
@@ -372,7 +374,11 @@ function OutputControls(props) {
         {errorData && <p>{errorData}</p>}
         {uploadedJSONJSX && (
           <CardSecondary>
-            <div className={styles["uploaded-json-container"]}>
+            <div
+              className={
+                styles["uploaded-json-container"] + " " + styles["edited-list"]
+              }
+            >
               <div className={styles["uploaded-json-message"]}>
                 <h4>New Items for Upload</h4>
                 <p>

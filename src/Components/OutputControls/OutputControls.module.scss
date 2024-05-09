@@ -77,7 +77,9 @@ body .loader-wrap > * {
   padding: 1em 1em 0;
   background: var(--spt-color-accent-light);
 }
-
+.edited-list {
+  position: relative;
+}
 .upload-json-input {
   display: flex;
   flex-direction: column;
