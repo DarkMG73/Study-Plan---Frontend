@@ -1,0 +1,164 @@
+const useStudyPlanListElmProperties = () => {
+  const outputFunction = (props) => {
+    console.log(
+      "%c⚪️►►►► %cline:2%cprops",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(153, 80, 84);padding:3px;border-radius:2px",
+      props,
+    );
+    const {
+      section,
+      key,
+      studyPlanItemsObj,
+      styles,
+      parentMasterType,
+      subListLevel,
+      parentKey,
+      parentsParentKey,
+      parentMasterID,
+      unlockProtectedVisible,
+      onlyList,
+    } = props;
+
+    return {
+      ul1: {
+        "data-section": section,
+        key: section + key,
+        id: key == 0 ? studyPlanItemsObj[key]._id : key,
+        type: props.type ? props.type : studyPlanItemsObj[key].type,
+        "data-parentmastertype": parentMasterType
+          ? parentMasterType
+          : studyPlanItemsObj[key].type,
+        "data-maingoal":
+          "" +
+          (Object.hasOwn(studyPlanItemsObj[key], "msup") &&
+            studyPlanItemsObj[key].msup.trim() === ""),
+        "data-forreview":
+          "" +
+          (Object.hasOwn(studyPlanItemsObj[key], "markforreview") &&
+            studyPlanItemsObj[key].markforreview &&
+            studyPlanItemsObj[key].markforreview !== "false"),
+        "data-markedcomplete":
+          "" +
+          (Object.hasOwn(studyPlanItemsObj[key], "markcomplete") &&
+            studyPlanItemsObj[key].markcomplete &&
+            studyPlanItemsObj[key].marcomplete !== "false"),
+        className:
+          (subListLevel > 0 &&
+            styles.subgroup +
+              " " +
+              styles[!!parentKey && !parentsParentKey && "subgroup-set"] +
+              " " +
+              styles[!!parentKey && "subgroup-set-child"] +
+              " " +
+              styles["subgroup-" + key] +
+              " " +
+              styles["sub-level-" + subListLevel]) +
+          " " +
+          ((!subListLevel || subListLevel <= 0) &&
+            styles["master-parent-group"]) +
+          " " +
+          styles[key] +
+          " " +
+          styles[parentKey] +
+          " " +
+          styles[parentMasterID] +
+          " " +
+          (unlockProtectedVisible.includes(key) && styles["edited-list"]) +
+          " " +
+          (props.inModal && styles["in-modal"]),
+      },
+      ul2: {
+        "data-section": section,
+        key:
+          key +
+          section +
+          parentKey +
+          parentMasterType +
+          subListLevel +
+          onlyList +
+          (props.type ? props.type : studyPlanItemsObj[key].type + "-sub--2"),
+
+        id: key != 0 ? key : studyPlanItemsObj[key]._id,
+        type: props.type ? props.type : studyPlanItemsObj[key].type,
+        "data-parentmastertype": parentMasterType
+          ? parentMasterType
+          : studyPlanItemsObj[key].type,
+
+        "data-maingoal":
+          "" +
+          (Object.hasOwn(studyPlanItemsObj[key], "msup") &&
+            studyPlanItemsObj[key].msup.trim() === ""),
+
+        "data-forreview":
+          "" +
+          (Object.hasOwn(studyPlanItemsObj[key], "markforreview") &&
+            studyPlanItemsObj[key].markforreview &&
+            studyPlanItemsObj[key].markforreview !== "false"),
+
+        "data-markedcomplete":
+          "" +
+          (Object.hasOwn(studyPlanItemsObj[key], "markcomplete") &&
+            studyPlanItemsObj[key].markcomplete &&
+            studyPlanItemsObj[key].marcomplete !== "false"),
+
+        className:
+          (subListLevel > 0 &&
+            styles.subgroup +
+              " " +
+              styles[!!parentKey && !parentsParentKey && "subgroup-set"] +
+              " " +
+              styles[!!parentKey && "subgroup-set-child"] +
+              " " +
+              styles["subgroup-" + key] +
+              " " +
+              styles["sub-level-" + subListLevel]) +
+          " " +
+          ((!subListLevel || subListLevel <= 0) &&
+            styles["master-parent-group"]) +
+          " " +
+          styles[key] +
+          " " +
+          styles[parentKey] +
+          " " +
+          styles[parentMasterID] +
+          " " +
+          (unlockProtectedVisible.includes(key) && styles["edited-list"]) +
+          " " +
+          (props.inModal && styles["in-modal"]),
+      },
+      pushButton1: {
+        margin: "0 auto",
+        padding: "0.5em 2em",
+        transition: "0.7s all ease",
+        maxWidth: "80%",
+        textAlign: "center",
+        display: "flex",
+        alignItems: "center",
+        borderRadius: "0 0 50px 0",
+        fontFamily: "Arial",
+        border: "none",
+        position: "absolute",
+        top: "0",
+        left: "0",
+        flexGrow: "1",
+        minWidth: "4.5em",
+        boxShadow:
+          "inset 3px 3px 5px 0px #ffffffe0, inset -3px -3px 5px 0px #00000038",
+        fontSize: "1.2rem",
+        fontVariant: "all-small-caps",
+        letterSpacing: "0.2em",
+        cursor: "pointer",
+        height: "100%",
+        maxHeight: "4em",
+        transformOrigin: "left",
+        zIndex: "1",
+      },
+    };
+  };
+
+  return outputFunction;
+};
+
+export default useStudyPlanListElmProperties;
