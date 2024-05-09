@@ -10,6 +10,13 @@ function CollapsibleElm(props) {
 
   // See if div is overflowing and See More button is needed
   function isOverflowActive(e) {
+    console.log(
+      "%c⚪️►►►► %cline:14%ce.offsetHeight",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(153, 80, 84);padding:3px;border-radius:2px",
+      e.offsetHeight,
+    );
     if (e)
       return e.offsetHeight < e.scrollHeight || e.offsetWidth < e.scrollWidth;
   }
@@ -23,14 +30,31 @@ function CollapsibleElm(props) {
   }, [isOverflowActive, textRef.current]);
 
   useEffect(() => {
-    setTimeout(() => {
+    let timerTripCount = 0;
+    const hieghtCheckTimerInterval = setInterval(() => {
+      timerTripCount++;
+      console.log(
+        "%c⚪️►►►► %cline:28%ctimerTripCount",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(237, 222, 139);padding:3px;border-radius:2px",
+        timerTripCount,
+      );
       if (!isOverflowActive(textRef.current)) {
         setMaxHeight("max-content");
         return;
       } else {
         setMaxHeight(props.maxHeight);
       }
-    }, 2000);
+      console.log(
+        "%c⚪️►►►► %cline:36%ctextRef.current",
+        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+        "color:#fff;background:rgb(38, 157, 128);padding:3px;border-radius:2px",
+        textRef.current,
+      );
+      if (timerTripCount > 5) clearInterval(hieghtCheckTimerInterval);
+    }, 1000);
   }, [props.maxHeight]);
 
   useEffect(() => {

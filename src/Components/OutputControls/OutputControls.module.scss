@@ -15,17 +15,19 @@
   margin: 0 auto;
   padding: 1em;
   font: var(--spt-image-background-texture);
-  box-shadow: inset 0 3px 10px -7px var(--spt-color-accent),
+  box-shadow:
+    inset 0 3px 10px -7px var(--spt-color-accent),
     0px -3px 10px -7px #fca0757d;
 }
 
 .outerwrap {
   > div {
     padding-bottom: 1em;
-    box-shadow: inset 0 3px 10px -7px var(--spt-color-accent-light),
+    box-shadow:
+      inset 0 3px 10px -7px var(--spt-color-accent-light),
       0px -3px 10px -7px var(--spt-color-accent);
     border-radius: 3px;
-    overflow: hidden;
+    // overflow: hidden;
   }
 
   p {
@@ -52,11 +54,13 @@
 .outerwrap button {
   border-radius: 50px;
 }
+
 .outerwrap button:hover {
   background: var(--spt-color-accent);
   color: var(--spt-color-background) !important;
   transform: none;
 }
+
 body .loader-wrap > * {
   max-height: 200px;
   min-height: 125px;
@@ -103,7 +107,8 @@ body .loader-wrap > * {
 .upload-json-input::before {
   content: "Upload Study Plan JSON";
   margin: 0 0.5em;
-  box-shadow: 3px 3px 7px -5px white inset,
+  box-shadow:
+    3px 3px 7px -5px white inset,
     -3px -3px 7px -5px rgba(0, 0, 0, 0.5) inset;
   border: none;
   background: inherit;
@@ -135,12 +140,15 @@ body .loader-wrap > * {
 .uploaded-json-container button:hover {
   background: var(--spt-color-accent-dark) !important;
   color: var(--spt-color-background) !important;
-  box-shadow: inset 3px 3px 10px -3px white, inset -3px -3px 10px -3px #0000007a;
+  box-shadow:
+    inset 3px 3px 10px -3px white,
+    inset -3px -3px 10px -3px #0000007a;
 }
 .uploaded-json-container .uploaded-json-message {
   background: var(--spt-color-background-warm);
   color: var(--spt-color-background-contrast);
-  box-shadow: inset 0px -13px 7px -14px #aeaeae,
+  box-shadow:
+    inset 0px -13px 7px -14px #aeaeae,
     inset 0px 14px 7px -14px rgba(0, 0, 0, 0.5294117647);
   padding: 1em;
   p,

@@ -9,7 +9,7 @@ import { deleteAllStudyTopics } from "../../storage/studyPlanDB";
 import StudyPlanItemsList from "../StudyPlanItems/StudyPlanItemsList/StudyPlanItemsList";
 import displayConditions from "../../data/displayConditionsObj.js";
 import CardSecondary from "../../UI/Cards/CardSecondary/CardSecondary";
-import CollapsibleElm from "../../UI/CollapsibleElm/CollapsibleElm";
+// import CollapsibleElm from "../../UI/CollapsibleElm/CollapsibleElm";
 import { formInputDataActions } from "../../store/formInputDataSlice";
 import useDemoCheck from "../../Hooks/useDemoCheck";
 
@@ -67,7 +67,8 @@ function OutputControls(props) {
     if (uploadedJSONData) {
       if (user) {
         console.log("SUCCESS! dataObj: ", uploadedJSONData);
-
+        const idArray = [];
+        idArray.length = 200;
         const outputJSX = (
           <StudyPlanItemsList
             key={"uploaded-json-list"}
@@ -82,7 +83,7 @@ function OutputControls(props) {
             type={false}
             onlyList={true}
             noEditButton={props.noEditButton}
-            studyPlanMetadata={{ _id: [] }}
+            studyPlanMetadata={{ _id: idArray }} // Avoids undefined error
           />
         );
         setUploadedJSONJSX(outputJSX);
@@ -373,52 +374,16 @@ function OutputControls(props) {
         {uploadedJSONJSX && (
           <CardSecondary>
             <div className={styles["uploaded-json-container"]}>
-              <CollapsibleElm
-                elmId={"uploaded-json-collapsible-elm"}
-                styles={{
-                  position: "relative",
-                }}
-                maxHeight={"7.5em"}
-                s
-                inputOrButton="button"
-                buttonStyles={{
-                  margin: "auto",
-                  width: "95%",
-                  maxWidth: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  position: "relative",
-                  flexGrow: "1",
-                  minWidth: "min-content",
-                  height: "100%",
-                  maxHeight: "4em",
-                  textAlign: "center",
-                  transformOrigin: "center",
-                  color: " var(--spt-color-accent-light)",
-                  background: "var(--spt-color-background-contrast)",
-                }}
-                colorType="primary"
-                data=""
-                size="medium"
-                buttonTextOpened={"Close Uploaded Items"}
-                buttonTextClosed={"Open Uploaded Items"}
-                open={false}
-                showBottomGradient={false}
-              >
-                <div className={styles["uploaded-json-message"]}>
-                  <h4>New Items for Upload</h4>
-                  <p>
-                    Look over the data and make sure it is as you want. If
-                    changes need to be made before saving to the database, make
-                    those changes in the JSON file and re-upload the JSON file.
-                    All other changes can be made in the Syllabus section after
-                    saving to the database and refreshing the page.
-                  </p>
-                </div>
-                <ul className={styles["uploaded-json-wrap"]}>
-                  {uploadedJSONJSX}
-                </ul>
-              </CollapsibleElm>
+              <div className={styles["uploaded-json-message"]}>
+                <h4>New Items for Upload</h4>
+                <p>
+                  Look over the data and make sure it is as you want. If changes
+                  need to be made before saving to the database, make those
+                  changes in the JSON file and re-upload the JSON file. All
+                  other changes can be made in the Syllabus section after saving
+                  to the database and refreshing the page.
+                </p>
+              </div>
               <PushButton
                 inputOrButton="button"
                 id="import-json-submit-btn"
@@ -428,17 +393,21 @@ function OutputControls(props) {
                 size="large"
                 styles={{
                   background: "var(--spt-color-background-contrast)",
-                  margin: "1em",
-                  width: "20em",
+                  margin: "auto",
                   minWidth: "min-content",
                   font: "var(--spt--font-heading-2)",
                   fontVariant: "small-caps",
                   letterSpacing: "var(--spt-spacing-heading)",
+                  position: "sticky",
+                  top: "var(--spt-navbar-height)",
+                  zIndex: "3",
+                  width: "90%",
                 }}
                 onClick={submitFormButtonHandler}
               >
                 Submit All New Items
               </PushButton>
+              {uploadedJSONJSX}
             </div>
           </CardSecondary>
         )}

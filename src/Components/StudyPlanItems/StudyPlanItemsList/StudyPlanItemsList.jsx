@@ -354,7 +354,13 @@ const StudyPlanItemsList = (props) => {
       }
     }
   };
-
+  console.log(
+    "%c⚪️►►►► %cline:403%cstudyPlanMetadata[_id]",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(34, 8, 7);padding:3px;border-radius:2px",
+    studyPlanMetadata["_id"].length,
+  );
   ////////////////////////////////////////////////////////////////////////
   /// OUTPUT
   ////////////////////////////////////////////////////////////////////////
@@ -931,13 +937,6 @@ const StudyPlanItemsList = (props) => {
                               }
                               onClick={openItemEditorButtonHandler}
                             >
-                              {console.log(
-                                "%c⚪️►►►► %cline:909%cstudyPlanItemsObj[key]",
-                                "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-                                "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-                                "color:#fff;background:rgb(38, 157, 128);padding:3px;border-radius:2px",
-                                studyPlanItemsObj[key],
-                              )}
                               <Fragment>
                                 <span>Edit </span>
                                 <span
