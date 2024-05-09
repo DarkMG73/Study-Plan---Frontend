@@ -379,7 +379,6 @@ const StudyPlanItemsList = (props) => {
                   key,
                 }).ul1}
               >
-                {/* Item FLow 1: Nested items */}
                 <Fragment key={" flow - 1 -" + key}>
                   <div
                     key={key + "-collapsible-elm"}
@@ -693,6 +692,7 @@ const StudyPlanItemsList = (props) => {
                   key,
                 }).ul1}
               >
+                {/* If the Study Plan is large, add the open elm button (due to not being suppplied by <CollapsibleElm>) */}
                 {studyPlanMetadata["_id"].length > largeStudyPlanBreakPoint && (
                   <Fragment key={key + section}>
                     <PushButton
@@ -731,7 +731,6 @@ const StudyPlanItemsList = (props) => {
                   </Fragment>
                 )}
 
-                {/* Item Flow 2: Standard items */}
                 <Fragment
                   key={
                     " flow - 2 -" + Object.hasOwn(studyPlanItemsObj[key], "_id")
@@ -760,11 +759,7 @@ const StudyPlanItemsList = (props) => {
                     }
                     data-container-type="collapsibleElm"
                   >
-                    console.log('%c⚪️►►►► %cline:686%cstudyPlanItemsObj[key]',
-                    'color:#fff;background:#ee6f57;padding:3px;border-radius:2px',
-                    'color:#fff;background:#1f3c88;padding:3px;border-radius:2px',
-                    'color:#fff;background:rgb(252, 157,
-                    154);padding:3px;border-radius:2px', studyPlanItemsObj[key])
+                    {/* Item Group Title*/}
                     <h2
                       className={
                         styles["group-title"] +
@@ -792,6 +787,13 @@ const StudyPlanItemsList = (props) => {
                         key,
                       }).studyPlanItemsSubList3}
                     />
+
+                    {
+                      /////////////////////////////////////////
+                      // Item Group Edit, Show/Hide,
+                      // Delete and Submit Buttons
+                      /////////////////////////////////////////
+                    }
                     {!onlyList &&
                       !subListLevel &&
                       (studyPlanMetadata["_id"].length <
@@ -890,6 +892,21 @@ const StudyPlanItemsList = (props) => {
                             )}
                         </div>
                       )}
+
+                    {console.log(
+                      "%c⚪️►►►► %cline:743%cstudyPlanItemsObj[key]",
+                      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+                      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+                      "color:#fff;background:rgb(60, 79, 57);padding:3px;border-radius:2px",
+                      studyPlanItemsObj[key],
+                    )}
+
+                    {
+                      /////////////////////////////////////////
+                      // Sub-List Edit, Show/Hide,
+                      // Delete and Submit Buttons
+                      /////////////////////////////////////////
+                    }
                     {subListLevel &&
                       (studyPlanMetadata["_id"].length <
                         largeStudyPlanBreakPoint ||
