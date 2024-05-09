@@ -12,8 +12,16 @@ import { studyPlanDataActions } from "../../../store/studyPlanDataSlice";
 import { loadingRequestsActions } from "../../../store/loadingRequestsSlice";
 import useDemoCheck from "../../../Hooks/useDemoCheck";
 import { authActions } from "../../../store/authSlice";
+import elmProperties from "../../../data/studyPlanListElmProperties.json";
 
 const StudyPlanItemsList = (props) => {
+  console.log(
+    "%c⚪️►►►► %cline:15%celmProperties",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(3, 38, 58);padding:3px;border-radius:2px",
+    elmProperties,
+  );
   const dispatch = useDispatch();
   // Number of Study Plan items to switch to resource-saving mode
   const largeStudyPlanBreakPoint = 2;
@@ -23,13 +31,7 @@ const StudyPlanItemsList = (props) => {
   const studyPlanMetadata = props.studyPlanMetadata
     ? props.studyPlanMetadata
     : useSelector((state) => state.studyPlanData.studyPlanMetadata);
-  console.log(
-    "%c⚪️►►►► %cline:22%cstudyPlanMetadata",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(114, 83, 52);padding:3px;border-radius:2px",
-    studyPlanMetadata,
-  );
+
   // if (Object.hasOwn(studyPlanItemsObj, "dependencies"))
   const user = useSelector((state) => state.auth.user);
   const parentKey = props.parentKey;
@@ -347,63 +349,7 @@ const StudyPlanItemsList = (props) => {
             studyPlanItemsObj[key].dependencies.length > 0
           )
             return (
-              <ul
-                data-marker="CATALOG-ITEM-LIST-1"
-                data-section={section}
-                key={section + key}
-                id={key == 0 ? studyPlanItemsObj[key]._id : key}
-                type={props.type ? props.type : studyPlanItemsObj[key].type}
-                data-parentmastertype={
-                  parentMasterType
-                    ? parentMasterType
-                    : studyPlanItemsObj[key].type
-                }
-                data-maingoal={
-                  "" +
-                  (Object.hasOwn(studyPlanItemsObj[key], "msup") &&
-                    studyPlanItemsObj[key].msup.trim() === "")
-                }
-                data-forreview={
-                  "" +
-                  (Object.hasOwn(studyPlanItemsObj[key], "markforreview") &&
-                    studyPlanItemsObj[key].markforreview &&
-                    studyPlanItemsObj[key].markforreview !== "false")
-                }
-                data-markedcomplete={
-                  "" +
-                  (Object.hasOwn(studyPlanItemsObj[key], "markcomplete") &&
-                    studyPlanItemsObj[key].markcomplete &&
-                    studyPlanItemsObj[key].marcomplete !== "false")
-                }
-                className={
-                  (subListLevel > 0 &&
-                    styles.subgroup +
-                      " " +
-                      styles[
-                        !!parentKey && !parentsParentKey && "subgroup-set"
-                      ] +
-                      " " +
-                      styles[!!parentKey && "subgroup-set-child"] +
-                      " " +
-                      styles["subgroup-" + key] +
-                      " " +
-                      styles["sub-level-" + subListLevel]) +
-                  " " +
-                  ((!subListLevel || subListLevel <= 0) &&
-                    styles["master-parent-group"]) +
-                  " " +
-                  styles[key] +
-                  " " +
-                  styles[parentKey] +
-                  " " +
-                  styles[parentMasterID] +
-                  " " +
-                  (unlockProtectedVisible.includes(key) &&
-                    styles["edited-list"]) +
-                  " " +
-                  (props.inModal && styles["in-modal"])
-                }
-              >
+              <ul data-marker="CATALOG-ITEM-LIST-1" {...elmProperties["ul-1"]}>
                 {/* Item FLow 1: Nested items */}
                 <Fragment key={" flow - 1 -" + key}>
                   <div
@@ -511,6 +457,7 @@ const StudyPlanItemsList = (props) => {
                     <StudyPlanItemsSubList
                       key={key + studyPlanItemsObj[key]}
                       studyPlanItemsObj={studyPlanItemsObj[key]}
+                      studyPlanMetadata={props.studyPlanMetadata}
                       allStudyPlanItems={props.allStudyPlanItems}
                       parentKey={key}
                       parentsParentKey={parentKey}
@@ -582,6 +529,7 @@ const StudyPlanItemsList = (props) => {
                                       "-sub--2")
                                 }
                                 studyPlanItemsObj={dependenciesObj}
+                                studyPlanMetadata={props.studyPlanMetadata}
                                 allStudyPlanItems={props.allStudyPlanItems}
                                 parentKey={key}
                                 parentsParentKey={parentKey}
@@ -969,6 +917,7 @@ const StudyPlanItemsList = (props) => {
                     <StudyPlanItemsSubList
                       key={studyPlanItemsObj[key]}
                       studyPlanItemsObj={studyPlanItemsObj[key]}
+                      studyPlanMetadata={props.studyPlanMetadata}
                       allStudyPlanItems={props.allStudyPlanItems}
                       parentKey={key}
                       parentsParentKey={parentKey}
