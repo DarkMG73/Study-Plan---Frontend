@@ -9,23 +9,32 @@ export default async function GatherStudyPlanData(
   const studyPlanData = {};
   studyPlanData.studyPlan = {};
 
-  let studyPlanFromDB = [];
-  studyPlanFromDB = passedStudyPlan
+  let rawStudyPlanFromDB = [];
+  rawStudyPlanFromDB = passedStudyPlan
     ? passedStudyPlan
     : await studyPlanDataFunction(user);
 
   console.log(
-    "%c⚪️►►►► %cline:13%cstudyPlanFromDB",
+    "%c⚪️►►►► %cline:13%crawStudyPlanFromDB",
     "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
     "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
     "color:#fff;background:rgb(60, 79, 57);padding:3px;border-radius:2px",
-    studyPlanFromDB,
+    rawStudyPlanFromDB,
   );
 
   studyPlanData.schema = studyPlanItemSchema
     ? studyPlanItemSchema
     : await runGetSchemaForStudyPlanItems();
 
+  const studyPlanFromDB = [];
+  for (const value of rawStudyPlanFromDB) {
+    const newValue = { ...value };
+    Object.keys(studyPlanData.schema).forEach((schemaKey) => {
+      if (!Object.hasOwn(newValue, schemaKey)) newValue[schemaKey] = "";
+    });
+
+    studyPlanFromDB.push(newValue);
+  }
   studyPlanFromDB.forEach((studyPlanItem) => {
     studyPlanData.studyPlan[studyPlanItem._id] = studyPlanItem;
 

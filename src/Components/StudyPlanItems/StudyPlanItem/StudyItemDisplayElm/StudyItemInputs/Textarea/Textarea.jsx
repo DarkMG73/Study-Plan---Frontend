@@ -61,7 +61,7 @@ const Textarea = (props) => {
       </label>
       {(unlockProtectedVisible.includes(parentMasterID) ||
         (section && section.includes("editor-in-modal")) ||
-        parentMasterID.includes("newForm")) && (
+        (parentMasterID && parentMasterID.includes("newForm"))) && (
         <TextareaAutosize
           id={
             parentMasterID +
@@ -91,6 +91,7 @@ const Textarea = (props) => {
       )}
       {!unlockProtectedVisible.includes(parentMasterID) &&
         section !== "editor-in-modal" &&
+        parentMasterID &&
         !parentMasterID.includes("newForm") && (
           <div
             id={

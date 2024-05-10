@@ -21,7 +21,17 @@ const useStudyPlanListElmProperties = () => {
       expandedItems,
       updateExistingFormState,
     } = props;
+    if (!studyPlanItemsObj) return;
 
+    const spExists = (prop1, prop2) => {
+      if (!Object.hasOwn(studyPlanItemsObj, prop1)) {
+        return false;
+      } else {
+        if (prop2) return !Object.hasOwn(studyPlanItemsObj[prop1], prop2);
+        return true;
+      }
+    };
+    !Object.hasOwn(studyPlanItemsObj[key], "_id");
     return {
       ul1: {
         "data-section": section,
@@ -81,7 +91,12 @@ const useStudyPlanListElmProperties = () => {
           onlyList +
           (props.type ? props.type : studyPlanItemsObj[key].type + "-sub--2"),
 
-        id: key != 0 ? key : studyPlanItemsObj[key]._id,
+        id:
+          key != 0
+            ? key
+            : spExists(key, "_id")
+              ? studyPlanItemsObj[key]._id
+              : "",
         type: props.type ? props.type : studyPlanItemsObj[key].type,
         "data-parentmastertype": parentMasterType
           ? parentMasterType
@@ -190,7 +205,9 @@ const useStudyPlanListElmProperties = () => {
         parentsParentKey: parentKey,
         parentMasterID: parentMasterID
           ? parentMasterID
-          : studyPlanItemsObj[key]._id,
+          : spExists(key, "_id")
+            ? studyPlanItemsObj[key]._id
+            : "",
         section: section,
         displayConditions: displayConditions,
         subListLevel: subListLevel,
@@ -207,7 +224,9 @@ const useStudyPlanListElmProperties = () => {
         parentsParentKey: parentKey,
         parentMasterID: parentMasterID
           ? parentMasterID
-          : studyPlanItemsObj[key]._id,
+          : spExists(key, "_id")
+            ? studyPlanItemsObj[key]._id
+            : "",
         section: section,
         displayConditions: displayConditions,
         subListLevel: subListLevel,
@@ -224,7 +243,9 @@ const useStudyPlanListElmProperties = () => {
         parentsParentKey: parentKey,
         parentMasterID: parentMasterID
           ? parentMasterID
-          : studyPlanItemsObj[key]._id,
+          : spExists(key, "_id")
+            ? studyPlanItemsObj[key]._id
+            : "",
         section: section,
         displayConditions: displayConditions,
         subListLevel: subListLevel,
