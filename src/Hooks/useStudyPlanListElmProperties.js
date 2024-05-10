@@ -25,19 +25,35 @@ const useStudyPlanListElmProperties = () => {
 
     const spExists = (prop1, prop2) => {
       if (!Object.hasOwn(studyPlanItemsObj, prop1)) {
+        console.log(
+          "%c⚪️►►►► %cline:27%c!Object.hasOwn(studyPlanItemsObj, prop1",
+          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+          "color:#fff;background:rgb(252, 157, 154);padding:3px;border-radius:2px",
+          !Object.hasOwn(studyPlanItemsObj, prop1),
+        );
         return false;
       } else {
         if (prop2) return !Object.hasOwn(studyPlanItemsObj[prop1], prop2);
         return true;
       }
     };
-    !Object.hasOwn(studyPlanItemsObj[key], "_id");
+
     return {
       ul1: {
         "data-section": section,
         key: section + key,
-        id: key == 0 ? studyPlanItemsObj[key]._id : key,
-        type: props.type ? props.type : studyPlanItemsObj[key].type,
+        id:
+          key == 0
+            ? spExists(key, "_id")
+              ? studyPlanItemsObj[key]._id
+              : ""
+            : key,
+        type: props.type
+          ? props.type
+          : spExists(key, "type")
+            ? studyPlanItemsObj[key].type
+            : "TEST",
         "data-parentmastertype": parentMasterType
           ? parentMasterType
           : studyPlanItemsObj[key].type,
@@ -91,12 +107,7 @@ const useStudyPlanListElmProperties = () => {
           onlyList +
           (props.type ? props.type : studyPlanItemsObj[key].type + "-sub--2"),
 
-        id:
-          key != 0
-            ? key
-            : spExists(key, "_id")
-              ? studyPlanItemsObj[key]._id
-              : "",
+        id: key != 0 ? key : studyPlanItemsObj[key]._id,
         type: props.type ? props.type : studyPlanItemsObj[key].type,
         "data-parentmastertype": parentMasterType
           ? parentMasterType
@@ -205,9 +216,7 @@ const useStudyPlanListElmProperties = () => {
         parentsParentKey: parentKey,
         parentMasterID: parentMasterID
           ? parentMasterID
-          : spExists(key, "_id")
-            ? studyPlanItemsObj[key]._id
-            : "",
+          : studyPlanItemsObj[key]._id,
         section: section,
         displayConditions: displayConditions,
         subListLevel: subListLevel,
@@ -224,9 +233,7 @@ const useStudyPlanListElmProperties = () => {
         parentsParentKey: parentKey,
         parentMasterID: parentMasterID
           ? parentMasterID
-          : spExists(key, "_id")
-            ? studyPlanItemsObj[key]._id
-            : "",
+          : studyPlanItemsObj[key]._id,
         section: section,
         displayConditions: displayConditions,
         subListLevel: subListLevel,
@@ -243,9 +250,7 @@ const useStudyPlanListElmProperties = () => {
         parentsParentKey: parentKey,
         parentMasterID: parentMasterID
           ? parentMasterID
-          : spExists(key, "_id")
-            ? studyPlanItemsObj[key]._id
-            : "",
+          : studyPlanItemsObj[key]._id,
         section: section,
         displayConditions: displayConditions,
         subListLevel: subListLevel,
