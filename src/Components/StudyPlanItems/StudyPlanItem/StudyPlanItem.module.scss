@@ -48,7 +48,7 @@
     resize: none;
     max-width: 100%;
     pointer-events: none;
-    line-height: normal !important;
+    // line-height: normal !important;
     box-shadow: none;
     padding: 0;
     white-space: break-spaces;
@@ -234,7 +234,6 @@ select {
 }
 body ul .name {
   grid-area: name;
-  padding-top: 0.05em;
   box-shadow: none;
   textarea,
   [class*="sizable-textarea"] {
@@ -246,6 +245,9 @@ body ul .name {
     margin-bottom: 1em;
     max-width: 96%;
   }
+}
+body ul[type="studyPlan"] > .name {
+  padding-top: 0.05em;
 }
 
 body .method {

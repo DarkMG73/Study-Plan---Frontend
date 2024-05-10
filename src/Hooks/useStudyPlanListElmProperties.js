@@ -25,16 +25,9 @@ const useStudyPlanListElmProperties = () => {
 
     const spExists = (prop1, prop2) => {
       if (!Object.hasOwn(studyPlanItemsObj, prop1)) {
-        console.log(
-          "%c⚪️►►►► %cline:27%c!Object.hasOwn(studyPlanItemsObj, prop1",
-          "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-          "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-          "color:#fff;background:rgb(252, 157, 154);padding:3px;border-radius:2px",
-          !Object.hasOwn(studyPlanItemsObj, prop1),
-        );
         return false;
       } else {
-        if (prop2) return !Object.hasOwn(studyPlanItemsObj[prop1], prop2);
+        if (prop2) return Object.hasOwn(studyPlanItemsObj[prop1], prop2);
         return true;
       }
     };
@@ -53,22 +46,23 @@ const useStudyPlanListElmProperties = () => {
           ? props.type
           : spExists(key, "type")
             ? studyPlanItemsObj[key].type
-            : "TEST",
+            : "",
         "data-parentmastertype": parentMasterType
           ? parentMasterType
-          : studyPlanItemsObj[key].type,
+          : spExists(key, "type")
+            ? studyPlanItemsObj[key].type
+            : "",
         "data-maingoal":
           "" +
-          (Object.hasOwn(studyPlanItemsObj[key], "msup") &&
-            studyPlanItemsObj[key].msup.trim() === ""),
+          (spExists(key, "msup") && studyPlanItemsObj[key].msup.trim() === ""),
         "data-forreview":
           "" +
-          (Object.hasOwn(studyPlanItemsObj[key], "markforreview") &&
+          (spExists(key, "markforreview") &&
             studyPlanItemsObj[key].markforreview &&
             studyPlanItemsObj[key].markforreview !== "false"),
         "data-markedcomplete":
           "" +
-          (Object.hasOwn(studyPlanItemsObj[key], "markcomplete") &&
+          (spExists(key, "markcomplete") &&
             studyPlanItemsObj[key].markcomplete &&
             studyPlanItemsObj[key].marcomplete !== "false"),
         className:
@@ -105,28 +99,42 @@ const useStudyPlanListElmProperties = () => {
           parentMasterType +
           subListLevel +
           onlyList +
-          (props.type ? props.type : studyPlanItemsObj[key].type + "-sub--2"),
+          (props.type
+            ? props.type
+            : spExists(key, "type")
+              ? studyPlanItemsObj[key].type + "-sub--2"
+              : ""),
 
-        id: key != 0 ? key : studyPlanItemsObj[key]._id,
-        type: props.type ? props.type : studyPlanItemsObj[key].type,
+        id:
+          key != 0
+            ? key
+            : spExists(key, "type")
+              ? studyPlanItemsObj[key]._id
+              : "",
+        type: props.type
+          ? props.type
+          : spExists(key, "type")
+            ? studyPlanItemsObj[key].type
+            : "",
         "data-parentmastertype": parentMasterType
           ? parentMasterType
-          : studyPlanItemsObj[key].type,
+          : spExists(key, "type")
+            ? studyPlanItemsObj[key].type
+            : "",
 
         "data-maingoal":
           "" +
-          (Object.hasOwn(studyPlanItemsObj[key], "msup") &&
-            studyPlanItemsObj[key].msup.trim() === ""),
+          (spExists(key, "msup") && studyPlanItemsObj[key].msup.trim() === ""),
 
         "data-forreview":
           "" +
-          (Object.hasOwn(studyPlanItemsObj[key], "markforreview") &&
+          (spExists(key, "markforreview") &&
             studyPlanItemsObj[key].markforreview &&
             studyPlanItemsObj[key].markforreview !== "false"),
 
         "data-markedcomplete":
           "" +
-          (Object.hasOwn(studyPlanItemsObj[key], "markcomplete") &&
+          (spExists(key, "markcomplete") &&
             studyPlanItemsObj[key].markcomplete &&
             studyPlanItemsObj[key].marcomplete !== "false"),
 
@@ -216,7 +224,9 @@ const useStudyPlanListElmProperties = () => {
         parentsParentKey: parentKey,
         parentMasterID: parentMasterID
           ? parentMasterID
-          : studyPlanItemsObj[key]._id,
+          : spExists(key, "_id")
+            ? studyPlanItemsObj[key]._id
+            : "",
         section: section,
         displayConditions: displayConditions,
         subListLevel: subListLevel,
@@ -233,7 +243,9 @@ const useStudyPlanListElmProperties = () => {
         parentsParentKey: parentKey,
         parentMasterID: parentMasterID
           ? parentMasterID
-          : studyPlanItemsObj[key]._id,
+          : spExists(key, "_id")
+            ? studyPlanItemsObj[key]._id
+            : "",
         section: section,
         displayConditions: displayConditions,
         subListLevel: subListLevel,
@@ -250,7 +262,9 @@ const useStudyPlanListElmProperties = () => {
         parentsParentKey: parentKey,
         parentMasterID: parentMasterID
           ? parentMasterID
-          : studyPlanItemsObj[key]._id,
+          : spExists(key, "_id")
+            ? studyPlanItemsObj[key]._id
+            : "",
         section: section,
         displayConditions: displayConditions,
         subListLevel: subListLevel,
@@ -270,8 +284,7 @@ const useStudyPlanListElmProperties = () => {
         parentMasterID: parentMasterID,
         parentMasterType: parentMasterType
           ? parentMasterType
-          : studyPlanItemsObj[key] &&
-              Object.hasOwn(studyPlanItemsObj[key], "type")
+          : studyPlanItemsObj[key] && spExists(key, "type")
             ? studyPlanItemsObj[key].type
             : "",
         displayConditions: displayConditions,
