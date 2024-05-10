@@ -14,6 +14,14 @@ export default async function GatherStudyPlanData(
     ? passedStudyPlan
     : await studyPlanDataFunction(user);
 
+  console.log(
+    "%c⚪️►►►► %cline:13%cstudyPlanFromDB",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(60, 79, 57);padding:3px;border-radius:2px",
+    studyPlanFromDB,
+  );
+
   studyPlanData.schema = studyPlanItemSchema
     ? studyPlanItemSchema
     : await runGetSchemaForStudyPlanItems();
