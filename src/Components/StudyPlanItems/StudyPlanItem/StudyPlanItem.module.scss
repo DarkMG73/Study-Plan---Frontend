@@ -58,7 +58,10 @@
     text-overflow: ellipsis;
   }
 }
-.name {
+
+body ul[type="step"] .name,
+body ul[type="step"] [class*="featured-url-arrow-wrap"] {
+  transform: translateY(-12%);
 }
 
 .name label {
@@ -656,8 +659,8 @@ input[type="number"] {
   }
 }
 @media screen and (max-width: 1024px) {
-  body .name,
-  body [class*="featured-url-arrow-wrap"] {
+  body ul[type="step"] .name,
+  body ul[type="step"] [class*="featured-url-arrow-wrap"] {
     transform: translateY(-12%);
   }
 
