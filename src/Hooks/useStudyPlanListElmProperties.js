@@ -21,6 +21,7 @@ const useStudyPlanListElmProperties = () => {
       expandedItems,
       updateExistingFormState,
     } = props;
+
     if (!studyPlanItemsObj) return;
 
     const spExists = (prop1, prop2) => {
