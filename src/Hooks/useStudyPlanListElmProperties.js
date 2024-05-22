@@ -43,16 +43,6 @@ const useStudyPlanListElmProperties = () => {
               ? studyPlanItemsObj[key]._id
               : ""
             : key,
-        type: props.type
-          ? props.type
-          : spExists(key, "type")
-            ? studyPlanItemsObj[key].type
-            : "",
-        "data-parentmastertype": parentMasterType
-          ? parentMasterType
-          : spExists(key, "type")
-            ? studyPlanItemsObj[key].type
-            : "",
         "data-maingoal":
           "" +
           (spExists(key, "msup") && studyPlanItemsObj[key].msup.trim() === ""),
@@ -219,6 +209,7 @@ const useStudyPlanListElmProperties = () => {
         zIndex: "1",
       },
       studyPlanItemsSubList: {
+        studyPlanItemsObj: studyPlanItemsObj[key],
         allStudyPlanItems: props.allStudyPlanItems,
         parentKey: key,
         parentsParentKey: parentKey,
@@ -256,7 +247,6 @@ const useStudyPlanListElmProperties = () => {
         setFormType: setFormType,
       },
       studyPlanItemsSubList3: {
-        studyPlanItemsObj: studyPlanItemsObj[key],
         allStudyPlanItems: allStudyPlanItems,
         parentKey: key,
         parentsParentKey: parentKey,
@@ -275,7 +265,6 @@ const useStudyPlanListElmProperties = () => {
         setFormType: setFormType,
       },
       StudyPlanItem: {
-        studyPlanItemsObj: props,
         expandedItems: expandedItems,
         section: section,
         passedKey: key,

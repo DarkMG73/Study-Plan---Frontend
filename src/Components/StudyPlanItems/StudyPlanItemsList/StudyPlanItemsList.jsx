@@ -373,7 +373,8 @@ const StudyPlanItemsList = (props) => {
   /// OUTPUT
   ////////////////////////////////////////////////////////////////////////
 
-  if (studyPlanItemsObj) console.log("-->", studyPlanItemsObj);
+  // if (studyPlanItemsObj) console.log("-->", studyPlanItemsObj);
+
   if (studyPlanItemsObj)
     return (
       <Fragment>
@@ -390,6 +391,12 @@ const StudyPlanItemsList = (props) => {
             return (
               <ul
                 data-marker="CATALOG-ITEM-LIST-1"
+                type={props.type ? props.type : studyPlanItemsObj[key].type}
+                data-parentmastertype={
+                  parentMasterType
+                    ? parentMasterType
+                    : studyPlanItemsObj[key].type
+                }
                 {...elmProperties({
                   ...elmPropertiesVariables,
                   key,
@@ -449,6 +456,7 @@ const StudyPlanItemsList = (props) => {
                           )}
                       </PushButton>
                     </Fragment>
+
                     <h2
                       key={parentKey + key}
                       className={
@@ -469,11 +477,9 @@ const StudyPlanItemsList = (props) => {
                       ) : (
                         key
                       )}
-                    </h2>{" "}
-                    <h1>TEST</h1>
+                    </h2>
                     <StudyPlanItemsSubList
                       key={key + studyPlanItemsObj[key]}
-                      studyPlanItemsObj={studyPlanItemsObj[key]}
                       unlockProtectedVisible={
                         props.unlockProtectedVisible
                           ? props.unlockProtectedVisible
@@ -631,6 +637,7 @@ const StudyPlanItemsList = (props) => {
                             )}
                         </div>
                       )}
+
                     {subListLevel && (
                       <div className={styles["button-container"]}>
                         {!noEditButton && (
@@ -715,6 +722,12 @@ const StudyPlanItemsList = (props) => {
             return (
               <ul
                 data-marker="CATALOG-ITEM-LIST-2"
+                type={props.type ? props.type : studyPlanItemsObj[key].type}
+                data-parentmastertype={
+                  parentMasterType
+                    ? parentMasterType
+                    : studyPlanItemsObj[key].type
+                }
                 {...elmProperties({
                   ...elmPropertiesVariables,
                   key,
@@ -785,6 +798,7 @@ const StudyPlanItemsList = (props) => {
                     data-container-type="collapsibleElm"
                   >
                     {/* Item Group Title*/}
+                    <h1></h1>
                     <h2
                       className={
                         styles["group-title"] +
@@ -808,6 +822,18 @@ const StudyPlanItemsList = (props) => {
 
                     <StudyPlanItemsSubList
                       key={studyPlanItemsObj[key]}
+                      studyPlanItemsObj={studyPlanItemsObj[key]}
+                      allStudyPlanItems={props.allStudyPlanItems}
+                      parentKey={key}
+                      parentsParentKey={parentKey}
+                      parentMasterID={
+                        parentMasterID
+                          ? parentMasterID
+                          : studyPlanItemsObj[key]._id
+                      }
+                      section={section}
+                      displayConditions={displayConditions}
+                      subListLevel={subListLevel}
                       unlockProtectedVisible={
                         props.unlockProtectedVisible
                           ? props.unlockProtectedVisible
@@ -818,10 +844,10 @@ const StudyPlanItemsList = (props) => {
                           ? props.showProtectedHidden
                           : showProtectedHidden
                       }
-                      {...elmProperties({
-                        ...elmPropertiesVariables,
-                        key,
-                      }).studyPlanItemsSubList3}
+                      refresh={refresh}
+                      onlyList={onlyList}
+                      emptyForm={props.emptyForm}
+                      setFormType={props.setFormType}
                     />
 
                     {
@@ -1020,6 +1046,7 @@ const StudyPlanItemsList = (props) => {
             <Fragment key={key}>
               <StudyPlanItem
                 key={parentMasterID + parentsParentKey + parentKey + key}
+                studyPlanItemsObj={props}
                 unlockProtectedVisible={
                   props.unlockProtectedVisible
                     ? props.unlockProtectedVisible
