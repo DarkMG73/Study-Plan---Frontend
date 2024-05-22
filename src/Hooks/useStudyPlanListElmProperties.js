@@ -219,7 +219,6 @@ const useStudyPlanListElmProperties = () => {
         zIndex: "1",
       },
       studyPlanItemsSubList: {
-        studyPlanItemsObj: studyPlanItemsObj[key],
         allStudyPlanItems: props.allStudyPlanItems,
         parentKey: key,
         parentsParentKey: parentKey,

@@ -372,6 +372,8 @@ const StudyPlanItemsList = (props) => {
   ////////////////////////////////////////////////////////////////////////
   /// OUTPUT
   ////////////////////////////////////////////////////////////////////////
+
+  if (studyPlanItemsObj) console.log("-->", studyPlanItemsObj);
   if (studyPlanItemsObj)
     return (
       <Fragment>
@@ -447,7 +449,6 @@ const StudyPlanItemsList = (props) => {
                           )}
                       </PushButton>
                     </Fragment>
-
                     <h2
                       key={parentKey + key}
                       className={
@@ -468,9 +469,11 @@ const StudyPlanItemsList = (props) => {
                       ) : (
                         key
                       )}
-                    </h2>
+                    </h2>{" "}
+                    <h1>TEST</h1>
                     <StudyPlanItemsSubList
                       key={key + studyPlanItemsObj[key]}
+                      studyPlanItemsObj={studyPlanItemsObj[key]}
                       unlockProtectedVisible={
                         props.unlockProtectedVisible
                           ? props.unlockProtectedVisible
@@ -628,7 +631,6 @@ const StudyPlanItemsList = (props) => {
                             )}
                         </div>
                       )}
-
                     {subListLevel && (
                       <div className={styles["button-container"]}>
                         {!noEditButton && (
@@ -803,6 +805,7 @@ const StudyPlanItemsList = (props) => {
                         key
                       )}
                     </h2>
+
                     <StudyPlanItemsSubList
                       key={studyPlanItemsObj[key]}
                       unlockProtectedVisible={
