@@ -19,36 +19,38 @@ const InputURL = (props) => {
 
   return (
     <Fragment>
-      <a
-        id={
-          "arrow" +
-          parentMasterID +
-          "-" +
-          parentsParentKey +
-          "-" +
-          parentKey +
-          "-" +
-          key +
-          "url"
-        }
-        key={"arrow" + parentKey + "-" + key}
-        href={studyPlanItemsObj[key]}
-        rel="noreferrer"
-        target="_blank"
-        name={parentKey + "-" + key}
-        defaultValue={studyPlanItemsObj[key]}
-        data-category={key}
-        placeholder={"Valid URL only..."}
-        title={key}
-        data-parentkey={parentKey}
-        data-parentsparentkey={
-          parentsParentKey ? parentsParentKey.toString() : ""
-        }
-        data-parentmasterid={parentMasterID}
-        className={Styles["url-arrow"]}
-      >
-        Go &rarr;
-      </a>
+      {studyPlanItemsObj[key] && (
+        <a
+          id={
+            "arrow" +
+            parentMasterID +
+            "-" +
+            parentsParentKey +
+            "-" +
+            parentKey +
+            "-" +
+            key +
+            "url"
+          }
+          key={"arrow" + parentKey + "-" + key}
+          href={studyPlanItemsObj[key]}
+          rel="noreferrer"
+          target="_blank"
+          name={parentKey + "-" + key}
+          defaultValue={studyPlanItemsObj[key]}
+          data-category={key}
+          placeholder={"Valid URL only..."}
+          title={key}
+          data-parentkey={parentKey}
+          data-parentsparentkey={
+            parentsParentKey ? parentsParentKey.toString() : ""
+          }
+          data-parentmasterid={parentMasterID}
+          className={Styles["url-arrow"]}
+        >
+          Go &rarr;
+        </a>
+      )}
       <label
         id={
           parentMasterID +
