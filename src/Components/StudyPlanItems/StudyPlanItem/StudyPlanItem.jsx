@@ -191,17 +191,32 @@ const StudyPlanItem = (props) => {
           {onlyList && <span>{studyPlanItemsObj[passedKey]}</span>}
         </li>
       )}
-      {elementTypeNeeded === "isURL" && passedKey === "url" && (
-        <ArrowLink
-          passedKey={passedKey}
-          studyPlanItemsObj={studyPlanItemsObj}
-          parentMasterID={parentMasterID}
-          parentsParentKey={parentsParentKey}
-          parentKey={parentKey}
-          displayConditions={displayConditions}
-          unlockProtectedVisible={unlockProtectedVisible}
-        />
-      )}
+
+      {elementTypeNeeded === "isURL" &&
+        passedKey === "url" &&
+        studyPlanItemsObj[passedKey] &&
+        studyPlanItemsObj[passedKey].replaceAll(" ", "") !== "" && (
+          <Fragment>
+            {" "}
+            {console.log(
+              "studyPlanItemsObj[passedKey]",
+              studyPlanItemsObj[passedKey],
+            )}
+            {console.log(
+              "studyPlanItemsObj[passedKey]",
+              studyPlanItemsObj[passedKey].replaceAll(" ", "") !== "",
+            )}
+            <ArrowLink
+              passedKey={passedKey}
+              studyPlanItemsObj={studyPlanItemsObj}
+              parentMasterID={parentMasterID}
+              parentsParentKey={parentsParentKey}
+              parentKey={parentKey}
+              displayConditions={displayConditions}
+              unlockProtectedVisible={unlockProtectedVisible}
+            />
+          </Fragment>
+        )}
     </Fragment>
   );
 

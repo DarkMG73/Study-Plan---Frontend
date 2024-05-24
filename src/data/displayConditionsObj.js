@@ -1,6 +1,6 @@
 const displayConditions = {
   formWithPreFilledData: {
-    isURL: ["url"],
+    isURL: ["url", "demonstratedskillurl"],
     isBoolean: [],
     isDate: ["createdAt", "updatedAt", "start", "acomp"],
     isNumber: {
@@ -43,7 +43,7 @@ const displayConditions = {
     ],
   },
   emptyForm: {
-    isURL: ["url"],
+    isURL: ["url", "demonstratedskillurl"],
     isBoolean: [],
     isDate: ["createdAt", "updatedAt", "start", "acomp"],
     isNumber: {
@@ -66,7 +66,7 @@ const displayConditions = {
     protectedVisible: [],
   },
   jsonUpload: {
-    isURL: ["url"],
+    isURL: ["url", "demonstratedskillurl"],
     isBoolean: [],
     isDate: ["createdAt", "updatedAt", "start", "acomp"],
     isNumber: {
