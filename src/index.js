@@ -19,12 +19,6 @@ import "./assets/fonts/good_times/good_times_rg.ttf";
 const inDevelopment = process.env.NODE_ENV === "development";
 axios.defaults.baseURL = "https://studyplan.glassinteractive.com/";
 
-console.log(
-  "%cAxios Default Base URL:",
-  "color:#fff;background:#287094;padding:5px;border-radius:0 25px 25px 0",
-  axios.defaults.baseURL,
-);
-
 if (inDevelopment) {
   // axios.defaults.baseURL = "https://studyplan.glassinteractive.com/";
   axios.defaults.baseURL = "http://localhost:8000";
