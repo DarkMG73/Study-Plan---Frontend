@@ -9,7 +9,7 @@ const displayConditions = {
       status: { min: "0", max: "100" },
     },
     isList: ["author", "platform", "tags"], // List with compiled options.
-    isSuggestionsList: { method: ["corse", "project", "tutorial"] }, // List with fixed & compiled options.
+    isSuggestionsList: { method: ["course", "project", "tutorial"] }, // List with fixed & compiled options.
     isLimitedList: {
       type: ["- Select one -", "step", "goal", "hold"],
       priority: ["0", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"],
@@ -52,7 +52,7 @@ const displayConditions = {
       status: { min: "0", max: "100" },
     },
     isList: ["author", "platform", "tags"], // List with compiled options.
-    isSuggestionsList: { method: ["corse", "project", "tutorial"] }, // List with fixed & compiled options.
+    isSuggestionsList: { method: ["course", "project", "tutorial"] }, // List with fixed & compiled options.
     isLimitedList: {
       type: ["- Select one -", "step", "goal", "hold"],
       priority: ["0", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"],
@@ -75,7 +75,7 @@ const displayConditions = {
       status: { min: "0", max: "100" },
     },
     isList: ["author", "platform", "tags"], // List with compiled options.
-    isSuggestionsList: { method: ["corse", "project", "tutorial"] }, // List with fixed & compiled options.
+    isSuggestionsList: { method: ["course", "project", "tutorial"] }, // List with fixed & compiled options.
     isLimitedList: {
       type: ["- Select one -", "step", "goal", "hold"],
       priority: ["0", "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"],

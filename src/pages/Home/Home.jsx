@@ -367,7 +367,7 @@ const Home = (props) => {
               <StudyPlanItems
                 key="hold"
                 id="hold"
-                subText='If you want to add a book, corse or similar item, but are not yet sure where it fits in the path to achieving the main goal, simply mark the Type as "hold" when filling out the new item form. All items on hold will appear in this section until you edit the item and change the Type to either "goal" or "step"'
+                subText='If you want to add a book, course or similar item, but are not yet sure where it fits in the path to achieving the main goal, simply mark the Type as "hold" when filling out the new item form. All items on hold will appear in this section until you edit the item and change the Type to either "goal" or "step"'
                 dataObjForEdit={studyPlan}
                 user={props.user}
                 type={"hold"}

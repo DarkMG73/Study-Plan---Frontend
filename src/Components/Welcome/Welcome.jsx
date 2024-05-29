@@ -146,7 +146,7 @@ const Welcome = (props) => {
           item added after this point will support. Next, add two or three
           sub-goals that are needed to achieve the main goal. THen add any other
           sup-goals to support those two or three support goals. From there find
-          corses, books, tutorials, projects...anything...as a step to support
+          courses, books, tutorials, projects...anything...as a step to support
           each sub-goal.
         </p>
         <p>
