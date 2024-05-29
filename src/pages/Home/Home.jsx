@@ -323,7 +323,7 @@ const Home = (props) => {
         </CardPrimary>
       )}
 
-      {!hideStudyPlan && studyPlan && Object.keys(studyPlan).length > 0 && (
+      {!hideStudyPlan && studyPlan && (
         <CardPrimary>
           <ErrorBoundary>
             {props.userInitComplete && (
