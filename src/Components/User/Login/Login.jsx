@@ -36,11 +36,15 @@ const Login = (props) => {
   const status = false;
 
   let forgotPasswordURL =
-    "https://api-spt.glassinteractive.com/api/users/auth/forgot_password?";
+    "https://studyplan.glassinteractive.com/api/users/auth/forgot_password?";
   if (process.env.NODE_ENV === "development") {
     forgotPasswordURL = "http://localhost:8000/api/users/auth/forgot_password?";
   }
-
+  console.log(
+    "%cForgot Password URL:",
+    "color:#fff;background:#287094;padding:5px;border-radius:0 25px 25px 0",
+    forgotPasswordURL,
+  );
   ////////////////////////////////////////////////////////////////
   /// Effects
   ////////////////////////////////////////////////////////////////
@@ -146,9 +150,7 @@ const Login = (props) => {
   };
   const requestNewPasswordButtonHandler = (e) => {
     e.preventDefault();
-    const myRequest = new Request(
-      "http://localhost:8000/api/users/auth/forgot_password",
-    );
+    const myRequest = new Request(forgotPasswordURL);
 
     fetch(myRequest)
       .then(function () {
