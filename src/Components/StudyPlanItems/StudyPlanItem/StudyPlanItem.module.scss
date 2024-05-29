@@ -244,6 +244,7 @@ body ul .name {
   textarea,
   [class*="sizable-textarea"] {
     font-variant: small-caps;
+    font-size: 0.9em;
     line-height: 0.9em !important;
     max-height: 1.75em;
     margin-top: 0.45em;
@@ -652,9 +653,15 @@ input[type="number"] {
     text-shadow: none;
   }
 
-  body .name [class*="sizable-textarea"] {
-    margin-left: 2em;
-    padding: 0 1.25em 0 0;
+  body ul .name {
+    textarea,
+    [class*="sizable-textarea"] {
+      font-size: calc(0.6em + 0.5vmin);
+    }
+    [class*="sizable-textarea"] {
+      margin-left: 3em;
+      padding: 0 1.25em 0 0;
+    }
   }
 
   select {
@@ -664,10 +671,6 @@ input[type="number"] {
 @media screen and (max-width: 1024px) {
   body ul[type="step"] .name {
     transform: translateY(-7%);
-    textarea,
-    [class*="sizable-textarea"] {
-      font-size: calc(0.7em + 0.4vmin);
-    }
   }
 
   body ul[type="step"] [class*="featured-url-arrow-wrap"] {

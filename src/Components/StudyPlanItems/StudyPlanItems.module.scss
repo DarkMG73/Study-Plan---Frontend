@@ -204,7 +204,10 @@ ul[type="hold"] {
 
 ul[type="hold"] {
   li[id*="progressbar-item"] {
-    opacity: 0;
+    display: none;
+  }
+  > div[data-container-type="collapsibleElm"] > li[id*="name-item"] {
+    transform: translateY(3%);
   }
 }
 
