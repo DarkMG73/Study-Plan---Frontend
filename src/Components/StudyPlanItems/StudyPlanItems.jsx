@@ -531,7 +531,7 @@ const StudyPlanItems = (props) => {
                               key={"r" + entry[0] + entry[1]}
                               value={entry[0] + "-reverse"}
                             >
-                              {"Reverse " + entry[1]}
+                              {entry[1] + " (reversed)"}
                             </option>
                           </Fragment>
                         ))}
