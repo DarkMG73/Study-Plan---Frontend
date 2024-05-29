@@ -664,6 +664,10 @@ input[type="number"] {
 @media screen and (max-width: 1024px) {
   body ul[type="step"] .name {
     transform: translateY(-7%);
+    textarea,
+    [class*="sizable-textarea"] {
+      font-size: calc(0.7em + 0.4vmin);
+    }
   }
 
   body ul[type="step"] [class*="featured-url-arrow-wrap"] {

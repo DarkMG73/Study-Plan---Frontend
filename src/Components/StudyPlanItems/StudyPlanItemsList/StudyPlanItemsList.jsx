@@ -798,7 +798,7 @@ const StudyPlanItemsList = (props) => {
                     data-container-type="collapsibleElm"
                   >
                     {/* Item Group Title*/}
-                    <h1></h1>
+
                     <h2
                       className={
                         styles["group-title"] +
