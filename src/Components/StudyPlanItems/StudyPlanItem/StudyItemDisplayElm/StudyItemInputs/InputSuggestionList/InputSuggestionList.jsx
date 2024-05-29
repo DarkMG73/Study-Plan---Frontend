@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import useAddInputData from "../../../../../../Hooks/useAddInputData";
+import { toTitleCase } from "../../../../../../Hooks/utility";
 
 const InputSuggestionList = (props) => {
   const studyPlanMetadata = useSelector(
@@ -36,7 +37,7 @@ const InputSuggestionList = (props) => {
         }
         htmlFor={parentKey + "-" + key + "datalist"}
       >
-        {key}
+        {toTitleCase(key, true, false)}
       </label>{" "}
       {/*name={parentKey + "-" + key}*/}
       <input
@@ -75,14 +76,22 @@ const InputSuggestionList = (props) => {
       >
         {Object.values(displayConditions["isSuggestionsList"][key]).map(
           (option) => (
-            <option key={option} value={option}></option>
+            <option
+              key={option}
+              value={toTitleCase(option, true, false)}
+            ></option>
           ),
         )}
 
         {Object.hasOwn(studyPlanMetadata, key) &&
           studyPlanMetadata[key].slice(1).map((option) => {
             if (!displayConditions["isSuggestionsList"][key].includes(option))
-              return <option key={option} value={option}></option>;
+              return (
+                <option
+                  key={option}
+                  value={toTitleCase(option, true, false)}
+                ></option>
+              );
           })}
       </datalist>
     </Fragment>

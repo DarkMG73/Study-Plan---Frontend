@@ -366,6 +366,8 @@ const StudyPlanItemsList = (props) => {
           )}`,
         );
       }
+    } else {
+      dispatch(loadingRequestsActions.removeFromLoadRequest());
     }
   };
 
