@@ -261,6 +261,7 @@ body .method {
   grid-area: method; // font: var(--spt-font-body-text-12);
   input {
     font-variant: small-caps;
+    text-transform: capitalize;
   }
 }
 .method label {
