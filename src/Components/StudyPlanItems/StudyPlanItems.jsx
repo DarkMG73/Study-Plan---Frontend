@@ -57,13 +57,6 @@ const StudyPlanItems = (props) => {
       id
     );
 
-  console.log(
-    "%c⚪️►►►► %cline:60%coutputName",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
-    outputName,
-  );
   if (outputName === "goals") outputName = "Goals";
   if (outputName === "steps") outputName = "Steps";
   if (outputName === "holds") outputName = "Holds";
@@ -190,13 +183,7 @@ const StudyPlanItems = (props) => {
           <form key={id}>{newFormJSX}</form>
         </div>
       )}
-      {console.log(
-        "%c⚪️►►►► %cline:186%coutputName",
-        "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-        "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-        "color:#fff;background:rgb(131, 175, 155);padding:3px;border-radius:2px",
-        outputName,
-      )}
+
       {!user && outputName.toLowerCase().includes("goal") && <Welcome />}
       {user &&
         outputName.toLowerCase().includes("goal") &&
