@@ -32,6 +32,13 @@ export default async function GatherStudyPlanData(
 
     const dependencies = findDependencies(studyPlanItem, studyPlanFromDB);
     studyPlanData.studyPlan[studyPlanItem._id].dependencies = dependencies;
+    console.log(
+      "%c⚪️►►►► %cline:33%cdependencies",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(114, 83, 52);padding:3px;border-radius:2px",
+      dependencies,
+    );
   });
 
   const ungroomedStudyPlanMetadata = gatherAllMetadata(studyPlanData.studyPlan);
@@ -136,13 +143,33 @@ function gatherAllMetadata(dataObject) {
 function findDependencies(subjectObj, allObjects) {
   const output = [];
   for (const value of Object.values(allObjects)) {
+    console.log(
+      "%c⚪️►►►► %cline:138%cvalue",
+      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+      "color:#fff;background:rgb(60, 79, 57);padding:3px;border-radius:2px",
+      Object.hasOwn(value, "asup") &&
+        value.asup &&
+        value.asup !== "" &&
+        value.asup.includes(subjectObj.identifier),
+    );
+
     if (
       Object.hasOwn(value, "identifier") &&
-      value.msup.includes(subjectObj.identifier)
+      value.asup.includes(subjectObj.identifier)
     ) {
       output.push(value.identifier);
     }
   }
+
+  console.log(
+    "%c⚪️►►►► %cline:161%coutput",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(229, 187, 129);padding:3px;border-radius:2px",
+    output,
+  );
+
   return output;
 }
 
