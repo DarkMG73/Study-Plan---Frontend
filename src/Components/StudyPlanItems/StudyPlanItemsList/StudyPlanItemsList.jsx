@@ -499,7 +499,7 @@ const StudyPlanItemsList = (props) => {
                       className={styles["dependencies-container"]}
                       data-section={section}
                     >
-                      <h3>The Path to {studyPlanItemsObj[key].name}</h3>
+                      <h3>Path to {studyPlanItemsObj[key].name}</h3>
                       {allStudyPlanItems &&
                         studyPlanItemsObj[key].dependencies.map(
                           (dependencyIdentifier) => {
