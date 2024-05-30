@@ -40,11 +40,7 @@ const Login = (props) => {
   if (process.env.NODE_ENV === "development") {
     forgotPasswordURL = "http://localhost:8000/api/users/auth/forgot_password?";
   }
-  console.log(
-    "%cForgot Password URL:",
-    "color:#fff;background:#287094;padding:5px;border-radius:0 25px 25px 0",
-    forgotPasswordURL,
-  );
+
   ////////////////////////////////////////////////////////////////
   /// Effects
   ////////////////////////////////////////////////////////////////

@@ -4,6 +4,8 @@ PassengerBaseURI "/api"
 PassengerNodejs "/home/serverac/nodevenv/public_html/mini_dev_projects/study_plan/BACKEND/20/bin/node"
 PassengerAppType node
 PassengerStartupFile server.js
+Header always unset X-Frame-Options
+Header add Content-Security-Policy "default-src 'self'; script-src 'unsafe-inline'; img-src 'self'; style-src 'unsafe-inline';base-uri 'self';form-action 'self'; connect-src  https://www.studyplan.glassinteractive.com/api/users/auth/reset_password http://www.studyplan.glassinteractive.com/api/users/auth/reset_password https://www.studyplan.glassinteractive.com https://studyplan.glassinteractive.com;"
 # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
 # DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
 <IfModule Litespeed>
