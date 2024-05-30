@@ -72,13 +72,11 @@
     "name name  name name"
     "type type   type type"
     "method method method method"
-    "msup msup msup msup"
-    "asup asup asup asup"
     "des des des des"
     "url url url url"
     "author author platform platform"
     "lectureTime lectureTime labTime labTime"
-    "start status acomp acomp"
+    "start start acomp acomp"
     "itemnotes itemnotes itemnotes itemnotes"
     "tags tags tags tags";
   grid-auto-flow: row dense;
@@ -442,8 +440,8 @@
 [data-newformtype="hold"] {
   li[id*="-priority"],
   li[id*="-status"],
-  li[id*="-acomp"],
-  li[id*="-start"] {
+  li[id*="-msup"],
+  li[id*="-asup"] {
     background: gray;
     opacity: 0.5;
     pointer-events: none;
