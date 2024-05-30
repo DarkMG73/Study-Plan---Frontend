@@ -32,23 +32,9 @@ export default async function GatherStudyPlanData(
 
     const dependencies = findDependencies(studyPlanItem, studyPlanFromDB);
     studyPlanData.studyPlan[studyPlanItem._id].dependencies = dependencies;
-    console.log(
-      "%c⚪️►►►► %cline:33%cdependencies",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(114, 83, 52);padding:3px;border-radius:2px",
-      dependencies,
-    );
   });
 
   const ungroomedStudyPlanMetadata = gatherAllMetadata(studyPlanData.studyPlan);
-  console.log(
-    "%c⚪️►►►► %cline:44%cungroomedStudyPlanMetadata",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(39, 72, 98);padding:3px;border-radius:2px",
-    ungroomedStudyPlanMetadata,
-  );
   const groomedStudyPlanMetadata = {};
   for (const key in ungroomedStudyPlanMetadata) {
     const output = [];
@@ -98,13 +84,6 @@ export default async function GatherStudyPlanData(
         studyPlanValue.iframeCustomAttributes;
     }
   }
-  console.log(
-    "%c⚪️►►►► %cline:102%cstudyPlanData",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px",
-    studyPlanData,
-  );
   return studyPlanData;
 }
 
@@ -156,35 +135,24 @@ function gatherAllMetadata(dataObject) {
 function findDependencies(subjectObj, allObjects) {
   const output = [];
   for (const value of Object.values(allObjects)) {
-    console.log(
-      "%c⚪️►►►► %cline:138%cvalue",
-      "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-      "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-      "color:#fff;background:rgb(60, 79, 57);padding:3px;border-radius:2px",
-      Object.hasOwn(value, "asup") &&
-        value.asup &&
-        value.asup !== "" &&
-        value.asup.includes(subjectObj.identifier),
-    );
-
     if (
       Object.hasOwn(value, "identifier") &&
-      (false ||
+      value.identifier &&
+      value.identifier.replaceAll(" ", "") !== "" &&
+      ((value.asup &&
+        value.asup.replaceAll(" ", "") !== "" &&
+        value.asup.includes(subjectObj.identifier)) ||
         (value.msup &&
           value.msup !== "" &&
           value.msup.includes(subjectObj.identifier)))
     ) {
-      output.push(value.identifier);
+      if (
+        !subjectObj.msup.includes(value.identifier) &&
+        !subjectObj.asup.includes(value.identifier)
+      )
+        output.push(value.identifier);
     }
   }
-
-  console.log(
-    "%c⚪️►►►► %cline:161%coutput",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(229, 187, 129);padding:3px;border-radius:2px",
-    output,
-  );
 
   return output;
 }

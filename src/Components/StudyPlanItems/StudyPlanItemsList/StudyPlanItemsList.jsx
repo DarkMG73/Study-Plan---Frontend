@@ -376,13 +376,7 @@ const StudyPlanItemsList = (props) => {
   ////////////////////////////////////////////////////////////////////////
 
   // if (studyPlanItemsObj) console.log("-->", studyPlanItemsObj);
-  console.log(
-    "%c⚪️►►►► %cline:380%cstudyPlanItemsObj",
-    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
-    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
-    "color:#fff;background:rgb(118, 77, 57);padding:3px;border-radius:2px",
-    studyPlanItemsObj,
-  );
+
   if (studyPlanItemsObj)
     return (
       <Fragment>
@@ -391,6 +385,7 @@ const StudyPlanItemsList = (props) => {
           /////////////////////////////////////////
           // Create Dependency Sub-Lists (If needed)
           /////////////////////////////////////////
+
           if (
             studyPlanItemsObj[key] &&
             Object.hasOwn(studyPlanItemsObj[key], "dependencies") &&
