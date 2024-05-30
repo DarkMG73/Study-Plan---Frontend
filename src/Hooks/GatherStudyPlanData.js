@@ -42,6 +42,13 @@ export default async function GatherStudyPlanData(
   });
 
   const ungroomedStudyPlanMetadata = gatherAllMetadata(studyPlanData.studyPlan);
+  console.log(
+    "%c⚪️►►►► %cline:44%cungroomedStudyPlanMetadata",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(39, 72, 98);padding:3px;border-radius:2px",
+    ungroomedStudyPlanMetadata,
+  );
   const groomedStudyPlanMetadata = {};
   for (const key in ungroomedStudyPlanMetadata) {
     const output = [];
@@ -91,7 +98,13 @@ export default async function GatherStudyPlanData(
         studyPlanValue.iframeCustomAttributes;
     }
   }
-
+  console.log(
+    "%c⚪️►►►► %cline:102%cstudyPlanData",
+    "color:#fff;background:#ee6f57;padding:3px;border-radius:2px",
+    "color:#fff;background:#1f3c88;padding:3px;border-radius:2px",
+    "color:#fff;background:rgb(89, 61, 67);padding:3px;border-radius:2px",
+    studyPlanData,
+  );
   return studyPlanData;
 }
 
@@ -101,7 +114,6 @@ function gatherAllMetadata(dataObject) {
     "name",
     "slug",
     "type",
-    "asup",
     "author",
     "des",
     "demonstratedskillsdesc",
@@ -112,6 +124,7 @@ function gatherAllMetadata(dataObject) {
     "labTime",
     "method",
     "msup",
+    "asup",
     "itemnotes",
     "platform",
     "priority",
@@ -156,7 +169,7 @@ function findDependencies(subjectObj, allObjects) {
 
     if (
       Object.hasOwn(value, "identifier") &&
-      value.asup.includes(subjectObj.identifier)
+      value.msup.includes(subjectObj.identifier)
     ) {
       output.push(value.identifier);
     }
