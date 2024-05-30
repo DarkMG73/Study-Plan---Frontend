@@ -169,7 +169,10 @@ function findDependencies(subjectObj, allObjects) {
 
     if (
       Object.hasOwn(value, "identifier") &&
-      value.msup.includes(subjectObj.identifier)
+      (false ||
+        (value.msup &&
+          value.msup !== "" &&
+          value.msup.includes(subjectObj.identifier)))
     ) {
       output.push(value.identifier);
     }
