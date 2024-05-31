@@ -75,7 +75,6 @@ const FormInput = (props) => {
         className={styles["input-container"] + " " + styles[input.name]}
       >
         <label key={"form-inpu-1t"} htmlFor={formNumber + "#" + input.name}>
-          {" "}
           {input.title}
         </label>
         <textarea
@@ -142,13 +141,13 @@ const FormInput = (props) => {
           defaultValue=""
         >
           -- select an option --
-        </option>
+        </option>,
       );
     options.push(<option key={"form-input-empty"} defaultValue=""></option>);
     options.push(
       <option key={"form-input-unkown"} defaultValue="">
         -- Unkown --
-      </option>
+      </option>,
     );
 
     outputJSX = (
@@ -183,6 +182,7 @@ const FormInput = (props) => {
           onChange={props.onChange || textInputOnChangeHandler}
           className={styles[requiredClass]}
           required={props.inputRequired}
+          autoComplete={props.autoComplete}
         />
         {requiredError && input.required == true && (
           <span
@@ -233,6 +233,7 @@ const FormInput = (props) => {
               checked={"true"}
               onChange={checkboxInputOnChangeHandler}
               required={props.inputRequired}
+              autoComplete={props.autoComplete}
             />
             <label
               key={"form-input-3" + i}
@@ -277,6 +278,7 @@ const FormInput = (props) => {
               defaultChecked={"true"}
               onChange={checkboxInputOnChangeHandler}
               required={props.inputRequired}
+              autoComplete={props.autoComplete}
             />{" "}
             <label
               key={"form-input-a2"}
@@ -313,6 +315,7 @@ const FormInput = (props) => {
               defaultValue={optionName}
               onChange={checkboxInputOnChangeHandler}
               required={props.inputRequired}
+              autoComplete={props.autoComplete}
             />{" "}
             <label
               key={"form-input-a5"}
@@ -368,6 +371,7 @@ const FormInput = (props) => {
             onChange={checkboxTextInputOnChangeHandler}
             className={styles[requiredClass]}
             required={props.inputRequired}
+            autoComplete={props.autoComplete}
           />
           {requiredError && input.required == true && (
             <span
@@ -400,6 +404,7 @@ const FormInput = (props) => {
           className={styles[requiredClass]}
           placeholder={input.placeholder}
           required={props.inputRequired}
+          autoComplete={props.autoComplete}
         />
         {requiredError && input.required == true && (
           <span key={"form-input"} className={styles[requiredClass + "-text"]}>
