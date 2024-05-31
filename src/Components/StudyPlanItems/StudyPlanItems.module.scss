@@ -297,6 +297,9 @@ ul[data-parentmastertype="hold"][class*="edited-list"]
       background: inherit;
     }
   }
+  div {
+    color: var(--spt-color-background-contrast-light);
+  }
 }
 
 .studyPlan-items-group[type="hold"] button {

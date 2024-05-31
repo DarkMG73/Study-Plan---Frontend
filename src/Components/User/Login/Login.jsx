@@ -293,6 +293,7 @@ const Login = (props) => {
                 value: user.email,
                 placeholder: "Email Address",
               }}
+              autoComplete="username"
               requiredError={{}}
               onChange={handleChange}
             />
@@ -310,6 +311,7 @@ const Login = (props) => {
                 placeholder: "Password",
               }}
               requiredError={{}}
+              autoComplete="current-password"
               onChange={handleChange}
             />
           </div>
