@@ -5,6 +5,7 @@ import CardPrimary from "../../UI/Cards/CardPrimary/CardPrimary";
 import CardTransparent from "../../UI/Cards/CardTransparent/CardTransparent";
 import CardSecondary from "../../UI/Cards/CardSecondary/CardSecondary";
 import NotFound from "../../Components/NotFound/NotFound";
+import Welcome from "../../Components/Welcome/Welcome";
 import OutputControls from "../../Components/OutputControls/OutputControls";
 import Footer from "../../Components/Footer/Footer";
 import StudyPlanItems from "../../Components/StudyPlanItems/StudyPlanItems";
@@ -322,8 +323,15 @@ const Home = (props) => {
           </ErrorBoundary>
         </CardPrimary>
       )}
-
-      {!hideStudyPlan && studyPlan && (
+      {!studyPlan ||
+        (studyPlan && Object.keys(studyPlan).length <= 0 && (
+          <CardPrimary>
+            <ErrorBoundary>
+              <Welcome />
+            </ErrorBoundary>
+          </CardPrimary>
+        ))}
+      {!hideStudyPlan && studyPlan && Object.keys(studyPlan).length > 0 && (
         <CardPrimary>
           <ErrorBoundary>
             {props.userInitComplete && (

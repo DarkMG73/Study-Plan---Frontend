@@ -11,7 +11,6 @@ import PushButton from "../../UI/Buttons/PushButton/PushButton";
 import { toTitleCase } from "../../Hooks/utility";
 import { getSchemaForContentItem } from "../../storage/contentDB";
 import CollapsibleElm from "../../UI/CollapsibleElm/CollapsibleElm";
-
 import useSortList from "../../Hooks/useSortList";
 import useAssembleStudyPlanList from "../../Hooks/useAssembleStudyPlanList";
 import BarLoader from "../../UI/Loaders/BarLoader/BarLoader";
