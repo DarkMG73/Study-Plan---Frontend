@@ -806,7 +806,7 @@ body .list-button-container {
   ul[data-parentmastertype="goal"] div[data-container-type="collapsibleElm"] {
     li,
     ul[data-parentmastertype="step"] li {
-      padding: 0em 0 0.75em 0;
+      padding: 0.125em 0 0.75em 0;
     }
     ul[data-parentmastertype="goal"]
       > div[id*="collapsible-elm"]
